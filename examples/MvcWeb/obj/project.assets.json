@@ -8003,7 +8003,7 @@
       ]
     },
     "runtime.native.System.IO.Compression/4.3.0": {
-      "sha512": "b+V9JC/Ii3sR659flBeaBJww111425tgjcDS1k+hqV4sGh9FALRDBvJnDtQ895gAzpPTUOFDHdqaZ2Et7BpZMg==",
+      "sha512": "INBPonS5QPEgn7naufQFXJEp3zX6L4bwHgJ/ZH78aBTpeNfQMtf7C6VrAFhlq2xxWBveIOWyFzQjJ8XzHMhdOQ==",
       "type": "package",
       "path": "runtime.native.system.io.compression/4.3.0",
       "files": [
@@ -8109,7 +8109,7 @@
       ]
     },
     "runtime.rhel.7-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "T5NvFgmHX0WH4c7lP72krsnk+IJI10vJf2j2twGE+5QBRA4RyRAgD+ZjEgdmpLOjW4B+nZGaadewTCUcR899OQ==",
+      "sha512": "nyFNiCk/r+VOiIqreLix8yN+q3Wga9+SE8BCgkf+2BwEKiNx6DyvFjCgkfV743/grxv8jHJ8gUK4XEQw7yzRYg==",
       "type": "package",
       "path": "runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8627,7 +8627,7 @@
       ]
     },
     "System.Collections.NonGeneric/4.3.0": {
-      "sha512": "LE/oChpRvkSi3U25u0KnJcI44JeDZ1QJCyN4qFDx2uusEypdqR24w7lKYw21eYe5esuCBuc862wRmpF63Yy1KQ==",
+      "sha512": "prtjIEMhGUnQq6RnPEYLpFt8AtLbp9yq2zxOSrY7KJJZrw25Fi97IzBqY7iqssbM61Ek5b8f3MG/sG1N2sN5KA==",
       "type": "package",
       "path": "system.collections.nongeneric/4.3.0",
       "files": [
@@ -12894,23 +12894,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Users\\arsen\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\examples\\MvcWeb\\MvcWeb.csproj",
+      "projectUniqueName": "D:\\GIT\\TheraLang\\TheraLang\\examples\\MvcWeb\\MvcWeb.csproj",
       "projectName": "MvcWeb",
-      "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\examples\\MvcWeb\\MvcWeb.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\examples\\MvcWeb\\obj\\",
+      "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\examples\\MvcWeb\\MvcWeb.csproj",
+      "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+      "outputPath": "D:\\GIT\\TheraLang\\TheraLang\\examples\\MvcWeb\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12923,41 +12923,41 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AspNetCore.Identity.SQLite\\Piranha.AspNetCore.Identity.SQLite.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AspNetCore.Identity.SQLServer\\Piranha.AspNetCore.Identity.SQLServer.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.ImageSharp\\Piranha.ImageSharp.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Summernote\\Piranha.Manager.Summernote.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Summernote\\Piranha.Manager.Summernote.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager.Summernote\\Piranha.Manager.Summernote.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager.Summernote\\Piranha.Manager.Summernote.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager.TinyMCE\\Piranha.Manager.TinyMCE.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\Piranha.Manager.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\Piranha.Manager.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager\\Piranha.Manager.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager\\Piranha.Manager.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.WebApi\\Piranha.WebApi.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.WebApi\\Piranha.WebApi.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.WebApi\\Piranha.WebApi.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.WebApi\\Piranha.WebApi.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj"
             }
           }
         }
