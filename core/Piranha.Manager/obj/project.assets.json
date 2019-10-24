@@ -4788,7 +4788,7 @@
       ]
     },
     "runtime.native.System.IO.Compression/4.3.0": {
-      "sha512": "b+V9JC/Ii3sR659flBeaBJww111425tgjcDS1k+hqV4sGh9FALRDBvJnDtQ895gAzpPTUOFDHdqaZ2Et7BpZMg==",
+      "sha512": "INBPonS5QPEgn7naufQFXJEp3zX6L4bwHgJ/ZH78aBTpeNfQMtf7C6VrAFhlq2xxWBveIOWyFzQjJ8XzHMhdOQ==",
       "type": "package",
       "path": "runtime.native.system.io.compression/4.3.0",
       "files": [
@@ -4894,7 +4894,7 @@
       ]
     },
     "runtime.rhel.7-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "T5NvFgmHX0WH4c7lP72krsnk+IJI10vJf2j2twGE+5QBRA4RyRAgD+ZjEgdmpLOjW4B+nZGaadewTCUcR899OQ==",
+      "sha512": "nyFNiCk/r+VOiIqreLix8yN+q3Wga9+SE8BCgkf+2BwEKiNx6DyvFjCgkfV743/grxv8jHJ8gUK4XEQw7yzRYg==",
       "type": "package",
       "path": "runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8616,23 +8616,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Users\\arsen\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "7.1.0-alpha1",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\Piranha.Manager.csproj",
+      "projectUniqueName": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager\\Piranha.Manager.csproj",
       "projectName": "Piranha.Manager",
-      "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\Piranha.Manager.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\obj\\",
+      "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager\\Piranha.Manager.csproj",
+      "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+      "outputPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8645,17 +8645,17 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Core\\Piranha.Manager.Core.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Core\\Piranha.Manager.Core.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager.Core\\Piranha.Manager.Core.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager.Core\\Piranha.Manager.Core.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj"
             },
-            "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+            "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj": {
+              "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj"
             }
           }
         }

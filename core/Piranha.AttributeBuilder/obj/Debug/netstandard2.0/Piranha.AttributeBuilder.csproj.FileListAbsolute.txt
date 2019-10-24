@@ -9,3 +9,14 @@ C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.csproj.CopyComplete
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.dll
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.AttributeBuilder.deps.json
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.AttributeBuilder.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.AttributeBuilder.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.csprojAssemblyReference.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.AssemblyInfoInputs.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.AssemblyInfo.cs
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.csproj.CopyComplete
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.pdb

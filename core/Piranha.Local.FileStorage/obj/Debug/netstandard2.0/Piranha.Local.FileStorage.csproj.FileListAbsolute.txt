@@ -9,3 +9,14 @@ C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\ob
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.csproj.CopyComplete
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.dll
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.Local.FileStorage.deps.json
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.Local.FileStorage.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.Local.FileStorage.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.csprojAssemblyReference.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.AssemblyInfoInputs.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.AssemblyInfo.cs
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.csproj.CopyComplete
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.pdb

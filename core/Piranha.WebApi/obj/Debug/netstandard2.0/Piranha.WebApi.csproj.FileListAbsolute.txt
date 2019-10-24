@@ -9,3 +9,14 @@ C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.WebApi\obj\Debug\net
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.WebApi\obj\Debug\netstandard2.0\Piranha.WebApi.csproj.CopyComplete
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.WebApi\obj\Debug\netstandard2.0\Piranha.WebApi.dll
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.WebApi\obj\Debug\netstandard2.0\Piranha.WebApi.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\bin\Debug\netstandard2.0\Piranha.WebApi.deps.json
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\bin\Debug\netstandard2.0\Piranha.WebApi.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\bin\Debug\netstandard2.0\Piranha.WebApi.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\bin\Debug\netstandard2.0\Piranha.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\bin\Debug\netstandard2.0\Piranha.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\obj\Debug\netstandard2.0\Piranha.WebApi.csprojAssemblyReference.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\obj\Debug\netstandard2.0\Piranha.WebApi.AssemblyInfoInputs.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\obj\Debug\netstandard2.0\Piranha.WebApi.AssemblyInfo.cs
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\obj\Debug\netstandard2.0\Piranha.WebApi.csproj.CopyComplete
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\obj\Debug\netstandard2.0\Piranha.WebApi.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.WebApi\obj\Debug\netstandard2.0\Piranha.WebApi.pdb

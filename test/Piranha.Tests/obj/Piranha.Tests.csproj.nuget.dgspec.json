@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\test\\Piranha.Tests\\Piranha.Tests.csproj": {}
+    "D:\\GIT\\TheraLang\\TheraLang\\test\\Piranha.Tests\\Piranha.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj": {
+    "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj": {
       "version": "7.1.0-alpha1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+        "projectUniqueName": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
         "projectName": "Piranha.AttributeBuilder",
-        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AttributeBuilder\\obj\\",
+        "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj",
+        "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AttributeBuilder\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +30,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+              "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj": {
+                "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj"
               }
             }
           }
@@ -66,20 +66,20 @@
         }
       }
     },
-    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj": {
+    "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj": {
       "version": "7.1.0-alpha1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj",
+        "projectUniqueName": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj",
         "projectName": "Piranha.Extensions.Sync",
-        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Extensions.Sync\\obj\\",
+        "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj",
+        "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Extensions.Sync\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -92,8 +92,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+              "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj": {
+                "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj"
               }
             }
           }
@@ -128,20 +128,20 @@
         }
       }
     },
-    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj": {
+    "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj": {
       "version": "7.1.0-alpha1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+        "projectUniqueName": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
         "projectName": "Piranha.Local.FileStorage",
-        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Local.FileStorage\\obj\\",
+        "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj",
+        "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Local.FileStorage\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -154,8 +154,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+              "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj": {
+                "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj"
               }
             }
           }
@@ -190,20 +190,20 @@
         }
       }
     },
-    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
+    "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj": {
       "version": "7.1.0-alpha1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj",
+        "projectUniqueName": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj",
         "projectName": "Piranha",
-        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\obj\\",
+        "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj",
+        "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -272,20 +272,20 @@
         }
       }
     },
-    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj": {
+    "D:\\GIT\\TheraLang\\TheraLang\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj": {
       "version": "7.1.0-alpha1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+        "projectUniqueName": "D:\\GIT\\TheraLang\\TheraLang\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
         "projectName": "Piranha.Data.EF",
-        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\data\\Piranha.Data.EF\\obj\\",
+        "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj",
+        "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\TheraLang\\TheraLang\\data\\Piranha.Data.EF\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -298,8 +298,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+              "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj": {
+                "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj"
               }
             }
           }
@@ -346,20 +346,20 @@
         }
       }
     },
-    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\test\\Piranha.Tests\\Piranha.Tests.csproj": {
+    "D:\\GIT\\TheraLang\\TheraLang\\test\\Piranha.Tests\\Piranha.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\test\\Piranha.Tests\\Piranha.Tests.csproj",
+        "projectUniqueName": "D:\\GIT\\TheraLang\\TheraLang\\test\\Piranha.Tests\\Piranha.Tests.csproj",
         "projectName": "Piranha.Tests",
-        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\test\\Piranha.Tests\\Piranha.Tests.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\test\\Piranha.Tests\\obj\\",
+        "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\test\\Piranha.Tests\\Piranha.Tests.csproj",
+        "packagesPath": "C:\\Users\\arsen\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\TheraLang\\TheraLang\\test\\Piranha.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\arsen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -372,20 +372,20 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj"
+              "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj": {
+                "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.AttributeBuilder\\Piranha.AttributeBuilder.csproj"
               },
-              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj"
+              "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj": {
+                "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Extensions.Sync\\Piranha.Extensions.Sync.csproj"
               },
-              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj"
+              "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj": {
+                "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha.Local.FileStorage\\Piranha.Local.FileStorage.csproj"
               },
-              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+              "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj": {
+                "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\core\\Piranha\\Piranha.csproj"
               },
-              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj"
+              "D:\\GIT\\TheraLang\\TheraLang\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj": {
+                "projectPath": "D:\\GIT\\TheraLang\\TheraLang\\data\\Piranha.Data.EF\\Piranha.Data.EF.csproj"
               }
             }
           }

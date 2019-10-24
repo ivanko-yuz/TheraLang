@@ -6,3 +6,11 @@ C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha\obj\Debug\netstandar
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha\obj\Debug\netstandard2.0\Piranha.AssemblyInfo.cs
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha\obj\Debug\netstandard2.0\Piranha.dll
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha\obj\Debug\netstandard2.0\Piranha.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha\bin\Debug\netstandard2.0\Piranha.deps.json
+D:\GIT\TheraLang\TheraLang\core\Piranha\bin\Debug\netstandard2.0\Piranha.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha\bin\Debug\netstandard2.0\Piranha.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha\obj\Debug\netstandard2.0\Piranha.csprojAssemblyReference.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha\obj\Debug\netstandard2.0\Piranha.AssemblyInfoInputs.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha\obj\Debug\netstandard2.0\Piranha.AssemblyInfo.cs
+D:\GIT\TheraLang\TheraLang\core\Piranha\obj\Debug\netstandard2.0\Piranha.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha\obj\Debug\netstandard2.0\Piranha.pdb

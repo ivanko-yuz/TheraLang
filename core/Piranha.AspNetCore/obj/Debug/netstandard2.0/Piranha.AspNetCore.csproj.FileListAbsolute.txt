@@ -9,3 +9,14 @@ C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Debug
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Debug\netstandard2.0\Piranha.AspNetCore.csproj.CopyComplete
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Debug\netstandard2.0\Piranha.AspNetCore.dll
 C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Debug\netstandard2.0\Piranha.AspNetCore.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\bin\Debug\netstandard2.0\Piranha.AspNetCore.deps.json
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\bin\Debug\netstandard2.0\Piranha.AspNetCore.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\bin\Debug\netstandard2.0\Piranha.AspNetCore.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\bin\Debug\netstandard2.0\Piranha.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\bin\Debug\netstandard2.0\Piranha.pdb
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\obj\Debug\netstandard2.0\Piranha.AspNetCore.csprojAssemblyReference.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\obj\Debug\netstandard2.0\Piranha.AspNetCore.AssemblyInfoInputs.cache
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\obj\Debug\netstandard2.0\Piranha.AspNetCore.AssemblyInfo.cs
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\obj\Debug\netstandard2.0\Piranha.AspNetCore.csproj.CopyComplete
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\obj\Debug\netstandard2.0\Piranha.AspNetCore.dll
+D:\GIT\TheraLang\TheraLang\core\Piranha.AspNetCore\obj\Debug\netstandard2.0\Piranha.AspNetCore.pdb
