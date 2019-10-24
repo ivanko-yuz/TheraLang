@@ -1,0 +1,11 @@
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.AttributeBuilder.deps.json
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.AttributeBuilder.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.AttributeBuilder.pdb
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\bin\Debug\netstandard2.0\Piranha.pdb
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.csprojAssemblyReference.cache
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.AssemblyInfo.cs
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.csproj.CopyComplete
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AttributeBuilder\obj\Debug\netstandard2.0\Piranha.AttributeBuilder.pdb

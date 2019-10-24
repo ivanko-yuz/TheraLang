@@ -1,0 +1,11 @@
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\bin\Release\netstandard2.0\Piranha.ImageSharp.deps.json
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\bin\Release\netstandard2.0\Piranha.ImageSharp.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\bin\Release\netstandard2.0\Piranha.ImageSharp.pdb
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\bin\Release\netstandard2.0\Piranha.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\bin\Release\netstandard2.0\Piranha.pdb
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\obj\Release\netstandard2.0\Piranha.ImageSharp.csprojAssemblyReference.cache
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\obj\Release\netstandard2.0\Piranha.ImageSharp.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\obj\Release\netstandard2.0\Piranha.ImageSharp.AssemblyInfo.cs
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\obj\Release\netstandard2.0\Piranha.ImageSharp.csproj.CopyComplete
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\obj\Release\netstandard2.0\Piranha.ImageSharp.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.ImageSharp\obj\Release\netstandard2.0\Piranha.ImageSharp.pdb

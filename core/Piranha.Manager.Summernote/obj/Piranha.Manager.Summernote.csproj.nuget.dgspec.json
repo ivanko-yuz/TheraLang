@@ -1,0 +1,461 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Summernote\\Piranha.Manager.Summernote.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj": {
+      "version": "7.1.0-alpha1",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+        "projectName": "Piranha.AspNetCore",
+        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "XSitemap": {
+              "target": "Package",
+              "version": "[2.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Core\\Piranha.Manager.Core.csproj": {
+      "version": "7.1.0-alpha1",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Core\\Piranha.Manager.Core.csproj",
+        "projectName": "Piranha.Manager.Core",
+        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Core\\Piranha.Manager.Core.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj"
+              },
+              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Localization": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj": {
+      "version": "7.1.0-alpha1",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj",
+        "projectName": "Piranha.Manager.Localization",
+        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.Extensions.Localization": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Summernote\\Piranha.Manager.Summernote.csproj": {
+      "version": "7.1.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Summernote\\Piranha.Manager.Summernote.csproj",
+        "projectName": "Piranha.Manager.Summernote",
+        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Summernote\\Piranha.Manager.Summernote.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Summernote\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\Piranha.Manager.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\Piranha.Manager.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\Piranha.Manager.csproj": {
+      "version": "7.1.0-alpha1",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\Piranha.Manager.csproj",
+        "projectName": "Piranha.Manager",
+        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\Piranha.Manager.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.AspNetCore\\Piranha.AspNetCore.csproj"
+              },
+              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Core\\Piranha.Manager.Core.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Core\\Piranha.Manager.Core.csproj"
+              },
+              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha.Manager.Localization\\Piranha.Manager.Localization.csproj"
+              },
+              "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.SignalR": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.AspNetCore.StaticFiles": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.FileProviders.Embedded": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj": {
+      "version": "7.1.0-alpha1",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj",
+        "projectName": "Piranha",
+        "projectPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\Piranha.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\piranha git\\piranha.core\\core\\Piranha\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Markdig": {
+              "target": "Package",
+              "version": "[0.15.0, )"
+            },
+            "Microsoft.CSharp": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Microsoft.Extensions.Caching.Abstractions": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[11.0.2, )"
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

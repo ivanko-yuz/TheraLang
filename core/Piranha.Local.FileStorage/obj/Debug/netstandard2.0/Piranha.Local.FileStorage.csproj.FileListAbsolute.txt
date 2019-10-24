@@ -1,0 +1,11 @@
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.Local.FileStorage.deps.json
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.Local.FileStorage.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.Local.FileStorage.pdb
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\bin\Debug\netstandard2.0\Piranha.pdb
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.csprojAssemblyReference.cache
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.AssemblyInfo.cs
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.csproj.CopyComplete
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.Local.FileStorage\obj\Debug\netstandard2.0\Piranha.Local.FileStorage.pdb

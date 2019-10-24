@@ -1,0 +1,11 @@
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\bin\Release\netstandard2.0\Piranha.AspNetCore.deps.json
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\bin\Release\netstandard2.0\Piranha.AspNetCore.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\bin\Release\netstandard2.0\Piranha.AspNetCore.pdb
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\bin\Release\netstandard2.0\Piranha.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\bin\Release\netstandard2.0\Piranha.pdb
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Release\netstandard2.0\Piranha.AspNetCore.csprojAssemblyReference.cache
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Release\netstandard2.0\Piranha.AspNetCore.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Release\netstandard2.0\Piranha.AspNetCore.AssemblyInfo.cs
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Release\netstandard2.0\Piranha.AspNetCore.csproj.CopyComplete
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Release\netstandard2.0\Piranha.AspNetCore.dll
+C:\Users\User\Desktop\piranha git\piranha.core\core\Piranha.AspNetCore\obj\Release\netstandard2.0\Piranha.AspNetCore.pdb
