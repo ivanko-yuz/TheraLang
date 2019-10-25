@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConsoleApp.Db.Configuration
 {
-    public class PiranhaUserTokenConfiguration:IEntityTypeConfiguration<PiranhaUserToken>
+    public class PiranhaUserTokenConfiguration : IEntityTypeConfiguration<PiranhaUserToken>
     {
         public void Configure(EntityTypeBuilder<PiranhaUserToken> builder)
         {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConsoleApp.Db.Configuration
 {
-    public class PiranhaPageRevisionConfiguration:IEntityTypeConfiguration<PiranhaPageRevision>
+    public class PiranhaPageRevisionConfiguration : IEntityTypeConfiguration<PiranhaPageRevision>
     {
         public void Configure(EntityTypeBuilder<PiranhaPageRevision> builder)
         {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConsoleApp.Db.Configuration
 {
-    public class PiranhaPostFieldConfiguration:IEntityTypeConfiguration<PiranhaPostField>
+    public class PiranhaPostFieldConfiguration : IEntityTypeConfiguration<PiranhaPostField>
     {
         public void Configure(EntityTypeBuilder<PiranhaPostField> builder)
         {
