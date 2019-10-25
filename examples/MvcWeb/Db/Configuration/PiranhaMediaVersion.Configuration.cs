@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MvcWeb.Db.Entities;
 
-namespace ConsoleApp.Db.Configuration
+namespace MvcWeb.Db.Configuration
 {
     public class PiranhaMediaVersionConfiguration : IEntityTypeConfiguration<PiranhaMediaVersion>
     {

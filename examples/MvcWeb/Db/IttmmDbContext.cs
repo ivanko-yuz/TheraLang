@@ -1,7 +1,8 @@
-using ConsoleApp.Db.Configuration;
 using Microsoft.EntityFrameworkCore;
+using MvcWeb.Db.Configuration;
+using MvcWeb.Db.Entities;
 
-namespace ConsoleApp
+namespace MvcWeb.Db
 {
     public class IttmmDbContext : DbContext
     {
