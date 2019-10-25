@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConsoleApp.Db.Configuration
 {
-    public class PiranhaTagConfiguration:IEntityTypeConfiguration<PiranhaTag>
+    public class PiranhaTagConfiguration : IEntityTypeConfiguration<PiranhaTag>
     {
         public void Configure(EntityTypeBuilder<PiranhaTag> builder)
         {

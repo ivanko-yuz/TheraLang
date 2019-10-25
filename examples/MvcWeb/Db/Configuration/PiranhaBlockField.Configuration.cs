@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConsoleApp.Db.Configuration
 {
-    public class PiranhaBlockFieldConfiguration:IEntityTypeConfiguration<PiranhaBlockField>
+    public class PiranhaBlockFieldConfiguration : IEntityTypeConfiguration<PiranhaBlockField>
     {
         public void Configure(EntityTypeBuilder<PiranhaBlockField> builder)
         {

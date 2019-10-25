@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConsoleApp.Db.Configuration
 {
-    public class PiranhaMediaConfiguration:IEntityTypeConfiguration<PiranhaMedia>
+    public class PiranhaMediaConfiguration : IEntityTypeConfiguration<PiranhaMedia>
     {
         public void Configure(EntityTypeBuilder<PiranhaMedia> builder)
         {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConsoleApp.Db.Configuration
 {
-    public class PiranhaUserLoginConfiguration:IEntityTypeConfiguration<PiranhaUserLogin>
+    public class PiranhaUserLoginConfiguration : IEntityTypeConfiguration<PiranhaUserLogin>
     {
         public void Configure(EntityTypeBuilder<PiranhaUserLogin> builder)
         {
