@@ -42,9 +42,9 @@ namespace MvcWeb
             services.AddPiranhaApi();
 
             services.AddPiranhaEF(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabase")));
             services.AddPiranhaIdentityWithSeed<IdentitySQLServerDb>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabase")));
 
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
