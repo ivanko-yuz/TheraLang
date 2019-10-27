@@ -1,0 +1,15 @@
+[{
+    "Id" : 1,
+    "Name" : "proj1",
+    "Type" : "type1"
+    },
+    {
+    "Id" : 2,
+    "Name" : "proj2",
+    "Type" : "type2"
+    },
+    {
+    "Id" : 3,
+    "Name" : "proj3",
+    "Type" : "type3"
+}]

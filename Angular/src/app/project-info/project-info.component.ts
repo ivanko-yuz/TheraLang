@@ -11,7 +11,9 @@ import { Project } from '../project/project';
 export class ProjectInfoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,private http:HttpService) { }
-  projectInfo: Project;
+
+  projectInfo : Project;
+
   ngOnInit() {
     this.route.paramMap.subscribe(params=>{
       let id = +params.get('id');

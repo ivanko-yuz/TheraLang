@@ -10,12 +10,16 @@ import {Project} from './project';
 })
 export class ProjectComponent implements OnInit {
 
-  projects:Project[];
+  projects:Project;
 
   constructor(private httpService:HttpService) { }
 
   ngOnInit() {
-    this.httpService.getAllProjects().subscribe((data:Project[]) => this.projects=data);
+    this.httpService.getAllProjects().subscribe((data : Project) => this.projects = {
+      id : data['Id'],
+      name : data['Name'],
+      type : data['Type']
+    });
   }
 
 }
