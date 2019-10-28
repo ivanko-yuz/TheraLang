@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace MvcWeb.UnitOfWork
@@ -13,14 +12,20 @@ namespace MvcWeb.UnitOfWork
 
         private DbContext Context { get; }
 
-        public IQueryable<TEntity> Queryable<TEntity>() where TEntity : class
+
+        public IRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
-            return Context.Set<TEntity>();
+            return new Repository<TEntity>(Context.Set<TEntity>());
         }
 
         public Task<int> SaveChangesAsync()
         {
             return Context.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            Context.Dispose();
         }
     }
 }

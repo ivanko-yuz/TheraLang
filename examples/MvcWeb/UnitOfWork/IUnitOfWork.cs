@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿﻿using System;
 using System.Threading.Tasks;
 
 namespace MvcWeb.UnitOfWork
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork: IDisposable
     {
-        IQueryable<TEntity> Queryable<TEntity>() where TEntity : class;
+        IRepository<TEntity> Repository<TEntity>() where TEntity : class;
         Task<int> SaveChangesAsync();
     }
 }
