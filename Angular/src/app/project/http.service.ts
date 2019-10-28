@@ -6,7 +6,7 @@ export class HttpService{
   
     constructor(private http: HttpClient){ }
       
-     private url = "./back-endDbMocks/projects.json";
+     private url = "https://localhost:44353/api/project";
      private resourcesUrl = "./back-end_DbMocks/resources.json";
     getAllProjects(){
         return this.http.get(this.url);
