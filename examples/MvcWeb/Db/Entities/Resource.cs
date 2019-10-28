@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace MvcWeb.Db.Entities
 {
     public class Resource
@@ -12,11 +13,12 @@ namespace MvcWeb.Db.Entities
 
         public string Description { get; set; }
 
-        public virtual int CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public virtual ResourceCategory ResourceCategory { get; set; }
 
         // Navigation property to ResourceProject table.
         public virtual ResourceProject ResourceProject { get; set; }
+        // ... 
     }
 }

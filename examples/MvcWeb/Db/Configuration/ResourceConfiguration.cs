@@ -8,9 +8,13 @@ namespace MvcWeb.Db.Configuration
     {
         public void Configure(EntityTypeBuilder<Resource> builder)
         {
+            builder.ToTable("Resources");
+
             builder.HasKey(i => i.Id);
+            builder.Property(i => i.Id).ValueGeneratedOnAdd();
+
             builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
-            builder.Property(p => p.Description).HasMaxLength(500).IsRequired();
+            builder.Property(p => p.Description).HasMaxLength(5000).IsRequired();
             builder.Property(p => p.Date).IsRequired();
         }
     }

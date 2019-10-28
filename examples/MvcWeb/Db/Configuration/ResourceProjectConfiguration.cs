@@ -8,6 +8,10 @@ namespace MvcWeb.Db.Configuration
     {
         public void Configure(EntityTypeBuilder<ResourceProject> builder)
         {
+            builder.ToTable("ResourceToProject");
+
+            builder.HasKey(i => i.Id);
+
             // Relationship...
             builder.HasOne(r => r.Resource).WithOne(i => i.ResourceProject);
 

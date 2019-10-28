@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Piranha;
-using Piranha.AspNetCore.Identity.SQLServer;
+//using Piranha.AspNetCore.Identity.SQLServer;
+using MvcWeb.Db;
 
 namespace MvcWeb
 {
@@ -23,15 +24,25 @@ namespace MvcWeb
         {
             Configuration = configuration;
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddPiranhaEF(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddPiranhaIdentityWithSeed<IdentitySQLServerDb>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //Using our tables and etc.
+           services.AddDbContext<IttmmDbContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
             services.AddLocalization(options =>
                 options.ResourcesPath = "Resources"
             );
             services.AddMvc()
                 .AddPiranhaManagerOptions()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            
             services.AddPiranha();
             services.AddPiranhaApplication();
             services.AddPiranhaFileStorage();
@@ -40,11 +51,6 @@ namespace MvcWeb
             services.AddPiranhaSummernote();
             //services.AddPiranhaTinyMCE();
             services.AddPiranhaApi();
-
-            services.AddPiranhaEF(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabase")));
-            services.AddPiranhaIdentityWithSeed<IdentitySQLServerDb>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabase")));
 
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
