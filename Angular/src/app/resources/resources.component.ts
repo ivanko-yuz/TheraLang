@@ -7,7 +7,8 @@ import { Project } from '../project/project';
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
-  styleUrls: ['./resources.component.less']
+  styleUrls: ['./resources.component.less'],
+  providers:[HttpService]
 })
 export class ResourcesComponent implements OnInit {
 

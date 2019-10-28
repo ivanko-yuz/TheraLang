@@ -1,2 +1,34 @@
-<div>Name -- {{projectInfo.name}}</div>
-<div>Id --  {{projectInfo.id}}</div>
+<mat-card class="example-card">
+        <mat-card-header >
+          <div mat-card-avatar class="example-header-image"></div>          
+          <mat-card-title class="headerUpText">{{projectInfo.name}}</mat-card-title>
+          <mat-card-subtitle class="headerDownText">Project Owner</mat-card-subtitle>
+        </mat-card-header>
+
+        <img mat-card-image class="ProjImg" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo">
+        <mat-card-content>
+          <p class="description">
+                Хатіко з'явився на світ 10 листопада 1923 в японській префектурі Акіта. 
+                Фермер, який колись навчався в сільськогосподарській школі при Імператорському 
+                університеті (нині — Токійський університет), вирішив подарувати живу іграшку 
+                своєму колишньому професору Хідесабуро Уено. Той завжди тримав вдома собак, віддаючи 
+                перевагу великим псам. Уено назвав нового чотириногого вихованця Хаті (японською — Восьмий), 
+                тому що це був його восьмий за рахунком собака.                
+                
+                Опудало Хатіко в музеї Науки, Токіо                
+                Могила Хідесабуро Уено та Хатіко на цвинтарі Аояма, Мінато-ку, Токіо
+                Коли Хаті підріс, він став постійно супроводжувати господаря. Той щоденно їхав у місто у 
+                справах. Тому Хаті проводжав професора до входу на залізничну станцію Сібуя, а о 3 годині
+                дня знову приходив до станції, щоб зустріти його.
+          </p>
+        </mat-card-content>
+</mat-card>
+<button class="btn btn-primary" type="button" (click)="onClick()"></button>
+<div class="footerTable">
+    <h2>Ресурси</h2>
+    <mat-tab-group class="blahblah">
+            <mat-tab label="First"> Content 1 </mat-tab>
+            <mat-tab label="Second"> Content 2 </mat-tab>
+            <mat-tab label="Third"> Content 3 </mat-tab>
+    </mat-tab-group>
+</div>

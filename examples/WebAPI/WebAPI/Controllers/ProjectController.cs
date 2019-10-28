@@ -8,9 +8,18 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class ProjectController : ControllerBase
     {
-       
+        //[HttpGet("{idResources}")]
+        //public ActionResult<IEnumerable<Resource>> GetByProjId(int inProjectId)
+        //{
+        //    Resource resource1 = new Resource { Id = 1, Name = "Resource1", Date = new DateTime(2015, 7, 20), Description = "Blah blah blah", ProjectId = 1 };
+        //    Resource resource2 = new Resource { Id = 2, Name = "Resource2", Date = new DateTime(2015, 7, 20), Description = "Blah blah blah", ProjectId = 2 };
+        //    Resource resource3 = new Resource { Id = 3, Name = "Resource3", Date = new DateTime(2015, 7, 20), Description = "Blah blah blah", ProjectId = 3 };
+        //    Resource[] resources = new Resource[] { resource1, resource2, resource3 };
+        //    return resources.Where(x => x.ProjectId == inProjectId).ToList();
+        //}
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<Project>> Get()
@@ -51,5 +60,10 @@ namespace WebAPI.Controllers
         public void Delete(int id)
         {
         }
+    }
+
+    public class ResourceController : ControllerBase
+    {
+
     }
 }

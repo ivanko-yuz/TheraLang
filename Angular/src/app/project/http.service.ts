@@ -14,7 +14,7 @@ export class HttpService{
     getProjectInfo(id:number){      
         return this.http.get(this.url + '/' + id);
     }
-    getAllResourcesById(projectId : number){
-        return this.http.get(this.resourcesUrl );
-    }
+    // getAllResourcesById(projectId : number){
+    //     return this.http.get(this.resourcesUrl );
+    // }
 }
