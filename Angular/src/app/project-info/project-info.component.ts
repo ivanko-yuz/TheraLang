@@ -6,7 +6,8 @@ import { Project } from '../project/project';
 @Component({
   selector: 'app-project-info',
   templateUrl: './project-info.component.html',
-  styleUrls: ['./project-info.component.less']
+  styleUrls: ['./project-info.component.less'],
+  providers:[HttpService]
 })
 export class ProjectInfoComponent implements OnInit {
 
