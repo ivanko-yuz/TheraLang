@@ -1,7 +1,8 @@
-﻿﻿using System;
+﻿using MvcWeb.TheraLang.Repository;
+using System;
 using System.Threading.Tasks;
 
-namespace MvcWeb.UnitOfWork
+namespace MvcWeb.TheraLang.UnitOfWork
 {
     public interface IUnitOfWork: IDisposable
     {

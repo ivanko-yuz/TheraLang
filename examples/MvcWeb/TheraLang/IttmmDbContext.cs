@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using MvcWeb.Db.Configuration;
 using MvcWeb.Db.Entities;
+using MvcWeb.TheraLang.Configuration;
+using MvcWeb.TheraLang.Entities;
 
 namespace MvcWeb.Db
 {
@@ -8,7 +10,10 @@ namespace MvcWeb.Db
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
         {
+           
         }
+
+        public virtual DbSet<Project> Projects { get; set; }
 
         public virtual DbSet<PiranhaAlias> PiranhaAliases { get; set; }
         public virtual DbSet<PiranhaBlockField> PiranhaBlockFields { get; set; }
@@ -73,6 +78,8 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new PiranhaUserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserTokenConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
+            // ProjectConfiguration
+            modelBuilder.ApplyConfiguration(new ProjectConfiguration());
         }
     }
 }
