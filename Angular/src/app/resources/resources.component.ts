@@ -17,11 +17,7 @@ export class ResourcesComponent implements OnInit {
   constructor(private httpService:HttpService) { }
 
   ngOnInit() {    
-    // this.httpService.getAllResources().subscribe((data : Resource) => this.resources = {
-    //   id : data['Id'],
-    //   name : data['DateTime'],
-    //   type : data['Type']
-    // });
+
   }
 
 }

@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import {ProjectInfoComponent} from './project-info/project-info.component';
-import { ResourcesComponent } from './resources/resources.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
