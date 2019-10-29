@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'project/:id', component:ProjectInfoComponent },
   { path: 'project', component:ProjectComponent },
+  // { path: 'project/resources', component:ResourcesComponent },
 ];
 
 @NgModule({

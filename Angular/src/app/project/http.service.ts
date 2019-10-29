@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-
 @Injectable()
 export class HttpService{
   
@@ -17,5 +16,8 @@ export class HttpService{
 
     delProject(id:number){      
         return this.http.delete(this.url + '/' + id);
+    }
+    getAllResourcesById(projectId : number){
+        return this.http.get(this.url + '/' + projectId + '/' + 'resources');
     }
 }

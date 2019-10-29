@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from './http.service';
 import {Project} from './project';
+import { Resource } from '../resources/resourceCategory';
 
 @Component({
   selector: 'app-project',
@@ -15,7 +16,7 @@ export class ProjectComponent implements OnInit {
   constructor(private httpService:HttpService) { }
 
   ngOnInit() {
-    this.httpService.getAllProjects().subscribe((data:Project[]) => this.projects=data);
+    this.httpService.getAllProjects().subscribe((data : Project[]) => this.projects = data);   
   }
 
 }
