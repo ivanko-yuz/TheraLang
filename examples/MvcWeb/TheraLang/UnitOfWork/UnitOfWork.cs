@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MvcWeb.TheraLang.Repository;
+using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.UnitOfWork
 {
