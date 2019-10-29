@@ -7,14 +7,14 @@ export class HttpService{
     constructor(private http: HttpClient){ }
       
      private url = "https://localhost:44353/api/project";
-     private resourcesUrl = "./back-end_DbMocks/resources.json";
+
     getAllProjects(){
         return this.http.get(this.url);
     }
     getProjectInfo(id:number){      
         return this.http.get(this.url + '/' + id);
     }
-    // getAllResourcesById(projectId : number){
-    //     return this.http.get(this.resourcesUrl );
-    // }
+    getAllResourcesById(projectId : number){
+        return this.http.get(this.url + '/' + projectId + '/' + 'resources');
+    }
 }
