@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MvcWeb.Db;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
 
@@ -45,9 +46,10 @@ namespace MvcWeb
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddPiranhaIdentityWithSeed<IdentitySQLServerDb>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
+            services.AddDbContext<IttmmDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
