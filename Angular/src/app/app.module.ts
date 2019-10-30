@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule,MatButtonModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField, MatCardModule} from '@angular/material';
+import { MatToolbarModule,MatButtonModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField, } from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule, routingComponents  } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,7 +55,7 @@ import { ResourcesComponent } from './resources/resources.component';
     FormsModule,
     ReactiveFormsModule,
     MatGridListModule,
-    MatFormFieldModule
+    MatFormFieldModule,
     MatTabsModule,
     MatTableModule,
     MatProgressSpinnerModule,
