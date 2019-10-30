@@ -26,32 +26,87 @@
       </p>
     </mat-card-content>
   </mat-card>
-
+  <div class="bottom-buttons">
+    <button mat-raised-button class="resButton">Ресурси</button>
+  </div>
   <div class="footerTable">
-    <h2 class="tabHeadText">Ресурси</h2>
     <mat-tab-group mat-stretch-tabs class="resTab example-stretched-tabs mat-elevation-z4">
       <mat-tab label="Зображення">
-        <table>
-            <tr class="mainTr">
-                <th class="resName">Ім'я</th>                
-                <th class="resDate">Дата</th>
-                <th class="resImg">зображення</th>               
-            </tr>
-          </table>
-          <ol>
-          <table *ngFor="let i of projectResources">
-            <li></li>
-              <tr class="mainTr">
-                <td class="resName">{{i.name}}</td>
-                <td class="resDate">{{i.date}}</td>
-                <td class="resImg">{{i.description}}</td>
-              </tr>
+        <table class="headTabl">
+          <tr class="mainTr">
+            <th class="resName">Опис</th>
+            <th class="resDate">Дата</th>
+            <th class="resImg">Зображення</th>
+          </tr>
         </table>
-        </ol>
+        <div class="bigTablLine"></div>
+        <table class="tableWithValues">
+          <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+            <td class="resName">
+              <p class="img-title">{{i.name}}</p>
+            </td>
+            <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+            <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+          </tr>
+        </table>
       </mat-tab>
-      <mat-tab label="Відео"> Content 2 </mat-tab>
-      <mat-tab label="Посилання"> Content 3 </mat-tab>
-      <mat-tab label="Інше"> Content 4 </mat-tab>
+      <mat-tab label="Відео">
+        <table class="headTabl">
+          <tr class="mainTr">
+            <th class="resName">Опис</th>
+            <th class="resDate">Дата</th>
+            <th class="resImg">Відео</th>
+          </tr>
+        </table>
+        <div class="bigTablLine"></div>
+        <table class="tableWithValues">
+          <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+            <td class="resName">
+              <p class="img-title">{{i.name}}</p>
+            </td>
+            <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+            <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+          </tr>
+        </table>
+      </mat-tab>
+      <mat-tab label="Посилання">
+        <table class="headTabl">
+          <tr class="mainTr">
+            <th class="resName">Опис</th>
+            <th class="resDate">Дата</th>
+            <th class="resImg">Посилання</th>
+          </tr>
+        </table>
+        <div class="bigTablLine"></div>
+        <table class="tableWithValues">
+          <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+            <td class="resName">
+              <p class="img-title">{{i.name}}</p>
+            </td>
+            <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+            <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+          </tr>
+        </table>
+      </mat-tab>
+      <mat-tab label="Інше">
+        <table class="headTabl">
+          <tr class="mainTr">
+            <th class="resName">Опис</th>
+            <th class="resDate">Дата</th>
+            <th class="resImg">Контент</th>
+          </tr>
+        </table>
+        <div class="bigTablLine"></div>
+        <table class="tableWithValues">
+          <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+            <td class="resName">
+              <p class="img-title">{{i.name}}</p>
+            </td>
+            <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+            <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+          </tr>
+        </table>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div>

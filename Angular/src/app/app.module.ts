@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule,MatButtonModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule} from '@angular/material';
+import { MatToolbarModule,MatButtonModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField, } from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule, routingComponents  } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectInfoComponent } from './project-info/project-info.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { ReactiveFormsModule,FormsModule } from "@angular/forms";
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
@@ -22,6 +25,9 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FooterComponent } from './footer/footer.component';
+import { ResourcesComponent } from './resources/resources.component';
+
 
 
 @NgModule({
@@ -31,8 +37,13 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ToolbarComponent,
     ProjectComponent,
     HomeComponent,
-    ProjectInfoComponent
+    ProjectInfoComponent,
+    CreateProjectComponent,
+    FooterComponent,
+    ResourcesComponent
+
   ],
+  entryComponents:[CreateProjectComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,9 +52,12 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonModule,
     HttpClientModule,
     MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatGridListModule,
+    MatFormFieldModule,
     MatTabsModule,
     MatTableModule,
-    MatGridListModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
     A11yModule,
@@ -64,7 +78,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
-    MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
@@ -88,6 +101,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

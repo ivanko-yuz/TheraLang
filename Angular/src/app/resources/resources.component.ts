@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Resource } from './resource';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-resources',
@@ -12,12 +13,11 @@ import { Project } from '../project/project';
 })
 export class ResourcesComponent implements OnInit {
 
-  resources : Resource;
-  projects : Project;
-  constructor(private httpService:HttpService) { }
+  projectResources : Resource[];
+  constructor(private route: ActivatedRoute,private http:HttpService) { };
 
   ngOnInit() {    
-
+    this.http.getAllResourcesWithoutId().subscribe((_data:Resource[])=> this.projectResources=_data );
   }
 
 }

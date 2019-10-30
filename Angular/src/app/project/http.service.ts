@@ -14,10 +14,10 @@ export class HttpService{
         return this.http.get(this.url + '/' + id);       
     }
 
-    delProject(id:number){      
-        return this.http.delete(this.url + '/' + id);
-    }
     getAllResourcesById(projectId : number){
         return this.http.get(this.url + '/' + projectId + '/' + 'resources');
+    }
+    getAllResourcesWithoutId( ){
+        return this.http.get('resources');
     }
 }
