@@ -25,6 +25,9 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FooterComponent } from './footer/footer.component';
+import { ResourcesComponent } from './resources/resources.component';
+
 
 
 @NgModule({
@@ -36,6 +39,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     HomeComponent,
     ProjectInfoComponent,
     CreateProjectComponent,
+    FooterComponent,
+    ResourcesComponent
+
   ],
   entryComponents:[CreateProjectComponent],
   imports: [
