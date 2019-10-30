@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
 import { Resource } from '../resources/resource';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-project-info',
@@ -14,7 +14,7 @@ import { Resource } from '../resources/resource';
 })
 export class ProjectInfoComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,private http:HttpService) { }
+  constructor(private route: ActivatedRoute,private http:HttpService) { };
 
   projectInfo : Project; 
   projectResources : Resource[];
@@ -25,6 +25,20 @@ export class ProjectInfoComponent implements OnInit {
       this.http.getProjectInfo(id).subscribe((data:Project) => this.projectInfo=data);
 
       this.http.getAllResourcesById(id).subscribe((_data:Resource[])=> this.projectResources=_data );
+
+      $(document).ready(function(){
+        $(".resTab").hide();
     });
+      $(".resButton").click(function(){
+        $( ".resTab" ).slideToggle("slow");
+      });
+    });
+
   }
 }
+
+
+
+
+
+
