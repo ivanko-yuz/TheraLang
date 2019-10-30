@@ -4,8 +4,8 @@
 <div *ngFor="let p of projects">
     <mat-card class="project-card">
         <mat-card-header>
-          <mat-card-title>Project name {{p.name}}</mat-card-title>
-          <mat-card-subtitle>Id - {{p.id}}</mat-card-subtitle>
+          <mat-card-title> {{p.name}}</mat-card-title>
+          <mat-card-subtitle>ID - {{p.id}}</mat-card-subtitle>
         </mat-card-header>
         <div>
         <img class="project-image" mat-card-image 
@@ -24,9 +24,16 @@
             bred for hunting.
           </p>
         </mat-card-content>
+        <mat-card-content>
+            <p class="project-info">
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+              bred for hunting.
+            </p>
+          </mat-card-content>
         <mat-card-actions class="get-details-button">
-            <a  mat-stroked-button  [routerLink]="['/project', p.id]" >Details</a>
+            <a  mat-stroked-button  [routerLink]="['/project', p.id]" >Деталі</a>
+            <!-- <a  mat-stroked-button  [routerLink]="['project/resources', p.id]" >Ресурси</a> -->
         </mat-card-actions>
       </mat-card>
-   </div>
-    
+</div>    
