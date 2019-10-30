@@ -6,16 +6,17 @@ export class HttpService{
   
     constructor(private http: HttpClient){ }
       
-     private url = "https://localhost:44353/api/project";
+     private url = "https://localhost:44353/api/";
+     private rootUrl = "https://localhost:44353/api/";
     getAllProjects(){
-        return this.http.get(this.url);
+        return this.http.get(this.url + "project");
     }
     getProjectInfo(id:number){      
-        return this.http.get(this.url + '/' + id);       
+        return this.http.get(this.url + "project" + '/' + id);       
     }
 
     getAllResourcesById(projectId : number){
-        return this.http.get(this.url + '/' + projectId + '/' + 'resources');
+        return this.http.get(this.url + "project" + '/' + projectId + '/' + 'resources');
     }
     getAllResourcesWithoutId( ){
         return this.http.get('resources');
