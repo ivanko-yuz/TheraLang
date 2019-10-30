@@ -1,2 +1,112 @@
-<h1>Project name -- {{projectInfo.name}}</h1>
-<h1>Project Id --  {{projectInfo.id}}</h1>
+<div class="mainDiv">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title class="headerUpText">{{projectInfo.name}}</mat-card-title>
+      <mat-card-subtitle class="headerDownText">Added by: <a class="ownerLink"
+          href="http://localhost:4200/project/{{projectInfo.id}}">Project Owner</a></mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image class="ProjImg" src="../../assets/img/hatiko.gif" alt="Photo">
+    <mat-card-content>
+      <p class="description">
+        Фільм поставлений за відомою правдивою історією, що сталася в Японії
+        в 20-х роках ХХ століття. Господар назвав нового чотириногого вихованця
+        породи акіта-іну Хатіко (японською - Восьмий). Коли Хаті підріс, він став
+        постійно супроводжувати господаря. Песик щодня проводжав і зустрічав свого
+        власника Паркера (Річард Ґір) на вокзалі. Потім чоловік несподівано помер
+        прямо на лекції в присутності студентів. Того дня вірний собака не дочекався
+        його повернення. Не зважаючи на це Хатіко протягом 9 років, щовечора о 5
+        годині приходив на вокзал зустрічати хазяїна і чекав його до останнього
+        поїзда, допоки не помер від старості. Родичі Паркера шкодували пса і кілька
+        разів намагалися дати йому прихисток у себе вдома, проте тварина втекла назад
+        до своєї варти. Місцеві торговці підгодовували охлялого собаку, захоплюючись
+        про себе його відданістю та терплячістю. А залізничники контролювали, щоб собаку,
+        який став неодмінним атрибутом пристанційної площі, ніхто не ображав.
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <div class="bottom-buttons">
+    <button mat-raised-button class="resButton">Ресурси</button>
+  </div>
+  <div class="footerTable">
+    <mat-tab-group mat-stretch-tabs class="resTab example-stretched-tabs mat-elevation-z4">
+      <mat-tab label="Зображення">
+        <table class="headTabl">
+          <tr class="mainTr">
+            <th class="resName">Опис</th>
+            <th class="resDate">Дата</th>
+            <th class="resImg">Зображення</th>
+          </tr>
+        </table>
+        <div class="bigTablLine"></div>
+        <table class="tableWithValues">
+          <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+            <td class="resName">
+              <p class="img-title">{{i.name}}</p>
+            </td>
+            <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+            <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+          </tr>
+        </table>
+      </mat-tab>
+      <mat-tab label="Відео">
+        <table class="headTabl">
+          <tr class="mainTr">
+            <th class="resName">Опис</th>
+            <th class="resDate">Дата</th>
+            <th class="resImg">Відео</th>
+          </tr>
+        </table>
+        <div class="bigTablLine"></div>
+        <table class="tableWithValues">
+          <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+            <td class="resName">
+              <p class="img-title">{{i.name}}</p>
+            </td>
+            <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+            <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+          </tr>
+        </table>
+      </mat-tab>
+      <mat-tab label="Посилання">
+        <table class="headTabl">
+          <tr class="mainTr">
+            <th class="resName">Опис</th>
+            <th class="resDate">Дата</th>
+            <th class="resImg">Посилання</th>
+          </tr>
+        </table>
+        <div class="bigTablLine"></div>
+        <table class="tableWithValues">
+          <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+            <td class="resName">
+              <p class="img-title">{{i.name}}</p>
+            </td>
+            <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+            <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+          </tr>
+        </table>
+      </mat-tab>
+      <mat-tab label="Інше">
+        <table class="headTabl">
+          <tr class="mainTr">
+            <th class="resName">Опис</th>
+            <th class="resDate">Дата</th>
+            <th class="resImg">Контент</th>
+          </tr>
+        </table>
+        <div class="bigTablLine"></div>
+        <table class="tableWithValues">
+          <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+            <td class="resName">
+              <p class="img-title">{{i.name}}</p>
+            </td>
+            <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+            <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+          </tr>
+        </table>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

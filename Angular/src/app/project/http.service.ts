@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-
 @Injectable()
 export class HttpService{
   
@@ -14,4 +13,12 @@ export class HttpService{
     getProjectInfo(id:number){      
         return this.http.get(this.url + '/' + id);       
     }
+
+    getAllResourcesById(projectId : number){
+        return this.http.get(this.url + '/' + projectId + '/' + 'resources');
+    }
+    getAllResourcesWithoutId( ){
+        return this.http.get('resources');
+    }
+
 }

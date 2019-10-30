@@ -1,3 +1,6 @@
+ <button mat-stroked-button (click)="onCreate()" > 
+   <mat-icon>add</mat-icon>Створити проект
+  </button>
 <div *ngFor="let p of projects">
   <mat-card class="project-card">
     <mat-card-header class="header">
@@ -12,7 +15,6 @@
     <img class="project-image" mat-card-image
       src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg"
       alt="">
-
     <p class="project-info">
       The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
       A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
@@ -32,6 +34,5 @@
     <mat-card-actions class="get-details-button">
       <a mat-stroked-button [routerLink]="['/project', p.id]">Деталі</a>
     </mat-card-actions>
-
   </mat-card>
 </div>
