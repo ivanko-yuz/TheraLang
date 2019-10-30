@@ -20,5 +20,4 @@ export class HttpService{
     getAllResourcesWithoutId( ){
         return this.http.get('resources');
     }
-
 }
