@@ -1,10 +1,16 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MvcWeb.Db;
+using MvcWeb.Models;
+using MvcWeb.Services;
+using MvcWeb.TheraLang.UnitOfWork;
+using MvcWeb.Validators;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
 
@@ -31,7 +37,10 @@ namespace MvcWeb
             );
             services.AddMvc()
                 .AddPiranhaManagerOptions()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddFluentValidation(fv => { fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; });
+
+            #region Piranha setup
 
             services.AddPiranha();
             services.AddPiranhaApplication();
@@ -46,10 +55,23 @@ namespace MvcWeb
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddPiranhaIdentityWithSeed<IdentitySQLServerDb>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
-            services.AddDbContext<IttmmDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            #endregion
+
+            #region register services via IServiceCollection
+
+            services.AddDbContext<IttmmDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IUnitOfWork, UnitOfWork.UnitOfWork>(provider =>
+                new UnitOfWork.UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
+
+            services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
+            services.AddTransient<IProjectService, ProjectService>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
