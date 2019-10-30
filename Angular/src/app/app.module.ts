@@ -23,6 +23,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FooterComponent } from './footer/footer.component';
+import { ResourcesComponent } from './resources/resources.component';
 
 
 
@@ -35,6 +36,7 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     ProjectInfoComponent,
     FooterComponent,
+    ResourcesComponent
     
   ],
   imports: [

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from './http.service';
 import {Project} from './project';
-import { Resource } from '../resources/resourceCategory';
 
 @Component({
   selector: 'app-project',

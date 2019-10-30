@@ -29,6 +29,7 @@
   height: 100%;
   margin-left: auto;
   margin-right: auto;
+  min-height: 500px;
 
 }
 
@@ -51,15 +52,19 @@
   border-radius: 25px;
   padding-top: 15px;
   padding-bottom: 15px;
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 4px 0px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12);
 }
-.resButton{
+.bottom-buttons .resButton{
   margin-right: 1rem;
-  background-color: rgb(14, 102, 14);
+  background-color: green;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 .resImg .img-in-table{
   max-width: 75%;
   min-width: 19rem;
+  display: block;
+  margin: 0 auto;
 }
 
 .ownerLink {
@@ -148,27 +153,41 @@ li {
   border-color: purple;
 }
 .ng-star-inserted{
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.5rem;
+
+}
+.mainDiv .example-card{
+  box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.headTabl{
+  padding-left: 1.7rem;
+  padding-right: 0.7rem;
+  opacity: .6;
 }
 .mainTr{
   padding-top: 1rem;
   padding-bottom: 1rem;
- 
+  
 }
-.tableWithValues{
+.tableWithValues:not(:last-child){
   counter-reset: my-sec-counter;
+  opacity: .6;
 }
 .tr-with-val::before{
   counter-increment: my-sec-counter;
   content: counter(my-sec-counter);
   display: table-cell;
   vertical-align: middle;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+#mat-tab-content-0-0{
+  padding-top: 0rem !important;
 }
 .bigTablLine{
   height: 2px;
   background-color: purple;
   padding-top: 0;
   padding-bottom: 0;
-  margin-top: 0.7rem;
 }
