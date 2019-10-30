@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule,MatButtonModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule} from '@angular/material';
+import { MatToolbarModule,MatButtonModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField, } from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule, routingComponents  } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectInfoComponent } from './project-info/project-info.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
+import { ReactiveFormsModule,FormsModule } from "@angular/forms";
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
@@ -35,10 +38,12 @@ import { ResourcesComponent } from './resources/resources.component';
     ProjectComponent,
     HomeComponent,
     ProjectInfoComponent,
+    CreateProjectComponent,
     FooterComponent,
     ResourcesComponent
-    
+
   ],
+  entryComponents:[CreateProjectComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,9 +52,12 @@ import { ResourcesComponent } from './resources/resources.component';
     MatButtonModule,
     HttpClientModule,
     MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatGridListModule,
+    MatFormFieldModule,
     MatTabsModule,
     MatTableModule,
-    MatGridListModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
     A11yModule,
@@ -70,7 +78,6 @@ import { ResourcesComponent } from './resources/resources.component';
     MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
-    MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
