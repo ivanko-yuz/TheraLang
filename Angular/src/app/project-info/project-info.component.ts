@@ -18,23 +18,24 @@ export class ProjectInfoComponent implements OnInit {
 
   projectInfo : Project; 
   projectResources : Resource[];
-
+  id : number;
   ngOnInit() {
     this.route.paramMap.subscribe(params=>{
-      let id = +params.get('id');
-      this.http.getProjectInfo(id).subscribe((data:Project) => this.projectInfo=data);
-
-      this.http.getAllResourcesById(id).subscribe((_data:Resource[])=> this.projectResources=_data );
-
+      this.id = +params.get('this.id');
+      this.http.getProjectInfo(this.id).subscribe((data:Project) => this.projectInfo=data);    
       $(document).ready(function(){
         $(".resTab").hide();
     });
-      $(".resButton").click(function(){
-        $( ".resTab" ).slideToggle("slow");
-      });
-    });
-
+  
+    });    
   }
+  
+  getResources(){
+    this.http.getAllResourcesById(this.id).subscribe((_data:Resource[])=> this.projectResources=_data );
+
+    $(".resButton").click(function(){
+      $( ".resTab" ).slideToggle("slow");        
+    });}
 }
 
 

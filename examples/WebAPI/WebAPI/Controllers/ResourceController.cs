@@ -23,10 +23,10 @@ namespace WebAPI.Controllers
         }
 
     }
-    [Route("api/resources")]
-    public class NullableResController : Controller
-    {
-        [HttpGet("")]
-        public IEnumerable
-    }
+    //[Route("api/resources")]
+    //public class NullableResController : Controller
+    //{
+    //    [HttpGet("")]
+    //    public IEnumerable
+    //}
 }
