@@ -9,192 +9,165 @@ namespace MvcWeb.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Piranha_Blocks",
-                columns: table => new
+                "Piranha_Blocks",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    CLRType = table.Column<string>(maxLength: 256, nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    IsReusable = table.Column<bool>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    CLRType = table.Column<string>(maxLength: 256),
+                    Created = table.Column<DateTime>(),
+                    IsReusable = table.Column<bool>(),
+                    LastModified = table.Column<DateTime>(),
                     Title = table.Column<string>(maxLength: 128, nullable: true),
                     ParentId = table.Column<Guid>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piranha_Blocks", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Piranha_Blocks", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_MediaFolders",
-                columns: table => new
+                "Piranha_MediaFolders",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    Id = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
+                    Name = table.Column<string>(maxLength: 128),
                     ParentId = table.Column<Guid>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piranha_MediaFolders", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Piranha_MediaFolders", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_PageTypes",
-                columns: table => new
+                "Piranha_PageTypes",
+                table => new
                 {
-                    Id = table.Column<string>(maxLength: 64, nullable: false),
+                    Id = table.Column<string>(maxLength: 64),
                     Body = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(),
                     CLRType = table.Column<string>(maxLength: 256, nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piranha_PageTypes", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Piranha_PageTypes", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Params",
-                columns: table => new
+                "Piranha_Params",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
                     Description = table.Column<string>(maxLength: 256, nullable: true),
-                    Key = table.Column<string>(maxLength: 64, nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    Key = table.Column<string>(maxLength: 64),
+                    LastModified = table.Column<DateTime>(),
                     Value = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piranha_Params", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Piranha_Params", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_PostTypes",
-                columns: table => new
+                "Piranha_PostTypes",
+                table => new
                 {
-                    Id = table.Column<string>(maxLength: 64, nullable: false),
+                    Id = table.Column<string>(maxLength: 64),
                     Body = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(),
                     CLRType = table.Column<string>(maxLength: 256, nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piranha_PostTypes", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Piranha_PostTypes", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Roles",
-                columns: table => new
+                "Piranha_Roles",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piranha_Roles", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Piranha_Roles", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Sites",
-                columns: table => new
+                "Piranha_Sites",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
                     Description = table.Column<string>(maxLength: 256, nullable: true),
                     Hostnames = table.Column<string>(maxLength: 256, nullable: true),
-                    InternalId = table.Column<string>(maxLength: 64, nullable: false),
-                    IsDefault = table.Column<bool>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    InternalId = table.Column<string>(maxLength: 64),
+                    IsDefault = table.Column<bool>(),
+                    LastModified = table.Column<DateTime>(),
                     Title = table.Column<string>(maxLength: 128, nullable: true),
                     SiteTypeId = table.Column<string>(maxLength: 64, nullable: true),
                     ContentLastModified = table.Column<DateTime>(nullable: true),
                     Culture = table.Column<string>(maxLength: 6, nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piranha_Sites", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Piranha_Sites", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_SiteTypes",
-                columns: table => new
+                "Piranha_SiteTypes",
+                table => new
                 {
-                    Id = table.Column<string>(maxLength: 64, nullable: false),
+                    Id = table.Column<string>(maxLength: 64),
                     Body = table.Column<string>(nullable: true),
                     CLRType = table.Column<string>(maxLength: 256, nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false)
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>()
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piranha_SiteTypes", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Piranha_SiteTypes", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Users",
-                columns: table => new
+                "Piranha_Users",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    AccessFailedCount = table.Column<int>(),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    EmailConfirmed = table.Column<bool>(),
+                    LockoutEnabled = table.Column<bool>(),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    PhoneNumberConfirmed = table.Column<bool>(),
                     SecurityStamp = table.Column<string>(nullable: true),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(),
                     UserName = table.Column<string>(maxLength: 256, nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piranha_Users", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Piranha_Users", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_BlockFields",
-                columns: table => new
+                "Piranha_BlockFields",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlockId = table.Column<Guid>(nullable: false),
-                    CLRType = table.Column<string>(maxLength: 256, nullable: false),
-                    FieldId = table.Column<string>(maxLength: 64, nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    BlockId = table.Column<Guid>(),
+                    CLRType = table.Column<string>(maxLength: 256),
+                    FieldId = table.Column<string>(maxLength: 64),
+                    SortOrder = table.Column<int>(),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_BlockFields", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_BlockFields_Piranha_Blocks_BlockId",
-                        column: x => x.BlockId,
-                        principalTable: "Piranha_Blocks",
-                        principalColumn: "Id",
+                        "FK_Piranha_BlockFields_Piranha_Blocks_BlockId",
+                        x => x.BlockId,
+                        "Piranha_Blocks",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Media",
-                columns: table => new
+                "Piranha_Media",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    ContentType = table.Column<string>(maxLength: 256, nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Filename = table.Column<string>(maxLength: 128, nullable: false),
+                    Id = table.Column<Guid>(),
+                    ContentType = table.Column<string>(maxLength: 256),
+                    Created = table.Column<DateTime>(),
+                    Filename = table.Column<string>(maxLength: 128),
                     FolderId = table.Column<Guid>(nullable: true),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    LastModified = table.Column<DateTime>(),
                     PublicUrl = table.Column<string>(nullable: true),
-                    Size = table.Column<long>(nullable: false),
-                    Type = table.Column<int>(nullable: false),
+                    Size = table.Column<long>(),
+                    Type = table.Column<int>(),
                     Height = table.Column<int>(nullable: true),
                     Width = table.Column<int>(nullable: true)
                 },
@@ -202,78 +175,79 @@ namespace MvcWeb.Migrations
                 {
                     table.PrimaryKey("PK_Piranha_Media", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_Media_Piranha_MediaFolders_FolderId",
-                        column: x => x.FolderId,
-                        principalTable: "Piranha_MediaFolders",
-                        principalColumn: "Id",
+                        "FK_Piranha_Media_Piranha_MediaFolders_FolderId",
+                        x => x.FolderId,
+                        "Piranha_MediaFolders",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_RoleClaims",
-                columns: table => new
+                "Piranha_RoleClaims",
+                table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>()
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
-                    RoleId = table.Column<Guid>(nullable: false)
+                    RoleId = table.Column<Guid>()
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_RoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_RoleClaims_Piranha_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Piranha_Roles",
-                        principalColumn: "Id",
+                        "FK_Piranha_RoleClaims_Piranha_Roles_RoleId",
+                        x => x.RoleId,
+                        "Piranha_Roles",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Aliases",
-                columns: table => new
+                "Piranha_Aliases",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    AliasUrl = table.Column<string>(maxLength: 256, nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
-                    RedirectUrl = table.Column<string>(maxLength: 256, nullable: false),
-                    SiteId = table.Column<Guid>(nullable: false),
-                    Type = table.Column<int>(nullable: false)
+                    Id = table.Column<Guid>(),
+                    AliasUrl = table.Column<string>(maxLength: 256),
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(),
+                    RedirectUrl = table.Column<string>(maxLength: 256),
+                    SiteId = table.Column<Guid>(),
+                    Type = table.Column<int>()
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_Aliases", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_Aliases_Piranha_Sites_SiteId",
-                        column: x => x.SiteId,
-                        principalTable: "Piranha_Sites",
-                        principalColumn: "Id",
+                        "FK_Piranha_Aliases_Piranha_Sites_SiteId",
+                        x => x.SiteId,
+                        "Piranha_Sites",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Pages",
-                columns: table => new
+                "Piranha_Pages",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    IsHidden = table.Column<bool>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
+                    IsHidden = table.Column<bool>(),
+                    LastModified = table.Column<DateTime>(),
                     MetaDescription = table.Column<string>(maxLength: 256, nullable: true),
                     MetaKeywords = table.Column<string>(maxLength: 128, nullable: true),
                     NavigationTitle = table.Column<string>(maxLength: 128, nullable: true),
-                    PageTypeId = table.Column<string>(maxLength: 64, nullable: false),
+                    PageTypeId = table.Column<string>(maxLength: 64),
                     ParentId = table.Column<Guid>(nullable: true),
                     Published = table.Column<DateTime>(nullable: true),
-                    RedirectType = table.Column<int>(nullable: false),
+                    RedirectType = table.Column<int>(),
                     RedirectUrl = table.Column<string>(maxLength: 256, nullable: true),
                     Route = table.Column<string>(maxLength: 256, nullable: true),
-                    SiteId = table.Column<Guid>(nullable: false),
-                    Slug = table.Column<string>(maxLength: 128, nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(maxLength: 128, nullable: false),
+                    SiteId = table.Column<Guid>(),
+                    Slug = table.Column<string>(maxLength: 128),
+                    SortOrder = table.Column<int>(),
+                    Title = table.Column<string>(maxLength: 128),
                     ContentType = table.Column<string>(maxLength: 255, nullable: false, defaultValueSql: "(N'Page')"),
                     OriginalPageId = table.Column<Guid>(nullable: true)
                 },
@@ -281,573 +255,574 @@ namespace MvcWeb.Migrations
                 {
                     table.PrimaryKey("PK_Piranha_Pages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_Pages_Piranha_PageTypes_PageTypeId",
-                        column: x => x.PageTypeId,
-                        principalTable: "Piranha_PageTypes",
-                        principalColumn: "Id",
+                        "FK_Piranha_Pages_Piranha_PageTypes_PageTypeId",
+                        x => x.PageTypeId,
+                        "Piranha_PageTypes",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Piranha_Pages_Piranha_Pages_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "Piranha_Pages",
-                        principalColumn: "Id",
+                        "FK_Piranha_Pages_Piranha_Pages_ParentId",
+                        x => x.ParentId,
+                        "Piranha_Pages",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piranha_Pages_Piranha_Sites_SiteId",
-                        column: x => x.SiteId,
-                        principalTable: "Piranha_Sites",
-                        principalColumn: "Id",
+                        "FK_Piranha_Pages_Piranha_Sites_SiteId",
+                        x => x.SiteId,
+                        "Piranha_Sites",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_SiteFields",
-                columns: table => new
+                "Piranha_SiteFields",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    CLRType = table.Column<string>(maxLength: 256, nullable: false),
-                    FieldId = table.Column<string>(maxLength: 64, nullable: false),
-                    RegionId = table.Column<string>(maxLength: 64, nullable: false),
-                    SiteId = table.Column<Guid>(nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    CLRType = table.Column<string>(maxLength: 256),
+                    FieldId = table.Column<string>(maxLength: 64),
+                    RegionId = table.Column<string>(maxLength: 64),
+                    SiteId = table.Column<Guid>(),
+                    SortOrder = table.Column<int>(),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_SiteFields", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_SiteFields_Piranha_Sites_SiteId",
-                        column: x => x.SiteId,
-                        principalTable: "Piranha_Sites",
-                        principalColumn: "Id",
+                        "FK_Piranha_SiteFields_Piranha_Sites_SiteId",
+                        x => x.SiteId,
+                        "Piranha_Sites",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_UserClaims",
-                columns: table => new
+                "Piranha_UserClaims",
+                table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>()
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<Guid>()
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_UserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_UserClaims_Piranha_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Piranha_Users",
-                        principalColumn: "Id",
+                        "FK_Piranha_UserClaims_Piranha_Users_UserId",
+                        x => x.UserId,
+                        "Piranha_Users",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_UserLogins",
-                columns: table => new
+                "Piranha_UserLogins",
+                table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(),
+                    ProviderKey = table.Column<string>(),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<Guid>()
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Piranha_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_Piranha_UserLogins", x => new {x.LoginProvider, x.ProviderKey});
                     table.ForeignKey(
-                        name: "FK_Piranha_UserLogins_Piranha_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Piranha_Users",
-                        principalColumn: "Id",
+                        "FK_Piranha_UserLogins_Piranha_Users_UserId",
+                        x => x.UserId,
+                        "Piranha_Users",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_UserRoles",
-                columns: table => new
+                "Piranha_UserRoles",
+                table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false),
-                    RoleId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<Guid>(),
+                    RoleId = table.Column<Guid>()
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Piranha_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_Piranha_UserRoles", x => new {x.UserId, x.RoleId});
                     table.ForeignKey(
-                        name: "FK_Piranha_UserRoles_Piranha_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Piranha_Roles",
-                        principalColumn: "Id",
+                        "FK_Piranha_UserRoles_Piranha_Roles_RoleId",
+                        x => x.RoleId,
+                        "Piranha_Roles",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Piranha_UserRoles_Piranha_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Piranha_Users",
-                        principalColumn: "Id",
+                        "FK_Piranha_UserRoles_Piranha_Users_UserId",
+                        x => x.UserId,
+                        "Piranha_Users",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_UserTokens",
-                columns: table => new
+                "Piranha_UserTokens",
+                table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    UserId = table.Column<Guid>(),
+                    LoginProvider = table.Column<string>(),
+                    Name = table.Column<string>(),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Piranha_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_Piranha_UserTokens", x => new {x.UserId, x.LoginProvider, x.Name});
                     table.ForeignKey(
-                        name: "FK_Piranha_UserTokens_Piranha_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Piranha_Users",
-                        principalColumn: "Id",
+                        "FK_Piranha_UserTokens_Piranha_Users_UserId",
+                        x => x.UserId,
+                        "Piranha_Users",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_MediaVersions",
-                columns: table => new
+                "Piranha_MediaVersions",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(),
                     Height = table.Column<int>(nullable: true),
-                    MediaId = table.Column<Guid>(nullable: false),
-                    Size = table.Column<long>(nullable: false),
-                    Width = table.Column<int>(nullable: false),
+                    MediaId = table.Column<Guid>(),
+                    Size = table.Column<long>(),
+                    Width = table.Column<int>(),
                     FileExtension = table.Column<string>(maxLength: 8, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_MediaVersions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_MediaVersions_Piranha_Media_MediaId",
-                        column: x => x.MediaId,
-                        principalTable: "Piranha_Media",
-                        principalColumn: "Id",
+                        "FK_Piranha_MediaVersions_Piranha_Media_MediaId",
+                        x => x.MediaId,
+                        "Piranha_Media",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Categories",
-                columns: table => new
+                "Piranha_Categories",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlogId = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
-                    Slug = table.Column<string>(maxLength: 64, nullable: false),
-                    Title = table.Column<string>(maxLength: 64, nullable: false)
+                    Id = table.Column<Guid>(),
+                    BlogId = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(),
+                    Slug = table.Column<string>(maxLength: 64),
+                    Title = table.Column<string>(maxLength: 64)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_Categories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_Categories_Piranha_Pages_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "Piranha_Pages",
-                        principalColumn: "Id",
+                        "FK_Piranha_Categories_Piranha_Pages_BlogId",
+                        x => x.BlogId,
+                        "Piranha_Pages",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_PageBlocks",
-                columns: table => new
+                "Piranha_PageBlocks",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlockId = table.Column<Guid>(nullable: false),
-                    PageId = table.Column<Guid>(nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    BlockId = table.Column<Guid>(),
+                    PageId = table.Column<Guid>(),
+                    SortOrder = table.Column<int>(),
                     ParentId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_PageBlocks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_PageBlocks_Piranha_Blocks_BlockId",
-                        column: x => x.BlockId,
-                        principalTable: "Piranha_Blocks",
-                        principalColumn: "Id",
+                        "FK_Piranha_PageBlocks_Piranha_Blocks_BlockId",
+                        x => x.BlockId,
+                        "Piranha_Blocks",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Piranha_PageBlocks_Piranha_Pages_PageId",
-                        column: x => x.PageId,
-                        principalTable: "Piranha_Pages",
-                        principalColumn: "Id",
+                        "FK_Piranha_PageBlocks_Piranha_Pages_PageId",
+                        x => x.PageId,
+                        "Piranha_Pages",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_PageFields",
-                columns: table => new
+                "Piranha_PageFields",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    CLRType = table.Column<string>(maxLength: 256, nullable: false),
-                    FieldId = table.Column<string>(maxLength: 64, nullable: false),
-                    PageId = table.Column<Guid>(nullable: false),
-                    RegionId = table.Column<string>(maxLength: 64, nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    CLRType = table.Column<string>(maxLength: 256),
+                    FieldId = table.Column<string>(maxLength: 64),
+                    PageId = table.Column<Guid>(),
+                    RegionId = table.Column<string>(maxLength: 64),
+                    SortOrder = table.Column<int>(),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_PageFields", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_PageFields_Piranha_Pages_PageId",
-                        column: x => x.PageId,
-                        principalTable: "Piranha_Pages",
-                        principalColumn: "Id",
+                        "FK_Piranha_PageFields_Piranha_Pages_PageId",
+                        x => x.PageId,
+                        "Piranha_Pages",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_PageRevisions",
-                columns: table => new
+                "Piranha_PageRevisions",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(),
                     Data = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    PageId = table.Column<Guid>(nullable: false)
+                    Created = table.Column<DateTime>(),
+                    PageId = table.Column<Guid>()
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_PageRevisions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_PageRevisions_Piranha_Pages_PageId",
-                        column: x => x.PageId,
-                        principalTable: "Piranha_Pages",
-                        principalColumn: "Id",
+                        "FK_Piranha_PageRevisions_Piranha_Pages_PageId",
+                        x => x.PageId,
+                        "Piranha_Pages",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Tags",
-                columns: table => new
+                "Piranha_Tags",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlogId = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
-                    Slug = table.Column<string>(maxLength: 64, nullable: false),
-                    Title = table.Column<string>(maxLength: 64, nullable: false)
+                    Id = table.Column<Guid>(),
+                    BlogId = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(),
+                    Slug = table.Column<string>(maxLength: 64),
+                    Title = table.Column<string>(maxLength: 64)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_Tags", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_Tags_Piranha_Pages_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "Piranha_Pages",
-                        principalColumn: "Id",
+                        "FK_Piranha_Tags_Piranha_Pages_BlogId",
+                        x => x.BlogId,
+                        "Piranha_Pages",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_Posts",
-                columns: table => new
+                "Piranha_Posts",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlogId = table.Column<Guid>(nullable: false),
-                    CategoryId = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    BlogId = table.Column<Guid>(),
+                    CategoryId = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(),
                     MetaDescription = table.Column<string>(maxLength: 256, nullable: true),
                     MetaKeywords = table.Column<string>(maxLength: 128, nullable: true),
-                    PostTypeId = table.Column<string>(maxLength: 64, nullable: false),
+                    PostTypeId = table.Column<string>(maxLength: 64),
                     Published = table.Column<DateTime>(nullable: true),
-                    RedirectType = table.Column<int>(nullable: false),
+                    RedirectType = table.Column<int>(),
                     RedirectUrl = table.Column<string>(maxLength: 256, nullable: true),
                     Route = table.Column<string>(maxLength: 256, nullable: true),
-                    Slug = table.Column<string>(maxLength: 128, nullable: false),
-                    Title = table.Column<string>(maxLength: 128, nullable: false)
+                    Slug = table.Column<string>(maxLength: 128),
+                    Title = table.Column<string>(maxLength: 128)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_Posts_Piranha_Pages_BlogId",
-                        column: x => x.BlogId,
-                        principalTable: "Piranha_Pages",
-                        principalColumn: "Id",
+                        "FK_Piranha_Posts_Piranha_Pages_BlogId",
+                        x => x.BlogId,
+                        "Piranha_Pages",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Piranha_Posts_Piranha_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Piranha_Categories",
-                        principalColumn: "Id",
+                        "FK_Piranha_Posts_Piranha_Categories_CategoryId",
+                        x => x.CategoryId,
+                        "Piranha_Categories",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Piranha_Posts_Piranha_PostTypes_PostTypeId",
-                        column: x => x.PostTypeId,
-                        principalTable: "Piranha_PostTypes",
-                        principalColumn: "Id",
+                        "FK_Piranha_Posts_Piranha_PostTypes_PostTypeId",
+                        x => x.PostTypeId,
+                        "Piranha_PostTypes",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_PostBlocks",
-                columns: table => new
+                "Piranha_PostBlocks",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlockId = table.Column<Guid>(nullable: false),
-                    PostId = table.Column<Guid>(nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    BlockId = table.Column<Guid>(),
+                    PostId = table.Column<Guid>(),
+                    SortOrder = table.Column<int>(),
                     ParentId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_PostBlocks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_PostBlocks_Piranha_Blocks_BlockId",
-                        column: x => x.BlockId,
-                        principalTable: "Piranha_Blocks",
-                        principalColumn: "Id",
+                        "FK_Piranha_PostBlocks_Piranha_Blocks_BlockId",
+                        x => x.BlockId,
+                        "Piranha_Blocks",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Piranha_PostBlocks_Piranha_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Piranha_Posts",
-                        principalColumn: "Id",
+                        "FK_Piranha_PostBlocks_Piranha_Posts_PostId",
+                        x => x.PostId,
+                        "Piranha_Posts",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_PostFields",
-                columns: table => new
+                "Piranha_PostFields",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    CLRType = table.Column<string>(maxLength: 256, nullable: false),
-                    FieldId = table.Column<string>(maxLength: 64, nullable: false),
-                    PostId = table.Column<Guid>(nullable: false),
-                    RegionId = table.Column<string>(maxLength: 64, nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    CLRType = table.Column<string>(maxLength: 256),
+                    FieldId = table.Column<string>(maxLength: 64),
+                    PostId = table.Column<Guid>(),
+                    RegionId = table.Column<string>(maxLength: 64),
+                    SortOrder = table.Column<int>(),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_PostFields", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_PostFields_Piranha_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Piranha_Posts",
-                        principalColumn: "Id",
+                        "FK_Piranha_PostFields_Piranha_Posts_PostId",
+                        x => x.PostId,
+                        "Piranha_Posts",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_PostRevisions",
-                columns: table => new
+                "Piranha_PostRevisions",
+                table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(),
                     Data = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    PostId = table.Column<Guid>(nullable: false)
+                    Created = table.Column<DateTime>(),
+                    PostId = table.Column<Guid>()
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_PostRevisions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Piranha_PostRevisions_Piranha_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Piranha_Posts",
-                        principalColumn: "Id",
+                        "FK_Piranha_PostRevisions_Piranha_Posts_PostId",
+                        x => x.PostId,
+                        "Piranha_Posts",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piranha_PostTags",
-                columns: table => new
+                "Piranha_PostTags",
+                table => new
                 {
-                    PostId = table.Column<Guid>(nullable: false),
-                    TagId = table.Column<Guid>(nullable: false)
+                    PostId = table.Column<Guid>(),
+                    TagId = table.Column<Guid>()
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Piranha_PostTags", x => new { x.PostId, x.TagId });
+                    table.PrimaryKey("PK_Piranha_PostTags", x => new {x.PostId, x.TagId});
                     table.ForeignKey(
-                        name: "FK_Piranha_PostTags_Piranha_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Piranha_Posts",
-                        principalColumn: "Id",
+                        "FK_Piranha_PostTags_Piranha_Posts_PostId",
+                        x => x.PostId,
+                        "Piranha_Posts",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Piranha_PostTags_Piranha_Tags_TagId",
-                        column: x => x.TagId,
-                        principalTable: "Piranha_Tags",
-                        principalColumn: "Id",
+                        "FK_Piranha_PostTags_Piranha_Tags_TagId",
+                        x => x.TagId,
+                        "Piranha_Tags",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Aliases_SiteId_AliasUrl",
-                table: "Piranha_Aliases",
-                columns: new[] { "SiteId", "AliasUrl" },
+                "IX_Piranha_Aliases_SiteId_AliasUrl",
+                "Piranha_Aliases",
+                new[] {"SiteId", "AliasUrl"},
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_BlockFields_BlockId_FieldId_SortOrder",
-                table: "Piranha_BlockFields",
-                columns: new[] { "BlockId", "FieldId", "SortOrder" },
+                "IX_Piranha_BlockFields_BlockId_FieldId_SortOrder",
+                "Piranha_BlockFields",
+                new[] {"BlockId", "FieldId", "SortOrder"},
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Categories_BlogId_Slug",
-                table: "Piranha_Categories",
-                columns: new[] { "BlogId", "Slug" },
+                "IX_Piranha_Categories_BlogId_Slug",
+                "Piranha_Categories",
+                new[] {"BlogId", "Slug"},
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Media_FolderId",
-                table: "Piranha_Media",
-                column: "FolderId");
+                "IX_Piranha_Media_FolderId",
+                "Piranha_Media",
+                "FolderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_MediaVersions_MediaId_Width_Height",
-                table: "Piranha_MediaVersions",
-                columns: new[] { "MediaId", "Width", "Height" },
+                "IX_Piranha_MediaVersions_MediaId_Width_Height",
+                "Piranha_MediaVersions",
+                new[] {"MediaId", "Width", "Height"},
                 unique: true,
                 filter: "[Height] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_PageBlocks_BlockId",
-                table: "Piranha_PageBlocks",
-                column: "BlockId");
+                "IX_Piranha_PageBlocks_BlockId",
+                "Piranha_PageBlocks",
+                "BlockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_PageBlocks_PageId_SortOrder",
-                table: "Piranha_PageBlocks",
-                columns: new[] { "PageId", "SortOrder" },
+                "IX_Piranha_PageBlocks_PageId_SortOrder",
+                "Piranha_PageBlocks",
+                new[] {"PageId", "SortOrder"},
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_PageFields_PageId_RegionId_FieldId_SortOrder",
-                table: "Piranha_PageFields",
-                columns: new[] { "PageId", "RegionId", "FieldId", "SortOrder" });
+                "IX_Piranha_PageFields_PageId_RegionId_FieldId_SortOrder",
+                "Piranha_PageFields",
+                new[] {"PageId", "RegionId", "FieldId", "SortOrder"});
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_PageRevisions_PageId",
-                table: "Piranha_PageRevisions",
-                column: "PageId");
+                "IX_Piranha_PageRevisions_PageId",
+                "Piranha_PageRevisions",
+                "PageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Pages_PageTypeId",
-                table: "Piranha_Pages",
-                column: "PageTypeId");
+                "IX_Piranha_Pages_PageTypeId",
+                "Piranha_Pages",
+                "PageTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Pages_ParentId",
-                table: "Piranha_Pages",
-                column: "ParentId");
+                "IX_Piranha_Pages_ParentId",
+                "Piranha_Pages",
+                "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Pages_SiteId_Slug",
-                table: "Piranha_Pages",
-                columns: new[] { "SiteId", "Slug" },
+                "IX_Piranha_Pages_SiteId_Slug",
+                "Piranha_Pages",
+                new[] {"SiteId", "Slug"},
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Params_Key",
-                table: "Piranha_Params",
-                column: "Key",
+                "IX_Piranha_Params_Key",
+                "Piranha_Params",
+                "Key",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_PostBlocks_BlockId",
-                table: "Piranha_PostBlocks",
-                column: "BlockId");
+                "IX_Piranha_PostBlocks_BlockId",
+                "Piranha_PostBlocks",
+                "BlockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_PostBlocks_PostId_SortOrder",
-                table: "Piranha_PostBlocks",
-                columns: new[] { "PostId", "SortOrder" },
+                "IX_Piranha_PostBlocks_PostId_SortOrder",
+                "Piranha_PostBlocks",
+                new[] {"PostId", "SortOrder"},
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_PostFields_PostId_RegionId_FieldId_SortOrder",
-                table: "Piranha_PostFields",
-                columns: new[] { "PostId", "RegionId", "FieldId", "SortOrder" });
+                "IX_Piranha_PostFields_PostId_RegionId_FieldId_SortOrder",
+                "Piranha_PostFields",
+                new[] {"PostId", "RegionId", "FieldId", "SortOrder"});
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_PostRevisions_PostId",
-                table: "Piranha_PostRevisions",
-                column: "PostId");
+                "IX_Piranha_PostRevisions_PostId",
+                "Piranha_PostRevisions",
+                "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Posts_CategoryId",
-                table: "Piranha_Posts",
-                column: "CategoryId");
+                "IX_Piranha_Posts_CategoryId",
+                "Piranha_Posts",
+                "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Posts_PostTypeId",
-                table: "Piranha_Posts",
-                column: "PostTypeId");
+                "IX_Piranha_Posts_PostTypeId",
+                "Piranha_Posts",
+                "PostTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Posts_BlogId_Slug",
-                table: "Piranha_Posts",
-                columns: new[] { "BlogId", "Slug" },
+                "IX_Piranha_Posts_BlogId_Slug",
+                "Piranha_Posts",
+                new[] {"BlogId", "Slug"},
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_PostTags_TagId",
-                table: "Piranha_PostTags",
-                column: "TagId");
+                "IX_Piranha_PostTags_TagId",
+                "Piranha_PostTags",
+                "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_RoleClaims_RoleId",
-                table: "Piranha_RoleClaims",
-                column: "RoleId");
+                "IX_Piranha_RoleClaims_RoleId",
+                "Piranha_RoleClaims",
+                "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "Piranha_Roles",
-                column: "NormalizedName",
+                "RoleNameIndex",
+                "Piranha_Roles",
+                "NormalizedName",
                 unique: true,
                 filter: "([NormalizedName] IS NOT NULL)");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_SiteFields_SiteId_RegionId_FieldId_SortOrder",
-                table: "Piranha_SiteFields",
-                columns: new[] { "SiteId", "RegionId", "FieldId", "SortOrder" });
+                "IX_Piranha_SiteFields_SiteId_RegionId_FieldId_SortOrder",
+                "Piranha_SiteFields",
+                new[] {"SiteId", "RegionId", "FieldId", "SortOrder"});
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Sites_InternalId",
-                table: "Piranha_Sites",
-                column: "InternalId",
+                "IX_Piranha_Sites_InternalId",
+                "Piranha_Sites",
+                "InternalId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_Tags_BlogId_Slug",
-                table: "Piranha_Tags",
-                columns: new[] { "BlogId", "Slug" },
+                "IX_Piranha_Tags_BlogId_Slug",
+                "Piranha_Tags",
+                new[] {"BlogId", "Slug"},
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_UserClaims_UserId",
-                table: "Piranha_UserClaims",
-                column: "UserId");
+                "IX_Piranha_UserClaims_UserId",
+                "Piranha_UserClaims",
+                "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_UserLogins_UserId",
-                table: "Piranha_UserLogins",
-                column: "UserId");
+                "IX_Piranha_UserLogins_UserId",
+                "Piranha_UserLogins",
+                "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Piranha_UserRoles_RoleId",
-                table: "Piranha_UserRoles",
-                column: "RoleId");
+                "IX_Piranha_UserRoles_RoleId",
+                "Piranha_UserRoles",
+                "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "Piranha_Users",
-                column: "NormalizedEmail");
+                "EmailIndex",
+                "Piranha_Users",
+                "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "Piranha_Users",
-                column: "NormalizedUserName",
+                "UserNameIndex",
+                "Piranha_Users",
+                "NormalizedUserName",
                 unique: true,
                 filter: "([NormalizedUserName] IS NOT NULL)");
         }
@@ -855,94 +830,94 @@ namespace MvcWeb.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Piranha_Aliases");
+                "Piranha_Aliases");
 
             migrationBuilder.DropTable(
-                name: "Piranha_BlockFields");
+                "Piranha_BlockFields");
 
             migrationBuilder.DropTable(
-                name: "Piranha_MediaVersions");
+                "Piranha_MediaVersions");
 
             migrationBuilder.DropTable(
-                name: "Piranha_PageBlocks");
+                "Piranha_PageBlocks");
 
             migrationBuilder.DropTable(
-                name: "Piranha_PageFields");
+                "Piranha_PageFields");
 
             migrationBuilder.DropTable(
-                name: "Piranha_PageRevisions");
+                "Piranha_PageRevisions");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Params");
+                "Piranha_Params");
 
             migrationBuilder.DropTable(
-                name: "Piranha_PostBlocks");
+                "Piranha_PostBlocks");
 
             migrationBuilder.DropTable(
-                name: "Piranha_PostFields");
+                "Piranha_PostFields");
 
             migrationBuilder.DropTable(
-                name: "Piranha_PostRevisions");
+                "Piranha_PostRevisions");
 
             migrationBuilder.DropTable(
-                name: "Piranha_PostTags");
+                "Piranha_PostTags");
 
             migrationBuilder.DropTable(
-                name: "Piranha_RoleClaims");
+                "Piranha_RoleClaims");
 
             migrationBuilder.DropTable(
-                name: "Piranha_SiteFields");
+                "Piranha_SiteFields");
 
             migrationBuilder.DropTable(
-                name: "Piranha_SiteTypes");
+                "Piranha_SiteTypes");
 
             migrationBuilder.DropTable(
-                name: "Piranha_UserClaims");
+                "Piranha_UserClaims");
 
             migrationBuilder.DropTable(
-                name: "Piranha_UserLogins");
+                "Piranha_UserLogins");
 
             migrationBuilder.DropTable(
-                name: "Piranha_UserRoles");
+                "Piranha_UserRoles");
 
             migrationBuilder.DropTable(
-                name: "Piranha_UserTokens");
+                "Piranha_UserTokens");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Media");
+                "Piranha_Media");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Blocks");
+                "Piranha_Blocks");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Posts");
+                "Piranha_Posts");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Tags");
+                "Piranha_Tags");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Roles");
+                "Piranha_Roles");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Users");
+                "Piranha_Users");
 
             migrationBuilder.DropTable(
-                name: "Piranha_MediaFolders");
+                "Piranha_MediaFolders");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Categories");
+                "Piranha_Categories");
 
             migrationBuilder.DropTable(
-                name: "Piranha_PostTypes");
+                "Piranha_PostTypes");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Pages");
+                "Piranha_Pages");
 
             migrationBuilder.DropTable(
-                name: "Piranha_PageTypes");
+                "Piranha_PageTypes");
 
             migrationBuilder.DropTable(
-                name: "Piranha_Sites");
+                "Piranha_Sites");
         }
     }
 }
