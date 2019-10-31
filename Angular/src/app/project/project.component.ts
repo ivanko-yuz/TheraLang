@@ -3,7 +3,7 @@ import {HttpService} from './http.service';
 import {Project} from './project';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import { CreateProjectComponent } from '../create-project/create-project.component';
-import { Resource } from '../resources/resourceCategory';
+import { Resource } from '../resources-table/resourceCategory';
 
 @Component({
   selector: 'app-project',

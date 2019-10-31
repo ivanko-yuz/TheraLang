@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
-import { Resource } from '../resources/resource';
+import { Resource } from '../resources-table/resource';
 import * as $ from 'jquery';
 import { isNullOrUndefined } from 'util';
 
@@ -15,14 +15,14 @@ import { isNullOrUndefined } from 'util';
 })
 export class ProjectInfoComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private http: HttpService) { };
+  constructor(private route: ActivatedRoute, private http: HttpService) { }
 
   projectInfo: Project;
   projectResources: Resource[];
   id: number;
- 
+
   ngAfterViewInit() {
-    $("#resTabId").hide()}
+    $('#resTabId').hide(); }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -32,8 +32,8 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   getResources() {
-      $("#resTabId").slideToggle("slow");
-    if (isNullOrUndefined(this.projectResources)) {
+      $('#resTabId').slideToggle('slow');
+      if (isNullOrUndefined(this.projectResources)) {
       this.http.getAllResourcesById(this.id).subscribe((_data: Resource[]) => this.projectResources = _data);
     }
 

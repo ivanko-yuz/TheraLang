@@ -1,8 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule,MatButtonModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField, } from '@angular/material';
-import {HttpClientModule} from '@angular/common/http';
-import { AppRoutingModule, routingComponents  } from './app-routing.module';
+import {
+  MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
+  MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
+  MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
+  MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
+  MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
+  MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
+} from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -10,24 +17,27 @@ import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectInfoComponent } from './project-info/project-info.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
-import { ReactiveFormsModule,FormsModule } from "@angular/forms";
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTableModule} from '@angular/material/table';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list'; 
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material';
-import {MatPaginatorModule} from '@angular/material/paginator'; 
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { PortalModule } from '@angular/cdk/portal';
 import { A11yModule } from '@angular/cdk/a11y';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FooterComponent } from './footer/footer.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { CustomDatePipe } from './project-info/custom.datepipe';
+import { ResourcesTableComponent } from './resources-table/resources-table.component';
+import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
+
 
 
 
@@ -42,9 +52,11 @@ import { CustomDatePipe } from './project-info/custom.datepipe';
     CreateProjectComponent,
     FooterComponent,
     ResourcesComponent,
-    CustomDatePipe
+    CustomDatePipe,
+    ResourcesTableComponent,
+    ResourcesInternalTableComponent
   ],
-  entryComponents:[CreateProjectComponent],
+  entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -102,9 +114,10 @@ import { CustomDatePipe } from './project-info/custom.datepipe';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
-    
+
   ],
+  exports: [ResourcesInternalTableComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, ]
 })
 export class AppModule { }
