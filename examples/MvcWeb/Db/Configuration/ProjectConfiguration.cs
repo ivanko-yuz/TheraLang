@@ -13,8 +13,9 @@ namespace MvcWeb.Db.Configuration
             builder.HasKey(i => i.Id);
             builder.Property(i => i.Id).ValueGeneratedOnAdd();
 
-            builder.Property(i => i.Name).IsRequired().HasMaxLength(100);
-            builder.Property(i => i.Type).IsRequired().HasMaxLength(50);
+            builder.Property(i => i.Name).IsRequired().HasMaxLength(250);
+
+            builder.Property(i => i.Type).IsRequired().HasMaxLength(250);
         }
     }
 }

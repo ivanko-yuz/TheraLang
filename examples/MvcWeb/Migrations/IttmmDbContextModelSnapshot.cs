@@ -815,11 +815,11 @@ namespace MvcWeb.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(250);
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(250);
 
                     b.HasKey("Id");
 
@@ -838,7 +838,7 @@ namespace MvcWeb.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500);
+                        .HasMaxLength(5000);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -880,8 +880,7 @@ namespace MvcWeb.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("ResourceId")
-                        .IsUnique();
+                    b.HasIndex("ResourceId");
 
                     b.ToTable("ResourceToProject");
                 });
@@ -1106,8 +1105,8 @@ namespace MvcWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MvcWeb.Db.Entities.Resource", "Resource")
-                        .WithOne("ResourceProject")
-                        .HasForeignKey("MvcWeb.Db.Entities.ResourceProject", "ResourceId")
+                        .WithMany("ResourceProject")
+                        .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -6,9 +6,8 @@ namespace MvcWeb.Db
 {
     public class IttmmDbContext : DbContext
     {
-        public IttmmDbContext(DbContextOptions/*<IttmmDbContext>*/ options) : base(options)
+        public IttmmDbContext(DbContextOptions options) : base(options)
         {
-            //Database.Migrate();
         }
 
         // Piranha entities...

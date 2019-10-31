@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MvcWeb.Migrations
 {
-    public partial class Added_4_Table_DimaMoment : Migration
+    public partial class Added4Tables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -166,8 +166,8 @@ namespace MvcWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Type = table.Column<string>(maxLength: 50, nullable: false),
-                    Name = table.Column<string>(maxLength: 100, nullable: false)
+                    Type = table.Column<string>(maxLength: 250, nullable: false),
+                    Name = table.Column<string>(maxLength: 250, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -443,7 +443,7 @@ namespace MvcWeb.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(maxLength: 500, nullable: false),
+                    Description = table.Column<string>(maxLength: 5000, nullable: false),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -939,8 +939,7 @@ namespace MvcWeb.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ResourceToProject_ResourceId",
                 table: "ResourceToProject",
-                column: "ResourceId",
-                unique: true);
+                column: "ResourceId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

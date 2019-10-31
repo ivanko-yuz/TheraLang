@@ -8,7 +8,7 @@ namespace MvcWeb.Db.Entities
 
         public string Type { get; set; }
 
-        public virtual List<Resource> Resources { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
         public ResourceCategory()
         {
             this.Resources = new List<Resource>();

@@ -7,12 +7,12 @@ namespace MvcWeb.UnitOfWork
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
+        private DbSet<TEntity> DbSet { get; }
+
         public Repository(DbSet<TEntity> dbSet)
         {
             DbSet = dbSet;
         }
-
-        private DbSet<TEntity> DbSet { get; }
 
         public IQueryable<TEntity> Get()
         {
@@ -43,7 +43,7 @@ namespace MvcWeb.UnitOfWork
         {
             DbSet.Update(entity);
         }
-
+        
         public void Attach(TEntity entity)
         {
             DbSet.Attach(entity);

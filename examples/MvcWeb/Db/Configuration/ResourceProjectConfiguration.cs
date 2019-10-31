@@ -11,12 +11,13 @@ namespace MvcWeb.Db.Configuration
             builder.ToTable("ResourceToProject");
 
             builder.HasKey(i => i.Id);
+            builder.Property(i => i.Id).ValueGeneratedOnAdd();
 
             // Relationship...
-            builder.HasOne(r => r.Resource).WithOne(i => i.ResourceProject);
-
-            // At table project must be navigation property to Resource project table.
-            // builder.HasOne(p=>p.Project).WithOne(i=>i.ResourceProject);
+            builder.HasOne(r => r.Resource).WithMany(p => p.ResourceProject);
+            
+            // Maybe can be Unique Object ?
+            // builder.HasIndex(i => new { i.ProjectId, i.ResourceId }).IsUnique();
         }
     }
 }

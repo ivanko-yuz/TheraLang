@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
+using MvcWeb.Db.Entities;
+using MvcWeb.UnitOfWork;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace MvcWeb.Controllers
 {
@@ -11,16 +9,38 @@ namespace MvcWeb.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        [HttpPost]
-        public HttpResponse CreateResource(string type, string description, int categoryId)
-        {
+        private IUnitOfWork UnitOfWork;
 
+        public ResourceController(IUnitOfWork unit)
+        {
+            this.UnitOfWork = unit;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(Resource resource)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            await UnitOfWork.Repository<Resource>().Add(resource);
+            await UnitOfWork.SaveChangesAsync();
+
+            return Ok();
         }
 
         [HttpPut]
-        public void EditResource()
+        public async Task<IActionResult> Put(Resource resource)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            UnitOfWork.Repository<Resource>().Update(resource);
+            await UnitOfWork.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

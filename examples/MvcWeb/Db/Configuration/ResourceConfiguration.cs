@@ -15,7 +15,7 @@ namespace MvcWeb.Db.Configuration
 
             builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
             builder.Property(p => p.Description).HasMaxLength(5000).IsRequired();
-            builder.Property(p => p.Date).IsRequired();
+            builder.Property(p => p.Date);
         }
     }
 }

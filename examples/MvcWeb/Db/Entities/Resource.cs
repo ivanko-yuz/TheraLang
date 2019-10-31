@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace MvcWeb.Db.Entities
 {
@@ -17,8 +17,10 @@ namespace MvcWeb.Db.Entities
 
         public virtual ResourceCategory ResourceCategory { get; set; }
 
-        // Navigation property to ResourceProject table.
-        public virtual ResourceProject ResourceProject { get; set; }
-        // ... 
+        public virtual ICollection<ResourceProject> ResourceProject { get; set; }
+        public Resource()
+        {
+            this.ResourceProject = new List<ResourceProject>();
+        }
     }
 }

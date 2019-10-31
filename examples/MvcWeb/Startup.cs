@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Piranha;
-//using Piranha.AspNetCore.Identity.SQLServer;
 using MvcWeb.Db;
+using Piranha.AspNetCore.Identity.SQLServer;
 
 namespace MvcWeb
 {
@@ -27,15 +27,11 @@ namespace MvcWeb
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddPiranhaEF(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddPiranhaIdentityWithSeed<IdentitySQLServerDb>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //Using our tables and etc.
-           services.AddDbContext<IttmmDbContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-
+            services.AddPiranhaEF(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddPiranhaIdentityWithSeed<IdentitySQLServerDb>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddLocalization(options =>
                 options.ResourcesPath = "Resources"
             );
@@ -54,6 +50,9 @@ namespace MvcWeb
 
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
+
+            services.AddDbContext<IttmmDbContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
