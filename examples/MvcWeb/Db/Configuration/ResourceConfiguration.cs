@@ -14,8 +14,8 @@ namespace MvcWeb.Db.Configuration
             builder.Property(i => i.Id).ValueGeneratedOnAdd();
 
             builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
+            builder.HasIndex(p => p.Name).IsUnique();
             builder.Property(p => p.Description).HasMaxLength(5000).IsRequired();
-            builder.Property(p => p.Date);
         }
     }
 }

@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MvcWeb.Db.Entities
 {
-    public class Resource
+    public class Resource : BaseEntity
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public DateTime Date { get; set; }
-
+        
         public string Description { get; set; }
+        
+        public string URL { get; set; }
+
+        public string File { get; set; }
 
         public int CategoryId { get; set; }
 

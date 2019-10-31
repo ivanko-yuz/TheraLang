@@ -43,6 +43,7 @@ namespace MvcWeb.Db
         public virtual DbSet<PiranhaUser> PiranhaUsers { get; set; }
 
         // Our entities...
+        public virtual DbSet<BaseEntity> baseEntity { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
@@ -87,6 +88,7 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new ResourceCategoriesConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceProjectConfiguration());
+            modelBuilder.ApplyConfiguration(new BaseEntityConfiguration());
         }
     }
 }

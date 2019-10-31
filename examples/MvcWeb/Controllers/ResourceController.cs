@@ -36,10 +36,10 @@ namespace MvcWeb.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            
             UnitOfWork.Repository<Resource>().Update(resource);
             await UnitOfWork.SaveChangesAsync();
-
+            
             return Ok();
         }
     }
