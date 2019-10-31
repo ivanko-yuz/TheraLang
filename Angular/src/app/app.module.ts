@@ -27,6 +27,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FooterComponent } from './footer/footer.component';
 import { ResourcesComponent } from './resources/resources.component';
+import { CustomDatePipe } from './project-info/custom.datepipe';
 
 
 
@@ -40,8 +41,8 @@ import { ResourcesComponent } from './resources/resources.component';
     ProjectInfoComponent,
     CreateProjectComponent,
     FooterComponent,
-    ResourcesComponent
-
+    ResourcesComponent,
+    CustomDatePipe
   ],
   entryComponents:[CreateProjectComponent],
   imports: [

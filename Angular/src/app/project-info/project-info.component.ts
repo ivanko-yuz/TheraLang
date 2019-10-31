@@ -1,42 +1,45 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
 import { Resource } from '../resources/resource';
 import * as $ from 'jquery';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-project-info',
   templateUrl: './project-info.component.html',
   styleUrls: ['./project-info.component.less'],
   encapsulation: ViewEncapsulation.None,
-  providers:[HttpService]
+  providers: [HttpService]
 })
 export class ProjectInfoComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,private http:HttpService) { };
+  constructor(private route: ActivatedRoute, private http: HttpService) { };
 
-  projectInfo : Project; 
-  projectResources : Resource[];
-  id : number;
+  projectInfo: Project;
+  projectResources: Resource[];
+  id: number;
+ 
+  ngAfterViewInit() {
+    $("#resTabId").hide()}
+
   ngOnInit() {
-    this.route.paramMap.subscribe(params=>{
-      this.id = +params.get('this.id');
-      this.http.getProjectInfo(this.id).subscribe((data:Project) => this.projectInfo=data);    
-      $(document).ready(function(){
-        $(".resTab").hide();
+    this.route.paramMap.subscribe(params => {
+      this.id = +params.get('id');
+      this.http.getProjectInfo(this.id).subscribe((data: Project) => this.projectInfo = data);
     });
-  
-    });    
   }
-  
-  getResources(){
-    this.http.getAllResourcesById(this.id).subscribe((_data:Resource[])=> this.projectResources=_data );
 
-    $(".resButton").click(function(){
-      $( ".resTab" ).slideToggle("slow");        
-    });}
+  getResources() {
+      $("#resTabId").slideToggle("slow");
+    if (isNullOrUndefined(this.projectResources)) {
+      this.http.getAllResourcesById(this.id).subscribe((_data: Resource[]) => this.projectResources = _data);
+    }
+
+  }
 }
+
 
 
 

@@ -29,7 +29,7 @@
   <div class="bottom-buttons">
     <button mat-raised-button class="resButton" (click)="getResources()">Ресурси</button>
   </div>
-  <div class="footerTable">
+  <div class="footerTable" id="resTabId">
     <mat-tab-group mat-stretch-tabs class="resTab example-stretched-tabs mat-elevation-z4">
       <mat-tab label="Зображення">
         <table class="headTabl">
@@ -45,7 +45,7 @@
             <td class="resName">
               <p class="img-title">{{i.name}}</p>
             </td>
-            <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+            <td class="resDate"><time datetime="2015-07-20">{{i.date | customDate}}</time></td>
             <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
           </tr>
         </table>
