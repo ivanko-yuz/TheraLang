@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Piranha.Migrations
+namespace MvcWeb.Migrations
 {
     public partial class AddOriginalPageIdToPage : Migration
     {

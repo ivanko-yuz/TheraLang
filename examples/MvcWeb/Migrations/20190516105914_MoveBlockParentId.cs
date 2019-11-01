@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Piranha.Migrations
+namespace MvcWeb.Migrations
 {
-    [NoCoverage]
     public partial class MoveBlockParentId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -8,11 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Piranha;
 using Piranha.Models;
 using System;
+using MvcWeb.Db;
 
-namespace Piranha.Migrations
+namespace MvcWeb.Migrations
 {
     [NoCoverage]
-    [DbContext(typeof(Db))]
+    [DbContext(typeof(IttmmDbContext))]
     [Migration("20180430082044_AddOriginalPageIdToPage")]
     partial class AddOriginalPageIdToPage
     {

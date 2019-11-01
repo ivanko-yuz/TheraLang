@@ -5,10 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Piranha;
+using MvcWeb.Db;
 
-namespace Piranha.Migrations
+namespace MvcWeb.Migrations
 {
-    [DbContext(typeof(Db))]
+    [DbContext(typeof(IttmmDbContext))]
     [Migration("20190516105914_MoveBlockParentId")]
     partial class MoveBlockParentId
     {

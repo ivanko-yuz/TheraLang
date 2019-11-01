@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace Piranha.Migrations
+namespace MvcWeb.Migrations
 {
-    [NoCoverage]
     public partial class AddSiteContent : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
