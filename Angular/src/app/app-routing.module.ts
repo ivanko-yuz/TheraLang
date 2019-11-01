@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import {ProjectInfoComponent} from './project-info/project-info.component';
-import { ResourcesComponent } from './resources/resources.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'project/:id', component:ProjectInfoComponent },
-  { path: 'project', component:ProjectComponent },
-  { path: 'resources', component:ResourcesComponent },
+  { path: 'project/:id', component: ProjectInfoComponent },
+  { path: 'project', component: ProjectComponent },
+  { path: 'resources', component: ProjectInfoComponent },
 ];
 
 @NgModule({
@@ -18,4 +18,4 @@ const routes: Routes = [
 
 })
 export class AppRoutingModule { }
-export const routingComponents = [ProjectComponent, HomeComponent,ResourcesComponent];
+export const routingComponents = [ProjectComponent, HomeComponent, ProjectInfoComponent];

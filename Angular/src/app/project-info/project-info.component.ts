@@ -19,23 +19,27 @@ export class ProjectInfoComponent implements OnInit {
 
   projectInfo: Project;
   projectResources: Resource[];
-  id: number;
+  projectId: number;
 
+  rescrescresc = [];
+
+  // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewInit() {
     $('#resTabId').hide(); }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.id = +params.get('id');
-      this.http.getProjectInfo(this.id).subscribe((data: Project) => this.projectInfo = data);
+      this.projectId = +params.get('id');
+      this.http.getProjectInfo(this.projectId).subscribe((data: Project) => this.projectInfo = data);
     });
   }
 
-  getResources() {
-      $('#resTabId').slideToggle('slow');
-      if (isNullOrUndefined(this.projectResources)) {
-      this.http.getAllResourcesById(this.id).subscribe((_data: Resource[]) => this.projectResources = _data);
+  getResourcesData() {
+
+    if (isNullOrUndefined(this.projectResources)) {
+      this.http.getAllResourcesById(this.projectId).subscribe((data: Resource[]) => this.projectResources = data);
     }
+    $('#resTabId').slideToggle('slow');
 
   }
 }
