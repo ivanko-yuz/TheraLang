@@ -29,7 +29,7 @@ export class ResourcesInternalTableComponent implements OnInit {
   ngOnInit() {
         console.log(this.resInternalTablProjId);
 
-        this.http.getAllResourcesById(this.resInternalTablProjId).subscribe((data: Resource[]) => this.resourcesInnerTableData = data);
+        this.http.getAllResourcesById(+this.resInternalTablProjId).subscribe((data: Resource[]) => this.resourcesInnerTableData = data);
 
         // this.http.get<Resource[]>('https://localhost:44353/api/project/1/resources').
         // subscribe((data: Resource[]) => this.resourcesInnerTableData = data);
