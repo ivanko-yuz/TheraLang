@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Piranha.Migrations
+namespace MvcWeb.Migrations
 {
-    [NoCoverage]
     public partial class AddSiteCulture : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
