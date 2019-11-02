@@ -1,5 +1,8 @@
+import { ResourceCategory } from './resourceCategory';
+import { HttpService } from './../project/http.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Resource } from '../resources-table/resource';
+import { ResourceService } from './resources.service';
 
 @Component({
   selector: 'app-resources-table',
@@ -7,16 +10,12 @@ import { Resource } from '../resources-table/resource';
   styleUrls: ['./resources-table.component.less']
 })
 export class ResourcesTableComponent implements OnInit {
-
-  constructor() { }
   @Input()resTablProjId: number;
-  ngOnInit() {
-    console.log('mainTable', this.resTablProjId);
+  resourceCategories: ResourceCategory[];
+  constructor(private resourceService: ResourceService, private http: HttpService) { }
+  
+  ngOnInit() {    
+    this.http.getAllResourceCategories().subscribe((data: ResourceCategory[]) => this.resourceCategories = data);
   }
-  // tslint:disable-next-line:use-lifecycle-interface
-  // ngAfterViewInit() {
-  //   // tslint:disable-next-line:only-arrow-functions
-  //   this.resourcesData.forEach(function(value) {
-  //     console.log(value);
-  //   });}
-  }
+
+}

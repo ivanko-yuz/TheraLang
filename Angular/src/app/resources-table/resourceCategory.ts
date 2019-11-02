@@ -1,6 +1,6 @@
-export class ResourceCategoty {
+export class ResourceCategory {
     constructor(
         public id: number,
-        public type: string,
+        public name: string
     ) { }
 }

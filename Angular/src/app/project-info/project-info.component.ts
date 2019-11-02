@@ -1,3 +1,4 @@
+import { ResourceService } from './../resources-table/resources.service';
 import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
@@ -15,18 +16,15 @@ import { isNullOrUndefined } from 'util';
 })
 export class ProjectInfoComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private http: HttpService) { }
+  constructor(private route: ActivatedRoute, private http: HttpService, private resourceService: ResourceService) { }
 
-  projectInfo: Project;
-  projectResources: Resource[];
+  projectInfo: Project;  
   projectId: number;
-
-  rescrescresc = [];
-
-  // tslint:disable-next-line:use-lifecycle-interface
+  projectResources: Resource[];
+  generateOnceResourcesTable: boolean = false; 
   ngAfterViewInit() {
-    $('#resTabId').hide(); }
-
+    $("#resTabId").hide()
+}
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.projectId = +params.get('id');
@@ -34,13 +32,12 @@ export class ProjectInfoComponent implements OnInit {
     });
   }
 
-  getResourcesData() {
-
-    if (isNullOrUndefined(this.projectResources)) {
-      this.http.getAllResourcesById(this.projectId).subscribe((data: Resource[]) => this.projectResources = data);
+  getResourcesData() {   
+    if(!this.generateOnceResourcesTable){
+    this.resourceService.getAllResourcesByProjId(this.projectId); 
     }
+    this.generateOnceResourcesTable = true;
     $('#resTabId').slideToggle('slow');
-
   }
 }
 

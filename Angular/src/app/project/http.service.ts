@@ -15,14 +15,13 @@ export class HttpService {
     getProjectInfo(id: number) {
         return this.http.get(this.url + 'project' + '/' + id);
     }
-
-    getAllResourcesByIdNew(projectId: number): Observable<Resource[]> {
-        return this.http.get<Resource[]>(this.url + 'project' + '/' + projectId + '/' + 'resources');
-    }
     getAllResourcesById(projectId: number) {
         return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
     }
     getAllResourcesWithoutId( ) {
         return this.http.get('resources');
+    }
+    getAllResourceCategories(){
+        return this.http.get(this.url + 'project' + '/' + "resources" + "/" + "categories");
     }
 }

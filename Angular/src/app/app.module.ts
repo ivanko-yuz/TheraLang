@@ -36,6 +36,8 @@ import { FooterComponent } from './footer/footer.component';
 import { CustomDatePipe } from './project-info/custom.datepipe';
 import { ResourcesTableComponent } from './resources-table/resources-table.component';
 import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
+import { ResourceService } from './resources-table/resources.service';
+import { HttpService } from './project/http.service';
 
 
 
@@ -115,7 +117,7 @@ import { ResourcesInternalTableComponent } from './resources-internal-table/reso
 
   ],
   exports: [ResourcesInternalTableComponent],
-  providers: [],
+  providers: [ResourceService, HttpService],
   bootstrap: [AppComponent, ]
 })
 export class AppModule { }

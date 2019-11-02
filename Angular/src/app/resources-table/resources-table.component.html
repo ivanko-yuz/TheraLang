@@ -1,15 +1,5 @@
 <mat-tab-group mat-stretch-tabs class="resTab example-stretched-tabs mat-elevation-z4">
-    <mat-tab label="Зображення">
+    <mat-tab  *ngFor="let item of resourceCategories" label="{{item.name}}">
         <app-resources-internal-table [resInternalTablProjId]='resTablProjId'></app-resources-internal-table>
-        <!-- [resourcesInnerTableData]="resourcesTableData" -->
     </mat-tab>
-    <!-- <mat-tab label="Відео">
-        <app-resources-internal-table></app-resources-internal-table>
-    </mat-tab>
-    <mat-tab label="Посилання">
-            <app-resources-internal-table></app-resources-internal-table>
-    </mat-tab>
-    <mat-tab label="Інше">
-            <app-resources-internal-table></app-resources-internal-table>
-    </mat-tab> -->
 </mat-tab-group>
