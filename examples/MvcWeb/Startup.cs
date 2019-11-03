@@ -15,6 +15,8 @@ using MvcWeb.TheraLang.UnitOfWork;
 using MvcWeb.Validators;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
+using MvcWeb.TheraLang.Contracts;
+using MvcWeb.TheraLang.Services;
 
 namespace MvcWeb
 {
@@ -72,6 +74,8 @@ namespace MvcWeb
 
             services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
+
+            services.AddTransient<IResourceService, ResourceService>();
 
             #endregion
         }
