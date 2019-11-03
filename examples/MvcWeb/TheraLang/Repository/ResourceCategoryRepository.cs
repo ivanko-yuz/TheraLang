@@ -2,22 +2,27 @@
 using MvcWeb.TheraLang.Entities;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.TheraLang.Repository
 {
     public class ResourceCategoryRepository : IResourceCategoryRepository
     {
-        private DbSet<ResourceCategory> DbSet { get; }
+        private readonly IUnitOfWork unitOfWork;
 
-        public ResourceCategoryRepository(DbSet<ResourceCategory> dbSet)
+        public ResourceCategoryRepository(IUnitOfWork _unit)
         {
-            DbSet = dbSet;
+            unitOfWork = _unit;
         }
 
         public async Task ChangeType(int categoryId, string newType)
         {
-            var categotyType = await DbSet.Where(i => i.Id == categoryId).FirstOrDefaultAsync();
-            categotyType.Type = newType;
+            ResourceCategory resource = await unitOfWork.Repository<ResourceCategory>().
+                                              Get().Where(i => i.Id == categoryId).FirstOrDefaultAsync();
+
+            resource.Type = newType;
+            unitOfWork.Repository<ResourceCategory>().Update(resource);
+            await unitOfWork.SaveChangesAsync();
         }
     }
 }

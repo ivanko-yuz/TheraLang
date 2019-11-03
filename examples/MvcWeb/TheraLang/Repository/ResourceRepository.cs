@@ -1,28 +1,29 @@
 ﻿using MvcWeb.TheraLang.Entities;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Collections.Generic;
+using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.TheraLang.Repository
 {
     public class ResourceRepository : IResourceRepository
     {
-        private readonly DbSet<Resource> DbSet;
+        private readonly IUnitOfWork unitOfWork;
 
-        public ResourceRepository(DbSet<Resource> db)
+        public ResourceRepository(IUnitOfWork _unit)
         {
-            this.DbSet = db;
+            unitOfWork = _unit;
         }
 
         public void RemoveResource(int Id)
         {
-            IEnumerable<Resource> resources = DbSet.Where(i => i.Id == Id).ToList();
-            DbSet.RemoveRange(resources);
+            Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).FirstOrDefault();
+            unitOfWork.Repository<Resource>().Remove(resource);
+
+            unitOfWork.SaveChangesAsync();
         }
 
-        public IQueryable<Resource> GetResource(int Id)
+        public Resource GetResource(int Id)
         {
-            IQueryable<Resource> resource = DbSet.Where(i => i.Id == Id);
+            Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).FirstOrDefault();
             return resource;
         }
     }
