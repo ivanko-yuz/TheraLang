@@ -1,0 +1,80 @@
+<div class="footerTable">
+    <mat-tab-group mat-stretch-tabs class="resTab example-stretched-tabs mat-elevation-z4">
+        <mat-tab label="Зображення">
+            <table class="headTabl">
+                <tr class="mainTr">
+                    <th class="resName">Опис</th>
+                    <th class="resDate">Дата</th>
+                    <th class="resImg">Зображення</th>
+                </tr>
+            </table>
+            <div class="bigTablLine"></div>
+            <table class="tableWithValues">
+                <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+                    <td class="resName">
+                        <p class="img-title">{{i.name}}</p>
+                    </td>
+                    <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+                    <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+                </tr>
+            </table>
+        </mat-tab>
+        <mat-tab label="Відео">
+            <table class="headTabl">
+                <tr class="mainTr">
+                    <th class="resName">Опис</th>
+                    <th class="resDate">Дата</th>
+                    <th class="resImg">Відео</th>
+                </tr>
+            </table>
+            <div class="bigTablLine"></div>
+            <table class="tableWithValues">
+                <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+                    <td class="resName">
+                        <p class="img-title">{{i.name}}</p>
+                    </td>
+                    <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+                    <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+                </tr>
+            </table>
+        </mat-tab>
+        <mat-tab label="Посилання">
+            <table class="headTabl">
+                <tr class="mainTr">
+                    <th class="resName">Опис</th>
+                    <th class="resDate">Дата</th>
+                    <th class="resImg">Посилання</th>
+                </tr>
+            </table>
+            <div class="bigTablLine"></div>
+            <table class="tableWithValues">
+                <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+                    <td class="resName">
+                        <p class="img-title">{{i.name}}</p>
+                    </td>
+                    <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+                    <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+                </tr>
+            </table>
+        </mat-tab>
+        <mat-tab label="Інше">
+            <table class="headTabl">
+                <tr class="mainTr">
+                    <th class="resName">Опис</th>
+                    <th class="resDate">Дата</th>
+                    <th class="resImg">Контент</th>
+                </tr>
+            </table>
+            <div class="bigTablLine"></div>
+            <table class="tableWithValues">
+                <tr class="mainTr tr-with-val" *ngFor="let i of projectResources">
+                    <td class="resName">
+                        <p class="img-title">{{i.name}}</p>
+                    </td>
+                    <td class="resDate"><time datetime="2015-07-20">{{i.date}}</time></td>
+                    <td class="resImg"><img src="{{i.description}}" alt="" class="img-in-table"></td>
+                </tr>
+            </table>
+        </mat-tab>
+    </mat-tab-group>
+</div>
