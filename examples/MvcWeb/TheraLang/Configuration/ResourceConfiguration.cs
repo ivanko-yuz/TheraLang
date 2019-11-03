@@ -18,6 +18,7 @@ namespace MvcWeb.TheraLang.Configuration
             builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
             builder.HasIndex(p => p.Name).IsUnique();
             builder.Property(p => p.Description).HasMaxLength(5000).IsRequired();
+            // Relationship.
             builder.HasMany(r => r.ResourceProject).WithOne(rp => rp.Resource);
         }
     }

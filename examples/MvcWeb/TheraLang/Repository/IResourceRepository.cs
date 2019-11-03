@@ -1,5 +1,4 @@
 ﻿using MvcWeb.TheraLang.Entities;
-using System.Linq;
 
 namespace MvcWeb.TheraLang.Repository
 {
@@ -7,6 +6,6 @@ namespace MvcWeb.TheraLang.Repository
     {
         void RemoveResource(int Id);
 
-        IQueryable<Resource> GetResource(int Id);
+        Resource GetResource(int Id);
     }
 }
