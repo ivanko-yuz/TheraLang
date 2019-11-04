@@ -16,6 +16,6 @@
     <button mat-raised-button class="resButton" (click)="getResourcesData()">Ресурси</button>
   </div>
   <div id="resTabId">
-    <app-resources-table  [resTablProjId]="projectId" *ngIf="generateOnceResourcesTable"></app-resources-table>
+    <app-resources-table *ngIf="generateOnceResourcesTable" [resources]="resources"></app-resources-table>
   </div>
 </div>

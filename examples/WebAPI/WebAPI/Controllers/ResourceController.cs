@@ -19,14 +19,14 @@ namespace WebAPI.Controllers
                 Description = "https://www.brovarnya-rivne.com/img/images/poroda-hatiko-akita-inu-opisanie-i-harakter-uhod-za-yaponskoj-porodoj-iz-filma-hatiko.jpg",
                 Date = DateTime.UtcNow,                
                 ProjectId = 1,
-                ResourceCategoryId = 1};
+                ResourceCategory = "Зображення"};
             Resource resource4 = new Resource { 
                 Id = 2,
                 Name = "Hatiko so sweety1",
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),                
                 ProjectId = 1,
-                ResourceCategoryId = 2
+                ResourceCategory = "Відео"
             };
             Resource resource11 = new Resource
             {
@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
                 ProjectId = 1,
-                ResourceCategoryId = 3
+                ResourceCategory = "Посилання"
             };
             Resource resource5 = new Resource
             {
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
                 ProjectId = 1,
-                ResourceCategoryId = 3
+                ResourceCategory = "Зображення"
             };
             Resource resource6 = new Resource
             {
@@ -53,7 +53,7 @@ namespace WebAPI.Controllers
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
                 ProjectId = 1,
-                ResourceCategoryId = 1
+                ResourceCategory = "Відео"
             };
             Resource resource7 = new Resource
             {
@@ -62,7 +62,7 @@ namespace WebAPI.Controllers
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
                 ProjectId = 1,
-                ResourceCategoryId = 2
+                ResourceCategory = "Зображення"
             };
             Resource resource8 = new Resource
             {
@@ -71,7 +71,7 @@ namespace WebAPI.Controllers
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
                 ProjectId = 1,
-                ResourceCategoryId = 3
+                ResourceCategory = "Зображення"
             };
             Resource resource9 = new Resource
             {
@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
                 ProjectId = 2,
-                ResourceCategoryId = 2
+                ResourceCategory = "Посилання"
             };
             Resource resource10 = new Resource
             {
@@ -89,7 +89,7 @@ namespace WebAPI.Controllers
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
                 ProjectId = 1,
-                ResourceCategoryId = 1
+                ResourceCategory = "Відео"
             };
             Resource resource2 = new Resource { 
                 Id = 3,
@@ -97,7 +97,7 @@ namespace WebAPI.Controllers
                 Description = "https://i.kym-cdn.com/photos/images/original/000/581/296/c09.jpg",
                 Date = new DateTime(2015, 7, 20),                
                 ProjectId = 2,
-                ResourceCategoryId = 3
+                ResourceCategory = "Файли"
             };
             Resource resource3 = new Resource { 
                 Id = 4,
@@ -105,11 +105,15 @@ namespace WebAPI.Controllers
                 Description = "https://i.kym-cdn.com/entries/icons/mobile/000/030/157/womanyellingcat.jpg",
                 Date = new DateTime(2015, 7, 20),                
                 ProjectId = 3,
-                ResourceCategoryId = 3
+                ResourceCategory = "Зображення"
             };
 
             Resource[] resources = new Resource[] { resource11, resource10, resource9, resource8, resource7,
                 resource6, resource5, resource4, resource3, resource2, resource1 };
+            foreach(var res in resources)
+            {
+                res.Description = res.ResourceCategory;
+            }
             return resources.Where(x => x.ProjectId == id);
         }
 

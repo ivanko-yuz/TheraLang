@@ -24,17 +24,20 @@ export class ResourcesInternalTableComponent implements OnInit {
 
   // resourceCategories: ResourceCategory[];
   @Input() resInternalTablProjId: number;
-  // idCount: number = 1;
-  
   displayedColumns: string[] = ['id', 'name', 'date', 'description'];
-  dataSource: MatTableDataSource<Resource>;
+  @Input()dataSource: MatTableDataSource<Resource>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  //@Input() res :Resource[]=[];
 
   constructor(private http: HttpService, private resourcesService: ResourceService) {  }
 
-  ngOnInit() {this.dataSource = new MatTableDataSource(this.resourcesService.allProjectResources);
-    this.dataSource.paginator = this.paginator;
-    
+  ngOnInit() {//this.dataSource = new MatTableDataSource(this.resourcesService.allProjectResources);
+              this.dataSource.paginator = this.paginator;
   }
+
+  /*changeTable(){
+    this.dataSource = new MatTableDataSource(this.res);
+  }//*/
+
 }
 

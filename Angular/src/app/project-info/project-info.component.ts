@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
 import * as $ from 'jquery';
+import { Resource } from '../resources-table/resource';
 
 @Component({
   selector: 'app-project-info',
@@ -15,12 +16,13 @@ import * as $ from 'jquery';
 export class ProjectInfoComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private http: HttpService,
-    private resourceService: ResourceService) { }
+              private resourceService: ResourceService) { }
 
-  projectInfo: Project;  
+  projectInfo: Project= new Project(0,"","","");
   projectId: number;
   // projectResources: Resource[] = this.resourceService.allProjectResources;
   generateOnceResourcesTable: boolean = false; 
+  resources:Resource[][]=[];
 
   ngAfterViewInit() {
     $("#resTabId").hide()
@@ -33,11 +35,12 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getResourcesData() {   
+  async getResourcesData() {   
     if(!this.generateOnceResourcesTable){
-    this.resourceService.getAllResourcesByProjId(this.projectId); 
-    this.resourceService.getAllResourceCategories(); 
-    this.resourceService.getAallUniqueResourceCategories();    
+      let resources = await this.resourceService.getAllResourcesByProjId(this.projectId);   
+      this.resources = this.resourceService.sort(resources);
+      //this.resourceService.getAllResourceCategories(); 
+      // this.resourceService.getAallUniqueResourceCategories();
     }
     this.generateOnceResourcesTable = true;
     $('#resTabId').slideToggle('slow');

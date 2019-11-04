@@ -5,6 +5,6 @@ export class Resource {
         public dateTime: Date,
         public description: string,
         public projectId: number,
-        public resourceCategoryId: number
+        public resourceCategory: string
     ) { }
 }

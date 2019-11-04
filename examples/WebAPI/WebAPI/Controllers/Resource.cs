@@ -9,6 +9,6 @@ namespace WebAPI.Controllers
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public int ProjectId { get; set; }
-        public int ResourceCategoryId { get; set; }
+        public string ResourceCategory { get; set; }
     }
 }
