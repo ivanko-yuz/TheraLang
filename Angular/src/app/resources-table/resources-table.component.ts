@@ -1,5 +1,3 @@
-import { ResourceCategory } from './resourceCategory';
-import { HttpService } from './../project/http.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Resource } from '../resources-table/resource';
 import { ResourceService } from './resource.service';
@@ -11,25 +9,24 @@ import { MatTableDataSource, MatTabChangeEvent } from '@angular/material';
   styleUrls: ['./resources-table.component.less']
 })
 export class ResourcesTableComponent implements OnInit {
-  @Input() resources:Resource[][];
+  @Input() resources: Resource[][];
   dataSource: MatTableDataSource<Resource>;
   constructor(private resourceService: ResourceService) { }
   ngOnInit() {
-    for(const ress in this.resources){
+    for (const ress in this.resources) {
       this.changePageByName(ress);
       return;
     }
   }
 
-  changePage(event :MatTabChangeEvent){
+  changePage(event: MatTabChangeEvent) {
     const category = event.tab.textLabel;
     this.changePageByName(category);
   }
-  changePageByName(category :string){
-    //this.resourceService.setViewTeble(this.resources, category);
+  changePageByName(category: string) {
     this.changeTabDataSource(this.resources[category]);
   }
-  changeTabDataSource(res:Resource[]){
-    this.dataSource=new MatTableDataSource(res);
+  changeTabDataSource(res: Resource[]) {
+    this.dataSource = new MatTableDataSource(res);
   }
 }

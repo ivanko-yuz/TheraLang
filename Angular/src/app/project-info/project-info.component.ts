@@ -1,5 +1,5 @@
 import { ResourceService } from '../resources-table/resource.service';
-import { Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
@@ -18,14 +18,13 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute, private http: HttpService,
               private resourceService: ResourceService) { }
 
-  projectInfo: Project= new Project(0,"","","");
+  projectInfo: Project = new Project(0, '', '', '');
   projectId: number;
-  // projectResources: Resource[] = this.resourceService.allProjectResources;
-  generateOnceResourcesTable: boolean = false; 
-  resources:Resource[][]=[];
+  generateOnceResourcesTable = false;
+  resources: Resource[][] = [];
 
   ngAfterViewInit() {
-    $("#resTabId").hide()
+    $('#resTabId').hide();
   }
 
   ngOnInit() {
@@ -35,16 +34,13 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  async getResourcesData() {   
-    if(!this.generateOnceResourcesTable){
-      let resources = await this.resourceService.getAllResourcesByProjId(this.projectId);   
+  async getResourcesData() {
+    if (!this.generateOnceResourcesTable) {
+      const resources = await this.resourceService.getAllResourcesByProjId(this.projectId);
       this.resources = this.resourceService.sort(resources);
-      //this.resourceService.getAllResourceCategories(); 
-      // this.resourceService.getAallUniqueResourceCategories();
     }
     this.generateOnceResourcesTable = true;
     $('#resTabId').slideToggle('slow');
-
   }
 }
 
