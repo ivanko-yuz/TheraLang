@@ -1,11 +1,9 @@
-import { ResourceService } from './../resources-table/resources.service';
-import { Component, OnInit, ViewEncapsulation} from '@angular/core';
+import { ResourceService } from '../resources-table/resource.service';
+import { Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
-import { Resource } from '../resources-table/resource';
 import * as $ from 'jquery';
-import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-project-info',
@@ -14,17 +12,20 @@ import { isNullOrUndefined } from 'util';
   encapsulation: ViewEncapsulation.None,
   providers: [HttpService]
 })
-export class ProjectInfoComponent implements OnInit {
+export class ProjectInfoComponent implements OnInit, AfterViewInit {
 
-  constructor(private route: ActivatedRoute, private http: HttpService, private resourceService: ResourceService) { }
+  constructor(private route: ActivatedRoute, private http: HttpService,
+    private resourceService: ResourceService) { }
 
   projectInfo: Project;  
   projectId: number;
-  projectResources: Resource[];
+  // projectResources: Resource[] = this.resourceService.allProjectResources;
   generateOnceResourcesTable: boolean = false; 
+
   ngAfterViewInit() {
     $("#resTabId").hide()
-}
+  }
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.projectId = +params.get('id');
@@ -35,9 +36,12 @@ export class ProjectInfoComponent implements OnInit {
   getResourcesData() {   
     if(!this.generateOnceResourcesTable){
     this.resourceService.getAllResourcesByProjId(this.projectId); 
+    this.resourceService.getAllResourceCategories(); 
+    this.resourceService.getAallUniqueResourceCategories();    
     }
     this.generateOnceResourcesTable = true;
     $('#resTabId').slideToggle('slow');
+
   }
 }
 

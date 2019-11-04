@@ -8,7 +8,7 @@ import { HttpService } from '../project/http.service';
 import { isNullOrUndefined } from 'util';
 import { HttpClient } from '@angular/common/http';
 import { ResourceCategory } from '../resources-table/resourceCategory';
-import { ResourceService } from '../resources-table/resources.service';
+import { ResourceService } from '../resources-table/resource.service';
 import { MatPaginator, MatSort } from '@angular/material';
 
 
@@ -22,15 +22,14 @@ import { MatPaginator, MatSort } from '@angular/material';
 
 export class ResourcesInternalTableComponent implements OnInit {
 
-  resourceCategories: ResourceCategory[];
+  // resourceCategories: ResourceCategory[];
   @Input() resInternalTablProjId: number;
-  idCount: number = 1;
+  // idCount: number = 1;
   
   displayedColumns: string[] = ['id', 'name', 'date', 'description'];
   dataSource: MatTableDataSource<Resource>;
- 
-
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
   constructor(private http: HttpService, private resourcesService: ResourceService) {  }
 
   ngOnInit() {this.dataSource = new MatTableDataSource(this.resourcesService.allProjectResources);

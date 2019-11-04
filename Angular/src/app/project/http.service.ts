@@ -1,16 +1,17 @@
 import { Resource } from './../resources-table/resource';
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
+import { Subscription } from 'rxjs';
 
 @Injectable()
-export class HttpService {
+export class HttpService{   
 
     constructor(private http: HttpClient) { }
 
      private url = 'https://localhost:44353/api/';
     getAllProjects() {
-        return this.http.get(this.url + 'project');
+        return this.http.get(this.url + 'project');        
     }
     getProjectInfo(id: number) {
         return this.http.get(this.url + 'project' + '/' + id);
