@@ -10,8 +10,8 @@ using MvcWeb.Db;
 namespace MvcWeb.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    [Migration("20191029161243_PiranhaInitial")]
-    partial class PiranhaInitial
+    [Migration("20191105124931_ProjectConfiguration")]
+    partial class ProjectConfiguration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -808,6 +808,34 @@ namespace MvcWeb.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("Piranha_UserTokens");
+                });
+
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(5000);
+
+                    b.Property<string>("Details")
+                        .HasMaxLength(5000);
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<DateTime>("ProjectBegin");
+
+                    b.Property<DateTime>("ProjectEnd");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaAlias", b =>

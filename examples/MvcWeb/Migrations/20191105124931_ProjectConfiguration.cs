@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MvcWeb.Migrations
 {
-    public partial class PiranhaInitial : Migration
+    public partial class ProjectConfiguration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -158,6 +158,24 @@ namespace MvcWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Piranha_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 250, nullable: false),
+                    Description = table.Column<string>(maxLength: 5000, nullable: false),
+                    Details = table.Column<string>(maxLength: 5000, nullable: true),
+                    ProjectBegin = table.Column<DateTime>(nullable: false),
+                    ProjectEnd = table.Column<DateTime>(nullable: false),
+                    IsActive = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -907,6 +925,9 @@ namespace MvcWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "Piranha_UserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "Piranha_Media");

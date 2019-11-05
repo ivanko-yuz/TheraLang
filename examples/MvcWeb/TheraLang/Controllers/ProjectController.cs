@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -16,7 +16,7 @@ namespace MvcWeb.TheraLang.Controllers
         {
             uow = unitOfWork;
         }
-        
+
         [HttpGet]
         public IEnumerable<Project> GetAllProjects()
         {
@@ -31,6 +31,6 @@ namespace MvcWeb.TheraLang.Controllers
                 return NotFound();
             }
             return Ok(project);
-        }
+        }      
     }
 }

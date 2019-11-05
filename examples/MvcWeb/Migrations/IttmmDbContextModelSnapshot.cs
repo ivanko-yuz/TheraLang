@@ -808,19 +808,28 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_UserTokens");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.TheraLang.Entities.Project", b =>
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(5000);
+
+                    b.Property<string>("Details")
+                        .HasMaxLength(5000);
+
+                    b.Property<bool>("IsActive");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250);
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(250);
+                    b.Property<DateTime>("ProjectBegin");
+
+                    b.Property<DateTime>("ProjectEnd");
 
                     b.HasKey("Id");
 

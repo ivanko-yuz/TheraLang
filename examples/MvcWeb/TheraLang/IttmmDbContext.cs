@@ -78,7 +78,6 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new PiranhaUserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserTokenConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
-            // ProjectConfiguration
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());
         }
     }
