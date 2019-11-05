@@ -17,8 +17,15 @@ namespace MvcWeb.TheraLang.Services
 
         public Resource GetResourceById(int Id)
         {
-            Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).FirstOrDefault();
-            return resource;
+            try
+            {
+                Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).SingleOrDefault();
+                return resource;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Error when geting resource by Id: ", ex);
+            }
         }
 
         public async Task AddResource(Resource resource)
@@ -31,7 +38,6 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                unitOfWork.Dispose();
                 throw new Exception($"Error when adding the Id: {resource.Id} ", ex);
             }
         }
@@ -48,7 +54,6 @@ namespace MvcWeb.TheraLang.Services
             }
             catch(Exception ex)
             {
-                unitOfWork.Dispose();
                 throw new Exception($"Error when updating the Id: {resource.Id} ", ex);
             }
         }   
@@ -57,14 +62,13 @@ namespace MvcWeb.TheraLang.Services
         {
             try
             {
-                Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).FirstOrDefault();
+                Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).SingleOrDefault();
                 unitOfWork.Repository<Resource>().Remove(resource);
 
                 await unitOfWork.SaveChangesAsync();
             }
             catch(Exception ex)
             {
-                unitOfWork.Dispose();
                 throw new Exception($"Error when removing the Resource: ", ex);
             }
         }

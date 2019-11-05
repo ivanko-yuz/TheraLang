@@ -4,9 +4,9 @@
     {
         public virtual User User { get; set; }
         
-        public virtual MemberRole Role { get; set; }
+        public MemberRole Role { get; set; }
 
-        public virtual ProjectParticipationStatus Status { get; set; }
+        public ProjectParticipationStatus Status { get; set; }
 
         public int ProjectId { get; set; }
 

@@ -14,7 +14,7 @@ namespace MvcWeb.TheraLang.Configuration
             builder.Property(i => i.CreatedById).IsRequired();
             builder.Property(i => i.CreatedDateUtc).IsRequired();
             builder.Property(i => i.UpdatedById).HasDefaultValue();
-            builder.Property(i => i.UpdatedById).HasDefaultValue();
+            builder.Property(i => i.UpdatedDateUtc).HasDefaultValue();
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using MvcWeb.TheraLang.Entities;
+﻿    using MvcWeb.TheraLang.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
 
 namespace MvcWeb.TheraLang.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/resource")]
     [ApiController]
     public class ResourceController : ControllerBase
     {
@@ -17,7 +17,8 @@ namespace MvcWeb.TheraLang.Controllers
         private readonly IResourceService service;
 
         [HttpPost]
-        public async Task<IActionResult> PostResource(Resource resource)
+        [Route("create/{resource}")]
+        public async Task<IActionResult> PostResource([FromBody]Resource resource)
         {
             await service.AddResource(resource);
             
@@ -25,7 +26,8 @@ namespace MvcWeb.TheraLang.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutResource(Resource resource, int updatedById)
+        [Route("update/{resource}/{updatedById}")]
+        public async Task<IActionResult> PutResource([FromBody] Resource resource, int updatedById)
         {
             await service.UpdateResource(resource, updatedById);
 
@@ -33,7 +35,8 @@ namespace MvcWeb.TheraLang.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetResource(int Id)
+        [Route("get/{Id}")]
+        public IActionResult GetResource([FromBody]int Id)
         {
             Resource resource = service.GetResourceById(Id);
 
@@ -41,7 +44,8 @@ namespace MvcWeb.TheraLang.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteResource(int Id)
+        [Route("delete/{Id}")]
+        public async Task<IActionResult> DeleteResource([FromBody]int Id)
         {
             await service.RemoveResource(Id);
 

@@ -4,7 +4,7 @@ using MvcWeb.TheraLang.Entities;
 
 namespace MvcWeb.TheraLang.Services
 {
-    public interface IProjectParticipationSerice
+    public interface IProjectParticipationService
     {
         IEnumerable<ProjectParticipation> GetAll();
 

@@ -2,7 +2,7 @@
 
 namespace MvcWeb.TheraLang.Services
 {
-    public interface IResourceCategotyService
+    public interface IResourceCategoryService
     {
         Task ChangeType(int Id, string newType);
     }

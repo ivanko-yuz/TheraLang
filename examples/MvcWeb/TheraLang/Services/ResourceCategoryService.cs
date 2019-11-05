@@ -6,7 +6,7 @@ using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.TheraLang.Services
 {
-    public class ResourceCategoryService : IResourceCategotyService
+    public class ResourceCategoryService : IResourceCategoryService
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -20,7 +20,7 @@ namespace MvcWeb.TheraLang.Services
             try
             {
                 ResourceCategory category = unitOfWork.Repository<ResourceCategory>().
-                                            Get().Where(i => i.Id == categoryId).FirstOrDefault();
+                                            Get().Where(i => i.Id == categoryId).SingleOrDefault();
                 category.Type = newType;
 
                 unitOfWork.Repository<ResourceCategory>().Update(category);
@@ -28,7 +28,6 @@ namespace MvcWeb.TheraLang.Services
             }
             catch(Exception ex)
             {
-                unitOfWork.Dispose();
                 throw new Exception($"Error when changing resource type: ", ex);
             }
         }

@@ -6,19 +6,20 @@ using System.Collections.Generic;
 
 namespace MvcWeb.TheraLang.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/participation")]
     [ApiController]
     public class ParticipationController : ControllerBase
     {
-        public ParticipationController(IProjectParticipationSerice _service)
+        public ParticipationController(IProjectParticipationService _service)
         {
             this.service = _service;
         }
 
-        private readonly IProjectParticipationSerice service;
+        private readonly IProjectParticipationService service;
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        [Route("get")]
+        public IActionResult Get()
         {
             IEnumerable<ProjectParticipation> members = service.GetAll();
 
@@ -26,7 +27,8 @@ namespace MvcWeb.TheraLang.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(int userId, int projectId)
+        [Route("create/{userId}/{projectId}")]
+        public async Task<IActionResult> Post([FromBody] int userId, int projectId)
         {
             await service.CreateRequest(userId, projectId);
 
