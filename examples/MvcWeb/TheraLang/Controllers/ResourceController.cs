@@ -19,33 +19,31 @@ namespace MvcWeb.TheraLang.Controllers
         [HttpPost]
         public async Task<IActionResult> PostResource(Resource resource)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            bool result = await service.AddResource(resource);
-            if(!result)
-            {
-                return BadRequest();
-            }
-
+            await service.AddResource(resource);
+            
             return Ok();
         }
 
         [HttpPut]
         public async Task<IActionResult> PutResource(Resource resource, int updatedById)
         {
-           if(!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+            await service.UpdateResource(resource, updatedById);
 
-            bool result = await service.UpdateResource(resource, updatedById);
-            if(!result)
-            {
-                return BadRequest();
-            }
+            return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult GetResource(int Id)
+        {
+            Resource resource = service.GetResourceById(Id);
+
+            return Ok(resource);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteResource(int Id)
+        {
+            await service.RemoveResource(Id);
 
             return Ok();
         }

@@ -6,12 +6,12 @@ namespace MvcWeb.TheraLang.Entities
     {
         public int Id { get; set; }
 
-        public int CreatedbyId { get; set; }
+        public int CreatedById { get; set; }
 
-        public int? UpdatedbyId { get; set; }
+        public int? UpdatedById { get; set; }   
 
-        public DateTime CreatedDateUTC { get; set; }
+        public DateTime CreatedDateUtc { get; set; }
 
-        public DateTime? UpdatedDateUTC { get; set; }
+        public DateTime? UpdatedDateUtc { get; set; }
     }
 }

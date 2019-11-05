@@ -13,11 +13,8 @@ namespace MvcWeb.TheraLang.Configuration
             builder.HasKey(i => i.Id);
             builder.Property(i => i.Id).ValueGeneratedOnAdd();
 
-            // Relationship...
-            builder.HasOne(r => r.Resource).WithMany(p => p.ResourceProject);
-
-            // Maybe can be Unique Object ?
-            // builder.HasIndex(i => new { i.ProjectId, i.ResourceId }).IsUnique();
+            builder.Property(i => i.ProjectId).IsRequired();
+            builder.Property(r => r.ResourceId).IsRequired();
         }
     }
 }

@@ -18,6 +18,8 @@ namespace MvcWeb.Db
         public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<ResourceProject> ResourceProject { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
         #endregion
 
         #region Piranha_Entities
@@ -93,6 +95,8 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new ResourceCategoriesConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceProjectConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
             #endregion
         }
     }

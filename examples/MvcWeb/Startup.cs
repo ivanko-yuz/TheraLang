@@ -71,9 +71,9 @@ namespace MvcWeb
 
             services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
-
             services.AddTransient<IResourceService, ResourceService>();
-
+            services.AddTransient<IResourceCategotyService, ResourceCategoryService>();
+            services.AddTransient<IProjectParticipationSerice, ProjectParticipationService>();
             #endregion
         }
 

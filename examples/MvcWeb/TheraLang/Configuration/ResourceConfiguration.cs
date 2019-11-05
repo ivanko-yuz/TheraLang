@@ -9,17 +9,16 @@ namespace MvcWeb.TheraLang.Configuration
         public override void Configure(EntityTypeBuilder<Resource> builder)
         {
             builder.ToTable("Resources");
-            // builder.Property(b => b.CreatedDateUTC).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            builder.HasKey(i => i.Id);
-            builder.Property(i => i.Id).ValueGeneratedOnAdd();
-            builder.Property(i => i.CreatedbyId).IsRequired();
-            builder.Property(i => i.CreatedDateUTC).IsRequired();
             builder.Property(p => p.Name).HasMaxLength(50).IsRequired();
             builder.HasIndex(p => p.Name).IsUnique();
             builder.Property(p => p.Description).HasMaxLength(5000).IsRequired();
-            // Relationship.
-            builder.HasMany(r => r.ResourceProject).WithOne(rp => rp.Resource);
+            builder.Property(i => i.CategoryId).IsRequired();
+            builder.Property(i => i.Url).HasDefaultValue(null);
+            builder.Property(i => i.File).HasDefaultValue(null);
+
+            builder.HasMany(i => i.ResourceProject).WithOne(r => r.Resource).HasForeignKey("ResourceId");
+            builder.HasOne(u => u.User).WithMany(y => y.Resources);
         }
     }
 }
