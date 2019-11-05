@@ -1,26 +1,24 @@
+
+
+
+
+
 <div class="getRequests">
         <mat-tab-group animationDuration="0ms" #tabRef (selectedTabChange)="getRequests(tabRef.selectedIndex)">
                 <mat-tab label="Нові"></mat-tab>
                 <mat-tab label="Підтверджені"></mat-tab>
                 <mat-tab label="Відхилені"> </mat-tab>
         </mat-tab-group>
+        <!-- *ngIf="showHead;  else noData"  -->
+        <div class="mat-elevation-z8" >
+                <table mat-table [dataSource]="projectParticipationRequest" *ngIf="showHead;  else noData">
 
-        <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="projectParticipationRequest" *ngIf="projectParticipationRequest.length > 0">
-              
-                  <!-- Position Column -->
-                  <ng-container matColumnDef="position">
-                    <th mat-header-cell *matHeaderCellDef> No. </th>
-                    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                  </ng-container>
-              
-                  <!-- Name Column -->
                   <ng-container matColumnDef="userId">
                     <th mat-header-cell *matHeaderCellDef> user Id </th>
                     <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
                   </ng-container>
               
-                  <!-- Weight Column -->
+
                   <ng-container matColumnDef="projectId">
                     <th mat-header-cell *matHeaderCellDef> project Id </th>
                     <td mat-cell *matCellDef="let element"> {{element.projectId}} </td>
@@ -31,9 +29,10 @@
                         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
                       </ng-container>
 
-                      <ng-container matColumnDef="actions">
+                      <ng-container matColumnDef="actions" >
                         <mat-header-cell  *matHeaderCellDef ></mat-header-cell>
-                        <mat-cell *matCellDef="let row" >
+                        <mat-cell *matCellDef="let row"  >
+                                        <div *ngIf="showButtons">
                                 <span class="but">
                                         <button mat-raised-button (click)="changeStatus(1,row)">
                                                 Прийняти
@@ -44,133 +43,25 @@
                                                 Відхилити
                                         </button>
                                 </span>
+                        </div>  
                         </mat-cell>
                       </ng-container>
                      
-
-                        <!-- <td *ngIf="showButtons">
-                              
-                               
-                    </td> -->
-
-
-
-              
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
    
                 </table>
+            
+                <mat-paginator  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
               
-                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-                <div *ngIf="projectParticipationRequest.length === 0">No data</div>
-              </div>
-              
-
-
-
-        <!-- <table>
-                <thead *ngIf="showHead">
-                    <tr >
-                        <td>User Id &emsp;</td>
-                        <td>Project Id</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let joinProjectRequest of test">
-                            <td>{{joinProjectRequest.userId}}, </td>
-                            <td>{{joinProjectRequest.projectId}}</td>
-                            <br>
-                            <td *ngIf="showButtons">
-                                        <span class="but">
-                                                <button mat-raised-button (click)="changeStatus(1,joinProjectRequest)">
-                                                        Прийняти
-                                                </button>
-                                        </span>
-                                        <span class="but2">
-                                                <button mat-raised-button (click)="changeStatus(2,joinProjectRequest)">
-                                                        Відхилити
-                                                </button>
-                                        </span>
-                            </td>
-                    </tr>
-                </tbody>
-            </table> -->
-
-
-        <!-- <div *ngFor="let joinProjectRequest of test">
-                <div>user id -- {{joinProjectRequest.userId}}</div>
-                <div>user status -- {{joinProjectRequest.status}}</div>
-                <div>project id -- {{joinProjectRequest.projectId}}</div>
-                <div>--------</div>
-                <div *ngIf="newTable">
-                        <span class="but">
-                                <button mat-raised-button (click)="changeStatus(1,joinProjectRequest)">
-                                        Прийняти
-                                </button>
-                        </span>
-                        <span class="but2">
-                                <button mat-raised-button (click)="changeStatus(2,joinProjectRequest)">
-                                        Відхилити
-                                </button>
-                        </span>
-
-                </div>
-        </div> -->
-
+        
+  </div>  
+  <ng-template #noData></ng-template>
+                <h1>Немає проектів</h1>
+        </ng-template>
 </div>
+        
 
 
-
-<!-- <div *ngIf="newTable;else rest">
-                <span  routerLinkActive="mat-accent" >
-        <button mat-button color="primary" (click)="getRequests(0)">
-                Нові
-        </button>
-        </span>
-        <button mat-button color="primary" routerLinkActive="mat-accent" (click)="getRequests(1)">
-                Прийняті
-        </button>
-        <button mat-button color="primary" routerLinkActive="mat-accent" (click)="getRequests(2)">
-                Відхилені
-        </button>
-
-
-        <div *ngFor="let request of test">
-                <div>user id -- {{request.userId}}</div>
-                <div>user status -- {{request.status}}</div>
-                <div>project id -- {{request.projectId}}</div>
-                <span class="but">
-                        <button mat-raised-button (click)="getRequests(0)">
-                                Прийняти
-                        </button>
-                </span>
-                <span class="but2">
-                        <button mat-raised-button (click)="getRequests(1)">
-                                Відхилити
-                        </button>
-                </span>
-                <br>
-
-        </div>
-</div>
-<ng-template #rest>
-                <span class="active">
-        <button mat-button color="primary" class="active" (click)="getRequests(0)">
-                Нові
-        </button>
-        </span>
-        <button routerlinkActive="active" mat-button color="primary" class="active" (click)="getRequests(1)">
-                Прийняті
-        </button>
-        <button mat-button color="primary" class="active" (click)="getRequests(2)">
-                Відхилені
-        </button>
-        <div *ngFor="let request of test">
-                <div>user id -- {{request.userId}}</div>
-                <div>user status -- {{request.status}}</div>
-                <div>project id -- {{request.projectId}}</div>
-                <br>
-        </div>
-</ng-template> -->
+      

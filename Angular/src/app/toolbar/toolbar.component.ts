@@ -21,6 +21,11 @@ export class ToolbarComponent implements OnInit,AfterViewInit{
     this.reqs=data;
     if((this.reqs.filter(x=>x.status === 0)).length < 1){
       this.haveNotifications = false;
+      // this.evtSvc.childEventListner().subscribe(info =>{
+      //   debugger
+      //   console.log(info);
+      //   this.haveNotifications = false;
+      //  });
     }
   });
 
@@ -32,17 +37,45 @@ export class ToolbarComponent implements OnInit,AfterViewInit{
   //   v.requestForParentEvent.subscribe(x=>this.haveNotifications = false);
   // }
 
+  // ngAfterViewInit(): void {  
+  //     this.evtSvc.childEventListner().subscribe(info => {
+  //       this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[]) => {
+  //         this.reqs = data;
+  //         if ((this.reqs.filter(x => x.status === 0)).length < 2) {
+  //         console.log(info);
+  //         this.haveNotifications = false;
+  //       }
+  //       });      
+  //       });    
+  // }
+
+//   ngAfterViewInit(): void {  
+//     this.evtSvc.childEventListner().subscribe(info => {
+//         if(info.filteredData.length < 2){
+//         this.haveNotifications = false;
+//         }
+//       }
+         
+//       );    
+// }
+
+
 
    ngAfterViewInit(): void {
-    this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[])=>{
-      this.reqs=data;
-      if((this.reqs.filter(x=>x.status === 0)).length < 1){
-        this.evtSvc.childEventListner().subscribe(info =>{
-          this.haveNotifications = false; });
-        }
-      }
-    );
+    // this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[])=>{
+    //   this.reqs=data;
+    //   // if((this.reqs.filter(x=>x.status === 0)).length < 4){
+    //   // }
+    //   }
+    // );
+         this.evtSvc.childEventListner().subscribe(info =>{
+          debugger
+          console.log(info);
+          this.haveNotifications = false;
+         });
    }
+
+
   //   debugger
   //   this.request.requestForParentEvent.subscribe(x=>this.haveNotifications = false);
   //   // this.request.sub.subscribe(x=> this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[])=>{

@@ -6,3 +6,9 @@ export class ProjectParticipationRequest {
         public status: number
         ) { }
 }
+
+const enum Requests{
+    New,
+    Aproved,
+    Rejected
+}
