@@ -5,8 +5,12 @@ namespace MvcWeb.TheraLang.Services
 {
     public interface IResourceService
     {
-        Task<bool> AddResource(Resource resource);
+        Task AddResource(Resource resource);
 
-        Task<bool> UpdateResource(Resource resource, int updatedById);
+        Task UpdateResource(Resource resource, int updatedById);
+
+        Task RemoveResource(int Id);
+
+        Resource GetResourceById(int Id);
     }
 }

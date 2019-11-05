@@ -14,7 +14,6 @@ namespace MvcWeb.TheraLang.Configuration
             builder.Property(i => i.Id).ValueGeneratedOnAdd();
             builder.Property(i => i.Type).HasMaxLength(20).IsRequired();
 
-            // Relationship.
             builder.HasMany(c => c.Resources).WithOne(r => r.ResourceCategory).HasForeignKey(c => c.CategoryId);
         }
     }

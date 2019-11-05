@@ -11,8 +11,10 @@ namespace MvcWeb.TheraLang.Configuration
             builder.HasKey(i => i.Id);
             builder.Property(i => i.Id).ValueGeneratedOnAdd();
 
-            builder.Property(i => i.CreatedbyId).IsRequired();
-            builder.Property(i => i.CreatedDateUTC).IsRequired();
+            builder.Property(i => i.CreatedById).IsRequired();
+            builder.Property(i => i.CreatedDateUtc).IsRequired();
+            builder.Property(i => i.UpdatedById).HasDefaultValue();
+            builder.Property(i => i.UpdatedById).HasDefaultValue();
         }
     }
 }
