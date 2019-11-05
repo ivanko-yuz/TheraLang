@@ -16,7 +16,7 @@ export class ResourcesTableComponent implements OnInit {
     for (const ress in this.resources) {
       this.changePageByName(ress);
       return;
-    }
+    } 
   }
 
   changePage(event: MatTabChangeEvent) {

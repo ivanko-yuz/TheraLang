@@ -38,6 +38,7 @@ import { ResourcesTableComponent } from './resources-table/resources-table.compo
 import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
 import { ResourceService } from './resources-table/resource.service';
 import { HttpService } from './project/http.service';
+import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { HttpService } from './project/http.service';
     FooterComponent,
     CustomDatePipe,
     ResourcesTableComponent,
-    ResourcesInternalTableComponent
+    ResourcesInternalTableComponent,
+    GeneralResourcesComponent
   ],
   entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
   imports: [

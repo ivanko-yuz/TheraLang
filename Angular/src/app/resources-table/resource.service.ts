@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy} from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Resource } from './resource';
 import { HttpService } from '../project/http.service';
 
@@ -27,7 +27,9 @@ export class ResourceService {
         const sortedRess: Resource[][] = [];
         res.forEach((resuorce) => {
             if (resuorce.resourceCategory) {
-                if (!sortedRess[resuorce.resourceCategory]) {sortedRess[resuorce.resourceCategory] = []; }
+                if (!sortedRess[resuorce.resourceCategory]) {
+                    sortedRess[resuorce.resourceCategory] = [];                    
+                }
                 sortedRess[resuorce.resourceCategory].push(resuorce);
             }
         });

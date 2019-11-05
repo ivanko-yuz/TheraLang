@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
                 Name = "Hatiko so sweety6",
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
-                ProjectId = 1,
+                ProjectId = null,
                 ResourceCategory = "Зображення"
             };
             Resource resource9 = new Resource
@@ -108,8 +108,38 @@ namespace WebAPI.Controllers
                 ResourceCategory = "Зображення"
             };
 
+
+
+            Resource resource12 = new Resource
+            {
+                Id = 5,
+                Name = "Hatiko so sweety8 null",
+                Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
+                Date = new DateTime(2015, 7, 20, 3, 17, 00),
+                ProjectId = null,
+                ResourceCategory = "Відео"
+            };
+            Resource resource13 = new Resource
+            {
+                Id = 3,
+                Name = "Resource2 null",
+                Description = "https://i.kym-cdn.com/photos/images/original/000/581/296/c09.jpg",
+                Date = new DateTime(2015, 7, 20),
+                ProjectId = null,
+                ResourceCategory = "Файли"
+            };
+            Resource resource14 = new Resource
+            {
+                Id = 4,
+                Name = "Resource3 null",
+                Description = "https://i.kym-cdn.com/entries/icons/mobile/000/030/157/womanyellingcat.jpg",
+                Date = new DateTime(2015, 7, 20),
+                ProjectId = null,
+                ResourceCategory = "Зображення"
+            };
+
             Resource[] resources = new Resource[] { resource11, resource10, resource9, resource8, resource7,
-                resource6, resource5, resource4, resource3, resource2, resource1 };
+                resource6, resource5, resource4, resource3, resource2, resource12, resource13 , resource14 };
             foreach(var res in resources)
             {
                 res.Description = res.ResourceCategory;

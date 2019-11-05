@@ -1,5 +1,5 @@
 import { ResourceService } from '../resources-table/resource.service';
-import { Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
