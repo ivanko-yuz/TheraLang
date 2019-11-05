@@ -17,6 +17,12 @@ namespace MvcWeb.TheraLang.Services
 
         public Resource GetResourceById(int Id)
         {
+            Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).FirstOrDefault();
+            return resource;
+        }
+
+        public async Task AddResource(Resource resource)
+        {
             try
             {
                 Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == Id);
