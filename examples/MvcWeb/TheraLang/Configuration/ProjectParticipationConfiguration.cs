@@ -10,8 +10,8 @@ namespace MvcWeb.TheraLang.Configuration
         {
             builder.ToTable("ProjectParticipations");
 
-            builder.Property(i => i.Status).HasDefaultValue(0);
-            builder.Property(y => y.Role).HasDefaultValue(0);
+            builder.Property(i => i.Status).HasDefaultValue(ProjectParticipationStatus.New);
+            builder.Property(y => y.Role).HasDefaultValue(MemberRole.Member);
             builder.Property(u => u.ProjectId).IsRequired();
         }
     }

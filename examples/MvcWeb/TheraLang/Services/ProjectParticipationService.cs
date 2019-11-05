@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace MvcWeb.TheraLang.Services
 {
-    public class ProjectParticipationService : IProjectParticipationSerice
+    public class ProjectParticipationService : IProjectParticipationService
     {
         public ProjectParticipationService(IUnitOfWork _unit)
         {
@@ -26,15 +26,14 @@ namespace MvcWeb.TheraLang.Services
             try
             {
                 ProjectParticipation member = new ProjectParticipation 
-                { CreatedById = userId, ProjectId = projectId, Role = 0, Status = 0, UpdatedDateUtc = DateTime.UtcNow };
+                { CreatedById = userId, ProjectId = projectId, UpdatedDateUtc = DateTime.UtcNow };
 
                 await unitOfWork.Repository<ProjectParticipation>().Add(member);
                 await unitOfWork.SaveChangesAsync();
             }
             catch(Exception ex)
             {
-                unitOfWork.Dispose();
-                throw new Exception($"");
+                throw new Exception($"Error when creating request: ", ex);
             }
         }
     }

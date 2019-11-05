@@ -5,18 +5,19 @@ using MvcWeb.TheraLang.Services;
 
 namespace MvcWeb.TheraLang.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/category")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        public CategoryController(IResourceCategotyService _service)
+        public CategoryController(IResourceCategoryService _service)
         {
             this.service = _service;
         }
 
-        private readonly IResourceCategotyService service;
+        private readonly IResourceCategoryService service;
 
         [HttpPut]
+        [Route("create/{categoryId}/{newType}")]
         public async Task<IActionResult> PutType(int categoryId, string newType)
         {
             await service.ChangeType(categoryId, newType);
