@@ -1,5 +1,5 @@
 import { ResourceService } from './../resources-table/resource.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { Resource } from '../resources-table/resource';
 import { Subscription } from 'rxjs';
 
@@ -11,11 +11,18 @@ import { Subscription } from 'rxjs';
 })
 export class GeneralResourcesComponent implements OnInit {
 
+  @ViewChild('myDiv', {static: false}) myDiv: ElementRef;
   subscribe: Subscription;
   resources: Resource[][] = [];
   constructor(private resourceService: ResourceService) { }
    async ngOnInit() {
     const resources = await this.resourceService.getAllResourcesByProjId(1);
     this.resources = this.resourceService.sort(resources);
+    setTimeout(() => {
+      this.myDiv.nativeElement.click();
+     }, 100);
   }
+  triggerFalseClick() {
+
+}
 }
