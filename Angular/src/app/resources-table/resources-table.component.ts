@@ -10,7 +10,7 @@ import { MatTableDataSource, MatTabChangeEvent } from '@angular/material';
 })
 export class ResourcesTableComponent implements OnInit {
   @Input() resources: Resource[][];
-  dataSource: MatTableDataSource<Resource>;
+  dataSource: MatTableDataSource<Resource> = new MatTableDataSource<Resource>();
   constructor(private resourceService: ResourceService) { }
   ngOnInit() {
     for (const ress in this.resources) {

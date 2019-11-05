@@ -11,7 +11,7 @@ namespace WebAPI.Controllers
     public class ResourceController : Controller
     {
         [HttpGet("")]
-        public IEnumerable<Resource> GetByProjId(int id)
+        public IEnumerable<Resource> GetByProjId(int? id)
         {
             Resource resource1 = new Resource { 
                 Id = 1,
@@ -67,7 +67,7 @@ namespace WebAPI.Controllers
             Resource resource8 = new Resource
             {
                 Id = 7,
-                Name = "Hatiko so sweety6",
+                Name = "Hatiko so sweety6 null",
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
                 ProjectId = null,
@@ -85,10 +85,10 @@ namespace WebAPI.Controllers
             Resource resource10 = new Resource
             {
                 Id = 5,
-                Name = "Hatiko so sweety8",
+                Name = "Hatiko so sweety8 null",
                 Description = "https://piensosloboazul.com/wp-content/uploads/2019/01/Hachiko-richard-gere.jpg",
                 Date = new DateTime(2015, 7, 20, 3, 17, 00),
-                ProjectId = 1,
+                ProjectId = null,
                 ResourceCategory = "Відео"
             };
             Resource resource2 = new Resource { 

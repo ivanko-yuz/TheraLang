@@ -10,7 +10,6 @@ import { MatPaginator } from '@angular/material';
 })
 
 export class ResourcesInternalTableComponent implements OnInit {
-  @Input() resInternalTablProjId: number;
   displayedColumns: string[] = ['id', 'name', 'date', 'description'];
   @Input()dataSource: MatTableDataSource<Resource>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
