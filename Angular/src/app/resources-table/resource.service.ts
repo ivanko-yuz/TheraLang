@@ -4,7 +4,7 @@ import { HttpService } from '../project/http.service';
 
 @Injectable()
 export class ResourceService {
-
+///
     allProjectResources: Resource[] = [];
 
     constructor(private http: HttpService) { }
