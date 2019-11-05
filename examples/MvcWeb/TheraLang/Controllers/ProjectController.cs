@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +10,6 @@ namespace MvcWeb.TheraLang.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-
         public IUnitOfWork uow;
         public ProjectController(IUnitOfWork unitOfWork)
         {
@@ -24,16 +22,13 @@ namespace MvcWeb.TheraLang.Controllers
         }
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)
-        {
-            try
+        {      
+            var project = GetAllProjects().FirstOrDefault((p) => p.Id == id);
+            if(project == null)
             {
-                var project = GetAllProjects().FirstOrDefault((p) => p.Id == id);
-                return Ok(project);
+                throw new System.NullReferenceException($"project with id {3} not found");
             }
-            catch(NullReferenceException)
-            {
-                return NotFound();
-            }
+            return Ok(project);            
         }      
     }
 }
