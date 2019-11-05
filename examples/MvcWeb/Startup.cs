@@ -79,7 +79,7 @@ namespace MvcWeb
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApi api, ILoggerFactory loggerFactory)
         {
-            app.ConfigureExceptionHandler(loggerFactory, false);
+            app.ConfigureExceptionHandler(loggerFactory, !env.IsDevelopment());
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

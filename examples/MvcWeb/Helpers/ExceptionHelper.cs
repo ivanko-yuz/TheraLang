@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using MvcWeb.Models;
 
 namespace MvcWeb.Helpers
 {
@@ -28,14 +28,14 @@ namespace MvcWeb.Helpers
                             .LogError($"Something went wrong: {error}");
 
                         var exceptionType = error.GetType();
-                        var details = Details(exceptionType);
+                        var details = GetExceptionDetails(exceptionType);
                         await context.Respond(details, useQuietRespond);
                     }
                 });
             });
         }
 
-        private static ErrorDetails Details(Type exceptionType)
+        private static ErrorDetails GetExceptionDetails(Type exceptionType)
         {
             var status = HttpStatusCode.InternalServerError;
             var message = "Internal Server Error.";
@@ -76,17 +76,6 @@ namespace MvcWeb.Helpers
         {
             httpContext.Response.StatusCode = errorDetails.StatusCode;
             return httpContext.Response.WriteAsync(string.Empty);
-        }
-
-        private class ErrorDetails
-        {
-            public int StatusCode { get; set; }
-            public string Message { get; set; }
-
-            public override string ToString()
-            {
-                return JsonConvert.SerializeObject(this);
-            }
         }
     }
 }
