@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from '../project/http.service';
-import { ProjectParticipationRequest, Request } from './project-participation-request';
+import { ProjectParticipationRequest } from './project-participation-request';
 import { EventService } from './event-service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { Request } from '../status-enum';
 
 
 @Component({
@@ -12,17 +13,17 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 })
 export class ProjectParticipantsComponent implements OnInit {
 
-  projectParticipationRequest;
+  projectParticipationRequest = new MatTableDataSource<ProjectParticipationRequest>();
   showActionButtons: boolean = true;
   showHead: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['name', 'userId', 'projectId', 'status', 'actions'];
+  displayedColumns: string[] = ['createdById', 'role', 'projectId', 'status', 'actions'];
 
   constructor(private httpService: HttpService, private eventService: EventService) { }
 
   ngOnInit() {
     this.httpService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
-      this.projectParticipationRequest = new MatTableDataSource<ProjectParticipationRequest>(projectParticipants);
+      this.projectParticipationRequest.data = projectParticipants;
       this.projectParticipationRequest.filterPredicate = (projectParticipant: ProjectParticipationRequest, filter: string) => projectParticipant.status.toString() == filter;
       this.projectParticipationRequest.paginator = this.paginator;
       this.projectParticipationRequest.filter = Request.New.toString();

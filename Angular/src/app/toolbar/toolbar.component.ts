@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from '../project-participants/project-participation-request';
 import { EventService } from '../project-participants/event-service';
-import { Request } from '../project-participants/project-participation-request';
+import { Request } from '../status-enum';
 
 @Component({
   selector: 'app-toolbar',
