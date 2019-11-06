@@ -8,7 +8,7 @@ export class ProjectParticipationRequest {
         ) { }
 }
 
-const enum Requests{
+export const enum Request{
     New,
     Aproved,
     Rejected

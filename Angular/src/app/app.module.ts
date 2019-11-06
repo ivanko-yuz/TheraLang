@@ -29,6 +29,8 @@ import { FooterComponent } from './footer/footer.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
+import { HttpService } from './project/http.service';
+
 
 
 
@@ -102,10 +104,9 @@ import { EventService } from './project-participants/event-service';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,
-    
+    ScrollingModule,  
   ],
-  providers: [EventService],
+  providers: [EventService,HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
