@@ -27,6 +27,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FooterComponent } from './footer/footer.component';
 import { ResourcesComponent } from './resources/resources.component';
+import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
+import { EventService } from './project-participants/event-service';
 
 
 
@@ -40,7 +42,8 @@ import { ResourcesComponent } from './resources/resources.component';
     ProjectInfoComponent,
     CreateProjectComponent,
     FooterComponent,
-    ResourcesComponent
+    ResourcesComponent,
+    ProjectParticipantsComponent
 
   ],
   entryComponents:[CreateProjectComponent],
@@ -95,7 +98,6 @@ import { ResourcesComponent } from './resources/resources.component';
     MatSnackBarModule,
     MatSortModule,
     MatTableModule,
-    MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
@@ -103,7 +105,7 @@ import { ResourcesComponent } from './resources/resources.component';
     ScrollingModule,
     
   ],
-  providers: [],
+  providers: [EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
