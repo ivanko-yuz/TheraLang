@@ -12,7 +12,7 @@ namespace MvcWeb.Helpers
     public static class ExceptionHelper
     {
         public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILoggerFactory loggerFactory,
-            bool useQuietRespond)
+            bool useDetailedRespond)
         {
             app.UseExceptionHandler(builder =>
             {
@@ -29,7 +29,7 @@ namespace MvcWeb.Helpers
 
                         var exceptionType = error.GetType();
                         var details = GetExceptionDetails(exceptionType);
-                        await context.Respond(details, useQuietRespond);
+                        await context.Respond(details, useDetailedRespond);
                     }
                 });
             });
@@ -58,11 +58,11 @@ namespace MvcWeb.Helpers
             };
         }
 
-        private static Task Respond(this HttpContext httpContext, ErrorDetails errorDetails, bool useQuietRespond)
+        private static Task Respond(this HttpContext httpContext, ErrorDetails errorDetails, bool useDetailedRespond)
         {
-            return useQuietRespond
-                ? httpContext.RespondCode(errorDetails)
-                : httpContext.RespondJsonMessage(errorDetails);
+            return useDetailedRespond
+                ? httpContext.RespondJsonMessage(errorDetails)
+                : httpContext.RespondCode(errorDetails);
         }
 
         private static Task RespondJsonMessage(this HttpContext httpContext, ErrorDetails errorDetails)
