@@ -11,15 +11,17 @@ namespace WebAPI.Controllers
 
     public class ProjectController : ControllerBase
     {
+        static List<Project> projects = new List<Project> {
+             new Project { Id = 1, Name = "Хатіко: Вірний друг", Type = "type 1" },
+         new Project { Id = 2, Name = "project2", Type = "type 2" },
+        new Project { Id = 3, Name = "project3", Type = "type 3" }
+       };
 
-        // GET api/values
-        [HttpGet]
+       // GET api/values
+       [HttpGet]
         public ActionResult<IEnumerable<Project>> Get()
         {
-            Project project1 = new Project { Id = 1, Name = "Хатіко: Вірний друг", Type = "type 1" };
-            Project project2 = new Project { Id = 2, Name = "project2", Type = "type 2" };
-            Project project3 = new Project { Id = 3, Name = "project3", Type = "type 3" };
-            Project[] projects = new Project[] { project1, project2, project3 };
+            
             return projects;
         }
 
@@ -35,16 +37,20 @@ namespace WebAPI.Controllers
             return projects.FirstOrDefault(x=>x.Id == id);
         }
 
-        // POST api/values
+    
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult CreateProject([FromBody] Project project)
         {
+            projects.Add(project);
+            return Ok();
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE api/values/5
@@ -53,7 +59,7 @@ namespace WebAPI.Controllers
         {
         }
 
-
+        
     }
 
 }
