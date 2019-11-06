@@ -16,6 +16,11 @@ export class HttpService{
     getAllProjects(){
         return this.http.get(this.url + 'project');
     }
+
+    changeParticipationStatus (requestId: number, requestStatus: number){
+        return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
+    }
+
     getProjectInfo(id:number){      
         return this.http.get(this.url + '/' + id);       
     }

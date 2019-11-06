@@ -1,11 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from './project-participation-request';
 import { HttpClient } from '@angular/common/http';
 import { EventService } from './event-service';
-import { MatTableDataSource, MatPaginator, MatTable } from '@angular/material';
-import { DataRowOutlet } from '@angular/cdk/table';
-import { Observable, Subscription } from 'rxjs';
+import { MatTableDataSource, MatPaginator} from '@angular/material';
 
 
 @Component({
@@ -16,18 +14,13 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ProjectParticipantsComponent implements OnInit {
 
-  // projectParticipationRequest: ProjectParticipationRequest[];
   projectParticipationRequest;
-  // test: ProjectParticipationRequest[] = [];
-  test;
-  // filteredRequests: ProjectParticipationRequest[]=[];
-  errorMessage:string;
-  showButtons: boolean = true;
+  showActionButtons: boolean = true;
   showHead: boolean = true;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  displayedColumns: string[] = ['name','userId', 'projectId','status','actions'];
 
-  constructor(private httpService:HttpService,private http: HttpClient,private evtSvc: EventService) { }
-  private url2 = "https://localhost:44353/api/projectParticipants";
- 
+  constructor(private httpService:HttpService, private evtSvc: EventService) { }
 
   ngOnInit() {
     this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[]) =>{
@@ -39,56 +32,37 @@ export class ProjectParticipantsComponent implements OnInit {
 
   }
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
- 
-  displayedColumns: string[] = ['userId', 'projectId','status','actions'];
 
   load(){
       this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[]) =>{
       this.projectParticipationRequest.data = data; 
-      this.callParentEvent();   
-    // if(this.projectParticipationRequest.filteredData.length < 1){
-    //   this.showHead = false;
-    // }
-    // else{
-    //   this.showHead = true;
-    // }
+      this.removeNotificationIcon();   
      });
    
   }
   
-  getRequests(value:number){
-    console.log(value);
-   this.projectParticipationRequest.filter = value.toString();
+  changeTab(tabNumber:number){
+    this.projectParticipationRequest.filter = tabNumber.toString();
 
-    if(value !== 0){
-    this.showButtons = false;
-
+    if(tabNumber !== 0){
+    this.showActionButtons = false;
     }
     else{
-      this.showButtons = true;
- 
+      this.showActionButtons = true;
     }
-    console.log(this.projectParticipationRequest);
   }
 
   changeStatus( status: number ,request: ProjectParticipationRequest)
   {
     request.status = status;
-  
-    this.http.put(this.url2 + '/' + request.id, request.status).subscribe(data=>{ 
-     this.load(); 
-     });
-    
+    this.httpService.changeParticipationStatus(request.id, request.status).subscribe(data=>{ 
+      this.load(); 
+      });
+   
   }
 
-
-  @Output() public requestForParentEvent = new EventEmitter();
-
-  callParentEvent(){
-    //  this.projectParticipationRequest.filterPredicate = (data: ProjectParticipationRequest)=> data.status === 0;
+  removeNotificationIcon(){
      if(this.projectParticipationRequest.filteredData.length === 0){
-      // this.showHead = false;
       this.evtSvc.emitChildEvent();   
     }
     

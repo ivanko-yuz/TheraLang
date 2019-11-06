@@ -1,13 +1,11 @@
  <button mat-stroked-button (click)="onCreate()" > 
    <mat-icon>add</mat-icon>Створити проект
   </button>
-<div *ngFor="let p of projects">
+<div *ngFor="let project of projects">
   <mat-card class="project-card">
     <mat-card-header class="header">
-      <!-- <mat-card-title> {{p.name}}</mat-card-title>
-      <mat-card-subtitle>ID - {{p.id}}</mat-card-subtitle> -->
       <mat-card-title >
-        <a mat-button class="donate-button" [routerLink]="['/project', p.id]">Підтримати</a>
+        <a mat-button class="donate-button" [routerLink]="['/project', project.id]">Підтримати</a>
       </mat-card-title>
     </mat-card-header>
     <mat-card-title>{{p.name}}</mat-card-title>
@@ -32,7 +30,7 @@
     </mat-card-content>
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
-      <a mat-stroked-button [routerLink]="['/project', p.id]">Деталі</a>
+      <a mat-stroked-button [routerLink]="['/project', project.id]">Деталі</a>
     </mat-card-actions>
   </mat-card>
 </div>
