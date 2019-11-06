@@ -52,6 +52,7 @@ namespace MvcWeb.Db
         public virtual DbSet<PiranhaUserLogin> PiranhaUserLogins { get; set; }
         public virtual DbSet<PiranhaUserRole> PiranhaUserRoles { get; set; }
         public virtual DbSet<PiranhaUserToken> PiranhaUserTokens { get; set; }
+        public virtual DbSet<PiranhaUser> PiranhaUsers { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -86,6 +87,7 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new PiranhaUserLoginConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserTokenConfiguration());
+            modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
             #endregion
 
