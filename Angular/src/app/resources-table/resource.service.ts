@@ -1,10 +1,10 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Resource } from './resource';
 import { HttpService } from '../project/http.service';
 
 @Injectable()
 export class ResourceService {
-///
+
     allProjectResources: Resource[] = [];
 
     constructor(private http: HttpService) { }
@@ -23,19 +23,17 @@ export class ResourceService {
         }
         return allResourceCategories;
     }
-    sort(res: Resource[]): Resource[][] {
-        const sortedRess: Resource[][] = [];
+    sortAllResourcesByCategories(res: Resource[]): Resource[][] {
+        const sortedArray: Resource[][] = [];
         res.forEach((resuorce) => {
-            if (resuorce.resourceCategory) {
-                if (!sortedRess[resuorce.resourceCategory]) {
-                    sortedRess[resuorce.resourceCategory] = [];                    
-                }
-                sortedRess[resuorce.resourceCategory].push(resuorce);
+            if (!sortedArray[resuorce.resourceCategory]) {
+                sortedArray[resuorce.resourceCategory] = [];
             }
+            sortedArray[resuorce.resourceCategory].push(resuorce);
         });
-        return sortedRess;
+        return sortedArray;
     }
-    setViewTeble(res: Resource[][], name: string) {
-        this.allProjectResources = res[name];
-    }
+    // setViewTeble(res: Resource[][], name: string) {
+    //     this.allProjectResources = res[name];
+    // }
 }

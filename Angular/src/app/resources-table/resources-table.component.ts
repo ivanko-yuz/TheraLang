@@ -9,24 +9,24 @@ import { MatTableDataSource, MatTabChangeEvent } from '@angular/material';
   styleUrls: ['./resources-table.component.less']
 })
 export class ResourcesTableComponent implements OnInit {
-  @Input() resources: Resource[][];
+  @Input() sortedResourcesByCategory: Resource[][];
   dataSource: MatTableDataSource<Resource> = new MatTableDataSource<Resource>();
   constructor(private resourceService: ResourceService) { }
   ngOnInit() {
-    for (const ress in this.resources) {
-      this.changePageByName(ress);
+    for (const resCategoty in this.sortedResourcesByCategory) {
+      this.selectResourcesArrayByCategotyName(resCategoty);
       return;
     } 
   }
 
-  changePage(event: MatTabChangeEvent) {
+  convertMatTabChangeEventLabelToString(event: MatTabChangeEvent) {
     const category = event.tab.textLabel;
-    this.changePageByName(category);
+    this.selectResourcesArrayByCategotyName(category);
   }
-  changePageByName(category: string) {
-    this.changeTabDataSource(this.resources[category]);
+  selectResourcesArrayByCategotyName(category: string) {
+    this.setDataSourceToInternalResourcesTable(this.sortedResourcesByCategory[category]);
   }
-  changeTabDataSource(res: Resource[]) {
+  setDataSourceToInternalResourcesTable(res: Resource[]) {
     this.dataSource = new MatTableDataSource(res);
   }
 }

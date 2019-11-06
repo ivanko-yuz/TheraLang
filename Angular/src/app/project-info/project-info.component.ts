@@ -21,7 +21,7 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
   projectInfo: Project = new Project(0, '', '', '');
   projectId: number;
   generateOnceResourcesTable = false;
-  resources: Resource[][] = [];
+  sortedResourcesByCategory: Resource[][] = [];
 
   ngAfterViewInit() {
     $('#resTabId').hide();
@@ -33,11 +33,11 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
       this.http.getProjectInfo(this.projectId).subscribe((data: Project) => this.projectInfo = data);
     });
   }
-
+  
   async getResourcesData() {
     if (!this.generateOnceResourcesTable) {
-      const resources = await this.resourceService.getAllResourcesByProjId(this.projectId);
-      this.resources = this.resourceService.sort(resources);
+      const allResources = await this.resourceService.getAllResourcesByProjId(this.projectId);
+      this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
     }
     this.generateOnceResourcesTable = true;
     $('#resTabId').slideToggle('slow');

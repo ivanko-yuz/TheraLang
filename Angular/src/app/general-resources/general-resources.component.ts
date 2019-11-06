@@ -9,10 +9,10 @@ import { Resource } from '../resources-table/resource';
   encapsulation: ViewEncapsulation.None,
 })
 export class GeneralResourcesComponent implements OnInit {
-  resources: Resource[][] = [];
+  sortedResourcesByCategory: Resource[][] = [];
   constructor(private resourceService: ResourceService) { }
    async ngOnInit() {
-    const resources = await this.resourceService.getAllResourcesByProjId(null);
-    this.resources = this.resourceService.sort(resources);
+    const allResources = await this.resourceService.getAllResourcesByProjId(null);
+    this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
   }
 }
