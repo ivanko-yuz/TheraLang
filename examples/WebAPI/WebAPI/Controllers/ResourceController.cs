@@ -137,10 +137,56 @@ namespace WebAPI.Controllers
                 ProjectId = null,
                 ResourceCategory = "Зображення"
             };
-     
+            Resource resource19 = new Resource
+            {
+                Id = 4,
+                Name = "Resource14 null",
+                Description = "https://i.kym-cdn.com/entries/icons/mobile/000/030/157/womanyellingcat.jpg",
+                Date = new DateTime(2015, 7, 20),
+                ProjectId = null,
+                ResourceCategory = "Зображення"
+            };
+            Resource resource15 = new Resource
+            {
+                Id = 4,
+                Name = "Resource14 null",
+                Description = "https://i.kym-cdn.com/entries/icons/mobile/000/030/157/womanyellingcat.jpg",
+                Date = new DateTime(2015, 7, 20),
+                ProjectId = null,
+                ResourceCategory = "Зображення"
+            };
+            Resource resource16 = new Resource
+            {
+                Id = 4,
+                Name = "Resource14 null",
+                Description = "https://i.kym-cdn.com/entries/icons/mobile/000/030/157/womanyellingcat.jpg",
+                Date = new DateTime(2015, 7, 20),
+                ProjectId = null,
+                ResourceCategory = "Зображення"
+            };
+            Resource resource17 = new Resource
+            {
+                Id = 4,
+                Name = "Resource14 null",
+                Description = "https://i.kym-cdn.com/entries/icons/mobile/000/030/157/womanyellingcat.jpg",
+                Date = new DateTime(2015, 7, 20),
+                ProjectId = null,
+                ResourceCategory = "Зображення"
+            };
+            Resource resource18 = new Resource
+            {
+                Id = 4,
+                Name = "Resource14 null",
+                Description = "https://i.kym-cdn.com/entries/icons/mobile/000/030/157/womanyellingcat.jpg",
+                Date = new DateTime(2015, 7, 20),
+                ProjectId = null,
+                ResourceCategory = "Зображення"
+            };
+
 
             Resource[] resources = new Resource[] { resource11, resource10, resource9, resource8, resource7,
-                resource6, resource5, resource4, resource3, resource2, resource12, resource13 , resource14};
+                resource6, resource5, resource4, resource3, resource2, resource12, resource13 , resource14, 
+                resource15, resource16, resource17, resource18, resource19};
             foreach(var res in resources)
             {
                 res.Description = res.ResourceCategory;

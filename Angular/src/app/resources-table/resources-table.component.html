@@ -1,5 +1,5 @@
 <mat-tab-group mat-stretch-tabs class="resTab example-stretched-tabs mat-elevation-z4" (selectedTabChange)="convertMatTabChangeEventLabelToString($event)">
     <mat-tab  *ngFor="let category of this.resourceService.getAllResourceCategories(sortedResourcesByCategory)" label="{{category}}"  >
-        <app-resources-internal-table [dataSource]="dataSource"></app-resources-internal-table>
+        <app-resources-internal-table [dataSource]="dataSource" [lengthDataArrForDataSource]="lengthDataArrForDataSource"></app-resources-internal-table>
     </mat-tab>
 </mat-tab-group>

@@ -10,7 +10,8 @@ import { MatTableDataSource, MatTabChangeEvent } from '@angular/material';
 })
 export class ResourcesTableComponent implements OnInit {
   @Input() sortedResourcesByCategory: Resource[][];
-  dataSource: MatTableDataSource<Resource> = new MatTableDataSource<Resource>();
+  lengthDataArrForDataSource: number;
+  dataSource;
   constructor(private resourceService: ResourceService) { }
   ngOnInit() {
     for (const resCategoty in this.sortedResourcesByCategory) {
@@ -27,6 +28,8 @@ export class ResourcesTableComponent implements OnInit {
     this.setDataSourceToInternalResourcesTable(this.sortedResourcesByCategory[category]);
   }
   setDataSourceToInternalResourcesTable(res: Resource[]) {
+    this.lengthDataArrForDataSource = res.length;
+    console.log(this.lengthDataArrForDataSource);
     this.dataSource = new MatTableDataSource(res);
   }
 }
