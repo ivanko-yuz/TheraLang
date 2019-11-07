@@ -15,7 +15,6 @@ export class ProjectParticipantsComponent implements OnInit {
 
   projectParticipationRequest = new MatTableDataSource<ProjectParticipationRequest>();
   showActionButtons: boolean = true;
-  showHead: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = ['createdById', 'role', 'projectId', 'status', 'actions'];
 
@@ -28,7 +27,6 @@ export class ProjectParticipantsComponent implements OnInit {
       this.projectParticipationRequest.paginator = this.paginator;
       this.projectParticipationRequest.filter = Request.New.toString();
     });
-
   }
 
   load() {
@@ -36,30 +34,37 @@ export class ProjectParticipantsComponent implements OnInit {
       this.projectParticipationRequest.data = projectParticipants;
       this.removeNotificationIcon();
     });
-
   }
 
   changeTab(tabPosition: number) {
-    this.projectParticipationRequest.filter = tabPosition.toString();
+    this.projectParticipationRequest.filter = this.changeFilter(tabPosition);
     this.showActionButtons = (tabPosition === Request.New) ? true : false;
-
   }
 
-  changeStatus(status: number, projectParticipant: ProjectParticipationRequest) {
-    projectParticipant.status = status;
+  changeFilter(tabPosition: number){
+    if(tabPosition === 1){
+      return Request.Aproved.toString();
+    }
+    else if(tabPosition === 2){
+      return Request.Rejected.toString();
+    }
+    else{
+      return Request.New.toString();
+    }
+  }
+
+  changeStatus(status: string, projectParticipant: ProjectParticipationRequest) {
+    projectParticipant.status = (status === 'aproved') ? Request.Aproved : Request.Rejected;
     this.httpService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
       this.load();
     });
-
   }
 
   removeNotificationIcon() {
     if (this.projectParticipationRequest.filteredData.length === 0) {
       this.eventService.emitChildEvent();
-    }
-    
+    }  
   }
-
 
 }
 
