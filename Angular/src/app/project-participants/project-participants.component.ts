@@ -52,7 +52,7 @@ export class ProjectParticipantsComponent implements OnInit {
       return RequestStatus.New.toString();
     }
   }
-  req: Request;
+
   changeStatus(status: string, projectParticipant: ProjectParticipationRequest) {
     projectParticipant.status = (status === 'aproved') ?  RequestStatus.Aproved : RequestStatus.Rejected;
     this.httpService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
