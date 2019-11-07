@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from '../project-participants/project-participation-request';
 import { EventService } from '../project-participants/event-service';
-import { Request } from '../status-enum';
+import { RequestStatus } from '../request-status-enum';
 
 @Component({
   selector: 'app-toolbar',
@@ -19,11 +19,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[]) => {
       this.projectParticipation = data;
-      if ((this.projectParticipation.filter(x => x.status === Request.New)).length === 0) {
+      if ((this.projectParticipation.filter(x => x.status === RequestStatus.New)).length === 0) {
         this.hasNotification = false;
       }
     });
-
   }
 
   ngAfterViewInit(): void {
@@ -31,5 +30,4 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
       this.hasNotification = false;
     });
   }
-
 }

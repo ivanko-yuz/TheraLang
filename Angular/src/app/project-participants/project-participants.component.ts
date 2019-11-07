@@ -3,7 +3,7 @@ import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from './project-participation-request';
 import { EventService } from './event-service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { Request } from '../status-enum';
+import { RequestStatus } from '../request-status-enum';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class ProjectParticipantsComponent implements OnInit {
       this.projectParticipationRequest.data = projectParticipants;
       this.projectParticipationRequest.filterPredicate = (projectParticipant: ProjectParticipationRequest, filter: string) => projectParticipant.status.toString() == filter;
       this.projectParticipationRequest.paginator = this.paginator;
-      this.projectParticipationRequest.filter = Request.New.toString();
+      this.projectParticipationRequest.filter = RequestStatus.New.toString();
     });
   }
 
@@ -38,23 +38,23 @@ export class ProjectParticipantsComponent implements OnInit {
 
   changeTab(tabPosition: number) {
     this.projectParticipationRequest.filter = this.changeFilter(tabPosition);
-    this.showActionButtons = (tabPosition === Request.New) ? true : false;
+    this.showActionButtons = (tabPosition === RequestStatus.New) ? true : false;
   }
 
   changeFilter(tabPosition: number){
     if(tabPosition === 1){
-      return Request.Aproved.toString();
+      return RequestStatus.Aproved.toString();
     }
     else if(tabPosition === 2){
-      return Request.Rejected.toString();
+      return RequestStatus.Rejected.toString();
     }
     else{
-      return Request.New.toString();
+      return RequestStatus.New.toString();
     }
   }
-
+  req: Request;
   changeStatus(status: string, projectParticipant: ProjectParticipationRequest) {
-    projectParticipant.status = (status === 'aproved') ? Request.Aproved : Request.Rejected;
+    projectParticipant.status = (status === 'aproved') ?  RequestStatus.Aproved : RequestStatus.Rejected;
     this.httpService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
       this.load();
     });
