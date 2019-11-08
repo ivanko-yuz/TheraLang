@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -11,6 +8,7 @@ namespace WebAPI.Controllers
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
+        public string ResourceCategory { get; set; }
     }
 }
