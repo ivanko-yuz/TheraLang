@@ -1,6 +1,6 @@
 <mat-tab-group animationDuration="0ms" #tabPosition (selectedTabChange)="changeTab(tabPosition.selectedIndex)">
         <mat-tab label="Нові"></mat-tab>
-        <mat-tab label="Підтверджені" ></mat-tab>
+        <mat-tab label="Підтверджені"></mat-tab>
         <mat-tab label="Відхилені"> </mat-tab>
 </mat-tab-group>
 <div *ngIf="projectParticipationRequest.filteredData.length > 0">
@@ -31,8 +31,8 @@
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let participationRequest">
                                         <div *ngIf="showActionButtons">
-                                                <span class="aproveButton" >
-                                                        <button mat-raised-button 
+                                                <span class="aproveButton">
+                                                        <button mat-raised-button
                                                                 (click)="changeStatus('aproved', participationRequest)">Прийняти</button>
                                                 </span>
                                                 <span class="rejectButton">
@@ -46,9 +46,12 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+
                 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
+
 </div>
 <div *ngIf="projectParticipationRequest.filteredData.length === 0">
-        <h1>Немає нових запитів</h1>
-</div>
+        <div>
+                <h1>Немає нових запитів</h1>
+        </div>
