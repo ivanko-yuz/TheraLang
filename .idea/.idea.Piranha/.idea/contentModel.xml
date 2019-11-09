@@ -1,0 +1,1958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Administrator\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Administrator\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Piranha.-532978952.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Administrator\Desktop\TheraLang dev" t="IncludeFlat">
+      <e p=".global" t="Include" />
+      <e p=".nuspec" t="Include" />
+      <e p="core" t="Include">
+        <e p="Piranha" t="IncludeRecursive">
+          <e p="Api.cs" t="Include" />
+          <e p="App.cs" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Cache" t="Include">
+            <e p="CacheLevel.cs" t="Include" />
+            <e p="DistributedCache.cs" t="Include" />
+            <e p="MemoryCache.cs" t="Include" />
+            <e p="MemoryCacheWithClone.cs" t="Include" />
+            <e p="SimpleCache.cs" t="Include" />
+            <e p="SimpleCacheWithClone.cs" t="Include" />
+          </e>
+          <e p="Config.cs" t="Include" />
+          <e p="Extend" t="Include">
+            <e p="Block.cs" t="Include" />
+            <e p="BlockGroup.cs" t="Include" />
+            <e p="BlockGroupTypeAttribute.cs" t="Include" />
+            <e p="BlockItemTypeAttribute.cs" t="Include" />
+            <e p="Blocks" t="Include">
+              <e p="AudioBlock.cs" t="Include" />
+              <e p="ColumnBlock.cs" t="Include" />
+              <e p="HtmlBlock.cs" t="Include" />
+              <e p="HtmlColumnBlock.cs" t="Include" />
+              <e p="ImageBlock.cs" t="Include" />
+              <e p="ImageGalleryBlock.cs" t="Include" />
+              <e p="QuoteBlock.cs" t="Include" />
+              <e p="SeparatorBlock.cs" t="Include" />
+              <e p="TextBlock.cs" t="Include" />
+              <e p="VideoBlock.cs" t="Include" />
+            </e>
+            <e p="BlockTypeAttribute.cs" t="Include" />
+            <e p="DefaultMarkdown.cs" t="Include" />
+            <e p="Field.cs" t="Include" />
+            <e p="FieldAttribute.cs" t="Include" />
+            <e p="FieldDescriptionAttribute.cs" t="Include" />
+            <e p="Fields" t="Include">
+              <e p="AudioField.cs" t="Include" />
+              <e p="CheckBoxField.cs" t="Include" />
+              <e p="DateField.cs" t="Include" />
+              <e p="DocumentField.cs" t="Include" />
+              <e p="HtmlField.cs" t="Include" />
+              <e p="ImageField.cs" t="Include" />
+              <e p="MarkdownField.cs" t="Include" />
+              <e p="MediaField.cs" t="Include" />
+              <e p="MediaFieldBase.cs" t="Include" />
+              <e p="NumberField.cs" t="Include" />
+              <e p="PageField.cs" t="Include" />
+              <e p="PostField.cs" t="Include" />
+              <e p="ReadonlyField.cs" t="Include" />
+              <e p="SelectField.cs" t="Include" />
+              <e p="SelectFieldBase.cs" t="Include" />
+              <e p="SelectFieldItem.cs" t="Include" />
+              <e p="SimpleField.cs" t="Include" />
+              <e p="StringField.cs" t="Include" />
+              <e p="TextField.cs" t="Include" />
+              <e p="VideoField.cs" t="Include" />
+            </e>
+            <e p="FieldTypeAttribute.cs" t="Include" />
+            <e p="IField.cs" t="Include" />
+            <e p="IMarkdown.cs" t="Include" />
+            <e p="IModule.cs" t="Include" />
+            <e p="ISerializer.cs" t="Include" />
+            <e p="RegionAttribute.cs" t="Include" />
+            <e p="RegionDescriptionAttribute.cs" t="Include" />
+            <e p="Serializers" t="Include">
+              <e p="AudioFieldSerializer.cs" t="Include" />
+              <e p="CheckBoxFieldSerializer.cs" t="Include" />
+              <e p="DateFieldSerializer.cs" t="Include" />
+              <e p="DocumentFieldSerializer.cs" t="Include" />
+              <e p="ImageFieldSerializer.cs" t="Include" />
+              <e p="IntegerFieldSerializer.cs" t="Include" />
+              <e p="MediaFieldSerializer.cs" t="Include" />
+              <e p="PageFieldSerializer.cs" t="Include" />
+              <e p="PostFieldSerializer.cs" t="Include" />
+              <e p="SelectFieldSerializer.cs" t="Include" />
+              <e p="StringFieldSerializer.cs" t="Include" />
+              <e p="VideoFieldSerializer.cs" t="Include" />
+            </e>
+          </e>
+          <e p="IApi.cs" t="Include" />
+          <e p="ICache.cs" t="Include" />
+          <e p="IImageProcessor.cs" t="Include" />
+          <e p="ISecurity.cs" t="Include" />
+          <e p="IStorage.cs" t="Include" />
+          <e p="IStorageSession.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="Alias.cs" t="Include" />
+            <e p="ArchivePage.cs" t="Include" />
+            <e p="BlockDisplayMode.cs" t="Include" />
+            <e p="Content.cs" t="Include" />
+            <e p="ContentType.cs" t="Include" />
+            <e p="ContentTypeEditor.cs" t="Include" />
+            <e p="ContentTypeRoute.cs" t="Include" />
+            <e p="DynamicPage.cs" t="Include" />
+            <e p="DynamicPost.cs" t="Include" />
+            <e p="DynamicSiteContent.cs" t="Include" />
+            <e p="FieldOption.cs" t="Include" />
+            <e p="FieldType.cs" t="Include" />
+            <e p="GenericPage.cs" t="Include" />
+            <e p="IBlockModel.cs" t="Include" />
+            <e p="IContentInfo.cs" t="Include" />
+            <e p="IDynamicModel.cs" t="Include" />
+            <e p="IMeta.cs" t="Include" />
+            <e p="IPage.cs" t="Include" />
+            <e p="IRegionList.cs" t="Include" />
+            <e p="Media.cs" t="Include" />
+            <e p="MediaContent.cs" t="Include" />
+            <e p="MediaFolder.cs" t="Include" />
+            <e p="MediaStructure.cs" t="Include" />
+            <e p="MediaStructureItem.cs" t="Include" />
+            <e p="MediaType.cs" t="Include" />
+            <e p="MediaVersion.cs" t="Include" />
+            <e p="Page.cs" t="Include" />
+            <e p="PageBase.cs" t="Include" />
+            <e p="PageInfo.cs" t="Include" />
+            <e p="PageType.cs" t="Include" />
+            <e p="Param.cs" t="Include" />
+            <e p="Post.cs" t="Include" />
+            <e p="PostArchive.cs" t="Include" />
+            <e p="PostBase.cs" t="Include" />
+            <e p="PostInfo.cs" t="Include" />
+            <e p="PostType.cs" t="Include" />
+            <e p="RedirectType.cs" t="Include" />
+            <e p="RegionDisplayMode.cs" t="Include" />
+            <e p="RegionList.cs" t="Include" />
+            <e p="RegionType.cs" t="Include" />
+            <e p="RoutedContent.cs" t="Include" />
+            <e p="Site.cs" t="Include" />
+            <e p="SiteContent.cs" t="Include" />
+            <e p="SiteContentBase.cs" t="Include" />
+            <e p="Sitemap.cs" t="Include" />
+            <e p="SitemapItem.cs" t="Include" />
+            <e p="SiteType.cs" t="Include" />
+            <e p="Structure.cs" t="Include" />
+            <e p="StructureItem.cs" t="Include" />
+            <e p="Taxonomy.cs" t="Include" />
+            <e p="TaxonomyList.cs" t="Include" />
+          </e>
+          <e p="NoCoverageAttribute.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Piranha.csproj" t="IncludeRecursive" />
+          <e p="PiranhaExtensions.cs" t="Include" />
+          <e p="Repositories" t="Include">
+            <e p="IAliasRepository.cs" t="Include" />
+            <e p="IArchiveRepository.cs" t="Include" />
+            <e p="IMediaRepository.cs" t="Include" />
+            <e p="IPageRepository.cs" t="Include" />
+            <e p="IPageTypeRepository.cs" t="Include" />
+            <e p="IParamRepository.cs" t="Include" />
+            <e p="IPostRepository.cs" t="Include" />
+            <e p="IPostTypeRepository.cs" t="Include" />
+            <e p="ISiteRepository.cs" t="Include" />
+            <e p="ISiteTypeRepository.cs" t="Include" />
+          </e>
+          <e p="Runtime" t="Include">
+            <e p="AppBlock.cs" t="Include" />
+            <e p="AppBlockList.cs" t="Include" />
+            <e p="AppContentType.cs" t="Include" />
+            <e p="AppDataItem.cs" t="Include" />
+            <e p="AppDataList.cs" t="Include" />
+            <e p="AppField.cs" t="Include" />
+            <e p="AppFieldList.cs" t="Include" />
+            <e p="AppModule.cs" t="Include" />
+            <e p="AppModuleList.cs" t="Include" />
+            <e p="ContentTypeList.cs" t="Include" />
+            <e p="ContentTypeManager.cs" t="Include" />
+            <e p="HookManager.cs" t="Include" />
+            <e p="MediaManager.cs" t="Include" />
+            <e p="SerializerManager.cs" t="Include" />
+          </e>
+          <e p="Security" t="Include">
+            <e p="PermissionItem.cs" t="Include" />
+            <e p="PermissionManager.cs" t="Include" />
+            <e p="Permissions.cs" t="Include" />
+          </e>
+          <e p="Services" t="Include">
+            <e p="AliasService.cs" t="Include" />
+            <e p="ArchiveService.cs" t="Include" />
+            <e p="ContentFactory.cs" t="Include" />
+            <e p="IAliasService.cs" t="Include" />
+            <e p="IArchiveService.cs" t="Include" />
+            <e p="IContentFactory.cs" t="Include" />
+            <e p="IMediaService.cs" t="Include" />
+            <e p="IPageService.cs" t="Include" />
+            <e p="IPageTypeService.cs" t="Include" />
+            <e p="IParamService.cs" t="Include" />
+            <e p="IPostService.cs" t="Include" />
+            <e p="IPostTypeService.cs" t="Include" />
+            <e p="ISiteService.cs" t="Include" />
+            <e p="ISiteTypeService.cs" t="Include" />
+            <e p="MediaService.cs" t="Include" />
+            <e p="PageService.cs" t="Include" />
+            <e p="PageTypeService.cs" t="Include" />
+            <e p="ParamService.cs" t="Include" />
+            <e p="PostService.cs" t="Include" />
+            <e p="PostTypeService.cs" t="Include" />
+            <e p="SiteService.cs" t="Include" />
+            <e p="SiteTypeService.cs" t="Include" />
+          </e>
+          <e p="Utils.cs" t="Include" />
+          <e p="Web" t="Include">
+            <e p="AliasRouter.cs" t="Include" />
+            <e p="ArchiveRouter.cs" t="Include" />
+            <e p="HttpCacheInfo.cs" t="Include" />
+            <e p="IRouteResponse.cs" t="Include" />
+            <e p="PageRouter.cs" t="Include" />
+            <e p="PostRouter.cs" t="Include" />
+            <e p="RouteResponse.cs" t="Include" />
+            <e p="StartPageRouter.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Piranha.AspNetCore" t="IncludeRecursive">
+          <e p="AliasMiddleware.cs" t="Include" />
+          <e p="ApplicationMiddleware.cs" t="Include" />
+          <e p="ArchiveMiddleware.cs" t="Include" />
+          <e p="AspNetCoreExtensions.cs" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="HttpCaching.cs" t="Include" />
+          <e p="MiddlewareBase.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="SinglePageModel.cs" t="Include" />
+            <e p="SinglePostModel.cs" t="Include" />
+          </e>
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.AspNetCore.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="PageMiddleware.cs" t="Include" />
+          <e p="Piranha.AspNetCore.csproj" t="IncludeRecursive" />
+          <e p="PostMiddleware.cs" t="Include" />
+          <e p="Services" t="Include">
+            <e p="ApplicationService.cs" t="Include" />
+            <e p="IApplicationService.cs" t="Include" />
+            <e p="IMediaHelper.cs" t="Include" />
+            <e p="IModelLoader.cs" t="Include" />
+            <e p="ISiteHelper.cs" t="Include" />
+            <e p="ModelLoader.cs" t="Include" />
+          </e>
+          <e p="SitemapMiddleware.cs" t="Include" />
+          <e p="StartPageMiddleware.cs" t="Include" />
+        </e>
+        <e p="Piranha.AspNetCore.Identity" t="IncludeRecursive">
+          <e p="Areas" t="Include">
+            <e p="Manager" t="Include">
+              <e p="Views" t="Include">
+                <e p="Role" t="Include">
+                  <e p="_ViewImports.cshtml" t="Include" />
+                  <e p="Edit.cshtml" t="Include" />
+                  <e p="List.cshtml" t="Include" />
+                </e>
+                <e p="User" t="Include">
+                  <e p="_ViewImports.cshtml" t="Include" />
+                  <e p="Edit.cshtml" t="Include" />
+                  <e p="List.cshtml" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Controllers" t="Include">
+            <e p="RoleController.cs" t="Include" />
+            <e p="UserController.cs" t="Include" />
+          </e>
+          <e p="data" t="Include">
+            <e p="Role.cs" t="Include" />
+            <e p="User.cs" t="Include" />
+          </e>
+          <e p="Db.cs" t="Include" />
+          <e p="DefaultIdentitySeed.cs" t="Include" />
+          <e p="IDb.cs" t="Include" />
+          <e p="IdentityModuleExtensions.cs" t="Include" />
+          <e p="IdentitySecurity.cs" t="Include" />
+          <e p="IIdentitySeed.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="RoleEditModel.cs" t="Include" />
+            <e p="RoleListModel.cs" t="Include" />
+            <e p="UserEditModel.cs" t="Include" />
+            <e p="UserListModel.cs" t="Include" />
+          </e>
+          <e p="Module.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.AspNetCore.Identity.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Permissions.cs" t="Include" />
+          <e p="Piranha.AspNetCore.Identity.csproj" t="IncludeRecursive" />
+          <e p="Utils.cs" t="Include" />
+        </e>
+        <e p="Piranha.AspNetCore.Identity.SQLServer" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="DbFactory.cs" t="Include" />
+          <e p="IdentitySQLServerDb.cs" t="Include" />
+          <e p="Migrations" t="Include">
+            <e p="20180516203540_InitialCreate.cs" t="Include" />
+            <e p="20180516203540_InitialCreate.Designer.cs" t="Include" />
+            <e p="IdentitySQLServerDbModelSnapshot.cs" t="Include" />
+          </e>
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.AspNetCore.Identity.SQLServer.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Piranha.AspNetCore.Identity.SQLServer.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="Piranha.AspNetCore.SimpleSecurity" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.AspNetCore.SimpleSecurity.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Piranha.AspNetCore.SimpleSecurity.csproj" t="IncludeRecursive" />
+          <e p="SimpleSecurity.cs" t="Include" />
+          <e p="SimpleSecurityExtensions.cs" t="Include" />
+          <e p="SimpleUser.cs" t="Include" />
+        </e>
+        <e p="Piranha.AttributeBuilder" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="ContentTypeAttribute.cs" t="Include" />
+          <e p="ContentTypeBuilder.cs" t="Include" />
+          <e p="ContentTypeRouteAttribute.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.AttributeBuilder.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="PageTypeArchiveItemAttribute.cs" t="Include" />
+          <e p="PageTypeAttribute.cs" t="Include" />
+          <e p="PageTypeBuilder.cs" t="Include" />
+          <e p="PageTypeEditorAttribute.cs" t="Include" />
+          <e p="PageTypeRouteAttribute.cs" t="Include" />
+          <e p="Piranha.AttributeBuilder.csproj" t="IncludeRecursive" />
+          <e p="PostTypeAttribute.cs" t="Include" />
+          <e p="PostTypeBuilder.cs" t="Include" />
+          <e p="PostTypeEditorAttribute.cs" t="Include" />
+          <e p="PostTypeRouteAttribute.cs" t="Include" />
+          <e p="SiteTypeAttribute.cs" t="Include" />
+          <e p="SiteTypeBuilder.cs" t="Include" />
+        </e>
+        <e p="Piranha.Azure.BlobStorage" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="BlobStorage.cs" t="Include" />
+          <e p="BlobStorageExtensions.cs" t="Include" />
+          <e p="BlobStorageModule.cs" t="Include" />
+          <e p="BlobStorageSession.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.Azure.BlobStorage.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Piranha.Azure.BlobStorage.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="Piranha.Extensions.Sync" t="IncludeRecursive">
+          <e p="AliasServiceSyncExtensions.cs" t="Include" />
+          <e p="ArchiveServiceSyncExtensions.cs" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="MediaServiceSyncExtensions.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.Extensions.Sync.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="PageServiceSyncExtensions.cs" t="Include" />
+          <e p="PageTypeServiceSyncExtensions.cs" t="Include" />
+          <e p="ParamServiceSyncExtensions.cs" t="Include" />
+          <e p="Piranha.Extensions.Sync.csproj" t="IncludeRecursive" />
+          <e p="PostServiceSyncExtensions.cs" t="Include" />
+          <e p="PostTypeServiceSyncExtensions.cs" t="Include" />
+          <e p="SiteServiceSyncExtensions.cs" t="Include" />
+          <e p="SiteTypeServiceSyncExtensions.cs" t="Include" />
+        </e>
+        <e p="Piranha.ImageSharp" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="ImageSharpExtensions.cs" t="Include" />
+          <e p="ImageSharpProcessor.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.ImageSharp.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Piranha.ImageSharp.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="Piranha.Local.FileStorage" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="FileStorage.cs" t="Include" />
+          <e p="FileStorageExtensions.cs" t="Include" />
+          <e p="FileStorageModule.cs" t="Include" />
+          <e p="FileStorageSession.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.Local.FileStorage.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Piranha.Local.FileStorage.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="Piranha.Manager" t="IncludeRecursive">
+          <e p="ActionItem.cs" t="Include" />
+          <e p="ActionList.cs" t="Include" />
+          <e p="Actions.cs" t="Include" />
+          <e p="Areas" t="Include">
+            <e p="Manager" t="Include">
+              <e p="Pages" t="Include">
+                <e p="_ViewImports.cshtml" t="Include" />
+                <e p="_ViewStart.cshtml" t="Include" />
+                <e p="AliasEdit.cshtml" t="Include" />
+                <e p="AliasEdit.cshtml.cs" t="Include" />
+                <e p="ConfigEdit.cshtml" t="Include" />
+                <e p="ConfigEdit.cshtml.cs" t="Include" />
+                <e p="Index.cshtml" t="Include" />
+                <e p="Index.cshtml.cs" t="Include" />
+                <e p="Login.cshtml" t="Include" />
+                <e p="Login.cshtml.cs" t="Include" />
+                <e p="Logout.cshtml" t="Include" />
+                <e p="Logout.cshtml.cs" t="Include" />
+                <e p="MediaList.cshtml" t="Include" />
+                <e p="MediaList.cshtml.cs" t="Include" />
+                <e p="ModuleList.cshtml" t="Include" />
+                <e p="ModuleList.cshtml.cs" t="Include" />
+                <e p="PageEdit.cshtml" t="Include" />
+                <e p="PageEdit.cshtml.cs" t="Include" />
+                <e p="PageList.cshtml" t="Include" />
+                <e p="PageList.cshtml.cs" t="Include" />
+                <e p="PagePreview.cshtml" t="Include" />
+                <e p="PagePreview.cshtml.cs" t="Include" />
+                <e p="Partial" t="Include">
+                  <e p="_AliasForm.cshtml" t="Include" />
+                  <e p="_AliasList.cshtml" t="Include" />
+                  <e p="_MediaFolderModal.cshtml" t="Include" />
+                  <e p="_MediaGallery.cshtml" t="Include" />
+                  <e p="_MediaList.cshtml" t="Include" />
+                  <e p="_PageAddModal.cshtml" t="Include" />
+                  <e p="_PageMenu.cshtml" t="Include" />
+                  <e p="_PageSettings.cshtml" t="Include" />
+                  <e p="_PostSettings.cshtml" t="Include" />
+                  <e p="Actions" t="Include">
+                    <e p="_PageDelete.cshtml" t="Include" />
+                    <e p="_PagePreview.cshtml" t="Include" />
+                    <e p="_PageSave.cshtml" t="Include" />
+                    <e p="_PostDelete.cshtml" t="Include" />
+                    <e p="_PostPreview.cshtml" t="Include" />
+                    <e p="_PostSave.cshtml" t="Include" />
+                  </e>
+                </e>
+                <e p="PostEdit.cshtml" t="Include" />
+                <e p="PostEdit.cshtml.cs" t="Include" />
+                <e p="PostPreview.cshtml" t="Include" />
+                <e p="PostPreview.cshtml.cs" t="Include" />
+              </e>
+              <e p="Shared" t="Include">
+                <e p="_Layout.cshtml" t="Include" />
+                <e p="_ViewImports.cshtml" t="Include" />
+                <e p="Partial" t="Include">
+                  <e p="_BlockPickerModal.cshtml" t="Include" />
+                  <e p="_EditorConfig.cshtml" t="Include" />
+                  <e p="_MediaPickerModal.cshtml" t="Include" />
+                  <e p="_MediaUploadTemplate.cshtml" t="Include" />
+                  <e p="_Menu.cshtml" t="Include" />
+                  <e p="_Notifications.cshtml" t="Include" />
+                  <e p="_PagePickerModal.cshtml" t="Include" />
+                  <e p="_PostPickerModal.cshtml" t="Include" />
+                  <e p="_PreviewModal.cshtml" t="Include" />
+                  <e p="_Resources.cshtml" t="Include" />
+                  <e p="_SiteModal.cshtml" t="Include" />
+                </e>
+              </e>
+              <e p="Views" t="Include">
+                <e p="_ViewImports.cshtml" t="Include" />
+                <e p="_ViewStart.cshtml" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="assets" t="Include">
+            <e p="dist" t="Include">
+              <e p="css" t="Include">
+                <e p="full.min.css" t="Include" />
+                <e p="slim.min.css" t="Include" />
+              </e>
+              <e p="img" t="Include">
+                <e p="empty-image.png" t="Include" />
+                <e p="empty-text.png" t="Include" />
+                <e p="login.png" t="Include" />
+                <e p="logo-menu.png" t="Include" />
+                <e p="logo.png" t="Include" />
+                <e p="media-placeholder.jpg" t="Include" />
+                <e p="seigaiha-overlay.png" t="Include" />
+              </e>
+              <e p="js" t="Include">
+                <e p="piranha-dev.js" t="Include" />
+                <e p="piranha-dev.min.js" t="Include" />
+                <e p="piranha.alias.js" t="Include" />
+                <e p="piranha.alias.min.js" t="Include" />
+                <e p="piranha.config.js" t="Include" />
+                <e p="piranha.config.min.js" t="Include" />
+                <e p="piranha.contentedit.js" t="Include" />
+                <e p="piranha.contentedit.min.js" t="Include" />
+                <e p="piranha.js" t="Include" />
+                <e p="piranha.media.js" t="Include" />
+                <e p="piranha.media.min.js" t="Include" />
+                <e p="piranha.min.js" t="Include" />
+                <e p="piranha.module.js" t="Include" />
+                <e p="piranha.module.min.js" t="Include" />
+                <e p="piranha.pageedit.js" t="Include" />
+                <e p="piranha.pageedit.min.js" t="Include" />
+                <e p="piranha.pagelist.js" t="Include" />
+                <e p="piranha.pagelist.min.js" t="Include" />
+                <e p="piranha.postedit.js" t="Include" />
+                <e p="piranha.postedit.min.js" t="Include" />
+                <e p="piranha.siteedit.js" t="Include" />
+                <e p="piranha.siteedit.min.js" t="Include" />
+                <e p="signalr.min.js" t="Include" />
+                <e p="signalr.min.min.js" t="Include" />
+              </e>
+              <e p="webfonts" t="Include">
+                <e p="fa-brands-400.eot" t="Include" />
+                <e p="fa-brands-400.svg" t="Include" />
+                <e p="fa-brands-400.ttf" t="Include" />
+                <e p="fa-brands-400.woff" t="Include" />
+                <e p="fa-brands-400.woff2" t="Include" />
+                <e p="fa-regular-400.eot" t="Include" />
+                <e p="fa-regular-400.svg" t="Include" />
+                <e p="fa-regular-400.ttf" t="Include" />
+                <e p="fa-regular-400.woff" t="Include" />
+                <e p="fa-regular-400.woff2" t="Include" />
+                <e p="fa-solid-900.eot" t="Include" />
+                <e p="fa-solid-900.svg" t="Include" />
+                <e p="fa-solid-900.ttf" t="Include" />
+                <e p="fa-solid-900.woff" t="Include" />
+                <e p="fa-solid-900.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OUehpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OUuhpKKSTjw.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OVuhpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OX-hpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OXehpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OXOhpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OXuhpKKSTj5PW.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFUZ0bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFVp0bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFW50bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFWJ0bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFWp0bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFWZ0bf8pkAp6a.woff2" t="Include" />
+                <e p="rax_HiqOu8IVPmnzxKl8AxhfsUjQ8Q.woff2" t="Include" />
+                <e p="rax_HiqOu8IVPmnzxKl8DRhfsUjQ8Qad.woff2" t="Include" />
+              </e>
+            </e>
+            <e p="src" t="Include">
+              <e p="fonts" t="Include">
+                <e p="mem5YaGs126MiZpBA-UN_r8OUehpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OUuhpKKSTjw.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OVuhpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OX-hpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OXehpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OXOhpKKSTj5PW.woff2" t="Include" />
+                <e p="mem5YaGs126MiZpBA-UN_r8OXuhpKKSTj5PW.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFUZ0bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFVp0bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFVZ0bf8pkAg.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFW50bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFWJ0bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFWp0bf8pkAp6a.woff2" t="Include" />
+                <e p="mem8YaGs126MiZpBA-UFWZ0bf8pkAp6a.woff2" t="Include" />
+                <e p="rax_HiqOu8IVPmnzxKl8AxhfsUjQ8Q.woff2" t="Include" />
+                <e p="rax_HiqOu8IVPmnzxKl8DRhfsUjQ8Qad.woff2" t="Include" />
+              </e>
+              <e p="js" t="Include">
+                <e p="components" t="Include">
+                  <e p="block-group-horizontal.js" t="Include" />
+                  <e p="block-group.js" t="Include" />
+                  <e p="Blocks" t="Include">
+                    <e p="audio-block.js" t="Include" />
+                    <e p="html-block.js" t="Include" />
+                    <e p="html-column-block.js" t="Include" />
+                    <e p="image-block.js" t="Include" />
+                    <e p="missing-block.js" t="Include" />
+                    <e p="quote-block.js" t="Include" />
+                    <e p="separator-block.js" t="Include" />
+                    <e p="text-block.js" t="Include" />
+                    <e p="video-block.js" t="Include" />
+                  </e>
+                  <e p="Fields" t="Include">
+                    <e p="audio-field.js" t="Include" />
+                    <e p="checkbox-field.js" t="Include" />
+                    <e p="date-field.js" t="Include" />
+                    <e p="document-field.js" t="Include" />
+                    <e p="html-field.js" t="Include" />
+                    <e p="image-field.js" t="Include" />
+                    <e p="markdown-field.js" t="Include" />
+                    <e p="media-field.js" t="Include" />
+                    <e p="missing-field.js" t="Include" />
+                    <e p="number-field.js" t="Include" />
+                    <e p="page-field.js" t="Include" />
+                    <e p="post-field.js" t="Include" />
+                    <e p="readonly-field.js" t="Include" />
+                    <e p="select-field.js" t="Include" />
+                    <e p="string-field.js" t="Include" />
+                    <e p="text-field.js" t="Include" />
+                    <e p="video-field.js" t="Include" />
+                  </e>
+                  <e p="page-item.js" t="Include" />
+                  <e p="pagecopy-item.js" t="Include" />
+                  <e p="post-archive.js" t="Include" />
+                  <e p="region.js" t="Include" />
+                  <e p="sitemap-item.js" t="Include" />
+                </e>
+                <e p="piranha.accessibility.js" t="Include" />
+                <e p="piranha.alias.js" t="Include" />
+                <e p="piranha.blockpicker.js" t="Include" />
+                <e p="piranha.config.js" t="Include" />
+                <e p="piranha.dropzone.js" t="Include" />
+                <e p="piranha.editor.js" t="Include" />
+                <e p="piranha.media.js" t="Include" />
+                <e p="piranha.mediapicker.js" t="Include" />
+                <e p="piranha.module.js" t="Include" />
+                <e p="piranha.notifications.js" t="Include" />
+                <e p="piranha.pageedit.js" t="Include" />
+                <e p="piranha.pagelist.js" t="Include" />
+                <e p="piranha.pagepicker.js" t="Include" />
+                <e p="piranha.permissions.js" t="Include" />
+                <e p="piranha.postedit.js" t="Include" />
+                <e p="piranha.postpicker.js" t="Include" />
+                <e p="piranha.preview.js" t="Include" />
+                <e p="piranha.resources.js" t="Include" />
+                <e p="piranha.siteedit.js" t="Include" />
+                <e p="piranha.utils.js" t="Include" />
+              </e>
+              <e p="scss" t="Include">
+                <e p="full.scss" t="Include" />
+                <e p="inc" t="Include">
+                  <e p="_actions.scss" t="Include" />
+                  <e p="_badges.scss" t="Include" />
+                  <e p="_blockgroups.scss" t="Include" />
+                  <e p="_blocks.scss" t="Include" />
+                  <e p="_blocktypes.scss" t="Include" />
+                  <e p="_bootstrap-full.scss" t="Include" />
+                  <e p="_bootstrap-slim.scss" t="Include" />
+                  <e p="_breadcrumb.scss" t="Include" />
+                  <e p="_buttons.scss" t="Include" />
+                  <e p="_cards.scss" t="Include" />
+                  <e p="_content.scss" t="Include" />
+                  <e p="_datepicker.scss" t="Include" />
+                  <e p="_dropzone.scss" t="Include" />
+                  <e p="_fields.scss" t="Include" />
+                  <e p="_fontawesome.scss" t="Include" />
+                  <e p="_fonts.scss" t="Include" />
+                  <e p="_forms.scss" t="Include" />
+                  <e p="_gallery.scss" t="Include" />
+                  <e p="_general.scss" t="Include" />
+                  <e p="_login.scss" t="Include" />
+                  <e p="_logo.scss" t="Include" />
+                  <e p="_media.scss" t="Include" />
+                  <e p="_mixins.scss" t="Include" />
+                  <e p="_modals.scss" t="Include" />
+                  <e p="_nav.scss" t="Include" />
+                  <e p="_navbar.scss" t="Include" />
+                  <e p="_nestable2.scss" t="Include" />
+                  <e p="_notifications.scss" t="Include" />
+                  <e p="_preview.scss" t="Include" />
+                  <e p="_regions.scss" t="Include" />
+                  <e p="_select2.scss" t="Include" />
+                  <e p="_simplemde.scss" t="Include" />
+                  <e p="_sitemap.scss" t="Include" />
+                  <e p="_sortable.scss" t="Include" />
+                  <e p="_tables.scss" t="Include" />
+                  <e p="_tinymce.scss" t="Include" />
+                  <e p="_topnav.scss" t="Include" />
+                  <e p="_variables.scss" t="Include" />
+                </e>
+                <e p="slim.scss" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Controllers" t="Include">
+            <e p="AliasApiController.cs" t="Include" />
+            <e p="ConfigApiController.cs" t="Include" />
+            <e p="ContentApiController.cs" t="Include" />
+            <e p="ManagerController.cs" t="Include" />
+            <e p="MediaApiController.cs" t="Include" />
+            <e p="ModuleApiController.cs" t="Include" />
+            <e p="PageApiController.cs" t="Include" />
+            <e p="PermissionApiController.cs" t="Include" />
+            <e p="PostApiController.cs" t="Include" />
+            <e p="SiteApiController.cs" t="Include" />
+          </e>
+          <e p="Editor" t="Include">
+            <e p="EditorConfig.cs" t="Include" />
+            <e p="EditorScripts.cs" t="Include" />
+            <e p="EditorStyle.cs" t="Include" />
+            <e p="EditorStyleType.cs" t="Include" />
+          </e>
+          <e p="gulpfile.js" t="Include" />
+          <e p="Hubs" t="Include">
+            <e p="PreviewHub.cs" t="Include" />
+          </e>
+          <e p="ManagerExtensions.cs" t="Include" />
+          <e p="ManagerScriptDefinition.cs" t="Include" />
+          <e p="MenuExtensions.cs" t="Include" />
+          <e p="Module.cs" t="Include" />
+          <e p="node_modules\@aspnet\signalr" t="IncludeRecursive" />
+          <e p="node_modules\@fortawesome\fontawesome-free" t="IncludeRecursive" />
+          <e p="node_modules\bootstrap" t="IncludeRecursive" />
+          <e p="node_modules\dropzone" t="IncludeRecursive" />
+          <e p="node_modules\gulp" t="IncludeRecursive" />
+          <e p="node_modules\gulp-concat" t="IncludeRecursive" />
+          <e p="node_modules\gulp-cssmin" t="IncludeRecursive" />
+          <e p="node_modules\gulp-sass" t="IncludeRecursive" />
+          <e p="node_modules\gulp-uglify" t="IncludeRecursive" />
+          <e p="node_modules\html5sortable" t="IncludeRecursive" />
+          <e p="node_modules\jquery" t="IncludeRecursive" />
+          <e p="node_modules\nestable2" t="IncludeRecursive" />
+          <e p="node_modules\popper.js" t="IncludeRecursive" />
+          <e p="node_modules\select2" t="IncludeRecursive" />
+          <e p="node_modules\simplemde" t="IncludeRecursive" />
+          <e p="node_modules\uglify-es" t="IncludeRecursive" />
+          <e p="node_modules\vue" t="IncludeRecursive" />
+          <e p="node_modules\vuejs-datepicker" t="IncludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.Manager.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="package-lock.json" t="Include" />
+          <e p="package.json" t="Include" />
+          <e p="Piranha.Manager.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="Piranha.Manager.Core" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Menu.cs" t="Include" />
+          <e p="MenuItem.cs" t="Include" />
+          <e p="MenuItemList.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="AliasListModel.cs" t="Include" />
+            <e p="AsyncResult.cs" t="Include" />
+            <e p="BlockListModel.cs" t="Include" />
+            <e p="ConfigModel.cs" t="Include" />
+            <e p="Content" t="Include">
+              <e p="BlockGroupModel.cs" t="Include" />
+              <e p="BlockItemModel.cs" t="Include" />
+              <e p="BlockMeta.cs" t="Include" />
+              <e p="BlockModel.cs" t="Include" />
+              <e p="ContentEditModel.cs" t="Include" />
+              <e p="ContentMeta.cs" t="Include" />
+              <e p="ContentTypeModel.cs" t="Include" />
+              <e p="EditorModel.cs" t="Include" />
+              <e p="FieldMeta.cs" t="Include" />
+              <e p="FieldModel.cs" t="Include" />
+              <e p="RegionItemModel.cs" t="Include" />
+              <e p="RegionMeta.cs" t="Include" />
+              <e p="RegionModel.cs" t="Include" />
+            </e>
+            <e p="ContentState.cs" t="Include" />
+            <e p="MediaFolderModel.cs" t="Include" />
+            <e p="MediaListModel.cs" t="Include" />
+            <e p="MediaUploadModel.cs" t="Include" />
+            <e p="ModuleListModel.cs" t="Include" />
+            <e p="PageEditModel.cs" t="Include" />
+            <e p="PageListModel.cs" t="Include" />
+            <e p="PermissionModel.cs" t="Include" />
+            <e p="PostEditModel.cs" t="Include" />
+            <e p="PostListModel.cs" t="Include" />
+            <e p="PostModalModel.cs" t="Include" />
+            <e p="RouteModel.cs" t="Include" />
+            <e p="SiteContentEditModel.cs" t="Include" />
+            <e p="SiteEditModel.cs" t="Include" />
+            <e p="SiteListModel.cs" t="Include" />
+            <e p="StatusMessage.cs" t="Include" />
+            <e p="StructureModel.cs" t="Include" />
+          </e>
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.Manager.Core.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Permissions.cs" t="Include" />
+          <e p="Piranha.Manager.Core.csproj" t="IncludeRecursive" />
+          <e p="PreviewSize.cs" t="Include" />
+          <e p="Services" t="Include">
+            <e p="AliasService.cs" t="Include" />
+            <e p="ConfigService.cs" t="Include" />
+            <e p="ContentTypeService.cs" t="Include" />
+            <e p="MediaService.cs" t="Include" />
+            <e p="ModuleService.cs" t="Include" />
+            <e p="PageService.cs" t="Include" />
+            <e p="PostService.cs" t="Include" />
+            <e p="SiteService.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Piranha.Manager.Localization" t="IncludeRecursive">
+          <e p="Alias.cs" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Config.cs" t="Include" />
+          <e p="General.cs" t="Include" />
+          <e p="ManagerLocalizer.cs" t="Include" />
+          <e p="Media.cs" t="Include" />
+          <e p="Menu.cs" t="Include" />
+          <e p="Module.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.Manager.Localization.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Page.cs" t="Include" />
+          <e p="Piranha.Manager.Localization.csproj" t="IncludeRecursive" />
+          <e p="Post.cs" t="Include" />
+          <e p="Resources" t="Include">
+            <e p="Alias.af.resx" t="Include" />
+            <e p="Alias.ar.resx" t="Include" />
+            <e p="Alias.bg.resx" t="Include" />
+            <e p="Alias.ca.resx" t="Include" />
+            <e p="Alias.cs.resx" t="Include" />
+            <e p="Alias.da.resx" t="Include" />
+            <e p="Alias.de.resx" t="Include" />
+            <e p="Alias.el.resx" t="Include" />
+            <e p="Alias.es.resx" t="Include" />
+            <e p="Alias.fi.resx" t="Include" />
+            <e p="Alias.fr.resx" t="Include" />
+            <e p="Alias.he.resx" t="Include" />
+            <e p="Alias.hu.resx" t="Include" />
+            <e p="Alias.it.resx" t="Include" />
+            <e p="Alias.ja.resx" t="Include" />
+            <e p="Alias.ko.resx" t="Include" />
+            <e p="Alias.nl.resx" t="Include" />
+            <e p="Alias.no.resx" t="Include" />
+            <e p="Alias.pl.resx" t="Include" />
+            <e p="Alias.pt.resx" t="Include" />
+            <e p="Alias.resx" t="Include" />
+            <e p="Alias.ro.resx" t="Include" />
+            <e p="Alias.ru.resx" t="Include" />
+            <e p="Alias.sr.resx" t="Include" />
+            <e p="Alias.sv.resx" t="Include" />
+            <e p="Alias.tr.resx" t="Include" />
+            <e p="Alias.uk.resx" t="Include" />
+            <e p="Alias.vi.resx" t="Include" />
+            <e p="Alias.zh.resx" t="Include" />
+            <e p="Config.af.resx" t="Include" />
+            <e p="Config.ar.resx" t="Include" />
+            <e p="Config.bg.resx" t="Include" />
+            <e p="Config.ca.resx" t="Include" />
+            <e p="Config.cs.resx" t="Include" />
+            <e p="Config.da.resx" t="Include" />
+            <e p="Config.de.resx" t="Include" />
+            <e p="Config.el.resx" t="Include" />
+            <e p="Config.es.resx" t="Include" />
+            <e p="Config.fi.resx" t="Include" />
+            <e p="Config.fr.resx" t="Include" />
+            <e p="Config.he.resx" t="Include" />
+            <e p="Config.hu.resx" t="Include" />
+            <e p="Config.it.resx" t="Include" />
+            <e p="Config.ja.resx" t="Include" />
+            <e p="Config.ko.resx" t="Include" />
+            <e p="Config.nl.resx" t="Include" />
+            <e p="Config.no.resx" t="Include" />
+            <e p="Config.pl.resx" t="Include" />
+            <e p="Config.pt.resx" t="Include" />
+            <e p="Config.resx" t="Include" />
+            <e p="Config.ro.resx" t="Include" />
+            <e p="Config.ru.resx" t="Include" />
+            <e p="Config.sr.resx" t="Include" />
+            <e p="Config.sv.resx" t="Include" />
+            <e p="Config.tr.resx" t="Include" />
+            <e p="Config.uk.resx" t="Include" />
+            <e p="Config.vi.resx" t="Include" />
+            <e p="Config.zh.resx" t="Include" />
+            <e p="General.af.resx" t="Include" />
+            <e p="General.ar.resx" t="Include" />
+            <e p="General.bg.resx" t="Include" />
+            <e p="General.ca.resx" t="Include" />
+            <e p="General.cs.resx" t="Include" />
+            <e p="General.da.resx" t="Include" />
+            <e p="General.de.resx" t="Include" />
+            <e p="General.el.resx" t="Include" />
+            <e p="General.es.resx" t="Include" />
+            <e p="General.fi.resx" t="Include" />
+            <e p="General.fr.resx" t="Include" />
+            <e p="General.he.resx" t="Include" />
+            <e p="General.hu.resx" t="Include" />
+            <e p="General.it.resx" t="Include" />
+            <e p="General.ja.resx" t="Include" />
+            <e p="General.ko.resx" t="Include" />
+            <e p="General.nl.resx" t="Include" />
+            <e p="General.no.resx" t="Include" />
+            <e p="General.pl.resx" t="Include" />
+            <e p="General.pt.resx" t="Include" />
+            <e p="General.resx" t="Include" />
+            <e p="General.ro.resx" t="Include" />
+            <e p="General.ru.resx" t="Include" />
+            <e p="General.sr.resx" t="Include" />
+            <e p="General.sv.resx" t="Include" />
+            <e p="General.tr.resx" t="Include" />
+            <e p="General.uk.resx" t="Include" />
+            <e p="General.vi.resx" t="Include" />
+            <e p="General.zh.resx" t="Include" />
+            <e p="Media.af.resx" t="Include" />
+            <e p="Media.ar.resx" t="Include" />
+            <e p="Media.bg.resx" t="Include" />
+            <e p="Media.ca.resx" t="Include" />
+            <e p="Media.cs.resx" t="Include" />
+            <e p="Media.da.resx" t="Include" />
+            <e p="Media.de.resx" t="Include" />
+            <e p="Media.el.resx" t="Include" />
+            <e p="Media.es.resx" t="Include" />
+            <e p="Media.fi.resx" t="Include" />
+            <e p="Media.fr.resx" t="Include" />
+            <e p="Media.he.resx" t="Include" />
+            <e p="Media.hu.resx" t="Include" />
+            <e p="Media.it.resx" t="Include" />
+            <e p="Media.ja.resx" t="Include" />
+            <e p="Media.ko.resx" t="Include" />
+            <e p="Media.nl.resx" t="Include" />
+            <e p="Media.no.resx" t="Include" />
+            <e p="Media.pl.resx" t="Include" />
+            <e p="Media.pt.resx" t="Include" />
+            <e p="Media.resx" t="Include" />
+            <e p="Media.ro.resx" t="Include" />
+            <e p="Media.ru.resx" t="Include" />
+            <e p="Media.sr.resx" t="Include" />
+            <e p="Media.sv.resx" t="Include" />
+            <e p="Media.tr.resx" t="Include" />
+            <e p="Media.uk.resx" t="Include" />
+            <e p="Media.vi.resx" t="Include" />
+            <e p="Media.zh.resx" t="Include" />
+            <e p="Menu.af.resx" t="Include" />
+            <e p="Menu.ar.resx" t="Include" />
+            <e p="Menu.bg.resx" t="Include" />
+            <e p="Menu.ca.resx" t="Include" />
+            <e p="Menu.cs.resx" t="Include" />
+            <e p="Menu.da.resx" t="Include" />
+            <e p="Menu.de.resx" t="Include" />
+            <e p="Menu.el.resx" t="Include" />
+            <e p="Menu.es.resx" t="Include" />
+            <e p="Menu.fi.resx" t="Include" />
+            <e p="Menu.fr.resx" t="Include" />
+            <e p="Menu.he.resx" t="Include" />
+            <e p="Menu.hu.resx" t="Include" />
+            <e p="Menu.it.resx" t="Include" />
+            <e p="Menu.ja.resx" t="Include" />
+            <e p="Menu.ko.resx" t="Include" />
+            <e p="Menu.nl.resx" t="Include" />
+            <e p="Menu.no.resx" t="Include" />
+            <e p="Menu.pl.resx" t="Include" />
+            <e p="Menu.pt.resx" t="Include" />
+            <e p="Menu.resx" t="Include" />
+            <e p="Menu.ro.resx" t="Include" />
+            <e p="Menu.ru.resx" t="Include" />
+            <e p="Menu.sr.resx" t="Include" />
+            <e p="Menu.sv.resx" t="Include" />
+            <e p="Menu.tr.resx" t="Include" />
+            <e p="Menu.uk.resx" t="Include" />
+            <e p="Menu.vi.resx" t="Include" />
+            <e p="Menu.zh.resx" t="Include" />
+            <e p="Module.af.resx" t="Include" />
+            <e p="Module.ar.resx" t="Include" />
+            <e p="Module.bg.resx" t="Include" />
+            <e p="Module.ca.resx" t="Include" />
+            <e p="Module.cs.resx" t="Include" />
+            <e p="Module.da.resx" t="Include" />
+            <e p="Module.de.resx" t="Include" />
+            <e p="Module.el.resx" t="Include" />
+            <e p="Module.es.resx" t="Include" />
+            <e p="Module.fi.resx" t="Include" />
+            <e p="Module.fr.resx" t="Include" />
+            <e p="Module.he.resx" t="Include" />
+            <e p="Module.hu.resx" t="Include" />
+            <e p="Module.it.resx" t="Include" />
+            <e p="Module.ja.resx" t="Include" />
+            <e p="Module.ko.resx" t="Include" />
+            <e p="Module.nl.resx" t="Include" />
+            <e p="Module.no.resx" t="Include" />
+            <e p="Module.pl.resx" t="Include" />
+            <e p="Module.pt.resx" t="Include" />
+            <e p="Module.resx" t="Include" />
+            <e p="Module.ro.resx" t="Include" />
+            <e p="Module.ru.resx" t="Include" />
+            <e p="Module.sr.resx" t="Include" />
+            <e p="Module.sv.resx" t="Include" />
+            <e p="Module.tr.resx" t="Include" />
+            <e p="Module.uk.resx" t="Include" />
+            <e p="Module.vi.resx" t="Include" />
+            <e p="Module.zh.resx" t="Include" />
+            <e p="Page.af.resx" t="Include" />
+            <e p="Page.ar.resx" t="Include" />
+            <e p="Page.bg.resx" t="Include" />
+            <e p="Page.ca.resx" t="Include" />
+            <e p="Page.cs.resx" t="Include" />
+            <e p="Page.da.resx" t="Include" />
+            <e p="Page.de.resx" t="Include" />
+            <e p="Page.el.resx" t="Include" />
+            <e p="Page.es.resx" t="Include" />
+            <e p="Page.fi.resx" t="Include" />
+            <e p="Page.fr.resx" t="Include" />
+            <e p="Page.he.resx" t="Include" />
+            <e p="Page.hu.resx" t="Include" />
+            <e p="Page.it.resx" t="Include" />
+            <e p="Page.ja.resx" t="Include" />
+            <e p="Page.ko.resx" t="Include" />
+            <e p="Page.nl.resx" t="Include" />
+            <e p="Page.no.resx" t="Include" />
+            <e p="Page.pl.resx" t="Include" />
+            <e p="Page.pt.resx" t="Include" />
+            <e p="Page.resx" t="Include" />
+            <e p="Page.ro.resx" t="Include" />
+            <e p="Page.ru.resx" t="Include" />
+            <e p="Page.sr.resx" t="Include" />
+            <e p="Page.sv.resx" t="Include" />
+            <e p="Page.tr.resx" t="Include" />
+            <e p="Page.uk.resx" t="Include" />
+            <e p="Page.vi.resx" t="Include" />
+            <e p="Page.zh.resx" t="Include" />
+            <e p="Post.af.resx" t="Include" />
+            <e p="Post.ar.resx" t="Include" />
+            <e p="Post.bg.resx" t="Include" />
+            <e p="Post.ca.resx" t="Include" />
+            <e p="Post.cs.resx" t="Include" />
+            <e p="Post.da.resx" t="Include" />
+            <e p="Post.de.resx" t="Include" />
+            <e p="Post.el.resx" t="Include" />
+            <e p="Post.es.resx" t="Include" />
+            <e p="Post.fi.resx" t="Include" />
+            <e p="Post.fr.resx" t="Include" />
+            <e p="Post.he.resx" t="Include" />
+            <e p="Post.hu.resx" t="Include" />
+            <e p="Post.it.resx" t="Include" />
+            <e p="Post.ja.resx" t="Include" />
+            <e p="Post.ko.resx" t="Include" />
+            <e p="Post.nl.resx" t="Include" />
+            <e p="Post.no.resx" t="Include" />
+            <e p="Post.pl.resx" t="Include" />
+            <e p="Post.pt.resx" t="Include" />
+            <e p="Post.resx" t="Include" />
+            <e p="Post.ro.resx" t="Include" />
+            <e p="Post.ru.resx" t="Include" />
+            <e p="Post.sr.resx" t="Include" />
+            <e p="Post.sv.resx" t="Include" />
+            <e p="Post.tr.resx" t="Include" />
+            <e p="Post.uk.resx" t="Include" />
+            <e p="Post.vi.resx" t="Include" />
+            <e p="Post.zh.resx" t="Include" />
+            <e p="Site.af.resx" t="Include" />
+            <e p="Site.ar.resx" t="Include" />
+            <e p="Site.bg.resx" t="Include" />
+            <e p="Site.ca.resx" t="Include" />
+            <e p="Site.cs.resx" t="Include" />
+            <e p="Site.da.resx" t="Include" />
+            <e p="Site.de.resx" t="Include" />
+            <e p="Site.el.resx" t="Include" />
+            <e p="Site.es.resx" t="Include" />
+            <e p="Site.fi.resx" t="Include" />
+            <e p="Site.fr.resx" t="Include" />
+            <e p="Site.he.resx" t="Include" />
+            <e p="Site.hu.resx" t="Include" />
+            <e p="Site.it.resx" t="Include" />
+            <e p="Site.ja.resx" t="Include" />
+            <e p="Site.ko.resx" t="Include" />
+            <e p="Site.nl.resx" t="Include" />
+            <e p="Site.no.resx" t="Include" />
+            <e p="Site.pl.resx" t="Include" />
+            <e p="Site.pt.resx" t="Include" />
+            <e p="Site.resx" t="Include" />
+            <e p="Site.ro.resx" t="Include" />
+            <e p="Site.ru.resx" t="Include" />
+            <e p="Site.sr.resx" t="Include" />
+            <e p="Site.sv.resx" t="Include" />
+            <e p="Site.tr.resx" t="Include" />
+            <e p="Site.uk.resx" t="Include" />
+            <e p="Site.vi.resx" t="Include" />
+            <e p="Site.zh.resx" t="Include" />
+          </e>
+          <e p="Site.cs" t="Include" />
+        </e>
+        <e p="Piranha.Manager.Summernote" t="IncludeRecursive">
+          <e p="Areas" t="Include">
+            <e p="Manager" t="Include">
+              <e p="Shared" t="Include">
+                <e p="Partial" t="Include">
+                  <e p="_SummernoteLink.cshtml" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+          <e p="assets" t="Include">
+            <e p="dist" t="Include">
+              <e p="codemirror.css" t="Include" />
+              <e p="codemirror.js" t="Include" />
+              <e p="font" t="Include">
+                <e p="summernote.eot" t="Include" />
+                <e p="summernote.ttf" t="Include" />
+                <e p="summernote.woff" t="Include" />
+              </e>
+              <e p="html-hint.js" t="Include" />
+              <e p="lang" t="Include">
+                <e p="summernote-ar-AR.js" t="Include" />
+                <e p="summernote-ar-AR.min.js" t="Include" />
+                <e p="summernote-bg-BG.js" t="Include" />
+                <e p="summernote-bg-BG.min.js" t="Include" />
+                <e p="summernote-ca-ES.js" t="Include" />
+                <e p="summernote-ca-ES.min.js" t="Include" />
+                <e p="summernote-cs-CZ.js" t="Include" />
+                <e p="summernote-cs-CZ.min.js" t="Include" />
+                <e p="summernote-da-DK.js" t="Include" />
+                <e p="summernote-da-DK.min.js" t="Include" />
+                <e p="summernote-de-DE.js" t="Include" />
+                <e p="summernote-de-DE.min.js" t="Include" />
+                <e p="summernote-el-GR.js" t="Include" />
+                <e p="summernote-el-GR.min.js" t="Include" />
+                <e p="summernote-es-ES.js" t="Include" />
+                <e p="summernote-es-ES.min.js" t="Include" />
+                <e p="summernote-es-EU.js" t="Include" />
+                <e p="summernote-es-EU.min.js" t="Include" />
+                <e p="summernote-fa-IR.js" t="Include" />
+                <e p="summernote-fa-IR.min.js" t="Include" />
+                <e p="summernote-fi-FI.js" t="Include" />
+                <e p="summernote-fi-FI.min.js" t="Include" />
+                <e p="summernote-fr-FR.js" t="Include" />
+                <e p="summernote-fr-FR.min.js" t="Include" />
+                <e p="summernote-gl-ES.js" t="Include" />
+                <e p="summernote-gl-ES.min.js" t="Include" />
+                <e p="summernote-he-IL.js" t="Include" />
+                <e p="summernote-he-IL.min.js" t="Include" />
+                <e p="summernote-hr-HR.js" t="Include" />
+                <e p="summernote-hr-HR.min.js" t="Include" />
+                <e p="summernote-hu-HU.js" t="Include" />
+                <e p="summernote-hu-HU.min.js" t="Include" />
+                <e p="summernote-id-ID.js" t="Include" />
+                <e p="summernote-id-ID.min.js" t="Include" />
+                <e p="summernote-it-IT.js" t="Include" />
+                <e p="summernote-it-IT.min.js" t="Include" />
+                <e p="summernote-ja-JP.js" t="Include" />
+                <e p="summernote-ja-JP.min.js" t="Include" />
+                <e p="summernote-ko-KR.js" t="Include" />
+                <e p="summernote-ko-KR.min.js" t="Include" />
+                <e p="summernote-lt-LT.js" t="Include" />
+                <e p="summernote-lt-LT.min.js" t="Include" />
+                <e p="summernote-lt-LV.js" t="Include" />
+                <e p="summernote-lt-LV.min.js" t="Include" />
+                <e p="summernote-mn-MN.js" t="Include" />
+                <e p="summernote-mn-MN.min.js" t="Include" />
+                <e p="summernote-nb-NO.js" t="Include" />
+                <e p="summernote-nb-NO.min.js" t="Include" />
+                <e p="summernote-nl-NL.js" t="Include" />
+                <e p="summernote-nl-NL.min.js" t="Include" />
+                <e p="summernote-pl-PL.js" t="Include" />
+                <e p="summernote-pl-PL.min.js" t="Include" />
+                <e p="summernote-pt-BR.js" t="Include" />
+                <e p="summernote-pt-BR.min.js" t="Include" />
+                <e p="summernote-pt-PT.js" t="Include" />
+                <e p="summernote-pt-PT.min.js" t="Include" />
+                <e p="summernote-ro-RO.js" t="Include" />
+                <e p="summernote-ro-RO.min.js" t="Include" />
+                <e p="summernote-ru-RU.js" t="Include" />
+                <e p="summernote-ru-RU.min.js" t="Include" />
+                <e p="summernote-sk-SK.js" t="Include" />
+                <e p="summernote-sk-SK.min.js" t="Include" />
+                <e p="summernote-sl-SI.js" t="Include" />
+                <e p="summernote-sl-SI.min.js" t="Include" />
+                <e p="summernote-sr-RS-Latin.js" t="Include" />
+                <e p="summernote-sr-RS-Latin.min.js" t="Include" />
+                <e p="summernote-sr-RS.js" t="Include" />
+                <e p="summernote-sr-RS.min.js" t="Include" />
+                <e p="summernote-sv-SE.js" t="Include" />
+                <e p="summernote-sv-SE.min.js" t="Include" />
+                <e p="summernote-ta-IN.js" t="Include" />
+                <e p="summernote-ta-IN.min.js" t="Include" />
+                <e p="summernote-th-TH.js" t="Include" />
+                <e p="summernote-th-TH.min.js" t="Include" />
+                <e p="summernote-tr-TR.js" t="Include" />
+                <e p="summernote-tr-TR.min.js" t="Include" />
+                <e p="summernote-uk-UA.js" t="Include" />
+                <e p="summernote-uk-UA.min.js" t="Include" />
+                <e p="summernote-uz-UZ.js" t="Include" />
+                <e p="summernote-uz-UZ.min.js" t="Include" />
+                <e p="summernote-vi-VN.js" t="Include" />
+                <e p="summernote-vi-VN.min.js" t="Include" />
+                <e p="summernote-zh-CN.js" t="Include" />
+                <e p="summernote-zh-CN.min.js" t="Include" />
+                <e p="summernote-zh-TW.js" t="Include" />
+                <e p="summernote-zh-TW.min.js" t="Include" />
+              </e>
+              <e p="piranha.summernote.js" t="Include" />
+              <e p="piranha.summernote.min.css" t="Include" />
+              <e p="piranha.summernote.min.js" t="Include" />
+              <e p="show-hint.css" t="Include" />
+              <e p="show-hint.js" t="Include" />
+              <e p="summernote-0.8.11-dist.zip" t="Include" />
+              <e p="summernote-0.8.12-dist.zip" t="Include" />
+              <e p="summernote-bs4.css" t="Include" />
+              <e p="summernote-bs4.js" t="Include" />
+              <e p="summernote-bs4.js.map" t="Include" />
+              <e p="summernote-bs4.min.js" t="Include" />
+              <e p="summernote-lite.css" t="Include" />
+              <e p="summernote-lite.js" t="Include" />
+              <e p="summernote-lite.js.map" t="Include" />
+              <e p="summernote-lite.min.js" t="Include" />
+              <e p="summernote.css" t="Include" />
+              <e p="summernote.js" t="Include" />
+              <e p="summernote.js.map" t="Include" />
+              <e p="summernote.min.js" t="Include" />
+              <e p="xml-hint.js" t="Include" />
+              <e p="xml.js" t="Include" />
+            </e>
+            <e p="src" t="Include">
+              <e p="piranha.editor.js" t="Include" />
+              <e p="piranha.summernote.js" t="Include" />
+              <e p="piranha.summernote.scss" t="Include" />
+            </e>
+          </e>
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="gulpfile.js" t="Include" />
+          <e p="Module.cs" t="Include" />
+          <e p="node_modules\codemirror" t="IncludeRecursive" />
+          <e p="node_modules\gulp" t="IncludeRecursive" />
+          <e p="node_modules\gulp-concat" t="IncludeRecursive" />
+          <e p="node_modules\gulp-cssmin" t="IncludeRecursive" />
+          <e p="node_modules\gulp-sass" t="IncludeRecursive" />
+          <e p="node_modules\gulp-uglify" t="IncludeRecursive" />
+          <e p="node_modules\summernote" t="IncludeRecursive" />
+          <e p="node_modules\uglify-es" t="IncludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.Manager.Summernote.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="package.json" t="Include" />
+          <e p="Piranha.Manager.Summernote.csproj" t="IncludeRecursive" />
+          <e p="SummernoteExtensions.cs" t="Include" />
+        </e>
+        <e p="Piranha.Manager.TinyMCE" t="IncludeRecursive">
+          <e p="assets" t="Include">
+            <e p="piranha.editor.js" t="Include" />
+            <e p="tinymce" t="Include">
+              <e p="jquery.tinymce.min.js" t="Include" />
+              <e p="langs" t="Include">
+                <e p="readme.md" t="Include" />
+              </e>
+              <e p="license.txt" t="Include" />
+              <e p="plugins" t="Include">
+                <e p="advlist" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="anchor" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="autolink" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="autoresize" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="autosave" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="bbcode" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="charmap" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="code" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="codesample" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="colorpicker" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="contextmenu" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="directionality" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="emoticons" t="Include">
+                  <e p="js" t="Include">
+                    <e p="emojis.js" t="Include" />
+                    <e p="emojis.min.js" t="Include" />
+                  </e>
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="fullpage" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="fullscreen" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="help" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="hr" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="image" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="imagetools" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="importcss" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="insertdatetime" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="legacyoutput" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="link" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="lists" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="media" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="nonbreaking" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="noneditable" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="pagebreak" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="paste" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="piranhaimage" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="piranhalink" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="preview" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="print" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="quickbars" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="save" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="searchreplace" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="spellchecker" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="tabfocus" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="table" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="template" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="textcolor" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="textpattern" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="toc" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="visualblocks" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="visualchars" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+                <e p="wordcount" t="Include">
+                  <e p="plugin.min.js" t="Include" />
+                </e>
+              </e>
+              <e p="skins" t="Include">
+                <e p="Content" t="Include">
+                  <e p="default" t="Include">
+                    <e p="content.min.css" t="Include" />
+                  </e>
+                  <e p="document" t="Include">
+                    <e p="content.min.css" t="Include" />
+                  </e>
+                  <e p="writer" t="Include">
+                    <e p="content.min.css" t="Include" />
+                  </e>
+                </e>
+                <e p="ui" t="Include">
+                  <e p="oxide" t="Include">
+                    <e p="content.inline.min.css" t="Include" />
+                    <e p="content.min.css" t="Include" />
+                    <e p="content.mobile.min.css" t="Include" />
+                    <e p="fonts" t="Include">
+                      <e p="tinymce-mobile.woff" t="Include" />
+                    </e>
+                    <e p="skin.min.css" t="Include" />
+                    <e p="skin.mobile.min.css" t="Include" />
+                  </e>
+                  <e p="oxide-dark" t="Include">
+                    <e p="content.inline.min.css" t="Include" />
+                    <e p="content.min.css" t="Include" />
+                    <e p="skin.min.css" t="Include" />
+                  </e>
+                </e>
+              </e>
+              <e p="themes" t="Include">
+                <e p="mobile" t="Include">
+                  <e p="theme.min.js" t="Include" />
+                </e>
+                <e p="silver" t="Include">
+                  <e p="theme.min.js" t="Include" />
+                </e>
+              </e>
+              <e p="tinymce.min.js" t="Include" />
+            </e>
+          </e>
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Module.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.Manager.TinyMCE.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Piranha.Manager.TinyMCE.csproj" t="IncludeRecursive" />
+          <e p="TinyMCEExtensions.cs" t="Include" />
+        </e>
+        <e p="Piranha.WebApi" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="MediaApiController.cs" t="Include" />
+          <e p="Module.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.WebApi.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="PageApiController.cs" t="Include" />
+          <e p="Permissions.cs" t="Include" />
+          <e p="Piranha.WebApi.csproj" t="IncludeRecursive" />
+          <e p="PostApiController.cs" t="Include" />
+          <e p="SitemapApiController.cs" t="Include" />
+          <e p="WebApiModuleExtensions.cs" t="Include" />
+        </e>
+      </e>
+      <e p="data" t="Include">
+        <e p="Piranha.Data.EF" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="data" t="Include">
+            <e p="Alias.cs" t="Include" />
+            <e p="Block.cs" t="Include" />
+            <e p="BlockField.cs" t="Include" />
+            <e p="Category.cs" t="Include" />
+            <e p="Content.cs" t="Include" />
+            <e p="ContentField.cs" t="Include" />
+            <e p="ContentRevision.cs" t="Include" />
+            <e p="ContentType.cs" t="Include" />
+            <e p="IContentBlock.cs" t="Include" />
+            <e p="Media.cs" t="Include" />
+            <e p="MediaFolder.cs" t="Include" />
+            <e p="MediaVersion.cs" t="Include" />
+            <e p="Page.cs" t="Include" />
+            <e p="PageBlock.cs" t="Include" />
+            <e p="PageField.cs" t="Include" />
+            <e p="PageRevision.cs" t="Include" />
+            <e p="PageType.cs" t="Include" />
+            <e p="Param.cs" t="Include" />
+            <e p="Post.cs" t="Include" />
+            <e p="PostBlock.cs" t="Include" />
+            <e p="PostField.cs" t="Include" />
+            <e p="PostRevision.cs" t="Include" />
+            <e p="PostTag.cs" t="Include" />
+            <e p="PostType.cs" t="Include" />
+            <e p="RoutedContent.cs" t="Include" />
+            <e p="Site.cs" t="Include" />
+            <e p="SiteField.cs" t="Include" />
+            <e p="SiteType.cs" t="Include" />
+            <e p="Tag.cs" t="Include" />
+            <e p="Taxonomy.cs" t="Include" />
+          </e>
+          <e p="Db.cs" t="Include" />
+          <e p="DbFactory.cs" t="Include" />
+          <e p="IDb.cs" t="Include" />
+          <e p="Migrations" t="Include">
+            <e p="20171129204436_InitialCreate.cs" t="Include" />
+            <e p="20171129204436_InitialCreate.Designer.cs" t="Include" />
+            <e p="20171215130248_AddBlogging.cs" t="Include" />
+            <e p="20171215130248_AddBlogging.Designer.cs" t="Include" />
+            <e p="20180124170844_AddMediaVersions.cs" t="Include" />
+            <e p="20180124170844_AddMediaVersions.Designer.cs" t="Include" />
+            <e p="20180203063923_AddAliases.cs" t="Include" />
+            <e p="20180203063923_AddAliases.Designer.cs" t="Include" />
+            <e p="20180331212736_AddCLRContentType.cs" t="Include" />
+            <e p="20180331212736_AddCLRContentType.Designer.cs" t="Include" />
+            <e p="20180424093712_AddBlocks.cs" t="Include" />
+            <e p="20180424093712_AddBlocks.Designer.cs" t="Include" />
+            <e p="20180430082044_AddOriginalPageIdToPage.cs" t="Include" />
+            <e p="20180430082044_AddOriginalPageIdToPage.Designer.cs" t="Include" />
+            <e p="20180514215842_AddPostBlocks.cs" t="Include" />
+            <e p="20180514215842_AddPostBlocks.Designer.cs" t="Include" />
+            <e p="20180529100047_AddSiteContent.cs" t="Include" />
+            <e p="20180529100047_AddSiteContent.Designer.cs" t="Include" />
+            <e p="20180531092411_AddMediaVersionExtension.cs" t="Include" />
+            <e p="20180531092411_AddMediaVersionExtension.Designer.cs" t="Include" />
+            <e p="20180611095956_AddBlockParentId.cs" t="Include" />
+            <e p="20180611095956_AddBlockParentId.Designer.cs" t="Include" />
+            <e p="20181016205919_AddSiteContentLastModified.cs" t="Include" />
+            <e p="20181016205919_AddSiteContentLastModified.Designer.cs" t="Include" />
+            <e p="20181019125207_AddSiteCulture.cs" t="Include" />
+            <e p="20181019125207_AddSiteCulture.Designer.cs" t="Include" />
+            <e p="20190516105914_MoveBlockParentId.cs" t="Include" />
+            <e p="20190516105914_MoveBlockParentId.Designer.cs" t="Include" />
+            <e p="20190528064439_AddPageRevisions.cs" t="Include" />
+            <e p="20190528064439_AddPageRevisions.Designer.cs" t="Include" />
+            <e p="20190712055600_AddPostRevisions.cs" t="Include" />
+            <e p="20190712055600_AddPostRevisions.Designer.cs" t="Include" />
+            <e p="DbModelSnapshot.cs" t="Include" />
+          </e>
+          <e p="Module.cs" t="Include" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netstandard2.0" t="Include">
+                <e p="Piranha.Data.EF.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="Piranha.Data.EF.csproj" t="IncludeRecursive" />
+          <e p="PiranhaEFExtensions.cs" t="Include" />
+          <e p="Repositories" t="Include">
+            <e p="AliasRepository.cs" t="Include" />
+            <e p="ArchiveRepository.cs" t="Include" />
+            <e p="MediaRepository.cs" t="Include" />
+            <e p="PageRepository.cs" t="Include" />
+            <e p="PageTypeRepository.cs" t="Include" />
+            <e p="ParamRepository.cs" t="Include" />
+            <e p="PostRepository.cs" t="Include" />
+            <e p="PostTypeRepository.cs" t="Include" />
+            <e p="SiteRepository.cs" t="Include" />
+            <e p="SiteTypeRepository.cs" t="Include" />
+          </e>
+          <e p="Services" t="Include">
+            <e p="ContentService.cs" t="Include" />
+            <e p="ContentServiceFactory.cs" t="Include" />
+            <e p="IContentService.cs" t="Include" />
+            <e p="IContentServiceFactory.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="examples" t="Include">
+        <e p="MvcWeb" t="IncludeRecursive">
+          <e p="appsettings.json" t="Include" />
+          <e p="Areas" t="Include">
+            <e p="Manager" t="Include">
+              <e p="Views" t="Include">
+                <e p="Shared" t="Include">
+                  <e p="EditorTemplates" t="Include">
+                    <e p="SeparatorBlock.cshtml" t="Include" />
+                  </e>
+                  <e p="Partial" t="Include">
+                    <e p="_EditorSetup.cshtml" t="Include" />
+                  </e>
+                </e>
+              </e>
+            </e>
+          </e>
+          <e p="assets" t="Include">
+            <e p="scss" t="Include">
+              <e p="_archive.scss" t="Include" />
+              <e p="_base.scss" t="Include" />
+              <e p="_colors.scss" t="Include" />
+              <e p="_hero.scss" t="Include" />
+              <e p="_navigation.scss" t="Include" />
+              <e p="_pagination.scss" t="Include" />
+              <e p="_quotes.scss" t="Include" />
+              <e p="_responsive.scss" t="Include" />
+              <e p="_teasers.scss" t="Include" />
+              <e p="_type.scss" t="Include" />
+              <e p="style.scss" t="Include" />
+            </e>
+          </e>
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="compilerconfig.json" t="Include" />
+          <e p="compilerconfig.json.defaults" t="Include" />
+          <e p="Controllers" t="Include">
+            <e p="CmsController.cs" t="Include" />
+            <e p="ProjectController.cs" t="Include" />
+          </e>
+          <e p="Db" t="Include">
+            <e p="Configuration" t="Include">
+              <e p="PiranhaAlias.Configuration.cs" t="Include" />
+              <e p="PiranhaBlock.Configuration.cs" t="Include" />
+              <e p="PiranhaBlockField.Configuration.cs" t="Include" />
+              <e p="PiranhaCategory.Configuration.cs" t="Include" />
+              <e p="PiranhaMedia.Configuration.cs" t="Include" />
+              <e p="PiranhaMediaFolder.Configuration.cs" t="Include" />
+              <e p="PiranhaMediaVersion.Configuration.cs" t="Include" />
+              <e p="PiranhaPage.Configuration.cs" t="Include" />
+              <e p="PiranhaPageBlock.Configuration.cs" t="Include" />
+              <e p="PiranhaPageField.Configuration.cs" t="Include" />
+              <e p="PiranhaPageRevision.Configuration.cs" t="Include" />
+              <e p="PiranhaPageType.Configuration.cs" t="Include" />
+              <e p="PiranhaParam.Configuration.cs" t="Include" />
+              <e p="PiranhaPost.Configuration.cs" t="Include" />
+              <e p="PiranhaPostBlock.Configuration.cs" t="Include" />
+              <e p="PiranhaPostField.Configuration.cs" t="Include" />
+              <e p="PiranhaPostRevision.Configuration.cs" t="Include" />
+              <e p="PiranhaPostTag.Configuration.cs" t="Include" />
+              <e p="PiranhaPostType.Configuration.cs" t="Include" />
+              <e p="PiranhaRole.Configuration.cs" t="Include" />
+              <e p="PiranhaRoleClaim.Configuration.cs" t="Include" />
+              <e p="PiranhaSite.Configuration.cs" t="Include" />
+              <e p="PiranhaSiteField.Configuration.cs" t="Include" />
+              <e p="PiranhaSiteType.Configuration.cs" t="Include" />
+              <e p="PiranhaTag.Configuration.cs" t="Include" />
+              <e p="PiranhaUser.Configuration.cs" t="Include" />
+              <e p="PiranhaUserClaim.Configuration.cs" t="Include" />
+              <e p="PiranhaUserLogin.Configuration.cs" t="Include" />
+              <e p="PiranhaUserRole.Configuration.cs" t="Include" />
+              <e p="PiranhaUserToken.Configuration.cs" t="Include" />
+            </e>
+            <e p="Entities" t="Include">
+              <e p="PiranhaAlias.cs" t="Include" />
+              <e p="PiranhaBlock.cs" t="Include" />
+              <e p="PiranhaBlockField.cs" t="Include" />
+              <e p="PiranhaCategory.cs" t="Include" />
+              <e p="PiranhaMedia.cs" t="Include" />
+              <e p="PiranhaMediaFolder.cs" t="Include" />
+              <e p="PiranhaMediaVersion.cs" t="Include" />
+              <e p="PiranhaPage.cs" t="Include" />
+              <e p="PiranhaPageBlock.cs" t="Include" />
+              <e p="PiranhaPageField.cs" t="Include" />
+              <e p="PiranhaPageRevision.cs" t="Include" />
+              <e p="PiranhaPageType.cs" t="Include" />
+              <e p="PiranhaParam.cs" t="Include" />
+              <e p="PiranhaPost.cs" t="Include" />
+              <e p="PiranhaPostBlock.cs" t="Include" />
+              <e p="PiranhaPostField.cs" t="Include" />
+              <e p="PiranhaPostRevision.cs" t="Include" />
+              <e p="PiranhaPostTag.cs" t="Include" />
+              <e p="PiranhaPostType.cs" t="Include" />
+              <e p="PiranhaRole.cs" t="Include" />
+              <e p="PiranhaRoleClaim.cs" t="Include" />
+              <e p="PiranhaSite.cs" t="Include" />
+              <e p="PiranhaSiteField.cs" t="Include" />
+              <e p="PiranhaSiteType.cs" t="Include" />
+              <e p="PiranhaTag.cs" t="Include" />
+              <e p="PiranhaUser.cs" t="Include" />
+              <e p="PiranhaUserClaim.cs" t="Include" />
+              <e p="PiranhaUserLogin.cs" t="Include" />
+              <e p="PiranhaUserRole.cs" t="Include" />
+              <e p="PiranhaUserToken.cs" t="Include" />
+            </e>
+          </e>
+          <e p="gulpfile.js" t="Include" />
+          <e p="Helpers" t="Include">
+            <e p="ExceptionHelper.cs" t="Include" />
+          </e>
+          <e p="Migrations" t="Include">
+            <e p="20171129204436_InitialCreate.cs" t="Include" />
+            <e p="20171129204436_InitialCreate.Designer.cs" t="Include" />
+            <e p="20171215130248_AddBlogging.cs" t="Include" />
+            <e p="20171215130248_AddBlogging.Designer.cs" t="Include" />
+            <e p="20180124170844_AddMediaVersions.cs" t="Include" />
+            <e p="20180124170844_AddMediaVersions.Designer.cs" t="Include" />
+            <e p="20180203063923_AddAliases.cs" t="Include" />
+            <e p="20180203063923_AddAliases.Designer.cs" t="Include" />
+            <e p="20180331212736_AddCLRContentType.cs" t="Include" />
+            <e p="20180331212736_AddCLRContentType.Designer.cs" t="Include" />
+            <e p="20180424093712_AddBlocks.cs" t="Include" />
+            <e p="20180424093712_AddBlocks.Designer.cs" t="Include" />
+            <e p="20180430082044_AddOriginalPageIdToPage.cs" t="Include" />
+            <e p="20180430082044_AddOriginalPageIdToPage.Designer.cs" t="Include" />
+            <e p="20180514215842_AddPostBlocks.cs" t="Include" />
+            <e p="20180514215842_AddPostBlocks.Designer.cs" t="Include" />
+            <e p="20180516203540_InitialCreate.cs" t="Include" />
+            <e p="20180516203540_InitialCreate.Designer.cs" t="Include" />
+            <e p="20180529100047_AddSiteContent.cs" t="Include" />
+            <e p="20180529100047_AddSiteContent.Designer.cs" t="Include" />
+            <e p="20180531092411_AddMediaVersionExtension.cs" t="Include" />
+            <e p="20180531092411_AddMediaVersionExtension.Designer.cs" t="Include" />
+            <e p="20180611095956_AddBlockParentId.cs" t="Include" />
+            <e p="20180611095956_AddBlockParentId.Designer.cs" t="Include" />
+            <e p="20181016205919_AddSiteContentLastModified.cs" t="Include" />
+            <e p="20181016205919_AddSiteContentLastModified.Designer.cs" t="Include" />
+            <e p="20181019125207_AddSiteCulture.cs" t="Include" />
+            <e p="20181019125207_AddSiteCulture.Designer.cs" t="Include" />
+            <e p="20190516105914_MoveBlockParentId.cs" t="Include" />
+            <e p="20190516105914_MoveBlockParentId.Designer.cs" t="Include" />
+            <e p="20190528064439_AddPageRevisions.cs" t="Include" />
+            <e p="20190528064439_AddPageRevisions.Designer.cs" t="Include" />
+            <e p="20190712055600_AddPostRevisions.cs" t="Include" />
+            <e p="20190712055600_AddPostRevisions.Designer.cs" t="Include" />
+            <e p="20191029161346_AddProjectsTable.cs" t="Include" />
+            <e p="20191029161346_AddProjectsTable.Designer.cs" t="Include" />
+            <e p="IttmmDbContextModelSnapshot.cs" t="Include" />
+          </e>
+          <e p="Models" t="Include">
+            <e p="BlogArchive.cs" t="Include" />
+            <e p="BlogPost.cs" t="Include" />
+            <e p="ErrorDetails.cs" t="Include" />
+            <e p="ProjectViewModel.cs" t="Include" />
+            <e p="Regions" t="Include">
+              <e p="AllFields.cs" t="Include" />
+              <e p="Hero.cs" t="Include" />
+              <e p="Href.cs" t="Include" />
+              <e p="Teaser.cs" t="Include" />
+            </e>
+            <e p="StandardPage.cs" t="Include" />
+            <e p="StandardSite.cs" t="Include" />
+            <e p="TeaserPage.cs" t="Include" />
+          </e>
+          <e p="MvcWeb.csproj" t="IncludeRecursive" />
+          <e p="node_modules\gulp" t="IncludeRecursive" />
+          <e p="node_modules\gulp-cssmin" t="IncludeRecursive" />
+          <e p="node_modules\gulp-rename" t="IncludeRecursive" />
+          <e p="node_modules\gulp-sass" t="IncludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="netcoreapp2.2" t="Include">
+                <e p="MvcWeb.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="package-lock.json" t="Include" />
+          <e p="package.json" t="Include" />
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="launchSettings.json" t="Include" />
+          </e>
+          <e p="seed" t="Include">
+            <e p="blogpost.md" t="Include" />
+            <e p="drifter1.png" t="Include" />
+            <e p="drifter2.jpg" t="Include" />
+            <e p="features.md" t="Include" />
+            <e p="logo.png" t="Include" />
+            <e p="screenshot2.png" t="Include" />
+            <e p="startpage1.md" t="Include" />
+            <e p="startpage2.md" t="Include" />
+            <e p="teaser1.png" t="Include" />
+            <e p="teaser2.png" t="Include" />
+            <e p="teaser3.png" t="Include" />
+          </e>
+          <e p="Seed.cs" t="Include" />
+          <e p="Services" t="Include">
+            <e p="ProjectService.cs" t="Include" />
+          </e>
+          <e p="Startup.cs" t="Include" />
+          <e p="TheraLang" t="Include">
+            <e p="Configuration" t="Include">
+              <e p="ProjectConfiguration.cs" t="Include" />
+            </e>
+            <e p="Controllers" t="Include">
+              <e p="ProjectController.cs" t="Include" />
+            </e>
+            <e p="Entities" t="Include">
+              <e p="Project.cs" t="Include" />
+            </e>
+            <e p="IttmmDbContext.cs" t="Include" />
+            <e p="Repository" t="Include">
+              <e p="IProjectRepository.cs" t="Include" />
+              <e p="IRepository.cs" t="Include" />
+              <e p="ProjectRepository.cs" t="Include" />
+              <e p="Repository.cs" t="Include" />
+            </e>
+            <e p="UnitOfWork" t="Include">
+              <e p="IUnitOfWork.cs" t="Include" />
+              <e p="UnitOfWork.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Validators" t="Include">
+            <e p="ProjectViewModelValidator.cs" t="Include" />
+          </e>
+          <e p="Views" t="Include">
+            <e p="_ViewImports.cshtml" t="Include" />
+            <e p="_ViewStart.cshtml" t="Include" />
+            <e p="Cms" t="Include">
+              <e p="Archive.cshtml" t="Include" />
+              <e p="DisplayTemplates" t="Include">
+                <e p="AudioBlock.cshtml" t="Include" />
+                <e p="ColumnBlock.cshtml" t="Include" />
+                <e p="Hero.cshtml" t="Include" />
+                <e p="HtmlBlock.cshtml" t="Include" />
+                <e p="HtmlColumnBlock.cshtml" t="Include" />
+                <e p="ImageBlock.cshtml" t="Include" />
+                <e p="ImageGalleryBlock.cshtml" t="Include" />
+                <e p="QuoteBlock.cshtml" t="Include" />
+                <e p="SeparatorBlock.cshtml" t="Include" />
+                <e p="TextBlock.cshtml" t="Include" />
+                <e p="VideoBlock.cshtml" t="Include" />
+              </e>
+              <e p="Page.cshtml" t="Include" />
+              <e p="PageWide.cshtml" t="Include" />
+              <e p="Partial" t="Include">
+                <e p="Quotes.cshtml" t="Include" />
+                <e p="Teasers.cshtml" t="Include" />
+              </e>
+              <e p="Post.cshtml" t="Include" />
+              <e p="StartPage.cshtml" t="Include" />
+            </e>
+            <e p="Shared" t="Include">
+              <e p="_Layout.cshtml" t="Include" />
+              <e p="Partial" t="Include">
+                <e p="_Menu.cshtml" t="Include" />
+                <e p="_Meta.cshtml" t="Include" />
+              </e>
+            </e>
+          </e>
+          <e p="wwwroot" t="Include">
+            <e p="assets" t="Include">
+              <e p="css" t="Include">
+                <e p="style.css" t="Include" />
+                <e p="style.min.css" t="Include" />
+              </e>
+              <e p="img" t="Include">
+                <e p="github.png" t="Include" />
+                <e p="piranha.jpg" t="Include" />
+                <e p="seigaiha-overlay.png" t="Include" />
+                <e p="twitter.png" t="Include" />
+              </e>
+              <e p="setup" t="Include">
+                <e p="css" t="Include">
+                  <e p="style.css" t="Include" />
+                </e>
+                <e p="img" t="Include">
+                  <e p="ocean.jpg" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="uploads" t="Include">
+              <e p="0bac340d-5569-4c97-8696-24b680695553-teaser3.png" t="Include" />
+              <e p="0bac340d-5569-4c97-8696-24b680695553-teaser3_132.png" t="Include" />
+              <e p="1479227c-c5bc-4873-9e36-3a1f62f09bc7-teaser1.png" t="Include" />
+              <e p="1479227c-c5bc-4873-9e36-3a1f62f09bc7-teaser1_132.png" t="Include" />
+              <e p="1a52a0e0-c99c-4f4e-9913-01221bbb57d7-drifter1.png" t="Include" />
+              <e p="1a52a0e0-c99c-4f4e-9913-01221bbb57d7-drifter1_890x482.png" t="Include" />
+              <e p="2ec9914f-e1b7-4f00-81bc-25dc8f239593-teaser2.png" t="Include" />
+              <e p="2ec9914f-e1b7-4f00-81bc-25dc8f239593-teaser2_132.png" t="Include" />
+              <e p="2ec9914f-e1b7-4f00-81bc-25dc8f239593-teaser2_210x160.png" t="Include" />
+              <e p="3aaf5032-6612-4a2f-95f6-c26d081b1241-logo.png" t="Include" />
+              <e p="43536950-d337-4466-9508-178fd7960341-drifter2.jpg" t="Include" />
+              <e p="43536950-d337-4466-9508-178fd7960341-drifter2_210x160.jpg" t="Include" />
+              <e p="43536950-d337-4466-9508-178fd7960341-drifter2_890x482.jpg" t="Include" />
+              <e p="5d9ca2a3-dbfa-49c6-bb99-d14c0ccb2ec5-teaser1.png" t="Include" />
+              <e p="5d9ca2a3-dbfa-49c6-bb99-d14c0ccb2ec5-teaser1_132.png" t="Include" />
+              <e p="5d9ca2a3-dbfa-49c6-bb99-d14c0ccb2ec5-teaser1_210x160.png" t="Include" />
+              <e p="62999778-4102-4083-b42f-18e5b573094e-drifter1.png" t="Include" />
+              <e p="62999778-4102-4083-b42f-18e5b573094e-drifter1_890x482.png" t="Include" />
+              <e p="657a5262-beb7-49e2-93e8-f7c0d35f0932-logo.png" t="Include" />
+              <e p="7160954e-543f-4127-813e-45f8e5e5f43e-teaser1.png" t="Include" />
+              <e p="7160954e-543f-4127-813e-45f8e5e5f43e-teaser1_132.png" t="Include" />
+              <e p="78a19b49-5581-4e85-bf70-7c3896ab74d1-drifter2.jpg" t="Include" />
+              <e p="78a19b49-5581-4e85-bf70-7c3896ab74d1-drifter2_890x482.jpg" t="Include" />
+              <e p="7c25c379-82b8-49d1-862d-36033296e493-screenshot2.png" t="Include" />
+              <e p="7c651b45-824b-481a-b339-4e8376a3148c-screenshot2.png" t="Include" />
+              <e p="7c651b45-824b-481a-b339-4e8376a3148c-screenshot2_210x160.png" t="Include" />
+              <e p="7c72fd63-7cc2-445f-8612-c9701912d2a9-screenshot2.png" t="Include" />
+              <e p="8a9c0c05-a7cf-4547-a1a1-ede9708ef28f-teaser3.png" t="Include" />
+              <e p="8a9c0c05-a7cf-4547-a1a1-ede9708ef28f-teaser3_132.png" t="Include" />
+              <e p="8a9c0c05-a7cf-4547-a1a1-ede9708ef28f-teaser3_210x160.png" t="Include" />
+              <e p="8e305dac-c910-46fe-85f7-f43dac4ea661-drifter1.png" t="Include" />
+              <e p="8e305dac-c910-46fe-85f7-f43dac4ea661-drifter1_890x482.png" t="Include" />
+              <e p="a02a9f71-b715-4a95-a8a7-2cf2c6762ef0-teaser2.png" t="Include" />
+              <e p="a02a9f71-b715-4a95-a8a7-2cf2c6762ef0-teaser2_132.png" t="Include" />
+              <e p="b4e7154f-dc62-4c0a-b553-913e6da8088e-teaser2.png" t="Include" />
+              <e p="b4e7154f-dc62-4c0a-b553-913e6da8088e-teaser2_132.png" t="Include" />
+              <e p="bdd989f8-b825-46b2-a3e0-2eeb404fc8cb-drifter2.jpg" t="Include" />
+              <e p="bdd989f8-b825-46b2-a3e0-2eeb404fc8cb-drifter2_890x482.jpg" t="Include" />
+              <e p="ce16c14c-742e-4606-be57-d0c0c393073b-teaser3.png" t="Include" />
+              <e p="ce16c14c-742e-4606-be57-d0c0c393073b-teaser3_132.png" t="Include" />
+              <e p="d5cc6a04-d54d-4c33-b222-14af6f31bdbf-screenshot2.png" t="Include" />
+              <e p="dbe50056-03df-4f31-803a-5648d1136d6e-teaser2.png" t="Include" />
+              <e p="dbe50056-03df-4f31-803a-5648d1136d6e-teaser2_132.png" t="Include" />
+              <e p="e343f20d-2ad4-4330-b86b-ed59bd45f99c-drifter1.png" t="Include" />
+              <e p="e343f20d-2ad4-4330-b86b-ed59bd45f99c-drifter1_210x160.png" t="Include" />
+              <e p="e343f20d-2ad4-4330-b86b-ed59bd45f99c-drifter1_890x482.png" t="Include" />
+              <e p="e5a6cb38-40d0-41e1-bb8d-014cb5785eaa-teaser3.png" t="Include" />
+              <e p="e5a6cb38-40d0-41e1-bb8d-014cb5785eaa-teaser3_132.png" t="Include" />
+              <e p="ea3a021c-06c7-4462-aa6a-ca9e76176a59-teaser1.png" t="Include" />
+              <e p="ea3a021c-06c7-4462-aa6a-ca9e76176a59-teaser1_132.png" t="Include" />
+              <e p="ecca8781-61e6-4218-a924-1a1694ffeaba-drifter2.jpg" t="Include" />
+              <e p="ecca8781-61e6-4218-a924-1a1694ffeaba-drifter2_890x482.jpg" t="Include" />
+              <e p="fcc68955-2b64-4cf6-a3af-8cfc1c057cbf-logo.png" t="Include" />
+              <e p="fe6992b5-aa07-4697-85bd-e8be040a6ee3-logo.png" t="Include" />
+              <e p="fe6992b5-aa07-4697-85bd-e8be040a6ee3-logo_210x160.png" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="LICENSE" t="Include" />
+      <e p="nuspec\Piranha.AspNetCore.Identity.nuspec" t="Include" />
+      <e p="nuspec\Piranha.AspNetCore.Identity.SQLite.nuspec" t="Include" />
+      <e p="nuspec\Piranha.AspNetCore.Identity.SQLServer.nuspec" t="Include" />
+      <e p="nuspec\Piranha.AspNetCore.nuspec" t="Include" />
+      <e p="nuspec\Piranha.AspNetCore.SimpleSecurity.nuspec" t="Include" />
+      <e p="nuspec\Piranha.AttributeBuilder.nuspec" t="Include" />
+      <e p="nuspec\Piranha.Azure.BlobStorage.nuspec" t="Include" />
+      <e p="nuspec\Piranha.Data.EF.nuspec" t="Include" />
+      <e p="nuspec\Piranha.Extensions.Sync.nuspec" t="Include" />
+      <e p="nuspec\Piranha.ImageSharp.nuspec" t="Include" />
+      <e p="nuspec\Piranha.Local.FileStorage.nuspec" t="Include" />
+      <e p="nuspec\Piranha.Manager.nuspec" t="Include" />
+      <e p="nuspec\Piranha.nuspec" t="Include" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Piranha.sln" t="IncludeFlat" />
+      <e p="readme.md" t="Include" />
+      <e p="templates" t="Include" />
+    </e>
+  </component>
+</project>
