@@ -40,7 +40,7 @@ export class ProjectParticipantsComponent implements OnInit {
     this.projectParticipationRequest.filter = this.changeFilter(tabPosition);
     this.showActionButtons = (tabPosition === RequestStatus.New) ? true : false;
   }
-
+  
   changeFilter(tabPosition: number){
     if(tabPosition === 1){
       return RequestStatus.Aproved.toString();
