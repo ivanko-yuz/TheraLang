@@ -1,14 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using MvcWeb.TheraLang.Entities;
+using System.Threading.Tasks;
 
 namespace MvcWeb.TheraLang.Repository
 {
-    public interface IProjectRepository 
+    public interface IProjectRepository
     {
          Task SortingById();
          Task SortingByName();
          Task SortingByBeginDate();
          Task SortingByEndDate();
-       
-
     }
 }

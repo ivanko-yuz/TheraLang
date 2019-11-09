@@ -1,23 +1,23 @@
-﻿using MvcWeb.TheraLang.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MvcWeb.TheraLang.Repository
 {
-    public class ProjectRepository : IProjectRepository
+    public class ProjectRepository :  IProjectRepository
     {
-        int pages;
-        
         IUnitOfWork uow;
-        public  Task SortingById()
+       
+        public Task SortingById()
         {
             uow.Repository<Project>().Get().OrderBy(p => p.Id);
-           return uow.SaveChangesAsync();
+            return uow.SaveChangesAsync();
         }
         public Task SortingByName()
         {
-            uow.Repository<Project>().Get().OrderBy(p => p.Name);
+           uow.Repository<Project>().Get().OrderBy(p => p.Name);
            return uow.SaveChangesAsync();
         }
 

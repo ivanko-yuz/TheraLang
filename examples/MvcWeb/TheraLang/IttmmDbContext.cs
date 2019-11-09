@@ -9,9 +9,10 @@ namespace MvcWeb.Db
     public class IttmmDbContext : DbContext
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
-        {
-           
+        {          
         }
+
+        public DbSet<TypeProject> Types { get; set; }
 
         public virtual DbSet<Project> Projects { get; set; }
 
