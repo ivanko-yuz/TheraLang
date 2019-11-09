@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { ProjectService } from '../project/project.service';
+import { MatDialogRef } from '@angular/material';
+import { ProjectService } from '../project/shared/project.service';
 
 @Component({
   selector: 'app-create-project',
@@ -10,7 +10,7 @@ import { ProjectService } from '../project/project.service';
 })
 export class CreateProjectComponent implements OnInit {
 
-  constructor(private dialog:MatDialog,
+  constructor(public dialogRef: MatDialogRef<CreateProjectComponent>,
      public service: ProjectService) { }
 
   ngOnInit() {
@@ -19,7 +19,9 @@ export class CreateProjectComponent implements OnInit {
 
   onClose() {
     this.service.form.reset();
-    this.dialog.closeAll();}
+    this.service.initializeFormGroup();
+    this.dialogRef.close();
+  }
 
   onSubmit() {
     if (this.service.form.valid) {
@@ -27,7 +29,6 @@ export class CreateProjectComponent implements OnInit {
         this.service.addProject(this.service.form.value);
       else
       this.service.editProject(this.service.form.value);
-      this.service.form.reset();
       this.onClose();
     }
     else {

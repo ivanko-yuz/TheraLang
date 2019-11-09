@@ -1,20 +1,20 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
 import { Resource } from '../resources/resource';
 import * as $ from 'jquery';
+import { HttpProjectService } from '../project/shared/http-project.service';
 
 @Component({
   selector: 'app-project-info',
   templateUrl: './project-info.component.html',
   styleUrls: ['./project-info.component.less'],
   encapsulation: ViewEncapsulation.None,
-  providers:[HttpService]
+  providers:[HttpProjectService]
 })
 export class ProjectInfoComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,private http:HttpService) { };
+  constructor(private route: ActivatedRoute,private http:HttpProjectService) { };
 
   projectInfo : Project; 
   projectResources : Resource[];

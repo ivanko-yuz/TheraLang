@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpService} from './http.service';
 import {Project} from './project';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import { CreateProjectComponent } from '../create-project/create-project.component';
-import { ProjectService } from './project.service';
+import { ProjectService } from './shared/project.service';
+import { HttpProjectService } from './shared/http-project.service';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.less'],
-  providers:[ProjectService, HttpService]
+  providers:[]
 })
 export class ProjectComponent implements OnInit {
 
   projects:Project[];
 
-  constructor(private httpService:HttpService,
+  constructor(private httpService:HttpProjectService,
     private dialog:MatDialog,
     private service:ProjectService) { }
 
@@ -33,8 +33,10 @@ export class ProjectComponent implements OnInit {
     this.dialog.open(CreateProjectComponent, dialogConfig);
   }
 
+  project:Project = new Project(1, 'abcde', 'qwerty', 'awdawed')
+
   onEdit(id:number){
-    this.service.initializeFormGroup(<Project>this.httpService.getProjectInfo(id));
+    this.service.populateForm(<Project>this.httpService.getProjectInfo(id));
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;

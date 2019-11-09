@@ -1,15 +1,16 @@
-import {HttpClient} from '@angular/common/http';
-import { Project } from './project';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Project } from '../project';
+
 
 @Injectable({
-    providedIn: 'root'
-  })
-export class HttpService{
-  
-    constructor(private http: HttpClient){ }
+  providedIn: 'root'
+})
+export class HttpProjectService {
 
-    private url = "https://localhost:44353/api/project";
+  constructor(private http: HttpClient) { }
+
+  private url = "https://localhost:44353/api/project";
     
     getAllProjects(){
         return this.http.get(this.url);

@@ -1,13 +1,14 @@
-import { FormBuilder, Validators, FormGroup, FormControl } from "@angular/forms";
-import { Project } from './project';
-import { HttpService } from './http.service';
-
+import { Injectable, forwardRef, Inject } from '@angular/core';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { Project } from '../project';
+import { HttpProjectService } from '../shared/http-project.service';
 
 export class ProjectService {
 
   constructor(
+    @Inject(forwardRef(() => HttpProjectService))
+    private httpService: HttpProjectService,
     private fb = new FormBuilder(),
-    private httpService: HttpService,
   ) { }
 
   form = this.fb.group({
@@ -17,7 +18,16 @@ export class ProjectService {
     type: ['', [Validators.required, Validators.minLength(3)]],
   });
 
-  initializeFormGroup(project) {
+  initializeFormGroup() {
+    this.form.setValue({
+      id: null,
+      name: '',
+      description: '',
+      type: '',
+    });
+  }
+
+  populateForm(project) {
     this.form.setValue(project);
   }
 
@@ -29,5 +39,3 @@ export class ProjectService {
     this.httpService.updateProject(project);
   }
 }
-
-
