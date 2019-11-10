@@ -2,6 +2,7 @@ import { ResourceService } from '../../../ui/resources/resources-table/resource.
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../shared/project';
+import { Project } from '../project/project';
 import * as $ from 'jquery';
 import { HttpProjectService } from '../shared/http-project.service';
 import { Resource } from '../../../ui/resources/resources-table/resource';
