@@ -1,7 +1,7 @@
 import { Resource } from './../resources-table/resource';
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator, PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-resources-internal-table',
@@ -17,16 +17,14 @@ export class ResourcesInternalTableComponent implements OnInit, AfterViewInit {
 
   constructor() {  }
 
-  ngOnInit() {
-     
+  ngOnInit() {     
   }
-  ngAfterViewInit(){
-    console.log(this.lengthDataArrForDataSource,  "1");   
-    setTimeout(() => {
-      console.log(this.lengthDataArrForDataSource,  "1");   
+  ngAfterViewInit(){ 
+  }
+  ngOnChanges(changes: SimpleChanges){
+    if(changes['dataSource']) {
       this.dataSource.paginator = this.paginator;
-    }, 5000);
-    this.dataSource.paginator = this.paginator;
+    }
   }
 }
 
