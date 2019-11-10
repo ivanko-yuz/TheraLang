@@ -10,10 +10,11 @@ import { Resource } from '../resources-table/resource';
 })
 export class GeneralResourcesComponent implements OnInit {
   sortedResourcesByCategory: Resource[][] = [];
+  showTable: boolean = false;
   constructor(private resourceService: ResourceService) { }
    async ngOnInit() {
     const allResources = await this.resourceService.getAllResourcesByProjId(null);
-    this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
-    
+    this.sortedResourcesByCategory = await this.resourceService.sortAllResourcesByCategories(allResources);
+    this.showTable = true;
   }
 }
