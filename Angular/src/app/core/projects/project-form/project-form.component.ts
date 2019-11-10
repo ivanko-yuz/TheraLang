@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { ProjectService } from '../project/shared/project.service';
+import { ProjectService } from '../shared/project.service';
 
 @Component({
-  selector: 'app-create-project',
-  templateUrl: './create-project.component.html',
-  styleUrls: ['./create-project.component.less'],
+  selector: 'project-form',
+  templateUrl: './project-form.component.html',
+  styleUrls: ['./project-form.component.less'],
   providers: [ProjectService]
 })
-export class CreateProjectComponent implements OnInit {
+export class ProjectFormComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<CreateProjectComponent>,
+  constructor(public dialogRef: MatDialogRef<ProjectFormComponent>,
      public service: ProjectService) { }
 
   ngOnInit() {
