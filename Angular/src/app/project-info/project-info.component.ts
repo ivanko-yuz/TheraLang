@@ -1,9 +1,9 @@
 import { ResourceService } from '../resources-table/resource.service';
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
 import * as $ from 'jquery';
+import { HttpProjectService } from '../project/shared/http-project.service';
 import { Resource } from '../resources-table/resource';
 
 @Component({
@@ -11,11 +11,11 @@ import { Resource } from '../resources-table/resource';
   templateUrl: './project-info.component.html',
   styleUrls: ['./project-info.component.less'],
   encapsulation: ViewEncapsulation.None,
-  providers: [HttpService]
+  providers:[HttpProjectService]
 })
 export class ProjectInfoComponent implements OnInit, AfterViewInit {
 
-  constructor(private route: ActivatedRoute, private http: HttpService,
+  constructor(private route: ActivatedRoute, private http: HttpProjectService,
               private resourceService: ResourceService) { }
 
   projectInfo: Project = new Project(0, '', '', '');

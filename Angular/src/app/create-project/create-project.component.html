@@ -1,34 +1,21 @@
-<h2 mat-dialog-title >Cтворення проекту</h2>
+<h2 mat-dialog-title>
+ <span>{{service.form.controls['id'].value?"РЕДАГУВАННЯ ПРОЕКТУ":"СТВОРЕННЯ ПРОЕКТУ"}}</span>
+</h2>
+<form [formGroup]="service.form">
 <mat-dialog-content>
-  <form class="normal-form">
-        <mat-grid-list cols="2" rowHeight="300px">
-          <mat-grid-tile>
-            <div class="controles-container">
-              <input type="hidden" formControlName="$key">
-              <mat-form-field>
-                <input formControlName="fullName" matInput placeholder="Full Name*">
-                <mat-error>This field is mandatory.</mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <input formControlName="email" matInput placeholder="Email">
-                <mat-error>Invalid email address.</mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <input formControlName="mobile" matInput placeholder="Mobile*">
-              </mat-form-field>
-              <mat-form-field>
-                <input formControlName="city" matInput placeholder="City">
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div class="controles-container">
-              <div class="button-row">
-                <button mat-raised-button color="primary" type="submit">Submit</button>
-                <button mat-raised-button color="warn">Clear</button>
-              </div>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </form>
-    </mat-dialog-content>
+      <mat-form-field>
+          <input type="hidden" formControlName="id">
+        <input formControlName="name" matInput placeholder="Назва проекту*">
+      </mat-form-field>
+        <mat-form-field>
+          <input formControlName="description" matInput placeholder="Опис">
+        </mat-form-field>
+          <mat-form-field>
+            <input formControlName="type" matInput placeholder="Тип*">
+          </mat-form-field>
+     </mat-dialog-content>
+ <mat-dialog-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid" (click)='onSubmit()'>Підтвердити</button>
+      <button mat-raised-button color="warn" (click)="onClose()">Відмінити</button>
+    </mat-dialog-actions>
+  </form>
