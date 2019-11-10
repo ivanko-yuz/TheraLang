@@ -3,34 +3,26 @@
   margin: 0 auto;
   background-color: gray;
 }
-
+#resTabId{
+  max-width: 1230px;
+  margin: 0 auto;
+  min-height: 20rem;
+}
+app-resources-table .resTab{
+  border-radius: 25px ;
+}
 .example-header-image {
   background-image: url("../../assets/img/trashcat.jpg");
   background-size: cover;
 }
 .mat-card-header .mat-card-avatar{
-  display: block;
-  
+  display: block;  
+}
+mat-card-header .mat-card-header-text{
+  margin-top: 10px;
 }
 .description {
   text-align: center;
-}
-
-.footerTable {
-  position: relative;
-  display: block;
-  max-width: 1230px;
-  max-height: 1000px;
-  margin: 0 auto;
-}
-
-.footerTable .resTab {
-  width: 100%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 500px;
-
 }
 
 .mat-tab-label {
@@ -60,11 +52,6 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
-.resImg .img-in-table{
-  max-width: 75%;
-  display: block;
-  margin: 0 auto;
-}
 
 .ownerLink {
   text-decoration: none !important;
@@ -75,66 +62,17 @@
 }
 
 
-/* Structure */
-.example-container {
-  position: relative;
-}
-
-.example-table-container {
-  position: relative;
-  overflow: auto;
-}
-
-table {
-  width: 100%;
-}
-
 .example-rate-limit-reached {
   color: #980000;
   text-align: center;
 }
 
-ol,
-li {
-  padding-left: 1.4rem;
-}
-li {
-  height: 0px;
-  width: 0px;
-  position: absolute;
-  margin: 0;
-  border: 0;
-  padding: 0;
-}
-
-.resName,
-.resDate,
-.resImg {
-  width: 33%;
-  margin-top: -0.2rem;
-  font-size: 1.2rem;
-  margin: 0 auto;
-}
-.resName,.resDate{
-  text-align: center;
-  max-width: 19rem;
-}
 .img-title{
   text-align: justify;
   word-wrap: break-word;
   margin: 0;
 }
-.mat-tab-label-content {
-  font-size: 1.5rem;
-}
-.mat-card-title {
-  font-size: 1.5rem !important;
-  font-weight: 900 !important;
-  margin-top: 0.5rem;
-}
-.mat-card-subtitle {
-  font-size: 1rem !important;
-}
+
 .mainDiv .mat-card{
   border-radius: 25px ;
 }
@@ -142,51 +80,12 @@ li {
   padding-left: 15vw;
   padding-right: 15vw;
 }
-.footerTable .resTab{
-  border-radius: 25px ;
-}
+
 .mat-tab-header-pagination-disabled .mat-tab-header-pagination-chevron{
   border-color: rgba(0, 0, 0, 0.62) !important;
 }
-.mat-tab-header-pagination-chevron{
-  border-color: purple;
-}
-.ng-star-inserted{
-  padding-top: 0.3rem;
-  padding-bottom: 0.5rem;
 
-}
 .mainDiv .example-card{
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
-.headTabl{
-  padding-left: 1.7rem;
-  padding-right: 0.7rem;
-  opacity: .6;
-}
-.mainTr{
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  
-}
-.tableWithValues:not(:last-child){
-  counter-reset: my-sec-counter;
-  opacity: .6;
-}
-.tr-with-val::before{
-  counter-increment: my-sec-counter;
-  content: counter(my-sec-counter);
-  display: table-cell;
-  vertical-align: middle;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-#mat-tab-content-0-0{
-  padding-top: 0rem !important;
-}
-.bigTablLine{
-  height: 2px;
-  background-color: purple;
-  padding-top: 0;
-  padding-bottom: 0;
-}
+
