@@ -1,7 +1,7 @@
 import { Resource } from './../resources-table/resource';
-import { Component, OnInit, Input, ViewChild, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material';
+import { MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-resources-internal-table',
@@ -10,21 +10,26 @@ import { MatPaginator, PageEvent } from '@angular/material';
 })
 
 export class ResourcesInternalTableComponent implements OnInit, AfterViewInit {
-  @Input()dataSource: MatTableDataSource<Resource>;
+  _dataSource: MatTableDataSource<Resource>;
+  @Input() set dataSource(value: MatTableDataSource<Resource>){
+    this._dataSource = value;
+    this.dataSource.paginator = this.paginator;
+  }
+  get dataSource(): MatTableDataSource<Resource>{
+    return this._dataSource;
+  }
+
   displayedColumns: string[] = ['id', 'name', 'date', 'description'];  
   @Input()lengthDataArrForDataSource;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor() {  }
 
-  ngOnInit() {     
+  ngOnInit() {
+     
   }
-  ngAfterViewInit(){ 
-  }
-  ngOnChanges(changes: SimpleChanges){
-    if(changes['dataSource']) {
-      this.dataSource.paginator = this.paginator;
-    }
+  ngAfterViewInit(){
+    
   }
 }
 

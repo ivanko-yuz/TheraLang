@@ -17,6 +17,10 @@ export class ResourcesTableComponent implements OnInit, OnChanges {
   dataSource;
   constructor(private resourceService: ResourceService) { }
   ngOnInit() {
+    for (const resCategoty in this.sortedResourcesByCategory) {	
+      this.selectResourcesArrayByCategotyName(resCategoty);	
+      return;	
+    } 
   }
 
   convertMatTabChangeEventLabelToString(event: MatTabChangeEvent) {
