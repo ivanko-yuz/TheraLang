@@ -18,7 +18,7 @@ namespace Piranha.WebApi
 {
     [ApiController]
     [Route("api/sitemap")]
-    [Authorize(Policy = Permissions.Sitemap)]
+    //[Authorize(Policy = Permissions.Sitemap)]
     public class SitemapApiController : Controller
     {
         private readonly IApi _api;

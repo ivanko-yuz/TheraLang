@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Resource } from '../resources-table/resource';
 import { ResourceService } from './resource.service';
 import { MatTableDataSource, MatTabChangeEvent } from '@angular/material';
@@ -8,15 +8,18 @@ import { MatTableDataSource, MatTabChangeEvent } from '@angular/material';
   templateUrl: './resources-table.component.html',
   styleUrls: ['./resources-table.component.less']
 })
-export class ResourcesTableComponent implements OnInit {
+export class ResourcesTableComponent implements OnInit, OnChanges {
+  ngOnChanges() {
+   
+  }
   @Input() sortedResourcesByCategory: Resource[][];
   lengthDataArrForDataSource: number;
   dataSource;
   constructor(private resourceService: ResourceService) { }
   ngOnInit() {
-    for (const resCategoty in this.sortedResourcesByCategory) {
-      this.selectResourcesArrayByCategotyName(resCategoty);
-      return;
+    for (const resCategoty in this.sortedResourcesByCategory) {	
+      this.selectResourcesArrayByCategotyName(resCategoty);	
+      return;	
     } 
   }
 
@@ -29,7 +32,6 @@ export class ResourcesTableComponent implements OnInit {
   }
   setDataSourceToInternalResourcesTable(res: Resource[]) {
     this.lengthDataArrForDataSource = res.length;
-    console.log(this.lengthDataArrForDataSource);
     this.dataSource = new MatTableDataSource(res);
   }
 }

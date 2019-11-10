@@ -40,6 +40,7 @@ import { ResourcesTableComponent } from './resources-table/resources-table.compo
 import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
 import { ResourceService } from './resources-table/resource.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { PagesMenuButtonComponent } from './pages-menu-button/pages-menu-button.component';
 import { ProjectsComponent } from './core/projects/projects.component';
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ProjectsComponent } from './core/projects/projects.component';
     ResourcesTableComponent,
     ResourcesInternalTableComponent,
     GeneralResourcesComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    PagesMenuButtonComponent
   ],
   entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent],
   imports: [
