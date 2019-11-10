@@ -33,7 +33,4 @@ export class ResourceService {
         });
         return sortedArray;
     }
-    // setViewTeble(res: Resource[][], name: string) {
-    //     this.allProjectResources = res[name];
-    // }
 }
