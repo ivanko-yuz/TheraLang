@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Resource } from './resource';
-import { HttpService } from '../project/http.service';
+import { HttpProjectService } from '../project/shared/http-project.service';
 
 @Injectable()
 export class ResourceService {
 
     allProjectResources: Resource[] = [];
 
-    constructor(private http: HttpService) { }
+    constructor(private http: HttpProjectService) { }
 
     getAllResourcesByProjId(projid: number): Promise<Resource[]> {
         const allData = this.http.getAllResourcesById(projid).toPromise().then((data: Resource[]) => {

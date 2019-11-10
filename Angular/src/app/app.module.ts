@@ -33,12 +33,14 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FooterComponent } from './footer/footer.component';
+import { HttpProjectService } from './project/shared/http-project.service';
+import { ProjectService } from './project/shared/project.service';
 import { CustomDatePipe } from './project-info/custom.datepipe';
 import { ResourcesTableComponent } from './resources-table/resources-table.component';
 import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
 import { ResourceService } from './resources-table/resource.service';
-import { HttpService } from './project/http.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { ProjectsComponent } from './core/projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     CustomDatePipe,
     ResourcesTableComponent,
     ResourcesInternalTableComponent,
-    GeneralResourcesComponent
+    GeneralResourcesComponent,
+    ProjectsComponent
   ],
   entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
   imports: [
@@ -115,8 +118,9 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     ScrollingModule,
 
   ],
+
   exports: [ResourcesInternalTableComponent],
-  providers: [ResourceService, HttpService],
+  providers: [ResourceService, HttpProjectService,ProjectService],
   bootstrap: [AppComponent, ]
 })
 export class AppModule { }
