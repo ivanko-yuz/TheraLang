@@ -1,7 +1,7 @@
 import { Injectable, forwardRef, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import { Project } from '../project';
 import { HttpProjectService } from '../shared/http-project.service';
+import { Project } from './project';
 
 export class ProjectService {
 

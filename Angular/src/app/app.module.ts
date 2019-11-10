@@ -13,10 +13,10 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { ProjectComponent } from './project/project.component';
+import { ProjectListComponent } from './core/projects/project-list/project-list.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectInfoComponent } from './project-info/project-info.component';
-import { CreateProjectComponent } from './create-project/create-project.component';
+import { ProjectFormComponent } from './core/projects/project-form/project-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
@@ -38,6 +38,8 @@ import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
 import { HttpProjectService } from './project/shared/http-project.service';
 import { ProjectService } from './project/shared/project.service';
+import { HttpProjectService } from './core/projects/shared/http-project.service';
+import { ProjectService } from './core/projects/shared/project.service';
 import { CustomDatePipe } from './project-info/custom.datepipe';
 import { ResourcesTableComponent } from './resources-table/resources-table.component';
 import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
@@ -52,21 +54,22 @@ import { ProjectsComponent } from './core/projects/projects.component';
     AppComponent,
     routingComponents,
     ToolbarComponent,
-    ProjectComponent,
+    ProjectListComponent,
     HomeComponent,
     ProjectInfoComponent,
-    CreateProjectComponent,
+    ProjectFormComponent,
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
     ResourcesTableComponent,
     ResourcesInternalTableComponent,
     GeneralResourcesComponent,
+    ProjectsComponent,
     PagesMenuButtonComponent
     GeneralResourcesComponent,
     ProjectsComponent
   ],
-  entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
+  entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

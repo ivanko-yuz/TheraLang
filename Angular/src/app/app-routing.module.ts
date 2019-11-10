@@ -1,7 +1,7 @@
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProjectComponent } from './project/project.component';
+import { ProjectListComponent } from './core/projects/project-list/project-list.component';
 import { HomeComponent } from './home/home.component';
 import {ProjectInfoComponent} from './project-info/project-info.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'projectParticipants', component:ProjectParticipantsComponent },
   { path: 'project/:id', component: ProjectInfoComponent },
-  { path: 'project', component: ProjectComponent },
+  { path: 'project', component: ProjectListComponent },
   { path: 'resources', component: GeneralResourcesComponent },
 ];
 
@@ -26,3 +26,5 @@ export const routingComponents = [
   GeneralResourcesComponent
 ];
 
+export const routingComponents = [ProjectListComponent, HomeComponent, ProjectInfoComponent,
+   GeneralResourcesComponent];

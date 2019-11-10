@@ -6,6 +6,11 @@ import { CreateProjectComponent } from '../create-project/create-project.compone
 import { ProjectService } from './shared/project.service';
 import { HttpProjectService } from './shared/http-project.service';
 import { Resource } from '../resources-table/resource';
+import {Project} from '../shared/project';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import { ProjectFormComponent } from '../project-form/project-form.component';
+import { HttpProjectService } from '../shared/http-project.service';
+import { ProjectService } from '../shared/project.service';
 
 
 @Component({
@@ -13,7 +18,7 @@ import { Resource } from '../resources-table/resource';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.less']
 })
-export class ProjectComponent implements OnInit {
+export class ProjectListComponent implements OnInit {
 
   projects: Project[];
 
@@ -39,6 +44,6 @@ export class ProjectComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    this.dialog.open(CreateProjectComponent,dialogConfig);
+    this.dialog.open(ProjectFormComponent,dialogConfig);
   }
 }
