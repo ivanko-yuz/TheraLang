@@ -4,6 +4,8 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 import { CreateProjectComponent } from '../create-project/create-project.component';
 import { ProjectService } from './shared/project.service';
 import { HttpProjectService } from './shared/http-project.service';
+import { Resource } from '../resources-table/resource';
+
 
 @Component({
   selector: 'app-project',
@@ -13,7 +15,7 @@ import { HttpProjectService } from './shared/http-project.service';
 })
 export class ProjectComponent implements OnInit {
 
-  projects:Project[];
+  projects: Project[];
 
   constructor(private httpService:HttpProjectService,
     private dialog:MatDialog,

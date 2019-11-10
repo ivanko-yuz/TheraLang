@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit} from '@angular/core';
+import { ResourceService } from '../resources-table/resource.service';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../project/project';
-import { Resource } from '../resources/resource';
 import * as $ from 'jquery';
 import { HttpProjectService } from '../project/shared/http-project.service';
+import { Resource } from '../resources-table/resource';
 
 @Component({
   selector: 'app-project-info',
@@ -12,30 +13,37 @@ import { HttpProjectService } from '../project/shared/http-project.service';
   encapsulation: ViewEncapsulation.None,
   providers:[HttpProjectService]
 })
-export class ProjectInfoComponent implements OnInit {
+export class ProjectInfoComponent implements OnInit, AfterViewInit {
 
-  constructor(private route: ActivatedRoute,private http:HttpProjectService) { };
+  constructor(private route: ActivatedRoute, private http: HttpProjectService,
+              private resourceService: ResourceService) { }
 
-  projectInfo : Project; 
-  projectResources : Resource[];
+  projectInfo: Project = new Project(0, '', '', '');
+  projectId: number;
+  generateOnceResourcesTable = false;
+  sortedResourcesByCategory: Resource[][] = [];
+
+  ngAfterViewInit() {
+    $('#resTabId').hide();
+  }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params=>{
-      let id = +params.get('id');
-      this.http.getProjectInfo(id).subscribe((data:Project) => this.projectInfo=data);
-
-      this.http.getAllResourcesById(id).subscribe((_data:Resource[])=> this.projectResources=_data );
-
-      $(document).ready(function(){
-        $(".resTab").hide();
+    this.route.paramMap.subscribe(params => {
+      this.projectId = +params.get('id');
+      this.http.getProjectInfo(this.projectId).subscribe((data: Project) => this.projectInfo = data);
     });
-      $(".resButton").click(function(){
-        $( ".resTab" ).slideToggle("slow");
-      });
-    });
-
+  }
+  
+  async getResourcesData() {
+    if (!this.generateOnceResourcesTable) {
+      const allResources = await this.resourceService.getAllResourcesByProjId(this.projectId);
+      this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
+    }
+    this.generateOnceResourcesTable = true;
+    $('#resTabId').slideToggle('slow');
   }
 }
+
 
 
 
