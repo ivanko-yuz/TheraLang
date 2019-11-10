@@ -22,7 +22,8 @@
     </mat-card-content>
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
-      <a mat-stroked-button [routerLink]="['/project', project.id]">Деталі</a>
+      <a mat-stroked-button [routerLink]="['/project', p.id]">Деталі</a>
+      <button mat-stroked-button (click)="onEdit(p.id)" >Змінити</button>
     </mat-card-actions>
   </mat-card>
 </div>

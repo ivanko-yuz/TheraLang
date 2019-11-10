@@ -3,6 +3,8 @@ import { HttpService } from './http.service';
 import { Project } from './project';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CreateProjectComponent } from '../create-project/create-project.component';
+import { ProjectService } from './shared/project.service';
+import { HttpProjectService } from './shared/http-project.service';
 import { Resource } from '../resources-table/resource';
 
 
@@ -22,12 +24,21 @@ export class ProjectComponent implements OnInit {
     this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects);
   }
 
-  onCreate() {
+  onCreate(){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "60%";
-    dialogConfig.height = "40%";
+    dialogConfig.width = '60%';
+    dialogConfig.height = '40%';
     this.dialog.open(CreateProjectComponent, dialogConfig);
   }
 
+  project:Project = new Project(1, 'abcde', 'qwerty', 'awdawed')
+
+  onEdit(id:number){
+    this.service.populateForm(<Project>this.httpService.getProjectInfo(id));
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(CreateProjectComponent,dialogConfig);
+  }
 }

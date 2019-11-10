@@ -14,6 +14,10 @@ namespace MvcWeb.Validators
         {
             ValidateStringLength(p => p.Name, 3, 30);
             ValidateStringLength(p => p.Type, 3, 30);
+
+            RuleSet("create", () => RuleFor(p => p.Id).Null());
+
+            RuleSet("edit", () => RuleFor(p => p.Id).NotNull().GreaterThan(0));
         }
 
         private void ValidateStringLength(Expression<Func<ProjectViewModel, string>> expression, int minLength, int maxLength)

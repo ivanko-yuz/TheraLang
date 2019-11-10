@@ -36,12 +36,15 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
+import { HttpProjectService } from './project/shared/http-project.service';
+import { ProjectService } from './project/shared/project.service';
 import { CustomDatePipe } from './project-info/custom.datepipe';
 import { ResourcesTableComponent } from './resources-table/resources-table.component';
 import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
 import { ResourceService } from './resources-table/resource.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 import { PagesMenuButtonComponent } from './pages-menu-button/pages-menu-button.component';
+import { ProjectsComponent } from './core/projects/projects.component';
 
 
 @NgModule({
@@ -60,6 +63,8 @@ import { PagesMenuButtonComponent } from './pages-menu-button/pages-menu-button.
     ResourcesInternalTableComponent,
     GeneralResourcesComponent,
     PagesMenuButtonComponent
+    GeneralResourcesComponent,
+    ProjectsComponent
   ],
   entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
   imports: [
@@ -121,8 +126,11 @@ import { PagesMenuButtonComponent } from './pages-menu-button/pages-menu-button.
   ],
 
   ],
+
   exports: [ResourcesInternalTableComponent],
   providers: [ResourceService, HttpService, EventService],
   bootstrap: [AppComponent]
+  providers: [ResourceService, HttpProjectService,ProjectService],
+  bootstrap: [AppComponent, ]
 })
 export class AppModule { }
