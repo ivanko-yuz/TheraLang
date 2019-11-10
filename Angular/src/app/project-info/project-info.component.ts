@@ -1,9 +1,9 @@
 import { ResourceService } from '../resources-table/resource.service';
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Project } from '../project/project';
+import { Project } from '../core/projects/shared/project';
 import * as $ from 'jquery';
-import { HttpProjectService } from '../project/shared/http-project.service';
+import { HttpProjectService } from '../core/projects/shared/http-project.service';
 import { Resource } from '../resources-table/resource';
 
 @Component({
