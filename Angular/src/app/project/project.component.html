@@ -4,10 +4,8 @@
 <div *ngFor="let p of projects">
   <mat-card class="project-card">
     <mat-card-header class="header">
-      <!-- <mat-card-title> {{p.name}}</mat-card-title>
-      <mat-card-subtitle>ID - {{p.id}}</mat-card-subtitle> -->
       <mat-card-title class="donate-button">
-        <a mat-flat-button [routerLink]="['/project', p.id]">Підтримати</a>
+        <a mat-flat-button [routerLink]="[]">Підтримати</a>
       </mat-card-title>
     </mat-card-header>
     <mat-card-title>{{p.name}}</mat-card-title>
