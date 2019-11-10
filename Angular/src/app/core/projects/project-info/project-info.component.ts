@@ -3,9 +3,12 @@ import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/co
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../shared/project';
 import { Project } from '../project/project';
+import { Project } from '../core/projects/shared/project';
 import * as $ from 'jquery';
 import { HttpProjectService } from '../shared/http-project.service';
 import { Resource } from '../../../ui/resources/resources-table/resource';
+import { HttpProjectService } from '../core/projects/shared/http-project.service';
+import { Resource } from '../resources-table/resource';
 
 @Component({
   selector: 'app-project-info',
