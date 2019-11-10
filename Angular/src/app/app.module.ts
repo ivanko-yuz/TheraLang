@@ -39,6 +39,7 @@ import { ResourcesInternalTableComponent } from './resources-internal-table/reso
 import { ResourceService } from './resources-table/resource.service';
 import { HttpService } from './project/http.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { PagesMenuButtonComponent } from './pages-menu-button/pages-menu-button.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     CustomDatePipe,
     ResourcesTableComponent,
     ResourcesInternalTableComponent,
-    GeneralResourcesComponent
+    GeneralResourcesComponent,
+    PagesMenuButtonComponent
   ],
   entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
   imports: [
