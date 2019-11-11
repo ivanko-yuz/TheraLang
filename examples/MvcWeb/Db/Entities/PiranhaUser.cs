@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MvcWeb.TheraLang.Entities;
 
 namespace MvcWeb.Db.Entities
 {
@@ -11,6 +12,8 @@ namespace MvcWeb.Db.Entities
             PiranhaUserLogins = new HashSet<PiranhaUserLogin>();
             PiranhaUserRoles = new HashSet<PiranhaUserRole>();
             PiranhaUserTokens = new HashSet<PiranhaUserToken>();
+            Resources = new List<Resource>();
+            ProjectsParticipation = new List<ProjectParticipation>();
         }
 
         public Guid Id { get; set; }
@@ -29,9 +32,11 @@ namespace MvcWeb.Db.Entities
         public bool TwoFactorEnabled { get; set; }
         public string UserName { get; set; }
 
+        public virtual ICollection<ProjectParticipation> ProjectsParticipation { get; set; }
         public virtual ICollection<PiranhaUserClaim> PiranhaUserClaims { get; set; }
         public virtual ICollection<PiranhaUserLogin> PiranhaUserLogins { get; set; }
         public virtual ICollection<PiranhaUserRole> PiranhaUserRoles { get; set; }
         public virtual ICollection<PiranhaUserToken> PiranhaUserTokens { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
     }
 }

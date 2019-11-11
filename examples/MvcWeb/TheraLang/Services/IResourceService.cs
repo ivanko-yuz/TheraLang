@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
+using System;
 
 namespace MvcWeb.TheraLang.Services
 {
@@ -7,7 +8,7 @@ namespace MvcWeb.TheraLang.Services
     {
         Task AddResource(Resource resource);
 
-        Task UpdateResource(Resource resource, int updatedById);
+        Task UpdateResource(Resource resource, Guid updatedById);
 
         Task RemoveResource(int Id);
 

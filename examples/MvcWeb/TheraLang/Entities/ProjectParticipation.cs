@@ -1,8 +1,10 @@
-﻿namespace MvcWeb.TheraLang.Entities
+﻿using MvcWeb.Db.Entities;
+
+namespace MvcWeb.TheraLang.Entities
 {
     public class ProjectParticipation : BaseEntity
     {
-        public virtual User User { get; set; }
+        public virtual PiranhaUser User { get; set; }
         
         public MemberRole Role { get; set; }
 

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
+using System;
 using System.Collections.Generic;
 
 namespace MvcWeb.TheraLang.Controllers
@@ -28,7 +29,7 @@ namespace MvcWeb.TheraLang.Controllers
 
         [HttpPost]
         [Route("create/{userId}/{projectId}")]
-        public async Task<IActionResult> Post([FromBody] int userId, int projectId)
+        public async Task<IActionResult> Post([FromBody] Guid userId, int projectId)
         {
             await service.CreateRequest(userId, projectId);
 
