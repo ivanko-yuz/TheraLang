@@ -1,4 +1,4 @@
-import { Resource } from './../resources-table/resource';
+import { Resource } from '../resources-table/resource';
 import { Component, OnInit, Input, ViewChild, AfterViewInit, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
