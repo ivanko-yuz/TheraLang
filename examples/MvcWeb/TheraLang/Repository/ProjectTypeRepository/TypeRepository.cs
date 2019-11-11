@@ -10,13 +10,13 @@ namespace MvcWeb.TheraLang.Repository.ProjectTypeRepository
         IUnitOfWork uow;
         public Task SortingById()
         {
-            uow.Repository<TypeProject>().Get().OrderBy(e => e.Id);
+            uow.Repository<ProjectType>().Get().OrderBy(e => e.Id);
             return uow.SaveChangesAsync();
         }
 
         public Task SortingByName()
         {
-            uow.Repository<TypeProject>().Get().OrderBy(e => e.TypeName);
+            uow.Repository<ProjectType>().Get().OrderBy(e => e.TypeName);
             return uow.SaveChangesAsync();
         }
     }

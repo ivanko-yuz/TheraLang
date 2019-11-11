@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MvcWeb.Db;
+using MvcWeb.TheraLang.Services;
+using MvcWeb.TheraLang.UnitOfWork;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
 
@@ -50,6 +52,10 @@ namespace MvcWeb
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
             services.AddDbContext<IttmmDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IUnitOfWork, UnitOfWork.UnitOfWork>(provider =>
+               new UnitOfWork.UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
+            services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<IProjectTypeService, ProjectTypeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

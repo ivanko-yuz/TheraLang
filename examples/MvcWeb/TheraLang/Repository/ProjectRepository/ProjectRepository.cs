@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MvcWeb.TheraLang.Entities;
+﻿using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
 using System.Linq;
 using System.Threading.Tasks;

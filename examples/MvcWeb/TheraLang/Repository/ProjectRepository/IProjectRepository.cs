@@ -1,5 +1,4 @@
-﻿using MvcWeb.TheraLang.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace MvcWeb.TheraLang.Repository
 {

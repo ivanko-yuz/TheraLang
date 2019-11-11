@@ -18,8 +18,8 @@ namespace MvcWeb.TheraLang.Entities
 
         public bool IsActive { get; set; }
 
-        public virtual TypeProject Type {get; set;}
+        public virtual ProjectType Type {get; set;}
 
-        public Guid TypeId { get; set; }    
+        public int TypeId { get; set; }    
     }
 }

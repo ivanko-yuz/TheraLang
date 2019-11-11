@@ -7,6 +7,8 @@ using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.Pagination;
 namespace MvcWeb.TheraLang.Controllers
 {
+    [Route("api/pag/projects")]
+    [ApiController]
     public class PaginationController : Controller
     {
         IttmmDbContext context;
@@ -14,19 +16,20 @@ namespace MvcWeb.TheraLang.Controllers
         {
             this.context = Context;
         }
-        //public async Task<IActionResult> Index(int page = 1)
-        //{
-        //    int pageSize = 5;
-        //    IQueryable<Project> source = context
-        //    var count = await source.CountAsync();
-        //    var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-        //    PageVievModel pageViewModel = new PageVievModel(count, page, pageSize);
-        //    IndexVievModel viewModel = new IndexVievModel
-        //    {
-        //        PageViewModel = pageViewModel,
-        //        Projects = items
-        //    };
-        //    return View(viewModel);
-        //}
+        [HttpGet]
+        public async Task<IActionResult> Index(int page = 1)
+        {
+            int pageSize = 5;
+            IQueryable<Project> source = context.Projects.Include(x => x.Type);
+            var count = await source.CountAsync();
+            var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            PageVievModel pageViewModel = new PageVievModel(count, page, pageSize);
+            IndexVievModel viewModel = new IndexVievModel
+            {
+                PageViewModel = pageViewModel,
+                Projects = items
+            };
+            return View(viewModel);
+        }
     }
 }

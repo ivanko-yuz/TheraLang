@@ -12,7 +12,7 @@ namespace MvcWeb.Db
         {          
         }
 
-        public DbSet<TypeProject> Types { get; set; }
+        public DbSet<ProjectType> Types { get; set; }
 
         public virtual DbSet<Project> Projects { get; set; }
 
