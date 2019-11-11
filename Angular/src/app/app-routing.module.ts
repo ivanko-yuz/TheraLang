@@ -7,6 +7,8 @@ import {ProjectInfoComponent} from './project-info/project-info.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { HomeComponent } from './ui/home/home.component';
 import {ProjectInfoComponent} from './core/projects/project-info/project-info.component';
+import { HomeComponent } from './ui/home/home.component';
+import {ProjectInfoComponent} from './core/projects/project-info/project-info.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
