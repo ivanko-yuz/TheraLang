@@ -1,10 +1,10 @@
-import { ResourceService } from '../resources-table/resource.service';
+import { ResourceService } from '../../../ui/resources/resources-table/resource.service';
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Project } from '../core/projects/shared/project';
+import { Project } from '../shared/project';
 import * as $ from 'jquery';
-import { HttpProjectService } from '../core/projects/shared/http-project.service';
-import { Resource } from '../resources-table/resource';
+import { HttpProjectService } from '../shared/http-project.service';
+import { Resource } from '../../../ui/resources/resources-table/resource';
 
 @Component({
   selector: 'app-project-info',

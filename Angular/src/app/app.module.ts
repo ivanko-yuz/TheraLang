@@ -12,10 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ToolbarComponent } from './ui/toolbar/toolbar.component';
 import { ProjectListComponent } from './core/projects/project-list/project-list.component';
-import { HomeComponent } from './home/home.component';
-import { ProjectInfoComponent } from './project-info/project-info.component';
+import { HomeComponent } from './ui/home/home.component';
+import { ProjectInfoComponent } from './core/projects/project-info/project-info.component';
 import { ProjectFormComponent } from './core/projects/project-form/project-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -38,15 +38,17 @@ import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
 import { HttpProjectService } from './project/shared/http-project.service';
 import { ProjectService } from './project/shared/project.service';
+import { FooterComponent } from './ui/footer/footer.component';
 import { HttpProjectService } from './core/projects/shared/http-project.service';
 import { ProjectService } from './core/projects/shared/project.service';
-import { CustomDatePipe } from './project-info/custom.datepipe';
-import { ResourcesTableComponent } from './resources-table/resources-table.component';
-import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
-import { ResourceService } from './resources-table/resource.service';
-import { GeneralResourcesComponent } from './general-resources/general-resources.component';
-import { PagesMenuButtonComponent } from './pages-menu-button/pages-menu-button.component';
+import { CustomDatePipe } from './core/projects/project-info/custom.datepipe';
+import { ResourcesTableComponent } from './ui/resources/resources-table/resources-table.component';
+import { ResourcesInternalTableComponent } from './ui/resources/resources-internal-table/resources-internal-table.component';
+import { ResourceService } from './ui/resources/resources-table/resource.service';
+import { GeneralResourcesComponent } from './core/resources/general-resources/general-resources.component';
+import { PagesMenuButtonComponent } from './ui/pages-menu-button/pages-menu-button.component';
 import { ProjectsComponent } from './core/projects/projects.component';
+import { ResourcesComponent } from './core/resources/resources.component';
 
 
 @NgModule({
@@ -65,9 +67,10 @@ import { ProjectsComponent } from './core/projects/projects.component';
     ResourcesInternalTableComponent,
     GeneralResourcesComponent,
     ProjectsComponent,
-    PagesMenuButtonComponent
-    GeneralResourcesComponent,
-    ProjectsComponent
+    PagesMenuButtonComponent,
+    GeneralResourcesComponent,    
+    PagesMenuButtonComponent,
+    ResourcesComponent
   ],
   entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent],
   imports: [
