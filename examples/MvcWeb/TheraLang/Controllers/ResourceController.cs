@@ -1,4 +1,4 @@
-﻿    using MvcWeb.TheraLang.Entities;
+﻿using MvcWeb.TheraLang.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
@@ -31,7 +31,7 @@ namespace MvcWeb.TheraLang.Controllers
 
         [HttpPut]
         [Route("update/{resource}/{updatedById}")]
-        public async Task<IActionResult> PutResource([FromBody] Resource resource, int updatedById)
+        public async Task<IActionResult> PutResource([FromBody] Resource resource, Guid updatedById)
         {
             if (updatedById == default)
             {

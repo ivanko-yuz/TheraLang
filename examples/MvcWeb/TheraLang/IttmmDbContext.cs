@@ -10,15 +10,15 @@ namespace MvcWeb.Db
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
         {
-           
+
         }
 
         #region UTTMM_Entities
+        // Connected with PiranhaUser.
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<ResourceProject> ResourceProject { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
         #endregion
 
@@ -88,7 +88,6 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new PiranhaUserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserTokenConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
-            modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
             #endregion
 
             #region UTTMM_Entities_Cfg
@@ -96,7 +95,6 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new ResourceCategoriesConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceProjectConfiguration());
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
             #endregion
         }

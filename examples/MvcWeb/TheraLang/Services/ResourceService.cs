@@ -19,7 +19,7 @@ namespace MvcWeb.TheraLang.Services
         {
             try
             {
-                Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).SingleOrDefault();
+                Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).FirstOrDefault();
                 return resource;
             }
             catch(Exception ex)
@@ -55,7 +55,7 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        public async Task UpdateResource(Resource resource, int updatetById)
+        public async Task UpdateResource(Resource resource, Guid updatetById)
         {
             try
             {
