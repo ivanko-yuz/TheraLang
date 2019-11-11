@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using MvcWeb.Db;
 using MvcWeb.TheraLang.Entities;
 
@@ -19,7 +15,7 @@ namespace TheraLang.DataSeeding
             dbContext.ClearAndSeed(Projects());
         }
 
-        static IEnumerable<Project> Projects()
+        private static IEnumerable<Project> Projects()
         {
             yield return new Project
             {
@@ -32,8 +28,8 @@ namespace TheraLang.DataSeeding
                 Type = "ProjectType",
             };
         }
-        
-        static DbContext CreateDbContext()
+
+        private static DbContext CreateDbContext()
         {
             var configurationBuilder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json");
