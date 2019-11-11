@@ -1,8 +1,7 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MvcWeb.TheraLang.Repository;
 using MvcWeb.TheraLang.UnitOfWork;
-
 namespace MvcWeb.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
@@ -10,12 +9,10 @@ namespace MvcWeb.UnitOfWork
         public UnitOfWork(DbContext context)
         {
             Context = context;
-
         }
 
         private DbContext Context { get; }
-
-
+        
         public IRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
             return new Repository<TEntity>(Context.Set<TEntity>());

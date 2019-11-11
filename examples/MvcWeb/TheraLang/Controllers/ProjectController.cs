@@ -1,7 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+
+using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.Services;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using MvcWeb.TheraLang.Entities;
+using MvcWeb.TheraLang.UnitOfWork;
+
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -27,7 +33,7 @@ namespace MvcWeb.TheraLang.Controllers
         [HttpGet]
         public IEnumerable<Project> GetAllProjects()
         {
-            return ProjectService.GetAllProjects();
+            return ProjectService.GetAllProjects();     
         }
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)
@@ -46,8 +52,7 @@ namespace MvcWeb.TheraLang.Controllers
             if (project == null)
             {
                 throw new System.NullReferenceException($"project with id {id} not found");
-            }
-           
+            }         
             return Ok(project);
         }
     }

@@ -11,11 +11,8 @@ namespace MvcWeb.Db
         public IttmmDbContext(DbContextOptions options) : base(options)
         {          
         }
-
-        public DbSet<ProjectType> Types { get; set; }
-
+        public virtual DbSet<ProjectType> Types { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
-
         public virtual DbSet<PiranhaAlias> PiranhaAliases { get; set; }
         public virtual DbSet<PiranhaBlockField> PiranhaBlockFields { get; set; }
         public virtual DbSet<PiranhaBlock> PiranhaBlocks { get; set; }
