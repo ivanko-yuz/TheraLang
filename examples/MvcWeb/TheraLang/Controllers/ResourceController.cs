@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
 using System;
+using System.Collections.Generic;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -37,11 +38,18 @@ namespace MvcWeb.TheraLang.Controllers
 
         [HttpGet]
         [Route("get/{Id}")]
-        public IActionResult GetResource([FromBody]int Id)
+        public IActionResult GetResource([FromBody]int? Id)
         {
-            Resource resource = service.GetResourceById(Id);
-
-            return Ok(resource);
+            if (Id is null)
+            {
+                IEnumerable<Resource> resourse = service.GetAllResourcesWhereProjectIdNull(Id);
+                return Ok(resourse);
+            }
+            else
+            {
+                Resource resource = service.GetResourceById(Id);
+                return Ok(resource);
+            }
         }
 
         [HttpDelete]

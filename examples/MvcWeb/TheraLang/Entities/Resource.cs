@@ -16,6 +16,8 @@ namespace MvcWeb.TheraLang.Entities
         public string File { get; set; }
 
         public int CategoryId { get; set; }
+        // this field if resource not contains in project.
+        public int? ResourceProjectId { get; set; }
 
         public virtual ResourceCategory ResourceCategory { get; set; }
 

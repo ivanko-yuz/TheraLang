@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
@@ -15,8 +16,9 @@ namespace MvcWeb.TheraLang.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public Resource GetResourceById(int Id)
+        public Resource GetResourceById(int? Id)
         {
+
             try
             {
                 Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).FirstOrDefault();
@@ -70,6 +72,19 @@ namespace MvcWeb.TheraLang.Services
             catch(Exception ex)
             {
                 throw new Exception($"Error when removing the Resource: ", ex);
+            }
+        }
+
+        public IEnumerable<Resource> GetAllResourcesWhereProjectIdNull(int? Id)
+        {
+            try
+            {
+                IEnumerable<Resource>resources = unitOfWork.Repository<Resource>().Get().Where(i => i.ResourceProjectId == Id); 
+                return resources;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error when get resources with Id equal null: ", ex);
             }
         }
     }
