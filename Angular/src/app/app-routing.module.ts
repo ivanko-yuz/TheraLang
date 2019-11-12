@@ -7,6 +7,7 @@ import {ProjectInfoComponent} from './ui/projects/project-info/project-info.comp
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'projectParticipants', component:ProjectParticipantsComponent },
   { path: 'project/:id', component: ProjectInfoComponent },
   { path: 'project', component: ProjectListComponent },
   { path: 'resources', component: GeneralResourcesComponent },

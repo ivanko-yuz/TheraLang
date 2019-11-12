@@ -1,11 +1,12 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
+    <mat-toolbar-row  class="toolbar">
          <a mat-button class="toolbar-button" routerLink="" >Головна</a>
          <a mat-button class="toolbar-button" routerLink="/project" >Проекти</a>  
          <app-pages-menu-button></app-pages-menu-button>
          <a mat-button class="toolbar-button" routerLink="" >Новини</a> 
-         <a mat-button class="toolbar-button" routerLink="" >Контакти</a>     
-         <a mat-button class="toolbar-button" routerLink="/resources" >Ресурси</a>    
+         <a mat-button class="toolbar-button" routerLink="" >Контакти</a>
+         <a mat-button class="toolbar-button" routerLink="/projectParticipants" >Запити 
+         <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>         
          <span class="fill-space"></span>      
          <a mat-button class="toolbar-button" routerLink="" >Реєстрація</a>
          <a mat-button class="toolbar-button" routerLink="" >Вхід</a>     

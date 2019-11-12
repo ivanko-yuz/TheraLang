@@ -43,6 +43,7 @@ import { PagesMenuButtonComponent } from './ui/pages-menu-button/pages-menu-butt
 import { ProjectsComponent } from './ui/projects/projects.component';
 import { ResourcesComponent } from './ui/resources/resources.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +54,7 @@ import { ResourcesComponent } from './ui/resources/resources.component';
     ProjectInfoComponent,
     ProjectFormComponent,
     FooterComponent,
+    ProjectParticipantsComponent,
     CustomDatePipe,
     ResourcesTableComponent,
     ResourcesInternalTableComponent,
@@ -113,12 +115,12 @@ import { ResourcesComponent } from './ui/resources/resources.component';
     MatSnackBarModule,
     MatSortModule,
     MatTableModule,
-    MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,
+    ScrollingModule,  
+  ],
 
   ],
 
