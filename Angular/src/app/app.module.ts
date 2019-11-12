@@ -33,12 +33,15 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FooterComponent } from './footer/footer.component';
+import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
+import { EventService } from './project-participants/event-service';
+import { HttpService } from './project/http.service';
 import { CustomDatePipe } from './project-info/custom.datepipe';
 import { ResourcesTableComponent } from './resources-table/resources-table.component';
 import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
 import { ResourceService } from './resources-table/resource.service';
-import { HttpService } from './project/http.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     ProjectInfoComponent,
     CreateProjectComponent,
     FooterComponent,
+    ProjectParticipantsComponent,
     CustomDatePipe,
     ResourcesTableComponent,
     ResourcesInternalTableComponent,
@@ -107,16 +111,16 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     MatSnackBarModule,
     MatSortModule,
     MatTableModule,
-    MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,
+    ScrollingModule,  
+  ],
 
   ],
   exports: [ResourcesInternalTableComponent],
-  providers: [ResourceService, HttpService],
-  bootstrap: [AppComponent, ]
+  providers: [ResourceService, HttpService, EventService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
