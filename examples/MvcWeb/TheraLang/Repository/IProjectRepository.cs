@@ -2,7 +2,7 @@
 
 namespace MvcWeb.TheraLang.Repository
 {
-    public interface IProjectRepository 
+    public interface IProjectRepository
     {
         Task<bool> ChangeType(int id, string type);
         Task<bool> ChangeName(int id, string type);

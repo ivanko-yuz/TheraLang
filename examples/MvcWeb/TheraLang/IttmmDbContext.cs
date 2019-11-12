@@ -10,11 +10,19 @@ namespace MvcWeb.Db
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
         {
-           
+
         }
 
+        #region UTTMM_Entities
+        // Connected with PiranhaUser.
         public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
+        public virtual DbSet<Resource> Resources { get; set; }
+        public virtual DbSet<ResourceProject> ResourceProject { get; set; }
+        public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
+        #endregion
 
+        #region Piranha_Entities
         public virtual DbSet<PiranhaAlias> PiranhaAliases { get; set; }
         public virtual DbSet<PiranhaBlockField> PiranhaBlockFields { get; set; }
         public virtual DbSet<PiranhaBlock> PiranhaBlocks { get; set; }
@@ -45,9 +53,11 @@ namespace MvcWeb.Db
         public virtual DbSet<PiranhaUserRole> PiranhaUserRoles { get; set; }
         public virtual DbSet<PiranhaUserToken> PiranhaUserTokens { get; set; }
         public virtual DbSet<PiranhaUser> PiranhaUsers { get; set; }
+        #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Piranha_Entities_Cfg
             modelBuilder.ApplyConfiguration(new PiranhaAliasConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaBlockFieldConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaBlockConfiguration());
@@ -78,8 +88,15 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new PiranhaUserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserTokenConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
-            // ProjectConfiguration
+            #endregion
+
+            #region UTTMM_Entities_Cfg
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceCategoriesConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceProjectConfiguration());
+            modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
+            #endregion
         }
     }
 }

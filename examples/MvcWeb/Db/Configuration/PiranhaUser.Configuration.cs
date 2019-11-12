@@ -27,6 +27,8 @@ namespace MvcWeb.Db.Configuration
             builder.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
             builder.Property(e => e.UserName).HasMaxLength(256);
+
+            builder.HasMany(i => i.Resources).WithOne(r => r.User).HasForeignKey("CreatedById");
         }
     }
 }

@@ -13,11 +13,11 @@ namespace MvcWeb.TheraLang.Configuration
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
-
             builder.Property(e => e.Name).HasMaxLength(250).IsRequired();
-
             builder.Property(e => e.Type).HasMaxLength(250).IsRequired();
 
+            builder.HasMany(i => i.ResourceProjects).WithOne(e => e.Project).HasForeignKey(p=>p.ProjectId);
+            builder.HasMany(i => i.ProjectParticipations).WithOne(t => t.Project).HasForeignKey(p => p.ProjectId);
         }
     }
 }
