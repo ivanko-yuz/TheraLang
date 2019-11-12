@@ -8,7 +8,7 @@ import { ProjectParticipantsComponent } from './project-participants/project-par
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'projectParticipants', component:ProjectParticipantsComponent },
+  { path: 'projectParticipants', component: ProjectParticipantsComponent },
   { path: 'project/:id', component: ProjectInfoComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'resources', component: GeneralResourcesComponent },

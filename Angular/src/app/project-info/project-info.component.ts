@@ -18,7 +18,7 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute, private http: HttpService,
               private resourceService: ResourceService) { }
 
-  projectInfo: Project = new Project(0, '', '', '');
+  projectInfo: Project = new Project(0, '', '', '', new Date(), new Date(), false);
   projectId: number;
   generateOnceResourcesTable = false;
   sortedResourcesByCategory: Resource[][] = [];
@@ -33,7 +33,7 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
       this.http.getProjectInfo(this.projectId).subscribe((data: Project) => this.projectInfo = data);
     });
   }
-  
+
   async getResourcesData() {
     if (!this.generateOnceResourcesTable) {
       const allResources = await this.resourceService.getAllResourcesByProjId(this.projectId);

@@ -16,7 +16,7 @@ export class ProjectComponent implements OnInit {
   projects: Project[];
 
   constructor(private httpService: HttpService,
-    private dialog: MatDialog) { }
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects);
@@ -25,8 +25,8 @@ export class ProjectComponent implements OnInit {
   onCreate() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "60%";
-    dialogConfig.height = "40%";
+    dialogConfig.width = '60%';
+    dialogConfig.height = '40%';
     this.dialog.open(CreateProjectComponent, dialogConfig);
   }
 

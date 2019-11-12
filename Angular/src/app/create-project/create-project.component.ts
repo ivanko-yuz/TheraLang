@@ -8,10 +8,9 @@ import { MatDialog } from '@angular/material';
 })
 export class CreateProjectComponent implements OnInit {
 
-  constructor(public dialog:MatDialog) { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
-    
   }
 
 }

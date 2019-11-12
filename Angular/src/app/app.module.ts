@@ -115,9 +115,7 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,  
-  ],
-
+    ScrollingModule,
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [ResourceService, HttpService, EventService],
