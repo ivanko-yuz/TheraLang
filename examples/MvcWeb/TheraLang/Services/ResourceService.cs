@@ -16,7 +16,7 @@ namespace MvcWeb.TheraLang.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public Resource GetResourceById(int? Id)
+        public Resource GetResourceById(int Id)
         {
 
             try
@@ -75,11 +75,27 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        public IEnumerable<Resource> GetAllResourcesWhereProjectIdNull(int? Id)
+        public IEnumerable<Resource> GetAllResourcesByProjectId(int? Id)
         {
             try
             {
-                IEnumerable<Resource>resources = unitOfWork.Repository<Resource>().Get().Where(i => i.ResourceProjectId == Id); 
+                IEnumerable<Resource> resources = unitOfWork.Repository<Resource>().Get()
+                    .Where(resource => resource.ResourceProject.Any(p => p.Id == Id));
+
+                return resources;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error when get resources with Id equal null: ", ex);
+            }
+        }
+
+        public IEnumerable<Resource> GetAllResources(int pageNumber, int recordsPerPage)
+        {
+            //TODO
+            try
+            {
+                IEnumerable<Resource> resources = unitOfWork.Repository<Resource>().Get().Where(i => !i.ResourceProject.Any());
                 return resources;
             }
             catch (Exception ex)
