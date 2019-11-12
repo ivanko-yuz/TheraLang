@@ -74,6 +74,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.Manager.Summernote"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.Manager.TinyMCE", "core\Piranha.Manager.TinyMCE\Piranha.Manager.TinyMCE.csproj", "{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheraLang.DataSeeding", "examples\TheraLang.DataSeeding\TheraLang.DataSeeding.csproj", "{98EB6508-7993-431B-B6BA-4E9EF374F376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,6 +154,10 @@ Global
 		{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -175,6 +181,7 @@ Global
 		{D61EFBBC-5DB5-4810-9FE7-B9FE0C47A035} = {42A64587-89B5-48F2-84D4-85B97F7847F1}
 		{DE3DC067-69E7-4CD4-BA76-02D4898ABA25} = {42A64587-89B5-48F2-84D4-85B97F7847F1}
 		{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9} = {42A64587-89B5-48F2-84D4-85B97F7847F1}
+		{98EB6508-7993-431B-B6BA-4E9EF374F376} = {A82A5922-BF05-4DD7-A2C1-DD22F1AD6A57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF88AA05-D127-4707-8214-A230F0DA569B}
