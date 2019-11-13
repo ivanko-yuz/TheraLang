@@ -72,6 +72,7 @@ namespace MvcWeb
 
             services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
+            services.RegisterPiranhaWebApiServices();
 
             #endregion
         }
