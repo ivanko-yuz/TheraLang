@@ -63,6 +63,13 @@ namespace MvcWeb.TheraLang.Controllers
              IEnumerable<Resource> resourse = service.GetAllResources(pageNumber, recordsPerPage); 
             return Ok(resourse);
         }
+        [HttpGet]
+        [Route("all/count")]
+        public IActionResult GetCountAllResources()
+        {
+            int countResources = service.GetCountAllResources();
+            return Ok(countResources);
+        }
 
         [HttpDelete]
         [Route("delete/{Id}")]

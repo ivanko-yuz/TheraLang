@@ -104,5 +104,17 @@ namespace MvcWeb.TheraLang.Services
                 throw new Exception($"Error when get all resources: ", ex);
             }
         }
+        public int GetCountAllResources()
+        {
+            try
+            {
+                int countAllResources = unitOfWork.Repository<Resource>().Get().Count();
+                return countAllResources;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error when get count all resources", ex);
+            }
+        }
     }
 }
