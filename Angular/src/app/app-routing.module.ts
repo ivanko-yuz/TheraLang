@@ -1,9 +1,9 @@
-import { GeneralResourcesComponent } from './core/resources/general-resources/general-resources.component';
+import { GeneralResourcesComponent } from './ui/resources/general-resources/general-resources.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProjectListComponent } from './core/projects/project-list/project-list.component';
+import { ProjectListComponent } from './ui/projects/project-list/project-list.component';
 import { HomeComponent } from './ui/home/home.component';
-import {ProjectInfoComponent} from './core/projects/project-info/project-info.component';
+import {ProjectInfoComponent} from './ui/projects/project-info/project-info.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

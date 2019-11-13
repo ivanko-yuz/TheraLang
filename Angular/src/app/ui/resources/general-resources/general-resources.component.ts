@@ -1,6 +1,6 @@
-import { ResourceService } from '../../../ui/resources/resources-table/resource.service';
+import { ResourceService } from '../resources-table/resource.service';
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { Resource } from '../../../ui/resources/resources-table/resource';
+import { Resource } from '../resources-table/resource';
 
 @Component({
   selector: 'app-general-resources',

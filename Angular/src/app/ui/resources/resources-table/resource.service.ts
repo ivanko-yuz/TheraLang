@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Resource } from './resource';
-import { HttpProjectService } from '../../../core/projects/shared/http-project.service';
+import { HttpProjectService } from '../../projects/shared/http-project.service';
 
 @Injectable()
 export class ResourceService {
