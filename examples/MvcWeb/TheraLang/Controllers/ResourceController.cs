@@ -5,6 +5,7 @@ using MvcWeb.TheraLang.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvcWeb.TheraLang.Constants;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -48,18 +49,18 @@ namespace MvcWeb.TheraLang.Controllers
             }
         }
         [HttpGet]
-        [Route("project/{Id}")]
-        public IActionResult GetAllResourcesByProjectId(int Id) //only on projects page
+        [Route("all/project/{id}")]
+        public IActionResult GetAllResourcesByProjectId(int id)
         {
-             IEnumerable<Resource> resourse = service.GetAllResourcesByProjectId(Id);
+             IEnumerable<Resource> resourse = service.GetAllResourcesByProjectId(id);
              return Ok(resourse);
         }
 
         [HttpGet]
-        [Route("project")]
-        public IActionResult GetAllResources(int pageNumber = 0, int recordsPerPage = 10)    //todo move to constant PaginationConsts -> RecordsPerPage
+        [Route("all/{pageNumber}/{recordsPerPage?}")]
+        public IActionResult GetAllResources(int pageNumber = 0, int recordsPerPage = PaginationConstants.RecordsPerPage)
         {
-             IEnumerable<Resource> resourse = service.GetAllResources(pageNumber, recordsPerPage);  //todo: implement and change naming in entity ResourceProject to ResourceProjects
+             IEnumerable<Resource> resourse = service.GetAllResources(pageNumber, recordsPerPage); 
             return Ok(resourse);
         }
 

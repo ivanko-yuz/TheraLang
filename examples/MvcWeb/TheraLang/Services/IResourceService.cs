@@ -15,7 +15,7 @@ namespace MvcWeb.TheraLang.Services
 
         Resource GetResourceById(int Id);
 
-        IEnumerable<Resource> GetAllResourcesByProjectId(int? Id);
+        IEnumerable<Resource> GetAllResourcesByProjectId(int Id);
         IEnumerable<Resource> GetAllResources(int pageNumber, int recordsPerPage);
     }
 }

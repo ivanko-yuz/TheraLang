@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
+using MvcWeb.TheraLang.ResourcesPagination;
 using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.TheraLang.Services
@@ -75,12 +76,12 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        public IEnumerable<Resource> GetAllResourcesByProjectId(int? Id)
+        public IEnumerable<Resource> GetAllResourcesByProjectId(int id)
         {
             try
             {
                 IEnumerable<Resource> resources = unitOfWork.Repository<Resource>().Get()
-                    .Where(resource => resource.ResourceProject.Any(p => p.Id == Id));
+                    .Where(resource => resource.ResourceProjects.Any(p => p.Id == id));
 
                 return resources;
             }
@@ -91,16 +92,16 @@ namespace MvcWeb.TheraLang.Services
         }
 
         public IEnumerable<Resource> GetAllResources(int pageNumber, int recordsPerPage)
-        {
-            //TODO
+        {           
             try
             {
-                IEnumerable<Resource> resources = unitOfWork.Repository<Resource>().Get().Where(i => !i.ResourceProject.Any());
-                return resources;
+                IEnumerable<Resource> resources = unitOfWork.Repository<Resource>().Get().Where(i => !i.ResourceProjects.Any());
+                IEnumerable<Resource> resourcesPerPages = resources.Skip((pageNumber - 1) * recordsPerPage).Take(recordsPerPage);
+                return resourcesPerPages;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when get resources with Id equal null: ", ex);
+                throw new Exception($"Error when get all resources: ", ex);
             }
         }
     }
