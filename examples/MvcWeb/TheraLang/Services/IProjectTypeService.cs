@@ -1,5 +1,6 @@
 ﻿using MvcWeb.TheraLang.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MvcWeb.TheraLang.Services
 {
@@ -8,5 +9,6 @@ namespace MvcWeb.TheraLang.Services
         IEnumerable<ProjectType> GetAllProjectsType();
 
         ProjectType GetProjectTypeById(int id);
+        Task TryAddProjectType(ProjectType projectType);
     }
 }

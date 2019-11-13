@@ -50,5 +50,11 @@ namespace MvcWeb.TheraLang.Controllers
            
             return Ok(project);
         }
+        [HttpGet("page{page}/{pagesize}")]
+        public IActionResult ProjectsPagination(int page,  int pageSize)
+        {
+            ProjectService.GetProjects(page, pageSize);
+            return Ok();
+        }
     }
 }

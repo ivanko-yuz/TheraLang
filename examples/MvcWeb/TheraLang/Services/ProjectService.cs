@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MvcWeb.TheraLang.Constants;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
 
@@ -33,6 +34,19 @@ namespace MvcWeb.TheraLang.Services
             {
                 e.Data["projectViewModel"] = projectViewModel;
                 throw;
+            }
+        }
+        public IEnumerable<Project> GetProjects(int pageNumber, int pageSize = PaginationConstants.RecordsPerPage)
+        {
+            try
+            {
+                IEnumerable<Project> projects = uow.Repository<Project>().Get();
+                IEnumerable<Project> projectsPerPages = projects.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+                return projectsPerPages;
+            }
+            catch(Exception e)
+            {
+                throw new Exception("projects can`t be found");
             }
         }
         public async Task UpdateAsync(int id, Project project)

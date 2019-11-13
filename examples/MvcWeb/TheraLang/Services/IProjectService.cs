@@ -14,5 +14,7 @@ namespace MvcWeb.TheraLang.Services
         IEnumerable<Project> GetAllProjects();
 
         Project GetById(int id);
+
+        IEnumerable<Project> GetProjects(int pageNumber, int pageSize);
     }
 }

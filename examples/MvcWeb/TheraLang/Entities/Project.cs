@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace MvcWeb.TheraLang.Entities
 {
     public class Project
