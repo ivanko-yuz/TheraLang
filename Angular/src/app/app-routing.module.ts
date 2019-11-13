@@ -1,4 +1,4 @@
-import { GeneralResourcesComponent } from './core/resources/general-resources/general-resources.component';
+import { GeneralResourcesComponent } from './ui/resources/general-resources/general-resources.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjectListComponent } from './core/projects/project-list/project-list.component';

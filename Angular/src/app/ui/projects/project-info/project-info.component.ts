@@ -1,4 +1,4 @@
-import { ResourceService } from '../../../ui/resources/resources-table/resource.service';
+import { ResourceService } from '../../resources/resources-table/resource.service';
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../shared/project';
