@@ -73,6 +73,8 @@ namespace MvcWeb
             services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
             services.RegisterPiranhaWebApiServices();
+            services.AddCors(options =>
+                options.AddPolicy("development mode", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
             #endregion
         }
@@ -83,6 +85,7 @@ namespace MvcWeb
             app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
+                app.UseCors("development mode");
                 app.UseDeveloperExceptionPage();
             }
 

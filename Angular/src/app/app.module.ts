@@ -41,6 +41,7 @@ import { ResourcesTableComponent } from './resources-table/resources-table.compo
 import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
 import { ResourceService } from './resources-table/resource.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     CustomDatePipe,
     ResourcesTableComponent,
     ResourcesInternalTableComponent,
-    GeneralResourcesComponent
+    GeneralResourcesComponent,
+    ToolbarItemComponent,
   ],
   entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
   imports: [

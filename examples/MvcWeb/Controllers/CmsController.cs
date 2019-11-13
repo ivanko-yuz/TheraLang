@@ -9,7 +9,8 @@ using Piranha.Models;
 
 namespace MvcWeb.Controllers
 {
-    [Route("/api/[controller]")]
+    //[Route("/api")]
+    [Route("/")]
     public class CmsController : ControllerBase
     {
         private readonly PiranhaSitemapService _piranhaSitemapService;
@@ -25,7 +26,7 @@ namespace MvcWeb.Controllers
             _loader = loader;
         }
 
-        [HttpGet("sitemap")]
+        [HttpGet("/api/sitemap")]
         public async Task<IActionResult> Sitemap(Guid? id = null)
         {
             return Ok(await _piranhaSitemapService.GetSiteMap());
