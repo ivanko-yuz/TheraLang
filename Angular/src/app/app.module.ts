@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {
-  MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
+import { MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
   MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
   MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
   MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
