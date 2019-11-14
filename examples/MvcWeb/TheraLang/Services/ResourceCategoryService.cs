@@ -19,7 +19,7 @@ namespace MvcWeb.TheraLang.Services
             try
             {
                 ResourceCategory category = _unitOfWork.Repository<ResourceCategory>().
-                                            Get().Where(i => i.Id == categoryId).SingleOrDefault();
+                                            Get().SingleOrDefault(i => i.Id == categoryId);
                 category.Type = newTypeName;
 
                 _unitOfWork.Repository<ResourceCategory>().Update(category);
@@ -27,7 +27,8 @@ namespace MvcWeb.TheraLang.Services
             }
             catch(System.Exception ex)
             {
-                throw new System.Exception($"Error when changing resource type: ", ex);
+                throw new System.Exception($"Error when changing resource category for {nameof(categoryId)}:{categoryId} " +
+                    $"and {nameof(newTypeName)}:{newTypeName}: ", ex);
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
+using System;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -21,7 +22,11 @@ namespace MvcWeb.TheraLang.Controllers
         {
             if( categoryId == default )
             {
-                throw new System.ArgumentException($"{nameof(categoryId)} can not be 0");
+                throw new ArgumentException($"{nameof(categoryId)} can not be 0");
+            }
+            if(newTypeName == null)
+            {
+                throw new ArgumentException($"{nameof(newTypeName)} can not be null");
             }
             await _service.ChangeType(categoryId, newTypeName);
             return Ok();

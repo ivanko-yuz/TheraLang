@@ -33,7 +33,8 @@ namespace MvcWeb.TheraLang.Services
             }
             catch(Exception ex)
             {
-                throw new Exception($"Error when creating request: ", ex);
+                throw new Exception($"Error when creating request for {nameof(userId)}:{userId}" +
+                    $"and {nameof(projectId)}:{projectId}: ", ex);
             }
         }
     }

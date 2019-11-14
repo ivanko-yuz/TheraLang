@@ -21,6 +21,10 @@ namespace MvcWeb.TheraLang.Controllers
         [Route("create/{resource}")]
         public async Task<IActionResult> PostResource([FromBody]Resource resource)
         {
+            if(resource == null)
+            {
+                throw new ArgumentException($"{nameof(resource)} can not be null");
+            }
             await _service.AddResource(resource);            
             return Ok();
         }
@@ -32,6 +36,10 @@ namespace MvcWeb.TheraLang.Controllers
             if (updatedById == default)
             {
                 throw new ArgumentException($"{nameof(updatedById)} can not be 0");
+            }
+            if(resource == null)
+            {
+                throw new ArgumentException($"{nameof(resource)} can not be 0");
             }
             await _service.UpdateResource(resource, updatedById);
             return Ok();
