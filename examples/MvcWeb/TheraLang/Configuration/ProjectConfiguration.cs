@@ -10,14 +10,14 @@ namespace MvcWeb.TheraLang.Configuration
         {
             builder.ToTable("Projects");
 
-            builder.HasKey(e => e.Id);
+            builder.HasKey(x => x.Id);
 
-            builder.Property(e => e.Id).ValueGeneratedOnAdd();
-            builder.Property(e => e.Name).HasMaxLength(250).IsRequired();
-            builder.Property(e => e.Type).HasMaxLength(250).IsRequired();
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Name).HasMaxLength(250).IsRequired();
+            builder.Property(x => x.Type).HasMaxLength(250).IsRequired();
 
-            builder.HasMany(i => i.ResourceProjects).WithOne(e => e.Project).HasForeignKey("ProjectId");
-            builder.HasMany(i => i.ProjectParticipations).WithOne(t => t.Project).HasForeignKey("ProjectId");
+            builder.HasMany(x => x.ResourceProjects).WithOne(i => i.Project).HasForeignKey("ProjectId");
+            builder.HasMany(x => x.ProjectParticipations).WithOne(i => i.Project).HasForeignKey("ProjectId");
         }
     }
 }

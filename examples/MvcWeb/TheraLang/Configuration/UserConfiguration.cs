@@ -10,18 +10,18 @@ namespace MvcWeb.TheraLang.Configuration
         {
             builder.ToTable("Users");
 
-            builder.HasKey(i => i.Id);
-            builder.Property(i => i.Id).ValueGeneratedOnAdd();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-            builder.Property(i => i.FirstName).HasMaxLength(50).IsRequired();
-            builder.Property(i => i.LastName).HasMaxLength(50).IsRequired();
-            builder.Property(i => i.Email).HasMaxLength(100).IsRequired();
-            builder.Property(i => i.PhooneNumber).IsRequired();
-            builder.Property(i => i.IsEmailConfirmed).IsRequired();
-            builder.Property(i => i.IsPhoneNumberConfirmed).IsRequired();
-            builder.Property(i => i.RegistrationDate).IsRequired();
+            builder.Property(x => x.FirstName).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.LastName).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.Email).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.PhooneNumber).IsRequired();
+            builder.Property(x => x.IsEmailConfirmed).IsRequired();
+            builder.Property(x => x.IsPhoneNumberConfirmed).IsRequired();
+            builder.Property(x => x.RegistrationDate).IsRequired();
 
-            builder.HasMany(r => r.Resources).WithOne(i => i.User);
+            builder.HasMany(x => x.Resources).WithOne(i => i.User);
         }
     }
 }

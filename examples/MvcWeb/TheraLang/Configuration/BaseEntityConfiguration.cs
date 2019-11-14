@@ -8,13 +8,13 @@ namespace MvcWeb.TheraLang.Configuration
     {
         public virtual void Configure(EntityTypeBuilder<TBase> builder)
         {
-            builder.HasKey(i => i.Id);
-            builder.Property(i => i.Id).ValueGeneratedOnAdd();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-            builder.Property(i => i.CreatedById).IsRequired();
-            builder.Property(i => i.CreatedDateUtc).IsRequired();
-            builder.Property(i => i.UpdatedById).HasDefaultValue();
-            builder.Property(i => i.UpdatedDateUtc).HasDefaultValue();
+            builder.Property(x => x.CreatedById).IsRequired();
+            builder.Property(x => x.CreatedDateUtc).IsRequired();
+            builder.Property(x => x.UpdatedById).HasDefaultValue();
+            builder.Property(x => x.UpdatedDateUtc).HasDefaultValue();
         }
     }
 }

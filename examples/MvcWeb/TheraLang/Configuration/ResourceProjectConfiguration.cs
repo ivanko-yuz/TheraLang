@@ -10,11 +10,11 @@ namespace MvcWeb.TheraLang.Configuration
         {
             builder.ToTable("ResourceToProject");
 
-            builder.HasKey(i => i.Id);
-            builder.Property(i => i.Id).ValueGeneratedOnAdd();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-            builder.Property(i => i.ProjectId).IsRequired();
-            builder.Property(r => r.ResourceId).IsRequired();
+            builder.Property(x => x.ProjectId).IsRequired();
+            builder.Property(x => x.ResourceId).IsRequired();
         }
     }
 }

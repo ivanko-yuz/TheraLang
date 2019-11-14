@@ -9,16 +9,16 @@ namespace MvcWeb.TheraLang.Services
 {
     public class ProjectParticipationService : IProjectParticipationService
     {
-        public ProjectParticipationService(IUnitOfWork _unit)
+        public ProjectParticipationService(IUnitOfWork unit)
         {
-            this.unitOfWork = _unit;
+            _unitOfWork = unit;
         }
 
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public IEnumerable<ProjectParticipation> GetAll()
         {
-            return unitOfWork.Repository<ProjectParticipation>().Get().ToList();
+            return _unitOfWork.Repository<ProjectParticipation>().Get().ToList();
         }
 
         public async Task CreateRequest(int userId, int projectId)
@@ -28,8 +28,8 @@ namespace MvcWeb.TheraLang.Services
                 ProjectParticipation member = new ProjectParticipation 
                 { CreatedById = userId, ProjectId = projectId, UpdatedDateUtc = DateTime.UtcNow };
 
-                await unitOfWork.Repository<ProjectParticipation>().Add(member);
-                await unitOfWork.SaveChangesAsync();
+                await _unitOfWork.Repository<ProjectParticipation>().Add(member);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch(Exception ex)
             {

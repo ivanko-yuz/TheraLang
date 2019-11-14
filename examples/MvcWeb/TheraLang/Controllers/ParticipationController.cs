@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
 using System.Collections.Generic;
+using System;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -10,19 +11,18 @@ namespace MvcWeb.TheraLang.Controllers
     [ApiController]
     public class ParticipationController : ControllerBase
     {
-        public ParticipationController(IProjectParticipationService _service)
+        public ParticipationController(IProjectParticipationService service)
         {
-            this.service = _service;
+            _service = service;
         }
 
-        private readonly IProjectParticipationService service;
+        private readonly IProjectParticipationService _service;
 
         [HttpGet]
         [Route("get")]
         public IActionResult Get()
         {
-            IEnumerable<ProjectParticipation> members = service.GetAll();
-
+            IEnumerable<ProjectParticipation> members = _service.GetAll();
             return Ok(members);
         }
 
@@ -30,8 +30,11 @@ namespace MvcWeb.TheraLang.Controllers
         [Route("create/{userId}/{projectId}")]
         public async Task<IActionResult> Post([FromBody] int userId, int projectId)
         {
-            await service.CreateRequest(userId, projectId);
-
+            if( userId == default || projectId == default )
+            {
+                throw new ArgumentException($"{nameof(userId)} or {nameof(projectId)} can not be 0");
+            }
+            await _service.CreateRequest(userId, projectId);
             return Ok();
         }
     }

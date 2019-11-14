@@ -1,7 +1,8 @@
-﻿    using MvcWeb.TheraLang.Entities;
+﻿using MvcWeb.TheraLang.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
+using System;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -9,19 +10,18 @@ namespace MvcWeb.TheraLang.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService _service)
+        public ResourceController(IResourceService service)
         {
-            this.service = _service;
+            _service = service;
         }
 
-        private readonly IResourceService service;
+        private readonly IResourceService _service;
 
         [HttpPost]
         [Route("create/{resource}")]
         public async Task<IActionResult> PostResource([FromBody]Resource resource)
         {
-            await service.AddResource(resource);
-            
+            await _service.AddResource(resource);            
             return Ok();
         }
 
@@ -29,8 +29,11 @@ namespace MvcWeb.TheraLang.Controllers
         [Route("update/{resource}/{updatedById}")]
         public async Task<IActionResult> PutResource([FromBody] Resource resource, int updatedById)
         {
-            await service.UpdateResource(resource, updatedById);
-
+            if (updatedById == default)
+            {
+                throw new ArgumentException($"{nameof(updatedById)} can not be 0");
+            }
+            await _service.UpdateResource(resource, updatedById);
             return Ok();
         }
 
@@ -38,8 +41,11 @@ namespace MvcWeb.TheraLang.Controllers
         [Route("get/{Id}")]
         public IActionResult GetResource([FromBody]int Id)
         {
-            Resource resource = service.GetResourceById(Id);
-
+            if (Id == default)
+            {
+                throw new ArgumentException($"{nameof(Id)} can not be 0");
+            }
+            Resource resource = _service.GetResourceById(Id);
             return Ok(resource);
         }
 
@@ -47,8 +53,11 @@ namespace MvcWeb.TheraLang.Controllers
         [Route("delete/{Id}")]
         public async Task<IActionResult> DeleteResource([FromBody]int Id)
         {
-            await service.RemoveResource(Id);
-
+            if (Id == default)
+            {
+                throw new ArgumentException($"{nameof(Id)} can not be 0");
+            }
+            await _service.RemoveResource(Id);
             return Ok();
         }
     }

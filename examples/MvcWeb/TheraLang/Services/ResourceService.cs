@@ -8,18 +8,18 @@ namespace MvcWeb.TheraLang.Services
 {
     public class ResourceService : IResourceService
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ResourceService(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public Resource GetResourceById(int Id)
         {
             try
             {
-                Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).SingleOrDefault();
+                Resource resource = _unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).SingleOrDefault();
                 return resource;
             }
             catch(Exception ex)
@@ -33,8 +33,8 @@ namespace MvcWeb.TheraLang.Services
             try
             {
                 resource.CreatedDateUtc = DateTime.UtcNow;
-                await unitOfWork.Repository<Resource>().Add(resource);
-                await unitOfWork.SaveChangesAsync();
+                await _unitOfWork.Repository<Resource>().Add(resource);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -49,8 +49,8 @@ namespace MvcWeb.TheraLang.Services
                 resource.UpdatedDateUtc = DateTime.UtcNow;
                 resource.UpdatedById = updatetById;
 
-                unitOfWork.Repository<Resource>().Update(resource);
-                await unitOfWork.SaveChangesAsync();
+                _unitOfWork.Repository<Resource>().Update(resource);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch(Exception ex)
             {
@@ -62,10 +62,10 @@ namespace MvcWeb.TheraLang.Services
         {
             try
             {
-                Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).SingleOrDefault();
-                unitOfWork.Repository<Resource>().Remove(resource);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).SingleOrDefault();
+                _unitOfWork.Repository<Resource>().Remove(resource);
 
-                await unitOfWork.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
             }
             catch(Exception ex)
             {

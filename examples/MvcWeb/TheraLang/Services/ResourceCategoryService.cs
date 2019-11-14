@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
@@ -8,27 +7,27 @@ namespace MvcWeb.TheraLang.Services
 {
     public class ResourceCategoryService : IResourceCategoryService
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ResourceCategoryService(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task ChangeType(int categoryId, string newType)
+        public async Task ChangeType(int categoryId, string newTypeName)
         {
             try
             {
-                ResourceCategory category = unitOfWork.Repository<ResourceCategory>().
+                ResourceCategory category = _unitOfWork.Repository<ResourceCategory>().
                                             Get().Where(i => i.Id == categoryId).SingleOrDefault();
-                category.Type = newType;
+                category.Type = newTypeName;
 
-                unitOfWork.Repository<ResourceCategory>().Update(category);
-                await unitOfWork.SaveChangesAsync();
+                _unitOfWork.Repository<ResourceCategory>().Update(category);
+                await _unitOfWork.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch(System.Exception ex)
             {
-                throw new Exception($"Error when changing resource type: ", ex);
+                throw new System.Exception($"Error when changing resource type: ", ex);
             }
         }
     }
