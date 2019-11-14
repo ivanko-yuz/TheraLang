@@ -11,7 +11,7 @@ namespace MvcWeb.TheraLang.Entities
 
         public string Details { get; set; }
 
-        public DateTime ProjectBegin { get; set; }
+        public DateTime ProjectStart { get; set; }
 
         public DateTime ProjectEnd { get; set; }
 

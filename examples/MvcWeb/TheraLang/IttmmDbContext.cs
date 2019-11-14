@@ -80,6 +80,7 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new PiranhaUserTokenConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());
+            modelBuilder.ApplyConfiguration(new ProjectTypeConfigurationcs());
         }
     }
 }

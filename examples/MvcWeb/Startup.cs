@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MvcWeb.Db;
-using MvcWeb.TheraLang.Services;
+using MvcWeb.Services;
 using MvcWeb.TheraLang.UnitOfWork;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;

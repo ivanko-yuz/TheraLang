@@ -1,59 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MvcWeb.Services;
 using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.Services;
+using System;
 using System.Collections.Generic;
 
-namespace MvcWeb.TheraLang.Controllers
+namespace MvcWeb.Controllers
 {
     [Route("api/projects")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        public IProjectService ProjectService; 
+        private readonly IProjectService _projectService; 
         public ProjectController(IProjectService projectService)
         {
-            ProjectService = projectService;
+            _projectService = projectService;
         }
         [HttpPost("create")]
         public IActionResult CreateProject(Project project)
         {
             if(project == null)
             {
-                throw new System.NullReferenceException($"project can`t be null");
+                throw new ArgumentException($"{nameof(project)} cannot be null");
             }
-            ProjectService.TryAddProject(project);
+            _projectService.TryAddProject(project);
             return  Ok(project);
         }
+
         [HttpGet]
         public IEnumerable<Project> GetAllProjects()
         {
-            return ProjectService.GetAllProjects();
+            return _projectService.GetAllProjects();
         }
+
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)
         {
-           var project = ProjectService.GetById(id);
-            if(project == null)
-            {
-                throw new System.NullReferenceException($"project with id {id} not found");
-            }
+           var project = _projectService.GetById(id);
             return Ok(project);            
         }
+
         [HttpPut("update{id}")]
         public IActionResult EditProject(int id,Project project)
         {
-            ProjectService.UpdateAsync(id,project);
-            if (project == null)
-            {
-                throw new System.NullReferenceException($"project with id {id} not found");
-            }
-           
+            _projectService.UpdateAsync(id,project);
             return Ok(project);
         }
+
         [HttpGet("page{page}/{pagesize}")]
         public IActionResult ProjectsPagination(int page,  int pageSize)
         {
-            ProjectService.GetProjects(page, pageSize);
+            _projectService.GetProjects(page, pageSize);
             return Ok();
         }
     }

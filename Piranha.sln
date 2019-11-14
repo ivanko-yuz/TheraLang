@@ -70,10 +70,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.Manager.Summernote"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.Manager.TinyMCE", "core\Piranha.Manager.TinyMCE\Piranha.Manager.TinyMCE.csproj", "{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit-Tests", "Unit-Tests", "{34525685-BF39-47FB-8642-324D4797900A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheraLangTests", "TheraLangTests\TheraLangTests.csproj", "{C61FFBB9-5D22-4833-8949-D539168DB9D2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,10 +148,6 @@ Global
 		{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C61FFBB9-5D22-4833-8949-D539168DB9D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C61FFBB9-5D22-4833-8949-D539168DB9D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C61FFBB9-5D22-4833-8949-D539168DB9D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C61FFBB9-5D22-4833-8949-D539168DB9D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -179,7 +171,6 @@ Global
 		{D61EFBBC-5DB5-4810-9FE7-B9FE0C47A035} = {42A64587-89B5-48F2-84D4-85B97F7847F1}
 		{DE3DC067-69E7-4CD4-BA76-02D4898ABA25} = {42A64587-89B5-48F2-84D4-85B97F7847F1}
 		{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9} = {42A64587-89B5-48F2-84D4-85B97F7847F1}
-		{C61FFBB9-5D22-4833-8949-D539168DB9D2} = {34525685-BF39-47FB-8642-324D4797900A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF88AA05-D127-4707-8214-A230F0DA569B}

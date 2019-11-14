@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
 
-namespace MvcWeb.TheraLang.Services
+namespace MvcWeb.Services
 {
     public class ProjectTypeService : IProjectTypeService
     {
@@ -16,17 +17,17 @@ namespace MvcWeb.TheraLang.Services
         }
         public IEnumerable<ProjectType> GetAllProjectsType()
         {
-            return uow.Repository<ProjectType>().Get().ToList();
+            return uow.Repository<ProjectType>().Get().AsNoTracking().ToList();
         }
 
         public ProjectType GetProjectTypeById(int id)
         {
             try
             {
-                ProjectType projectType = uow.Repository<ProjectType>().Get().ToList().FirstOrDefault(p => p.Id == id);
-                if (projectType == null)
+                ProjectType projectType = uow.Repository<ProjectType>().Get().FirstOrDefault(p => p.Id == id);
+                if (id == default(int))
                 {
-                    throw new NullReferenceException("project with id {id} not found");
+                    new ArgumentException($"{nameof(id)} cannot be 0");
                 }
                 return projectType;
             }
@@ -36,12 +37,12 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        async Task IProjectTypeService.TryAddProjectType(ProjectType projecttype)
+        public async Task TryAddProjectType(ProjectType projecttype)
         {
                 ProjectType Projecttype = new ProjectType { TypeName = projecttype.TypeName };
                 if(Projecttype == null)
                 {
-                    throw new NullReferenceException("projectType can`t be null");
+                    throw new NullReferenceException($"{nameof(Projecttype)} can`t be null");
                 }
                 try
                 {
@@ -50,8 +51,7 @@ namespace MvcWeb.TheraLang.Services
                 }
                 catch(Exception e)
                 {
-                    e.Data["project"] = projecttype;
-                    throw;
+                    throw new Exception("error when trying to add new data");
                 }
         }
     }

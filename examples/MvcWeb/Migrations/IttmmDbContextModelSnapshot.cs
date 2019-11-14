@@ -826,7 +826,7 @@ namespace MvcWeb.Migrations
                         .IsRequired()
                         .HasMaxLength(250);
 
-                    b.Property<DateTime>("ProjectBegin");
+                    b.Property<DateTime>("ProjectStart");
 
                     b.Property<DateTime>("ProjectEnd");
 

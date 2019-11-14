@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MvcWeb.TheraLang.Entities;
+﻿using MvcWeb.TheraLang.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MvcWeb.TheraLang.Services
+namespace MvcWeb.Services
 {
     public interface IProjectService
     {

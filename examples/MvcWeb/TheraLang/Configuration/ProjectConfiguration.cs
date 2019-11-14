@@ -18,7 +18,7 @@ namespace MvcWeb.TheraLang.Configuration
             
             builder.Property(e => e.Description).HasMaxLength(5000).IsRequired();
 
-            builder.Property(e => e.ProjectBegin).IsRequired();
+            builder.Property(e => e.ProjectStart).IsRequired();
 
             builder.Property(e => e.ProjectEnd).IsRequired();
 

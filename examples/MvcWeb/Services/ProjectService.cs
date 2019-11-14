@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MvcWeb.TheraLang.Constants;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
 
-namespace MvcWeb.TheraLang.Services
+namespace MvcWeb.Services
 {
     
     public class ProjectService : IProjectService
@@ -15,16 +16,19 @@ namespace MvcWeb.TheraLang.Services
         {
             uow = unitOfWork;
         }
+
         private IUnitOfWork uow { get; }
+
         public IEnumerable<Project> GetAllProjects()
         {
-            return uow.Repository<Project>().Get().ToList();
+            return uow.Repository<Project>().Get().AsNoTracking().ToList();
         }
+
         async Task IProjectService.TryAddProject(Project projectViewModel)
         {
             var newProject = new Project { Name = projectViewModel.Name, Details = projectViewModel.Details,
                 Description = projectViewModel.Description, IsActive = projectViewModel.IsActive,
-                ProjectBegin = projectViewModel.ProjectBegin, ProjectEnd = projectViewModel.ProjectEnd  };
+                ProjectStart = projectViewModel.ProjectStart, ProjectEnd = projectViewModel.ProjectEnd  };
             try
             {
                 await uow.Repository<Project>().Add(newProject);
@@ -36,6 +40,7 @@ namespace MvcWeb.TheraLang.Services
                 throw;
             }
         }
+
         public IEnumerable<Project> GetProjects(int pageNumber, int pageSize = PaginationConstants.RecordsPerPage)
         {
             try
@@ -44,11 +49,12 @@ namespace MvcWeb.TheraLang.Services
                 IEnumerable<Project> projectsPerPages = projects.Skip((pageNumber - 1) * pageSize).Take(pageSize);
                 return projectsPerPages;
             }
-            catch(Exception e)
+            catch
             {
-                throw new Exception("projects can`t be found");
+                throw new NullReferenceException($"projects on this page can`t be found");
             }
         }
+
         public async Task UpdateAsync(int id, Project project)
         {
             try
@@ -61,18 +67,21 @@ namespace MvcWeb.TheraLang.Services
                 uow.Repository<Project>().Update(project);
                 await uow.SaveChangesAsync();               
             }
-            catch
+            catch(Exception e)
             {
+                e.Data["project"] = project;
+                throw;
             }
         }
+
         public Project GetById(int id)
         {
             try
-            {                
-                Project project = uow.Repository<Project>().Get().ToList().FirstOrDefault(p => p.Id == id);
-                if(project == null)
+            {
+                var project = uow.Repository<Project>().Get().SingleOrDefault(i => i.Id == id);
+                if (project == null)
                 {
-                    throw new NullReferenceException("project with id {id} not found");
+                    throw new NullReferenceException($"project with id {id} not found");
                 }
                 return project;
             }
