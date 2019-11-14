@@ -39,7 +39,7 @@ namespace MvcWeb.TheraLang.Controllers
             }
             if(resource == null)
             {
-                throw new ArgumentException($"{nameof(resource)} can not be 0");
+                throw new ArgumentException($"{nameof(resource)} can not be null");
             }
             await _service.UpdateResource(resource, updatedById);
             return Ok();
