@@ -169,7 +169,7 @@ namespace MvcWeb.Migrations
                     Name = table.Column<string>(maxLength: 250, nullable: false),
                     Description = table.Column<string>(maxLength: 5000, nullable: false),
                     Details = table.Column<string>(maxLength: 5000, nullable: true),
-                    ProjectBegin = table.Column<DateTime>(nullable: false),
+                    ProjectStart = table.Column<DateTime>(nullable: false),
                     ProjectEnd = table.Column<DateTime>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false)
                 },
