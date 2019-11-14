@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+
 namespace MvcWeb.Migrations
 {
     public partial class RenameProjectBegin : Migration

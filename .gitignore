@@ -365,4 +365,3 @@ healthchecksdb
 MigrationBackup/
 
 # End of https://www.gitignore.io/api/visualstudio,visualstudiocode
-/examples/MvcWeb/wwwroot/uploads
