@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcWeb.Db;
 
 namespace MvcWeb.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191105212746_ProjectParticipation_User_etc")]
+    partial class ProjectParticipation_User_etc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -916,7 +918,7 @@ namespace MvcWeb.Migrations
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
@@ -1210,7 +1212,7 @@ namespace MvcWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MvcWeb.TheraLang.Entities.Resource", "Resource")
-                        .WithMany("ResourceProjects")
+                        .WithMany("ResourceProject")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
