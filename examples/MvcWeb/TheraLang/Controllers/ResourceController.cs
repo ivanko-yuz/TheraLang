@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
 using System;
-using System.Collections.Generic;
-using MvcWeb.TheraLang.Constants;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -33,7 +31,7 @@ namespace MvcWeb.TheraLang.Controllers
 
         [HttpPut]
         [Route("update/{resource}/{updatedById}")]
-        public async Task<IActionResult> PutResource([FromBody] Resource resource, Guid updatedById)
+        public async Task<IActionResult> PutResource([FromBody] Resource resource, int updatedById)
         {
             if (updatedById == default)
             {
@@ -56,38 +54,24 @@ namespace MvcWeb.TheraLang.Controllers
                 Resource resource = _service.GetResourceById(id);
                 return Ok(resource);
             }
-        }
-
-        [HttpGet]
-        [Route("all/project/{id}")]
-        public IActionResult GetAllResourcesByProjectId(int id)
-        {
-            if (id == default)
+            if(resource == null)
             {
-                throw new ArgumentException($"{nameof(id)} cannot be 0");
+                throw new ArgumentException($"{nameof(resource)} can not be null");
             }
-            IEnumerable<Resource> resources = _service.GetAllResourcesByProjectId(id);
-             return Ok(resources);
+            await _service.UpdateResource(resource, updatedById);
+            return Ok();
         }
 
         [HttpGet]
-        [Route("all/{pageNumber}/{recordsPerPage?}")]
-        public IActionResult GetAllResources(int pageNumber, int recordsPerPage = PaginationConstants.RecordsPerPage)
+        [Route("get/{Id}")]
+        public IActionResult GetResource([FromBody]int Id)
         {
-            if (pageNumber == default)
+            if (Id == default)
             {
-                throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
+                throw new ArgumentException($"{nameof(Id)} can not be 0");
             }
-            IEnumerable<Resource> resources = _service.GetAllResources(pageNumber, recordsPerPage); 
-            return Ok(resources);
-        }
-
-        [HttpGet]
-        [Route("all/count")]
-        public IActionResult GetCountAllResources()
-        {
-            int countResources = _service.GetCountAllResources();
-            return Ok(countResources);
+            Resource resource = _service.GetResourceById(Id);
+            return Ok(resource);
         }
 
         [HttpDelete]

@@ -21,7 +21,7 @@ namespace MvcWeb.TheraLang.Services
             return _unitOfWork.Repository<ProjectParticipation>().Get().ToList();
         }
 
-        public async Task CreateRequest(Guid userId, int projectId)
+        public async Task CreateRequest(int userId, int projectId)
         {
             try
             {

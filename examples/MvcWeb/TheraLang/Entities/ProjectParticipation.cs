@@ -2,7 +2,7 @@
 {
     public class ProjectParticipation : BaseEntity
     {
-        public virtual PiranhaUser User { get; set; }
+        public virtual User User { get; set; }
         
         public MemberRole Role { get; set; }
 

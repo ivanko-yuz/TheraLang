@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
-using System;
 
 namespace MvcWeb.TheraLang.Services
 {
@@ -9,6 +8,6 @@ namespace MvcWeb.TheraLang.Services
     {
         IEnumerable<ProjectParticipation> GetAll();
 
-        Task CreateRequest(Guid userId, int projectId);
+        Task CreateRequest(int userId, int projectId);
     }
 }
