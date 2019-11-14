@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.ResourcesPagination;
 using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.TheraLang.Services
 {
     public class ResourceService : IResourceService
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ResourceService(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = unitOfWork;
+            this._unitOfWork = unitOfWork;
         }
 
-        public Resource GetResourceById(int Id)
+        public Resource GetResourceById(int id)
         {
-
             try
             {
-                Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).FirstOrDefault();
+                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == id);
                 return resource;
             }
             catch(Exception ex)
             {
-                throw new Exception($"Error when geting resource by Id: ", ex);
+                throw new Exception($"Error when geting resource by id: ", ex);
             }
         }
 
@@ -36,12 +34,12 @@ namespace MvcWeb.TheraLang.Services
             try
             {
                 resource.CreatedDateUtc = DateTime.UtcNow;
-                await unitOfWork.Repository<Resource>().Add(resource);
-                await unitOfWork.SaveChangesAsync();
+                await _unitOfWork.Repository<Resource>().Add(resource);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when adding the Id: {resource.Id} ", ex);
+                throw new Exception($"Error when adding the id: {resource.Id} ", ex);
             }
         }
 
@@ -52,23 +50,23 @@ namespace MvcWeb.TheraLang.Services
                 resource.UpdatedDateUtc = DateTime.UtcNow;
                 resource.UpdatedById = updatetById;
 
-                unitOfWork.Repository<Resource>().Update(resource);
-                await unitOfWork.SaveChangesAsync();
+                _unitOfWork.Repository<Resource>().Update(resource);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch(Exception ex)
             {
-                throw new Exception($"Error when updating the Id: {resource.Id} ", ex);
+                throw new Exception($"Error when updating the id: {resource.Id} ", ex);
             }
         }   
 
-        public async Task RemoveResource(int Id)
+        public async Task RemoveResource(int id)
         {
             try
             {
-                Resource resource = unitOfWork.Repository<Resource>().Get().Where(i => i.Id == Id).SingleOrDefault();
-                unitOfWork.Repository<Resource>().Remove(resource);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == id);
+                _unitOfWork.Repository<Resource>().Remove(resource);
 
-                await unitOfWork.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
             }
             catch(Exception ex)
             {
@@ -80,14 +78,13 @@ namespace MvcWeb.TheraLang.Services
         {
             try
             {
-                IEnumerable<Resource> resources = unitOfWork.Repository<Resource>().Get()
+                IEnumerable<Resource> resources = _unitOfWork.Repository<Resource>().Get()
                     .Where(resource => resource.ResourceProjects.Any(p => p.Id == id));
-
                 return resources;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when get resources with Id equal null: ", ex);
+                throw new Exception($"Error when get resources with id equal null: ", ex);
             }
         }
 
@@ -95,7 +92,7 @@ namespace MvcWeb.TheraLang.Services
         {           
             try
             {
-                IEnumerable<Resource> resources = unitOfWork.Repository<Resource>().Get().Where(i => !i.ResourceProjects.Any());
+                IEnumerable<Resource> resources = _unitOfWork.Repository<Resource>().Get().Where(i => !i.ResourceProjects.Any());
                 IEnumerable<Resource> resourcesPerPages = resources.Skip((pageNumber - 1) * recordsPerPage).Take(recordsPerPage);
                 return resourcesPerPages;
             }
@@ -104,11 +101,12 @@ namespace MvcWeb.TheraLang.Services
                 throw new Exception($"Error when get all resources: ", ex);
             }
         }
+
         public int GetCountAllResources()
         {
             try
             {
-                int countAllResources = unitOfWork.Repository<Resource>().Get().Count();
+                int countAllResources = _unitOfWork.Repository<Resource>().Get().Count();
                 return countAllResources;
             }
             catch (Exception ex)

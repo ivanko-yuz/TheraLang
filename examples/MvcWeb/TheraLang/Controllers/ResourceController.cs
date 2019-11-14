@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using MvcWeb.TheraLang.Constants;
 
 namespace MvcWeb.TheraLang.Controllers
@@ -13,18 +12,18 @@ namespace MvcWeb.TheraLang.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService _service)
+        public ResourceController(IResourceService service)
         {
-            this.service = _service;
+            this._service = service;
         }
 
-        private readonly IResourceService service;
+        private readonly IResourceService _service;
 
         [HttpPost]
         [Route("create/{resource}")]
         public async Task<IActionResult> PostResource([FromBody]Resource resource)
         {
-            await service.AddResource(resource);
+            await _service.AddResource(resource);
             
             return Ok();
         }
@@ -33,49 +32,59 @@ namespace MvcWeb.TheraLang.Controllers
         [Route("update/{resource}/{updatedById}")]
         public async Task<IActionResult> PutResource([FromBody] Resource resource, Guid updatedById)
         {
-            await service.UpdateResource(resource, updatedById);
+            await _service.UpdateResource(resource, updatedById);
 
             return Ok();
         }
 
         [HttpGet]
         [Route("get/{Id}")]
-        public IActionResult GetResource([FromBody]int Id)
+        public IActionResult GetResource([FromBody]int id)
         {
 
             {
-                Resource resource = service.GetResourceById(Id);
+                Resource resource = _service.GetResourceById(id);
                 return Ok(resource);
             }
         }
+
         [HttpGet]
         [Route("all/project/{id}")]
         public IActionResult GetAllResourcesByProjectId(int id)
         {
-             IEnumerable<Resource> resourse = service.GetAllResourcesByProjectId(id);
-             return Ok(resourse);
+            if (id == default)
+            {
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
+            }
+            IEnumerable<Resource> resources = _service.GetAllResourcesByProjectId(id);
+             return Ok(resources);
         }
 
         [HttpGet]
         [Route("all/{pageNumber}/{recordsPerPage?}")]
-        public IActionResult GetAllResources(int pageNumber = 0, int recordsPerPage = PaginationConstants.RecordsPerPage)
+        public IActionResult GetAllResources(int pageNumber, int recordsPerPage = PaginationConstants.RecordsPerPage)
         {
-             IEnumerable<Resource> resourse = service.GetAllResources(pageNumber, recordsPerPage); 
-            return Ok(resourse);
+            if (pageNumber == default)
+            {
+                throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
+            }
+            IEnumerable<Resource> resources = _service.GetAllResources(pageNumber, recordsPerPage); 
+            return Ok(resources);
         }
+
         [HttpGet]
         [Route("all/count")]
         public IActionResult GetCountAllResources()
         {
-            int countResources = service.GetCountAllResources();
+            int countResources = _service.GetCountAllResources();
             return Ok(countResources);
         }
 
         [HttpDelete]
         [Route("delete/{Id}")]
-        public async Task<IActionResult> DeleteResource([FromBody]int Id)
+        public async Task<IActionResult> DeleteResource([FromBody]int id)
         {
-            await service.RemoveResource(Id);
+            await _service.RemoveResource(id);
 
             return Ok();
         }
