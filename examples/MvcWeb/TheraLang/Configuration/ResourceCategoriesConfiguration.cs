@@ -10,11 +10,11 @@ namespace MvcWeb.TheraLang.Configuration
         {
             builder.ToTable("ResourceCategories");
 
-            builder.HasKey(i => i.Id);
-            builder.Property(i => i.Id).ValueGeneratedOnAdd();
-            builder.Property(i => i.Type).HasMaxLength(20).IsRequired();
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Type).HasMaxLength(50).IsRequired();
 
-            builder.HasMany(c => c.Resources).WithOne(r => r.ResourceCategory).HasForeignKey(c => c.CategoryId);
+            builder.HasMany(x => x.Resources).WithOne(i => i.ResourceCategory).HasForeignKey(x => x.CategoryId);
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using MvcWeb.Db.Entities;
 
 namespace MvcWeb.TheraLang.Entities
 {
     public class Resource : BaseEntity
     {
-        public virtual PiranhaUser User { get; set; }
+        public virtual User User { get; set; }
 
         public string Name { get; set; }
 

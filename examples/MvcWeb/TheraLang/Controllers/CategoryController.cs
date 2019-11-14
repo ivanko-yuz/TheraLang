@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
+using System;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -8,19 +9,26 @@ namespace MvcWeb.TheraLang.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        public CategoryController(IResourceCategoryService _service)
+        public CategoryController(IResourceCategoryService service)
         {
-            this.service = _service;
+            _service = service;
         }
 
-        private readonly IResourceCategoryService service;
+        private readonly IResourceCategoryService _service;
 
         [HttpPut]
         [Route("create/{categoryId}/{newType}")]
-        public async Task<IActionResult> PutType(int categoryId, string newType)
+        public async Task<IActionResult> PutType(int categoryId, string newTypeName)
         {
-            await service.ChangeType(categoryId, newType);
-
+            if( categoryId == default )
+            {
+                throw new ArgumentException($"{nameof(categoryId)} can not be 0");
+            }
+            if(newTypeName == null)
+            {
+                throw new ArgumentException($"{nameof(newTypeName)} can not be null");
+            }
+            await _service.ChangeType(categoryId, newTypeName);
             return Ok();
         }
     }

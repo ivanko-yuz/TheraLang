@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
@@ -13,19 +12,19 @@ namespace MvcWeb.TheraLang.Services
 
         public ResourceService(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
-        public Resource GetResourceById(int id)
+        public Resource GetResourceById(int Id)
         {
             try
             {
-                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == id);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == Id);
                 return resource;
             }
             catch(Exception ex)
             {
-                throw new Exception($"Error when geting resource by id: ", ex);
+                throw new Exception($"Error when geting resource by {nameof(Id)}={Id}: ", ex);  
             }
         }
 
@@ -39,11 +38,11 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when adding the id: {resource.Id} ", ex);
+                throw new Exception($"Error when adding the {nameof(resource)}: {resource.Id} ", ex);
             }
         }
 
-        public async Task UpdateResource(Resource resource, Guid updatetById)
+        public async Task UpdateResource(Resource resource, int updatetById)
         {
             try
             {
@@ -55,22 +54,22 @@ namespace MvcWeb.TheraLang.Services
             }
             catch(Exception ex)
             {
-                throw new Exception($"Error when updating the id: {resource.Id} ", ex);
+                throw new Exception($"Error when updating the {nameof(resource)}: {resource.Id}: ", ex);
             }
         }   
 
-        public async Task RemoveResource(int id)
+        public async Task RemoveResource(int Id)
         {
             try
             {
-                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == id);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == Id);
                 _unitOfWork.Repository<Resource>().Remove(resource);
 
                 await _unitOfWork.SaveChangesAsync();
             }
             catch(Exception ex)
             {
-                throw new Exception($"Error when removing the Resource: ", ex);
+                throw new Exception($"Error when remove resource by {nameof(Id)}: {Id}: ", ex);
             }
         }
 
@@ -89,7 +88,7 @@ namespace MvcWeb.TheraLang.Services
         }
 
         public IEnumerable<Resource> GetAllResources(int pageNumber, int recordsPerPage)
-        {           
+        {
             try
             {
                 IEnumerable<Resource> resources = _unitOfWork.Repository<Resource>().Get().Where(i => !i.ResourceProjects.Any());

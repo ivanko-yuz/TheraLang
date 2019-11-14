@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MvcWeb.TheraLang.Entities;
+using MvcWeb.TheraLang.ProjectStatus;
 
 namespace MvcWeb.TheraLang.Configuration
 {
@@ -10,11 +11,9 @@ namespace MvcWeb.TheraLang.Configuration
         {
             builder.ToTable("ProjectParticipations");
 
-            builder.Property(i => i.Status).HasDefaultValue(ProjectParticipationStatus.New);
-            builder.Property(y => y.Role).HasDefaultValue(MemberRole.Member);
-            builder.Property(u => u.ProjectId).IsRequired();
-
-            builder.HasOne(u => u.User).WithMany(i => i.ProjectsParticipation).HasForeignKey(f=>f.CreatedById);
+            builder.Property(x => x.Status).HasDefaultValue(ProjectParticipationStatus.New);
+            builder.Property(x => x.Role).HasDefaultValue(MemberRole.Member);
+            builder.Property(x => x.ProjectId).IsRequired();
         }
     }
 }
