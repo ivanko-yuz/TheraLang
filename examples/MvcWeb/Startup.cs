@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MvcWeb.Db;
+using MvcWeb.Helpers;
+using MvcWeb.Models;
 using MvcWeb.Services;
 using MvcWeb.TheraLang.UnitOfWork;
+using MvcWeb.Validators;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
 
@@ -33,7 +39,10 @@ namespace MvcWeb
             );
             services.AddMvc()
                 .AddPiranhaManagerOptions()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddFluentValidation(fv => { fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; });
+
+            #region Piranha setup
 
             services.AddPiranha();
             services.AddPiranhaApplication();
@@ -51,16 +60,29 @@ namespace MvcWeb
             
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
-            services.AddDbContext<IttmmDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+          
+            #endregion
+
+            #region register services via IServiceCollection
+
+            services.AddDbContext<IttmmDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IUnitOfWork, UnitOfWork.UnitOfWork>(provider =>
-               new UnitOfWork.UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
+                new UnitOfWork.UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
+
+            services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
+            services.AddTransient<IResourceService, ResourceService>();
+            services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
+            services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApi api)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApi api, ILoggerFactory loggerFactory)
         {
+            app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using MvcWeb.Services;
 using MvcWeb.TheraLang.Entities;
 using System;
 using System.Collections.Generic;
-
 namespace MvcWeb.Controllers
 {
     [Route("api/projects")]

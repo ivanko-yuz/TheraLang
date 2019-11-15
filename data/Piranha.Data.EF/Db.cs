@@ -157,6 +157,7 @@ namespace Piranha
                         // Migrate database
                         //TODO: fix Database.MIGRATE()
                         //Database.Migrate();
+                        
                         // Seed
                         Seed();
 

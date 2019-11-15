@@ -8,8 +8,7 @@ using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.Services
-{
-    
+{    
     public class ProjectService : IProjectService
     {
         public ProjectService(IUnitOfWork unitOfWork)
