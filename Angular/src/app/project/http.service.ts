@@ -9,7 +9,7 @@ export class HttpService {
 
     constructor(private http: HttpClient) { }
 
-     private url = 'https://localhost:5001/api/';
+     private url = 'http://localhost:5000/api/';
 
     getAllProjects() {
         return this.http.get(`${this.url}project`);

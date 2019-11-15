@@ -133,8 +133,6 @@ namespace MvcWeb
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");
             });
-
-            Seed.RunAsync(api).GetAwaiter().GetResult();
         }
     }
 }

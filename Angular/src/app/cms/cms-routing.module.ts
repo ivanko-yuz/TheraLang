@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {CmsGenericPageComponent} from './components/cms-generic-page/cms-generic-page.component';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '**', component: CmsGenericPageComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

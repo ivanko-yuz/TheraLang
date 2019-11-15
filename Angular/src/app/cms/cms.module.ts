@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { CmsRoutingModule } from './cms-routing.module';
+import { CmsGenericPageComponent } from './components/cms-generic-page/cms-generic-page.component';
+import {CmsRoutingModule} from './cms-routing.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [CmsGenericPageComponent],
   imports: [
     CommonModule,
-    CmsRoutingModule
-  ]
+    CmsRoutingModule,
+  ],
+  exports: []
 })
 export class CmsModule { }

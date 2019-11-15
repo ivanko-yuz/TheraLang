@@ -42,6 +42,7 @@ import { ResourcesInternalTableComponent } from './resources-internal-table/reso
 import { ResourceService } from './resources-table/resource.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
+import {CmsModule} from './cms/cms.module';
 
 
 @NgModule({
@@ -118,6 +119,7 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    CmsModule,
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [ResourceService, HttpService, EventService],
