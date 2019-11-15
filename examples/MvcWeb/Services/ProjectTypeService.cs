@@ -10,21 +10,21 @@ namespace MvcWeb.Services
 {
     public class ProjectTypeService : IProjectTypeService
     {
-        private IUnitOfWork uow { get; }
+        private readonly IUnitOfWork _uow;
         public ProjectTypeService(IUnitOfWork unitOfWork)
         {
-            uow = unitOfWork;
+            _uow = unitOfWork;
         }
         public IEnumerable<ProjectType> GetAllProjectsType()
         {
-            return uow.Repository<ProjectType>().Get().AsNoTracking().ToList();
+            return _uow.Repository<ProjectType>().Get().AsNoTracking().ToList();
         }
 
         public ProjectType GetProjectTypeById(int id)
         {
             try
             {
-                ProjectType projectType = uow.Repository<ProjectType>().Get().FirstOrDefault(p => p.Id == id);
+                ProjectType projectType = _uow.Repository<ProjectType>().Get().FirstOrDefault(p => p.Id == id);
                 if (id == default(int))
                 {
                     new ArgumentException($"{nameof(id)} cannot be 0");
@@ -46,8 +46,8 @@ namespace MvcWeb.Services
                 }
                 try
                 {
-                    await uow.Repository<ProjectType>().Add(Projecttype);
-                    await uow.SaveChangesAsync();
+                    await _uow.Repository<ProjectType>().Add(Projecttype);
+                    await _uow.SaveChangesAsync();
                 }
                 catch(Exception e)
                 {

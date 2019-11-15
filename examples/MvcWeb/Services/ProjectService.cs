@@ -14,25 +14,25 @@ namespace MvcWeb.Services
     {
         public ProjectService(IUnitOfWork unitOfWork)
         {
-            uow = unitOfWork;
+            _uow = unitOfWork;
         }
 
-        private IUnitOfWork uow { get; }
+        private readonly IUnitOfWork _uow;
 
         public IEnumerable<Project> GetAllProjects()
         {
-            return uow.Repository<Project>().Get().AsNoTracking().ToList();
+            return _uow.Repository<Project>().Get().AsNoTracking().ToList();
         }
 
-        async Task IProjectService.TryAddProject(Project projectViewModel)
+        public async Task TryAddProject(Project projectViewModel)
         {
             var newProject = new Project { Name = projectViewModel.Name, Details = projectViewModel.Details,
                 Description = projectViewModel.Description, IsActive = projectViewModel.IsActive,
                 ProjectStart = projectViewModel.ProjectStart, ProjectEnd = projectViewModel.ProjectEnd  };
             try
             {
-                await uow.Repository<Project>().Add(newProject);
-                await uow.SaveChangesAsync();
+                await _uow.Repository<Project>().Add(newProject);
+                await _uow.SaveChangesAsync();
             }
             catch(Exception e)
             {
@@ -45,7 +45,7 @@ namespace MvcWeb.Services
         {
             try
             {
-                IEnumerable<Project> projects = uow.Repository<Project>().Get();
+                IEnumerable<Project> projects = _uow.Repository<Project>().Get();
                 IEnumerable<Project> projectsPerPages = projects.Skip((pageNumber - 1) * pageSize).Take(pageSize);
                 return projectsPerPages;
             }
@@ -59,13 +59,13 @@ namespace MvcWeb.Services
         {
             try
             {
-                project = uow.Repository<Project>().Get().ToList().FirstOrDefault(p => p.Id == id);
+                project = _uow.Repository<Project>().Get().ToList().FirstOrDefault(p => p.Id == id);
                 if (project == null)
                 {
                     throw new NullReferenceException($"project with id {id} not found");
                 }
-                uow.Repository<Project>().Update(project);
-                await uow.SaveChangesAsync();               
+                _uow.Repository<Project>().Update(project);
+                await _uow.SaveChangesAsync();               
             }
             catch(Exception e)
             {
@@ -78,7 +78,7 @@ namespace MvcWeb.Services
         {
             try
             {
-                var project = uow.Repository<Project>().Get().SingleOrDefault(i => i.Id == id);
+                var project = _uow.Repository<Project>().Get().SingleOrDefault(i => i.Id == id);
                 if (project == null)
                 {
                     throw new NullReferenceException($"project with id {id} not found");
