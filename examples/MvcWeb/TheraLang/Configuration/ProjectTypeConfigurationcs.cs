@@ -8,7 +8,7 @@ namespace MvcWeb.TheraLang.Configuration
     {
         public void Configure(EntityTypeBuilder<ProjectType> builder)
         {
-            builder.ToTable("projectTypes");
+            builder.ToTable("Types");
 
             builder.HasKey(e => e.Id);
 
