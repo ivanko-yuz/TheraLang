@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
 using System;
+using System.Collections.Generic;
+using MvcWeb.TheraLang.Constants;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -67,6 +69,29 @@ namespace MvcWeb.TheraLang.Controllers
             }
             await _service.RemoveResource(Id);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("all/{pageNumber}/{recordsPerPage?}")]
+        public IActionResult GetAllResources(int pageNumber, int recordsPerPage = PaginationConstants.RecordsPerPage)
+        {
+            if (pageNumber == default)
+
+
+            {
+                throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
+            }
+
+            IEnumerable<Resource> resources = _service.GetAllResources(pageNumber, recordsPerPage);
+            return Ok(resources);
+        }
+
+        [HttpGet]
+        [Route("all/count")]
+        public IActionResult GetCountAllResources()
+        {
+            int countResources = _service.GetCountAllResources();
+            return Ok(countResources);
         }
     }
 }
