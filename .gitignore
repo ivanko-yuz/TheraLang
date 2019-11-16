@@ -478,3 +478,4 @@ e2e/*.map
 .DS_Store/
 
 # End of https://www.gitignore.io/api/angular
+/examples/MvcWeb/wwwroot/uploads
