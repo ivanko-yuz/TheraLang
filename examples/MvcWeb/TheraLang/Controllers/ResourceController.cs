@@ -76,8 +76,6 @@ namespace MvcWeb.TheraLang.Controllers
         public IActionResult GetAllResources(int pageNumber, int recordsPerPage = PaginationConstants.RecordsPerPage)
         {
             if (pageNumber == default)
-
-
             {
                 throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
             }
