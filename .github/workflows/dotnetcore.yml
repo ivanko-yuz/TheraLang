@@ -30,6 +30,14 @@ jobs:
         app-name: TheraLang
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
         package: './myapp' 
+        
+
+    - name: 'Run Smarter.ASP deploy action using publish profile credentials'
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: TheraLang
+        publish-profile: ${{ secrets.smartAspWebAppPublishProfile }}
+        package: './myapp' 
 
       
       
