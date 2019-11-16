@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MvcWeb.TheraLang.Entities;
+using MvcWeb.TheraLang.UnitOfWork;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.TheraLang.Services
 {
@@ -23,9 +23,9 @@ namespace MvcWeb.TheraLang.Services
                 Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == Id);
                 return resource;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception($"Error when geting resource by {nameof(Id)}={Id}: ", ex);  
+                throw new Exception($"Error when geting resource by {nameof(Id)}={Id}: ", ex);
             }
         }
 
@@ -53,11 +53,11 @@ namespace MvcWeb.TheraLang.Services
                 _unitOfWork.Repository<Resource>().Update(resource);
                 await _unitOfWork.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"Error when updating the {nameof(resource)}: {resource.Id}: ", ex);
             }
-        }   
+        }
 
         public async Task RemoveResource(int Id)
         {
@@ -68,7 +68,7 @@ namespace MvcWeb.TheraLang.Services
 
                 await _unitOfWork.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"Error when remove resource by {nameof(Id)}: {Id}: ", ex);
             }
