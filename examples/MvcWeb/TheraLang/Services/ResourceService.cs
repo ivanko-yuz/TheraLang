@@ -78,7 +78,7 @@ namespace MvcWeb.TheraLang.Services
         {
             try
             {
-                IEnumerable<Resource> resources = _unitOfWork.Repository<Resource>().Get().Where(i => !i.ResourceProjects.Any());
+                IEnumerable<Resource> resources = _unitOfWork.Repository<Resource>().Get();
                 IEnumerable<Resource> resourcesPerPages = resources.Skip((pageNumber - 1) * recordsPerPage).Take(recordsPerPage);
                 return resourcesPerPages;
             }
