@@ -85,5 +85,46 @@ namespace MvcWeb.TheraLang.Services
                 throw new Exception($"Error when remove resource by {nameof(Id)}: {Id}: ", ex);
             }
         }
+
+        public IEnumerable<Resource> GetAllResourcesByProjectId(int id)
+        {
+            try
+            {
+                IEnumerable<Resource> resources = _unitOfWork.Repository<Resource>().Get()
+                    .Where(resource => resource.ResourceProjects.Any(p => p.Id == id));
+                return resources;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error when get resources with id equal null: ", ex);
+            }
+        }
+
+        public IEnumerable<Resource> GetAllResources(int pageNumber, int recordsPerPage)
+        {
+            try
+            {
+                IEnumerable<Resource> resources = _unitOfWork.Repository<Resource>().Get().Where(i => !i.ResourceProjects.Any());
+                IEnumerable<Resource> resourcesPerPages = resources.Skip((pageNumber - 1) * recordsPerPage).Take(recordsPerPage);
+                return resourcesPerPages;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error when get all resources: ", ex);
+            }
+        }
+
+        public int GetCountAllResources()
+        {
+            try
+            {
+                int countAllResources = _unitOfWork.Repository<Resource>().Get().Count();
+                return countAllResources;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error when get count all resources", ex);
+            }
+        }
     }
 }
