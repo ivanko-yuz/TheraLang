@@ -136,7 +136,7 @@ namespace MvcWeb
                     template: "{controller=home}/{action=index}/{id?}");
             });
 
-            Seed.RunAsync(api).GetAwaiter().GetResult();
+            //Seed.RunAsync(api).GetAwaiter().GetResult(); //TODO: fix seeding
         }
     }
 }
