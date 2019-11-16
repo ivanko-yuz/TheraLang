@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
 
 namespace MvcWeb.TheraLang.Services
@@ -12,5 +13,7 @@ namespace MvcWeb.TheraLang.Services
         Task RemoveResource(int Id);
 
         Resource GetResourceById(int Id);
+        int GetCountAllResources();
+        IEnumerable<Resource> GetAllResources(int pageNumber, int recordsPerPage);
     }
 }
