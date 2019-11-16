@@ -47,23 +47,6 @@ namespace MvcWeb.TheraLang.Controllers
 
         [HttpGet]
         [Route("get/{Id}")]
-        public IActionResult GetResource([FromBody]int id)
-        {
-            if (Id == default)
-            {
-                Resource resource = _service.GetResourceById(id);
-                return Ok(resource);
-            }
-            if(resource == null)
-            {
-                throw new ArgumentException($"{nameof(resource)} can not be null");
-            }
-            await _service.UpdateResource(resource, updatedById);
-            return Ok();
-        }
-
-        [HttpGet]
-        [Route("get/{Id}")]
         public IActionResult GetResource([FromBody]int Id)
         {
             if (Id == default)
@@ -76,7 +59,7 @@ namespace MvcWeb.TheraLang.Controllers
 
         [HttpDelete]
         [Route("delete/{Id}")]
-        public async Task<IActionResult> DeleteResource([FromBody]int id)
+        public async Task<IActionResult> DeleteResource([FromBody]int Id)
         {
             if (Id == default)
             {
