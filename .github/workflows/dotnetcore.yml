@@ -9,7 +9,6 @@ jobs:
     runs-on: windows-latest
     steps:
 
-    - name: Checkout master..
     - uses: actions/checkout@master
     
     - name: Setup .NET Core
