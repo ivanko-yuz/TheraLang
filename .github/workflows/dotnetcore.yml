@@ -20,6 +20,7 @@ jobs:
     # dotnet build and publish
     - name: Build with dotnet
       run: dotnet build --configuration Release
+      
     - name: dotnet publish
       run: |
         dotnet publish -c Release -o myapp 
@@ -32,14 +33,13 @@ jobs:
         package: './myapp' 
         
 
+    - name: 'Create Smarter.ASP deployment profile'
+      run: |
+        echo "smarterASP.PublishSettings" > ${{ secrets.smarterAspPublishProfile }}
+        
     - name: 'Run Smarter.ASP deploy action using publish profile credentials'
-      uses: azure/webapps-deploy@v1
-      with: 
-        app-name: TheraLang
-        publish-profile: ${{ secrets.smartAspWebAppPublishProfile }}
-        package: './myapp' 
-
-      
+      run: |
+        dotnet publish -c Release /p:PublishProfile="smarterASP.PublishSettings" /p:Password=${{ secrets.SmarterAsp_FTP_Password }}
       
 
     
