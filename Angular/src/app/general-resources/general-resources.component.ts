@@ -1,3 +1,4 @@
+import { HttpService } from './../project/http.service';
 import { ResourceService } from './../resources-table/resource.service';
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { Resource } from '../resources-table/resource';
@@ -10,10 +11,13 @@ import { Resource } from '../resources-table/resource';
 })
 export class GeneralResourcesComponent implements OnInit {
   sortedResourcesByCategory: Resource[][] = [];
+  showTable = false;
+  pageNumber: number;
+  recordPerPage: number;
   constructor(private resourceService: ResourceService) { }
    async ngOnInit() {
-    const allResources = await this.resourceService.getAllResourcesByProjId(null);
-    this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
-    
+    const allResources = await this.resourceService.getAllResources(this.pageNumber, this.recordPerPage);
+    this.sortedResourcesByCategory = await this.resourceService.sortAllResourcesByCategories(allResources);
+    this.showTable = true;
   }
 }

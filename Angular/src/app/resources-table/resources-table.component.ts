@@ -14,10 +14,11 @@ export class ResourcesTableComponent implements OnInit {
   dataSource;
   constructor(private resourceService: ResourceService) { }
   ngOnInit() {
+    // tslint:disable-next-line:forin
     for (const resCategoty in this.sortedResourcesByCategory) {
       this.selectResourcesArrayByCategotyName(resCategoty);
       return;
-    } 
+    }
   }
 
   convertMatTabChangeEventLabelToString(event: MatTabChangeEvent) {
@@ -27,8 +28,8 @@ export class ResourcesTableComponent implements OnInit {
   selectResourcesArrayByCategotyName(category: string) {
     this.setDataSourceToInternalResourcesTable(this.sortedResourcesByCategory[category]);
   }
-  setDataSourceToInternalResourcesTable(res: Resource[]) {
-    this.lengthDataArrForDataSource = res.length;
+  async setDataSourceToInternalResourcesTable(res: Resource[]) {
+    this.lengthDataArrForDataSource = await this.resourceService.getCountAllResources();
     console.log(this.lengthDataArrForDataSource);
     this.dataSource = new MatTableDataSource(res);
   }
