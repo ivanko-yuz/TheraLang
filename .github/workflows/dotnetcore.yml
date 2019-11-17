@@ -6,10 +6,10 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-16.04
+    runs-on: windows-latest
     steps:
 
-    # checkout the repo
+    - name: Checkout master..
     - uses: actions/checkout@master
     
     - name: Setup .NET Core
@@ -17,7 +17,6 @@ jobs:
       with:
         dotnet-version: 2.2.108
     
-    # dotnet build and publish
     - name: Build with dotnet
       run: dotnet build --configuration Release
       
@@ -36,14 +35,11 @@ jobs:
         
     - name: 'Run Smarter.ASP deploy action using FTP'
       if: github.ref == 'refs/heads/master'
-      uses: SamKirkland/FTP-Deploy-Action@2.0.0
       env:
-        FTP_SERVER: ${{ secrets.SmarterAsp_FTP_Url }}
-        FTP_USERNAME: ${{ secrets.SmarterAsp_FTP_User }}
-        FTP_PASSWORD: ${{ secrets.SmarterAsp_FTP_Password }}
-        LOCAL_DIR: myapp
-        REMOTE_DIR: site
-        ARGS: --delete
-      
+        INPUT_LOCALDIR: myapp
+        INPUT_REMOTEDIR: site
+      run: |
+        choco install lftp
+        lftp ${{ secrets.SmarterAsp_FTP_Url }} -u ${{ secrets.SmarterAsp_FTP_User }},${{ secrets.SmarterAsp_FTP_Password } -e "set ssl:verify-certificate false; mirror --reverse --continue --dereference -x ^\.git/$ $INPUT_LOCALDIR $INPUT_REMOTEDIR; quit"
 
-    
+        
