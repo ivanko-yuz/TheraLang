@@ -47,8 +47,11 @@ export class ResourceService {
         });
         return allData;
     }
-    getCountAllResources(): number {
-        this.http.getCountAllResources().subscribe((data: number) => this.countAllResources = data);
-        return this.countAllResources;
+    getCountAllResources(): Promise<number> {
+        const allData = this.http.getCountAllResources().toPromise().then((data: number) => {
+            this.countAllResources = data;
+            return data;
+        });
+        return allData;
     }
 }

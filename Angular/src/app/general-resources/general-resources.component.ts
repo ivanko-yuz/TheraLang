@@ -14,9 +14,11 @@ export class GeneralResourcesComponent implements OnInit {
   showTable = false;
   pageNumber: number;
   recordPerPage: number;
+  countAllResources: number;
   constructor(private resourceService: ResourceService) { }
    async ngOnInit() {
-    const allResources = await this.resourceService.getAllResources(this.pageNumber, this.recordPerPage);
+    this.countAllResources = await this.resourceService.getCountAllResources();
+    const allResources = await this.resourceService.getAllResources(1, 1);
     this.sortedResourcesByCategory = await this.resourceService.sortAllResourcesByCategories(allResources);
     this.showTable = true;
   }
