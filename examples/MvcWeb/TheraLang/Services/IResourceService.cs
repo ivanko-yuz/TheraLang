@@ -10,10 +10,12 @@ namespace MvcWeb.TheraLang.Services
 
         Task UpdateResource(Resource resource, int updatedById);
 
-        Task RemoveResource(int Id);
+        Task RemoveResource(int id);
 
-        Resource GetResourceById(int Id);
-        int GetCountAllResources();
+        Resource GetResourceById(int id);
+
+        int GetCountResources();
+
         IEnumerable<Resource> GetAllResources(int pageNumber, int recordsPerPage);
     }
 }

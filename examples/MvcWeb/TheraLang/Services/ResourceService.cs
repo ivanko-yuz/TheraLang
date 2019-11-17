@@ -1,4 +1,5 @@
-﻿using MvcWeb.TheraLang.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -16,16 +17,16 @@ namespace MvcWeb.TheraLang.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Resource GetResourceById(int Id)
+        public Resource GetResourceById(int id)
         {
             try
             {
-                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == Id);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == id);
                 return resource;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when geting resource by {nameof(Id)}={Id}: ", ex);
+                throw new Exception($"Error when geting resource by {nameof(id)}={id}: ", ex);
             }
         }
 
@@ -59,18 +60,18 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        public async Task RemoveResource(int Id)
+        public async Task RemoveResource(int id)
         {
             try
             {
-                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == Id);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == id);
                 _unitOfWork.Repository<Resource>().Remove(resource);
 
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when remove resource by {nameof(Id)}: {Id}: ", ex);
+                throw new Exception($"Error when remove resource by {nameof(id)}: {id}: ", ex);
             }
         }
 
@@ -78,8 +79,9 @@ namespace MvcWeb.TheraLang.Services
         {
             try
             {
-                IEnumerable<Resource> resources = _unitOfWork.Repository<Resource>().Get();
-                IEnumerable<Resource> resourcesPerPages = resources.Skip((pageNumber - 1) * recordsPerPage).Take(recordsPerPage);
+                var resources = _unitOfWork.Repository<Resource>().Get();
+                IEnumerable<Resource> resourcesPerPages = resources.Skip((pageNumber - 1) * recordsPerPage)
+                    .Take(recordsPerPage).AsNoTracking().ToList();
                 return resourcesPerPages;
             }
             catch (Exception ex)
@@ -88,7 +90,7 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        public int GetCountAllResources()
+        public int GetCountResources()
         {
             try
             {

@@ -7,7 +7,7 @@ namespace MvcWeb.TheraLang.Repository
 {
     public class ProjectRepository : IProjectRepository
     {
-        IUnitOfWork uow;
+        IUnitOfWork uow = new MvcWeb.UnitOfWork.UnitOfWork();
         public async Task<bool> ChangeName(int id, string name)
         {
             var p = await uow.Repository<Project>().Get().ToAsyncEnumerable().FirstOrDefault(i => i.Id == id);
