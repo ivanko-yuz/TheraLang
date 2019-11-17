@@ -22,10 +22,12 @@ jobs:
       run: dotnet build --configuration Release
       
     - name: dotnet publish
+      if: github.ref == 'refs/heads/master'
       run: |
         dotnet publish -c Release -o myapp 
 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
+      if: github.ref == 'refs/heads/master'
       uses: azure/webapps-deploy@v1
       with: 
         app-name: TheraLang
@@ -34,10 +36,12 @@ jobs:
         
 
     - name: 'Create Smarter.ASP deployment profile'
+      if: github.ref == 'refs/heads/master'
       run: |
-        echo "smarterASP.PublishSettings" > ${{ secrets.smarterAspPublishProfile }}
+        echo ${{ secrets.smarterAspPublishProfile }} > "smarterASP.PublishSettings"
         
     - name: 'Run Smarter.ASP deploy action using publish profile credentials'
+      if: github.ref == 'refs/heads/master'
       run: |
         dotnet publish -c Release /p:PublishProfile="smarterASP.PublishSettings" /p:Password=${{ secrets.SmarterAsp_FTP_Password }}
       
