@@ -39,6 +39,6 @@ jobs:
         INPUT_REMOTEDIR: site
       run: |
         choco install lftp
-        lftp ${{ secrets.SmarterAsp_FTP_Url }} -u ${{ secrets.SmarterAsp_FTP_User }},${{ secrets.SmarterAsp_FTP_Password } -e "set ssl:verify-certificate false; mirror --reverse --continue --dereference -x ^\.git/$ $INPUT_LOCALDIR $INPUT_REMOTEDIR; quit"
+        lftp ${{ secrets.SmarterAsp_FTP_Url }} -u ${{ secrets.SmarterAsp_FTP_User }},${{ secrets.SmarterAsp_FTP_Password }} -e "set ssl:verify-certificate false; mirror --reverse --continue --dereference -x ^\.git/$ $INPUT_LOCALDIR $INPUT_REMOTEDIR; quit"
       shell: bash
         
