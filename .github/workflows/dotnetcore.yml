@@ -34,16 +34,16 @@ jobs:
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
         package: './myapp' 
         
-
-    - name: 'Create Smarter.ASP deployment profile'
+    - name: 'Run Smarter.ASP deploy action using FTP'
       if: github.ref == 'refs/heads/master'
-      run: |
-        echo ${{ secrets.smarterAspPublishProfile }} > "smarterASP.PublishSettings"
-        
-    - name: 'Run Smarter.ASP deploy action using publish profile credentials'
-      if: github.ref == 'refs/heads/master'
-      run: |
-        dotnet publish -c Release /p:PublishProfile="smarterASP.PublishSettings" /p:Password=${{ secrets.SmarterAsp_FTP_Password }}
+      uses: SamKirkland/FTP-Deploy-Action@2.0.0
+      env:
+        FTP_SERVER: ${{ secrets.SmarterAsp_FTP_Url }}
+        FTP_USERNAME: ${{ secrets.SmarterAsp_FTP_User }}
+        FTP_PASSWORD: ${{ secrets.SmarterAsp_FTP_Password }}
+        LOCAL_DIR: myapp
+        REMOTE_DIR: site
+        ARGS: --delete
       
 
     
