@@ -38,6 +38,12 @@ namespace MvcWeb
             services.AddLocalization(options =>
                 options.ResourcesPath = "Resources"
             );
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddMvc()
                 .AddPiranhaManagerOptions()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -89,7 +95,7 @@ namespace MvcWeb
             }
 
             App.Init(api);
-
+            app.UseCors("MyPolicy");
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.Full;
 

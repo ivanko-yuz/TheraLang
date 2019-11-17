@@ -1,3 +1,4 @@
+import { PiranhaPageComponent } from './cms-api/piranha-page/piranha-page.component';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'project/:id', component: ProjectInfoComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'resources', component: GeneralResourcesComponent },
+  {path: 'piranha', component: PiranhaPageComponent}
 ];
 
 @NgModule({
@@ -23,6 +25,6 @@ export class AppRoutingModule { }
 
 export const routingComponents = [
   ProjectParticipantsComponent, ProjectComponent, HomeComponent, ProjectInfoComponent,
-  GeneralResourcesComponent
+  GeneralResourcesComponent, PiranhaPageComponent
 ];
 
