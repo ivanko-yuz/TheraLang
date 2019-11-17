@@ -38,7 +38,7 @@ namespace MvcWeb.Controllers
             return Ok(project);            
         }
 
-        [HttpPut("update{id}")]
+        [HttpPut("update/{id}")]
         public IActionResult EditProject(int id,Project project)
         {
             _projectService.UpdateAsync(id,project);
