@@ -86,9 +86,9 @@ namespace MvcWeb.TheraLang.Controllers
 
         [HttpGet]
         [Route("all/count")]
-        public IActionResult GetCountResources()
+        public IActionResult GetResourcesCount()
         {
-            int countResources = _service.GetCountResources();
+            int countResources = _service.GetResourcesCount();
             return Ok(countResources);
         }
     }

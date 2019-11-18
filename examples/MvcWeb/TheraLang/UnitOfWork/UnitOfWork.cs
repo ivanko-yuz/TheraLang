@@ -12,10 +12,6 @@ namespace MvcWeb.UnitOfWork
             Context = context;
         }
 
-        public UnitOfWork()
-        {
-        }
-
         private DbContext Context { get; }
 
 

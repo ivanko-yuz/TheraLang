@@ -90,7 +90,7 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        public int GetCountResources()
+        public int GetResourcesCount()
         {
             try
             {
