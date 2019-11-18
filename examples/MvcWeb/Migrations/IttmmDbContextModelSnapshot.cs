@@ -951,6 +951,10 @@ namespace MvcWeb.Migrations
             modelBuilder.Entity("MvcWeb.TheraLang.Entities.ResourceProject", b =>
                     {
                     
+                    b.Property<int>("Id")	
+                        .ValueGeneratedOnAdd()	
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        
                     b.Property<int>("ProjectId");
 
                     b.Property<int>("ResourceId");
