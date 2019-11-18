@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.Services
 {
-    
     public class ProjectService : IProjectService
     {
         public ProjectService(IUnitOfWork unitOfWork)
@@ -83,7 +83,7 @@ namespace MvcWeb.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when getting project by {nameof(id)} = {id} ", ex);
+                throw new Exception($"Error when getting project by {nameof(id)} = {id} ", ex);  
             }
         }
     }

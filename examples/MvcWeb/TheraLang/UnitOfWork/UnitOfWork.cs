@@ -10,11 +10,9 @@ namespace MvcWeb.UnitOfWork
         public UnitOfWork(DbContext context)
         {
             Context = context;
-
         }
 
         private DbContext Context { get; }
-
 
         public IRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
