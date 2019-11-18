@@ -6,13 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MvcWeb.Db;
+using MvcWeb.Helpers;
 using MvcWeb.Models;
 using MvcWeb.Services;
 using MvcWeb.TheraLang.UnitOfWork;
 using MvcWeb.Validators;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
+using MvcWeb.TheraLang.Services;
 
 namespace MvcWeb
 {
@@ -70,13 +73,16 @@ namespace MvcWeb
 
             services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
-
+            services.AddTransient<IResourceService, ResourceService>();
+            services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
+            services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApi api)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApi api, ILoggerFactory loggerFactory)
         {
+            app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -130,7 +136,7 @@ namespace MvcWeb
                     template: "{controller=home}/{action=index}/{id?}");
             });
 
-            Seed.RunAsync(api).GetAwaiter().GetResult();
+            //Seed.RunAsync(api).GetAwaiter().GetResult(); //TODO: fix seeding
         }
     }
 }

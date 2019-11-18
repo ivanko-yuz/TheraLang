@@ -48,6 +48,7 @@ bld/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
+.vscode/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -363,5 +364,8 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
+
+# Exclude any production generated files (all the dist folders)
+**/dist/
 
 # End of https://www.gitignore.io/api/visualstudio,visualstudiocode

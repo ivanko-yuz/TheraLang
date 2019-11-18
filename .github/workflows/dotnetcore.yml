@@ -1,0 +1,45 @@
+name: .NET Core      
+on: 
+  pull_request:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    steps:
+
+    - uses: actions/checkout@master
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+      
+    - name: dotnet publish
+      if: github.ref == 'refs/heads/master'
+      run: |
+        dotnet publish -c Release -o myapp 
+
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
+      if: github.ref == 'refs/heads/master'
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: TheraLang
+        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+        package: './myapp' 
+        
+    - name: 'Run Smarter.ASP deploy action using FTP'
+      if: github.ref == 'refs/heads/master'
+      env:
+        INPUT_LOCALDIR: myapp
+        INPUT_REMOTEDIR: site
+      run: |
+        choco install lftp
+        lftp ${{ secrets.SmarterAsp_FTP_Url }} -u iittmm-001,${{ secrets.SmarterAsp_FTP_Password }} -e "set ssl:verify-certificate false; mirror --reverse --continue --dereference -x ^\.git/$ $INPUT_LOCALDIR $INPUT_REMOTEDIR; quit"
+      shell: bash
+        
