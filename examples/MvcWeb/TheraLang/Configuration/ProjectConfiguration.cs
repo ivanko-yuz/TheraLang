@@ -18,6 +18,8 @@ namespace MvcWeb.TheraLang.Configuration
 
             builder.Property(e => e.Type).HasMaxLength(250).IsRequired();
 
+            builder.Property(e => e.StatusId).HasMaxLength(250).IsRequired(); //TODO: HasDefaultValue
+
         }
     }
 }

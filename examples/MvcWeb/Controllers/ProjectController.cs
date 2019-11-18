@@ -1,26 +1,42 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MvcWeb.Models;
 using MvcWeb.Services;
+using MvcWeb.TheraLang;
+using MvcWeb.TheraLang.Entities;
+
 
 namespace MvcWeb.Controllers
 {
-    [Route("/api/projects/")]
+    [Route("api/project")]
+    [ApiController]
+
     public class ProjectController : ControllerBase
     {
         public ProjectController(IProjectService projectService)
         {
-            ProjectService = projectService;
+                _projectService = projectService;
         }
+            private readonly IProjectService _projectService;
 
-        private IProjectService ProjectService { get; }
+            public IEnumerable<Project> GetAllProjects()
+            {
+                return _projectService.GetAll();
+            }
 
-        [HttpPost("create")]
-        public async Task<ActionResult<bool>> CreateProject(ProjectViewModel projectViewModel)
-        {
-            var ms = ModelState;
-            if (!ModelState.IsValid) return false;
-            return await ProjectService.TryAddProject(projectViewModel);
+            [HttpPut("{id}")]
+            public async Task<IActionResult> ApproveStatusId(int id)
+            {
+                await _projectService.ChangeStatus(id, ProjectStatus.Approved);
+                return Ok();
+            }
+
+            [HttpPut("{id}")]
+            public async Task<IActionResult> RejectStatusId(int id)
+            {
+                await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
+                return Ok();
+            }
         }
     }
-}
+

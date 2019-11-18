@@ -8,6 +8,6 @@
 
         public string Name { get; set; }
         
-        public int StatusId { get; set;  }
+        public ProjectStatus StatusId { get; set;  }
     }
 }
