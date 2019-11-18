@@ -839,7 +839,6 @@ namespace MvcWeb.Migrations
 
             modelBuilder.Entity("MvcWeb.TheraLang.Entities.ProjectType", b =>
                    {
-                   
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
