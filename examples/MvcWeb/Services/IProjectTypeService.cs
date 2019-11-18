@@ -10,6 +10,6 @@ namespace MvcWeb.Services
 
         ProjectType GetProjectTypeById(int id);
 
-        Task TryAddProjectType(ProjectType projectType);
+        Task Add(ProjectType projectType);
     }
 }

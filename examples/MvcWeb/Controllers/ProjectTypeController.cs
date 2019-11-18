@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.Services;
 using MvcWeb.TheraLang.Entities;
@@ -10,11 +11,10 @@ namespace MvcWeb.Controllers
     public class ProjectTypeController : ControllerBase
     {
         private readonly IProjectTypeService _service;
-        public ProjectTypeController(IProjectTypeService Service)
+        public ProjectTypeController(IProjectTypeService service)
         {
-            _service = Service;
+            _service = service;
         }
-
         [HttpGet]
         public IEnumerable<ProjectType> GetAllTypes()
         {
@@ -24,6 +24,10 @@ namespace MvcWeb.Controllers
         [HttpGet("{id}")]
         public IActionResult GetType(int id)
         {
+            if(id == default)
+            {
+                throw new ArgumentException($"{nameof(id)} can not be null");
+            }
             var type = _service.GetProjectTypeById(id);           
             return Ok(type);
         }            

@@ -27,7 +27,7 @@ namespace MvcWeb.Services
                 ProjectType projectType = _uow.Repository<ProjectType>().Get().FirstOrDefault(p => p.Id == id);
                 if (id == default(int))
                 {
-                    new ArgumentException($"{nameof(id)} cannot be 0");
+                    throw new ArgumentException($"{nameof(id)} cannot be null");
                 }
                 return projectType;
             }
@@ -37,21 +37,17 @@ namespace MvcWeb.Services
             }
         }
 
-        public async Task TryAddProjectType(ProjectType projecttype)
+        public async Task Add(ProjectType projecttype)
         {
-                ProjectType Projecttype = new ProjectType { TypeName = projecttype.TypeName };
-                if(Projecttype == null)
-                {
-                    throw new NullReferenceException($"{nameof(Projecttype)} can`t be null");
-                }
+                var projectType = new ProjectType { TypeName = projecttype.TypeName };               
                 try
                 {
-                    await _uow.Repository<ProjectType>().Add(Projecttype);
+                    await _uow.Repository<ProjectType>().Add(projectType);
                     await _uow.SaveChangesAsync();
                 }
                 catch(Exception e)
                 {
-                    throw new Exception("error when trying to add new data");
+                    throw new Exception("error when trying to add new data", e);
                 }
         }
     }

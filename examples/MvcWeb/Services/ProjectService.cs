@@ -45,13 +45,13 @@ namespace MvcWeb.Services
         {
             try
             {
-                IEnumerable<Project> projects = _uow.Repository<Project>().Get();
+                var projects = _uow.Repository<Project>().Get();
                 IEnumerable<Project> projectsPerPages = projects.Skip((pageNumber - 1) * pageSize).Take(pageSize);
                 return projectsPerPages;
             }
             catch
             {
-                throw new NullReferenceException($"projects on this page can`t be found");
+                throw new Exception($"Error while fetching the projects for {nameof(pageNumber)}=${pageNumber} and {nameof(pageSize)}-{pageSize}");
             }
         }
 
@@ -59,10 +59,10 @@ namespace MvcWeb.Services
         {
             try
             {
-                project = _uow.Repository<Project>().Get().ToList().FirstOrDefault(p => p.Id == id);
+                project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
                 if (project == null)
                 {
-                    throw new NullReferenceException($"project with id {id} not found");
+                    throw new NullReferenceException($"Error while updating project. Project with id {nameof(id)}={id} not found");
                 }
                 _uow.Repository<Project>().Update(project);
                 await _uow.SaveChangesAsync();               
@@ -79,15 +79,11 @@ namespace MvcWeb.Services
             try
             {
                 var project = _uow.Repository<Project>().Get().SingleOrDefault(i => i.Id == id);
-                if (project == null)
-                {
-                    throw new NullReferenceException($"project with id {id} not found");
-                }
                 return project;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when geting project by Id: ", ex);
+                throw new Exception($"Error when getting project by {nameof(id)} = {id} ", ex);
             }
         }
     }

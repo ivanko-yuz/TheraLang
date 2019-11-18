@@ -34,19 +34,23 @@ namespace MvcWeb.Controllers
 
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)
-        {
-           var project = _projectService.GetById(id);
+        {            
+            var project = _projectService.GetById(id);            
             return Ok(project);            
         }
 
-        [HttpPut("update{id}")]
+        [HttpPut("update/{id}")]
         public IActionResult EditProject(int id,Project project)
         {
+            if (id == default)
+            {
+                throw new ArgumentException($"{nameof(id)} can not be 0");
+            }
             _projectService.UpdateAsync(id,project);
             return Ok(project);
         }
 
-        [HttpGet("page{page}/{pagesize}")]
+        [HttpGet("page/{page}/{pagesize}")]
         public IActionResult ProjectsPagination(int page,  int pageSize)
         {
             _projectService.GetProjects(page, pageSize);
