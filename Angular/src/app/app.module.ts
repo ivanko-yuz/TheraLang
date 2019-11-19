@@ -117,8 +117,7 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     PortalModule,
     ScrollingModule,  
   ],
-
-  ],
+  
   exports: [ResourcesInternalTableComponent],
   providers: [ResourceService, HttpService, EventService],
   bootstrap: [AppComponent]

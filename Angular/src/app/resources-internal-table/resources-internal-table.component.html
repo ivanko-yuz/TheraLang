@@ -28,5 +28,5 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>  
-    <mat-paginator [length]="lengthDataArrForDataSource" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="pageChanged($event)"></mat-paginator>
+    <mat-paginator  [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="pageChanged($event)"></mat-paginator>
   </div>

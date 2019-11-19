@@ -1,31 +1,39 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable, OnDestroy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class HttpService{
-  
-    constructor(private http: HttpClient){ }
-      
-     private url = "https://localhost:44353/api/";
-     
-    getAllProjects(){
+export class HttpService {
+
+    constructor(private http: HttpClient) { }
+
+    private url = 'https://localhost:44353/api/';
+    private piranhaApiUrl = 'http://localhost:5000/api/';
+
+    getAllProjects() {
         return this.http.get(this.url + 'project');
     }
-  
+
     getProjectInfo(id: number) {
         return this.http.get(this.url + 'project' + '/' + id);
     }
-  
-    getAllProjectParticipants(){
-        return this.http.get(this.url + 'projectParticipants');
-      }
 
-    changeParticipationStatus (requestId: number, requestStatus: number){
+    getAllProjectParticipants() {
+        return this.http.get(this.url + 'projectParticipants');
+    }
+
+    changeParticipationStatus(requestId: number, requestStatus: number) {
         return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
-    }   
- 
-    getAllResourcesById(projectId: number) {
+    }
+
+    getAllResourcesByProjectId(projectId: number) {
         return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
-    }  
-  
+    }
+
+    getAllResources(pageNumber: number, recordsPerPage: number) {
+        return this.http.get(this.piranhaApiUrl + 'resource/all/' + pageNumber + '/' + recordsPerPage);
+    }
+
+    getCountAllResources() {
+        return this.http.get<number>(this.piranhaApiUrl + 'resource/all/count');
+    }
 }
