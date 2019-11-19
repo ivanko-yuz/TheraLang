@@ -1,17 +1,17 @@
-import { ResourceService } from '../resources-table/resource.service';
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
 import * as $ from 'jquery';
 import { Resource } from '../resources-table/resource';
+import { ResourceService } from '../resources-table/resource.service';
+import { HttpService } from '../project/http.service';
 
 @Component({
   selector: 'app-project-info',
   templateUrl: './project-info.component.html',
   styleUrls: ['./project-info.component.less'],
   encapsulation: ViewEncapsulation.None,
-  providers: [HttpService]
+  providers :[HttpService]
 })
 export class ProjectInfoComponent implements OnInit, AfterViewInit {
 
