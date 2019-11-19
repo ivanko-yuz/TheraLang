@@ -13,7 +13,6 @@ namespace MvcWeb.Db
         }
 
         public DbSet<ProjectType> Types { get; set; }
-
         public virtual DbSet<Project> Projects { get; set; }
 
         public virtual DbSet<PiranhaAlias> PiranhaAliases { get; set; }
