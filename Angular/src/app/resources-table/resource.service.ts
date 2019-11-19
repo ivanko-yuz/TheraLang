@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Resource } from './resource';
+import { Resource } from '../general-resources/resource-models/resource';
 import { HttpService } from '../project/http.service';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class ResourceService {
@@ -32,10 +31,10 @@ export class ResourceService {
     sortAllResourcesByCategories(res: Resource[]): Resource[][] {
         const sortedArray: Resource[][] = [];
         res.forEach((resuorce) => {
-            if (!sortedArray[resuorce.resourceCategory]) {
-                sortedArray[resuorce.resourceCategory] = [];
+            if (!sortedArray[resuorce.resourceCategory.type]) {
+                sortedArray[resuorce.resourceCategory.type] = [];
             }
-            sortedArray[resuorce.resourceCategory].push(resuorce);
+            sortedArray[resuorce.resourceCategory.type].push(resuorce);
         });
         return sortedArray;
     }
@@ -47,11 +46,13 @@ export class ResourceService {
         });
         return allData;
     }
-    getCountAllResources(): Promise<number> {
-        const allData = this.http.getCountAllResources().toPromise().then((data: number) => {
+    async getCountAllResources(category: string): Promise<number>{
+        const allData = await this.http.getCountAllResources(category).toPromise().then((data: number) => {
             this.countAllResources = data;
             return data;
         });
         return allData;
+        //  const data =  this.http.getCountAllResources(category).subscribe((data: number) => data);
+        //  return data;
     }
 }

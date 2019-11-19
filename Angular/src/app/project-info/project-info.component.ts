@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
 import * as $ from 'jquery';
-import { Resource } from '../resources-table/resource';
+import { Resource } from '../general-resources/resource-models/resource';
 
 @Component({
   selector: 'app-project-info',

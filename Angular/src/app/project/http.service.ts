@@ -33,7 +33,7 @@ export class HttpService {
         return this.http.get(this.piranhaApiUrl + 'resource/all/' + pageNumber + '/' + recordsPerPage);
     }
 
-    getCountAllResources() {
-        return this.http.get<number>(this.piranhaApiUrl + 'resource/all/count');
+    getCountAllResources(category: string) {
+        return this.http.get<number>(this.piranhaApiUrl + 'resource/all/count' + '/' + category);
     }
 }

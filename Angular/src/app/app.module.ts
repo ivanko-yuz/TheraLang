@@ -41,6 +41,8 @@ import { ResourcesTableComponent } from './resources-table/resources-table.compo
 import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
 import { ResourceService } from './resources-table/resource.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
+import { GeneralResourcesInnerTableComponent } from './general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     CustomDatePipe,
     ResourcesTableComponent,
     ResourcesInternalTableComponent,
-    GeneralResourcesComponent
+    GeneralResourcesComponent,
+    GeneralResourcesTableComponent,
+    GeneralResourcesInnerTableComponent
   ],
   entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
   imports: [

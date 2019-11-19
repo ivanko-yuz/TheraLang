@@ -1,4 +1,4 @@
-import { Resource } from './../resources-table/resource';
+import { Resource } from '../general-resources/resource-models/resource';
 import { Component, OnInit, Input, ViewChild, AfterViewInit, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material';
@@ -10,33 +10,21 @@ import { MatPaginator, PageEvent } from '@angular/material';
 })
 
 export class ResourcesInternalTableComponent implements OnInit, AfterViewInit {
-  @Input() lengthDataArrForDataSource: number;
-  pageNumber: number;
-  itemsPerPage: number;
-  // tslint:disable-next-line:variable-name
-  _dataSource: MatTableDataSource<Resource>;
-  @Input() set dataSource(value: MatTableDataSource<Resource>) {
-    this._dataSource = value;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator.length = this.lengthDataArrForDataSource;
-  }
-
-  get dataSource(): MatTableDataSource<Resource> {
-    return this._dataSource;
-  }
-
-  displayedColumns: string[] = ['id', 'name', 'date', 'description'];
+  @Input()dataSource: MatTableDataSource<Resource>;
+  displayedColumns: string[] = ['id', 'name', 'date', 'description'];  
+  @Input()lengthDataArrForDataSource;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor() {  }
 
   ngOnInit() {
+     
   }
-  ngAfterViewInit() {
-  }
-  pageChanged(event: PageEvent) {
-    this.pageNumber = event.pageIndex;
-    this.itemsPerPage = event.pageSize;
+  ngAfterViewInit(){    
+    setTimeout(() => {      
+      this.dataSource.paginator = this.paginator;
+    }, 5000);
+    this.dataSource.paginator = this.paginator;
   }
 }
 
