@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { ProjectService } from '../project/project.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class ProjectFormComponent implements OnInit {
     public service: ProjectService) { }
 
   ngOnInit() {
-    
+
   }
   onClose() {
     this.service.form.reset();
@@ -24,18 +24,19 @@ export class ProjectFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.service.form.invalid){
+    if (this.service.form.invalid) {
       const controls = this.service.form.controls;
       Object.keys(controls)
-       .forEach(controlName => controls[controlName].markAsTouched());
-       return;
-    } 
-    else if (!this.service.form.get('id').value){
+        .forEach(controlName => controls[controlName].markAsTouched());
+      return;
+    }
+    else if (!this.service.form.get('id').value) {
       this.service.addProject(this.service.form.value);
       this.onClose();
     }
     else {
       this.service.editProject(this.service.form.value);
       this.onClose();
-   }};
+    }
+  }
 }

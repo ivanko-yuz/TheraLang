@@ -30,7 +30,6 @@ export class ProjectComponent implements OnInit {
   }
 
   onEdit(project){
-    debugger
     this.service.populateForm(project);
     this.dialogService.openFormDialog(ProjectFormComponent);
   }

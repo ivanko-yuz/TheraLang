@@ -12,7 +12,6 @@ export class NotificationService {
     duration: 10000,
     horizontalPosition: 'center',
     verticalPosition: 'top',
-    
   }
 
 
