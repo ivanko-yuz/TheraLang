@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +35,7 @@ namespace MvcWeb.Services
             }
             catch(Exception e)
             {
-                e.Data["projectViewModel"] = projectViewModel;
+                e.Data["project"] = projectViewModel;
                 throw;
             }
         }

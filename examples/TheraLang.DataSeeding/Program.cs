@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MvcWeb.Db;
@@ -12,28 +13,36 @@ namespace TheraLang.DataSeeding
         {
             using var dbContext = CreateDbContext();
 
-            dbContext.ClearAndSeed(Projects());
+            dbContext.ClearAndSeed(ProjectTypes());
+            dbContext.ClearAndSeed(Projects(dbContext.GetArrayOf<ProjectType>()));
         }
 
-        private static IEnumerable<Project> Projects()
+        private static IEnumerable<Project> Projects(ProjectType[] projectTypes)
         {
             yield return new Project
             {
                 Name = "ProjectName",
-                Type = "ProjectType",
-            };
-            yield return new Project
-            {
-                Name = "ProjectName",
-                Type = "ProjectType",
+                Description = "ProjectDescription",
+                Details = "ProjectDetails",
+                ProjectStart = new DateTime(2000, 8, 30),
+                ProjectEnd = new DateTime(2019, 8, 30),
+                IsActive = true,
+                TypeId = projectTypes[0].Id,
             };
         }
-
+        private static IEnumerable<ProjectType> ProjectTypes()
+        {
+            yield return new ProjectType
+            {
+                TypeName = "name"
+            };
+        }
         private static DbContext CreateDbContext()
         {
-            
+
             var configurationBuilder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true);
+
             var configuration = configurationBuilder.Build();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
@@ -44,5 +53,5 @@ namespace TheraLang.DataSeeding
 
             return new IttmmDbContext(dbContextOptions);
         }
-    }
+    };                    
 }

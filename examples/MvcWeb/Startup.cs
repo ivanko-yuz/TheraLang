@@ -1,4 +1,3 @@
-using FluentValidation;	
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,9 +10,6 @@ using MvcWeb.Services;
 using MvcWeb.TheraLang.UnitOfWork;
 using Microsoft.Extensions.Logging;
 using MvcWeb.Helpers;
-using MvcWeb.Models;
-using MvcWeb.Validators;
-
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
 using MvcWeb.TheraLang.Services;
