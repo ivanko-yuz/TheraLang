@@ -1,4 +1,5 @@
-<div id="resTabId"  *ngIf="showTable">
-<app-resources-table [lengthDataArrForDataSource] = 'countAllResources'
-[sortedResourcesByCategory] = 'sortedResourcesByCategory' ></app-resources-table>
+<div id="resTabId" *ngIf="showTable">
+    <app-general-resources-table [sortedResourcesByCategory]='sortedResourcesByCategory'
+        (innerPageChangedEvent)="innerTableEvent($event)">
+    </app-general-resources-table>
 </div>
