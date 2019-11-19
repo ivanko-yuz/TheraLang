@@ -80,8 +80,22 @@ namespace MvcWeb.TheraLang.Services
             try
             {
                 var resources = _unitOfWork.Repository<Resource>().Get();
-                IEnumerable<Resource> resourcesPerPages = resources.Skip((pageNumber - 1) * recordsPerPage)
-                    .Take(recordsPerPage).AsNoTracking().ToList();
+                var resourceCategories = new ResourceCategoryService(_unitOfWork).GetAllResourceCategories();
+                var joinedResources = (from res in resources                                      
+                                      select new Resource {Id = res.Id, 
+                                          User = res.User, Name = res.Name, 
+                                          Description = res.Description, 
+                                          Url = res.Url, File = res.File,
+                                          CategoryId = res.CategoryId,
+                                          ResourceCategory = res.ResourceCategory,
+                                          ResourceProjects = res.ResourceProjects,
+                                          UpdatedById = res.UpdatedById,
+                                          CreatedDateUtc = res.CreatedDateUtc,
+                                          UpdatedDateUtc = res.UpdatedDateUtc,
+                                      });
+                
+                var resourcesPerPages = joinedResources.Skip((pageNumber - 1) * recordsPerPage)
+                    .Take(recordsPerPage).ToList();
                 return resourcesPerPages;
             }
             catch (Exception ex)
@@ -90,11 +104,11 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        public int GetResourcesCount()
+        public int GetResourcesCountByCategoryName(string category)
         {
             try
             {
-                int countAllResources = _unitOfWork.Repository<Resource>().Get().Count();
+                int countAllResources = _unitOfWork.Repository<Resource>().Get().Where(x => x.ResourceCategory.Type == category).AsNoTracking().Count();
                 return countAllResources;
             }
             catch (Exception ex)

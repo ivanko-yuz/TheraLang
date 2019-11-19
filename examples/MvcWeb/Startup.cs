@@ -38,6 +38,14 @@ namespace MvcWeb
             services.AddLocalization(options =>
                 options.ResourcesPath = "Resources"
             );
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddMvc()
                 .AddPiranhaManagerOptions()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -117,7 +125,7 @@ namespace MvcWeb
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
              */
-
+            app.UseCors("MyPolicy");
             // Register middleware
             app.UseStaticFiles();
             app.UseAuthentication();

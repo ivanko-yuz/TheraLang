@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Constants;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.Services;
@@ -10,6 +11,7 @@ namespace MvcWeb.TheraLang.Controllers
 {
     [Route("api/resource")]
     [ApiController]
+    [EnableCors("MyPolicy")]
     public class ResourceController : ControllerBase
     {
         public ResourceController(IResourceService service)
@@ -85,10 +87,10 @@ namespace MvcWeb.TheraLang.Controllers
         }
 
         [HttpGet]
-        [Route("all/count")]
-        public IActionResult GetResourcesCount()
+        [Route("all/count/{category}")]
+        public IActionResult GetResourcesCountByCategoryName(string category)
         {
-            int countResources = _service.GetResourcesCount();
+            int countResources = _service.GetResourcesCountByCategoryName(category);
             return Ok(countResources);
         }
     }
