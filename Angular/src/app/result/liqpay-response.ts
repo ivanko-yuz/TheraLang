@@ -1,4 +1,4 @@
-export class LiqPayResponseModel{
+export class LiqpayResponse{
     constructor(
     public projectId: number,
     public amount: number,

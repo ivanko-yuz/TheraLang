@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { LiqPayResponseModel } from './liqay-response-model';
-import { error } from 'util';
 import { ActivatedRoute } from '@angular/router';
+import { DonationService } from '../donation/donation.service';
+import { LiqpayResponse } from './liqpay-response';
 
 @Component({
   selector: 'app-result',
@@ -10,13 +9,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./result.component.less']
 })
 export class ResultComponent implements OnInit {
-  response: LiqPayResponseModel;
+  liqpayResponse: LiqpayResponse;
   er: any;
   donationId: string;
-  private url = "https://localhost:44353/api/";
-  constructor(private http1: HttpClient,private route: ActivatedRoute) { }
+
+  constructor(private route: ActivatedRoute, private donationService: DonationService) { }
 
   ngOnInit() {
+
+    this.route.paramMap.subscribe(params=>{
+      this.donationId = params.get('donationId');
+      debugger
+      this.donationService.getLiqpayResponse(this.donationId).subscribe((liqpayResponseData: LiqpayResponse) => {
+        this.liqpayResponse = liqpayResponseData;    
+      });
+    });
     // this.http1.get(`${this.url}result/`).subscribe((responseData: LiqPayResponseModel) => {
     //   debugger
     //   this.response = responseData
@@ -24,18 +31,9 @@ export class ResultComponent implements OnInit {
     //  error =>       {
     //   this.er = <any>error;   
     // });
-
-    this.route.paramMap.subscribe(params=>{
-      this.donationId = params.get('donationId');
-      debugger
-      this.http1.get(`${this.url}result/${this.donationId}`).subscribe((responseData: LiqPayResponseModel) => {
-        debugger
-        this.response = responseData;
-      
-      });
-    });
         
   }
+
 }
 
 

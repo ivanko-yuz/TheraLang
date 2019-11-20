@@ -1,8 +1,8 @@
 <!-- <p>result works!</p> -->
 <!-- <h1>{{response?.order_id}}</h1>     -->
-<div *ngIf="response !== null; else error">
-<h1 >Payment has beed sent, the status is: {{response?.status}}</h1>
-<div>amount {{response?.amount}} UAH</div>
+<div *ngIf="liqpayResponse !== null ; else error">
+<h1 >Payment has beed sent, the status is: {{liqpayResponse?.status}}</h1>
+<h1>amount {{liqpayResponse?.amount}} UAH</h1>
 <!-- <div>project ID {{response?.projectId}}</div> -->
 </div>
 <ng-template #error>

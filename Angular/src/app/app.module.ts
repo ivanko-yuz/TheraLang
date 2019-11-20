@@ -48,6 +48,8 @@ import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
 import { PaymentComponent } from './payment/payment.component';
 import { ResultComponent } from './result/result.component';
+import { DonationComponent } from './donation/donation.component';
+import { DonationService } from './donation/donation.service';
 
 
 
@@ -72,7 +74,8 @@ import { ResultComponent } from './result/result.component';
     HomeComponent,
     ProjectParticipantsComponent,
     PaymentComponent,
-    ResultComponent
+    ResultComponent,
+    DonationComponent
 
   ],
   entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent, ConfirmDialogComponent],
@@ -136,7 +139,8 @@ import { ResultComponent } from './result/result.component';
   exports: [ResourcesInternalTableComponent],
   providers: [ResourceService,
      HttpService,
-     EventService,
+      EventService,
+      DonationService,
      {provide: ErrorHandler, useClass: ErrorHandlerService},
      NotificationService,
      DialogService,
