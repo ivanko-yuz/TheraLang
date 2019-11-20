@@ -75,11 +75,11 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        public IEnumerable<Resource> GetAllResources(int pageNumber, int recordsPerPage)
+        public IEnumerable<Resource> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage)
         {
             try
             {
-                var resources = _unitOfWork.Repository<Resource>().Get();
+                var resources = _unitOfWork.Repository<Resource>().Get().Where(x => x.CategoryId == categoryId);
                 var resourceCategories = new ResourceCategoryService(_unitOfWork).GetAllResourceCategories();
                 var joinedResources = (from res in resources                                      
                                       select new Resource {Id = res.Id, 
@@ -88,7 +88,7 @@ namespace MvcWeb.TheraLang.Services
                                           Url = res.Url, File = res.File,
                                           CategoryId = res.CategoryId,
                                           ResourceCategory = res.ResourceCategory,
-                                          ResourceProjects = res.ResourceProjects,
+                                          ResourceToProjects = res.ResourceToProjects,
                                           UpdatedById = res.UpdatedById,
                                           CreatedDateUtc = res.CreatedDateUtc,
                                           UpdatedDateUtc = res.UpdatedDateUtc,
@@ -104,16 +104,66 @@ namespace MvcWeb.TheraLang.Services
             }
         }
 
-        public int GetResourcesCountByCategoryName(string category)
+        public int CountResourcesByCategoryId(int categoryId)
         {
             try
             {
-                int countAllResources = _unitOfWork.Repository<Resource>().Get().Where(x => x.ResourceCategory.Type == category).AsNoTracking().Count();
-                return countAllResources;
+                var resourcesCount = _unitOfWork.Repository<Resource>()
+                    .Get().Where(x => x.CategoryId == categoryId).Count();
+                return resourcesCount;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when get count all resources", ex);
+                throw new Exception($"Error when get count resources by category id: ", ex);
+            }
+        }
+
+        public IEnumerable<ResourceCategory> GetResourcesCategories(bool withAssignedResources)
+        {
+            try
+            {
+                var query = _unitOfWork.Repository<ResourceCategory>().Get();
+
+                if (withAssignedResources)
+                {
+                    query = query.Where(x => x.Resources.Any());
+                }
+
+                return query.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error when get all ResourceCategories: ", ex);
+            }
+        }
+
+        public IEnumerable<Resource> GetAllResourcesByProjectId(int projectId)
+        {
+            try
+            {
+                var resources = _unitOfWork.Repository<Resource>().Get().Where(x => x.ResourceToProjects.Any(c => c.ProjectId == projectId));
+                var joinedResources = (from res in resources
+                                       select new Resource
+                                       {
+                                           Id = res.Id,
+                                           User = res.User,
+                                           Name = res.Name,
+                                           Description = res.Description,
+                                           Url = res.Url,
+                                           File = res.File,
+                                           CategoryId = res.CategoryId,
+                                           ResourceCategory = res.ResourceCategory,
+                                           ResourceToProjects = res.ResourceToProjects,
+                                           UpdatedById = res.UpdatedById,
+                                           CreatedDateUtc = res.CreatedDateUtc,
+                                           UpdatedDateUtc = res.UpdatedDateUtc,
+                                       });
+                return joinedResources.ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Error when get all resources by project id: ", ex);
             }
         }
     }

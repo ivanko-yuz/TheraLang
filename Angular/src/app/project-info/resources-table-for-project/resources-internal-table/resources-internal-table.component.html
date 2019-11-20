@@ -16,7 +16,7 @@
 
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef> Дата створення </th>
-      <td mat-cell *matCellDef="let element"> {{element.date | customDate}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.createdDateUtc | customDate}} </td>
     </ng-container>
 
 
@@ -28,5 +28,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>  
-  <mat-paginator [length]="lengthDataArrForDataSource" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [length]="lengthDataArrForDataSource" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

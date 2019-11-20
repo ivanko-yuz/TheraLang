@@ -1,9 +1,6 @@
-<mat-tab-group mat-stretch-tabs class="resTab example-stretched-tabs mat-elevation-z4"
-    (selectedTabChange)="convertMatTabChangeEventLabelToString($event)">
-    <mat-tab *ngFor="let category of resourceService.getAllResourceCategories(sortedResourcesByCategory)"
-        label="{{category}}">
-        <app-general-resources-inner-table (pageChangedEvent)="innerTableEvent($event)" [dataSource]="dataSource"
-            [countAllResources]="resourceService.getCountAllResources(category)"></app-general-resources-inner-table>
-
+<mat-tab-group mat-stretch-tabs class="resTab example-stretched-tabs mat-elevation-z4" *ngIf="showCategories">
+    <mat-tab  *ngFor="let category of this.resourcesCategories" label="{{category.type}}">
+        <app-general-resources-inner-table [resourcesCategoryId]="category.id">            
+        </app-general-resources-inner-table>
     </mat-tab>
 </mat-tab-group>

@@ -1,4 +1,4 @@
-import { ResourceService } from '../resources-table/resource.service';
+import { ResourceService } from './resources-table-for-project/resources-table/resource.service';
 import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
@@ -13,7 +13,7 @@ import { Resource } from '../general-resources/resource-models/resource';
   encapsulation: ViewEncapsulation.None,
   providers: [HttpService]
 })
-export class ProjectInfoComponent implements OnInit, AfterViewInit {
+export class ProjectInfoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpService,
               private resourceService: ResourceService) { }
@@ -38,9 +38,10 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
     if (!this.generateOnceResourcesTable) {
       const allResources = await this.resourceService.getAllResourcesByProjId(this.projectId);
       this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
+      
     }
     this.generateOnceResourcesTable = true;
-    $('#resTabId').slideToggle('slow');
+    $('#resTabId').fadeToggle('slow');
   }
 }
 

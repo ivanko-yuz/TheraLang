@@ -74,24 +74,50 @@ namespace MvcWeb.TheraLang.Controllers
         }
 
         [HttpGet]
-        [Route("all/{pageNumber}/{recordsPerPage?}")]
-        public IActionResult GetAllResources(int pageNumber, int recordsPerPage = PaginationConstants.RecordsPerPage)
+        [Route("categories/{withAssignedResources}")]
+        public IActionResult GetResourcesCategories(bool withAssignedResources)
         {
-            if (pageNumber == default)
+            var countResources = _service.GetResourcesCategories(withAssignedResources);
+            return Ok(countResources);
+        }
+
+        [HttpGet]
+        [Route("count/{categoryId}")]
+        public IActionResult CountResourcesByCategoryId(int categoryId)
+        {
+            if (categoryId == default)
+            {
+                throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
+            }
+            int count = _service.CountResourcesByCategoryId(categoryId);
+            return Ok(count);
+        }
+
+        [HttpGet]
+        [Route("all/{categoryId}/{pageNumber}/{recordsPerPage?}")]
+        public IActionResult GetAllResourcesByCategoryId(int categoryId, int pageNumber, 
+            int recordsPerPage = PaginationConstants.RecordsPerPage)
+        {
+            if (pageNumber == default || categoryId == default)
             {
                 throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
             }
 
-            IEnumerable<Resource> resources = _service.GetAllResources(pageNumber, recordsPerPage);
+            IEnumerable<Resource> resources = _service.GetResourcesByCategoryId(categoryId, pageNumber, recordsPerPage);
             return Ok(resources);
         }
 
         [HttpGet]
-        [Route("all/count/{category}")]
-        public IActionResult GetResourcesCountByCategoryName(string category)
+        [Route("all/{projectId}")]
+        public IActionResult GetAllResourcesByProjectId(int projectId)
         {
-            int countResources = _service.GetResourcesCountByCategoryName(category);
-            return Ok(countResources);
+            if (projectId == default)
+            {
+                throw new ArgumentException($"{nameof(projectId)} cannot be 0");
+            }
+
+            IEnumerable<Resource> resources = _service.GetAllResourcesByProjectId(projectId);
+            return Ok(resources);
         }
     }
 }

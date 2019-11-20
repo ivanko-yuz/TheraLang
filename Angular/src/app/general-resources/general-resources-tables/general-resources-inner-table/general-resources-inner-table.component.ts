@@ -1,42 +1,45 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { MatTableDataSource, MatPaginator, PageEvent } from '@angular/material';
 import { Resource } from 'src/app/general-resources/resource-models/resource';
-import { ResourceService } from 'src/app/resources-table/resource.service';
+import { ResourceService } from 'src/app/project-info/resources-table-for-project/resources-table/resource.service';
+import { ResourceCategory } from '../../resource-models/resource-category';
+import { Constants } from '../../resource-models/resources-table-constants';
 
 @Component({
   selector: 'app-general-resources-inner-table',
   templateUrl: './general-resources-inner-table.component.html',
   styleUrls: ['./general-resources-inner-table.component.less']
 })
-export class GeneralResourcesInnerTableComponent implements OnInit, OnChanges {
-  @Input() countAllResources: number;
-
-  // tslint:disable-next-line:variable-name
-  _dataSource: MatTableDataSource<Resource>;
-  @Input() set  dataSource(value: MatTableDataSource<Resource>) {
-    this._dataSource = value;
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator.length = this.countAllResources;   
-  }
-  get dataSource(): MatTableDataSource<Resource> {
-    return this._dataSource;  
-  }
-
+export class GeneralResourcesInnerTableComponent implements OnInit {
+  @Input() resourcesCategoryId: number;
+  resources: Resource[];
+  dataSource: MatTableDataSource<Resource>;
+  showTable: boolean = false;
+  allResourcesCount: number;
+  columnsPerPage =  Constants.COLUMNS_PER_PAGE;
   displayedColumns: string[] = ['id', 'name', 'date', 'description'];
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @Output() pageChangedEvent:EventEmitter<PageEvent> = new  EventEmitter<PageEvent>();
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(public resourceService: ResourceService) { }
 
   async ngOnInit() {
-    // this.countAllResources = await this.resourceService.getCountAllResources(1);
+    this.resources = await this.resourceService.getResourcesByCategoryId(this.resourcesCategoryId ,
+      Constants.PAGE_NUMBER, Constants.COLUMNS_PER_PAGE
+    );
     
+    this.allResourcesCount = await this.resourceService.getResourcesCountByCategoryId(this.resourcesCategoryId);   
+    this.dataSource = new MatTableDataSource(this.resources);
+    this.dataSource.paginator = this.paginator;    
+    this.showTable = true;    
   }
 
-  async ngOnChanges() {
-   
-  }
-  pageChanged(event: PageEvent) {
-    this.pageChangedEvent.emit(event);
+  async pageChanged(event: PageEvent) {
+    this.resources = await this.resourceService.getResourcesByCategoryId(this.resourcesCategoryId ,
+      event.pageIndex + 1, event.pageSize
+    );
+
+    this.allResourcesCount = await this.resourceService.getResourcesCountByCategoryId(this.resourcesCategoryId);   
+    this.dataSource = new MatTableDataSource(this.resources);
+    this.dataSource.paginator = this.paginator; 
   }
 }

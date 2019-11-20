@@ -26,14 +26,20 @@ export class HttpService {
     }
 
     getAllResourcesByProjectId(projectId: number) {
-        return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
+        return this.http.get(this.piranhaApiUrl + 'resource/all/' + projectId);
     }
 
-    getAllResources(pageNumber: number, recordsPerPage: number) {
-        return this.http.get(this.piranhaApiUrl + 'resource/all/' + pageNumber + '/' + recordsPerPage);
+    getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
+        return this.http.get(this.piranhaApiUrl + 'resource/all/' + categoryId + '/' + pageNumber 
+        + '/' + recordsPerPage);
     }
 
-    getCountAllResources(category: string) {
-        return this.http.get<number>(this.piranhaApiUrl + 'resource/all/count' + '/' + category);
+    getResourceCategories(withAssignedResources: boolean) {
+        return this.http.get(this.piranhaApiUrl + 'resource/categories' + '/' + withAssignedResources);
+    }
+
+    getResourcesCountByCategoryId(categoryId: number)
+    {
+        return this.http.get(this.piranhaApiUrl + 'resource/count' + '/' + categoryId);
     }
 }

@@ -37,12 +37,12 @@ import { ProjectParticipantsComponent } from './project-participants/project-par
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
 import { CustomDatePipe } from './project-info/custom.datepipe';
-import { ResourcesTableComponent } from './resources-table/resources-table.component';
-import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
-import { ResourceService } from './resources-table/resource.service';
-import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
+import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
+import { ResourceService } from './project-info/resources-table-for-project/resources-table/resource.service';
 import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
 import { GeneralResourcesInnerTableComponent } from './general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component';
+import { ResourceCategoriesService } from './project-info/resources-table-for-project/resources-table/resource-categories.service';
 
 
 @NgModule({
@@ -58,8 +58,7 @@ import { GeneralResourcesInnerTableComponent } from './general-resources/general
     ProjectParticipantsComponent,
     CustomDatePipe,
     ResourcesTableComponent,
-    ResourcesInternalTableComponent,
-    GeneralResourcesComponent,
+    ResourcesInternalTableComponent,    
     GeneralResourcesTableComponent,
     GeneralResourcesInnerTableComponent
   ],
@@ -122,8 +121,8 @@ import { GeneralResourcesInnerTableComponent } from './general-resources/general
     ScrollingModule,  
   ],
   
-  exports: [ResourcesInternalTableComponent],
-  providers: [ResourceService, HttpService, EventService],
+  exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],
+  providers: [ResourceService, HttpService, EventService, ResourceCategoriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,7 +15,7 @@
   <div class="bottom-buttons">
     <button mat-raised-button class="resButton" (click)="getResourcesData()">Ресурси</button>
   </div>
-  <div id="resTabId">
-    <app-resources-table *ngIf="generateOnceResourcesTable" [sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>
+  <div>
+    <app-resources-table id="resTabId" *ngIf="generateOnceResourcesTable" [sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>
   </div>
 </div>

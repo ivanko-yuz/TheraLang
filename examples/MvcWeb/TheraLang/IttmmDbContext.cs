@@ -17,7 +17,7 @@ namespace MvcWeb.Db
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
-        public virtual DbSet<ResourceProject> ResourceProject { get; set; }
+        public virtual DbSet<ResourceToProject> ResourceProject { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
         #endregion

@@ -14,8 +14,12 @@ namespace MvcWeb.TheraLang.Services
 
         Resource GetResourceById(int id);
 
-        int GetResourcesCountByCategoryName(string category);
+        IEnumerable<ResourceCategory> GetResourcesCategories(bool withAssignedResources);
 
-        IEnumerable<Resource> GetAllResources(int pageNumber, int recordsPerPage);
+        int CountResourcesByCategoryId(int categoryId);
+
+        IEnumerable<Resource> GetResourcesByCategoryId(int categoryID, int pageNumber, int recordsPerPage);
+
+        IEnumerable<Resource> GetAllResourcesByProjectId(int projectId);
     }
 }

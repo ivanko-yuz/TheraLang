@@ -1,6 +1,6 @@
 ﻿namespace MvcWeb.TheraLang.Entities
 {
-    public class ResourceProject
+    public class ResourceToProject
     {
         public int Id { get; set; }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { Resource } from '../general-resources/resource-models/resource';
+import { Resource } from '../../../general-resources/resource-models/resource';
 import { ResourceService } from './resource.service';
 import { MatTableDataSource, MatTabChangeEvent } from '@angular/material';
 
