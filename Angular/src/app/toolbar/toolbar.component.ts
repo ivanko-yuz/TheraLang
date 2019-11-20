@@ -12,15 +12,15 @@ import { RequestStatus } from '../request-status-enum';
 })
 export class ToolbarComponent implements OnInit, AfterViewInit {
 
-  hasNotification: boolean = true;
+  hasNotification: boolean = false;
   projectParticipation: ProjectParticipationRequest[];
   constructor(private httpService: HttpService, private evtSvc: EventService) { }
 
   ngOnInit() {
     this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[]) => {
       this.projectParticipation = data;
-      if ((this.projectParticipation.filter(x => x.status === RequestStatus.New)).length === 0) {
-        this.hasNotification = false;
+      if ((this.projectParticipation.filter(x => x.status === RequestStatus.New)).length > 0) {
+        this.hasNotification = true;
       }
     });
   }

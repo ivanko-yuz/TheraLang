@@ -17,8 +17,12 @@ export class HttpService{
     getProjectInfo(id: number) {
         return this.http.get(this.url + 'project' + '/' + id);
     }
-  
-    getAllProjectParticipants(){
+     
+     getPayment(){
+        return this.http.get(this.url + 'payment');
+    }
+
+     getAllProjectParticipants(){
         return this.http.get(this.url + 'projectParticipants');
       }
 

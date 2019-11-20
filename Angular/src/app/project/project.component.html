@@ -1,4 +1,28 @@
-<button mat-stroked-button (click)="onCreate()">
+<app-payment></app-payment>
+<br>
+ <!-- <form #amount="ngForm" novalidate (ngSubmit)="submit(amount)">
+  <div class="form-group">
+    <div>
+      <label>Сума допомоги</label>
+      </div>
+      <input class="form-control" name="amount" ngModel 
+          required pattern="[0-9]{10}" />
+  </div>
+
+  <div class="form-group">
+      <input type="submit" [disabled]="myForm.invalid" class="btn btn-default" value="send"/>
+      <button type="submit"  style="border: none !important; display:inline-block !important;text-align: center !important;padding: 7px 20px !important;
+      color: #fff !important; font-size:16px !important; font-weight: 600 !important; font-family:OpenSans, sans-serif; cursor: pointer !important; border-radius: 2px !important;
+      background: rgb(122,183,43) !important;" onmouseover="this.style.opacity='0.5';"
+        onmouseout="this.style.opacity='1';">
+        <img src="https://static.liqpay.ua/buttons/logo-small.png" name="btn_text"
+          style="margin-right: 7px !important; vertical-align: middle !important;" />
+        <span style="vertical-align:middle !important">Підтримати NOT</span>
+      </button>
+  </div>
+</form>
+
+ <button mat-stroked-button (click)="onCreate()">
   <mat-icon>add</mat-icon>Створити проект
 </button>
 <div *ngFor="let project of projects">

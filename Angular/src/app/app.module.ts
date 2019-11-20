@@ -46,6 +46,10 @@ import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
+import { PaymentComponent } from './payment/payment.component';
+import { ResultComponent } from './result/result.component';
+
+
 
 
 @NgModule({
@@ -65,7 +69,11 @@ import { DialogService } from './shared/services/dialog.service';
     GeneralResourcesComponent,
     ConfirmDialogComponent,
     ErrorComponent,
-    HomeComponent
+    HomeComponent,
+    ProjectParticipantsComponent,
+    PaymentComponent,
+    ResultComponent
+
   ],
   entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent, ConfirmDialogComponent],
   imports: [

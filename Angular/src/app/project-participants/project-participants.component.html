@@ -3,9 +3,9 @@
         <mat-tab label="Підтверджені"></mat-tab>
         <mat-tab label="Відхилені"> </mat-tab>
 </mat-tab-group>
-<div *ngIf="projectParticipationRequest.filteredData.length > 0">
+<!-- <div *ngIf="projectParticipationRequest.filteredData.length > 0"> -->
         <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="projectParticipationRequest">
+                <table mat-table [dataSource]="projectParticipationRequest" *ngIf="projectParticipationRequest.filteredData.length > 0">
 
                         <ng-container matColumnDef="createdById">
                                 <th mat-header-cell *matHeaderCellDef> Ім’я/Id</th>
@@ -46,12 +46,12 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
-
+                <div class="noData"*ngIf="projectParticipationRequest.filteredData.length === 0">
+                         <h1>Немає нових запитів</h1>
+                </div>
                 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
+         
+<!-- </div> -->
 
-</div>
-<div *ngIf="projectParticipationRequest.filteredData.length === 0">
-        <div>
-                <h1>Немає нових запитів</h1>
-        </div>
+

@@ -4,6 +4,9 @@ import { Project } from './project';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { ProjectService } from './project.service';
 import { DialogService } from '../shared/services/dialog.service';
+import { LiqPayCheckoutFormModel } from '../payment/liq-pay-checkout-form-model';
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -15,6 +18,8 @@ import { DialogService } from '../shared/services/dialog.service';
 export class ProjectComponent implements OnInit {
 
   projects: Project[];
+  payment: LiqPayCheckoutFormModel = new LiqPayCheckoutFormModel('','');
+  donationAmount: number;
 
   constructor(private httpService: HttpService,
     private dialogService:DialogService,

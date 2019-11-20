@@ -1,0 +1,12 @@
+<!-- <p>result works!</p> -->
+<!-- <h1>{{response?.order_id}}</h1>     -->
+<div *ngIf="response !== null; else error">
+<h1 >Payment has beed sent, the status is: {{response?.status}}</h1>
+<div>amount {{response?.amount}} UAH</div>
+<!-- <div>project ID {{response?.projectId}}</div> -->
+</div>
+<ng-template #error>
+    <h2 *ngIf="er !== undefined">Something went wrong, code {{er?.status}}</h2>
+</ng-template>
+ 
+
