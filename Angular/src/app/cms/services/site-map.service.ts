@@ -4,6 +4,7 @@ import {SiteMap} from '../models/site-map';
 import {Observable, Subject} from 'rxjs';
 import {ToolbarItem} from '../../toolbar/toolbar-item/toolbar-item';
 import {environment} from '../../../environments/environment';
+import {CmsRoute} from '../../toolbar/toolbar-item/cms-route';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,8 @@ export class SiteMapService {
 
   private mapToolbarItems(siteMap: SiteMap[]): ToolbarItem[] {
     return siteMap.map(item => {
-      return new ToolbarItem(item.permalink, item.menuTitle, this.mapToolbarItems(item.items));
+      const route = new CmsRoute(item.pageTypeName, item.id);
+      return new ToolbarItem(item.permalink, route, item.menuTitle, this.mapToolbarItems(item.items));
     });
   }
 }

@@ -5,8 +5,7 @@ import { EventService } from '../project-participants/event-service';
 import { RequestStatus } from '../request-status-enum';
 import {SiteMapService} from '../cms/services/site-map.service';
 import {ToolbarItem} from './toolbar-item/toolbar-item';
-import {Subject, Subscription} from 'rxjs';
-import {SiteMap} from '../cms/models/site-map';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
