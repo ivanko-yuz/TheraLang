@@ -14,10 +14,13 @@ namespace MvcWeb.TheraLang.Entities
 
         public virtual ICollection<ProjectParticipation> ProjectParticipations { get; set; }
 
+        public virtual ICollection<Donation> Donations { get; set; }
+
         public Project()
         {
             this.ResourceProjects = new List<ResourceProject>();
             this.ProjectParticipations = new List<ProjectParticipation>();
+            this.Donations = new List<Donation>();
         }
     }
 }

@@ -1,20 +1,20 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { donationtUrl } from '../shared/api-endpoint.constants';
+
 
 @Injectable()
-export class DonationService{
-  
-    constructor(private http: HttpClient){ }
-      
-     private url = "https://localhost:44353/api/";
-     
-     getCheckoutModel(donationAmount: string, projectId: number){
-         debugger
-        return this.http.get(`${this.url}payment/${donationAmount}/${projectId}`);
+export class DonationService {
+
+    constructor(private http: HttpClient) { }
+
+    getCheckoutModel(donationAmount: string, projectId: number) {
+        return this.http.get(`${donationtUrl}/${donationAmount}/${projectId}`);
     }
 
-    getLiqpayResponse(donationId: string){
-        return this.http.get(`${this.url}result/${donationId}`);
+    getLiqpayResponse(donationId: string) {
+        return this.http.get(`${donationtUrl}/${donationId}`);
+
     }
-    
+
 }

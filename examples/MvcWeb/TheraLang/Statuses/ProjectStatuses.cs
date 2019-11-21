@@ -3,8 +3,8 @@
     public enum ProjectParticipationStatus
     {
         New = 0,
-        Approved = 1,
-        Rejected = 2
+        Approved = 10,
+        Rejected = 20
     }
 
     public enum MemberRole

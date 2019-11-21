@@ -46,7 +46,6 @@ import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
-import { PaymentComponent } from './payment/payment.component';
 import { ResultComponent } from './result/result.component';
 import { DonationComponent } from './donation/donation.component';
 import { DonationService } from './donation/donation.service';
@@ -73,7 +72,6 @@ import { DonationService } from './donation/donation.service';
     ErrorComponent,
     HomeComponent,
     ProjectParticipantsComponent,
-    PaymentComponent,
     ResultComponent,
     DonationComponent
 
@@ -134,17 +132,17 @@ import { DonationService } from './donation/donation.service';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,  
+    ScrollingModule,
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [ResourceService,
-     HttpService,
-      EventService,
-      DonationService,
-     {provide: ErrorHandler, useClass: ErrorHandlerService},
-     NotificationService,
-     DialogService,
-    ],
+    HttpService,
+    EventService,
+    DonationService,
+    { provide: ErrorHandler, useClass: ErrorHandlerService },
+    NotificationService,
+    DialogService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

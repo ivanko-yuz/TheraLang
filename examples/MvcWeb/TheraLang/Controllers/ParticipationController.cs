@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
 using System.Collections.Generic;
 using System;
+using MvcWeb.TheraLang.ProjectStatus;
 
 namespace MvcWeb.TheraLang.Controllers
 {
-    [Route("api/participation")]
+    [Route("api/participants")]
     [ApiController]
     public class ParticipationController : ControllerBase
     {
@@ -19,12 +20,23 @@ namespace MvcWeb.TheraLang.Controllers
         private readonly IProjectParticipationService _service;
 
         [HttpGet]
-        [Route("get")]
-        public IActionResult Get()
+        //[Route("get")]
+        public ActionResult<ProjectParticipation> Get()
         {
             IEnumerable<ProjectParticipation> members = _service.GetAll();
             return Ok(members);
         }
+
+        //
+        [HttpPut]
+        [Route("{participantId}")]
+        public async Task<IActionResult> ChangeStatus(int participantId, [FromBody]ProjectParticipationStatus status)
+        {
+            await _service.ChangeStatusAsync(participantId, status);
+            return Ok();
+        }
+
+        //
 
         [HttpPost]
         [Route("create/{userId}/{projectId}")]

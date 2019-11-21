@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Entities;
+using MvcWeb.TheraLang.Models;
 using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.TheraLang.Controllers
@@ -18,9 +19,19 @@ namespace MvcWeb.TheraLang.Controllers
         }
         
         [HttpGet]
-        public IEnumerable<Project> GetAllProjects()
+        public IEnumerable<ProjectModel> GetAllProjects()
         {
-            return uow.Repository<Project>().Get().ToList();
+            List<ProjectModel> projectModels = new List<ProjectModel>();
+
+            projectModels = uow.Repository<Project>().Get().Select(x => new ProjectModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                DonationAmount = x.Donations.Sum(y => y.Amount) // add new property how much need to get
+            }).ToList();
+
+            return projectModels;
+
         }
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)

@@ -20,6 +20,7 @@ namespace MvcWeb.Db
         public virtual DbSet<ResourceProject> ResourceProject { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
+        public virtual DbSet<Donation> Donations { get; set; }
         #endregion
 
         #region Piranha_Entities
@@ -98,6 +99,7 @@ namespace MvcWeb.Db
             modelBuilder.ApplyConfiguration(new ResourceProjectConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
+            modelBuilder.ApplyConfiguration(new DonationConfiguration());
             #endregion
         }
     }

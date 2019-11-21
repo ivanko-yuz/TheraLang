@@ -38,6 +38,14 @@ namespace MvcWeb
             services.AddLocalization(options =>
                 options.ResourcesPath = "Resources"
             );
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddMvc()
                 .AddPiranhaManagerOptions()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -76,6 +84,7 @@ namespace MvcWeb
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
+            services.AddTransient<IDonationService, DonationService>();
             #endregion
         }
 
@@ -125,6 +134,7 @@ namespace MvcWeb
             app.UsePiranhaManager();
             app.UsePiranhaSummernote();
             //app.UsePiranhaTinyMCE();
+            app.UseCors("MyPolicy");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",

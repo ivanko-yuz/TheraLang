@@ -14,11 +14,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
 
   hasNotification: boolean = false;
   projectParticipation: ProjectParticipationRequest[];
-  constructor(private httpService: HttpService, private evtSvc: EventService) { }
+  constructor(private httpService: HttpService, private eventService: EventService) { }
 
   ngOnInit() {
-    this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[]) => {
-      this.projectParticipation = data;
+    this.httpService.getAllProjectParticipants().subscribe((projectParticipation: ProjectParticipationRequest[]) => {
+      this.projectParticipation = projectParticipation;
       if ((this.projectParticipation.filter(x => x.status === RequestStatus.New)).length > 0) {
         this.hasNotification = true;
       }
@@ -26,7 +26,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.evtSvc.childEventListner().subscribe(info => {
+    this.eventService.childEventListner().subscribe(click => {
       this.hasNotification = false;
     });
   }

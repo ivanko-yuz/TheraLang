@@ -9,8 +9,8 @@ import { LiqpayResponse } from './liqpay-response';
   styleUrls: ['./result.component.less']
 })
 export class ResultComponent implements OnInit {
+
   liqpayResponse: LiqpayResponse;
-  er: any;
   donationId: string;
 
   constructor(private route: ActivatedRoute, private donationService: DonationService) { }
@@ -19,18 +19,11 @@ export class ResultComponent implements OnInit {
 
     this.route.paramMap.subscribe(params=>{
       this.donationId = params.get('donationId');
-      debugger
       this.donationService.getLiqpayResponse(this.donationId).subscribe((liqpayResponseData: LiqpayResponse) => {
+        debugger
         this.liqpayResponse = liqpayResponseData;    
       });
     });
-    // this.http1.get(`${this.url}result/`).subscribe((responseData: LiqPayResponseModel) => {
-    //   debugger
-    //   this.response = responseData
-    // },
-    //  error =>       {
-    //   this.er = <any>error;   
-    // });
         
   }
 

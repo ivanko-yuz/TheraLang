@@ -24,8 +24,6 @@ export class DonationComponent implements OnInit {
   }
  
   checkout(){
-    debugger
-    console.log(this.donationAmount);
     this.donationService.getCheckoutModel(this.donationAmount, this.projectId).subscribe((checkoutModel: LiqpayCheckout) => {
       this.donationModel = checkoutModel;
       window.open(`https://www.liqpay.ua/api/3/checkout?data=${this.donationModel.data}&signature=${this.donationModel.signature}`, "_blank") ;

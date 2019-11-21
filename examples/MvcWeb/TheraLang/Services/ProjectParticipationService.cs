@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
 using System.Collections.Generic;
+using MvcWeb.TheraLang.ProjectStatus;
 
 namespace MvcWeb.TheraLang.Services
 {
@@ -15,6 +16,17 @@ namespace MvcWeb.TheraLang.Services
         }
 
         private readonly IUnitOfWork _unitOfWork;
+
+        //
+        public async Task ChangeStatusAsync(int participantId, ProjectParticipationStatus status)
+        {
+            var participant = _unitOfWork.Repository<ProjectParticipation>().Get().SingleOrDefault(x => x.Id == participantId);
+            participant.Status = status;
+            _unitOfWork.Repository<ProjectParticipation>().Update(participant);
+            await _unitOfWork.SaveChangesAsync();
+        }
+        //
+
 
         public IEnumerable<ProjectParticipation> GetAll()
         {

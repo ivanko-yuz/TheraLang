@@ -13,7 +13,7 @@ import { RequestStatus } from '../request-status-enum';
 })
 export class ProjectParticipantsComponent implements OnInit {
 
-  projectParticipationRequest = new MatTableDataSource<ProjectParticipationRequest>();
+  projectParticipationRequest: MatTableDataSource<ProjectParticipationRequest> = new MatTableDataSource<ProjectParticipationRequest>();
   showActionButtons: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = ['createdById', 'role', 'projectId', 'status', 'actions'];
@@ -23,7 +23,7 @@ export class ProjectParticipantsComponent implements OnInit {
   ngOnInit() {
     this.httpService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
       this.projectParticipationRequest.data = projectParticipants;
-      this.projectParticipationRequest.filterPredicate = (projectParticipant: ProjectParticipationRequest, filter: string) => projectParticipant.status.toString() == filter;
+      this.projectParticipationRequest.filterPredicate = (projectParticipant: ProjectParticipationRequest, filter: string) => projectParticipant.status.toString() === filter;
       this.projectParticipationRequest.paginator = this.paginator;
       this.projectParticipationRequest.filter = RequestStatus.New.toString();
     });
@@ -43,7 +43,7 @@ export class ProjectParticipantsComponent implements OnInit {
   
   changeFilter(tabPosition: number){
     if(tabPosition === 1){
-      return RequestStatus.Aproved.toString();
+      return RequestStatus.Approved.toString();
     }
     else if(tabPosition === 2){
       return RequestStatus.Rejected.toString();
@@ -54,7 +54,8 @@ export class ProjectParticipantsComponent implements OnInit {
   }
 
   changeStatus(status: string, projectParticipant: ProjectParticipationRequest) {
-    projectParticipant.status = (status === 'aproved') ?  RequestStatus.Aproved : RequestStatus.Rejected;
+    projectParticipant.status = (status === 'approved') ?  RequestStatus.Approved : RequestStatus.Rejected;
+    debugger
     this.httpService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
       this.load();
     });

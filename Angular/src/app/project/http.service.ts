@@ -2,6 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Project } from './project';
 import { baseUrl } from '../shared/api-endpoint.constants';
+import { RequestStatus } from '../request-status-enum';
 
 @Injectable()
 export class HttpService{
@@ -11,7 +12,7 @@ export class HttpService{
      private url = baseUrl;
      
     getAllProjects(){
-        return this.http.get(this.url + 'project');
+        return this.http.get(this.url + 'projects');
     }
   
     getProjectInfo(id: number) {
@@ -23,11 +24,11 @@ export class HttpService{
     }
 
      getAllProjectParticipants(){
-        return this.http.get(this.url + 'projectParticipants');
+        return this.http.get(this.url + 'participants');
       }
 
-    changeParticipationStatus (requestId: number, requestStatus: number){
-        return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
+    changeParticipationStatus (requestId: number, requestStatus: RequestStatus){
+        return this.http.put(this.url + 'participants' + '/' + requestId, requestStatus);
     }   
  
     getAllResourcesById(projectId: number) {

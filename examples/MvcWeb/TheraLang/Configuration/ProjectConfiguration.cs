@@ -18,6 +18,7 @@ namespace MvcWeb.TheraLang.Configuration
 
             builder.HasMany(x => x.ResourceProjects).WithOne(i => i.Project).HasForeignKey("ProjectId");
             builder.HasMany(x => x.ProjectParticipations).WithOne(i => i.Project).HasForeignKey("ProjectId");
+            builder.HasMany(i => i.Donations).WithOne(e => e.Project).HasForeignKey("ProjectId");
         }
     }
 }
