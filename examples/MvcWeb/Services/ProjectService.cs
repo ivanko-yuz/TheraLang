@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MvcWeb.Models;
 using MvcWeb.TheraLang;
 using MvcWeb.TheraLang.Entities;
@@ -11,7 +12,7 @@ namespace MvcWeb.Services
 {
     public interface IProjectService
     {
-        Task<bool> TryAddProject(ProjectViewModel projectViewModel);
+        Task TryAddProject(ProjectViewModel projectViewModel);
 
         Task ChangeStatus(int id, ProjectStatus rejected);
 
@@ -29,24 +30,23 @@ namespace MvcWeb.Services
 
         private readonly IUnitOfWork _uow;
 
-        public async Task<bool> TryAddProject(ProjectViewModel projectViewModel)
+        public async Task TryAddProject(ProjectViewModel projectViewModel)
         {
             var newProject = new Project {Name = projectViewModel.Name, Type = projectViewModel.Type};
             try
             {
                 await _uow.Repository<Project>().Add(newProject);
                 await _uow.SaveChangesAsync();
-                return true;
             }
-            catch
+            catch(Exception ex)
             {
-                return false;
+                throw new Exception($"Error", ex);
             }
         }
 
         public IEnumerable<Project> GetAll()
         {
-            return _uow.Repository<Project>().Get().ToList();
+            return _uow.Repository<Project>().Get().AsNoTracking().ToList();
         }
 
         public Project GetbyId(int id)

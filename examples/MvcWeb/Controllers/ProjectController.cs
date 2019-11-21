@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.Services;
-using MvcWeb.TheraLang;
 using MvcWeb.TheraLang.Entities;
 
 
@@ -27,6 +27,10 @@ namespace MvcWeb.Controllers
             [HttpPut("{id}")]
             public async Task<IActionResult> ApproveStatusId(int id)
             {
+                if (id == default)
+                {
+                    throw new ArgumentException($"{nameof(id)} cannot be 0");
+                }
                 await _projectService.ChangeStatus(id, ProjectStatus.Approved);
                 return Ok();
             }
@@ -34,6 +38,10 @@ namespace MvcWeb.Controllers
             [HttpPut("{id}")]
             public async Task<IActionResult> RejectStatusId(int id)
             {
+                if (id == default)
+                {
+                    throw new ArgumentException($"{nameof(id)} cannot be 0");
+                }
                 await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
                 return Ok();
             }
