@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MvcWeb.TheraLang.Entities;
+﻿using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -80,20 +79,23 @@ namespace MvcWeb.TheraLang.Services
             try
             {
                 var resources = _unitOfWork.Repository<Resource>().Get().Where(x => x.CategoryId == categoryId);
-                var resourceCategories = new ResourceCategoryService(_unitOfWork).GetAllResourceCategories();
-                var joinedResources = (from res in resources                                      
-                                      select new Resource {Id = res.Id, 
-                                          User = res.User, Name = res.Name, 
-                                          Description = res.Description, 
-                                          Url = res.Url, File = res.File,
-                                          CategoryId = res.CategoryId,
-                                          ResourceCategory = res.ResourceCategory,
-                                          ResourceToProjects = res.ResourceToProjects,
-                                          UpdatedById = res.UpdatedById,
-                                          CreatedDateUtc = res.CreatedDateUtc,
-                                          UpdatedDateUtc = res.UpdatedDateUtc,
-                                      });
-                
+                var joinedResources = (from res in resources
+                                       select new Resource
+                                       {
+                                           Id = res.Id,
+                                           User = res.User,
+                                           Name = res.Name,
+                                           Description = res.Description,
+                                           Url = res.Url,
+                                           File = res.File,
+                                           CategoryId = res.CategoryId,
+                                           ResourceCategory = res.ResourceCategory,
+                                           ResourceToProjects = res.ResourceToProjects,
+                                           UpdatedById = res.UpdatedById,
+                                           CreatedDateUtc = res.CreatedDateUtc,
+                                           UpdatedDateUtc = res.UpdatedDateUtc,
+                                       });
+
                 var resourcesPerPages = joinedResources.Skip((pageNumber - 1) * recordsPerPage)
                     .Take(recordsPerPage).ToList();
                 return resourcesPerPages;
@@ -108,8 +110,7 @@ namespace MvcWeb.TheraLang.Services
         {
             try
             {
-                var resourcesCount = _unitOfWork.Repository<Resource>()
-                    .Get().Where(x => x.CategoryId == categoryId).Count();
+                var resourcesCount = _unitOfWork.Repository<Resource>().Get().Count(x => x.CategoryId == categoryId);
                 return resourcesCount;
             }
             catch (Exception ex)

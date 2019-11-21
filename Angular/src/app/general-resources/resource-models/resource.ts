@@ -1,5 +1,5 @@
 import { ResourceProjects } from './resource-projects';
-import { User } from './User';
+import { User } from './user';
 import { ResourceCategory } from './resource-category';
 
 export class Resource {

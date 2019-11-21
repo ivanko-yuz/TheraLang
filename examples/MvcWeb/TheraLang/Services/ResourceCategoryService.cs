@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MvcWeb.TheraLang.Entities;
+using MvcWeb.TheraLang.UnitOfWork;
 using System.Linq;
 using System.Threading.Tasks;
-using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.TheraLang.Services
 {
@@ -27,22 +25,10 @@ namespace MvcWeb.TheraLang.Services
                 _unitOfWork.Repository<ResourceCategory>().Update(category);
                 await _unitOfWork.SaveChangesAsync();
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 throw new System.Exception($"Error when changing resource category for {nameof(categoryId)}:{categoryId} " +
                     $"and {nameof(newTypeName)}:{newTypeName}: ", ex);
-            }
-        }
-
-        public IEnumerable<ResourceCategory> GetAllResourceCategories()
-        {
-            try
-            {
-                return _unitOfWork.Repository<ResourceCategory>().Get();
-            }
-            catch (System.Exception ex)
-            {
-                throw new Exception($"Error when get all ResourceCategories: ", ex);
             }
         }
     }

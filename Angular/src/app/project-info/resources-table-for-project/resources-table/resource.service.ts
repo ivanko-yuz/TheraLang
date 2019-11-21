@@ -18,7 +18,7 @@ export class ResourceService {
         });
         return allData;
     }
-    
+
     getAllResourceCategories(arr: Resource[][]): string[] {
         const allResourceCategories: string[] = [];
         for (const cat in arr) {
@@ -26,7 +26,7 @@ export class ResourceService {
         }
         return allResourceCategories;
     }
-    
+
     sortAllResourcesByCategories(res: Resource[]): Resource[][] {
         const sortedArray: Resource[][] = [];
         res.forEach((resuorce) => {
@@ -40,7 +40,7 @@ export class ResourceService {
 
     getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number): Promise<Resource[]> {
         const allData = this.http.getResourcesByCategoryId(categoryId, pageNumber, recordsPerPage).toPromise()
-        .then((data: Resource[]) => { 
+        .then((data: Resource[]) => {
             this.allResources = data;
             return data;
         });

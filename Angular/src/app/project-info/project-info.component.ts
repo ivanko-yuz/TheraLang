@@ -13,7 +13,7 @@ import { Resource } from '../general-resources/resource-models/resource';
   encapsulation: ViewEncapsulation.None,
   providers: [HttpService]
 })
-export class ProjectInfoComponent implements OnInit {
+export class ProjectInfoComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private http: HttpService,
               private resourceService: ResourceService) { }
@@ -33,21 +33,15 @@ export class ProjectInfoComponent implements OnInit {
       this.http.getProjectInfo(this.projectId).subscribe((data: Project) => this.projectInfo = data);
     });
   }
-  
+
   async getResourcesData() {
     if (!this.generateOnceResourcesTable) {
       const allResources = await this.resourceService.getAllResourcesByProjId(this.projectId);
       this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
-      
+
     }
     this.generateOnceResourcesTable = true;
     $('#resTabId').fadeToggle('slow');
   }
 }
-
-
-
-
-
-
 
