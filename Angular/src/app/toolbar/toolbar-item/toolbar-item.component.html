@@ -1,5 +1,5 @@
 <ng-template [ngIf]="isFinalMenu()">
-  <a mat-button class="toolbar-button" [routerLink]="toolbarItem.permalink" [innerText]="toolbarItem.title"></a>
+  <a mat-button class="toolbar-button" [routerLink]="toolbarItem.permalink" [innerText]="toolbarItem.title" (click)="onClick()"></a>
 </ng-template>
 
 
