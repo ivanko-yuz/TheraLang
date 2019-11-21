@@ -26,7 +26,7 @@ namespace MvcWeb.Controllers
         {
             if(id == default)
             {
-                throw new ArgumentException($"{nameof(id)} can not be null");
+                throw new ArgumentException($"{nameof(id)} can not be 0");
             }
             var type = _service.GetProjectTypeById(id);           
             return Ok(type);
