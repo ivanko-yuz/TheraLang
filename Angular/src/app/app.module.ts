@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import {
   MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
   MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
@@ -16,7 +16,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectInfoComponent } from './project-info/project-info.component';
-import { CreateProjectComponent } from './create-project/create-project.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
@@ -43,6 +43,11 @@ import { ResourceService } from './resources-table/resource.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
 import {CmsModule} from './cms/cms.module';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { ErrorComponent } from './shared/components/error/error.component';
+import { ErrorHandlerService } from './shared/services/error-handler.service';
+import { NotificationService } from './shared/services/notification.service';
+import { DialogService } from './shared/services/dialog.service';
 
 
 @NgModule({
@@ -51,9 +56,8 @@ import {CmsModule} from './cms/cms.module';
     routingComponents,
     ToolbarComponent,
     ProjectComponent,
-    HomeComponent,
+    ProjectFormComponent,
     ProjectInfoComponent,
-    CreateProjectComponent,
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
@@ -61,8 +65,11 @@ import {CmsModule} from './cms/cms.module';
     ResourcesInternalTableComponent,
     GeneralResourcesComponent,
     ToolbarItemComponent,
+    ConfirmDialogComponent,
+    ErrorComponent,
+    HomeComponent
   ],
-  entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
+  entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent, ConfirmDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -122,7 +129,13 @@ import {CmsModule} from './cms/cms.module';
     CmsModule,
   ],
   exports: [ResourcesInternalTableComponent],
-  providers: [ResourceService, HttpService, EventService],
+  providers: [ResourceService,
+     HttpService,
+     EventService,
+     {provide: ErrorHandler, useClass: ErrorHandlerService},
+     NotificationService,
+     DialogService,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import {ProjectInfoComponent} from './project-info/project-info.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import {CmsModule} from './cms/cms.module';
+import { ErrorComponent } from './shared/components/error/error.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'project', component: ProjectComponent },
   { path: 'resources', component: GeneralResourcesComponent },
   { path: '**', loadChildren: () => CmsModule},
+  { path: 'error', component: ErrorComponent },
 ];
 
 @NgModule({
@@ -25,6 +27,6 @@ export class AppRoutingModule { }
 
 export const routingComponents = [
   ProjectParticipantsComponent, ProjectComponent, HomeComponent, ProjectInfoComponent,
-  GeneralResourcesComponent
+  GeneralResourcesComponent, ErrorComponent
 ];
 

@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { Project } from './project';
+import { baseUrl } from '../shared/api-endpoint.constants';
 import {SiteMap} from '../cms/models/site-map';
 import {Observable} from 'rxjs';
-import {Subscription} from 'rxjs/src/internal/Subscription';
 
 @Injectable()
 export class HttpService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient){ }
 
-     private url = 'http://localhost:5000/api/';
+     private url = baseUrl;
 
     getAllProjects() {
-        return this.http.get(`${this.url}project`);
+        return this.http.get(this.url + 'project');
     }
 
     getProjectInfo(id: number) {
@@ -28,10 +29,19 @@ export class HttpService {
     }
 
     getAllResourcesById(projectId: number) {
-        return this.http.get(`${this.url}project/${projectId}/resources`);
+
+        return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
+    }
+
+    createProject(project: Project) {
+        return this.http.post(this.url, project);
+    }
+
+    updateProject(project: Project) {
+        return this.http.put(this.url + '/' + project.id, project);
     }
 
     getSiteMap(): Observable<SiteMap[]> {
-        return this.http.get<SiteMap[]>(`${this.url}sitemap`);
+      return this.http.get<SiteMap[]>(`${this.url}sitemap`);
     }
 }

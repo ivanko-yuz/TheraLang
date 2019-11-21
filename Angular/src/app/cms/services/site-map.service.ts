@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpService} from '../../project/http.service';
+import {HttpClient} from '@angular/common/http';
 import {SiteMap} from '../models/site-map';
 import {Observable, Subject} from 'rxjs';
 import {ToolbarItem} from '../../toolbar/toolbar-item/toolbar-item';
 import {environment} from '../../../environments/environment';
 import {CmsRoute} from '../../toolbar/toolbar-item/cms-route';
+import {cmsSitemapUrl} from '../../shared/api-endpoint.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,13 @@ export class SiteMapService {
   siteMap = new Subject<SiteMap[]>();
   toolbarItems = new Subject<ToolbarItem[]>();
 
-  constructor(private http: HttpService) {
+  constructor(private http: HttpClient) {
     this.updateToolbarItemsOnSubscription();
     this.updateSiteMap();
   }
 
   private getSiteMap(): Observable<SiteMap[]> {
-    return this.http.getSiteMap();
+    return this.http.get<SiteMap[]>(cmsSitemapUrl);
   }
 
   updateSiteMap(): void {

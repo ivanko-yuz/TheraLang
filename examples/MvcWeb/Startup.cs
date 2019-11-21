@@ -15,6 +15,7 @@ using MvcWeb.TheraLang.UnitOfWork;
 using MvcWeb.Validators;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
+using MvcWeb.TheraLang.Services;
 
 namespace MvcWeb
 {
@@ -75,6 +76,9 @@ namespace MvcWeb
             services.AddCors(options =>
                 options.AddPolicy("development mode", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 
+            services.AddTransient<IResourceService, ResourceService>();
+            services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
+            services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             #endregion
         }
 
@@ -132,6 +136,8 @@ namespace MvcWeb
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");
             });
+
+            //Seed.RunAsync(api).GetAwaiter().GetResult(); //TODO: fix seeding
         }
     }
 }
