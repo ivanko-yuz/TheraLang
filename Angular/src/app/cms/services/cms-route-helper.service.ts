@@ -12,16 +12,18 @@ export class CmsRouteHelperService {
   public currentRoute: CmsRoute;
   public currentRouteSubject = new Subject<CmsRoute>();
   private siteSlugMap: Map<string, CmsRoute>;
+  private siteSlugMapSubject = new Subject<Map<string, CmsRoute>>();
   private subscription = new Subscription();
 
   constructor(private siteMapService: SiteMapService) {
     this.subscribeOnToolbarItems();
     this.subscribeRoute();
+    this.subscribeSiteSlugMap();
   }
 
   private subscribeOnToolbarItems(): void {
     const subscription = this.siteMapService.toolbarItems.subscribe(next => {
-      this.siteSlugMap = this.createSiteSlugMap(next);
+      this.siteSlugMapSubject.next(this.createSiteSlugMap(next));
     });
     this.subscription.add(subscription);
   }
@@ -33,12 +35,27 @@ export class CmsRouteHelperService {
     this.subscription.add(subscription);
   }
 
-  public updateRouteByPath(path: string): void {
-    const nextRoute = this.siteSlugMap.get(path);
+  private subscribeSiteSlugMap(): void {
+    const subscription = this.siteSlugMapSubject.subscribe(next => {
+      this.siteSlugMap = next;
+    });
+    this.subscription.add(subscription);
+  }
+
+  private getRouteByPathAndUpdate(siteSlugMap: Map<string, CmsRoute>, path: string): void {
+    const nextRoute = siteSlugMap.get(path);
     if (nextRoute) {
-      this.currentRouteSubject.next(this.siteSlugMap.get(path));
+      this.currentRouteSubject.next(nextRoute);
     } else {
       this.currentRouteSubject.error('no routes found');
+    }
+  }
+
+  public updateRouteByPath(path: string): void {
+    if (this.siteMapService.siteMapUpdating || !this.siteSlugMap) {
+      this.siteSlugMapSubject.subscribe(next => this.getRouteByPathAndUpdate(next, path));
+    } else {
+      this.getRouteByPathAndUpdate(this.siteSlugMap, path);
     }
   }
 

@@ -14,6 +14,7 @@ export class SiteMapService {
 
   siteMap = new Subject<SiteMap[]>();
   toolbarItems = new Subject<ToolbarItem[]>();
+  siteMapUpdating = false;
 
   constructor(private http: HttpClient) {
     this.updateToolbarItemsOnSubscription();
@@ -25,11 +26,15 @@ export class SiteMapService {
   }
 
   updateSiteMap(): void {
+    if (this.siteMapUpdating) {return; } else {this.siteMapUpdating = true; }
+
     const subscription = this.getSiteMap().subscribe(next => {
       this.siteMap.next(next);
+      this.siteMapUpdating = false;
       subscription.unsubscribe();
     }, error => {
       this.siteMap.error(error);
+      this.siteMapUpdating = false;
       subscription.unsubscribe();
     });
   }

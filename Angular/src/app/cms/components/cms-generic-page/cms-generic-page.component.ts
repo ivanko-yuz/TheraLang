@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CmsRouteHelperService} from '../../services/cms-route-helper.service';
 import {CmsRoute} from '../../../toolbar/toolbar-item/cms-route';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cms-generic-page',
@@ -12,11 +13,14 @@ export class CmsGenericPageComponent implements OnInit {
   private cmsRoute: CmsRoute;
   private subscription = new Subscription();
 
-  constructor(private cmsRouteHelperService: CmsRouteHelperService) {
+  constructor(private cmsRouteHelperService: CmsRouteHelperService, private router: Router) {
     this.subscribeOnCmsRouteChange();
   }
 
   ngOnInit() {
+    if (!this.cmsRoute) {
+      this.cmsRouteHelperService.updateRouteByPath(this.router.url);
+    }
   }
 
   subscribeOnCmsRouteChange(): void {
