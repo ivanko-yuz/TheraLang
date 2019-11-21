@@ -14,8 +14,8 @@ const routes: Routes = [
   { path: 'project/:id', component: ProjectInfoComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'resources', component: GeneralResourcesComponent },
-  { path: '**', loadChildren: () => CmsModule},
   { path: 'error', component: ErrorComponent },
+  { path: '**', loadChildren: () => CmsModule},
 ];
 
 @NgModule({

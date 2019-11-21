@@ -29,9 +29,6 @@ export class SiteMapService {
       this.siteMap.next(next);
       subscription.unsubscribe();
     }, error => {
-      if (!environment.production) {
-        console.log(error);
-      }
       this.siteMap.error(error);
       subscription.unsubscribe();
     });
@@ -41,9 +38,6 @@ export class SiteMapService {
     this.siteMap.subscribe(sitemap => {
       this.toolbarItems.next(this.mapToolbarItems(sitemap));
     }, error => {
-      if (!environment.production) {
-        console.log(error);
-      }
       this.toolbarItems.error(error);
     });
   }
