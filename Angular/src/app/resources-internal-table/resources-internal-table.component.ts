@@ -29,3 +29,4 @@ export class ResourcesInternalTableComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 }
+

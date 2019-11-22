@@ -15,7 +15,7 @@ import {Subscription} from 'rxjs';
 })
 export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  hasNotification = true;
+  hasNotification: boolean = true;
   projectParticipation: ProjectParticipationRequest[];
   toolbarItems: ToolbarItem[] = [];
   private subscription = new Subscription();
@@ -24,24 +24,20 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.subscribeOnSiteMapService();
-    this.subscribeOnProjectParticipants();
+    const subscription =
+    this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[]) => {
+      this.projectParticipation = data;
+      if ((this.projectParticipation.filter(x => x.status === RequestStatus.New)).length === 0) {
+        this.hasNotification = false;
+      }
+    });
+    this.subscription.add(subscription);
   }
 
   ngAfterViewInit(): void {
     this.evtSvc.childEventListner().subscribe(info => {
       this.hasNotification = false;
     });
-  }
-
-  subscribeOnProjectParticipants(): void {
-    const subscription =
-      this.httpService.getAllProjectParticipants().subscribe((data: ProjectParticipationRequest[]) => {
-        this.projectParticipation = data;
-        if ((this.projectParticipation.filter(x => x.status === RequestStatus.New)).length === 0) {
-          this.hasNotification = false;
-        }
-      });
-    this.subscription.add(subscription);
   }
 
   subscribeOnSiteMapService(): void {
