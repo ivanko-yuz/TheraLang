@@ -1,19 +1,29 @@
 import { ResourceService } from './resources-table-for-project/resources-table/resource.service';
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
-import * as $ from 'jquery';
 import { Resource } from '../general-resources/resource-models/resource';
+import { trigger, state, style } from '@angular/animations';
 
 @Component({
   selector: 'app-project-info',
   templateUrl: './project-info.component.html',
   styleUrls: ['./project-info.component.less'],
   encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        display: 'initial'
+      })),
+      state('closed', style({        
+        display: 'none'      
+      })),
+    ]),
+  ],
   providers: [HttpService]
 })
-export class ProjectInfoComponent implements OnInit, AfterViewInit {
+export class ProjectInfoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpService,
               private resourceService: ResourceService) { }
@@ -22,10 +32,7 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
   projectId: number;
   generateOnceResourcesTable = false;
   sortedResourcesByCategory: Resource[][] = [];
-
-  ngAfterViewInit() {
-    $('#resTabId').hide();
-  }
+  isOpen = false;
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -40,8 +47,8 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
       this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
 
     }
-    this.generateOnceResourcesTable = true;
-    $('#resTabId').fadeToggle('slow');
+    this.isOpen = !this.isOpen;
+    this.generateOnceResourcesTable = true;   
   }
 }
 
