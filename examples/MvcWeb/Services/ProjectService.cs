@@ -50,7 +50,7 @@ namespace MvcWeb.Services
             }
             catch
             {
-                throw new Exception($"Error while fetching the projects for {nameof(pageNumber)}=${pageNumber} and {nameof(pageSize)}-{pageSize}");
+                throw new Exception($"Error while fetching the projects for {nameof(pageNumber)}={pageNumber} and {nameof(pageSize)}={pageSize}");
             }
         }
 

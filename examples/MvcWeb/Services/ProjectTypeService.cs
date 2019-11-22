@@ -33,7 +33,7 @@ namespace MvcWeb.Services
             }
         }
 
-        public async Task Add(ProjectType projecttype)
+        public async Task Add(ProjectType projectType)
         {
                 var projectType = new ProjectType { TypeName = projecttype.TypeName };               
                 try
