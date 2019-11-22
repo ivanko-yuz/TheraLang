@@ -15,7 +15,7 @@ export class ResourcesInternalTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'date', 'description'];
   @Input()lengthDataArrForDataSource;
   pageSize: number;
-  pageSizeOptions: string;
+  pageSizeOptions: number[];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor() {  }
