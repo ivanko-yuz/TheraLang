@@ -10,13 +10,13 @@ namespace MvcWeb.TheraLang.Entities
 
         public string Name { get; set; }
 
-        public virtual ICollection<ResourceToProject> ResourceProjects { get; set; }
+        public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
 
         public virtual ICollection<ProjectParticipation> ProjectParticipations { get; set; }
 
         public Project()
         {
-            this.ResourceProjects = new List<ResourceToProject>();
+            this.ResourceProjects = new List<ResourceProject>();
             this.ProjectParticipations = new List<ProjectParticipation>();
         }
     }

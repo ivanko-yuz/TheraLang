@@ -16,7 +16,7 @@ namespace MvcWeb.TheraLang.Services
 
         IEnumerable<ResourceCategory> GetResourcesCategories(bool withAssignedResources);
 
-        int CountResourcesByCategoryId(int categoryId);
+        int GetResourcesCount(int categoryId);
 
         IEnumerable<Resource> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
 

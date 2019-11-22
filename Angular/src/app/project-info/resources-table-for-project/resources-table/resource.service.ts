@@ -54,13 +54,4 @@ export class ResourceService {
         });
         return allData;
     }
-    // async getCountAllResources(category: string): Promise<number>{
-    //     const allData = await this.http.getCountAllResources(category).toPromise().then((data: number) => {
-    //         this.countAllResources = data;
-    //         return data;
-    //     });
-    //     return allData;
-    //     //  const data =  this.http.getCountAllResources(category).subscribe((data: number) => data);
-    //     //  return data;
-    // }
 }

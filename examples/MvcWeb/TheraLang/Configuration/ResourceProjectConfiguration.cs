@@ -4,9 +4,9 @@ using MvcWeb.TheraLang.Entities;
 
 namespace MvcWeb.TheraLang.Configuration
 {
-    public class ResourceProjectConfiguration : IEntityTypeConfiguration<ResourceToProject>
+    public class ResourceProjectConfiguration : IEntityTypeConfiguration<ResourceProject>
     {
-        public void Configure(EntityTypeBuilder<ResourceToProject> builder)
+        public void Configure(EntityTypeBuilder<ResourceProject> builder)
         {
             builder.ToTable("ResourceToProject");
 

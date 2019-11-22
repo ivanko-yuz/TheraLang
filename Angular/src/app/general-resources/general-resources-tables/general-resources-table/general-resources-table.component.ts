@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ResourceService } from 'src/app/project-info/resources-table-for-project/resources-table/resource.service';
 import { ResourceCategoriesService } from 'src/app/project-info/resources-table-for-project/resources-table/resource-categories.service';
 import { ResourceCategory } from '../../resource-models/resource-category';
-import { Constants } from '../../resource-models/resources-table-constants';
+import * as Constants  from '../../../shared/constants/resources-table';
 
 @Component({
   selector: 'app-general-resources-table',
@@ -21,7 +21,7 @@ export class GeneralResourcesTableComponent implements OnInit {
 
   async ngOnInit() {
     this.resourcesCategories = await this.resourceCategoriesService
-      .getResourceCategories(Constants.WITH_ASSIGNED_RESOURCES);
+      .getResourceCategories(Constants.ResourcesTableConstants.WITH_ASSIGNED_RESOURCES);
     this.showCategories = true;
   }
 }

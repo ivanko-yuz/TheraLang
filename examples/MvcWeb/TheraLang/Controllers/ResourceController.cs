@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Constants;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.Services;
@@ -11,7 +10,6 @@ namespace MvcWeb.TheraLang.Controllers
 {
     [Route("api/resource")]
     [ApiController]
-    [EnableCors("MyPolicy")]
     public class ResourceController : ControllerBase
     {
         public ResourceController(IResourceService service)
@@ -77,8 +75,8 @@ namespace MvcWeb.TheraLang.Controllers
         [Route("categories/{withAssignedResources}")]
         public IActionResult GetResourcesCategories(bool withAssignedResources)
         {
-            var countResources = _service.GetResourcesCategories(withAssignedResources);
-            return Ok(countResources);
+            var categories = _service.GetResourcesCategories(withAssignedResources);
+            return Ok(categories);
         }
 
         [HttpGet]
@@ -89,7 +87,7 @@ namespace MvcWeb.TheraLang.Controllers
             {
                 throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
             }
-            int count = _service.CountResourcesByCategoryId(categoryId);
+            int count = _service.GetResourcesCount(categoryId);
             return Ok(count);
         }
 
@@ -98,9 +96,14 @@ namespace MvcWeb.TheraLang.Controllers
         public IActionResult GetAllResourcesByCategoryId(int categoryId, int pageNumber,
             int recordsPerPage = PaginationConstants.RecordsPerPage)
         {
-            if (pageNumber == default || categoryId == default)
+            if (pageNumber == default)
             {
                 throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
+            }
+
+            if (categoryId == default)
+            {
+                throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
             }
 
             IEnumerable<Resource> resources = _service.GetResourcesByCategoryId(categoryId, pageNumber, recordsPerPage);

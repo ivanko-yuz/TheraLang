@@ -2,7 +2,7 @@ import { Resource } from '../../../general-resources/resource-models/resource';
 import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
-import { Constants } from 'src/app/general-resources/resource-models/resources-table-constants';
+import * as Constants  from '../../../shared/constants/resources-table';
 
 @Component({
   selector: 'app-resources-internal-table',
@@ -15,15 +15,18 @@ export class ResourcesInternalTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'date', 'description'];
   @Input()lengthDataArrForDataSource;
   pageSize: number;
+  pageSizeOptions: string;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor() {  }
 
   ngOnInit() {
+    
   }
 
   ngAfterViewInit() {
-    this.pageSize = Constants.COLUMNS_PER_PAGE;
+    this.pageSize = Constants.ResourcesTableConstants.COLUMNS_PER_PAGE;
+    this.pageSizeOptions = Constants.ResourcesTableConstants.PAGE_SIZE_OPTIONS;
     this.dataSource.paginator = this.paginator;
   }
 }

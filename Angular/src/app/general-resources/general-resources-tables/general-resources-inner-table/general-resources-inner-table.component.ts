@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input} from '@angular/core';
 import { MatTableDataSource, MatPaginator, PageEvent } from '@angular/material';
 import { Resource } from 'src/app/general-resources/resource-models/resource';
 import { ResourceService } from 'src/app/project-info/resources-table-for-project/resources-table/resource.service';
-import { Constants } from '../../resource-models/resources-table-constants';
+import * as Constants  from '../../../shared/constants/resources-table';
 
 @Component({
   selector: 'app-general-resources-inner-table',
@@ -15,7 +15,8 @@ export class GeneralResourcesInnerTableComponent implements OnInit {
   dataSource: MatTableDataSource<Resource>;
   showTable = false;
   allResourcesCount: number;
-  columnsPerPage =  Constants.COLUMNS_PER_PAGE;
+  columnsPerPage =  Constants.ResourcesTableConstants.COLUMNS_PER_PAGE;
+  pageSizeOptions = Constants.ResourcesTableConstants.PAGE_SIZE_OPTIONS;
   displayedColumns: string[] = ['id', 'name', 'date', 'description'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -23,7 +24,7 @@ export class GeneralResourcesInnerTableComponent implements OnInit {
 
   async ngOnInit() {
     this.resources = await this.resourceService.getResourcesByCategoryId(this.resourcesCategoryId ,
-      Constants.PAGE_NUMBER, Constants.COLUMNS_PER_PAGE
+      Constants.ResourcesTableConstants.PAGE_NUMBER, Constants.ResourcesTableConstants.COLUMNS_PER_PAGE
     );
 
     this.allResourcesCount = await this.resourceService.getResourcesCountByCategoryId(this.resourcesCategoryId);

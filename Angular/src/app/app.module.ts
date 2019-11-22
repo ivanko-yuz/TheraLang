@@ -36,7 +36,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
-import { CustomDatePipe } from './project-info/custom.datepipe';
+import { CustomDatePipe } from './shared/pipes/custom.datepipe';
 import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
 import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
 import { ResourceService } from './project-info/resources-table-for-project/resources-table/resource.service';
@@ -118,7 +118,7 @@ import { ResourceCategoriesService } from './project-info/resources-table-for-pr
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,  
+    ScrollingModule,
   ],
   
   exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],

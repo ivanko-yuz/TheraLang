@@ -25,7 +25,7 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when geting resource by {nameof(id)}={id}: ", ex);
+                throw new Exception($"Error when getting resource by {nameof(id)}={id}: ", ex);
             }
         }
 
@@ -55,7 +55,7 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when updating the {nameof(resource)}: {resource.Id}: ", ex);
+                throw new Exception($"Error when updating the {nameof(resource)}: {resource.Id} ", ex);
             }
         }
 
@@ -70,7 +70,7 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when remove resource by {nameof(id)}: {id}: ", ex);
+                throw new Exception($"Error when remove resource by {nameof(id)}: {id} ", ex);
             }
         }
 
@@ -102,11 +102,11 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when get all resources: ", ex);
+                throw new Exception($"Error when get resources by {nameof(categoryId)} = {categoryId}", ex);
             }
         }
 
-        public int CountResourcesByCategoryId(int categoryId)
+        public int GetResourcesCount(int categoryId)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when get count resources by category id: ", ex);
+                throw new Exception($"Error when get resources count by category id", ex);
             }
         }
 
@@ -134,7 +134,7 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when get all ResourceCategories: ", ex);
+                throw new Exception($"Error when get all Resource Categories", ex);
             }
         }
 
@@ -163,8 +163,7 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-
-                throw new Exception($"Error when get all resources by project id: ", ex);
+                throw new Exception($"Error when get all resources by {nameof(projectId)} = {projectId} ", ex);
             }
         }
     }
