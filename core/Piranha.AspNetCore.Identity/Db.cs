@@ -57,7 +57,7 @@ namespace Piranha.AspNetCore.Identity
                 }
 
                 // Migrate database
-                //Database.Migrate();
+                Database.Migrate();
 
                 Seed();
 

@@ -28,15 +28,5 @@ namespace TheraLang.DataSeeding
             dbContext.Clear<TEntity>();
             dbContext.Seed(entities);
         }
-
-        public static TEntity[] GetArrayOf<TEntity>(this DbContext dbContext) where TEntity: class
-        {
-            var array = dbContext.Set<TEntity>().ToArray();
-            if (array.Length == 0)
-            {
-                throw new System.Exception("array is empty! fill it first");
-            }
-            return array;
-        }
     }
 }

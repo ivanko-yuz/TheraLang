@@ -10,8 +10,8 @@ using MvcWeb.Db;
 namespace MvcWeb.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    [Migration("20191111152604_ProjectTypeConfiguration")]
-    partial class ProjectTypeConfiguration
+    [Migration("20191122153028_Project_ProjectType")]
+    partial class Project_ProjectType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -829,9 +829,9 @@ namespace MvcWeb.Migrations
                         .IsRequired()
                         .HasMaxLength(250);
 
-                    b.Property<DateTime>("ProjectStart");
-
                     b.Property<DateTime>("ProjectEnd");
+
+                    b.Property<DateTime>("ProjectStart");
 
                     b.Property<int>("TypeId");
 
@@ -842,17 +842,169 @@ namespace MvcWeb.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ProjectParticipation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
+                    b.Property<int>("ProjectId");
+
+                    b.Property<int>("Role")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
+
+                    b.Property<int?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
+
+                    b.Property<int?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProjectParticipations");
+                });
+
             modelBuilder.Entity("MvcWeb.TheraLang.Entities.ProjectType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("TypeName");
+                    b.Property<string>("TypeName")
+                        .HasMaxLength(500);
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TypeName")
+                        .IsUnique()
+                        .HasFilter("[TypeName] IS NOT NULL");
+
                     b.ToTable("Types");
+                });
+
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.Resource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(5000);
+
+                    b.Property<string>("File")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(null);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
+
+                    b.Property<string>("Url")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(null);
+
+                    b.Property<int?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Resources");
+                });
+
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ResourceCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ResourceCategories");
+                });
+
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ResourceProject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ProjectId");
+
+                    b.Property<int>("ResourceId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("ResourceId");
+
+                    b.ToTable("ResourceToProject");
+                });
+
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<bool>("IsEmailConfirmed");
+
+                    b.Property<bool>("IsPhoneNumberConfirmed");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("PhooneNumber")
+                        .IsRequired();
+
+                    b.Property<DateTime>("RegistrationDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaAlias", b =>
@@ -1064,6 +1216,43 @@ namespace MvcWeb.Migrations
                     b.HasOne("MvcWeb.TheraLang.Entities.ProjectType", "Type")
                         .WithMany("Projects")
                         .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ProjectParticipation", b =>
+                {
+                    b.HasOne("MvcWeb.TheraLang.Entities.Project", "Project")
+                        .WithMany("ProjectParticipations")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MvcWeb.TheraLang.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.Resource", b =>
+                {
+                    b.HasOne("MvcWeb.TheraLang.Entities.ResourceCategory", "ResourceCategory")
+                        .WithMany("Resources")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MvcWeb.TheraLang.Entities.User", "User")
+                        .WithMany("Resources")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ResourceProject", b =>
+                {
+                    b.HasOne("MvcWeb.TheraLang.Entities.Project", "Project")
+                        .WithMany("ResourceProjects")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MvcWeb.TheraLang.Entities.Resource", "Resource")
+                        .WithMany("ResourceProjects")
+                        .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

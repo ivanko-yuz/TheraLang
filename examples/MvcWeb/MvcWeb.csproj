@@ -4,6 +4,12 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Migrations\20191122134557_Project_ProjectType.cs" />
+    <Compile Remove="Migrations\20191122134557_Project_ProjectType.Designer.cs" />
+    <Compile Remove="Migrations\20191122151537_Project_ProjectType.cs" />
+    <Compile Remove="Migrations\20191122151537_Project_ProjectType.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
   <ItemGroup>

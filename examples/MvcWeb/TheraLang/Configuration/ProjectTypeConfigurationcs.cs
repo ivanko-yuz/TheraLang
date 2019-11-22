@@ -16,7 +16,7 @@ namespace MvcWeb.TheraLang.Configuration
 
             builder.Property(e => e.TypeName).HasMaxLength(500);
 
-            builder.HasMany(e => e.Projects).WithOne(e => e.Type).HasForeignKey(e => e.Id);
+            builder.HasIndex(e => e.TypeName).IsUnique(true);
         }
     }
 }
