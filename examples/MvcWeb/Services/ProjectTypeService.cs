@@ -35,15 +35,15 @@ namespace MvcWeb.Services
 
         public async Task Add(ProjectType projectType)
         {
-                var projectType = new ProjectType { TypeName = projecttype.TypeName };               
+                var projecType = new ProjectType { TypeName = projectType.TypeName };               
                 try
                 {
-                    await _uow.Repository<ProjectType>().Add(projectType);
+                    await _uow.Repository<ProjectType>().Add(projecType);
                     await _uow.SaveChangesAsync();
                 }
                  catch (Exception e)
                 {
-                    e.Data["project type"] = projecttype;
+                    e.Data["project type"] = projecType;
                     throw;
                 }
         }
