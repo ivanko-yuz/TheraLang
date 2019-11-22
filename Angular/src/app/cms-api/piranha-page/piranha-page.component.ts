@@ -1,8 +1,6 @@
-import { Block } from './../when-get-page-by-slug/block.model';
-import { RootObject } from '../when-get-page-by-slug/root-object.mode';
-import { CmsService } from '../cms-shared/cms.service';
+import { Page } from '../models/root-object.model';
 import { Component, OnInit } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { HttpService } from 'src/app/project/http.service';
 
 @Component({
   selector: 'app-piranha-page',
@@ -10,19 +8,15 @@ import { NgModel } from '@angular/forms';
   styleUrls: ['./piranha-page.component.less']
 })
 export class PiranhaPageComponent implements OnInit {
-  page: RootObject;
+  page: Page;
   model: any;
   ifGenerate: boolean = false;
-  constructor(private http: CmsService) { }
+  constructor(private http: HttpService) { }
 
   async ngOnInit() {
-    this.page = await this.http.getAboutPage();
-    this.page.blocks;
+    this.page = await this.http.getAboutPage("b7a401db-61ba-4308-a9c1-c38a291cc497");
     console.log(this.page.slug);
     this.ifGenerate = true;
-    this.page.blocks.forEach(element => {
-      element.$type
-    });
   }
 
 }

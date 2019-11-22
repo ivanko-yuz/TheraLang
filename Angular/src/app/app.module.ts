@@ -1,4 +1,3 @@
-import { CmsService } from './cms-api/cms-shared/cms.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {
@@ -133,7 +132,6 @@ import { BlockComponent } from './cms-api/cms-shared/block/block.component';
       ResourceService,
       HttpService,
       EventService,
-      CmsService
    ],
    bootstrap: [
       AppComponent

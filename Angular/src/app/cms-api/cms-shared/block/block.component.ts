@@ -1,4 +1,4 @@
-import { Block } from './../../when-get-page-by-slug/block.model';
+import { Block } from './../../models/block.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -8,10 +8,18 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BlockComponent implements OnInit {
   @Input() model: Block;
+  imgUrl: string;
   constructor() { }
   
-  ngOnInit() {
-    // this.model.body.value
+  ngOnInit() {   
   }
 
+  cutLink(): string {
+    return this.model.body.media.publicUrl.substr(1);
+  }
+
+  splitBlockType(fullType: string): string {
+    var blockType = fullType.split(".",4)
+    return blockType[3];
+  }
 }

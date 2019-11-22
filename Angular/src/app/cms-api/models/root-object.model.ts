@@ -1,7 +1,7 @@
 import { Block } from './block.model';
 import { Hero } from './hero.model';
 
-export class RootObject {
+export class Page {
     hero: Hero;
     isStartPage: boolean;
     siteId: string;

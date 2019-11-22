@@ -1,23 +1,41 @@
 
-<div class="row" *ngIf="model.type=='ImageBlock' || model.Type=='SizedImageBlock'">
-  <div class="col-sm-12">
-    <img *ngIf="model.Body.HasValue" [src]="model.Body.Url">
+<div class="row" *ngIf="model.type=='Piranha.Extend.Blocks.ImageBlock' ">
+  <div class="ImageBlock">
+    <img *ngIf="model.body.hasValue" src="https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg">   
   </div>
 </div>
 
-<div class="row" *ngIf="model.type=='Piranha.Extend.Blocks.QuoteBlock'">
-  <div class="col-sm-12">
+<div class="row" *ngIf="model.type=='Piranha.Extend.Blocks.QuoteBlock' ">
+  <div class="QuoteBlock">
     <blockquote [innerHTML]="model.body.value">
     </blockquote>
   </div>
 </div>
 
-<div class="row" *ngIf="model.type=='HtmlBlock'">
-  <div class="col-sm-12" [innerHTML]="model.Body.Value">
-  </div>
+<div class="row" *ngIf="model.type=='Piranha.Extend.Blocks.HtmlBlock' ">
+  <div class="HtmlBlock" [innerHTML]="model.body.value"></div>
 </div>
 
-<div class="row" *ngIf="model.type=='HtmlColumnBlock'">
-  <div class="col-sm-6" [innerHTML]="model.Column1.Value"></div>
-  <div class="col-sm-6" [innerHTML]="model.Column1.Value"></div>
+<div class="column-block" *ngIf="model.type=='Piranha.Extend.Blocks.ColumnBlock'">
+  <div  *ngFor="let item of model.items" class="{{this.splitBlockType(item.type)}}" [innerHTML]="item.body.value"></div>  
+</div>
+
+<div class="TextBlockDiv" *ngIf="model.type=='Piranha.Extend.Blocks.TextBlock' ">
+  <div class="TextBlock" [innerHTML]="model.body.value"></div>
+</div>
+
+<div class="AudioBlock" *ngIf="model.type=='Piranha.Extend.Blocks.AudioBlock' ">
+  <audio controls>
+    <source src="{{this.cutLink(model.body.media.publicUrl)}}" type>
+  </audio>
+</div>
+
+<div class="VideoBlock" *ngIf="model.type=='Piranha.Extend.Blocks.VideoBlock' ">
+  <video controls>
+    <source src="{{this.cutLink(this.model.body.media.publicUrl)}}">
+  </video>
+</div>
+
+<div class="SeparatorBlock" *ngIf="model.type=='Piranha.Extend.Blocks.SeparatorBlock' ">
+  <hr>
 </div>
