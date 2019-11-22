@@ -65,8 +65,8 @@ namespace MvcWeb.Controllers
             {
                 throw new ArgumentException($"{nameof(pageSize)} can not be 0");
             }
-            _projectService.GetProjects(page, pageSize);
-            return Ok();
+            var projects =_projectService.GetProjects(page, pageSize);
+            return Ok(projects);
         }
     }
 }
