@@ -14,6 +14,6 @@ export class GeneralResourcesComponent implements OnInit {
    async ngOnInit() {
     const allResources = await this.resourceService.getAllResourcesByProjId(null);
     this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
-
+    
   }
 }

@@ -33,7 +33,7 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
       this.http.getProjectInfo(this.projectId).subscribe((data: Project) => this.projectInfo = data);
     });
   }
-
+  
   async getResourcesData() {
     if (!this.generateOnceResourcesTable) {
       const allResources = await this.resourceService.getAllResourcesByProjId(this.projectId);

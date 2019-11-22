@@ -63,7 +63,7 @@ export class ProjectParticipantsComponent implements OnInit {
   removeNotificationIcon() {
     if (this.projectParticipationRequest.filteredData.length === 0) {
       this.eventService.emitChildEvent();
-    }
+    }  
   }
 
 }

@@ -17,7 +17,7 @@ export class ResourcesTableComponent implements OnInit {
     for (const resCategoty in this.sortedResourcesByCategory) {
       this.selectResourcesArrayByCategotyName(resCategoty);
       return;
-    }
+    } 
   }
 
   convertMatTabChangeEventLabelToString(event: MatTabChangeEvent) {

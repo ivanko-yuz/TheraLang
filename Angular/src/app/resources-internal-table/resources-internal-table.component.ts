@@ -11,19 +11,19 @@ import { MatPaginator } from '@angular/material';
 
 export class ResourcesInternalTableComponent implements OnInit, AfterViewInit {
   @Input()dataSource: MatTableDataSource<Resource>;
-  displayedColumns: string[] = ['id', 'name', 'date', 'description'];
+  displayedColumns: string[] = ['id', 'name', 'date', 'description'];  
   @Input()lengthDataArrForDataSource;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor() {  }
 
   ngOnInit() {
-
+     
   }
   ngAfterViewInit(){
-    console.log(this.lengthDataArrForDataSource,  "1");
+    console.log(this.lengthDataArrForDataSource,  "1");   
     setTimeout(() => {
-      console.log(this.lengthDataArrForDataSource,  "1");
+      console.log(this.lengthDataArrForDataSource,  "1");   
       this.dataSource.paginator = this.paginator;
     }, 5000);
     this.dataSource.paginator = this.paginator;
