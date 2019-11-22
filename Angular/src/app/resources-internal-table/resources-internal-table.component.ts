@@ -18,14 +18,14 @@ export class ResourcesInternalTableComponent implements OnInit, AfterViewInit {
   constructor() {  }
 
   ngOnInit() {
+
   }
-  ngAfterViewInit() {
-    console.log(this.lengthDataArrForDataSource,  '1');
+  ngAfterViewInit(){
+    console.log(this.lengthDataArrForDataSource,  "1");
     setTimeout(() => {
-      console.log(this.lengthDataArrForDataSource,  '1');
+      console.log(this.lengthDataArrForDataSource,  "1");
       this.dataSource.paginator = this.paginator;
     }, 5000);
     this.dataSource.paginator = this.paginator;
   }
 }
-

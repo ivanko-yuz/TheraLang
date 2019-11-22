@@ -43,7 +43,7 @@ export class ProjectParticipantsComponent implements OnInit {
 
   changeFilter(tabPosition: number){
     if(tabPosition === 1){
-      return RequestStatus.Approved.toString();
+      return RequestStatus.Aproved.toString();
     }
     else if(tabPosition === 2){
       return RequestStatus.Rejected.toString();
@@ -54,7 +54,7 @@ export class ProjectParticipantsComponent implements OnInit {
   }
 
   changeStatus(status: string, projectParticipant: ProjectParticipationRequest) {
-    projectParticipant.status = (status === 'aproved') ?  RequestStatus.Approved : RequestStatus.Rejected;
+    projectParticipant.status = (status === 'aproved') ?  RequestStatus.Aproved : RequestStatus.Rejected;
     this.httpService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
       this.load();
     });

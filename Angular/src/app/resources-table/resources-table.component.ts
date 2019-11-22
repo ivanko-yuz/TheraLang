@@ -14,8 +14,8 @@ export class ResourcesTableComponent implements OnInit {
   dataSource;
   constructor(private resourceService: ResourceService) { }
   ngOnInit() {
-    for (const resCategory in this.sortedResourcesByCategory) {
-      this.selectResourcesArrayByCategotyName(resCategory);
+    for (const resCategoty in this.sortedResourcesByCategory) {
+      this.selectResourcesArrayByCategotyName(resCategoty);
       return;
     }
   }

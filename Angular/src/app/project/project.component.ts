@@ -17,8 +17,8 @@ export class ProjectComponent implements OnInit {
   projects: Project[];
 
   constructor(private httpService: HttpService,
-              private dialogService:DialogService,
-              private service:ProjectService) { }
+    private dialogService:DialogService,
+    private service:ProjectService) { }
 
   ngOnInit() {
     this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects);
