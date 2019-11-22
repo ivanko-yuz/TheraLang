@@ -7,7 +7,7 @@ export class EventService {
    private childClickedEvent = new Subject();
 
    emitChildEvent() {
-      this.childClickedEvent.next();
+      this.childClickedEvent.next()
    }
 
    childEventListner() {

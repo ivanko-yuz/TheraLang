@@ -14,7 +14,7 @@ import { RequestStatus } from '../request-status-enum';
 export class ProjectParticipantsComponent implements OnInit {
 
   projectParticipationRequest = new MatTableDataSource<ProjectParticipationRequest>();
-  showActionButtons = true;
+  showActionButtons: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = ['createdById', 'role', 'projectId', 'status', 'actions'];
 
@@ -23,7 +23,7 @@ export class ProjectParticipantsComponent implements OnInit {
   ngOnInit() {
     this.httpService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
       this.projectParticipationRequest.data = projectParticipants;
-      this.projectParticipationRequest.filterPredicate = (projectParticipant: ProjectParticipationRequest, filter: string) => projectParticipant.status.toString() === filter;
+      this.projectParticipationRequest.filterPredicate = (projectParticipant: ProjectParticipationRequest, filter: string) => projectParticipant.status.toString() == filter;
       this.projectParticipationRequest.paginator = this.paginator;
       this.projectParticipationRequest.filter = RequestStatus.New.toString();
     });

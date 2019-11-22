@@ -1,47 +1,41 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Project } from './project';
 import { baseUrl } from '../shared/api-endpoint.constants';
-import {SiteMap} from '../cms/models/site-map';
-import {Observable} from 'rxjs';
 
 @Injectable()
-export class HttpService {
+export class HttpService{
 
-    constructor(private http: HttpClient){ }
+  constructor(private http: HttpClient){ }
 
-     private url = baseUrl;
+  private url = baseUrl;
 
-    getAllProjects() {
-        return this.http.get(this.url + 'project');
-    }
+  getAllProjects(){
+    return this.http.get(this.url + 'project');
+  }
 
-    getProjectInfo(id: number) {
-        return this.http.get(`${this.url}project/${id}`);
-    }
+  getProjectInfo(id: number) {
+    return this.http.get(this.url + 'project' + '/' + id);
+  }
 
-    getAllProjectParticipants() {
-        return this.http.get(`${this.url}projectParticipants`);
-      }
+  getAllProjectParticipants(){
+    return this.http.get(this.url + 'projectParticipants');
+  }
 
-    changeParticipationStatus(requestId: number, requestStatus: number) {
-        return this.http.put(`${this.url}projectParticipants/requestId`, requestStatus);
-    }
+  changeParticipationStatus (requestId: number, requestStatus: number){
+    return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
+  }
 
-    getAllResourcesById(projectId: number) {
+  getAllResourcesById(projectId: number) {
+    return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
+  }
 
-        return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
-    }
+  createProject(project:Project) {
+    return this.http.post(this.url, project);
+  }
 
-    createProject(project: Project) {
-        return this.http.post(this.url, project);
-    }
+  updateProject(project: Project) {
+    return this.http.put(this.url + '/' + project.id, project);
+  }
 
-    updateProject(project: Project) {
-        return this.http.put(this.url + '/' + project.id, project);
-    }
-
-    getSiteMap(): Observable<SiteMap[]> {
-      return this.http.get<SiteMap[]>(`${this.url}sitemap`);
-    }
 }
