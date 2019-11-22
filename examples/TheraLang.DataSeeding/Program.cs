@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MvcWeb.Db;
@@ -13,8 +14,9 @@ namespace TheraLang.DataSeeding
         {
             using var dbContext = CreateDbContext();
 
-            dbContext.ClearAndSeed(ProjectTypes());
-            dbContext.ClearAndSeed(Projects(dbContext.GetArrayOf<ProjectType>()));
+            var projectTypes = ProjectTypes().ToArray();
+            dbContext.ClearAndSeed(projectTypes);           
+            dbContext.ClearAndSeed(Projects(projectTypes));
         }
 
         private static IEnumerable<Project> Projects(ProjectType[] projectTypes)

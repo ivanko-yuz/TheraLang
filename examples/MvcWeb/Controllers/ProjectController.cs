@@ -34,7 +34,11 @@ namespace MvcWeb.Controllers
 
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)
-        {            
+        {
+            if (id == default)
+            {
+                throw new ArgumentException($"{nameof(id)} can not be 0");
+            }
             var project = _projectService.GetById(id);            
             return Ok(project);            
         }
@@ -53,6 +57,14 @@ namespace MvcWeb.Controllers
         [HttpGet("page/{page}/{pagesize}")]
         public IActionResult ProjectsPagination(int page,  int pageSize)
         {
+            if (page == default)
+            {
+                throw new ArgumentException($"{nameof(page)} can not be 0");
+            }
+            else if (pageSize == default)
+            {
+                throw new ArgumentException($"{nameof(pageSize)} can not be 0");
+            }
             _projectService.GetProjects(page, pageSize);
             return Ok();
         }
