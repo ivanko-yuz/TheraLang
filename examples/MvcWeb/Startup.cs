@@ -88,6 +88,7 @@ namespace MvcWeb
                 app.UseDeveloperExceptionPage();
             }
 
+
             App.Init(api);
 
             // Configure cache level
@@ -121,9 +122,8 @@ namespace MvcWeb
             // Register middleware
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UsePiranha();
             app.UsePiranhaManager();
-            app.UsePiranhaSummernote();
+            //app.UsePiranhaSummernote();
             //app.UsePiranhaTinyMCE();
             app.UseMvc(routes =>
             {
@@ -134,6 +134,11 @@ namespace MvcWeb
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");
+
+                routes.MapRoute(
+                   name: "angular",
+                   template: "{*template}",
+                   defaults: new { controller = "Home", action = "Index" });
             });
 
             //Seed.RunAsync(api).GetAwaiter().GetResult(); //TODO: fix seeding

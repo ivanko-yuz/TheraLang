@@ -3,8 +3,15 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="ClientApp\out-tsc - Copy\**" />
+    <Content Remove="ClientApp\out-tsc - Copy\**" />
+    <EmbeddedResource Remove="ClientApp\out-tsc - Copy\**" />
+    <None Remove="ClientApp\out-tsc - Copy\**" />
+  </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\e2e\src\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

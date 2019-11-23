@@ -6,7 +6,7 @@ using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.TheraLang.Controllers
 {
-    [Route("api/projects")]
+    [Route("api/project")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
