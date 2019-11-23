@@ -145,7 +145,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<button mat-stroked-button (click)=\"onCreate()\">\r\n  <mat-icon>add</mat-icon>Створити проект\r\n</button>\r\n<div *ngFor=\"let project of projects\">\r\n  <mat-card class=\"project-card\">\r\n    <mat-card-header class=\"header\">\r\n      <mat-card-title>\r\n        <a mat-button class=\"donate-button\" [routerLink]=\"['/project', project.id]\">Підтримати</a>\r\n      </mat-card-title>\r\n    </mat-card-header>\r\n    <mat-card-title>{{project.name}}</mat-card-title>\r\n    <mat-card-subtitle>Ukraine, id - {{project.id}}</mat-card-subtitle>\r\n    <img class=\"project-image\" mat-card-image\r\n      src=\"http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg\"\r\n      alt=\"\">\r\n    <mat-card-content>\r\n      <div class=\"project-info\">\r\n        {{project.description}}\r\n        <p>Проект починається: {{project.projectBegin}}</p>\r\n        <p>Проект закінчується: {{project.projectEnd}}</p>\r\n      </div>\r\n    </mat-card-content>\r\n    <div class=\"clear\"></div>\r\n    <mat-card-actions class=\"get-details-button\">\r\n      <a mat-stroked-button [routerLink]=\"['/project', project.id]\">Деталі</a>\r\n      <button mat-stroked-button (click)=\"onEdit(project)\" >Змінити</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<button mat-stroked-button (click)=\"onCreate()\">\r\n  <mat-icon>add</mat-icon>Створити проект\r\n</button>\r\n<div *ngFor=\"let project of projects\">\r\n  <mat-card class=\"project-card\">\r\n    <mat-card-header class=\"header\">\r\n      <mat-card-title>\r\n        <a mat-button class=\"donate-button\" [routerLink]=\"['/project', project.id]\">Підтримати</a>\r\n      </mat-card-title>\r\n    </mat-card-header>\r\n    <mat-card-title>{{project.name}}</mat-card-title>\r\n    <mat-card-subtitle>Ukraine, id - {{project.id}}</mat-card-subtitle>\r\n    <img class=\"project-image\" mat-card-image\r\n      src=\"http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg\"\r\n      alt=\"\">\r\n    <mat-card-content>\r\n      <div class=\"project-info\">\r\n        {{project.description}}\r\n        <p>Проект починається: {{project.projectBegin}}</p>\r\n        <p>Проект закінчується: {{project.projectEnd}}</p>\r\n      </div>\r\n    </mat-card-content>\r\n    <div class=\"clear\"></div>\r\n    <mat-card-actions class=\"get-details-button\">\r\n      <a mat-stroked-button [routerLink]=\"['/project', project.id]\">Деталі</a>\r\n      <button mat-stroked-button (click)=\"onEdit()\" >Змінити</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n</div>\r\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/resources-internal-table/resources-internal-table.component.html": 
@@ -1201,7 +1201,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
                 };
                 HttpService.prototype.createProject = function (project) {
-                    return this.http.post(this.url, project);
+                    return this.http.post(this.url + 'project' + '/' + 'create', project);
                 };
                 HttpService.prototype.updateProject = function (project) {
                     return this.http.put(this.url + '/' + project.id, project);
@@ -1256,8 +1256,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     this.service.initializeFormGroup();
                     this.dialogService.openFormDialog(_project_form_project_form_component__WEBPACK_IMPORTED_MODULE_3__["ProjectFormComponent"]);
                 };
-                ProjectComponent.prototype.onEdit = function (project) {
-                    this.service.populateForm(project);
+                ProjectComponent.prototype.onEdit = function () {
+                    //this.service.populateForm();
                     this.dialogService.openFormDialog(_project_form_project_form_component__WEBPACK_IMPORTED_MODULE_3__["ProjectFormComponent"]);
                 };
                 return ProjectComponent;

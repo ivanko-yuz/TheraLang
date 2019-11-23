@@ -31,7 +31,7 @@ export class HttpService{
     }  
 
     createProject(project:Project) {
-        return this.http.post(this.url, project);
+        return this.http.post(this.url + 'project' + '/' + 'create', project);
     }
 
     updateProject(project: Project) {

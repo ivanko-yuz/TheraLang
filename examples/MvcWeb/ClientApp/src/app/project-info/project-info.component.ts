@@ -5,18 +5,19 @@ import * as $ from 'jquery';
 import { Resource } from '../resources-table/resource';
 import { ResourceService } from '../resources-table/resource.service';
 import { HttpService } from '../project/http.service';
+import { ProjectParticipationService } from '../project-participants/project-participation.service';
 
 @Component({
   selector: 'app-project-info',
   templateUrl: './project-info.component.html',
   styleUrls: ['./project-info.component.less'],
   encapsulation: ViewEncapsulation.None,
-  providers :[HttpService]
+  providers :[HttpService, ProjectParticipationService]
 })
 export class ProjectInfoComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute, private http: HttpService,
-              private resourceService: ResourceService) { }
+              private resourceService: ResourceService, private participService:ProjectParticipationService) { }
 
   projectInfo: Project = new Project(0, '', '', '');
   projectId: number;
@@ -41,6 +42,10 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
     }
     this.generateOnceResourcesTable = true;
     $('#resTabId').slideToggle('slow');
+  }
+
+  onJoin(){
+    this.participService.createParticipRequest(this.projectId);
   }
 }
 
