@@ -1,17 +1,19 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Page } from '../cms-api/models/root-object.model';
+import {Injectable, OnDestroy} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { Project } from './project';
+import { baseUrl } from '../shared/api-endpoint.constants';
 
 @Injectable()
-export class HttpService {
-
-    constructor(private http: HttpClient) { }
-
-    private url = "https://localhost:44353/api/";
-
-    private piranhaApiUrl = "http://localhost:5000/api/"
-
-    getAllProjects() {
+export class HttpService{
+  
+    constructor(private http: HttpClient){ }
+      
+     private url = baseUrl;
+     
+    getAllProjects(){
         return this.http.get(this.url + 'project');
     }
 
@@ -32,8 +34,16 @@ export class HttpService {
     }
 
     async getPiranhaPageById(pageId: string): Promise<Page> {
-        const dataaa = await this.http.get(this.piranhaApiUrl + "page/" + pageId).toPromise().then((data: Page) => data)
-        return dataaa;
+        const data = await this.http.get(this.url + "page/" + pageId).toPromise().then((data: Page) => data)
+        return data;
+    }    
+
+    createProject(project:Project) {
+        return this.http.post(this.url, project);
     }
+
+    updateProject(project: Project) {
+        return this.http.put(this.url + '/' + project.id, project);
+    }  
 
 }

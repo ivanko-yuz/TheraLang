@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import {
   MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
   MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
@@ -16,7 +16,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectInfoComponent } from './project-info/project-info.component';
-import { CreateProjectComponent } from './create-project/create-project.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
@@ -45,6 +45,11 @@ import { PiranhaPageComponent } from './cms-api/piranha-page/piranha-page.compon
 import { BlockComponent } from './cms-api/cms-shared/block/block.component';
 import { GalleryBlockComponent } from './cms-api/cms-shared/gallery-block/gallery-block.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { ErrorComponent } from './shared/components/error/error.component';
+import { ErrorHandlerService } from './shared/services/error-handler.service';
+import { NotificationService } from './shared/services/notification.service';
+import { DialogService } from './shared/services/dialog.service';
 
 @NgModule({
    declarations: [
@@ -63,11 +68,16 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
       GeneralResourcesComponent,
       PiranhaPageComponent,
       BlockComponent,
-      GalleryBlockComponent
+      GalleryBlockComponent,
+      ConfirmDialogComponent,
+      ErrorComponent,
+      HomeComponent
    ],
    entryComponents: [
       CreateProjectComponent,
-      ResourcesInternalTableComponent,   
+      ResourcesInternalTableComponent,
+      ProjectFormComponent, 
+      ConfirmDialogComponent
    ],
    imports: [
       BrowserModule,
@@ -136,9 +146,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
       ResourceService,
       HttpService,
       EventService,
+      {provide: ErrorHandler, useClass: ErrorHandlerService},
+      NotificationService,
+      DialogService,
    ],
    bootstrap: [
       AppComponent, GalleryBlockComponent
    ]
-})
+
 export class AppModule { }

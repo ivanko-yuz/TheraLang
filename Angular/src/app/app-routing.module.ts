@@ -6,6 +6,7 @@ import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import {ProjectInfoComponent} from './project-info/project-info.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
+import { ErrorComponent } from './shared/components/error/error.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,7 @@ const routes: Routes = [
   { path: 'project/:id', component: ProjectInfoComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'resources', component: GeneralResourcesComponent },
-  {path: 'piranha', component: PiranhaPageComponent}
+  { path: 'error', component: ErrorComponent },
 ];
 
 @NgModule({
@@ -25,6 +26,6 @@ export class AppRoutingModule { }
 
 export const routingComponents = [
   ProjectParticipantsComponent, ProjectComponent, HomeComponent, ProjectInfoComponent,
-  GeneralResourcesComponent, PiranhaPageComponent
+  GeneralResourcesComponent, ErrorComponent
 ];
 
