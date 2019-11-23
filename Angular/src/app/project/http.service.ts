@@ -1,15 +1,16 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable, OnDestroy} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { Project } from './project';
+import { baseUrl } from '../shared/api-endpoint.constants';
 
 @Injectable()
-export class HttpService {
-
-    constructor(private http: HttpClient) { }
-
-    private url = 'https://localhost:44353/api/';
-    private piranhaApiUrl = 'http://localhost:5000/api/';
-
-    getAllProjects() {
+export class HttpService{
+  
+    constructor(private http: HttpClient){ }
+      
+     private url = baseUrl;
+     
+    getAllProjects(){
         return this.http.get(this.url + 'project');
     }
 
@@ -26,20 +27,29 @@ export class HttpService {
     }
 
     getAllResourcesByProjectId(projectId: number) {
-        return this.http.get(this.piranhaApiUrl + 'resource/all/' + projectId);
+        return this.http.get(this.url + 'resource/all/' + projectId);
     }
 
     getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
-        return this.http.get(this.piranhaApiUrl + 'resource/all/' + categoryId + '/' + pageNumber 
+        return this.http.get(this.url + 'resource/all/' + categoryId + '/' + pageNumber 
         + '/' + recordsPerPage);
     }
 
     getResourceCategories(withAssignedResources: boolean) {
-        return this.http.get(this.piranhaApiUrl + 'resource/categories' + '/' + withAssignedResources);
+        return this.http.get(this.url + 'resource/categories' + '/' + withAssignedResources);
     }
 
     getResourcesCountByCategoryId(categoryId: number)
     {
-        return this.http.get(this.piranhaApiUrl + 'resource/count' + '/' + categoryId);
+        return this.http.get(this.url + 'resource/count' + '/' + categoryId);
     }
+
+    createProject(project:Project) {
+        return this.http.post(this.url, project);
+    }
+
+    updateProject(project: Project) {
+        return this.http.put(this.url + '/' + project.id, project);
+    }  
+
 }

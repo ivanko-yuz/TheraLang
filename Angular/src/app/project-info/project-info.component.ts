@@ -1,10 +1,11 @@
 import { ResourceService } from './resources-table-for-project/resources-table/resource.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from '../project/http.service';
 import { Project } from '../project/project';
 import { Resource } from '../general-resources/resource-models/resource';
 import { trigger, state, style } from '@angular/animations';
+import { ResourceService } from '../resources-table/resource.service';
+import { HttpService } from '../project/http.service';
 
 @Component({
   selector: 'app-project-info',

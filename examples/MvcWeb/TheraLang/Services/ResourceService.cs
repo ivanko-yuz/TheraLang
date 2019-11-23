@@ -1,4 +1,5 @@
 ﻿using MvcWeb.TheraLang.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 using MvcWeb.TheraLang.UnitOfWork;
 using System;
 using System.Collections.Generic;

@@ -100,7 +100,7 @@ namespace MvcWeb.TheraLang.Controllers
             {
                 throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
             }
-
+            
             if (categoryId == default)
             {
                 throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
