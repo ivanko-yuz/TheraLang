@@ -31,7 +31,7 @@ export class HttpService {
         return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
     }
 
-    async getAboutPage(pageId: string): Promise<Page> {
+    async getPiranhaPageById(pageId: string): Promise<Page> {
         const dataaa = await this.http.get(this.piranhaApiUrl + "page/" + pageId).toPromise().then((data: Page) => data)
         return dataaa;
     }

@@ -17,9 +17,4 @@ export class BlockComponent implements OnInit {
   cutLink(): string {
     return this.model.body.media.publicUrl.substr(1);
   }
-
-  splitBlockType(fullType: string): string {
-    var blockType = fullType.split(".",4)
-    return blockType[3];
-  }
 }

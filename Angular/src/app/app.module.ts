@@ -43,7 +43,8 @@ import { ResourceService } from './resources-table/resource.service';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 import { PiranhaPageComponent } from './cms-api/piranha-page/piranha-page.component';
 import { BlockComponent } from './cms-api/cms-shared/block/block.component';
-
+import { GalleryBlockComponent } from './cms-api/cms-shared/gallery-block/gallery-block.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
    declarations: [
@@ -61,11 +62,12 @@ import { BlockComponent } from './cms-api/cms-shared/block/block.component';
       ResourcesInternalTableComponent,
       GeneralResourcesComponent,
       PiranhaPageComponent,
-      BlockComponent
+      BlockComponent,
+      GalleryBlockComponent
    ],
    entryComponents: [
       CreateProjectComponent,
-      ResourcesInternalTableComponent
+      ResourcesInternalTableComponent,   
    ],
    imports: [
       BrowserModule,
@@ -123,10 +125,12 @@ import { BlockComponent } from './cms-api/cms-shared/block/block.component';
       MatTreeModule,
       PortalModule,
       ScrollingModule,
+      NgbModule
    ],
    exports: [
       ResourcesInternalTableComponent,
-      BlockComponent
+      BlockComponent,
+      GalleryBlockComponent
    ],
    providers: [
       ResourceService,
@@ -134,7 +138,7 @@ import { BlockComponent } from './cms-api/cms-shared/block/block.component';
       EventService,
    ],
    bootstrap: [
-      AppComponent
+      AppComponent, GalleryBlockComponent
    ]
 })
 export class AppModule { }

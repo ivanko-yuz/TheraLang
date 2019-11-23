@@ -1,22 +1,24 @@
-.QuoteBlock {
+.QuoteBlock, .column-block app-block .QuoteBlock {
     color: #999;
     border: 1px solid #ddd;
-    border-radius: .25rem;
     padding: 1rem;
     padding-top: 1.5rem;
     font-size: 1.1rem;
     box-shadow: 0 4px 0 #f2f2f4;
-    max-width: 80%; 
+    width: 100% !important;
     margin: 0 auto; 
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     font-weight: 300;
     font-family: "Open Sans",sans-serif;
-    box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+blockquote, .column-block app-block blockquote{
+    display: table-cell;
+    vertical-align: bottom;
 }
 
-.TextBlock {    
-    max-width: 80%; 
+.TextBlock .column-block app-block .TextBlock {    
+    max-width: 68%; 
     margin: 0 auto; 
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -25,25 +27,22 @@
     font-size: 1rem;
     line-height: 1.5;
     font-family: "Open Sans",sans-serif;
-    // box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
+
 .column-block .TextBlock {
     padding: 1rem;
-    // border-radius: 25px ;
 }
-.column-block div {
-    display: inline;
+.column-block app-block {
+    display: inline;    
     text-align: left;
     width: 100%;
     margin-right: 15px;
     margin-left: 15px;
     margin-top: 1.5rem;
-    // box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .column-block {
-    max-width: 80%;
-    min-height: 3vh;
+    max-width: 65%;
     text-align: center;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -51,26 +50,32 @@
     margin-right: auto;
     display: flex;
     padding: 1rem;
-    border-radius: 25px ;
-    box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.ImageBlock img {
-    max-width: 80%;
+.ImageBlock img  {
+    max-width: 68%;
     display: block;
     margin: 0 auto;
-    border-radius: 25px ;
     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .TextBlockDiv .TextBlock {
     min-height: 100px;
     padding: 1rem;
+    max-width: 68%; 
+    margin: 0 auto; 
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: "Open Sans",sans-serif;
 }
 
-.VideoBlock, .AudioBlock {
+.VideoBlock, .AudioBlock, .column-block app-block {
     margin: 0 auto; 
-    width: 80%;
+    width: 68%;
     margin-top: 1.5rem;
 }
 
@@ -78,26 +83,49 @@
     width: 100%;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+    display: block;
+    vertical-align: middle;
 }
 
 div .ImageBlock {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+    margin: 0 auto; 
 }
 
 .AudioBlock audio {
-    width: 100%;
+    max-width: 50%;
+    min-width: 150px;
 }
 
-.SeparatorBlock hr {
+.SeparatorBlock hr{
     border-top: 1px solid rgba(0,0,0,.1);
     margin-top: .5rem;
     margin-bottom: .5rem;
     border-top-color: #eee;
-    max-width: 80%;
+    max-width: 68%;
 }
 
-.SeparatorBlock {
+.SeparatorBlock, .HtmlBlock {
     margin: 0 auto; 
-    width: 80%;
+    width: 68%;
+}
+
+.HtmlBlock {
+    font-family: "Open Sans",sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+}
+
+#quoteBlock {
+    width: 68%;
+    margin: 0 auto;
+}
+
+.GalleryBlock {
+    max-width: 68%;
+    margin: 0 auto;
 }

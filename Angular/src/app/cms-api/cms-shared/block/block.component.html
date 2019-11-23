@@ -1,11 +1,11 @@
 
 <div class="row" *ngIf="model.type=='Piranha.Extend.Blocks.ImageBlock' ">
   <div class="ImageBlock">
-    <img *ngIf="model.body.hasValue" src="https://i.ytimg.com/vi/YCaGYUIfdy4/maxresdefault.jpg">   
+    <img *ngIf="model.body.hasValue" src="{{this.cutLink()}}">   
   </div>
 </div>
 
-<div class="row" *ngIf="model.type=='Piranha.Extend.Blocks.QuoteBlock' ">
+<div class="row" id="quoteBlock" *ngIf="model.type=='Piranha.Extend.Blocks.QuoteBlock' ">
   <div class="QuoteBlock">
     <blockquote [innerHTML]="model.body.value">
     </blockquote>
@@ -16,8 +16,8 @@
   <div class="HtmlBlock" [innerHTML]="model.body.value"></div>
 </div>
 
-<div class="column-block" *ngIf="model.type=='Piranha.Extend.Blocks.ColumnBlock'">
-  <div  *ngFor="let item of model.items" class="{{this.splitBlockType(item.type)}}" [innerHTML]="item.body.value"></div>  
+<div class="column-block" id="col-block" *ngIf="model.type=='Piranha.Extend.Blocks.ColumnBlock'">
+  <app-block *ngFor="let block of model.items" [model]="block"></app-block>
 </div>
 
 <div class="TextBlockDiv" *ngIf="model.type=='Piranha.Extend.Blocks.TextBlock' ">
@@ -26,16 +26,20 @@
 
 <div class="AudioBlock" *ngIf="model.type=='Piranha.Extend.Blocks.AudioBlock' ">
   <audio controls>
-    <source src="{{this.cutLink(model.body.media.publicUrl)}}" type>
+    <source *ngIf="model.body.hasValue" src="{{this.cutLink()}}" type>
   </audio>
 </div>
 
 <div class="VideoBlock" *ngIf="model.type=='Piranha.Extend.Blocks.VideoBlock' ">
   <video controls>
-    <source src="{{this.cutLink(this.model.body.media.publicUrl)}}">
+    <source *ngIf="model.body.hasValue" src="{{this.cutLink()}}">
   </video>
 </div>
 
 <div class="SeparatorBlock" *ngIf="model.type=='Piranha.Extend.Blocks.SeparatorBlock' ">
   <hr>
+</div>
+
+<div class="GalleryBlock" *ngIf="model.type=='Piranha.Extend.Blocks.ImageGalleryBlock' ">
+  <app-gallery-block  [block]="model"></app-gallery-block>
 </div>
