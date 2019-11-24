@@ -36,11 +36,6 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
-import { CustomDatePipe } from './project-info/custom.datepipe';
-import { ResourcesTableComponent } from './resources-table/resources-table.component';
-import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
-import { ResourceService } from './resources-table/resource.service';
-import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 import { PiranhaPageComponent } from './cms-api/piranha-page/piranha-page.component';
 import { BlockComponent } from './cms-api/cms-shared/block/block.component';
 import { GalleryBlockComponent } from './cms-api/cms-shared/gallery-block/gallery-block.component';
@@ -66,25 +61,26 @@ import { DialogService } from './shared/services/dialog.service';
       ProjectComponent,
       HomeComponent,
       ProjectInfoComponent,
-      CreateProjectComponent,
       FooterComponent,
       ProjectParticipantsComponent,
       CustomDatePipe,
       ResourcesTableComponent,
-      ResourcesInternalTableComponent,
-      GeneralResourcesComponent,
       PiranhaPageComponent,
       BlockComponent,
       GalleryBlockComponent,
       ConfirmDialogComponent,
       ErrorComponent,
-      HomeComponent
+      ProjectFormComponent,
+      ResourcesInternalTableComponent,    
+      GeneralResourcesTableComponent,
+      GeneralResourcesInnerTableComponent,
    ],
+
+
    entryComponents: [
-      CreateProjectComponent,
       ResourcesInternalTableComponent,
       ProjectFormComponent, 
-      ConfirmDialogComponent
+      ConfirmDialogComponent,
    ],
    imports: [
       BrowserModule,
@@ -156,96 +152,10 @@ import { DialogService } from './shared/services/dialog.service';
       {provide: ErrorHandler, useClass: ErrorHandlerService},
       NotificationService,
       DialogService,
+      ResourceCategoriesService
    ],
    bootstrap: [
       AppComponent, GalleryBlockComponent
    ]
-
-  declarations: [
-    AppComponent,
-    routingComponents,
-    ToolbarComponent,
-    ProjectComponent,
-    ProjectFormComponent,
-    ProjectInfoComponent,
-    ProjectFormComponent,
-    FooterComponent,
-    ProjectParticipantsComponent,
-    CustomDatePipe,
-    ResourcesInternalTableComponent,    
-    GeneralResourcesTableComponent,
-    GeneralResourcesInnerTableComponent,
-    ConfirmDialogComponent,
-    ErrorComponent,
-    HomeComponent
-  ],
-  entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent, ConfirmDialogComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    HttpClientModule,
-    MatCardModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatTabsModule,
-    MatTableModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    A11yModule,
-    CdkStepperModule,
-    CdkTableModule,
-    CdkTreeModule,
-    DragDropModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatTreeModule,
-    PortalModule,
-    ScrollingModule,
-  ],
-  exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],
-  providers: [ResourceService,
-     HttpService,
-     EventService,
-     {provide: ErrorHandler, useClass: ErrorHandlerService},
-     NotificationService,
-     DialogService,
-     ResourceCategoriesService
-    ],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

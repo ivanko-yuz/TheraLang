@@ -1,8 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Page } from '../cms-api/models/root-object.model';
-import {Injectable, OnDestroy} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import { Project } from './project';
 import { baseUrl } from '../shared/api-endpoint.constants';
 
@@ -45,8 +43,7 @@ export class HttpService{
     getResourcesCountByCategoryId(categoryId: number)
     {
         return this.http.get(this.url + 'resource/count' + '/' + categoryId);
-    }
-    }
+    }    
 
     getAllResourcesById(projectId: number) {
         return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
