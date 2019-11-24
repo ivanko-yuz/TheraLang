@@ -15,7 +15,7 @@ import {Subscription} from 'rxjs';
 })
 export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  hasNotification: boolean = true;
+  hasNotification = true;
   projectParticipation: ProjectParticipationRequest[];
   toolbarItems: ToolbarItem[] = [];
   private subscription = new Subscription();

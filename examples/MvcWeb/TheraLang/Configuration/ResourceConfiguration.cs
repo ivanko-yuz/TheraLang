@@ -17,7 +17,7 @@ namespace MvcWeb.TheraLang.Configuration
             builder.Property(x => x.Url).HasDefaultValue(null);
             builder.Property(x => x.File).HasDefaultValue(null);
 
-            builder.HasMany(x => x.ResourceProjects).WithOne(i => i.Resource).HasForeignKey("ResourceId");
+            builder.HasMany(x => x.ResourceToProjects).WithOne(i => i.Resource).HasForeignKey("ResourceId");
             builder.HasOne(x => x.User).WithMany(i => i.Resources);
         }
     }
