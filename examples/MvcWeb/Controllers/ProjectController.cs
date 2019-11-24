@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MvcWeb.Services;
 using MvcWeb.TheraLang.Entities;
-
+using MvcWeb.TheraLang.Repository;
 
 namespace MvcWeb.Controllers
 {

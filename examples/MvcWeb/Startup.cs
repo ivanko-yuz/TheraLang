@@ -16,6 +16,7 @@ using MvcWeb.Validators;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
 using MvcWeb.TheraLang.Services;
+using MvcWeb.TheraLang.Repository;
 
 namespace MvcWeb
 {
