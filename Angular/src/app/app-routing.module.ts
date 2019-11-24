@@ -6,14 +6,15 @@ import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import {ProjectInfoComponent} from './project-info/project-info.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
+import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'projectParticipants', component:ProjectParticipantsComponent },
+  { path: 'projectParticipants', component: ProjectParticipantsComponent },
   { path: 'project/:id', component: ProjectInfoComponent },
   { path: 'project', component: ProjectComponent },
-  { path: 'resources', component: GeneralResourcesComponent },
+  { path: 'resources', component: GeneralResourcesTableComponent },
   { path: 'error', component: ErrorComponent },
 ];
 
@@ -26,6 +27,6 @@ export class AppRoutingModule { }
 
 export const routingComponents = [
   ProjectParticipantsComponent, ProjectComponent, HomeComponent, ProjectInfoComponent,
-  GeneralResourcesComponent, ErrorComponent
+  ErrorComponent
 ];
 

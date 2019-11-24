@@ -45,6 +45,13 @@ import { PiranhaPageComponent } from './cms-api/piranha-page/piranha-page.compon
 import { BlockComponent } from './cms-api/cms-shared/block/block.component';
 import { GalleryBlockComponent } from './cms-api/cms-shared/gallery-block/gallery-block.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CustomDatePipe } from './shared/pipes/custom.datepipe';
+import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
+import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
+import { ResourceService } from './project-info/resources-table-for-project/resources-table/resource.service';
+import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
+import { GeneralResourcesInnerTableComponent } from './general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component';
+import { ResourceCategoriesService } from './project-info/resources-table-for-project/resources-table/resource-categories.service';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
@@ -154,4 +161,91 @@ import { DialogService } from './shared/services/dialog.service';
       AppComponent, GalleryBlockComponent
    ]
 
+  declarations: [
+    AppComponent,
+    routingComponents,
+    ToolbarComponent,
+    ProjectComponent,
+    ProjectFormComponent,
+    ProjectInfoComponent,
+    ProjectFormComponent,
+    FooterComponent,
+    ProjectParticipantsComponent,
+    CustomDatePipe,
+    ResourcesInternalTableComponent,    
+    GeneralResourcesTableComponent,
+    GeneralResourcesInnerTableComponent,
+    ConfirmDialogComponent,
+    ErrorComponent,
+    HomeComponent
+  ],
+  entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent, ConfirmDialogComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    HttpClientModule,
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatTabsModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    A11yModule,
+    CdkStepperModule,
+    CdkTableModule,
+    CdkTreeModule,
+    DragDropModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
+    PortalModule,
+    ScrollingModule,
+  ],
+  exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],
+  providers: [ResourceService,
+     HttpService,
+     EventService,
+     {provide: ErrorHandler, useClass: ErrorHandlerService},
+     NotificationService,
+     DialogService,
+     ResourceCategoriesService
+    ],
+  bootstrap: [AppComponent]
+})
 export class AppModule { }

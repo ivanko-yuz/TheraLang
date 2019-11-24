@@ -29,6 +29,25 @@ export class HttpService{
         return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
     }
 
+    getAllResourcesByProjectId(projectId: number) {
+        return this.http.get(this.url + 'resource/all/' + projectId);
+    }
+
+    getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
+        return this.http.get(this.url + 'resource/all/' + categoryId + '/' + pageNumber 
+        + '/' + recordsPerPage);
+    }
+
+    getResourceCategories(withAssignedResources: boolean) {
+        return this.http.get(this.url + 'resource/categories' + '/' + withAssignedResources);
+    }
+
+    getResourcesCountByCategoryId(categoryId: number)
+    {
+        return this.http.get(this.url + 'resource/count' + '/' + categoryId);
+    }
+    }
+
     getAllResourcesById(projectId: number) {
         return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
     }
