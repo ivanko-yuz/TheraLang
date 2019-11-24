@@ -48,7 +48,7 @@ namespace MvcWeb.TheraLang.Controllers
             }
 
             var donation = _donationService.GetDonation(donationId);
-            return donation;        
+            return Ok(donation);        
         }
 
 

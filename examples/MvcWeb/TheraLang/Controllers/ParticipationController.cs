@@ -20,7 +20,7 @@ namespace MvcWeb.TheraLang.Controllers
         private readonly IProjectParticipationService _service;
 
         [HttpGet]
-        public ActionResult<ProjectParticipation> Get()
+        public ActionResult<IEnumerable<ProjectParticipation>> Get()
         {
             IEnumerable<ProjectParticipation> members = _service.GetAll();
             return Ok(members);

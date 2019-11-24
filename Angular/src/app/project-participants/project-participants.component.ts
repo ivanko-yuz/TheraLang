@@ -55,7 +55,6 @@ export class ProjectParticipantsComponent implements OnInit {
 
   changeStatus(status: string, projectParticipant: ProjectParticipationRequest) {
     projectParticipant.status = (status === 'approved') ?  RequestStatus.Approved : RequestStatus.Rejected;
-    debugger
     this.httpService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
       this.load();
     });
