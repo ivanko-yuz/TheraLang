@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../project/project';
-import * as $ from 'jquery';
-import { Resource } from '../resources-table/resource';
+import { Resource } from '../general-resources/resource-models/resource';
+import { trigger, state, style } from '@angular/animations';
 import { ResourceService } from '../resources-table/resource.service';
 import { HttpService } from '../project/http.service';
 import { ProjectParticipationService } from '../project-participants/project-participation.service';
@@ -12,21 +12,28 @@ import { ProjectParticipationService } from '../project-participants/project-par
   templateUrl: './project-info.component.html',
   styleUrls: ['./project-info.component.less'],
   encapsulation: ViewEncapsulation.None,
-  providers :[HttpService, ProjectParticipationService]
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        display: 'initial'
+      })),
+      state('closed', style({        
+        display: 'none'      
+      })),
+    ]),
+  ],
+  providers: [HttpService, ProjectParticipationService]
 })
-export class ProjectInfoComponent implements OnInit, AfterViewInit {
+export class ProjectInfoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpService,
               private resourceService: ResourceService, private participService:ProjectParticipationService) { }
 
-  projectInfo: Project = new Project(0, '', '', '');
+  projectInfo: Project ;
   projectId: number;
   generateOnceResourcesTable = false;
   sortedResourcesByCategory: Resource[][] = [];
-
-  ngAfterViewInit() {
-    $('#resTabId').hide();
-  }
+  isOpen = false;
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -34,24 +41,19 @@ export class ProjectInfoComponent implements OnInit, AfterViewInit {
       this.http.getProjectInfo(this.projectId).subscribe((data: Project) => this.projectInfo = data);
     });
   }
-  
+
   async getResourcesData() {
     if (!this.generateOnceResourcesTable) {
       const allResources = await this.resourceService.getAllResourcesByProjId(this.projectId);
       this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
+
     }
-    this.generateOnceResourcesTable = true;
-    $('#resTabId').slideToggle('slow');
+    this.isOpen = !this.isOpen;
+    this.generateOnceResourcesTable = true;   
   }
 
   onJoin(){
     this.participService.createParticipRequest(this.projectId);
   }
 }
-
-
-
-
-
-
 

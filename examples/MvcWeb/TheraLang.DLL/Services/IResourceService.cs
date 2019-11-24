@@ -1,5 +1,6 @@
-﻿using System.Threading.Tasks;
-using MvcWeb.TheraLang.Entities;
+﻿using MvcWeb.TheraLang.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MvcWeb.TheraLang.Services
 {
@@ -9,8 +10,16 @@ namespace MvcWeb.TheraLang.Services
 
         Task UpdateResource(Resource resource, int updatedById);
 
-        Task RemoveResource(int Id);
+        Task RemoveResource(int id);
 
-        Resource GetResourceById(int Id);
+        Resource GetResourceById(int id);
+
+        IEnumerable<ResourceCategory> GetResourcesCategories(bool withAssignedResources);
+
+        int GetResourcesCount(int categoryId);
+
+        IEnumerable<Resource> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
+
+        IEnumerable<Resource> GetAllResourcesByProjectId(int projectId);
     }
 }

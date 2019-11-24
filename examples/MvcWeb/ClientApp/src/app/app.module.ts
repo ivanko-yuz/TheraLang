@@ -36,11 +36,12 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
-import { CustomDatePipe } from './project-info/custom.datepipe';
-import { ResourcesTableComponent } from './resources-table/resources-table.component';
-import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
-import { ResourceService } from './resources-table/resource.service';
-import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { CustomDatePipe } from './shared/pipes/custom.datepipe';
+import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
+import { ResourceService } from './project-info/resources-table-for-project/resources-table/resource.service';
+import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
+import { GeneralResourcesInnerTableComponent } from './general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component';
+import { ResourceCategoriesService } from './project-info/resources-table-for-project/resources-table/resource-categories.service';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
@@ -60,9 +61,9 @@ import { DialogService } from './shared/services/dialog.service';
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
-    ResourcesTableComponent,
-    ResourcesInternalTableComponent,
-    GeneralResourcesComponent,
+    ResourcesInternalTableComponent,    
+    GeneralResourcesTableComponent,
+    GeneralResourcesInnerTableComponent,
     ConfirmDialogComponent,
     ErrorComponent,
     HomeComponent
@@ -123,15 +124,16 @@ import { DialogService } from './shared/services/dialog.service';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,  
+    ScrollingModule,
   ],
-  exports: [ResourcesInternalTableComponent],
+  exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],
   providers: [ResourceService,
      HttpService,
      EventService,
-     //{provide: ErrorHandler, useClass: ErrorHandlerService},
+     {provide: ErrorHandler, useClass: ErrorHandlerService},
      NotificationService,
      DialogService,
+     ResourceCategoriesService
     ],
   bootstrap: [AppComponent]
 })
