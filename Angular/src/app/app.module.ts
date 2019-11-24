@@ -71,7 +71,6 @@ import { ErrorHandlerService } from "./shared/services/error-handler.service";
 import { NotificationService } from "./shared/services/notification.service";
 import { DialogService } from "./shared/services/dialog.service";
 import { TypeProjectComponent } from "./type-project/type-project.component";
-import { TypeProjectFormComponent } from "./type-project-form/type-project-form.component";
 import { TypeProjectHttp } from "./type-project/TypeProjectHttp.service";
 import { TypeProjectService } from "./type-project/type-project.service";
 
@@ -91,7 +90,6 @@ import { TypeProjectService } from "./type-project/type-project.service";
     ResourcesInternalTableComponent,
     GeneralResourcesComponent,
     TypeProjectComponent,
-    TypeProjectFormComponent,
     ConfirmDialogComponent,
     ErrorComponent,
     HomeComponent
@@ -99,7 +97,6 @@ import { TypeProjectService } from "./type-project/type-project.service";
   entryComponents: [
     ResourcesInternalTableComponent,
     TypeProjectComponent,
-    TypeProjectFormComponent,
     ProjectFormComponent,
     ConfirmDialogComponent
   ],

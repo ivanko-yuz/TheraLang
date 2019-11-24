@@ -4,7 +4,7 @@ import { Project } from "./project";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { Resource } from "../resources-table/resource";
 import { TypeProjectComponent } from "../type-project/type-project.component";
-import { TypeProjectService } from "../type-project-form/type-project.service";
+import { TypeProjectService } from "../type-project/type-project.service";
 import { ProjectFormComponent } from "../project-form/project-form.component";
 import { ProjectService } from "./project.service";
 import { DialogService } from "../shared/services/dialog.service";
@@ -43,13 +43,6 @@ export class ProjectComponent implements OnInit {
     this.service.populateForm(project);
     this.dialogService.openFormDialog(ProjectFormComponent);
   }
-
-  // ShowDialogTypeProject(id: number) {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.data
-  //   this.dialog.open(TypeProjectComponent, dialogConfig); //todo refactor  component NewTypeProgectComponent
-  // }
 
   onCreateTypeProject() {
     this.typeProjectService.initializeFormGroup();

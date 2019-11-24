@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
 import { TypeProjectHttp } from "./TypeProjectHttp.service";
 import { NotificationService } from "../shared/services/notification.service";
+import { typeProjectUrl } from "../shared/api-endpoint.constants";
 
 @Injectable({
   providedIn: "root"
@@ -26,26 +27,24 @@ export class TypeProjectService {
   initializeFormGroup() {
     this.form.setValue({
       id: null,
-      name: "wer"
+      name: ""
     });
   }
 
-  populateForm(typeProject) {
+  populateForm(typeProject: TypeProject) {
     this.form.setValue(typeProject);
   }
 
-  private url = "https://localhost:44355/api/typeProject";
-  myvalue: string;
-
-  btnPut() {
-    let putUrl = this.url + "/" + 1;
-    let newProj: TypeProject = new TypeProject(1, "updated");
-    this.http.put(putUrl, newProj).subscribe(
+  btnPut(typeProject: TypeProject) {
+    let putUrl = typeProjectUrl + typeProject.id;
+    this.http.put(putUrl, typeProject).subscribe(
       response => {
-        this.notificationService.success("");
+        this.notificationService.success(
+          "Project type was successfully updated"
+        );
       },
       error => {
-        this.notificationService.warn("");
+        this.notificationService.warn("Project type was not updated");
       }
     );
   }
@@ -53,23 +52,24 @@ export class TypeProjectService {
   btnPost(newTypeProject: TypeProject): Observable<any> {
     this.http.post(newTypeProject).subscribe(
       response => {
-        this.notificationService.success("");
+        this.notificationService.success("Project type was successfully added");
       },
       error => {
-        this.notificationService.warn("");
+        this.notificationService.warn("Project type was not added");
       }
     );
     return;
   }
 
   btnDelete(id: number) {
-    let code: number;
     this.http.delete(id).subscribe(
       response => {
-        this.notificationService.success("");
+        this.notificationService.success(
+          "Project type was successfully deleted"
+        );
       },
       error => {
-        this.notificationService.warn("");
+        this.notificationService.warn("Project type was not updated");
       }
     );
   }
