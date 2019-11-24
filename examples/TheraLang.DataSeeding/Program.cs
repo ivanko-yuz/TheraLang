@@ -31,8 +31,9 @@ namespace TheraLang.DataSeeding
 
         private static DbContext CreateDbContext()
         {
+            
             var configurationBuilder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json");
+                .AddJsonFile("appsettings.json", optional: true);
             var configuration = configurationBuilder.Build();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
