@@ -4,22 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MvcWeb.Models;
-using MvcWeb.TheraLang;
 using MvcWeb.TheraLang.Entities;
+using MvcWeb.TheraLang.Repository;
 using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.Services
 {
-    public interface IProjectService
-    {
-        Task TryAddProject(ProjectViewModel projectViewModel);
-
-        Task ChangeStatus(int id, ProjectStatus rejected);
-
-        IEnumerable<Project> GetAll();
-
-        Project GetbyId(int id);
-    }
 
     public class ProjectService : IProjectService
     {
@@ -40,7 +30,8 @@ namespace MvcWeb.Services
             }
             catch(Exception ex)
             {
-                throw new Exception($"Error", ex);
+                ex.Data[nameof(projectViewModel)] = projectViewModel;
+                throw new Exception($"Error while adding the project", ex);
             }
         }
 

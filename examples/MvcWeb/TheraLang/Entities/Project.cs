@@ -12,13 +12,13 @@ namespace MvcWeb.TheraLang.Entities
         
         public ProjectStatus StatusId { get; set;  }
 
-        public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
+        public virtual ICollection<ResourceProject> ProjectResources { get; set; }
 
         public virtual ICollection<ProjectParticipation> ProjectParticipations { get; set; }
 
         public Project()
         {
-            this.ResourceProjects = new List<ResourceProject>();
+            this.ProjectResources = new List<ResourceProject>();
             this.ProjectParticipations = new List<ProjectParticipation>();
         }
     }
