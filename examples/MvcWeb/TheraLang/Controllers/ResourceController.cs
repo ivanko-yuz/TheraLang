@@ -49,47 +49,78 @@ namespace MvcWeb.TheraLang.Controllers
 
         [HttpGet]
         [Route("get/{Id}")]
-        public IActionResult GetResource([FromBody]int Id)
+        public IActionResult GetResource([FromBody]int id)
         {
-            if (Id == default)
+            if (id == default)
             {
-                throw new ArgumentException($"{nameof(Id)} can not be 0");
+                throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            Resource resource = _service.GetResourceById(Id);
+            Resource resource = _service.GetResourceById(id);
             return Ok(resource);
         }
 
         [HttpDelete]
         [Route("delete/{Id}")]
-        public async Task<IActionResult> DeleteResource([FromBody]int Id)
+        public async Task<IActionResult> DeleteResource([FromBody]int id)
         {
-            if (Id == default)
+            if (id == default)
             {
-                throw new ArgumentException($"{nameof(Id)} can not be 0");
+                throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            await _service.RemoveResource(Id);
+            await _service.RemoveResource(id);
             return Ok();
         }
 
         [HttpGet]
-        [Route("all/{pageNumber}/{recordsPerPage?}")]
-        public IActionResult GetAllResources(int pageNumber, int recordsPerPage = PaginationConstants.RecordsPerPage)
+        [Route("categories/{withAssignedResources}")]
+        public IActionResult GetResourcesCategories(bool withAssignedResources)
+        {
+            var categories = _service.GetResourcesCategories(withAssignedResources);
+            return Ok(categories);
+        }
+
+        [HttpGet]
+        [Route("count/{categoryId}")]
+        public IActionResult CountResourcesByCategoryId(int categoryId)
+        {
+            if (categoryId == default)
+            {
+                throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
+            }
+            int count = _service.GetResourcesCount(categoryId);
+            return Ok(count);
+        }
+
+        [HttpGet]
+        [Route("all/{categoryId}/{pageNumber}/{recordsPerPage?}")]
+        public IActionResult GetAllResourcesByCategoryId(int categoryId, int pageNumber,
+            int recordsPerPage = PaginationConstants.RecordsPerPage)
         {
             if (pageNumber == default)
             {
                 throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
             }
+            
+            if (categoryId == default)
+            {
+                throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
+            }
 
-            IEnumerable<Resource> resources = _service.GetAllResources(pageNumber, recordsPerPage);
+            IEnumerable<Resource> resources = _service.GetResourcesByCategoryId(categoryId, pageNumber, recordsPerPage);
             return Ok(resources);
         }
 
         [HttpGet]
-        [Route("all/count")]
-        public IActionResult GetResourcesCount()
+        [Route("all/{projectId}")]
+        public IActionResult GetAllResourcesByProjectId(int projectId)
         {
-            int countResources = _service.GetResourcesCount();
-            return Ok(countResources);
+            if (projectId == default)
+            {
+                throw new ArgumentException($"{nameof(projectId)} cannot be 0");
+            }
+
+            IEnumerable<Resource> resources = _service.GetAllResourcesByProjectId(projectId);
+            return Ok(resources);
         }
     }
 }

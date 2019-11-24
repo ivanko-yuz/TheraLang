@@ -13,22 +13,36 @@ export class HttpService{
     getAllProjects(){
         return this.http.get(this.url + 'project');
     }
-  
+
     getProjectInfo(id: number) {
         return this.http.get(this.url + 'project' + '/' + id);
     }
-  
-    getAllProjectParticipants(){
-        return this.http.get(this.url + 'projectParticipants');
-      }
 
-    changeParticipationStatus (requestId: number, requestStatus: number){
+    getAllProjectParticipants() {
+        return this.http.get(this.url + 'projectParticipants');
+    }
+
+    changeParticipationStatus(requestId: number, requestStatus: number) {
         return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
-    }   
- 
-    getAllResourcesById(projectId: number) {
-        return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
-    }  
+    }
+
+    getAllResourcesByProjectId(projectId: number) {
+        return this.http.get(this.url + 'resource/all/' + projectId);
+    }
+
+    getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
+        return this.http.get(this.url + 'resource/all/' + categoryId + '/' + pageNumber 
+        + '/' + recordsPerPage);
+    }
+
+    getResourceCategories(withAssignedResources: boolean) {
+        return this.http.get(this.url + 'resource/categories' + '/' + withAssignedResources);
+    }
+
+    getResourcesCountByCategoryId(categoryId: number)
+    {
+        return this.http.get(this.url + 'resource/count' + '/' + categoryId);
+    }
 
     createProject(project:Project) {
         return this.http.post(this.url, project);

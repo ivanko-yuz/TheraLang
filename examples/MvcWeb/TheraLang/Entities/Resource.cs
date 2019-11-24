@@ -18,10 +18,10 @@ namespace MvcWeb.TheraLang.Entities
 
         public virtual ResourceCategory ResourceCategory { get; set; }
 
-        public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
+        public virtual ICollection<ResourceProject> ResourceToProjects { get; set; }
         public Resource()
         {
-            this.ResourceProjects = new List<ResourceProject>();
+            this.ResourceToProjects = new List<ResourceProject>();
         }
     }
 }

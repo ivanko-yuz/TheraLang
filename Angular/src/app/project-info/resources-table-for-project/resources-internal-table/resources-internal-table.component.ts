@@ -1,7 +1,8 @@
-import { Resource } from './../resources-table/resource';
+import { Resource } from '../../../general-resources/resource-models/resource';
 import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
+import * as Constants  from '../../../shared/constants/resources-table';
 
 @Component({
   selector: 'app-resources-internal-table',
@@ -11,21 +12,21 @@ import { MatPaginator } from '@angular/material';
 
 export class ResourcesInternalTableComponent implements OnInit, AfterViewInit {
   @Input()dataSource: MatTableDataSource<Resource>;
-  displayedColumns: string[] = ['id', 'name', 'date', 'description'];  
+  displayedColumns: string[] = ['id', 'name', 'date', 'description'];
   @Input()lengthDataArrForDataSource;
+  pageSize: number;
+  pageSizeOptions: number[];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor() {  }
 
   ngOnInit() {
-     
+    
   }
-  ngAfterViewInit(){
-    console.log(this.lengthDataArrForDataSource,  "1");   
-    setTimeout(() => {
-      console.log(this.lengthDataArrForDataSource,  "1");   
-      this.dataSource.paginator = this.paginator;
-    }, 5000);
+
+  ngAfterViewInit() {
+    this.pageSize = Constants.ResourcesTableConstants.COLUMNS_PER_PAGE;
+    this.pageSizeOptions = Constants.ResourcesTableConstants.PAGE_SIZE_OPTIONS;
     this.dataSource.paginator = this.paginator;
   }
 }
