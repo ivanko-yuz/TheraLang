@@ -24,7 +24,7 @@ namespace MvcWeb.Controllers
             }
 
             [HttpPut("{id}")]
-            public async Task<IActionResult> ApproveStatusId(int id)
+            public async Task<IActionResult> Approve(int id)
             {
                 if (id == default)
                 {
@@ -35,7 +35,7 @@ namespace MvcWeb.Controllers
             }
 
             [HttpPut("{id}")]
-            public async Task<IActionResult> RejectStatusId(int id)
+            public async Task<IActionResult> Reject(int id)
             {
                 if (id == default)
                 {
