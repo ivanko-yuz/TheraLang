@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -40,7 +40,7 @@ import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { ProjectComponent } from "./project/project.component";
 import { HomeComponent } from "./home/home.component";
 import { ProjectInfoComponent } from "./project-info/project-info.component";
-import { CreateProjectComponent } from "./create-project/create-project.component";
+import { ProjectFormComponent } from "./project-form/project-form.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from "@angular/material/table";
@@ -65,10 +65,15 @@ import { ResourcesTableComponent } from "./resources-table/resources-table.compo
 import { ResourcesInternalTableComponent } from "./resources-internal-table/resources-internal-table.component";
 import { ResourceService } from "./resources-table/resource.service";
 import { GeneralResourcesComponent } from "./general-resources/general-resources.component";
+import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confirm-dialog.component";
+import { ErrorComponent } from "./shared/components/error/error.component";
+import { ErrorHandlerService } from "./shared/services/error-handler.service";
+import { NotificationService } from "./shared/services/notification.service";
+import { DialogService } from "./shared/services/dialog.service";
 import { TypeProjectComponent } from "./type-project/type-project.component";
-import { TypeProjectHttp } from "./type-project/TypeProjectHttp.service";
 import { TypeProjectFormComponent } from "./type-project-form/type-project-form.component";
-import { TypeProjectService } from "./type-project-form/type-project.service";
+import { TypeProjectHttp } from "./type-project/TypeProjectHttp.service";
+import { TypeProjectService } from "./type-project/type-project.service";
 
 @NgModule({
   declarations: [
@@ -76,9 +81,9 @@ import { TypeProjectService } from "./type-project-form/type-project.service";
     routingComponents,
     ToolbarComponent,
     ProjectComponent,
-    HomeComponent,
+    ProjectFormComponent,
     ProjectInfoComponent,
-    CreateProjectComponent,
+    ProjectFormComponent,
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
@@ -86,13 +91,17 @@ import { TypeProjectService } from "./type-project-form/type-project.service";
     ResourcesInternalTableComponent,
     GeneralResourcesComponent,
     TypeProjectComponent,
-    TypeProjectFormComponent
+    TypeProjectFormComponent,
+    ConfirmDialogComponent,
+    ErrorComponent,
+    HomeComponent
   ],
   entryComponents: [
-    CreateProjectComponent,
     ResourcesInternalTableComponent,
     TypeProjectComponent,
-    TypeProjectFormComponent
+    TypeProjectFormComponent,
+    ProjectFormComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -157,6 +166,9 @@ import { TypeProjectService } from "./type-project-form/type-project.service";
     ResourceService,
     HttpService,
     EventService,
+    { provide: ErrorHandler, useClass: ErrorHandlerService },
+    NotificationService,
+    DialogService,
     TypeProjectHttp,
     TypeProjectService
   ],

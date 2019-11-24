@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
 import { TypeProject } from "./TypeProject";
-import { Component, OnInit } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
 import { TypeProjectHttp } from "./TypeProjectHttp.service";

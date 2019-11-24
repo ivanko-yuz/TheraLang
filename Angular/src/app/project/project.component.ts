@@ -2,10 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Project } from "./project";
 import { MatDialog, MatDialogConfig } from "@angular/material";
-import { CreateProjectComponent } from "../create-project/create-project.component";
 import { Resource } from "../resources-table/resource";
 import { TypeProjectComponent } from "../type-project/type-project.component";
 import { TypeProjectService } from "../type-project-form/type-project.service";
+import { ProjectFormComponent } from "../project-form/project-form.component";
+import { ProjectService } from "./project.service";
 import { DialogService } from "../shared/services/dialog.service";
 
 import { from } from "rxjs";
@@ -13,13 +14,16 @@ import { from } from "rxjs";
 @Component({
   selector: "app-project",
   templateUrl: "./project.component.html",
-  styleUrls: ["./project.component.less"]
+  styleUrls: ["./project.component.less"],
+  providers: [ProjectService]
 })
 export class ProjectComponent implements OnInit {
   projects: Project[];
 
   constructor(
     private httpService: HttpService,
+    private dialogService: DialogService,
+    private service: ProjectService,
     private dialog: MatDialog,
     private typeProjectService: TypeProjectService
   ) {}
@@ -31,11 +35,13 @@ export class ProjectComponent implements OnInit {
   }
 
   onCreate() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "60%";
-    dialogConfig.height = "40%";
-    this.dialog.open(CreateProjectComponent, dialogConfig);
+    this.service.initializeFormGroup();
+    this.dialogService.openFormDialog(ProjectFormComponent);
+  }
+
+  onEdit(project) {
+    this.service.populateForm(project);
+    this.dialogService.openFormDialog(ProjectFormComponent);
   }
 
   // ShowDialogTypeProject(id: number) {

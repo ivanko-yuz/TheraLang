@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>
+  <span>{{this.service.form.controls['id'].value?"РЕДАГУВАННЯ ПРОЕКТУ":"СТВОРЕННЯ ПРОЕКТУ"}}</span>
+</h2>
+<form [formGroup]="this.service.form">
+  <mat-dialog-content>
+    <mat-form-field>
+      <input type="hidden" formControlName="id">
+      <input formControlName="name" autofocus required matInput placeholder="Назва проекту">
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="description" required matInput placeholder="Опис">
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="type" required matInput placeholder="Тип">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="this.service.form.invalid"
+      (click)='onSubmit()'>Підтвердити</button>
+    <button mat-raised-button color="warn" type="reset" (click)="onClose()">Відмінити</button>
+  </mat-dialog-actions>
+</form>

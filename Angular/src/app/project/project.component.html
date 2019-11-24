@@ -22,7 +22,7 @@
         <div class="clear"></div>
         <mat-card-actions class="get-details-button">
             <a mat-stroked-button [routerLink]="['/project', project.id]">Деталі</a>
-            <!-- <a mat-raised-button (click)="ShowDialogTypeProject(1)">Тип проекту</a> -->
+            <button mat-stroked-button (click)="onEdit(project)">Змінити</button>
         </mat-card-actions>
     </mat-card>
 </div>
