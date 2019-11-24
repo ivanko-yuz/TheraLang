@@ -22,29 +22,53 @@ namespace MvcWeb.TheraLang.Services
 
         public LiqPayCheckoutModel GetLiqPayCheckoutModel(string donationAmount, int projectId)
         {
-            return LiqPayHelper.GetLiqPayCheckoutModel(donationAmount, projectId);
+            try
+            {
+                return LiqPayHelper.GetLiqPayCheckoutModel(donationAmount, projectId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error while generation a request to LiqPay platform", ex);
+            }
+           
         }
 
         public Donation GetDonation(string donationId)
         {
-            Donation donation = _unitOfWork.Repository<Donation>().Get().SingleOrDefault(x => x.OrderId == donationId);
-            return donation;
+            try
+            {
+                Donation donation = _unitOfWork.Repository<Donation>().Get().SingleOrDefault(x => x.OrderId == donationId);
+                return donation;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error while recieving a donation by {nameof(donationId)}: {donationId} ", ex);
+            }
+           
         }
 
         public async Task CheckLiqPayResponse(int projectId, string donationId, string data, string signature)
         {
-            byte[] responseData = Convert.FromBase64String(data);
-            string decodedString = Encoding.UTF8.GetString(responseData);
-            string mySignature = LiqPayHelper.GetLiqPaySignature(data);
-            if (mySignature != signature)
+            try
             {
-                throw new Exception($"Error when checking LiqPay signature, {nameof(signature)} is not original ");
+                byte[] responseData = Convert.FromBase64String(data);
+                string decodedString = Encoding.UTF8.GetString(responseData);
+                string mySignature = LiqPayHelper.GetLiqPaySignature(data);
+                if (mySignature != signature)
+                {
+                    throw new Exception($"Error, while checking LiqPay response signature, the {nameof(signature)} was not authenticated ");
+                }
+                Donation donation = JsonConvert.DeserializeObject<Donation>(decodedString);
+                donation.ProjectId = projectId;
+                donation.OrderId = donationId;
+                await _unitOfWork.Repository<Donation>().Add(donation);
+                await _unitOfWork.SaveChangesAsync();
             }
-            Donation donation = JsonConvert.DeserializeObject<Donation>(decodedString);
-            donation.ProjectId = projectId;
-            donation.OrderId = donationId;
-            await _unitOfWork.Repository<Donation>().Add(donation);
-            await _unitOfWork.SaveChangesAsync();
+            catch (Exception ex)
+            {
+                throw new Exception($"Error, while adding the donation, {nameof(donationId)}: {donationId} ", ex);
+            }
+        
         }
     }
 }

@@ -1,8 +1,8 @@
 <mat-form-field class="example-form-field">
-    <input matInput type="text" placeholder="Введіть суму" [(ngModel)]="donationAmount" autofocus>
-    <button mat-button *ngIf="donationAmount" matSuffix mat-icon-button aria-label="Clear" (click)="donationAmount = ''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
-  <br>
-  <span class="donate-button"><button mat-button color="primary" (click)="checkout()">Допомогти</button></span>
+  <input matInput type="text" placeholder="Введіть суму" [(ngModel)]="donationAmount" autofocus>
+  <button mat-button *ngIf="donationAmount" matSuffix mat-icon-button aria-label="Clear" (click)="donationAmount = ''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+<br>
+<span class="donate-button"><button mat-button color="primary" (click)="checkout()">Допомогти</button></span>

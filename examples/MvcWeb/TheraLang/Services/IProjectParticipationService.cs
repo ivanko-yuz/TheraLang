@@ -10,7 +10,5 @@ namespace MvcWeb.TheraLang.Services
         IEnumerable<ProjectParticipation> GetAll();
 
         Task CreateRequest(int userId, int projectId);
-        //
-        Task ChangeStatusAsync(int participantId, ProjectParticipationStatus status);
     }
 }

@@ -13,7 +13,6 @@ using Newtonsoft.Json;
 namespace MvcWeb.TheraLang.Controllers
 {
     [Route("api/donation")]
-    [EnableCors("MyPolicy")]
     [ApiController]
     public class DonationController : Controller
     {
@@ -27,6 +26,15 @@ namespace MvcWeb.TheraLang.Controllers
         [HttpGet("{donationAmount}/{projectId}")]
         public ActionResult<LiqPayCheckoutModel> Get(string donationAmount, int projectId)
         {
+            if (projectId == default)
+            {
+                throw new ArgumentException($"{nameof(projectId)} can not be 0");
+            }
+            if (String.IsNullOrEmpty(donationAmount))
+            {
+                throw new ArgumentException($"{nameof(donationAmount)} can not be null");
+            }
+
             return _donationService.GetLiqPayCheckoutModel(donationAmount, projectId);
         }
 
@@ -34,6 +42,11 @@ namespace MvcWeb.TheraLang.Controllers
         [HttpGet("{donationId}")]
         public ActionResult<Donation> Get(string donationId)
         {
+            if (String.IsNullOrEmpty(donationId))
+            {
+                throw new ArgumentException($"{nameof(donationId)} can not be null");
+            }
+
             var donation = _donationService.GetDonation(donationId);
             return donation;        
         }
@@ -42,6 +55,15 @@ namespace MvcWeb.TheraLang.Controllers
         [HttpPost("{projectId}/{donationId}")]
         public async Task<ActionResult> Post(int projectId, string donationId, [FromForm]string data, [FromForm]string signature)
         {
+            if (String.IsNullOrEmpty(data))
+            {
+                throw new ArgumentException($"{nameof(data)} can not be null");
+            }
+            if (String.IsNullOrEmpty(signature))
+            {
+                throw new ArgumentException($"{nameof(signature)} can not be null");
+            }
+
             await _donationService.CheckLiqPayResponse(projectId, donationId, data, signature);        
             return Ok();
         }

@@ -1,6 +1,6 @@
-export class LiqpayCheckout{
+export class LiqpayCheckout {
     constructor(
-    public data: string,
-    public signature: string
-    ){}
+        public data: string,
+        public signature: string
+    ) { }
 }

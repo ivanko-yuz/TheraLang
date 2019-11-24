@@ -20,23 +20,12 @@ namespace MvcWeb.TheraLang.Controllers
         private readonly IProjectParticipationService _service;
 
         [HttpGet]
-        //[Route("get")]
         public ActionResult<ProjectParticipation> Get()
         {
             IEnumerable<ProjectParticipation> members = _service.GetAll();
             return Ok(members);
         }
 
-        //
-        [HttpPut]
-        [Route("{participantId}")]
-        public async Task<IActionResult> ChangeStatus(int participantId, [FromBody]ProjectParticipationStatus status)
-        {
-            await _service.ChangeStatusAsync(participantId, status);
-            return Ok();
-        }
-
-        //
 
         [HttpPost]
         [Route("create/{userId}/{projectId}")]

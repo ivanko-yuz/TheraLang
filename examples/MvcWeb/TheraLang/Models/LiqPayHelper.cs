@@ -32,7 +32,7 @@ namespace MvcWeb.TheraLang.Models
                 Currency = "UAH",
                 Description = "Благодійність",
                 ResultUrl = $"http://localhost:4200/result/{donationId}",
-                ServerUrl = $"http://9d516929.ngrok.io/api/donation/{projectId}/{donationId}",
+                ServerUrl = $"http://localhost:44353/api/donation/{projectId}/{donationId}",
                 Language = "uk"
             };
 

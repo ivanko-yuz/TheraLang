@@ -17,21 +17,12 @@ namespace MvcWeb.TheraLang.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
-        //
-        public async Task ChangeStatusAsync(int participantId, ProjectParticipationStatus status)
-        {
-            var participant = _unitOfWork.Repository<ProjectParticipation>().Get().SingleOrDefault(x => x.Id == participantId);
-            participant.Status = status;
-            _unitOfWork.Repository<ProjectParticipation>().Update(participant);
-            await _unitOfWork.SaveChangesAsync();
-        }
-        //
-
 
         public IEnumerable<ProjectParticipation> GetAll()
         {
             return _unitOfWork.Repository<ProjectParticipation>().Get().ToList();
         }
+
 
         public async Task CreateRequest(int userId, int projectId)
         {

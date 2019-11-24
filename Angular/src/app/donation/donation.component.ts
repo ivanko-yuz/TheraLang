@@ -17,17 +17,16 @@ export class DonationComponent implements OnInit {
   constructor(private donationService: DonationService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    debugger
-    this.route.paramMap.subscribe(params=>{
+    this.route.paramMap.subscribe(params => {
       this.projectId = +params.get('projectId');
     });
   }
- 
-  checkout(){
+
+  checkout() {
     this.donationService.getCheckoutModel(this.donationAmount, this.projectId).subscribe((checkoutModel: LiqpayCheckout) => {
       this.donationModel = checkoutModel;
-      window.open(`https://www.liqpay.ua/api/3/checkout?data=${this.donationModel.data}&signature=${this.donationModel.signature}`, "_blank") ;
-    });  
-    
+      window.open(`https://www.liqpay.ua/api/3/checkout?data=${this.donationModel.data}&signature=${this.donationModel.signature}`, "_blank");
+    });
+
   }
 }
