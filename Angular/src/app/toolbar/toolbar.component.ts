@@ -12,7 +12,7 @@ import { RequestStatus } from '../request-status-enum';
 })
 export class ToolbarComponent implements OnInit, AfterViewInit {
 
-  hasNotification: boolean = true;
+  hasNotification = true;
   projectParticipation: ProjectParticipationRequest[];
   constructor(private httpService: HttpService, private evtSvc: EventService) { }
 
