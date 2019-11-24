@@ -6,7 +6,6 @@ import { CreateProjectComponent } from "../create-project/create-project.compone
 import { Resource } from "../resources-table/resource";
 import { TypeProjectComponent } from "../type-project/type-project.component";
 import { TypeProjectService } from "../type-project-form/type-project.service";
-import { TypeProjectFormComponent } from "../type-project-form/type-project-form.component";
 import { DialogService } from "../shared/services/dialog.service";
 
 import { from } from "rxjs";
@@ -42,6 +41,7 @@ export class ProjectComponent implements OnInit {
   // ShowDialogTypeProject(id: number) {
   //   const dialogConfig = new MatDialogConfig();
   //   dialogConfig.autoFocus = true;
+  //   dialogConfig.data
   //   this.dialog.open(TypeProjectComponent, dialogConfig); //todo refactor  component NewTypeProgectComponent
   // }
 
@@ -54,6 +54,6 @@ export class ProjectComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
     dialogConfig.panelClass = "form";
-    this.dialog.open(TypeProjectFormComponent, dialogConfig);
+    this.dialog.open(TypeProjectComponent, dialogConfig);
   }
 }

@@ -4,6 +4,8 @@ import { TypeProject } from "./TypeProject";
 import { Observable } from "rxjs";
 import { TypeProjectHttp } from "./TypeProjectHttp.service";
 import { error } from "@angular/compiler/src/util";
+import { TypeProjectService } from "./type-project.service";
+import { MatDialogRef } from "@angular/material";
 
 @Component({
   selector: "app-type-project",
@@ -11,51 +13,31 @@ import { error } from "@angular/compiler/src/util";
   styleUrls: ["./type-project.component.less"]
 })
 export class TypeProjectComponent implements OnInit {
-  constructor(private http: TypeProjectHttp) {}
-  private url = "https://localhost:44355/api/typeProject";
-  myvalue: string;
+  constructor(
+    private dialog: MatDialogRef<TypeProjectComponent>,
+    public service: TypeProjectService
+  ) {}
 
   ngOnInit() {}
-
-  onClick() {
-    console.log("log btn click ");
-    this.btnPut();
+  onClose() {
+    this.service.form.reset();
+    this.service.initializeFormGroup();
+    this.dialog.close();
   }
 
-  btnPut() {
-    let putUrl = this.url + "/" + 1;
-    let newProj: TypeProject = new TypeProject(1, "updated");
-    this.http.put(putUrl, newProj).subscribe(
-      response => {
-        //to do snackBar
-      },
-      error => {
-        //to do snackBar
-      }
-    );
-  }
-
-  btnPost(newTypeProject: TypeProject): Observable<any> {
-    this.http.post(newTypeProject).subscribe(
-      response => {
-        //to do snackBar
-      },
-      error => {
-        //to do snackBar
-      }
-    );
-    return;
-  }
-
-  btnDelete(id: number) {
-    let code: number;
-    this.http.delete(id).subscribe(
-      response => {
-        //to do snackBar
-      },
-      error => {
-        //to do snackBar
-      }
-    );
-  }
+  // onSubmit() {
+  //   if (this.service.form.invalid) {
+  //     const controls = this.service.form.controls;
+  //     Object.keys(controls).forEach(controlName =>
+  //       controls[controlName].markAsTouched()
+  //     );
+  //     return;
+  //   } else if (!this.service.form.get("id").value) {
+  //     this.service.addProject(this.service.form.value);
+  //     this.onClose();
+  //   } else {
+  //     this.service.editProject(this.service.form.value);
+  //     this.onClose();
+  //   }
+  // }
 }

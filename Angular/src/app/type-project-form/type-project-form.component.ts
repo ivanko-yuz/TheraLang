@@ -20,19 +20,19 @@ export class TypeProjectFormComponent implements OnInit {
     this.dialog.close();
   }
 
-  onSubmit() {
-    if (this.service.form.invalid) {
-      const controls = this.service.form.controls;
-      Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
-      );
-      return;
-    } else if (!this.service.form.get("id").value) {
-      this.service.addProject(this.service.form.value);
-      this.onClose();
-    } else {
-      this.service.editProject(this.service.form.value);
-      this.onClose();
-    }
-  }
+  // onSubmit() {
+  //   if (this.service.form.invalid) {
+  //     const controls = this.service.form.controls;
+  //     Object.keys(controls).forEach(controlName =>
+  //       controls[controlName].markAsTouched()
+  //     );
+  //     return;
+  //   } else if (!this.service.form.get("id").value) {
+  //     this.service.addProject(this.service.form.value);
+  //     this.onClose();
+  //   } else {
+  //     this.service.editProject(this.service.form.value);
+  //     this.onClose();
+  //   }
+  // }
 }
