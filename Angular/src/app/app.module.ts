@@ -1,78 +1,57 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, ErrorHandler } from "@angular/core";
 import {
-  MatToolbarModule,
-  MatButtonModule,
-  MatAutocompleteModule,
-  MatBadgeModule,
-  MatBottomSheetModule,
-  MatButtonToggleModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatStepperModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatProgressBarModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTooltipModule,
-  MatTreeModule,
-  MatFormField
-} from "@angular/material";
-import { HttpClientModule } from "@angular/common/http";
-import { AppRoutingModule, routingComponents } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ToolbarComponent } from "./toolbar/toolbar.component";
-import { ProjectComponent } from "./project/project.component";
-import { HomeComponent } from "./home/home.component";
-import { ProjectInfoComponent } from "./project-info/project-info.component";
-import { ProjectFormComponent } from "./project-form/project-form.component";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatTableModule } from "@angular/material/table";
-import { MatTabsModule } from "@angular/material/tabs";
-import { MatCardModule } from "@angular/material/card";
-import { MatGridListModule } from "@angular/material/grid-list";
-import { MatProgressSpinnerModule } from "@angular/material";
-import { MatPaginatorModule } from "@angular/material/paginator";
-import { PortalModule } from "@angular/cdk/portal";
-import { A11yModule } from "@angular/cdk/a11y";
-import { CdkStepperModule } from "@angular/cdk/stepper";
-import { CdkTableModule } from "@angular/cdk/table";
-import { CdkTreeModule } from "@angular/cdk/tree";
-import { ScrollingModule } from "@angular/cdk/scrolling";
-import { DragDropModule } from "@angular/cdk/drag-drop";
-import { FooterComponent } from "./footer/footer.component";
-import { ProjectParticipantsComponent } from "./project-participants/project-participants.component";
-import { EventService } from "./project-participants/event-service";
-import { HttpService } from "./project/http.service";
-import { CustomDatePipe } from "./project-info/custom.datepipe";
-import { ResourcesTableComponent } from "./resources-table/resources-table.component";
-import { ResourcesInternalTableComponent } from "./resources-internal-table/resources-internal-table.component";
-import { ResourceService } from "./resources-table/resource.service";
-import { GeneralResourcesComponent } from "./general-resources/general-resources.component";
-import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confirm-dialog.component";
-import { ErrorComponent } from "./shared/components/error/error.component";
-import { ErrorHandlerService } from "./shared/services/error-handler.service";
-import { NotificationService } from "./shared/services/notification.service";
-import { DialogService } from "./shared/services/dialog.service";
-import { TypeProjectComponent } from "./type-project/type-project.component";
-import { TypeProjectHttp } from "./type-project/TypeProjectHttp.service";
-import { TypeProjectService } from "./type-project/type-project.service";
+  MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
+  MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
+  MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
+  MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
+  MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
+  MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
+} from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ProjectComponent } from './project/project.component';
+import { HomeComponent } from './home/home.component';
+import { ProjectInfoComponent } from './project-info/project-info.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressSpinnerModule } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { PortalModule } from '@angular/cdk/portal';
+import { A11yModule } from '@angular/cdk/a11y';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FooterComponent } from './footer/footer.component';
+import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
+import { EventService } from './project-participants/event-service';
+import { HttpService } from './project/http.service';
+import { CustomDatePipe } from './shared/pipes/custom.datepipe';
+import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
+import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
+import { ResourceService } from './project-info/resources-table-for-project/resources-table/resource.service';
+import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
+import { GeneralResourcesInnerTableComponent } from './general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component';
+import { ResourceCategoriesService } from './project-info/resources-table-for-project/resources-table/resource-categories.service';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { ErrorComponent } from './shared/components/error/error.component';
+import { ErrorHandlerService } from './shared/services/error-handler.service';
+import { NotificationService } from './shared/services/notification.service';
+import { DialogService } from './shared/services/dialog.service';
+import { TypeProjectComponent } from './type-project/type-project.component';
+import { TypeProjectHttp } from './type-project/TypeProjectHttp.service';
+
+
 
 @NgModule({
   declarations: [
@@ -86,10 +65,9 @@ import { TypeProjectService } from "./type-project/type-project.service";
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
-    ResourcesTableComponent,
-    ResourcesInternalTableComponent,
-    GeneralResourcesComponent,
-    TypeProjectComponent,
+    ResourcesInternalTableComponent,    
+    GeneralResourcesTableComponent,
+    GeneralResourcesInnerTableComponent,
     ConfirmDialogComponent,
     ErrorComponent,
     HomeComponent
@@ -155,20 +133,19 @@ import { TypeProjectService } from "./type-project/type-project.service";
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
   ],
-
-  exports: [ResourcesInternalTableComponent],
-  providers: [
-    ResourceService,
-    HttpService,
-    EventService,
-    { provide: ErrorHandler, useClass: ErrorHandlerService },
-    NotificationService,
-    DialogService,
+  exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],
+  providers: [ResourceService,
+     HttpService,
+     EventService,
+     {provide: ErrorHandler, useClass: ErrorHandlerService},
+     NotificationService,
+     DialogService,
+     ResourceCategoriesService
     TypeProjectHttp,
     TypeProjectService
-  ],
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,44 +1,55 @@
-import { Injectable, OnDestroy } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Project } from "./project";
-import { baseUrl } from "../shared/api-endpoint.constants";
+import {Injectable, OnDestroy} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { Project } from './project';
+import { baseUrl } from '../shared/api-endpoint.constants';
 
 @Injectable()
-export class HttpService {
-  constructor(private http: HttpClient) {}
+export class HttpService{
+  
+    constructor(private http: HttpClient){ }
+      
+     private url = baseUrl;
+     
+    getAllProjects(){
+        return this.http.get(this.url + 'project');
+    }
 
-  private url = baseUrl;
+    getProjectInfo(id: number) {
+        return this.http.get(this.url + 'project' + '/' + id);
+    }
 
-  getAllProjects() {
-    return this.http.get(this.url + "project");
-  }
+    getAllProjectParticipants() {
+        return this.http.get(this.url + 'projectParticipants');
+    }
 
-  getProjectInfo(id: number) {
-    return this.http.get(this.url + "project" + "/" + id);
-  }
+    changeParticipationStatus(requestId: number, requestStatus: number) {
+        return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
+    }
 
-  getAllProjectParticipants() {
-    return this.http.get(this.url + "projectParticipants");
-  }
+    getAllResourcesByProjectId(projectId: number) {
+        return this.http.get(this.url + 'resource/all/' + projectId);
+    }
 
-  changeParticipationStatus(requestId: number, requestStatus: number) {
-    return this.http.put(
-      this.url + "projectParticipants" + "/" + requestId,
-      requestStatus
-    );
-  }
+    getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
+        return this.http.get(this.url + 'resource/all/' + categoryId + '/' + pageNumber 
+        + '/' + recordsPerPage);
+    }
 
-  getAllResourcesById(projectId: number) {
-    return this.http.get(
-      this.url + "project" + "/" + projectId + "/" + "resources"
-    );
-  }
+    getResourceCategories(withAssignedResources: boolean) {
+        return this.http.get(this.url + 'resource/categories' + '/' + withAssignedResources);
+    }
 
-  createProject(project: Project) {
-    return this.http.post(this.url, project);
-  }
+    getResourcesCountByCategoryId(categoryId: number)
+    {
+        return this.http.get(this.url + 'resource/count' + '/' + categoryId);
+    }
 
-  updateProject(project: Project) {
-    return this.http.put(this.url + "/" + project.id, project);
-  }
+    createProject(project:Project) {
+        return this.http.post(this.url, project);
+    }
+
+    updateProject(project: Project) {
+        return this.http.put(this.url + '/' + project.id, project);
+    }  
+
 }

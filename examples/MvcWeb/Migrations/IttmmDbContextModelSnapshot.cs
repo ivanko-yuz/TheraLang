@@ -1209,7 +1209,7 @@ namespace MvcWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MvcWeb.TheraLang.Entities.Resource", "Resource")
-                        .WithMany("ResourceProjects")
+                        .WithMany("ResourceToProjects")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

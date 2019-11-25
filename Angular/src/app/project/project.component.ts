@@ -9,8 +9,6 @@ import { ProjectFormComponent } from "../project-form/project-form.component";
 import { ProjectService } from "./project.service";
 import { DialogService } from "../shared/services/dialog.service";
 
-import { from } from "rxjs";
-
 @Component({
   selector: "app-project",
   templateUrl: "./project.component.html",
