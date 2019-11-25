@@ -12,7 +12,7 @@ export class ResourceService {
     constructor(private http: HttpService) { }
 
     getAllResourcesByProjId(projid: number): Promise<Resource[]> {
-        const allData = this.http.getAllResourcesByProjectId(projid).toPromise().then((data: Resource[]) => {
+        const allData = this.http.getAllResourcesById(projid).toPromise().then((data: Resource[]) => {
             this.allProjectResources = data;
             return data;
         });
