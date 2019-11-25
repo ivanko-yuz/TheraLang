@@ -14,14 +14,30 @@ export class HttpService{
     getAllProjects(){
         return this.http.get(`${projectUrl}`);
     }
-  
+
     getProjectInfo(id: number) {
         return this.http.get(this.url + 'project' + '/' + id);
-    }  
- 
-    getAllResourcesById(projectId: number) {
-        return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
-    }  
+    }
+
+
+    getAllResourcesByProjectId(projectId: number) {
+        return this.http.get(this.url + 'resource/all/' + projectId);
+    }
+
+    getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
+        return this.http.get(this.url + 'resource/all/' + categoryId + '/' + pageNumber 
+        + '/' + recordsPerPage);
+    }
+
+    getResourceCategories(withAssignedResources: boolean) {
+        return this.http.get(this.url + 'resource/categories' + '/' + withAssignedResources);
+    }
+
+    getResourcesCountByCategoryId(categoryId: number)
+    {
+        return this.http.get(this.url + 'resource/count' + '/' + categoryId);
+    }
+
 
     createProject(project:Project) {
         return this.http.post(this.url, project);
@@ -29,6 +45,6 @@ export class HttpService{
 
     updateProject(project: Project) {
         return this.http.put(this.url + '/' + project.id, project);
-    }
-  
+    }  
+
 }

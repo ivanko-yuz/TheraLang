@@ -11,11 +11,11 @@ using MvcWeb.Db;
 using MvcWeb.Helpers;
 using MvcWeb.Models;
 using MvcWeb.Services;
+using MvcWeb.TheraLang.Services;
 using MvcWeb.TheraLang.UnitOfWork;
 using MvcWeb.Validators;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
-using MvcWeb.TheraLang.Services;
 
 namespace MvcWeb
 {
@@ -119,7 +119,6 @@ namespace MvcWeb
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
              */
-
             // Register middleware
             app.UseStaticFiles();
             app.UseAuthentication();

@@ -36,11 +36,13 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
-import { CustomDatePipe } from './project-info/custom.datepipe';
-import { ResourcesTableComponent } from './resources-table/resources-table.component';
-import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
-import { ResourceService } from './resources-table/resource.service';
-import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { CustomDatePipe } from './shared/pipes/custom.datepipe';
+import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
+import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
+import { ResourceService } from './project-info/resources-table-for-project/resources-table/resource.service';
+import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
+import { GeneralResourcesInnerTableComponent } from './general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component';
+import { ResourceCategoriesService } from './project-info/resources-table-for-project/resources-table/resource-categories.service';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
@@ -50,6 +52,7 @@ import { ResultComponent } from './result/result.component';
 import { DonationComponent } from './donation/donation.component';
 import { DonationService } from './donation/donation.service';
 import { ProjectParticipantService } from './project-participants/project-participant.service';
+
 
 
 
@@ -66,9 +69,9 @@ import { ProjectParticipantService } from './project-participants/project-partic
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
-    ResourcesTableComponent,
-    ResourcesInternalTableComponent,
-    GeneralResourcesComponent,
+    ResourcesInternalTableComponent,    
+    GeneralResourcesTableComponent,
+    GeneralResourcesInnerTableComponent,
     ConfirmDialogComponent,
     ErrorComponent,
     HomeComponent,
@@ -135,16 +138,19 @@ import { ProjectParticipantService } from './project-participants/project-partic
     PortalModule,
     ScrollingModule,
   ],
-  exports: [ResourcesInternalTableComponent],
-  providers: [ResourceService,
-    HttpService,
-    EventService,
-    DonationService,
-    { provide: ErrorHandler, useClass: ErrorHandlerService },
-    NotificationService,
-    DialogService,
-    ProjectParticipantService
-  ],
+  exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],
+  providers: [
+     ResourceService,
+     HttpService,
+     EventService,
+     {provide: ErrorHandler, useClass: ErrorHandlerService},
+     NotificationService,
+     DialogService,
+     ResourceCategoriesService,
+      DonationService,
+      ProjectParticipantService
+    ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

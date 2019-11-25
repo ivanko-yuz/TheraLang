@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -20,11 +20,11 @@ namespace MvcWeb.TheraLang.Controllers
         [Route("create/{categoryId}/{newType}")]
         public async Task<IActionResult> PutType(int categoryId, string newTypeName)
         {
-            if( categoryId == default )
+            if (categoryId == default)
             {
                 throw new ArgumentException($"{nameof(categoryId)} can not be 0");
             }
-            if(newTypeName == null)
+            if (newTypeName == null)
             {
                 throw new ArgumentException($"{nameof(newTypeName)} can not be null");
             }
