@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import {
   MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
   MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
@@ -16,7 +16,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectInfoComponent } from './project-info/project-info.component';
-import { CreateProjectComponent } from './create-project/create-project.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
@@ -36,11 +36,19 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
-import { CustomDatePipe } from './project-info/custom.datepipe';
-import { ResourcesTableComponent } from './resources-table/resources-table.component';
-import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
-import { ResourceService } from './resources-table/resource.service';
-import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { CustomDatePipe } from './shared/pipes/custom.datepipe';
+import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
+import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
+import { ResourceService } from './project-info/resources-table-for-project/resources-table/resource.service';
+import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
+import { GeneralResourcesInnerTableComponent } from './general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component';
+import { ResourceCategoriesService } from './project-info/resources-table-for-project/resources-table/resource-categories.service';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { ErrorComponent } from './shared/components/error/error.component';
+import { ErrorHandlerService } from './shared/services/error-handler.service';
+import { NotificationService } from './shared/services/notification.service';
+import { DialogService } from './shared/services/dialog.service';
+
 
 
 @NgModule({
@@ -49,17 +57,20 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     routingComponents,
     ToolbarComponent,
     ProjectComponent,
-    HomeComponent,
+    ProjectFormComponent,
     ProjectInfoComponent,
-    CreateProjectComponent,
+    ProjectFormComponent,
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
-    ResourcesTableComponent,
-    ResourcesInternalTableComponent,
-    GeneralResourcesComponent
+    ResourcesInternalTableComponent,    
+    GeneralResourcesTableComponent,
+    GeneralResourcesInnerTableComponent,
+    ConfirmDialogComponent,
+    ErrorComponent,
+    HomeComponent
   ],
-  entryComponents: [CreateProjectComponent, ResourcesInternalTableComponent],
+  entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent, ConfirmDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -115,12 +126,17 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,  
+    ScrollingModule,
   ],
-
-  ],
-  exports: [ResourcesInternalTableComponent],
-  providers: [ResourceService, HttpService, EventService],
+  exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],
+  providers: [ResourceService,
+     HttpService,
+     EventService,
+     {provide: ErrorHandler, useClass: ErrorHandlerService},
+     NotificationService,
+     DialogService,
+     ResourceCategoriesService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
