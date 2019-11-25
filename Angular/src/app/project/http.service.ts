@@ -51,6 +51,7 @@ export class HttpService{
     updateProject(project: Project) {
         return this.http.put(this.url + '/' + project.id, project);
     }
+  
     getAllProjectTypes(){
         return this.http.get( 'https://localhost:5000/api/types');
        }
