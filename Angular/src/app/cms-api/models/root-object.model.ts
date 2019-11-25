@@ -1,8 +1,9 @@
 import { Block } from './block.model';
-import { Hero } from './hero.model';
+import { TopTitle } from './top-title.model';
+
 
 export class Page {
-    hero: Hero;
+    hero: TopTitle;
     isStartPage: boolean;
     siteId: string;
     contentType: string;

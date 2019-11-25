@@ -8,19 +8,17 @@
  *
  */
 
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Piranha.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace Piranha.WebApi
 {
     [ApiController]
     [Route("api/page")]
-    [EnableCors("MyPolicy")]
-    //[Authorize(Policy = Permissions.Pages)]
+    [Authorize(Policy = Permissions.Pages)]
     public class PageApiController : Controller
     {
         private readonly IApi _api;

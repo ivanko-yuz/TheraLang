@@ -14,8 +14,8 @@ export class PiranhaPageComponent implements OnInit {
   constructor(private http: HttpService) { }
 
   async ngOnInit() {
-    this.page = await this.http.getPiranhaPageById("b7a401db-61ba-4308-a9c1-c38a291cc497");
-    console.log(this.page.slug);
+    // There will be used service from uttmm-46.
+    this.page = await this.http.getPiranhaPageById(); 
     this.ifGenerate = true;
   }
 

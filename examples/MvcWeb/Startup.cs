@@ -90,7 +90,6 @@ namespace MvcWeb
             }
 
             App.Init(api);
-            app.UseCors("MyPolicy");
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.Full;
 
