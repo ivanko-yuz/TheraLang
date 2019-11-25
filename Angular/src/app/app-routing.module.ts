@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'project/:id', component: ProjectInfoComponent },
   { path: 'projects', component: ProjectComponent },
   { path: 'donation/:projectId', component: DonationComponent },
-  { path: 'resources', component: GeneralResourcesComponent },
+  { path: 'resources', component: GeneralResourcesTableComponent },
   { path: 'result/:donationId', component:ResultComponent },
   { path: 'error', component: ErrorComponent }
 ];
@@ -29,6 +29,7 @@ export class AppRoutingModule { }
 
 export const routingComponents = [
   ProjectParticipantsComponent, ProjectComponent, HomeComponent, ProjectInfoComponent,
-  GeneralResourcesComponent, ErrorComponent, ResultComponent, DonationComponent
+  ErrorComponent, ResultComponent, DonationComponent
+  // GeneralResourcesTableComponent
 ];
 

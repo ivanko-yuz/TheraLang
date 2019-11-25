@@ -19,6 +19,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
     this.participantService.getAllProjectParticipants().subscribe((projectParticipation: ProjectParticipationRequest[]) => {
       this.projectParticipation = projectParticipation;
       if ((this.projectParticipation.filter(x => x.status === RequestStatus.New)).length > 0) {
+        debugger
         this.hasNotification = true;
       }
     });

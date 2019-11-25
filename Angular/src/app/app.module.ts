@@ -71,6 +71,7 @@ import { ProjectParticipantService } from './project-participants/project-partic
     CustomDatePipe,
     ResourcesInternalTableComponent,    
     GeneralResourcesTableComponent,
+    ResourcesTableComponent,
     GeneralResourcesInnerTableComponent,
     ConfirmDialogComponent,
     ErrorComponent,
@@ -138,7 +139,7 @@ import { ProjectParticipantService } from './project-participants/project-partic
     PortalModule,
     ScrollingModule,
   ],
-  exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],
+  exports: [ResourcesInternalTableComponent],
   providers: [
      ResourceService,
      HttpService,
@@ -147,7 +148,7 @@ import { ProjectParticipantService } from './project-participants/project-partic
      NotificationService,
      DialogService,
      ResourceCategoriesService,
-      DonationService,
+     DonationService,
       ProjectParticipantService
     ],
 
