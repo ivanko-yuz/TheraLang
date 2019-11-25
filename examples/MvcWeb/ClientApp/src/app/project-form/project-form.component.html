@@ -11,8 +11,21 @@
       <input formControlName="description" required matInput placeholder="Опис">
     </mat-form-field>
     <mat-form-field>
-      <input formControlName="type" required matInput placeholder="Тип">
+      <input formControlName="details" matInput placeholder="Деталі">
     </mat-form-field>
+    <mat-form-field>
+      <input formControlName="projectStart" matInput [matDatepicker]="picker" required placeholder="Дата початку">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="projectEnd" matInput [matDatepicker]="picker1" placeholder="Дата завершення">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+      <mat-form-field>
+        <input formControlName="type" required matInput placeholder="Тип">
+      </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-raised-button color="primary" type="submit" [disabled]="this.service.form.invalid"

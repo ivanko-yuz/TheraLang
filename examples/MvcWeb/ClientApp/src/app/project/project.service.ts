@@ -17,6 +17,9 @@ export class ProjectService {
     id: [null],
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(8000)]],
+    details: ['', Validators.maxLength(8000)],
+    projectStart: ['', Validators.required],
+    projectEnd: [''],
     type: ['', [Validators.required, Validators.minLength(3)]],
   });
 
@@ -26,6 +29,9 @@ export class ProjectService {
       id: null,
       name: '',
       description: '',
+      details: '',
+      projectStart: '',
+      projectEnd: '',
       type: '',
     });
   }
@@ -37,7 +43,6 @@ export class ProjectService {
 
   addProject(project: Project) {
     this.httpService.createProject(project);
-    this.notificationService.success("Проект створено!")
   }
 
   editProject(project: Project) {

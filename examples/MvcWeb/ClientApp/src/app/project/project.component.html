@@ -16,14 +16,14 @@
     <mat-card-content>
       <div class="project-info">
         {{project.description}}
-        <p>Проект починається: {{project.projectBegin}}</p>
+        <p>Проект починається: {{project.projectStart}}</p>
         <p>Проект закінчується: {{project.projectEnd}}</p>
       </div>
     </mat-card-content>
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
       <a mat-stroked-button [routerLink]="['/project', project.id]">Деталі</a>
-      <button mat-stroked-button (click)="onEdit()" >Змінити</button>
+      <button mat-stroked-button (click)="onEdit(project)" >Змінити</button>
     </mat-card-actions>
   </mat-card>
 </div>

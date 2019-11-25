@@ -29,8 +29,8 @@ export class ProjectComponent implements OnInit {
     this.dialogService.openFormDialog(ProjectFormComponent);
   }
 
-  onEdit(){
-    //this.service.populateForm();
+  onEdit(project){
+    this.service.populateForm(project);
     this.dialogService.openFormDialog(ProjectFormComponent);
   }
 
