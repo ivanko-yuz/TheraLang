@@ -4,8 +4,7 @@ import { HttpService } from '../project/http.service';
 
 @Injectable ()
 export class ProjectTypeService{
-    allProjectTypes: ProjectType[];
-    
+    allProjectTypes: ProjectType[];  
     constructor(private http: HttpService){ }
   
     getAllProjectTypes() {
