@@ -47,6 +47,7 @@ import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
+import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { DialogService } from './shared/services/dialog.service';
     GeneralResourcesInnerTableComponent,
     ConfirmDialogComponent,
     ErrorComponent,
-    HomeComponent
+    HomeComponent,
+    ResourcesTableComponent
   ],
   entryComponents: [ProjectFormComponent, ResourcesInternalTableComponent, ConfirmDialogComponent],
   imports: [

@@ -82,15 +82,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"footerBlock\">\r\n    <div class=\"fixedMainBlock\">\r\n    </div>\r\n</div>\r\n");
             /***/ 
         }),
-        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/general-resources/general-resources.component.html": 
-        /*!**********************************************************************************************************!*\
-          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/general-resources/general-resources.component.html ***!
-          \**********************************************************************************************************/
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component.html": 
+        /*!*****************************************************************************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component.html ***!
+          \*****************************************************************************************************************************************************************************/
         /*! exports provided: default */
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div id=\"resTabId\">\r\n<app-resources-table [sortedResourcesByCategory]= 'sortedResourcesByCategory' ></app-resources-table>\r\n</div>\r\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"mat-elevation-z8\" *ngIf=\"showTable\">\r\n  <table mat-table [dataSource]=\"dataSource\">\r\n\r\n    <ng-container matColumnDef=\"id\">\r\n      <th mat-header-cell *matHeaderCellDef> ID </th>\r\n      <td mat-cell *matCellDef=\"let i = index\"> {{i+1}} </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"name\">\r\n      <th mat-header-cell *matHeaderCellDef> Назва </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.name}} </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"date\">\r\n      <th mat-header-cell *matHeaderCellDef> Дата створення </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.createdDateUtc | customDate}} </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"description\">\r\n      <th mat-header-cell *matHeaderCellDef> Опис </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.description}} </td>\r\n    </ng-container>\r\n\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns; sticky: true\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n  </table>\r\n  <mat-paginator [length]=\"this.allResourcesCount\" [pageSize]=\"this.columnsPerPage\"\r\n    [pageSizeOptions]=\"this.pageSizeOptions\" showFirstLastButtons (page)=\"pageChanged($event)\">\r\n  </mat-paginator>\r\n</div>");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.html": 
+        /*!*****************************************************************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.html ***!
+          \*****************************************************************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<mat-tab-group mat-stretch-tabs class=\"resTab example-stretched-tabs mat-elevation-z4\" *ngIf=\"showCategories\">\r\n    <mat-tab  *ngFor=\"let category of this.resourcesCategories\" label=\"{{category.type}}\">\r\n        <app-general-resources-inner-table [resourcesCategoryId]=\"category.id\">            \r\n        </app-general-resources-inner-table>\r\n    </mat-tab>\r\n</mat-tab-group>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/home/home.component.html": 
@@ -112,7 +123,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>\r\n  <span>{{this.service.form.controls['id'].value?\"РЕДАГУВАННЯ ПРОЕКТУ\":\"СТВОРЕННЯ ПРОЕКТУ\"}}</span>\r\n</h2>\r\n<form [formGroup]=\"this.service.form\">\r\n  <mat-dialog-content>\r\n    <mat-form-field>\r\n      <input type=\"hidden\" formControlName=\"id\">\r\n      <input formControlName=\"name\" required matInput placeholder=\"Назва проекту\">\r\n    </mat-form-field>\r\n    <mat-form-field>\r\n      <input formControlName=\"description\" required matInput placeholder=\"Опис\">\r\n    </mat-form-field>\r\n    <mat-form-field>\r\n      <input formControlName=\"type\" required matInput placeholder=\"Тип\">\r\n    </mat-form-field>\r\n  </mat-dialog-content>\r\n  <mat-dialog-actions>\r\n    <button mat-raised-button color=\"primary\" type=\"submit\" [disabled]=\"this.service.form.invalid\"\r\n      (click)='onSubmit()'>Підтвердити</button>\r\n    <button mat-raised-button color=\"warn\" type=\"reset\" (click)=\"onClose()\">Відмінити</button>\r\n  </mat-dialog-actions>\r\n</form>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>\r\n  <span>{{this.service.form.controls['id'].value?\"РЕДАГУВАННЯ ПРОЕКТУ\":\"СТВОРЕННЯ ПРОЕКТУ\"}}</span>\r\n</h2>\r\n<form [formGroup]=\"this.service.form\">\r\n  <mat-dialog-content>\r\n    <mat-form-field>\r\n      <input type=\"hidden\" formControlName=\"id\">\r\n      <input formControlName=\"name\" autofocus required matInput placeholder=\"Назва проекту\">\r\n    </mat-form-field>\r\n    <mat-form-field>\r\n      <input formControlName=\"description\" required matInput placeholder=\"Опис\">\r\n    </mat-form-field>\r\n    <mat-form-field>\r\n      <input formControlName=\"type\" required matInput placeholder=\"Тип\">\r\n    </mat-form-field>\r\n  </mat-dialog-content>\r\n  <mat-dialog-actions>\r\n    <button mat-raised-button color=\"primary\" type=\"submit\" [disabled]=\"this.service.form.invalid\"\r\n      (click)='onSubmit()'>Підтвердити</button>\r\n    <button mat-raised-button color=\"warn\" type=\"reset\" (click)=\"onClose()\">Відмінити</button>\r\n  </mat-dialog-actions>\r\n</form>\r\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/project-info/project-info.component.html": 
@@ -123,7 +134,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"mainDiv\" >\r\n  <mat-card class=\"example-card\">\r\n    <mat-card-header>\r\n      <div mat-card-avatar class=\"example-header-image\"></div>\r\n      <mat-card-title class=\"headerUpText\">{{projectInfo.name}}</mat-card-title>\r\n      <mat-card-subtitle class=\"headerDownText\">Added by: <a class=\"ownerLink\"\r\n          href=\"http://localhost:4200/project/{{projectInfo.id}}\">Project Owner</a></mat-card-subtitle>\r\n    </mat-card-header>\r\n\r\n    <img mat-card-image class=\"ProjImg\" src=\"../../assets/img/hatiko.gif\" alt=\"Photo\">\r\n    <mat-card-content>\r\n      <p class=\"description\">{{projectInfo.description}}</p>\r\n    </mat-card-content>\r\n  </mat-card>\r\n  <div class=\"bottom-buttons\">\r\n    <button mat-raised-button class=\"resButton\" (click)=\"getResourcesData()\">Ресурси</button>\r\n  </div>\r\n  <div id=\"resTabId\">\r\n    <app-resources-table *ngIf=\"generateOnceResourcesTable\" [sortedResourcesByCategory]=\"sortedResourcesByCategory\"></app-resources-table>\r\n  </div>\r\n</div>\r\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"mainDiv\" >\r\n  <mat-card class=\"example-card\">\r\n    <mat-card-header>\r\n      <div mat-card-avatar class=\"example-header-image\"></div>\r\n      <mat-card-title class=\"headerUpText\">{{projectInfo.name}}</mat-card-title>\r\n      <mat-card-subtitle class=\"headerDownText\">Added by: <a class=\"ownerLink\"\r\n          href=\"http://localhost:4200/project/{{projectInfo.id}}\">Project Owner</a></mat-card-subtitle>\r\n    </mat-card-header>\r\n\r\n    <img mat-card-image class=\"ProjImg\" src=\"../../assets/img/hatiko.gif\" alt=\"Photo\">\r\n    <mat-card-content>\r\n      <p class=\"description\">{{projectInfo.description}}</p>\r\n    </mat-card-content>\r\n  </mat-card>\r\n  <div class=\"bottom-buttons\">\r\n    <button mat-raised-button class=\"resButton\" (click)=\"getResourcesData()\">Ресурси</button>\r\n    <button mat-raised-button class=\"resButton\" (click)=\"onJoin()\">Ресурси</button>\r\n  </div>\r\n  <div >\r\n    <app-resources-table [@openClose]=\"isOpen ? 'open' : 'closed'\" id=\"resTabId\" *ngIf=\"generateOnceResourcesTable\" [sortedResourcesByCategory]=\"sortedResourcesByCategory\"></app-resources-table>\r\n  </div>\r\n</div>\r\n");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component.html": 
+        /*!*****************************************************************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component.html ***!
+          \*****************************************************************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"mat-elevation-z8\">\r\n  <table mat-table [dataSource]='dataSource'>\r\n\r\n\r\n    <ng-container matColumnDef=\"id\">\r\n      <th mat-header-cell *matHeaderCellDef> ID </th>\r\n      <td mat-cell *matCellDef=\"let i = index\"> {{i+1}} </td>\r\n    </ng-container>\r\n\r\n\r\n    <ng-container matColumnDef=\"name\">\r\n      <th mat-header-cell *matHeaderCellDef> Назва </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.name}} </td>\r\n    </ng-container>\r\n\r\n\r\n    <ng-container matColumnDef=\"date\">\r\n      <th mat-header-cell *matHeaderCellDef> Дата створення </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.createdDateUtc | customDate}} </td>\r\n    </ng-container>\r\n\r\n\r\n    <ng-container matColumnDef=\"description\">\r\n      <th mat-header-cell *matHeaderCellDef> Опис </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.description}} </td>\r\n    </ng-container>\r\n\r\n    <tr mat-header-row *matHeaderRowDef=\"displayedColumns; sticky: true\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n  </table>\r\n  <mat-paginator [length]=\"lengthDataArrForDataSource\" [pageSize]=\"this.pageSize\"\r\n    [pageSizeOptions]=\"this.pageSizeOptions\" showFirstLastButtons></mat-paginator>\r\n</div>");
+            /***/ 
+        }),
+        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/project-info/resources-table-for-project/resources-table/resources-table.component.html": 
+        /*!***********************************************************************************************************************************************!*\
+          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/project-info/resources-table-for-project/resources-table/resources-table.component.html ***!
+          \***********************************************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("<mat-tab-group mat-stretch-tabs class=\"resTab example-stretched-tabs mat-elevation-z4\" (selectedTabChange)=\"convertMatTabChangeEventLabelToString($event)\">\r\n    <mat-tab  *ngFor=\"let category of this.resourceService.getAllResourceCategories(sortedResourcesByCategory)\" label=\"{{category}}\"  >\r\n        <app-resources-internal-table [dataSource]=\"dataSource\" [lengthDataArrForDataSource]=\"lengthDataArrForDataSource\"></app-resources-internal-table>\r\n    </mat-tab>\r\n</mat-tab-group>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/project-participants/project-participants.component.html": 
@@ -148,28 +181,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             /* harmony default export */ __webpack_exports__["default"] = ("<button mat-stroked-button (click)=\"onCreate()\">\r\n  <mat-icon>add</mat-icon>Створити проект\r\n</button>\r\n<div *ngFor=\"let project of projects\">\r\n  <mat-card class=\"project-card\">\r\n    <mat-card-header class=\"header\">\r\n      <mat-card-title>\r\n        <a mat-button class=\"donate-button\" [routerLink]=\"['/project', project.id]\">Підтримати</a>\r\n      </mat-card-title>\r\n    </mat-card-header>\r\n    <mat-card-title>{{project.name}}</mat-card-title>\r\n    <mat-card-subtitle>Ukraine, id - {{project.id}}</mat-card-subtitle>\r\n    <img class=\"project-image\" mat-card-image\r\n      src=\"http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg\"\r\n      alt=\"\">\r\n    <mat-card-content>\r\n      <div class=\"project-info\">\r\n        {{project.description}}\r\n        <p>Проект починається: {{project.projectBegin}}</p>\r\n        <p>Проект закінчується: {{project.projectEnd}}</p>\r\n      </div>\r\n    </mat-card-content>\r\n    <div class=\"clear\"></div>\r\n    <mat-card-actions class=\"get-details-button\">\r\n      <a mat-stroked-button [routerLink]=\"['/project', project.id]\">Деталі</a>\r\n      <button mat-stroked-button (click)=\"onEdit()\" >Змінити</button>\r\n    </mat-card-actions>\r\n  </mat-card>\r\n</div>\r\n");
             /***/ 
         }),
-        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/resources-internal-table/resources-internal-table.component.html": 
-        /*!************************************************************************************************************************!*\
-          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/resources-internal-table/resources-internal-table.component.html ***!
-          \************************************************************************************************************************/
-        /*! exports provided: default */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"mat-elevation-z8\">\r\n    <table mat-table [dataSource]='dataSource'>\r\n  \r\n      \r\n      <ng-container matColumnDef=\"id\">\r\n        <th mat-header-cell *matHeaderCellDef> ID  </th>\r\n        <td mat-cell *matCellDef=\"let element; let i = index\"> {{i+1}} </td>\r\n      </ng-container>\r\n  \r\n     \r\n      <ng-container matColumnDef=\"name\">\r\n        <th mat-header-cell *matHeaderCellDef> Назва </th>\r\n        <td mat-cell *matCellDef=\"let element\"> {{element.name}} </td>\r\n      </ng-container>\r\n  \r\n\r\n      <ng-container matColumnDef=\"date\">\r\n        <th mat-header-cell *matHeaderCellDef> Дата створення </th>\r\n        <td mat-cell *matCellDef=\"let element\"> {{element.date | customDate}} </td>\r\n      </ng-container>\r\n  \r\n  \r\n      <ng-container matColumnDef=\"description\">\r\n        <th mat-header-cell *matHeaderCellDef> Опис </th>\r\n        <td mat-cell *matCellDef=\"let element\"> {{element.description}} </td>\r\n      </ng-container>\r\n  \r\n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns; sticky: true\" ></tr>\r\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n    </table>  \r\n    <mat-paginator [length]=\"lengthDataArrForDataSource\" [pageSize]=\"5\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons (page)=\"pageChanged($event)\"></mat-paginator>\r\n  </div>\r\n");
-            /***/ 
-        }),
-        /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/resources-table/resources-table.component.html": 
-        /*!******************************************************************************************************!*\
-          !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/resources-table/resources-table.component.html ***!
-          \******************************************************************************************************/
-        /*! exports provided: default */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<mat-tab-group mat-stretch-tabs class=\"resTab example-stretched-tabs mat-elevation-z4\" (selectedTabChange)=\"convertMatTabChangeEventLabelToString($event)\">\r\n    <mat-tab  *ngFor=\"let category of this.resourceService.getAllResourceCategories(sortedResourcesByCategory)\" label=\"{{category}}\"  >\r\n        <app-resources-internal-table [dataSource]=\"dataSource\" [lengthDataArrForDataSource]=\"lengthDataArrForDataSource\"></app-resources-internal-table>\r\n    </mat-tab>\r\n</mat-tab-group>\r\n");
-            /***/ 
-        }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/shared/components/confirm-dialog/confirm-dialog.component.html": 
         /*!**********************************************************************************************************************!*\
           !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/shared/components/confirm-dialog/confirm-dialog.component.html ***!
@@ -178,7 +189,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title >{{data.message}}</h2>\n<mat-dialog-actions>\n<button mat-flat-button id=\"yes-button\" [mat-dialog-close]=\"true\">ТАК</button>\n<button mat-dialog- id=\"no-button\" [mat-dialog-close]=\"false\">НІ</button>\n</mat-dialog-actions>\n");
+            /* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title >{{data.message}}</h2>\r\n<mat-dialog-actions>\r\n<button mat-flat-button id=\"yes-button\" [mat-dialog-close]=\"true\">ТАК</button>\r\n<button mat-dialog- id=\"no-button\" [mat-dialog-close]=\"false\">НІ</button>\r\n</mat-dialog-actions>\r\n");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/shared/components/error/error.component.html": 
@@ -189,7 +200,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<h2>Error</h2>\n<p class=\"text-error\">Упс, трапилася помилка при обробці Вашого запиту =(</p>\n<button mat-stroked-buttom (click)=\"goHome()\">Повернутися на головну сторінку</button>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<h2>Error</h2>\r\n<p class=\"text-error\">Упс, трапилася помилка при обробці Вашого запиту =(</p>\r\n<button mat-stroked-buttom (click)=\"goHome()\">Повернутися на головну сторінку</button>");
             /***/ 
         }),
         /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/toolbar/toolbar.component.html": 
@@ -200,7 +211,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row  class=\"toolbar\">\r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Головна</a>\r\n         <a mat-button class=\"toolbar-button\" routerLink=\"/project\" >Проекти</a>  \r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Новини</a> \r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Контакти</a>\r\n         <a mat-button class=\"toolbar-button\" routerLink=\"/projectParticipants\" >Запити \r\n         <span ><mat-icon *ngIf=\"hasNotification\">notifications</mat-icon></span></a>         \r\n         <span class=\"fill-space\"></span>      \r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Реєстрація</a>\r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Вхід</a>     \r\n    </mat-toolbar-row >                \r\n  </mat-toolbar>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<mat-toolbar color=\"primary\">\r\n    <mat-toolbar-row  class=\"toolbar\">\r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Головна</a>\r\n         <a mat-button class=\"toolbar-button\" routerLink=\"/project\" >Проекти</a>  \r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Новини</a> \r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Контакти</a>\r\n         <a mat-button class=\"toolbar-button\" routerLink=\"/resources\" >Ресурси</a>\r\n         <a mat-button class=\"toolbar-button\" routerLink=\"/projectParticipants\" >Запити \r\n         <span ><mat-icon *ngIf=\"hasNotification\">notifications</mat-icon></span></a>         \r\n         <span class=\"fill-space\"></span>      \r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Реєстрація</a>\r\n         <a mat-button class=\"toolbar-button\" routerLink=\"\" >Вхід</a>     \r\n    </mat-toolbar-row >                \r\n  </mat-toolbar>");
             /***/ 
         }),
         /***/ "./node_modules/tslib/tslib.es6.js": 
@@ -514,20 +525,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function () { return AppRoutingModule; });
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routingComponents", function () { return routingComponents; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            /* harmony import */ var _general_resources_general_resources_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./general-resources/general-resources.component */ "./src/app/general-resources/general-resources.component.ts");
-            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-            /* harmony import */ var _project_project_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./project/project.component */ "./src/app/project/project.component.ts");
-            /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-            /* harmony import */ var _project_info_project_info_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./project-info/project-info.component */ "./src/app/project-info/project-info.component.ts");
-            /* harmony import */ var _project_participants_project_participants_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./project-participants/project-participants.component */ "./src/app/project-participants/project-participants.component.ts");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var _project_project_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./project/project.component */ "./src/app/project/project.component.ts");
+            /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+            /* harmony import */ var _project_info_project_info_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./project-info/project-info.component */ "./src/app/project-info/project-info.component.ts");
+            /* harmony import */ var _project_participants_project_participants_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./project-participants/project-participants.component */ "./src/app/project-participants/project-participants.component.ts");
+            /* harmony import */ var _general_resources_general_resources_tables_general_resources_table_general_resources_table_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./general-resources/general-resources-tables/general-resources-table/general-resources-table.component */ "./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.ts");
             /* harmony import */ var _shared_components_error_error_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./shared/components/error/error.component */ "./src/app/shared/components/error/error.component.ts");
             var routes = [
-                { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"] },
-                { path: 'projectParticipants', component: _project_participants_project_participants_component__WEBPACK_IMPORTED_MODULE_7__["ProjectParticipantsComponent"] },
-                { path: 'project/:id', component: _project_info_project_info_component__WEBPACK_IMPORTED_MODULE_6__["ProjectInfoComponent"] },
-                { path: 'project', component: _project_project_component__WEBPACK_IMPORTED_MODULE_4__["ProjectComponent"] },
-                { path: 'resources', component: _general_resources_general_resources_component__WEBPACK_IMPORTED_MODULE_1__["GeneralResourcesComponent"] },
+                { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] },
+                { path: 'projectParticipants', component: _project_participants_project_participants_component__WEBPACK_IMPORTED_MODULE_6__["ProjectParticipantsComponent"] },
+                { path: 'project/:id', component: _project_info_project_info_component__WEBPACK_IMPORTED_MODULE_5__["ProjectInfoComponent"] },
+                { path: 'project', component: _project_project_component__WEBPACK_IMPORTED_MODULE_3__["ProjectComponent"] },
+                { path: 'resources', component: _general_resources_general_resources_tables_general_resources_table_general_resources_table_component__WEBPACK_IMPORTED_MODULE_7__["GeneralResourcesTableComponent"] },
                 { path: 'error', component: _shared_components_error_error_component__WEBPACK_IMPORTED_MODULE_8__["ErrorComponent"] },
             ];
             var AppRoutingModule = /** @class */ (function () {
@@ -536,14 +547,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                 return AppRoutingModule;
             }());
             AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-                    imports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"].forRoot(routes)],
-                    exports: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterModule"]],
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+                    imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes)],
+                    exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
                 })
             ], AppRoutingModule);
             var routingComponents = [
-                _project_participants_project_participants_component__WEBPACK_IMPORTED_MODULE_7__["ProjectParticipantsComponent"], _project_project_component__WEBPACK_IMPORTED_MODULE_4__["ProjectComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"], _project_info_project_info_component__WEBPACK_IMPORTED_MODULE_6__["ProjectInfoComponent"],
-                _general_resources_general_resources_component__WEBPACK_IMPORTED_MODULE_1__["GeneralResourcesComponent"], _shared_components_error_error_component__WEBPACK_IMPORTED_MODULE_8__["ErrorComponent"]
+                _project_participants_project_participants_component__WEBPACK_IMPORTED_MODULE_6__["ProjectParticipantsComponent"], _project_project_component__WEBPACK_IMPORTED_MODULE_3__["ProjectComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"], _project_info_project_info_component__WEBPACK_IMPORTED_MODULE_5__["ProjectInfoComponent"],
+                _shared_components_error_error_component__WEBPACK_IMPORTED_MODULE_8__["ErrorComponent"]
             ];
             /***/ 
         }),
@@ -624,15 +635,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             /* harmony import */ var _project_participants_project_participants_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./project-participants/project-participants.component */ "./src/app/project-participants/project-participants.component.ts");
             /* harmony import */ var _project_participants_event_service__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./project-participants/event-service */ "./src/app/project-participants/event-service.ts");
             /* harmony import */ var _project_http_service__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./project/http.service */ "./src/app/project/http.service.ts");
-            /* harmony import */ var _project_info_custom_datepipe__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./project-info/custom.datepipe */ "./src/app/project-info/custom.datepipe.ts");
-            /* harmony import */ var _resources_table_resources_table_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./resources-table/resources-table.component */ "./src/app/resources-table/resources-table.component.ts");
-            /* harmony import */ var _resources_internal_table_resources_internal_table_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./resources-internal-table/resources-internal-table.component */ "./src/app/resources-internal-table/resources-internal-table.component.ts");
-            /* harmony import */ var _resources_table_resource_service__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./resources-table/resource.service */ "./src/app/resources-table/resource.service.ts");
-            /* harmony import */ var _general_resources_general_resources_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./general-resources/general-resources.component */ "./src/app/general-resources/general-resources.component.ts");
-            /* harmony import */ var _shared_components_confirm_dialog_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./shared/components/confirm-dialog/confirm-dialog.component */ "./src/app/shared/components/confirm-dialog/confirm-dialog.component.ts");
-            /* harmony import */ var _shared_components_error_error_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./shared/components/error/error.component */ "./src/app/shared/components/error/error.component.ts");
-            /* harmony import */ var _shared_services_notification_service__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./shared/services/notification.service */ "./src/app/shared/services/notification.service.ts");
-            /* harmony import */ var _shared_services_dialog_service__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./shared/services/dialog.service */ "./src/app/shared/services/dialog.service.ts");
+            /* harmony import */ var _shared_pipes_custom_datepipe__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./shared/pipes/custom.datepipe */ "./src/app/shared/pipes/custom.datepipe.ts");
+            /* harmony import */ var _project_info_resources_table_for_project_resources_internal_table_resources_internal_table_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component */ "./src/app/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component.ts");
+            /* harmony import */ var _project_info_resources_table_for_project_resources_table_resource_service__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./project-info/resources-table-for-project/resources-table/resource.service */ "./src/app/project-info/resources-table-for-project/resources-table/resource.service.ts");
+            /* harmony import */ var _general_resources_general_resources_tables_general_resources_table_general_resources_table_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./general-resources/general-resources-tables/general-resources-table/general-resources-table.component */ "./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.ts");
+            /* harmony import */ var _general_resources_general_resources_tables_general_resources_inner_table_general_resources_inner_table_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component */ "./src/app/general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component.ts");
+            /* harmony import */ var _project_info_resources_table_for_project_resources_table_resource_categories_service__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./project-info/resources-table-for-project/resources-table/resource-categories.service */ "./src/app/project-info/resources-table-for-project/resources-table/resource-categories.service.ts");
+            /* harmony import */ var _shared_components_confirm_dialog_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./shared/components/confirm-dialog/confirm-dialog.component */ "./src/app/shared/components/confirm-dialog/confirm-dialog.component.ts");
+            /* harmony import */ var _shared_components_error_error_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./shared/components/error/error.component */ "./src/app/shared/components/error/error.component.ts");
+            /* harmony import */ var _shared_services_error_handler_service__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./shared/services/error-handler.service */ "./src/app/shared/services/error-handler.service.ts");
+            /* harmony import */ var _shared_services_notification_service__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./shared/services/notification.service */ "./src/app/shared/services/notification.service.ts");
+            /* harmony import */ var _shared_services_dialog_service__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./shared/services/dialog.service */ "./src/app/shared/services/dialog.service.ts");
+            /* harmony import */ var _project_info_resources_table_for_project_resources_table_resources_table_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./project-info/resources-table-for-project/resources-table/resources-table.component */ "./src/app/project-info/resources-table-for-project/resources-table/resources-table.component.ts");
             var AppModule = /** @class */ (function () {
                 function AppModule() {
                 }
@@ -650,15 +664,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         _project_form_project_form_component__WEBPACK_IMPORTED_MODULE_12__["ProjectFormComponent"],
                         _footer_footer_component__WEBPACK_IMPORTED_MODULE_27__["FooterComponent"],
                         _project_participants_project_participants_component__WEBPACK_IMPORTED_MODULE_28__["ProjectParticipantsComponent"],
-                        _project_info_custom_datepipe__WEBPACK_IMPORTED_MODULE_31__["CustomDatePipe"],
-                        _resources_table_resources_table_component__WEBPACK_IMPORTED_MODULE_32__["ResourcesTableComponent"],
-                        _resources_internal_table_resources_internal_table_component__WEBPACK_IMPORTED_MODULE_33__["ResourcesInternalTableComponent"],
-                        _general_resources_general_resources_component__WEBPACK_IMPORTED_MODULE_35__["GeneralResourcesComponent"],
-                        _shared_components_confirm_dialog_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_36__["ConfirmDialogComponent"],
-                        _shared_components_error_error_component__WEBPACK_IMPORTED_MODULE_37__["ErrorComponent"],
-                        _home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"]
+                        _shared_pipes_custom_datepipe__WEBPACK_IMPORTED_MODULE_31__["CustomDatePipe"],
+                        _project_info_resources_table_for_project_resources_internal_table_resources_internal_table_component__WEBPACK_IMPORTED_MODULE_32__["ResourcesInternalTableComponent"],
+                        _general_resources_general_resources_tables_general_resources_table_general_resources_table_component__WEBPACK_IMPORTED_MODULE_34__["GeneralResourcesTableComponent"],
+                        _general_resources_general_resources_tables_general_resources_inner_table_general_resources_inner_table_component__WEBPACK_IMPORTED_MODULE_35__["GeneralResourcesInnerTableComponent"],
+                        _shared_components_confirm_dialog_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_37__["ConfirmDialogComponent"],
+                        _shared_components_error_error_component__WEBPACK_IMPORTED_MODULE_38__["ErrorComponent"],
+                        _home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
+                        _project_info_resources_table_for_project_resources_table_resources_table_component__WEBPACK_IMPORTED_MODULE_42__["ResourcesTableComponent"]
                     ],
-                    entryComponents: [_project_form_project_form_component__WEBPACK_IMPORTED_MODULE_12__["ProjectFormComponent"], _resources_internal_table_resources_internal_table_component__WEBPACK_IMPORTED_MODULE_33__["ResourcesInternalTableComponent"], _shared_components_confirm_dialog_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_36__["ConfirmDialogComponent"]],
+                    entryComponents: [_project_form_project_form_component__WEBPACK_IMPORTED_MODULE_12__["ProjectFormComponent"], _project_info_resources_table_for_project_resources_internal_table_resources_internal_table_component__WEBPACK_IMPORTED_MODULE_32__["ResourcesInternalTableComponent"], _shared_components_confirm_dialog_confirm_dialog_component__WEBPACK_IMPORTED_MODULE_37__["ConfirmDialogComponent"]],
                     imports: [
                         _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                         _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
@@ -716,13 +731,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                         _angular_cdk_portal__WEBPACK_IMPORTED_MODULE_20__["PortalModule"],
                         _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_25__["ScrollingModule"],
                     ],
-                    exports: [_resources_internal_table_resources_internal_table_component__WEBPACK_IMPORTED_MODULE_33__["ResourcesInternalTableComponent"]],
-                    providers: [_resources_table_resource_service__WEBPACK_IMPORTED_MODULE_34__["ResourceService"],
+                    exports: [_project_info_resources_table_for_project_resources_internal_table_resources_internal_table_component__WEBPACK_IMPORTED_MODULE_32__["ResourcesInternalTableComponent"], _general_resources_general_resources_tables_general_resources_table_general_resources_table_component__WEBPACK_IMPORTED_MODULE_34__["GeneralResourcesTableComponent"]],
+                    providers: [_project_info_resources_table_for_project_resources_table_resource_service__WEBPACK_IMPORTED_MODULE_33__["ResourceService"],
                         _project_http_service__WEBPACK_IMPORTED_MODULE_30__["HttpService"],
                         _project_participants_event_service__WEBPACK_IMPORTED_MODULE_29__["EventService"],
-                        //{provide: ErrorHandler, useClass: ErrorHandlerService},
-                        _shared_services_notification_service__WEBPACK_IMPORTED_MODULE_38__["NotificationService"],
-                        _shared_services_dialog_service__WEBPACK_IMPORTED_MODULE_39__["DialogService"],
+                        { provide: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ErrorHandler"], useClass: _shared_services_error_handler_service__WEBPACK_IMPORTED_MODULE_39__["ErrorHandlerService"] },
+                        _shared_services_notification_service__WEBPACK_IMPORTED_MODULE_40__["NotificationService"],
+                        _shared_services_dialog_service__WEBPACK_IMPORTED_MODULE_41__["DialogService"],
+                        _project_info_resources_table_for_project_resources_table_resource_categories_service__WEBPACK_IMPORTED_MODULE_36__["ResourceCategoriesService"]
                     ],
                     bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
                 })
@@ -767,61 +783,164 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             ], FooterComponent);
             /***/ 
         }),
-        /***/ "./src/app/general-resources/general-resources.component.less": 
-        /*!********************************************************************!*\
-          !*** ./src/app/general-resources/general-resources.component.less ***!
-          \********************************************************************/
+        /***/ "./src/app/general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component.less": 
+        /*!***************************************************************************************************************************************!*\
+          !*** ./src/app/general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component.less ***!
+          \***************************************************************************************************************************************/
         /*! exports provided: default */
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = (".mat-tab-label-content {\n  color: black !important;\n}\n#resTabId {\n  max-width: 1230px;\n  margin: 0 auto;\n  min-height: 20rem;\n}\napp-resources-table .resTab {\n  border-radius: 25px ;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZ2VuZXJhbC1yZXNvdXJjZXMvRDovR0lUL1RoZXJhTGFuZy9UaGVyYUxhbmcvZXhhbXBsZXMvTXZjV2ViL0NsaWVudEFwcC9zcmMvYXBwL2dlbmVyYWwtcmVzb3VyY2VzL2dlbmVyYWwtcmVzb3VyY2VzLmNvbXBvbmVudC5sZXNzIiwic3JjL2FwcC9nZW5lcmFsLXJlc291cmNlcy9nZW5lcmFsLXJlc291cmNlcy5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHVCQUFBO0FDQ0o7QURDRTtFQUNFLGlCQUFBO0VBQ0EsY0FBQTtFQUNBLGlCQUFBO0FDQ0o7QURDRTtFQUNFLG9CQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9nZW5lcmFsLXJlc291cmNlcy9nZW5lcmFsLXJlc291cmNlcy5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYXQtdGFiLWxhYmVsLWNvbnRlbnQge1xuICAgIGNvbG9yOiBibGFjayAhaW1wb3J0YW50O1xuICB9XG4gICNyZXNUYWJJZHtcbiAgICBtYXgtd2lkdGg6IDEyMzBweDtcbiAgICBtYXJnaW46IDAgYXV0bztcbiAgICBtaW4taGVpZ2h0OiAyMHJlbTtcbiAgfVxuICBhcHAtcmVzb3VyY2VzLXRhYmxlIC5yZXNUYWJ7XG4gICAgYm9yZGVyLXJhZGl1czogMjVweCA7XG4gIH0iLCIubWF0LXRhYi1sYWJlbC1jb250ZW50IHtcbiAgY29sb3I6IGJsYWNrICFpbXBvcnRhbnQ7XG59XG4jcmVzVGFiSWQge1xuICBtYXgtd2lkdGg6IDEyMzBweDtcbiAgbWFyZ2luOiAwIGF1dG87XG4gIG1pbi1oZWlnaHQ6IDIwcmVtO1xufVxuYXBwLXJlc291cmNlcy10YWJsZSAucmVzVGFiIHtcbiAgYm9yZGVyLXJhZGl1czogMjVweCA7XG59XG4iXX0= */");
+            /* harmony default export */ __webpack_exports__["default"] = ("table {\n  width: 100%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZ2VuZXJhbC1yZXNvdXJjZXMvZ2VuZXJhbC1yZXNvdXJjZXMtdGFibGVzL2dlbmVyYWwtcmVzb3VyY2VzLWlubmVyLXRhYmxlL0Q6L0dJVC9UaGVyYUxhbmcvVGhlcmFMYW5nL2V4YW1wbGVzL012Y1dlYi9DbGllbnRBcHAvc3JjL2FwcC9nZW5lcmFsLXJlc291cmNlcy9nZW5lcmFsLXJlc291cmNlcy10YWJsZXMvZ2VuZXJhbC1yZXNvdXJjZXMtaW5uZXItdGFibGUvZ2VuZXJhbC1yZXNvdXJjZXMtaW5uZXItdGFibGUuY29tcG9uZW50Lmxlc3MiLCJzcmMvYXBwL2dlbmVyYWwtcmVzb3VyY2VzL2dlbmVyYWwtcmVzb3VyY2VzLXRhYmxlcy9nZW5lcmFsLXJlc291cmNlcy1pbm5lci10YWJsZS9nZW5lcmFsLXJlc291cmNlcy1pbm5lci10YWJsZS5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFdBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL2dlbmVyYWwtcmVzb3VyY2VzL2dlbmVyYWwtcmVzb3VyY2VzLXRhYmxlcy9nZW5lcmFsLXJlc291cmNlcy1pbm5lci10YWJsZS9nZW5lcmFsLXJlc291cmNlcy1pbm5lci10YWJsZS5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxle1xuICAgIHdpZHRoOiAxMDAlO1xufSIsInRhYmxlIHtcbiAgd2lkdGg6IDEwMCU7XG59XG4iXX0= */");
             /***/ 
         }),
-        /***/ "./src/app/general-resources/general-resources.component.ts": 
-        /*!******************************************************************!*\
-          !*** ./src/app/general-resources/general-resources.component.ts ***!
-          \******************************************************************/
-        /*! exports provided: GeneralResourcesComponent */
+        /***/ "./src/app/general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component.ts": 
+        /*!*************************************************************************************************************************************!*\
+          !*** ./src/app/general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component.ts ***!
+          \*************************************************************************************************************************************/
+        /*! exports provided: GeneralResourcesInnerTableComponent */
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GeneralResourcesComponent", function () { return GeneralResourcesComponent; });
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GeneralResourcesInnerTableComponent", function () { return GeneralResourcesInnerTableComponent; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            /* harmony import */ var _resources_table_resource_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../resources-table/resource.service */ "./src/app/resources-table/resource.service.ts");
-            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            var GeneralResourcesComponent = /** @class */ (function () {
-                function GeneralResourcesComponent(resourceService) {
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+            /* harmony import */ var src_app_project_info_resources_table_for_project_resources_table_resource_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/project-info/resources-table-for-project/resources-table/resource.service */ "./src/app/project-info/resources-table-for-project/resources-table/resource.service.ts");
+            /* harmony import */ var _shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../shared/constants/resources-table */ "./src/app/shared/constants/resources-table.ts");
+            var GeneralResourcesInnerTableComponent = /** @class */ (function () {
+                function GeneralResourcesInnerTableComponent(resourceService) {
                     this.resourceService = resourceService;
-                    this.sortedResourcesByCategory = [];
+                    this.showTable = false;
+                    this.columnsPerPage = _shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_4__["ResourcesTableConstants"].COLUMNS_PER_PAGE;
+                    this.pageSizeOptions = _shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_4__["ResourcesTableConstants"].PAGE_SIZE_OPTIONS;
+                    this.displayedColumns = ['id', 'name', 'date', 'description'];
                 }
-                GeneralResourcesComponent.prototype.ngOnInit = function () {
+                GeneralResourcesInnerTableComponent.prototype.ngOnInit = function () {
                     return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-                        var allResources;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4 /*yield*/, this.resourceService.getAllResourcesByProjId(null)];
+                        var _a, _b;
+                        return __generator(this, function (_c) {
+                            switch (_c.label) {
+                                case 0:
+                                    _a = this;
+                                    return [4 /*yield*/, this.resourceService.getResourcesByCategoryId(this.resourcesCategoryId, _shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_4__["ResourcesTableConstants"].PAGE_NUMBER, _shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_4__["ResourcesTableConstants"].COLUMNS_PER_PAGE)];
                                 case 1:
-                                    allResources = _a.sent();
-                                    this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
+                                    _a.resources = _c.sent();
+                                    _b = this;
+                                    return [4 /*yield*/, this.resourceService.getResourcesCountByCategoryId(this.resourcesCategoryId)];
+                                case 2:
+                                    _b.allResourcesCount = _c.sent();
+                                    this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"](this.resources);
+                                    this.dataSource.paginator = this.paginator;
+                                    this.showTable = true;
                                     return [2 /*return*/];
                             }
                         });
                     });
                 };
-                return GeneralResourcesComponent;
+                GeneralResourcesInnerTableComponent.prototype.pageChanged = function (event) {
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+                        var _a, _b;
+                        return __generator(this, function (_c) {
+                            switch (_c.label) {
+                                case 0:
+                                    _a = this;
+                                    return [4 /*yield*/, this.resourceService.getResourcesByCategoryId(this.resourcesCategoryId, event.pageIndex + 1, event.pageSize)];
+                                case 1:
+                                    _a.resources = _c.sent();
+                                    _b = this;
+                                    return [4 /*yield*/, this.resourceService.getResourcesCountByCategoryId(this.resourcesCategoryId)];
+                                case 2:
+                                    _b.allResourcesCount = _c.sent();
+                                    this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"](this.resources);
+                                    this.dataSource.paginator = this.paginator;
+                                    return [2 /*return*/];
+                            }
+                        });
+                    });
+                };
+                return GeneralResourcesInnerTableComponent;
             }());
-            GeneralResourcesComponent.ctorParameters = function () { return [
-                { type: _resources_table_resource_service__WEBPACK_IMPORTED_MODULE_1__["ResourceService"] }
+            GeneralResourcesInnerTableComponent.ctorParameters = function () { return [
+                { type: src_app_project_info_resources_table_for_project_resources_table_resource_service__WEBPACK_IMPORTED_MODULE_3__["ResourceService"] }
             ]; };
-            GeneralResourcesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-                    selector: 'app-general-resources',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./general-resources.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/general-resources/general-resources.component.html")).default,
-                    encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewEncapsulation"].None,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./general-resources.component.less */ "./src/app/general-resources/general-resources.component.less")).default]
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+            ], GeneralResourcesInnerTableComponent.prototype, "resourcesCategoryId", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"], { static: true })
+            ], GeneralResourcesInnerTableComponent.prototype, "paginator", void 0);
+            GeneralResourcesInnerTableComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-general-resources-inner-table',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./general-resources-inner-table.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component.html")).default,
+                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./general-resources-inner-table.component.less */ "./src/app/general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component.less")).default]
                 })
-            ], GeneralResourcesComponent);
+            ], GeneralResourcesInnerTableComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.less": 
+        /*!***************************************************************************************************************************!*\
+          !*** ./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.less ***!
+          \***************************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = (".mat-tab-label-content {\n  color: black !important;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZ2VuZXJhbC1yZXNvdXJjZXMvZ2VuZXJhbC1yZXNvdXJjZXMtdGFibGVzL2dlbmVyYWwtcmVzb3VyY2VzLXRhYmxlL0Q6L0dJVC9UaGVyYUxhbmcvVGhlcmFMYW5nL2V4YW1wbGVzL012Y1dlYi9DbGllbnRBcHAvc3JjL2FwcC9nZW5lcmFsLXJlc291cmNlcy9nZW5lcmFsLXJlc291cmNlcy10YWJsZXMvZ2VuZXJhbC1yZXNvdXJjZXMtdGFibGUvZ2VuZXJhbC1yZXNvdXJjZXMtdGFibGUuY29tcG9uZW50Lmxlc3MiLCJzcmMvYXBwL2dlbmVyYWwtcmVzb3VyY2VzL2dlbmVyYWwtcmVzb3VyY2VzLXRhYmxlcy9nZW5lcmFsLXJlc291cmNlcy10YWJsZS9nZW5lcmFsLXJlc291cmNlcy10YWJsZS5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHVCQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9nZW5lcmFsLXJlc291cmNlcy9nZW5lcmFsLXJlc291cmNlcy10YWJsZXMvZ2VuZXJhbC1yZXNvdXJjZXMtdGFibGUvZ2VuZXJhbC1yZXNvdXJjZXMtdGFibGUuY29tcG9uZW50Lmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWF0LXRhYi1sYWJlbC1jb250ZW50IHtcbiAgICBjb2xvcjogYmxhY2sgIWltcG9ydGFudDtcbiAgfSIsIi5tYXQtdGFiLWxhYmVsLWNvbnRlbnQge1xuICBjb2xvcjogYmxhY2sgIWltcG9ydGFudDtcbn1cbiJdfQ== */");
+            /***/ 
+        }),
+        /***/ "./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.ts": 
+        /*!*************************************************************************************************************************!*\
+          !*** ./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.ts ***!
+          \*************************************************************************************************************************/
+        /*! exports provided: GeneralResourcesTableComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GeneralResourcesTableComponent", function () { return GeneralResourcesTableComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var src_app_project_info_resources_table_for_project_resources_table_resource_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/project-info/resources-table-for-project/resources-table/resource.service */ "./src/app/project-info/resources-table-for-project/resources-table/resource.service.ts");
+            /* harmony import */ var src_app_project_info_resources_table_for_project_resources_table_resource_categories_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/project-info/resources-table-for-project/resources-table/resource-categories.service */ "./src/app/project-info/resources-table-for-project/resources-table/resource-categories.service.ts");
+            /* harmony import */ var _shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../shared/constants/resources-table */ "./src/app/shared/constants/resources-table.ts");
+            var GeneralResourcesTableComponent = /** @class */ (function () {
+                function GeneralResourcesTableComponent(resourceService, resourceCategoriesService) {
+                    this.resourceService = resourceService;
+                    this.resourceCategoriesService = resourceCategoriesService;
+                    this.showCategories = false;
+                }
+                GeneralResourcesTableComponent.prototype.ngOnInit = function () {
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+                        var _a;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    _a = this;
+                                    return [4 /*yield*/, this.resourceCategoriesService
+                                            .getResourceCategories(_shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_4__["ResourcesTableConstants"].WITH_ASSIGNED_RESOURCES)];
+                                case 1:
+                                    _a.resourcesCategories = _b.sent();
+                                    this.showCategories = true;
+                                    return [2 /*return*/];
+                            }
+                        });
+                    });
+                };
+                return GeneralResourcesTableComponent;
+            }());
+            GeneralResourcesTableComponent.ctorParameters = function () { return [
+                { type: src_app_project_info_resources_table_for_project_resources_table_resource_service__WEBPACK_IMPORTED_MODULE_2__["ResourceService"] },
+                { type: src_app_project_info_resources_table_for_project_resources_table_resource_categories_service__WEBPACK_IMPORTED_MODULE_3__["ResourceCategoriesService"] }
+            ]; };
+            GeneralResourcesTableComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-general-resources-table',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./general-resources-table.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.html")).default,
+                    encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None,
+                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./general-resources-table.component.less */ "./src/app/general-resources/general-resources-tables/general-resources-table/general-resources-table.component.less")).default]
+                })
+            ], GeneralResourcesTableComponent);
             /***/ 
         }),
         /***/ "./src/app/home/home.component.less": 
@@ -930,35 +1049,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             ], ProjectFormComponent);
             /***/ 
         }),
-        /***/ "./src/app/project-info/custom.datepipe.ts": 
-        /*!*************************************************!*\
-          !*** ./src/app/project-info/custom.datepipe.ts ***!
-          \*************************************************/
-        /*! exports provided: CustomDatePipe */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomDatePipe", function () { return CustomDatePipe; });
-            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-            var CustomDatePipe = /** @class */ (function (_super) {
-                __extends(CustomDatePipe, _super);
-                function CustomDatePipe() {
-                    return _super !== null && _super.apply(this, arguments) || this;
-                }
-                CustomDatePipe.prototype.transform = function (value, args) {
-                    return _super.prototype.transform.call(this, value, 'y MM d H:mm');
-                };
-                return CustomDatePipe;
-            }(_angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"]));
-            CustomDatePipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Pipe"])({
-                    name: 'customDate'
-                })
-            ], CustomDatePipe);
-            /***/ 
-        }),
         /***/ "./src/app/project-info/project-info.component.less": 
         /*!**********************************************************!*\
           !*** ./src/app/project-info/project-info.component.less ***!
@@ -982,23 +1072,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
             /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-            /* harmony import */ var _project_project__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../project/project */ "./src/app/project/project.ts");
-            /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-            /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/ __webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
-            /* harmony import */ var _resources_table_resource_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../resources-table/resource.service */ "./src/app/resources-table/resource.service.ts");
-            /* harmony import */ var _project_http_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../project/http.service */ "./src/app/project/http.service.ts");
+            /* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/fesm2015/animations.js");
+            /* harmony import */ var _project_http_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../project/http.service */ "./src/app/project/http.service.ts");
+            /* harmony import */ var _project_participants_project_participation_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../project-participants/project-participation.service */ "./src/app/project-participants/project-participation.service.ts");
+            /* harmony import */ var _resources_table_for_project_resources_table_resource_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./resources-table-for-project/resources-table/resource.service */ "./src/app/project-info/resources-table-for-project/resources-table/resource.service.ts");
             var ProjectInfoComponent = /** @class */ (function () {
-                function ProjectInfoComponent(route, http, resourceService) {
+                function ProjectInfoComponent(route, http, resourceService, participService) {
                     this.route = route;
                     this.http = http;
                     this.resourceService = resourceService;
-                    this.projectInfo = new _project_project__WEBPACK_IMPORTED_MODULE_3__["Project"](0, '', '', '');
+                    this.participService = participService;
                     this.generateOnceResourcesTable = false;
                     this.sortedResourcesByCategory = [];
+                    this.isOpen = false;
                 }
-                ProjectInfoComponent.prototype.ngAfterViewInit = function () {
-                    jquery__WEBPACK_IMPORTED_MODULE_4__('#resTabId').hide();
-                };
                 ProjectInfoComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this.route.paramMap.subscribe(function (params) {
@@ -1019,29 +1106,265 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                                     this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(allResources);
                                     _a.label = 2;
                                 case 2:
+                                    this.isOpen = !this.isOpen;
                                     this.generateOnceResourcesTable = true;
-                                    jquery__WEBPACK_IMPORTED_MODULE_4__('#resTabId').slideToggle('slow');
                                     return [2 /*return*/];
                             }
                         });
                     });
                 };
+                ProjectInfoComponent.prototype.onJoin = function () {
+                    this.participService.createParticipRequest(this.projectId);
+                };
                 return ProjectInfoComponent;
             }());
             ProjectInfoComponent.ctorParameters = function () { return [
                 { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
-                { type: _project_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"] },
-                { type: _resources_table_resource_service__WEBPACK_IMPORTED_MODULE_5__["ResourceService"] }
+                { type: _project_http_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"] },
+                { type: _resources_table_for_project_resources_table_resource_service__WEBPACK_IMPORTED_MODULE_6__["ResourceService"] },
+                { type: _project_participants_project_participation_service__WEBPACK_IMPORTED_MODULE_5__["ProjectParticipationService"] }
             ]; };
             ProjectInfoComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'app-project-info',
                     template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./project-info.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/project-info/project-info.component.html")).default,
                     encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None,
-                    providers: [_project_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"]],
+                    animations: [
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["trigger"])('openClose', [
+                            Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["state"])('open', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["style"])({
+                                display: 'initial'
+                            })),
+                            Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["state"])('closed', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_3__["style"])({
+                                display: 'none'
+                            })),
+                        ]),
+                    ],
+                    providers: [_project_http_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"], _project_participants_project_participation_service__WEBPACK_IMPORTED_MODULE_5__["ProjectParticipationService"]],
                     styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./project-info.component.less */ "./src/app/project-info/project-info.component.less")).default]
                 })
             ], ProjectInfoComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component.less": 
+        /*!***************************************************************************************************************************!*\
+          !*** ./src/app/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component.less ***!
+          \***************************************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("table {\n  width: 100%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcHJvamVjdC1pbmZvL3Jlc291cmNlcy10YWJsZS1mb3ItcHJvamVjdC9yZXNvdXJjZXMtaW50ZXJuYWwtdGFibGUvRDovR0lUL1RoZXJhTGFuZy9UaGVyYUxhbmcvZXhhbXBsZXMvTXZjV2ViL0NsaWVudEFwcC9zcmMvYXBwL3Byb2plY3QtaW5mby9yZXNvdXJjZXMtdGFibGUtZm9yLXByb2plY3QvcmVzb3VyY2VzLWludGVybmFsLXRhYmxlL3Jlc291cmNlcy1pbnRlcm5hbC10YWJsZS5jb21wb25lbnQubGVzcyIsInNyYy9hcHAvcHJvamVjdC1pbmZvL3Jlc291cmNlcy10YWJsZS1mb3ItcHJvamVjdC9yZXNvdXJjZXMtaW50ZXJuYWwtdGFibGUvcmVzb3VyY2VzLWludGVybmFsLXRhYmxlLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvcHJvamVjdC1pbmZvL3Jlc291cmNlcy10YWJsZS1mb3ItcHJvamVjdC9yZXNvdXJjZXMtaW50ZXJuYWwtdGFibGUvcmVzb3VyY2VzLWludGVybmFsLXRhYmxlLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGV7XG4gICAgd2lkdGg6IDEwMCU7XG59IiwidGFibGUge1xuICB3aWR0aDogMTAwJTtcbn1cbiJdfQ== */");
+            /***/ 
+        }),
+        /***/ "./src/app/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component.ts": 
+        /*!*************************************************************************************************************************!*\
+          !*** ./src/app/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component.ts ***!
+          \*************************************************************************************************************************/
+        /*! exports provided: ResourcesInternalTableComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResourcesInternalTableComponent", function () { return ResourcesInternalTableComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+            /* harmony import */ var _shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../shared/constants/resources-table */ "./src/app/shared/constants/resources-table.ts");
+            var ResourcesInternalTableComponent = /** @class */ (function () {
+                function ResourcesInternalTableComponent() {
+                    this.displayedColumns = ['id', 'name', 'date', 'description'];
+                }
+                ResourcesInternalTableComponent.prototype.ngOnInit = function () {
+                };
+                ResourcesInternalTableComponent.prototype.ngAfterViewInit = function () {
+                    this.pageSize = _shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_3__["ResourcesTableConstants"].COLUMNS_PER_PAGE;
+                    this.pageSizeOptions = _shared_constants_resources_table__WEBPACK_IMPORTED_MODULE_3__["ResourcesTableConstants"].PAGE_SIZE_OPTIONS;
+                    this.dataSource.paginator = this.paginator;
+                };
+                return ResourcesInternalTableComponent;
+            }());
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+            ], ResourcesInternalTableComponent.prototype, "dataSource", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+            ], ResourcesInternalTableComponent.prototype, "lengthDataArrForDataSource", void 0);
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"], { static: true })
+            ], ResourcesInternalTableComponent.prototype, "paginator", void 0);
+            ResourcesInternalTableComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-resources-internal-table',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./resources-internal-table.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component.html")).default,
+                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./resources-internal-table.component.less */ "./src/app/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component.less")).default]
+                })
+            ], ResourcesInternalTableComponent);
+            /***/ 
+        }),
+        /***/ "./src/app/project-info/resources-table-for-project/resources-table/resource-categories.service.ts": 
+        /*!*********************************************************************************************************!*\
+          !*** ./src/app/project-info/resources-table-for-project/resources-table/resource-categories.service.ts ***!
+          \*********************************************************************************************************/
+        /*! exports provided: ResourceCategoriesService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResourceCategoriesService", function () { return ResourceCategoriesService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _project_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../project/http.service */ "./src/app/project/http.service.ts");
+            var ResourceCategoriesService = /** @class */ (function () {
+                function ResourceCategoriesService(http) {
+                    this.http = http;
+                }
+                ResourceCategoriesService.prototype.getResourceCategories = function (withAssignedResources) {
+                    var _this = this;
+                    var categories = this.http.getResourceCategories(withAssignedResources).toPromise()
+                        .then(function (category) {
+                        _this.resourceCategories = category;
+                        return category;
+                    });
+                    return categories;
+                };
+                return ResourceCategoriesService;
+            }());
+            ResourceCategoriesService.ctorParameters = function () { return [
+                { type: _project_http_service__WEBPACK_IMPORTED_MODULE_2__["HttpService"] }
+            ]; };
+            ResourceCategoriesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+            ], ResourceCategoriesService);
+            /***/ 
+        }),
+        /***/ "./src/app/project-info/resources-table-for-project/resources-table/resource.service.ts": 
+        /*!**********************************************************************************************!*\
+          !*** ./src/app/project-info/resources-table-for-project/resources-table/resource.service.ts ***!
+          \**********************************************************************************************/
+        /*! exports provided: ResourceService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResourceService", function () { return ResourceService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _project_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../project/http.service */ "./src/app/project/http.service.ts");
+            var ResourceService = /** @class */ (function () {
+                function ResourceService(http) {
+                    this.http = http;
+                    this.allProjectResources = [];
+                    this.allResources = [];
+                }
+                ResourceService.prototype.getAllResourcesByProjId = function (projid) {
+                    var _this = this;
+                    var allData = this.http.getAllResourcesById(projid).toPromise().then(function (data) {
+                        _this.allProjectResources = data;
+                        return data;
+                    });
+                    return allData;
+                };
+                ResourceService.prototype.getAllResourceCategories = function (arr) {
+                    var allResourceCategories = [];
+                    for (var cat in arr) {
+                        allResourceCategories.push(cat);
+                    }
+                    return allResourceCategories;
+                };
+                ResourceService.prototype.sortAllResourcesByCategories = function (res) {
+                    var sortedArray = [];
+                    res.forEach(function (resuorce) {
+                        if (!sortedArray[resuorce.resourceCategory.type]) {
+                            sortedArray[resuorce.resourceCategory.type] = [];
+                        }
+                        sortedArray[resuorce.resourceCategory.type].push(resuorce);
+                    });
+                    return sortedArray;
+                };
+                ResourceService.prototype.getResourcesByCategoryId = function (categoryId, pageNumber, recordsPerPage) {
+                    var _this = this;
+                    var allData = this.http.getResourcesByCategoryId(categoryId, pageNumber, recordsPerPage).toPromise()
+                        .then(function (data) {
+                        _this.allResources = data;
+                        return data;
+                    });
+                    return allData;
+                };
+                ResourceService.prototype.getResourcesCountByCategoryId = function (categoryId) {
+                    var _this = this;
+                    var allData = this.http.getResourcesCountByCategoryId(categoryId).toPromise().then(function (data) {
+                        _this.countAllResourcesByCategoryId = data;
+                        return data;
+                    });
+                    return allData;
+                };
+                return ResourceService;
+            }());
+            ResourceService.ctorParameters = function () { return [
+                { type: _project_http_service__WEBPACK_IMPORTED_MODULE_2__["HttpService"] }
+            ]; };
+            ResourceService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+            ], ResourceService);
+            /***/ 
+        }),
+        /***/ "./src/app/project-info/resources-table-for-project/resources-table/resources-table.component.less": 
+        /*!*********************************************************************************************************!*\
+          !*** ./src/app/project-info/resources-table-for-project/resources-table/resources-table.component.less ***!
+          \*********************************************************************************************************/
+        /*! exports provided: default */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2plY3QtaW5mby9yZXNvdXJjZXMtdGFibGUtZm9yLXByb2plY3QvcmVzb3VyY2VzLXRhYmxlL3Jlc291cmNlcy10YWJsZS5jb21wb25lbnQubGVzcyJ9 */");
+            /***/ 
+        }),
+        /***/ "./src/app/project-info/resources-table-for-project/resources-table/resources-table.component.ts": 
+        /*!*******************************************************************************************************!*\
+          !*** ./src/app/project-info/resources-table-for-project/resources-table/resources-table.component.ts ***!
+          \*******************************************************************************************************/
+        /*! exports provided: ResourcesTableComponent */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResourcesTableComponent", function () { return ResourcesTableComponent; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _resource_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./resource.service */ "./src/app/project-info/resources-table-for-project/resources-table/resource.service.ts");
+            /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+            var ResourcesTableComponent = /** @class */ (function () {
+                function ResourcesTableComponent(resourceService) {
+                    this.resourceService = resourceService;
+                }
+                ResourcesTableComponent.prototype.ngOnInit = function () {
+                    for (var resCategoty in this.sortedResourcesByCategory) {
+                        this.selectResourcesArrayByCategotyName(resCategoty);
+                        return;
+                    }
+                };
+                ResourcesTableComponent.prototype.convertMatTabChangeEventLabelToString = function (event) {
+                    var category = event.tab.textLabel;
+                    this.selectResourcesArrayByCategotyName(category);
+                };
+                ResourcesTableComponent.prototype.selectResourcesArrayByCategotyName = function (category) {
+                    this.setDataSourceToInternalResourcesTable(this.sortedResourcesByCategory[category]);
+                };
+                ResourcesTableComponent.prototype.setDataSourceToInternalResourcesTable = function (res) {
+                    this.lengthDataArrForDataSource = res.length;
+                    this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"](res);
+                };
+                return ResourcesTableComponent;
+            }());
+            ResourcesTableComponent.ctorParameters = function () { return [
+                { type: _resource_service__WEBPACK_IMPORTED_MODULE_2__["ResourceService"] }
+            ]; };
+            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+            ], ResourcesTableComponent.prototype, "sortedResourcesByCategory", void 0);
+            ResourcesTableComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+                    selector: 'app-resources-table',
+                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./resources-table.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/project-info/resources-table-for-project/resources-table/resources-table.component.html")).default,
+                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./resources-table.component.less */ "./src/app/project-info/resources-table-for-project/resources-table/resources-table.component.less")).default]
+                })
+            ], ResourcesTableComponent);
             /***/ 
         }),
         /***/ "./src/app/project-participants/event-service.ts": 
@@ -1168,6 +1491,39 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             ], ProjectParticipantsComponent);
             /***/ 
         }),
+        /***/ "./src/app/project-participants/project-participation.service.ts": 
+        /*!***********************************************************************!*\
+          !*** ./src/app/project-participants/project-participation.service.ts ***!
+          \***********************************************************************/
+        /*! exports provided: ProjectParticipationService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectParticipationService", function () { return ProjectParticipationService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+            /* harmony import */ var _shared_api_endpoint_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/api-endpoint.constants */ "./src/app/shared/api-endpoint.constants.ts");
+            var ProjectParticipationService = /** @class */ (function () {
+                function ProjectParticipationService(http) {
+                    this.http = http;
+                    this.url = _shared_api_endpoint_constants__WEBPACK_IMPORTED_MODULE_3__["participationUrl"];
+                }
+                ProjectParticipationService.prototype.createParticipRequest = function (projectId) {
+                    return this.http.post(this.url + '/' + 'create', projectId);
+                };
+                return ProjectParticipationService;
+            }());
+            ProjectParticipationService.ctorParameters = function () { return [
+                { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+            ]; };
+            ProjectParticipationService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+                    providedIn: 'root'
+                })
+            ], ProjectParticipationService);
+            /***/ 
+        }),
         /***/ "./src/app/project/http.service.ts": 
         /*!*****************************************!*\
           !*** ./src/app/project/http.service.ts ***!
@@ -1180,10 +1536,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
             /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+            /* harmony import */ var _shared_api_endpoint_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/api-endpoint.constants */ "./src/app/shared/api-endpoint.constants.ts");
             var HttpService = /** @class */ (function () {
                 function HttpService(http) {
                     this.http = http;
-                    this.url = "api/";
+                    this.url = _shared_api_endpoint_constants__WEBPACK_IMPORTED_MODULE_3__["baseUrl"];
                 }
                 HttpService.prototype.getAllProjects = function () {
                     return this.http.get(this.url + 'project');
@@ -1198,7 +1555,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
                 };
                 HttpService.prototype.getAllResourcesById = function (projectId) {
-                    return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
+                    return this.http.get(this.url + 'resource/all/' + projectId);
+                };
+                HttpService.prototype.getResourcesByCategoryId = function (categoryId, pageNumber, recordsPerPage) {
+                    return this.http.get(this.url + 'resource/all/' + categoryId + '/' + pageNumber
+                        + '/' + recordsPerPage);
+                };
+                HttpService.prototype.getResourceCategories = function (withAssignedResources) {
+                    return this.http.get(this.url + 'resource/categories' + '/' + withAssignedResources);
+                };
+                HttpService.prototype.getResourcesCountByCategoryId = function (categoryId) {
+                    return this.http.get(this.url + 'resource/count' + '/' + categoryId);
                 };
                 HttpService.prototype.createProject = function (project) {
                     return this.http.post(this.url + 'project' + '/' + 'create', project);
@@ -1335,27 +1702,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             ], ProjectService);
             /***/ 
         }),
-        /***/ "./src/app/project/project.ts": 
-        /*!************************************!*\
-          !*** ./src/app/project/project.ts ***!
-          \************************************/
-        /*! exports provided: Project */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Project", function () { return Project; });
-            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            var Project = /** @class */ (function () {
-                function Project(id, name, type, description) {
-                    this.id = id;
-                    this.name = name;
-                    this.type = type;
-                    this.description = description;
-                }
-                return Project;
-            }());
-            /***/ 
-        }),
         /***/ "./src/app/request-status-enum.ts": 
         /*!****************************************!*\
           !*** ./src/app/request-status-enum.ts ***!
@@ -1374,177 +1720,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             })(RequestStatus || (RequestStatus = {}));
             /***/ 
         }),
-        /***/ "./src/app/resources-internal-table/resources-internal-table.component.less": 
-        /*!**********************************************************************************!*\
-          !*** ./src/app/resources-internal-table/resources-internal-table.component.less ***!
-          \**********************************************************************************/
-        /*! exports provided: default */
+        /***/ "./src/app/shared/api-endpoint.constants.ts": 
+        /*!**************************************************!*\
+          !*** ./src/app/shared/api-endpoint.constants.ts ***!
+          \**************************************************/
+        /*! exports provided: baseUrl, projectUrl, resourсeUrl, requestUrl, categoryUrl, participationUrl, paymentUrl */
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("table {\n  width: 100%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVzb3VyY2VzLWludGVybmFsLXRhYmxlL0Q6L0dJVC9UaGVyYUxhbmcvVGhlcmFMYW5nL2V4YW1wbGVzL012Y1dlYi9DbGllbnRBcHAvc3JjL2FwcC9yZXNvdXJjZXMtaW50ZXJuYWwtdGFibGUvcmVzb3VyY2VzLWludGVybmFsLXRhYmxlLmNvbXBvbmVudC5sZXNzIiwic3JjL2FwcC9yZXNvdXJjZXMtaW50ZXJuYWwtdGFibGUvcmVzb3VyY2VzLWludGVybmFsLXRhYmxlLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksV0FBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvcmVzb3VyY2VzLWludGVybmFsLXRhYmxlL3Jlc291cmNlcy1pbnRlcm5hbC10YWJsZS5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbInRhYmxle1xuICAgIHdpZHRoOiAxMDAlO1xufSIsInRhYmxlIHtcbiAgd2lkdGg6IDEwMCU7XG59XG4iXX0= */");
-            /***/ 
-        }),
-        /***/ "./src/app/resources-internal-table/resources-internal-table.component.ts": 
-        /*!********************************************************************************!*\
-          !*** ./src/app/resources-internal-table/resources-internal-table.component.ts ***!
-          \********************************************************************************/
-        /*! exports provided: ResourcesInternalTableComponent */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResourcesInternalTableComponent", function () { return ResourcesInternalTableComponent; });
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "baseUrl", function () { return baseUrl; });
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "projectUrl", function () { return projectUrl; });
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resourсeUrl", function () { return resourсeUrl; });
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestUrl", function () { return requestUrl; });
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "categoryUrl", function () { return categoryUrl; });
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "participationUrl", function () { return participationUrl; });
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "paymentUrl", function () { return paymentUrl; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
-            var ResourcesInternalTableComponent = /** @class */ (function () {
-                function ResourcesInternalTableComponent() {
-                    this.displayedColumns = ['id', 'name', 'date', 'description'];
-                }
-                ResourcesInternalTableComponent.prototype.ngOnInit = function () {
-                };
-                ResourcesInternalTableComponent.prototype.ngAfterViewInit = function () {
-                    var _this = this;
-                    console.log(this.lengthDataArrForDataSource, "1");
-                    setTimeout(function () {
-                        console.log(_this.lengthDataArrForDataSource, "1");
-                        _this.dataSource.paginator = _this.paginator;
-                    }, 5000);
-                    this.dataSource.paginator = this.paginator;
-                };
-                return ResourcesInternalTableComponent;
-            }());
-            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-            ], ResourcesInternalTableComponent.prototype, "dataSource", void 0);
-            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-            ], ResourcesInternalTableComponent.prototype, "lengthDataArrForDataSource", void 0);
-            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginator"], { static: true })
-            ], ResourcesInternalTableComponent.prototype, "paginator", void 0);
-            ResourcesInternalTableComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-                    selector: 'app-resources-internal-table',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./resources-internal-table.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/resources-internal-table/resources-internal-table.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./resources-internal-table.component.less */ "./src/app/resources-internal-table/resources-internal-table.component.less")).default]
-                })
-            ], ResourcesInternalTableComponent);
-            /***/ 
-        }),
-        /***/ "./src/app/resources-table/resource.service.ts": 
-        /*!*****************************************************!*\
-          !*** ./src/app/resources-table/resource.service.ts ***!
-          \*****************************************************/
-        /*! exports provided: ResourceService */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResourceService", function () { return ResourceService; });
-            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            /* harmony import */ var _project_http_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../project/http.service */ "./src/app/project/http.service.ts");
-            var ResourceService = /** @class */ (function () {
-                function ResourceService(http) {
-                    this.http = http;
-                    this.allProjectResources = [];
-                }
-                ResourceService.prototype.getAllResourcesByProjId = function (projid) {
-                    var _this = this;
-                    var allData = this.http.getAllResourcesById(projid).toPromise().then(function (data) {
-                        _this.allProjectResources = data;
-                        return data;
-                    });
-                    return allData;
-                };
-                ResourceService.prototype.getAllResourceCategories = function (arr) {
-                    var allResourceCategories = [];
-                    for (var cat in arr) {
-                        allResourceCategories.push(cat);
-                    }
-                    return allResourceCategories;
-                };
-                ResourceService.prototype.sortAllResourcesByCategories = function (res) {
-                    var sortedArray = [];
-                    res.forEach(function (resuorce) {
-                        if (!sortedArray[resuorce.resourceCategory]) {
-                            sortedArray[resuorce.resourceCategory] = [];
-                        }
-                        sortedArray[resuorce.resourceCategory].push(resuorce);
-                    });
-                    return sortedArray;
-                };
-                return ResourceService;
-            }());
-            ResourceService.ctorParameters = function () { return [
-                { type: _project_http_service__WEBPACK_IMPORTED_MODULE_2__["HttpService"] }
-            ]; };
-            ResourceService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
-            ], ResourceService);
-            /***/ 
-        }),
-        /***/ "./src/app/resources-table/resources-table.component.less": 
-        /*!****************************************************************!*\
-          !*** ./src/app/resources-table/resources-table.component.less ***!
-          \****************************************************************/
-        /*! exports provided: default */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Jlc291cmNlcy10YWJsZS9yZXNvdXJjZXMtdGFibGUuY29tcG9uZW50Lmxlc3MifQ== */");
-            /***/ 
-        }),
-        /***/ "./src/app/resources-table/resources-table.component.ts": 
-        /*!**************************************************************!*\
-          !*** ./src/app/resources-table/resources-table.component.ts ***!
-          \**************************************************************/
-        /*! exports provided: ResourcesTableComponent */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResourcesTableComponent", function () { return ResourcesTableComponent; });
-            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            /* harmony import */ var _resource_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./resource.service */ "./src/app/resources-table/resource.service.ts");
-            /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
-            var ResourcesTableComponent = /** @class */ (function () {
-                function ResourcesTableComponent(resourceService) {
-                    this.resourceService = resourceService;
-                }
-                ResourcesTableComponent.prototype.ngOnInit = function () {
-                    for (var resCategoty in this.sortedResourcesByCategory) {
-                        this.selectResourcesArrayByCategotyName(resCategoty);
-                        return;
-                    }
-                };
-                ResourcesTableComponent.prototype.convertMatTabChangeEventLabelToString = function (event) {
-                    var category = event.tab.textLabel;
-                    this.selectResourcesArrayByCategotyName(category);
-                };
-                ResourcesTableComponent.prototype.selectResourcesArrayByCategotyName = function (category) {
-                    this.setDataSourceToInternalResourcesTable(this.sortedResourcesByCategory[category]);
-                };
-                ResourcesTableComponent.prototype.setDataSourceToInternalResourcesTable = function (res) {
-                    this.lengthDataArrForDataSource = res.length;
-                    console.log(this.lengthDataArrForDataSource);
-                    this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"](res);
-                };
-                return ResourcesTableComponent;
-            }());
-            ResourcesTableComponent.ctorParameters = function () { return [
-                { type: _resource_service__WEBPACK_IMPORTED_MODULE_2__["ResourceService"] }
-            ]; };
-            tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
-            ], ResourcesTableComponent.prototype, "sortedResourcesByCategory", void 0);
-            ResourcesTableComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-                    selector: 'app-resources-table',
-                    template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./resources-table.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/resources-table/resources-table.component.html")).default,
-                    styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./resources-table.component.less */ "./src/app/resources-table/resources-table.component.less")).default]
-                })
-            ], ResourcesTableComponent);
+            var baseUrl = "https://localhost:44353/api/";
+            var projectUrl = baseUrl + "project";
+            var resourсeUrl = baseUrl + "resourсe";
+            var requestUrl = baseUrl + "request";
+            var categoryUrl = baseUrl + "category";
+            var participationUrl = baseUrl + "participation";
+            var paymentUrl = baseUrl + "payment";
             /***/ 
         }),
         /***/ "./src/app/shared/components/confirm-dialog/confirm-dialog.component.less": 
@@ -1642,6 +1840,75 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             ], ErrorComponent);
             /***/ 
         }),
+        /***/ "./src/app/shared/constants/date-formats.ts": 
+        /*!**************************************************!*\
+          !*** ./src/app/shared/constants/date-formats.ts ***!
+          \**************************************************/
+        /*! exports provided: DateFormatsConstants */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DateFormatsConstants", function () { return DateFormatsConstants; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            var DateFormatsConstants = /** @class */ (function () {
+                function DateFormatsConstants() {
+                }
+                return DateFormatsConstants;
+            }());
+            DateFormatsConstants.LONG_DATE_STRING = "y/MM/dd H:mm";
+            /***/ 
+        }),
+        /***/ "./src/app/shared/constants/resources-table.ts": 
+        /*!*****************************************************!*\
+          !*** ./src/app/shared/constants/resources-table.ts ***!
+          \*****************************************************/
+        /*! exports provided: ResourcesTableConstants */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResourcesTableConstants", function () { return ResourcesTableConstants; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            var ResourcesTableConstants = /** @class */ (function () {
+                function ResourcesTableConstants() {
+                }
+                return ResourcesTableConstants;
+            }());
+            ResourcesTableConstants.PAGE_NUMBER = 1;
+            ResourcesTableConstants.COLUMNS_PER_PAGE = 10;
+            ResourcesTableConstants.WITH_ASSIGNED_RESOURCES = true;
+            ResourcesTableConstants.PAGE_SIZE_OPTIONS = [5, 10, 20];
+            /***/ 
+        }),
+        /***/ "./src/app/shared/pipes/custom.datepipe.ts": 
+        /*!*************************************************!*\
+          !*** ./src/app/shared/pipes/custom.datepipe.ts ***!
+          \*************************************************/
+        /*! exports provided: CustomDatePipe */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomDatePipe", function () { return CustomDatePipe; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+            /* harmony import */ var _constants_date_formats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../constants/date-formats */ "./src/app/shared/constants/date-formats.ts");
+            var CustomDatePipe = /** @class */ (function (_super) {
+                __extends(CustomDatePipe, _super);
+                function CustomDatePipe() {
+                    return _super !== null && _super.apply(this, arguments) || this;
+                }
+                CustomDatePipe.prototype.transform = function (value, args) {
+                    return _super.prototype.transform.call(this, value, _constants_date_formats__WEBPACK_IMPORTED_MODULE_3__["DateFormatsConstants"].LONG_DATE_STRING);
+                };
+                return CustomDatePipe;
+            }(_angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"]));
+            CustomDatePipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Pipe"])({
+                    name: 'customDate'
+                })
+            ], CustomDatePipe);
+            /***/ 
+        }),
         /***/ "./src/app/shared/services/dialog.service.ts": 
         /*!***************************************************!*\
           !*** ./src/app/shared/services/dialog.service.ts ***!
@@ -1688,6 +1955,47 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
                     providedIn: 'root'
                 })
             ], DialogService);
+            /***/ 
+        }),
+        /***/ "./src/app/shared/services/error-handler.service.ts": 
+        /*!**********************************************************!*\
+          !*** ./src/app/shared/services/error-handler.service.ts ***!
+          \**********************************************************/
+        /*! exports provided: ErrorHandlerService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ErrorHandlerService", function () { return ErrorHandlerService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            var ErrorHandlerService = /** @class */ (function () {
+                function ErrorHandlerService(injector) {
+                    this.injector = injector;
+                }
+                ErrorHandlerService.prototype.handleError = function (error) {
+                    var router = this.injector.get(_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]);
+                    console.log('Request URL: ${router.url}');
+                    if (error instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpErrorResponse"]) {
+                        console.error('Backend returned status code:', error.status);
+                        console.error('Response body:', error.message);
+                    }
+                    else {
+                        console.log('An error occurred', error.message);
+                    }
+                    router.navigate(['error']);
+                };
+                return ErrorHandlerService;
+            }());
+            ErrorHandlerService.ctorParameters = function () { return [
+                { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"] }
+            ]; };
+            ErrorHandlerService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+                    providedIn: 'root'
+                })
+            ], ErrorHandlerService);
             /***/ 
         }),
         /***/ "./src/app/shared/services/notification.service.ts": 
