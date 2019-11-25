@@ -53,6 +53,6 @@ export class HttpService{
     }
   
     getAllProjectTypes(){
-        return this.http.get( 'https://localhost:5000/api/types');
+        return this.http.get('https://localhost:5000/api/types');
        } 
 }
