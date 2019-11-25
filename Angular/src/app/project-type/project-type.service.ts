@@ -6,9 +6,8 @@ import { HttpService } from '../project/http.service';
 export class ProjectTypeService{
     allProjectTypes: ProjectType[];
     
-    constructor(private http: HttpService){
-
-    }
+    constructor(private http: HttpService){ }
+  
     getAllProjectTypes() {
         const alldata = this.http.getAllProjectTypes().toPromise().then((data: ProjectType[]) => {
             this.allProjectTypes = data;
