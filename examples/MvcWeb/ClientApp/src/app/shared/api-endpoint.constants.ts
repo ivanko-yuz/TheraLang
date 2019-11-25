@@ -1,5 +1,5 @@
 
-export const baseUrl = "api/";
+export const baseUrl = "/api/";
 
 export const projectUrl = baseUrl + "project";
 export const resourсeUrl = baseUrl + "resourсe";
