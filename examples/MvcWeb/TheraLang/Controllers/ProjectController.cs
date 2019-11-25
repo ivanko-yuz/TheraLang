@@ -22,11 +22,11 @@ namespace MvcWeb.TheraLang.Controllers
         public IEnumerable<ProjectModel> GetAllProjects()
         {
             List<ProjectModel> projectModels = new List<ProjectModel>();
-            projectModels = uow.Repository<Project>().Get().Select(x => new ProjectModel
+            projectModels = uow.Repository<Project>().Get().Select(p => new ProjectModel
             {
-                Id = x.Id,
-                Name = x.Name,
-                DonationAmount = x.Donations.Sum(y => y.Amount)
+                Id = p.Id,
+                Name = p.Name,
+                DonationAmount = p.Donations.Sum(y => y.Amount)
             }).ToList();
 
             return projectModels;

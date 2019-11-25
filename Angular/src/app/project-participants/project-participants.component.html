@@ -1,4 +1,4 @@
-<mat-tab-group animationDuration="0ms" #tabPosition (selectedTabChange)="changeTab(tabPosition.selectedIndex)">
+<mat-tab-group class="participation-tab" animationDuration="0ms" #tabPosition (selectedTabChange)="changeTab(tabPosition.selectedIndex)">
         <mat-tab label="Нові"></mat-tab>
         <mat-tab label="Підтверджені"></mat-tab>
         <mat-tab label="Відхилені"> </mat-tab>
@@ -46,7 +46,7 @@
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
                 <div class="noData"*ngIf="projectParticipationRequest.filteredData.length === 0">
-                         <h1>Немає нових запитів</h1>
+                         <h2>Немає запитів</h2>
                 </div>
                 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>

@@ -18,6 +18,21 @@ namespace MvcWeb.TheraLang.Controllers
         }
 
         private readonly IProjectParticipationService _service;
+        
+
+        [HttpPut]
+        [Route("{participantId}")]
+        public async Task<IActionResult> ChangeStatus(int participantId, [FromBody]ProjectParticipationStatus status)
+        {
+            if (participantId == default)
+            {
+                throw new ArgumentException($"{nameof(participantId)} can not be 0");
+            }
+
+            await _service.ChangeStatusAsync(participantId, status);
+            return Ok();
+        }
+
 
         [HttpGet]
         public ActionResult<IEnumerable<ProjectParticipation>> Get()

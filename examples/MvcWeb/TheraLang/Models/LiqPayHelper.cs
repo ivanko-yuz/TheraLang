@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MvcWeb.TheraLang.Models
 {
@@ -13,6 +11,7 @@ namespace MvcWeb.TheraLang.Models
         static private readonly string _privateKey;
         static private readonly string _publicKey;
         private const int ApiVersion = 3;
+        
 
         static LiqPayHelper()
         {
@@ -32,7 +31,7 @@ namespace MvcWeb.TheraLang.Models
                 Currency = "UAH",
                 Description = "Благодійність",
                 ResultUrl = $"http://localhost:4200/result/{donationId}",
-                ServerUrl = $"http://localhost:44353/api/donation/{projectId}/{donationId}",
+                ServerUrl = $"http://63cd43c7.ngrok.io/api/donation/{projectId}/{donationId}",
                 Language = "uk"
             };
 

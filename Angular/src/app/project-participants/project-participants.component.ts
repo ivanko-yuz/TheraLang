@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from './project-participation-request';
 import { EventService } from './event-service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { RequestStatus } from '../request-status-enum';
+import { RequestStatus } from '../request-status.enum';
+import { ProjectParticipantService } from './project-participant.service';
+import { debug } from 'util';
 
 
 @Component({
@@ -13,15 +14,15 @@ import { RequestStatus } from '../request-status-enum';
 })
 export class ProjectParticipantsComponent implements OnInit {
 
-  projectParticipationRequest: MatTableDataSource<ProjectParticipationRequest> = new MatTableDataSource<ProjectParticipationRequest>();
+  projectParticipationRequest = new MatTableDataSource<ProjectParticipationRequest>();
   showActionButtons: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = ['createdById', 'role', 'projectId', 'status', 'actions'];
 
-  constructor(private httpService: HttpService, private eventService: EventService) { }
+  constructor(private participantService: ProjectParticipantService, private eventService: EventService) { }
 
   ngOnInit() {
-    this.httpService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
+    this.participantService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
       this.projectParticipationRequest.data = projectParticipants;
       this.projectParticipationRequest.filterPredicate = (projectParticipant: ProjectParticipationRequest, filter: string) => projectParticipant.status.toString() === filter;
       this.projectParticipationRequest.paginator = this.paginator;
@@ -30,7 +31,7 @@ export class ProjectParticipantsComponent implements OnInit {
   }
 
   load() {
-    this.httpService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
+    this.participantService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
       this.projectParticipationRequest.data = projectParticipants;
       this.removeNotificationIcon();
     });
@@ -55,7 +56,7 @@ export class ProjectParticipantsComponent implements OnInit {
 
   changeStatus(status: string, projectParticipant: ProjectParticipationRequest) {
     projectParticipant.status = (status === 'approved') ?  RequestStatus.Approved : RequestStatus.Rejected;
-    this.httpService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
+    this.participantService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
       this.load();
     });
   }

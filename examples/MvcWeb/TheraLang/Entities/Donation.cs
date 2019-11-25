@@ -7,18 +7,35 @@ namespace MvcWeb.TheraLang.Entities
     {
         public int Id { get; set; }
 
-        [JsonProperty("product_name")]
         public int ProjectId { get; set; }
 
         public virtual Project Project { get; set; }
 
-        [JsonProperty("status")]
-        public string Status { get; set; }
+        public string DonationId { get; set; }
 
-        [JsonProperty("order_id")]
-        public string OrderId { get; set; }
+        [JsonProperty("status")]
+        public string Status { get; set; }      
 
         [JsonProperty("amount")]
         public decimal Amount { get; set; }
+
+        [JsonProperty("currency")]
+        public string Currency { get; set; }
+
+        [JsonProperty("payment_id")]
+        public int PaymentId { get; set; }
+
+        [JsonProperty("acq_id")]
+        public int AcqId { get; set; }
+
+        [JsonProperty("liqpay_order_id")]
+        public string LiqpayOrderId { get; set; }
+
+        [JsonProperty("transaction_id")]
+        public int TransactionId { get; set; }
+
+        [JsonProperty("receiver_commission")]
+        public decimal ReceiverCommission { get; set; }
+
     }
 }

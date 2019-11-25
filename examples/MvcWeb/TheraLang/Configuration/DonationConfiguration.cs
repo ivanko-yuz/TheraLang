@@ -11,11 +11,16 @@ namespace MvcWeb.TheraLang.Configuration
         {
             builder.ToTable("Donations");
 
-            builder.HasKey(e => e.Id);
-            builder.Property(e => e.Id).ValueGeneratedOnAdd();
-            builder.Property(e => e.Status).HasMaxLength(250).IsRequired();
-            builder.Property(e => e.Amount).HasMaxLength(250).IsRequired();
-            builder.Property(e => e.ProjectId).IsRequired();
+            builder.HasKey(p => p.Id);
+            builder.Property(p => p.Id).ValueGeneratedOnAdd();
+            builder.Property(p => p.ProjectId);
+            builder.Property(p => p.Status).IsRequired();
+            builder.Property(p => p.Amount).IsRequired();
+            builder.Property(p => p.Currency).IsRequired();
+            builder.Property(p => p.PaymentId).IsRequired();
+            builder.Property(p => p.LiqpayOrderId).IsRequired();
+            builder.Property(p => p.TransactionId).IsRequired();
+            builder.Property(p => p.ReceiverCommission).IsRequired();
         }
     }
 }

@@ -49,6 +49,7 @@ import { DialogService } from './shared/services/dialog.service';
 import { ResultComponent } from './result/result.component';
 import { DonationComponent } from './donation/donation.component';
 import { DonationService } from './donation/donation.service';
+import { ProjectParticipantService } from './project-participants/project-participant.service';
 
 
 
@@ -142,6 +143,7 @@ import { DonationService } from './donation/donation.service';
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     NotificationService,
     DialogService,
+    ProjectParticipantService
   ],
   bootstrap: [AppComponent]
 })

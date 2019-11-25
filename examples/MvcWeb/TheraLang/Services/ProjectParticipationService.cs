@@ -17,6 +17,22 @@ namespace MvcWeb.TheraLang.Services
 
         private readonly IUnitOfWork _unitOfWork;
 
+        public async Task ChangeStatusAsync(int participantId, ProjectParticipationStatus status)
+        {
+            try
+            {
+                ProjectParticipation participant = _unitOfWork.Repository<ProjectParticipation>()
+                                                              .Get().SingleOrDefault(x => x.Id == participantId);
+                participant.Status = status;
+                _unitOfWork.Repository<ProjectParticipation>().Update(participant);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error while updating the status for {nameof(participantId)}:{participantId}", ex);
+            }
+         
+        }
 
         public IEnumerable<ProjectParticipation> GetAll()
         {

@@ -3,6 +3,6 @@ export class LiqpayResponse{
     public projectId: number,
     public amount: number,
     public status: string,
-    public orderId: string
+    public donationId: string
     ){}
 }

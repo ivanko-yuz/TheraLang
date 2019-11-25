@@ -1,4 +1,4 @@
-import { RequestStatus } from '../request-status-enum';
+import { RequestStatus } from '../request-status.enum';
 
 export class ProjectParticipationRequest {
     constructor(

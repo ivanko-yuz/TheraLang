@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.Models;
 using MvcWeb.TheraLang.Services;
-using Newtonsoft.Json;
+
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -34,7 +30,6 @@ namespace MvcWeb.TheraLang.Controllers
             {
                 throw new ArgumentException($"{nameof(donationAmount)} can not be null");
             }
-
             return _donationService.GetLiqPayCheckoutModel(donationAmount, projectId);
         }
 

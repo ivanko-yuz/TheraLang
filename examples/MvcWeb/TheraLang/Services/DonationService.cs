@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +36,7 @@ namespace MvcWeb.TheraLang.Services
         {
             try
             {
-                Donation donation = _unitOfWork.Repository<Donation>().Get().SingleOrDefault(x => x.OrderId == donationId);
+                Donation donation = _unitOfWork.Repository<Donation>().Get().SingleOrDefault(x => x.DonationId == donationId);
                 return donation;
             }
             catch (Exception ex)
@@ -60,7 +59,7 @@ namespace MvcWeb.TheraLang.Services
                 }
                 Donation donation = JsonConvert.DeserializeObject<Donation>(decodedString);
                 donation.ProjectId = projectId;
-                donation.OrderId = donationId;
+                donation.DonationId = donationId;
                 await _unitOfWork.Repository<Donation>().Add(donation);
                 await _unitOfWork.SaveChangesAsync();
             }
