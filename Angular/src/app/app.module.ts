@@ -76,30 +76,6 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
       ResourcesInternalTableComponent,    
       GeneralResourcesTableComponent,
       GeneralResourcesInnerTableComponent,
-   ],
-
-
-@NgModule({
-   declarations: [
-      AppComponent,
-      routingComponents,
-      ToolbarComponent,
-      ProjectComponent,
-      HomeComponent,
-      ProjectInfoComponent,
-      FooterComponent,
-      ProjectParticipantsComponent,
-      CustomDatePipe,
-      ResourcesTableComponent,
-      PiranhaPageComponent,
-      BlockComponent,
-      GalleryBlockComponent,
-      ConfirmDialogComponent,
-      ErrorComponent,
-      ProjectFormComponent,
-      ResourcesInternalTableComponent,    
-      GeneralResourcesTableComponent,
-      GeneralResourcesInnerTableComponent,
       ToolbarItemComponent,
    ],
    entryComponents: [
