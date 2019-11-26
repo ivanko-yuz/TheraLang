@@ -8,4 +8,4 @@ export const categoryUrl = baseUrl + "category";
 export const participUrl = baseUrl + "participation";
 export const paymentUrl = baseUrl + "payment";
 export const projectType = baseUrl + "projectTypes";
-export const cmsSitemapUrl = `${baseUrl}sitemap`;
+export const cmsSitemapUrl = baseUrl + "sitemap";
