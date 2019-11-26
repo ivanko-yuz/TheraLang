@@ -77,6 +77,9 @@ namespace MvcWeb
 
             services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
+            services.AddCors(options =>
+                options.AddPolicy("development mode", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())); //TODO: remove after app integrated
+
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
@@ -89,6 +92,7 @@ namespace MvcWeb
             app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
+                app.UseCors("development mode");
                 app.UseDeveloperExceptionPage();
             }
 
@@ -125,8 +129,6 @@ namespace MvcWeb
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UsePiranhaManager();
-            //app.UsePiranhaSummernote();
-            //app.UsePiranhaTinyMCE();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",
