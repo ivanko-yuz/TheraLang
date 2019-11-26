@@ -5,6 +5,7 @@ import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import {ProjectInfoComponent} from './project-info/project-info.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
+import {CmsModule} from './cms/cms.module';
 import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'project', component: ProjectComponent },
   { path: 'resources', component: GeneralResourcesTableComponent },
   { path: 'error', component: ErrorComponent },
+  { path: '**', loadChildren: () => CmsModule},
 ];
 
 @NgModule({

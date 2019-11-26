@@ -52,6 +52,8 @@ import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
+import {CmsModule} from './cms/cms.module';
+import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
 
 @NgModule({
    declarations: [
@@ -74,9 +76,8 @@ import { DialogService } from './shared/services/dialog.service';
       ResourcesInternalTableComponent,    
       GeneralResourcesTableComponent,
       GeneralResourcesInnerTableComponent,
+      ToolbarItemComponent,
    ],
-
-
    entryComponents: [
       ResourcesInternalTableComponent,
       ProjectFormComponent, 
@@ -138,7 +139,8 @@ import { DialogService } from './shared/services/dialog.service';
       MatTreeModule,
       PortalModule,
       ScrollingModule,
-      NgbModule
+      NgbModule,
+      CmsModule,
    ],
    exports: [
       ResourcesInternalTableComponent,
