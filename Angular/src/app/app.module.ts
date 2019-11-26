@@ -66,14 +66,14 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
       ConfirmDialogComponent,
       ErrorComponent,
       ProjectFormComponent,
-      ResourcesInternalTableComponent,    
+      ResourcesInternalTableComponent,
       GeneralResourcesTableComponent,
       GeneralResourcesInnerTableComponent,
       ToolbarItemComponent,
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
-      ProjectFormComponent, 
+      ProjectFormComponent,
       ConfirmDialogComponent,
    ],
    imports: [

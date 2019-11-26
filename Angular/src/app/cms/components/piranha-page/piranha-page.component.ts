@@ -1,7 +1,7 @@
 import { Page } from '../../models/page.model';
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpService } from 'src/app/project/http.service';
 import { CmsRoute } from 'src/app/toolbar/toolbar-item/cms-route';
+import { CmsPageService } from '../../services/cms-page.service';
 
 @Component({
   selector: 'app-piranha-page',
@@ -11,12 +11,11 @@ import { CmsRoute } from 'src/app/toolbar/toolbar-item/cms-route';
 export class PiranhaPageComponent implements OnInit {
   page: Page;
   @Input() cmsRoute: CmsRoute;
-  ifGenerate: boolean = false;
-  constructor(private http: HttpService) { }
+  ifGenerate = false;
+  constructor(private cmsPageService: CmsPageService) { }
 
   async ngOnInit() {
-    this.page = await this.http.getPiranhaPageById(this.cmsRoute.id);
+    this.page = await this.cmsPageService.getPiranhaPageById(this.cmsRoute.id);
     this.ifGenerate = true;
   }
-
 }

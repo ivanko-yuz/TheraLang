@@ -6,6 +6,7 @@ import { PiranhaPageComponent } from './components/piranha-page/piranha-page.com
 import { BlockComponent } from './components/block/block.component';
 import { GalleryBlockComponent } from './components/gallery-block/gallery-block.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CmsPageService } from './services/cms-page.service';
 
 
 @NgModule({
@@ -22,6 +23,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   exports: [
     GalleryBlockComponent,
+  ],
+  providers: [
+    CmsPageService
   ],
   bootstrap: [
     GalleryBlockComponent

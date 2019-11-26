@@ -7,17 +7,12 @@ import { StringifyOptions } from 'querystring';
   templateUrl: './gallery-block.component.html',
   styleUrls: ['./gallery-block.component.less']
 })
-export class GalleryBlockComponent implements OnInit {
-
+export class GalleryBlockComponent {
   @Input() block: Block;
-  
-  constructor() { }
 
-  ngOnInit() {
-  }
+  constructor() { }
 
   cutLink(url: string): string {
     return url.substr(1);
   }
-
 }
