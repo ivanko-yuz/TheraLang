@@ -28,7 +28,7 @@ export class ProjectInfoComponent implements OnInit {
   constructor(private route: ActivatedRoute, private http: HttpService,
               private resourceService: ResourceService) { }
 
-  projectInfo: Project ;
+  projectInfo: Project;
   projectId: number;
   generateOnceResourcesTable = false;
   sortedResourcesByCategory: Resource[][] = [];

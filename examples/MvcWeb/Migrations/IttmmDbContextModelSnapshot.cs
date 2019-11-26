@@ -854,6 +854,9 @@ namespace MvcWeb.Migrations
                         .IsRequired()
                         .HasMaxLength(250);
 
+                    b.Property<int>("StatusId")
+                        .HasMaxLength(250);
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(250);
