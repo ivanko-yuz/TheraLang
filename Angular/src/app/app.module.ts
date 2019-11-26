@@ -56,7 +56,8 @@ import { ResultComponent } from './result/result.component';
 import { DonationComponent } from './donation/donation.component';
 import { DonationService } from './donation/donation.service';
 import { ProjectParticipantService } from './project-participants/project-participant.service';
-
+import {CmsModule} from './cms/cms.module';
+import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { ProjectParticipantService } from './project-participants/project-partic
       GeneralResourcesTableComponent,
       GeneralResourcesInnerTableComponent,
       ResultComponent,
-      DonationComponent
+      DonationComponent,
+     ToolbarItemComponent
    ],
 
    entryComponents: [
@@ -145,7 +147,8 @@ import { ProjectParticipantService } from './project-participants/project-partic
       MatTreeModule,
       PortalModule,
       ScrollingModule,
-      NgbModule
+      NgbModule,
+      CmsModule,
    ],
    exports: [
       ResourcesInternalTableComponent,

@@ -42,13 +42,6 @@ namespace MvcWeb
                 options.ResourcesPath = "Resources"
             );
 
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
-
             services.AddMvc()
                 .AddPiranhaManagerOptions()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -84,6 +77,9 @@ namespace MvcWeb
 
             services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
+            services.AddCors(options =>
+                options.AddPolicy("development mode", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())); //TODO: remove after app integrated
+
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
@@ -97,6 +93,7 @@ namespace MvcWeb
             app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
+                app.UseCors("development mode");
                 app.UseDeveloperExceptionPage();
             }
 
@@ -131,11 +128,7 @@ namespace MvcWeb
             // Register middleware
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UsePiranha();
             app.UsePiranhaManager();
-            app.UsePiranhaSummernote();
-            //app.UsePiranhaTinyMCE();
-            app.UseCors("MyPolicy");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",
