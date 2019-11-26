@@ -17,13 +17,13 @@ export class ResultComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.paramMap.subscribe(params=>{
+    this.route.paramMap.subscribe(params => {
       this.donationId = params.get('donationId');
       this.donationService.getLiqpayResponse(this.donationId).subscribe((liqpayResponseData: LiqpayResponse) => {
-        this.liqpayResponse = liqpayResponseData;    
+        this.liqpayResponse = liqpayResponseData;
       });
     });
-        
+
   }
 
 }

@@ -30,6 +30,5 @@ export class AppRoutingModule { }
 export const routingComponents = [
   ProjectParticipantsComponent, ProjectComponent, HomeComponent, ProjectInfoComponent,
   ErrorComponent, ResultComponent, DonationComponent
-  // GeneralResourcesTableComponent
 ];
 

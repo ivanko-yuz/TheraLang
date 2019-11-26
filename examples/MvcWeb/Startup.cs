@@ -39,6 +39,13 @@ namespace MvcWeb
                 options.ResourcesPath = "Resources"
             );
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddMvc()
                 .AddPiranhaManagerOptions()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -126,6 +133,7 @@ namespace MvcWeb
             app.UsePiranhaManager();
             app.UsePiranhaSummernote();
             //app.UsePiranhaTinyMCE();
+            app.UseCors("MyPolicy");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",

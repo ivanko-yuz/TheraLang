@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ProjectParticipationRequest } from '../project-participants/project-participation-request';
 import { EventService } from '../project-participants/event-service';
-import { RequestStatus } from '../request-status.enum';
+import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status.enum';
 import { ProjectParticipantService } from '../project-participants/project-participant.service';
 
 @Component({
@@ -13,13 +13,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
 
   hasNotification: boolean = false;
   projectParticipation: ProjectParticipationRequest[];
+  
   constructor(private participantService: ProjectParticipantService, private eventService: EventService) { }
 
   ngOnInit() {
     this.participantService.getAllProjectParticipants().subscribe((projectParticipation: ProjectParticipationRequest[]) => {
       this.projectParticipation = projectParticipation;
-      if ((this.projectParticipation.filter(x => x.status === RequestStatus.New)).length > 0) {
-        debugger
+      if ((this.projectParticipation.filter(x => x.status === ProjectParticipationRequestStatus.New)).length > 0) {
         this.hasNotification = true;
       }
     });

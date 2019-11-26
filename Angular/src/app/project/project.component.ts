@@ -16,19 +16,19 @@ export class ProjectComponent implements OnInit {
   projects: Project[];
 
   constructor(private httpService: HttpService,
-    private dialogService:DialogService,
-    private service:ProjectService) { }
+    private dialogService: DialogService,
+    private service: ProjectService) { }
 
   ngOnInit() {
     this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects);
   }
 
-  onCreate(){
+  onCreate() {
     this.service.initializeFormGroup();
     this.dialogService.openFormDialog(ProjectFormComponent);
   }
 
-  onEdit(project){
+  onEdit(project) {
     this.service.populateForm(project);
     this.dialogService.openFormDialog(ProjectFormComponent);
   }

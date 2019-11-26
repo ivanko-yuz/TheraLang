@@ -1,4 +1,4 @@
-﻿using MvcWeb.TheraLang.ProjectStatus;
+﻿using MvcWeb.TheraLang.Enums;
 
 namespace MvcWeb.TheraLang.Entities
 {

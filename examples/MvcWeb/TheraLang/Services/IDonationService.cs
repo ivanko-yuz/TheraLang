@@ -8,6 +8,6 @@ namespace MvcWeb.TheraLang.Services
     {
         LiqPayCheckoutModel GetLiqPayCheckoutModel(string donationAmount, int projectId);
         Donation GetDonation(string donationId);
-        Task CheckLiqPayResponse(int projectId, string donationId, string data, string signature);
+        Task AddDonation(int projectId, string donationId, string data, string signature);
     }
 }

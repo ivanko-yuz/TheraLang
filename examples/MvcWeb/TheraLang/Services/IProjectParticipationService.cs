@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.ProjectStatus;
+using MvcWeb.TheraLang.Enums;
 
 namespace MvcWeb.TheraLang.Services
 {

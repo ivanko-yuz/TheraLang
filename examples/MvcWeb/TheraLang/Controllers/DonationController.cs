@@ -50,16 +50,22 @@ namespace MvcWeb.TheraLang.Controllers
         [HttpPost("{projectId}/{donationId}")]
         public async Task<ActionResult> Post(int projectId, string donationId, [FromForm]string data, [FromForm]string signature)
         {
-            if (String.IsNullOrEmpty(data))
+            if (string.IsNullOrEmpty(data))
             {
                 throw new ArgumentException($"{nameof(data)} can not be null");
             }
-            if (String.IsNullOrEmpty(signature))
+            if (string.IsNullOrEmpty(signature))
             {
                 throw new ArgumentException($"{nameof(signature)} can not be null");
             }
 
-            await _donationService.CheckLiqPayResponse(projectId, donationId, data, signature);        
+            string mySignature = LiqPayHelper.GetLiqPaySignature(data);
+            if (mySignature != signature)
+            {
+                throw new Exception($"Error, while checking LiqPay response signature, the {nameof(signature)} was not authenticated ");
+            }
+
+            await _donationService.AddDonation(projectId, donationId, data, signature);        
             return Ok();
         }
 

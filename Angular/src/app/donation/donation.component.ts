@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LiqpayCheckout } from './liqpay-checkout'
 import { DonationService } from './donation.service';
 import { ActivatedRoute } from '@angular/router';
+import { donationUrl } from '../shared/api-endpoint.constants';
 
 @Component({
   selector: 'app-donation',
@@ -25,7 +26,7 @@ export class DonationComponent implements OnInit {
   checkout() {
     this.donationService.getCheckoutModel(this.donationAmount, this.projectId).subscribe((checkoutModel: LiqpayCheckout) => {
       this.donationModel = checkoutModel;
-      window.open(`https://www.liqpay.ua/api/3/checkout?data=${this.donationModel.data}&signature=${this.donationModel.signature}`, "_blank");
+      window.open(`${donationUrl}?data=${this.donationModel.data}&signature=${this.donationModel.signature}`);
     });
 
   }

@@ -6,8 +6,8 @@
     <mat-card-header class="header">
       <mat-card-title>
         <a mat-button class="donate-button" [routerLink]="['/donation', project.id]">Підтримати</a>
-        <div>Зібрано: 
-            <h3 class="donation-amount">{{project?.donationAmount | number : '1.2-2'}} грн</h3>
+        <div>Зібрано:
+          <h3 class="donation-amount">{{project?.donationAmount | number : '1.2-2'}} грн</h3>
         </div>
       </mat-card-title>
     </mat-card-header>
@@ -19,14 +19,14 @@
     <mat-card-content>
       <div class="project-info">
         {{project?.description}}
-        <p>Проект починається: {{project?.projectBegin}}</p>
-        <p>Проект закінчується: {{project?.projectEnd}}</p>
+        <p>Проект починається: {{project?.projectBegin | date: 'dd/MM/yyyy'}}</p>
+        <p>Проект закінчується: {{project?.projectEnd | date: 'dd/MM/yyyy'}}</p>
       </div>
     </mat-card-content>
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
       <a mat-stroked-button [routerLink]="['/project', project.id]">Деталі</a>
-      <button mat-stroked-button (click)="onEdit(project)" >Змінити</button>
+      <button mat-stroked-button (click)="onEdit(project)">Змінити</button>
     </mat-card-actions>
   </mat-card>
 </div>

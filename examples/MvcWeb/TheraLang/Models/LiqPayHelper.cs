@@ -16,7 +16,7 @@ namespace MvcWeb.TheraLang.Models
         static LiqPayHelper()
         {
             _publicKey = "sandbox_i42859998914";
-            _privateKey = "sandbox_nqmktFe8ozPyPOGdjck7HgIfXp14kr0vcBF0RHhY";
+            _privateKey = "sandbox_nqmktFe8ozPyPOGdjck7HgIfXp14kr0vcBF0RHhY"; //TODO: set via env variables
         }
 
         static public LiqPayCheckoutModel GetLiqPayCheckoutModel(string donationAmount, int projectId)
@@ -31,7 +31,7 @@ namespace MvcWeb.TheraLang.Models
                 Currency = "UAH",
                 Description = "Благодійність",
                 ResultUrl = $"http://localhost:4200/result/{donationId}",
-                ServerUrl = $"http://63cd43c7.ngrok.io/api/donation/{projectId}/{donationId}",
+                ServerUrl = $"http://6a62a3af.ngrok.io/api/donation/{projectId}/{donationId}",
                 Language = "uk"
             };
 

@@ -4,9 +4,8 @@ export class Project {
         public name: string,
         public description: string,
         public details: string,
-        public projectBegin: Date,
+        public projectStart: Date,
         public projectEnd: Date,
-        public donationAmount: number,
-        public isActive: boolean,       
+        public donationAmount: number      
     ) { }
 }

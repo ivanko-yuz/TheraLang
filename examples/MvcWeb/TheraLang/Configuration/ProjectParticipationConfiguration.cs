@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.ProjectStatus;
+using MvcWeb.TheraLang.Enums;
 
 namespace MvcWeb.TheraLang.Configuration
 {

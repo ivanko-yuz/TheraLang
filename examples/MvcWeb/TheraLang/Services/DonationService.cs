@@ -27,7 +27,7 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                throw new Exception("Error while generation a request to LiqPay platform", ex);
+                throw new Exception($"Error while generation a request to LiqPay platform, {nameof(donationAmount)} or {nameof(projectId)} is invalid ", ex);
             }
            
         }
@@ -41,22 +41,17 @@ namespace MvcWeb.TheraLang.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error while recieving a donation by {nameof(donationId)}: {donationId} ", ex);
+                throw new Exception($"Error while receiving a donation by {nameof(donationId)}: {donationId} ", ex);
             }
            
         }
 
-        public async Task CheckLiqPayResponse(int projectId, string donationId, string data, string signature)
+        public async Task AddDonation(int projectId, string donationId, string data, string signature)
         {
             try
             {
                 byte[] responseData = Convert.FromBase64String(data);
-                string decodedString = Encoding.UTF8.GetString(responseData);
-                string mySignature = LiqPayHelper.GetLiqPaySignature(data);
-                if (mySignature != signature)
-                {
-                    throw new Exception($"Error, while checking LiqPay response signature, the {nameof(signature)} was not authenticated ");
-                }
+                string decodedString = Encoding.UTF8.GetString(responseData);                           
                 Donation donation = JsonConvert.DeserializeObject<Donation>(decodedString);
                 donation.ProjectId = projectId;
                 donation.DonationId = donationId;
