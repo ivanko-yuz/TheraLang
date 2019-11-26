@@ -1,4 +1,4 @@
-<div class="mainDiv" >
+<div class="mainDiv">
   <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
@@ -16,7 +16,8 @@
     <button mat-raised-button class="resButton" (click)="onJoin()">Приєднатися</button>
     <button mat-raised-button class="resButton" (click)="getResourcesData()">Ресурси</button>
   </div>
-  <div >
-    <app-resources-table [@openClose]="isOpen ? 'open' : 'closed'" id="resTabId" *ngIf="generateOnceResourcesTable" [sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>
+  <div>
+    <app-resources-table [@openClose]="isOpen ? 'open' : 'closed'" id="resTabId" *ngIf="generateOnceResourcesTable"
+      [sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>
   </div>
 </div>

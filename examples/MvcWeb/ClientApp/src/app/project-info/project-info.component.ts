@@ -32,7 +32,7 @@ export class ProjectInfoComponent implements OnInit {
               private participService:ProjectParticipationService,
               private notificationService: NotificationService) { }
 
-  projectInfo: Project ;
+  projectInfo: Project;
   projectId: number;
   generateOnceResourcesTable = false;
   sortedResourcesByCategory: Resource[][] = [];
