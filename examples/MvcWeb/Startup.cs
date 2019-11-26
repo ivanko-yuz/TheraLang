@@ -78,7 +78,7 @@ namespace MvcWeb
             services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddCors(options =>
-                options.AddPolicy("development mode", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+                options.AddPolicy("development mode", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())); //TODO: remove after app integrated
 
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
