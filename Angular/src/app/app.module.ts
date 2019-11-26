@@ -1,12 +1,12 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule, ErrorHandler } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, ErrorHandler } from '@angular/core';
 import {
-  MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
-  MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
-  MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
-  MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
-  MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
-  MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
+  MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule,
+  MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatStepperModule, MatDatepickerModule,
+  MatDialogModule, MatDividerModule, MatExpansionModule, MatIconModule, MatInputModule,
+  MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule, MatRadioModule,
+  MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
+  MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -50,8 +50,7 @@ import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
 import { TypeProjectComponent } from './type-project/type-project.component';
 import { TypeProjectHttp } from './type-project/TypeProjectHttp.service';
-
-
+import { TypeProjectService } from './type-project/type-project.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +64,7 @@ import { TypeProjectHttp } from './type-project/TypeProjectHttp.service';
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
-    ResourcesInternalTableComponent,    
+    ResourcesInternalTableComponent,
     GeneralResourcesTableComponent,
     GeneralResourcesInnerTableComponent,
     ConfirmDialogComponent,
@@ -133,19 +132,20 @@ import { TypeProjectHttp } from './type-project/TypeProjectHttp.service';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,
+    ScrollingModule
   ],
-  exports: [ResourcesInternalTableComponent,GeneralResourcesTableComponent],
-  providers: [ResourceService,
-     HttpService,
-     EventService,
-     {provide: ErrorHandler, useClass: ErrorHandlerService},
-     NotificationService,
-     DialogService,
-     ResourceCategoriesService
+  exports: [ResourcesInternalTableComponent, GeneralResourcesTableComponent],
+  providers: [
+    ResourceService,
+    HttpService,
+    EventService,
+    { provide: ErrorHandler, useClass: ErrorHandlerService },
+    NotificationService,
+    DialogService,
+    ResourceCategoriesService,
     TypeProjectHttp,
     TypeProjectService
-    ],
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

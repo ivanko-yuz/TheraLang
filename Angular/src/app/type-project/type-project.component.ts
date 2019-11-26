@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { TypeProjectService } from "./type-project.service";
-import { MatDialogRef } from "@angular/material";
+import { Component, OnInit } from '@angular/core';
+import { TypeProjectService } from './type-project.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: "app-type-project",
@@ -11,9 +11,9 @@ export class TypeProjectComponent implements OnInit {
   constructor(
     private dialog: MatDialogRef<TypeProjectComponent>,
     public service: TypeProjectService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   onClose() {
     this.service.form.reset();
     this.service.initializeFormGroup();

@@ -5,11 +5,11 @@ namespace MvcWeb.Services
 {
     public interface IProjectTypeService
     {
-        Task AddProjectType(ProjectType projectType);
+        Task Add(ProjectType projectType);
 
-        Task RemoveProjectType(int id);
+        Task Remove(int id);
 
-        Task UpdateProjectType(ProjectType projectType, int id);
+        Task Update(ProjectType projectType, int id);
 
 
     }

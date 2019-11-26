@@ -1,10 +1,9 @@
-import { Injectable } from "@angular/core";
-import { TypeProject } from "./TypeProject";
-import { FormBuilder, Validators } from "@angular/forms";
-import { Observable } from "rxjs";
-import { TypeProjectHttp } from "./TypeProjectHttp.service";
-import { NotificationService } from "../shared/services/notification.service";
-import { typeProjectUrl } from "../shared/api-endpoint.constants";
+import { Injectable } from '@angular/core';
+import { TypeProject } from './TypeProject';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { TypeProjectHttp } from './TypeProjectHttp.service';
+import { NotificationService } from '../shared/services/notification.service';
 
 @Injectable({
   providedIn: "root"
@@ -14,7 +13,7 @@ export class TypeProjectService {
     private fb: FormBuilder,
     private http: TypeProjectHttp,
     private notificationService: NotificationService
-  ) {}
+  ) { }
 
   public form = this.fb.group({
     id: [null],
@@ -36,8 +35,7 @@ export class TypeProjectService {
   }
 
   btnPut(typeProject: TypeProject) {
-    let putUrl = typeProjectUrl + typeProject.id;
-    this.http.put(putUrl, typeProject).subscribe(
+    this.http.put(typeProject).subscribe(
       response => {
         this.notificationService.success(
           "Project type was successfully updated"
@@ -61,15 +59,15 @@ export class TypeProjectService {
     return;
   }
 
-  btnDelete(id: number) {
-    this.http.delete(id).subscribe(
+  btnDelete(typeProjectId: number) {
+    this.http.delete(typeProjectId).subscribe(
       response => {
         this.notificationService.success(
           "Project type was successfully deleted"
         );
       },
       error => {
-        this.notificationService.warn("Project type was not updated");
+        this.notificationService.warn("Project type was not deleted");
       }
     );
   }

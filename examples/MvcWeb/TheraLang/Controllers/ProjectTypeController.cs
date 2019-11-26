@@ -6,7 +6,7 @@ using MvcWeb.TheraLang.Entities;
 
 namespace MvcWeb.TheraLang.Controllers
 {
-    [Route("api/ProjectType")]
+    [Route("api/projectTypes")]
     [ApiController]
     public class ProjectTypeController : ControllerBase
     {
@@ -18,19 +18,19 @@ namespace MvcWeb.TheraLang.Controllers
         private readonly IProjectTypeService _service;
 
         [HttpPost]
-        [Route("create/{ProjectType}")]
+        [Route("create/{projectType}")]
         public async Task<IActionResult> PostProjectType([FromBody]ProjectType projectType)
         {
             if (projectType == null)
             {
                 throw new ArgumentException($"{nameof(projectType)} can not be null");
             }
-            await _service.AddProjectType(projectType);
+            await _service.Add(projectType);
             return Ok();
         }
 
         [HttpPut]
-        [Route("update/{ProjectType}/{Id}")]
+        [Route("update/{projectType}/{id}")]
         public async Task<IActionResult> PutProjectType([FromBody] ProjectType projectType, int id)
         {
             if (id == default)
@@ -41,20 +41,20 @@ namespace MvcWeb.TheraLang.Controllers
             {
                 throw new ArgumentException($"{nameof(projectType)} can not be null");
             }
-            await _service.UpdateProjectType(projectType, id);
+            await _service.Update(projectType, id);
             return Ok();
         }
 
         
         [HttpDelete]
-        [Route("delete/{Id}")]
+        [Route("delete/{id}")]
         public async Task<IActionResult> DeleteProjectType([FromBody]int id)
         {
             if (id == default)
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            await _service.RemoveProjectType(id);
+            await _service.Remove(id);
             return Ok();
         }
     }
