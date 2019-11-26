@@ -23,7 +23,7 @@ namespace MvcWeb.TheraLang.Entities
 
         public int TypeId { get; set; }    
       
-        public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
+        public virtual ICollection<ResourceProject> ProjectResources { get; set; }
 
         public virtual ICollection<ProjectParticipation> ProjectParticipations { get; set; }
 

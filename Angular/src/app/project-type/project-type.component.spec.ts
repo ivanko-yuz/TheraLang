@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProjectTypeComponent } from './project-type.component';
 
 describe('ProjectTypeComponent', () => {

@@ -23,7 +23,7 @@ namespace MvcWeb.Services
             return _uow.Repository<Project>().Get().AsNoTracking().ToList();
         }
 
-        public async Task TryAddProject(Project projectViewModel)
+        public async Task Add(Project project)
         {
             var newProject = new Project { Name = projectViewModel.Name, Details = projectViewModel.Details,
                 Description = projectViewModel.Description, IsActive = projectViewModel.IsActive,

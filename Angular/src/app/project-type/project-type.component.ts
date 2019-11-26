@@ -7,6 +7,7 @@ import { ProjectType } from './project-type.model';
   templateUrl: './project-type.component.html',
   styleUrls: ['./project-type.component.less']
 })
+
 export class ProjectTypeComponent implements OnInit {
   projectTypes: ProjectType[];
   constructor(private projectTypeService: ProjectTypeService) { }
