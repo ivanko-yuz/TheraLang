@@ -50,7 +50,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.AspNetCore.Identity
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.AspNetCore.Identity.SQLServer", "core\Piranha.AspNetCore.Identity.SQLServer\Piranha.AspNetCore.Identity.SQLServer.csproj", "{CC742AA4-A544-46D4-901C-7A605B4F132B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLangWeb", "examples\MvcWeb\TheraLangWeb.csproj", "{14F9CA8A-6532-40CC-81D6-9763351AFD91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcWeb", "examples\MvcWeb\MvcWeb.csproj", "{14F9CA8A-6532-40CC-81D6-9763351AFD91}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96510F63-4191-494B-B4A3-6C0497837F6A} = {96510F63-4191-494B-B4A3-6C0497837F6A}
+		{4BCC1E64-AACC-4D9B-973E-6072416D98A1} = {4BCC1E64-AACC-4D9B-973E-6072416D98A1}
+		{22D8ED84-0A3B-4A02-B17B-ED8839323CCC} = {22D8ED84-0A3B-4A02-B17B-ED8839323CCC}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.Extensions.Sync", "core\Piranha.Extensions.Sync\Piranha.Extensions.Sync.csproj", "{D17485D2-371E-4F7C-952F-57B26606FC6A}"
 EndProject

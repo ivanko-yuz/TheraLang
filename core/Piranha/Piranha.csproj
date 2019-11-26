@@ -6,6 +6,8 @@
     <AssemblyTitle>Piranha</AssemblyTitle>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Sdk.Razor" Version="3.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.1.1" />
