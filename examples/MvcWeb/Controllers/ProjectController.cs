@@ -61,7 +61,7 @@ namespace MvcWeb.Controllers
             {
                 throw new ArgumentException($"{nameof(page)} can not be 0");
             }
-            else if (pageSize == default)
+            if (pageSize == default)
             {
                 throw new ArgumentException($"{nameof(pageSize)} can not be 0");
             }
