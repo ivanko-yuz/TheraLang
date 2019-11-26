@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Project } from '../project/project';
 import { Resource } from '../general-resources/resource-models/resource';
 import { trigger, state, style } from '@angular/animations';
-import { ResourceService } from '../resources-table/resource.service';
 import { HttpService } from '../project/http.service';
 
 @Component({
@@ -29,7 +28,7 @@ export class ProjectInfoComponent implements OnInit {
   constructor(private route: ActivatedRoute, private http: HttpService,
               private resourceService: ResourceService) { }
 
-  projectInfo: Project ;
+  projectInfo: Project;
   projectId: number;
   generateOnceResourcesTable = false;
   sortedResourcesByCategory: Resource[][] = [];

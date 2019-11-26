@@ -16,6 +16,9 @@ using MvcWeb.TheraLang.UnitOfWork;
 using MvcWeb.Validators;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
+using MvcWeb.TheraLang.Services;
+using MvcWeb.TheraLang.Repository;
+
 
 namespace MvcWeb
 {
@@ -94,7 +97,6 @@ namespace MvcWeb
             }
 
             App.Init(api);
-
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.Full;
 
