@@ -23,7 +23,7 @@ namespace MvcWeb.Services
             return _uow.Repository<Project>().Get().AsNoTracking().ToList();
         }
 
-        public async Task Add(Project project)
+        public async Task Add(Project projectViewModel)
         {
             var newProject = new Project { Name = projectViewModel.Name, Details = projectViewModel.Details,
                 Description = projectViewModel.Description, IsActive = projectViewModel.IsActive,
@@ -44,6 +44,7 @@ namespace MvcWeb.Services
         {
             try
             {
+                
                 var projects = _uow.Repository<Project>().Get().AsNoTracking();
                 IEnumerable<Project> projectsPerPages = projects.Skip((pageNumber - 1) * pageSize).Take(pageSize);
                 return projectsPerPages;
