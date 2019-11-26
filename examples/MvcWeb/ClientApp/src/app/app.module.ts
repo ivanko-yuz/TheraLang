@@ -36,10 +36,6 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
-import { PiranhaPageComponent } from './cms-api/piranha-page/piranha-page.component';
-import { BlockComponent } from './cms-api/cms-shared/block/block.component';
-import { GalleryBlockComponent } from './cms-api/cms-shared/gallery-block/gallery-block.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CustomDatePipe } from './shared/pipes/custom.datepipe';
 import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
 import { ResourceService } from './project-info/resources-table-for-project/resources-table/resource.service';
@@ -67,20 +63,17 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
       ProjectParticipantsComponent,
       CustomDatePipe,
       ResourcesTableComponent,
-      PiranhaPageComponent,
-      BlockComponent,
-      GalleryBlockComponent,
       ConfirmDialogComponent,
       ErrorComponent,
       ProjectFormComponent,
-      ResourcesInternalTableComponent,    
+      ResourcesInternalTableComponent,
       GeneralResourcesTableComponent,
       GeneralResourcesInnerTableComponent,
       ToolbarItemComponent,
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
-      ProjectFormComponent, 
+      ProjectFormComponent,
       ConfirmDialogComponent,
    ],
    imports: [
@@ -139,13 +132,10 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
       MatTreeModule,
       PortalModule,
       ScrollingModule,
-      NgbModule,
       CmsModule,
    ],
    exports: [
       ResourcesInternalTableComponent,
-      BlockComponent,
-      GalleryBlockComponent
    ],
    providers: [
       ResourceService,
@@ -157,7 +147,7 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
       ResourceCategoriesService
    ],
    bootstrap: [
-      AppComponent, GalleryBlockComponent
+      AppComponent,
    ]
 })
 export class AppModule { }

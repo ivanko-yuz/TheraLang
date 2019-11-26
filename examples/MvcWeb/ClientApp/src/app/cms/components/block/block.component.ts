@@ -1,4 +1,4 @@
-import { Block } from './../../models/block.model';
+import { Block } from '../../models/block.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -6,13 +6,11 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './block.component.html',
   styleUrls: ['./block.component.less']
 })
-export class BlockComponent implements OnInit {
+export class BlockComponent {
   @Input() model: Block;
   imgUrl: string;
+
   constructor() { }
-  
-  ngOnInit() {   
-  }
 
   cutLink(): string {
     return this.model.body.media.publicUrl.substr(1);
