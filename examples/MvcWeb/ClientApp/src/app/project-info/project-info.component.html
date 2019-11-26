@@ -13,8 +13,8 @@
     </mat-card-content>
   </mat-card>
   <div class="bottom-buttons">
+    <button mat-raised-button class="resButton" (click)="onJoin()">Приєднатися</button>
     <button mat-raised-button class="resButton" (click)="getResourcesData()">Ресурси</button>
-    <button mat-raised-button class="resButton" (click)="onJoin()">Ресурси</button>
   </div>
   <div >
     <app-resources-table [@openClose]="isOpen ? 'open' : 'closed'" id="resTabId" *ngIf="generateOnceResourcesTable" [sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>

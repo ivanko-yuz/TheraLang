@@ -27,8 +27,8 @@ namespace MvcWeb.TheraLang.Controllers
         }
 
         [HttpPost]
-        [Route("create/{userId}/{projectId}")]
-        public async Task<IActionResult> Post([FromBody] int userId, int projectId)
+        [Route("create/{projectId}")]
+        public async Task<IActionResult> Post([FromBody] int projectId, int userId)
         {
             if( userId == default || projectId == default )
             {

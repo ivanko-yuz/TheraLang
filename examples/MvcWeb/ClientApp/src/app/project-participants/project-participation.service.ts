@@ -12,6 +12,6 @@ export class ProjectParticipationService {
   private url = participationUrl; 
 
   createParticipRequest(projectId) {
-    return this.http.post(this.url + '/' + 'create', projectId);
+    return this.http.post(this.url + '/' + 'create', projectId, {observe: 'response'});
 }
 }

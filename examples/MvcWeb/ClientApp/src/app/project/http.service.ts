@@ -45,11 +45,11 @@ export class HttpService{
     }
 
     createProject(project:Project) {
-        return this.http.post(this.url + 'project' + '/' + 'create', project);
+        return this.http.post(this.url + 'project' + '/' + 'create', project, {observe: 'response'});
     }
 
     updateProject(project: Project) {
-        return this.http.put(this.url + '/' + project.id, project);
+        return this.http.put(this.url + '/' + project.id, project, {observe: 'response'});
     }
   
 }

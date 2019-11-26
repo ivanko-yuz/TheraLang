@@ -11,7 +11,7 @@
       <mat-error *ngIf="service.form.controls['name'].errors?.maxlength">Завелика назва</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input formControlName="description" required matInput placeholder="Опис">
+      <input formControlName="description"  required matInput placeholder="Опис">
       <mat-error *ngIf="service.form.controls['description'].errors?.required">Це поле є обов'язковим</mat-error>
       <mat-error *ngIf="service.form.controls['description'].errors?.minlength">Мінімум 5 знаків</mat-error>
       <mat-error *ngIf="service.form.controls['description'].errors?.maxlength">Завеликий опис</mat-error>
@@ -21,7 +21,7 @@
       <mat-error *ngIf="service.form.controls['details'].errors?.maxlength">Завеликий опис</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input formControlName="projectStart" matInput [matDatepicker]="picker" required placeholder="Дата початку">
+      <input formControlName="projectStart" type=[valueAsDate] matInput [matDatepicker]="picker" required placeholder="Дата початку">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="service.form.controls['projectStart'].errors?.required">Це поле є обов'язковим</mat-error>
@@ -29,7 +29,8 @@
     <mat-form-field>
       <input formControlName="projectEnd" matInput [matDatepicker]="picker1" placeholder="Дата завершення">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
+      <mat-datepicker #picker1 ></mat-datepicker>
+      <mat-error *ngIf="service.form.controls['projectEnd'].hasError('matDatepickerFilter')">щось там</mat-error>
     </mat-form-field>
       <mat-form-field>
         <input formControlName="type" required matInput placeholder="Тип">

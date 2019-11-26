@@ -6,6 +6,7 @@ import { trigger, state, style } from '@angular/animations';
 import { HttpService } from '../project/http.service';
 import { ProjectParticipationService } from '../project-participants/project-participation.service';
 import { ResourceService } from './resources-table-for-project/resources-table/resource.service';
+import { NotificationService } from '../shared/services/notification.service';
 
 @Component({
   selector: 'app-project-info',
@@ -27,7 +28,9 @@ import { ResourceService } from './resources-table-for-project/resources-table/r
 export class ProjectInfoComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpService,
-              private resourceService: ResourceService, private participService:ProjectParticipationService) { }
+              private resourceService: ResourceService, 
+              private participService:ProjectParticipationService,
+              private notificationService: NotificationService) { }
 
   projectInfo: Project ;
   projectId: number;
@@ -53,7 +56,16 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   onJoin(){
-    this.participService.createParticipRequest(this.projectId);
+    this.participService.createParticipRequest(this.projectId).subscribe(
+      (res) => {
+       if (res.ok){
+       this.notificationService.success('Заявку надіслано')
+       }
+      },
+      (error) => {
+         console.log(error);
+         this.notificationService.warn('Неможливо надіслати заявку')
+      });;
   }
 }
 
