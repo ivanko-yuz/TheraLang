@@ -1,0 +1,7 @@
+<ngb-carousel>
+    <ng-template ngbSlide *ngFor="let item of block.items">
+        <div class="picsum-img-wrapper">
+            <img [src]="this.cutLink(item.body.media.publicUrl)" alt="Random first slide">
+        </div>
+    </ng-template>
+</ngb-carousel>

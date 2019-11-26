@@ -834,6 +834,9 @@ namespace MvcWeb.Migrations
                     b.Property<DateTime>("ProjectStart");
 
                     b.Property<int>("TypeId");
+                    b.Property<int>("StatusId")
+                        .HasMaxLength(250);
+                 
 
                     b.HasKey("Id");
 

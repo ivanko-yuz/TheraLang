@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{42A64587-89B5-48F2-84D4-85B97F7847F1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{A82A5922-BF05-4DD7-A2C1-DD22F1AD6A57}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TheraLang", "TheraLang", "{A82A5922-BF05-4DD7-A2C1-DD22F1AD6A57}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha", "core\Piranha\Piranha.csproj", "{7D7EC9B2-BB1B-43FA-BBDC-1AB11D132F07}"
 EndProject
@@ -50,6 +50,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.AspNetCore.Identity
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.AspNetCore.Identity.SQLServer", "core\Piranha.AspNetCore.Identity.SQLServer\Piranha.AspNetCore.Identity.SQLServer.csproj", "{CC742AA4-A544-46D4-901C-7A605B4F132B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLangWeb", "examples\MvcWeb\TheraLangWeb.csproj", "{14F9CA8A-6532-40CC-81D6-9763351AFD91}"
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcWeb", "examples\MvcWeb\MvcWeb.csproj", "{14F9CA8A-6532-40CC-81D6-9763351AFD91}"
 	ProjectSection(ProjectDependencies) = postProject
 		{96510F63-4191-494B-B4A3-6C0497837F6A} = {96510F63-4191-494B-B4A3-6C0497837F6A}
