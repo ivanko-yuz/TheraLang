@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MvcWeb.TheraLang.Services;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using TheraLang.Web.TheraLang.DLL.Services;
 
-namespace MvcWeb.TheraLang.Controllers
+namespace TheraLang.Web.TheraLang.DLL.Controllers
 {
     [Route("api/category")]
     [ApiController]

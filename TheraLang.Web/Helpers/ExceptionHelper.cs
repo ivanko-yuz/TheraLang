@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using MvcWeb.Models;
+using TheraLang.Web.Models;
 
-namespace MvcWeb.Helpers
+namespace TheraLang.Web.Helpers
 {
     public static class ExceptionHelper
     {

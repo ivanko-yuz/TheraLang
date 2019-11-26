@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace MvcWeb.TheraLang.Repository
+namespace TheraLang.Web.TheraLang.DLL.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {

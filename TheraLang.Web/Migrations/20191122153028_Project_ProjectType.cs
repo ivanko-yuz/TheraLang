@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MvcWeb.Migrations
+namespace TheraLang.Web.Migrations
 {
     public partial class Project_ProjectType : Migration
     {

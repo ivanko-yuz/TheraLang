@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace MvcWeb.TheraLang.Services
+namespace TheraLang.Web.TheraLang.DLL.Services
 {
     public interface IResourceCategoryService
     {

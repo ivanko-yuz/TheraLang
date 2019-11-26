@@ -5,19 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MvcWeb.Db;
-using MvcWeb.Services;
-using MvcWeb.TheraLang.Services;
-using MvcWeb.TheraLang.UnitOfWork;
 using Microsoft.Extensions.Logging;
-using MvcWeb.Helpers;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
-using MvcWeb.TheraLang.Services;
-using MvcWeb.TheraLang.Repository;
+using TheraLang.Web.Helpers;
+using TheraLang.Web.Services;
+using TheraLang.Web.TheraLang.DLL;
+using TheraLang.Web.TheraLang.DLL.Services;
+using TheraLang.Web.TheraLang.DLL.UnitOfWork;
 
-
-namespace MvcWeb
+namespace TheraLang.Web
 {
     public class Startup
     {
@@ -67,8 +64,8 @@ namespace MvcWeb
             #region register services via IServiceCollection
 
              services.AddDbContext<IttmmDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IUnitOfWork, UnitOfWork.UnitOfWork>(provider =>
-               new UnitOfWork.UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
+            services.AddTransient<IUnitOfWork, UnitOfWork>(provider =>
+               new UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
             services.AddCors(options =>

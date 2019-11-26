@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MvcWeb.Migrations
+namespace TheraLang.Web.Migrations
 {
     public partial class MoveBlockParentId : Migration
     {

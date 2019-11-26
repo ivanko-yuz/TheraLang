@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MvcWeb.TheraLang.Entities;
+using TheraLang.Web.TheraLang.DLL.Entities;
 
-namespace MvcWeb.TheraLang.Services
+namespace TheraLang.Web.TheraLang.DLL.Services
 {
     public interface IProjectParticipationService
     {

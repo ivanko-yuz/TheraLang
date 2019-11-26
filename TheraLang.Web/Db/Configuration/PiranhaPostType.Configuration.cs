@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MvcWeb.Db.Entities;
+using TheraLang.Web.Db.Entities;
 
-namespace MvcWeb.Db.Configuration
+namespace TheraLang.Web.Db.Configuration
 {
     public class PiranhaPostTypeConfiguration : IEntityTypeConfiguration<PiranhaPostType>
     {

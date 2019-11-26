@@ -1,9 +1,9 @@
-﻿using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.UnitOfWork;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using TheraLang.Web.TheraLang.DLL.Entities;
+using TheraLang.Web.TheraLang.DLL.UnitOfWork;
 
-namespace MvcWeb.TheraLang.Services
+namespace TheraLang.Web.TheraLang.DLL.Services
 {
     public class ResourceCategoryService : IResourceCategoryService
     {

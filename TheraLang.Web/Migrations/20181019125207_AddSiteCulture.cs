@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MvcWeb.Migrations
+namespace TheraLang.Web.Migrations
 {
     public partial class AddSiteCulture : Migration
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using MvcWeb.Services;
-using MvcWeb.TheraLang.Entities;
+using TheraLang.Web.Services;
+using TheraLang.Web.TheraLang.DLL.Entities;
 
-namespace MvcWeb.Controllers
+namespace TheraLang.Web.Controllers
 {
     [ApiController]
     [Route("api/types")]

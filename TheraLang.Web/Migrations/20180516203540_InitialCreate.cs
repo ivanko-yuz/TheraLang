@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
-namespace MvcWeb.Migrations
+namespace TheraLang.Web.Migrations
 {
     public partial class InitialCreate2 : Migration
     {

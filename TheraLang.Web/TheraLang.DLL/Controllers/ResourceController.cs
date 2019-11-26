@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
-using MvcWeb.TheraLang.Constants;
-using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using TheraLang.Web.TheraLang.DLL.Constants;
+using TheraLang.Web.TheraLang.DLL.Entities;
+using TheraLang.Web.TheraLang.DLL.Services;
 
-namespace MvcWeb.TheraLang.Controllers
+namespace TheraLang.Web.TheraLang.DLL.Controllers
 {
     [Route("api/resource")]
     [ApiController]

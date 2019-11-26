@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MvcWeb.TheraLang.Repository;
-using MvcWeb.TheraLang.UnitOfWork;
+using TheraLang.Web.TheraLang.DLL.Repository;
 
-namespace MvcWeb.UnitOfWork
+namespace TheraLang.Web.TheraLang.DLL.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

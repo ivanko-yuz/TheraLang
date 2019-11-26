@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using MvcWeb.Services;
-using MvcWeb.TheraLang.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using TheraLang.Web.Services;
+using TheraLang.Web.TheraLang.DLL.Entities;
 
-namespace MvcWeb.Controllers
+namespace TheraLang.Web.Controllers
 {
     [Route("api/project")]
     [ApiController]

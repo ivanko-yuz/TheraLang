@@ -10,10 +10,10 @@
 
 using Piranha.AttributeBuilder;
 using Piranha.Extend;
-using Piranha.Models;
 using Piranha.Extend.Fields;
+using Piranha.Models;
 
-namespace MvcWeb.Models
+namespace TheraLang.Web.Models
 {
     /// <summary>
     /// Basic page with main content in markdown.

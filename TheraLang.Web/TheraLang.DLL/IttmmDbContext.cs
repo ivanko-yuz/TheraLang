@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using MvcWeb.Db.Configuration;
-using MvcWeb.Db.Entities;
-using MvcWeb.TheraLang.Configuration;
-using MvcWeb.TheraLang.Entities;
+using TheraLang.Web.Db.Configuration;
+using TheraLang.Web.Db.Entities;
+using TheraLang.Web.TheraLang.DLL.Configuration;
+using TheraLang.Web.TheraLang.DLL.Entities;
 
-namespace MvcWeb.Db
+namespace TheraLang.Web.TheraLang.DLL
 {
     public class IttmmDbContext : DbContext
     {

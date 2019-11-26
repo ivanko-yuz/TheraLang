@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvcWeb.TheraLang.Entities
+namespace TheraLang.Web.TheraLang.DLL.Entities
 {
     public abstract class BaseEntity
     {

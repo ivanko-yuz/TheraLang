@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-namespace MvcWeb.TheraLang.Entities
+﻿using System.Collections.Generic;
+
+namespace TheraLang.Web.TheraLang.DLL.Entities
 {
     public class ProjectType
     {   

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcWeb.TheraLang.Repository
+namespace TheraLang.Web.TheraLang.DLL.Repository
 {
     public interface IRepository<TEntity> where TEntity : class
     {

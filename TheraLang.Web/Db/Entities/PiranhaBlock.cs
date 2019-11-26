@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MvcWeb.Db.Entities
+namespace TheraLang.Web.Db.Entities
 {
     public class PiranhaBlock
     {

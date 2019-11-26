@@ -1,12 +1,11 @@
-﻿using MvcWeb.TheraLang.Entities;
-﻿using Microsoft.EntityFrameworkCore;
-using MvcWeb.TheraLang.UnitOfWork;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TheraLang.Web.TheraLang.DLL.Entities;
+using TheraLang.Web.TheraLang.DLL.UnitOfWork;
 
-namespace MvcWeb.TheraLang.Services
+namespace TheraLang.Web.TheraLang.DLL.Services
 {
     public class ResourceService : IResourceService
     {
