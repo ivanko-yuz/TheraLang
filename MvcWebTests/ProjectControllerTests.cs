@@ -2,7 +2,6 @@ using Moq;
 using MvcWeb.Controllers;
 using MvcWeb.Services;
 using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.UnitOfWork;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
