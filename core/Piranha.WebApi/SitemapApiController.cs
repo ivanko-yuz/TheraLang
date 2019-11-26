@@ -8,11 +8,11 @@
  *
  */
 
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Piranha.Models;
+using System;
+using System.Threading.Tasks;
 
 namespace Piranha.WebApi
 {
