@@ -1,6 +1,7 @@
 import { Page } from '../models/root-object.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from 'src/app/project/http.service';
+import { CmsRoute } from 'src/app/toolbar/toolbar-item/cms-route';
 
 @Component({
   selector: 'app-piranha-page',
@@ -9,13 +10,12 @@ import { HttpService } from 'src/app/project/http.service';
 })
 export class PiranhaPageComponent implements OnInit {
   page: Page;
-  model: any;
+  @Input() cmsRoute: CmsRoute;
   ifGenerate: boolean = false;
   constructor(private http: HttpService) { }
 
   async ngOnInit() {
-    // There will be used service from uttmm-46.
-    this.page = await this.http.getPiranhaPageById(); 
+    this.page = await this.http.getPiranhaPageById(this.cmsRoute.id);
     this.ifGenerate = true;
   }
 

@@ -1,4 +1,3 @@
-import { PiranhaPageComponent } from './cms-api/piranha-page/piranha-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjectComponent } from './project/project.component';
