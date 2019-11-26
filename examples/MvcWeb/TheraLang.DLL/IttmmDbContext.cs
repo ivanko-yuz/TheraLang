@@ -9,12 +9,12 @@ namespace MvcWeb.Db
     public class IttmmDbContext : DbContext
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
-        {
-           
+        {          
         }
 
         #region UTTMM_Entities
         public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<ProjectType> Types { get; set; }
         public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<ResourceProject> ResourceProject { get; set; }
@@ -93,6 +93,7 @@ namespace MvcWeb.Db
 
             #region UTTMM_Entities_Cfg
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());
+            modelBuilder.ApplyConfiguration(new ProjectTypeConfigurationcs());
             modelBuilder.ApplyConfiguration(new ResourceCategoriesConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceProjectConfiguration());

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcWeb.Db;
 
 namespace MvcWeb.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191122153028_Project_ProjectType")]
+    partial class Project_ProjectType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -826,17 +828,12 @@ namespace MvcWeb.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250);
-                    b.Property<int>("StatusId")
-                        .HasMaxLength(250);
-                        
+
                     b.Property<DateTime>("ProjectEnd");
 
                     b.Property<DateTime>("ProjectStart");
 
                     b.Property<int>("TypeId");
-                    b.Property<int>("StatusId")
-                        .HasMaxLength(250);
-                 
 
                     b.HasKey("Id");
 
@@ -1254,7 +1251,7 @@ namespace MvcWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MvcWeb.TheraLang.Entities.Resource", "Resource")
-                        .WithMany("ResourceToProjects")
+                        .WithMany("ResourceProjects")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

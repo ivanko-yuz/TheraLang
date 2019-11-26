@@ -14,7 +14,6 @@ namespace MvcWeb.UnitOfWork
 
         private DbContext Context { get; }
 
-
         public IRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
             return new Repository<TEntity>(Context.Set<TEntity>());

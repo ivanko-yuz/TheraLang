@@ -8,6 +8,7 @@ import { ProjectParticipantsComponent } from './project-participants/project-par
 import {CmsModule} from './cms/cms.module';
 import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
 import { ErrorComponent } from './shared/components/error/error.component';
+import { ProjectTypeComponent } from './project-type/project-type.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'resources', component: GeneralResourcesTableComponent },
   { path: 'error', component: ErrorComponent },
   { path: '**', loadChildren: () => CmsModule},
+  {path: 'projectTypes', component: ProjectTypeComponent}
 ];
 
 @NgModule({
@@ -28,6 +30,6 @@ export class AppRoutingModule { }
 
 export const routingComponents = [
   ProjectParticipantsComponent, ProjectComponent, HomeComponent, ProjectInfoComponent,
-  ErrorComponent,
+  GeneralResourcesComponent, ErrorComponent, ProjectTypeComponent
 ];
 

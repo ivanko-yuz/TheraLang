@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 
 namespace MvcWeb.TheraLang.Entities
 {
@@ -6,11 +7,23 @@ namespace MvcWeb.TheraLang.Entities
     {
         public int Id { get; set; }
 
-        public string Type { get; set; }
-
         public string Name { get; set; }
         
         public ProjectStatus StatusId { get; set;  }
+
+        public string Description { get; set; }
+
+        public string Details { get; set; }
+
+        public DateTime ProjectStart { get; set; }
+
+        public DateTime ProjectEnd { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public virtual ProjectType Type {get; set;}
+
+        public int TypeId { get; set; }    
 
         public virtual ICollection<ResourceProject> ProjectResources { get; set; }
 
