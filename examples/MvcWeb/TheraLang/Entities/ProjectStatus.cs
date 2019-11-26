@@ -1,5 +1,4 @@
-﻿
-namespace MvcWeb.TheraLang.Entities
+﻿namespace MvcWeb.TheraLang.Entities
 {
     public enum ProjectStatus 
     {

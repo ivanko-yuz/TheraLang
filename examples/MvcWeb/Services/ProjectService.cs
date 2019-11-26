@@ -4,9 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MvcWeb.TheraLang.Constants;
-using MvcWeb.Models;
 using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.Repository;
 using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.Services
@@ -59,11 +57,14 @@ namespace MvcWeb.Services
 
         public async Task ChangeStatus(int projectId, ProjectStatus status)
         {
-            var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == projectId);
-            if (project is null)
-            {
-                throw new Exception($"Error while fetching the projects for {nameof(pageNumber)}={pageNumber} and {nameof(pageSize)}={pageSize}");
-            }
+ 
+                var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == projectId);
+                if (project is null)
+                {
+                    throw new NullReferenceException($"{ nameof(project) } cannot be null");
+                }
+                project.StatusId = status;
+                await _uow.SaveChangesAsync();          
         }
 
         public async Task UpdateAsync(int id, Project project)

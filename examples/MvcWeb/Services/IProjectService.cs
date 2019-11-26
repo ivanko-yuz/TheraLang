@@ -6,6 +6,8 @@ namespace MvcWeb.Services
 {
     public interface IProjectService
     {
+        Task ChangeStatus(int id, ProjectStatus rejected);
+
         Task Add(Project projectViewModel);
 
         Task UpdateAsync(int id, Project project);
