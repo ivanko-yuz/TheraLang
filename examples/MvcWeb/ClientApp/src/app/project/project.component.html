@@ -3,31 +3,6 @@
 </button>
 
 <div *ngFor="let project of projects">
-<<<<<<< HEAD:Angular/src/app/project/project.component.html
-    <mat-card class="project-card">
-        <mat-card-header class="header">
-            <mat-card-title>
-                <a mat-button class="donate-button" [routerLink]="['/project', project.id]">Підтримати</a>
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-title>{{project.name}}</mat-card-title>
-        <mat-card-subtitle>Ukraine, id - {{project.id}}</mat-card-subtitle>
-        <img class="project-image" mat-card-image src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg" alt="">
-        <mat-card-content>
-            <div class="project-info">
-                {{project.description}}
-                <p>Проект починається: {{project.projectBegin}}</p>
-                <p>Проект закінчується: {{project.projectEnd}}</p>
-            </div>
-        </mat-card-content>
-        <div class="clear"></div>
-        <mat-card-actions class="get-details-button">
-            <a mat-stroked-button [routerLink]="['/project', project.id]">Деталі</a>
-            <button mat-stroked-button (click)="onEdit(project)">Змінити</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
-=======
   <mat-card class="project-card">
     <mat-card-header class="header">
       <mat-card-title>
@@ -49,8 +24,7 @@
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
       <a mat-stroked-button [routerLink]="['/project', project.id]">Деталі</a>
-      <button mat-stroked-button (click)="onEdit(project)" >Змінити</button>
+      <button mat-stroked-button (click)="onEdit(project)">Змінити</button>
     </mat-card-actions>
   </mat-card>
 </div>
->>>>>>> master:examples/MvcWeb/ClientApp/src/app/project/project.component.html

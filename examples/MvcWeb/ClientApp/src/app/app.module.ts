@@ -51,12 +51,8 @@ import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
-<<<<<<< HEAD:Angular/src/app/app.module.ts
-import { CmsModule } from './cms/cms.module';
-=======
 import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
-import {CmsModule} from './cms/cms.module';
->>>>>>> master:examples/MvcWeb/ClientApp/src/app/app.module.ts
+import { CmsModule } from './cms/cms.module';
 import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
 import { TypeProjectComponent } from './type-project/type-project.component';
 import { TypeProjectHttp } from './type-project/TypeProjectHttp.service';

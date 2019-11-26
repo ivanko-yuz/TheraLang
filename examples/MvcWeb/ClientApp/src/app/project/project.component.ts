@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
 import { Project } from './project';
-<<<<<<< HEAD:Angular/src/app/project/project.component.ts
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { TypeProjectComponent } from '../type-project/type-project.component';
-import { TypeProjectService } from '../type-project/type-project.service';
-=======
->>>>>>> master:examples/MvcWeb/ClientApp/src/app/project/project.component.ts
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { ProjectService } from './project.service';
 import { DialogService } from '../shared/services/dialog.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { TypeProjectComponent } from '../type-project/type-project.component';
+import { TypeProjectService } from '../type-project/type-project.service';
 
 
 @Component({
