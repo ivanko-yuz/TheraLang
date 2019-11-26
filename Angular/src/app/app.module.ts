@@ -36,6 +36,10 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
+import { PiranhaPageComponent } from './cms-api/piranha-page/piranha-page.component';
+import { BlockComponent } from './cms-api/cms-shared/block/block.component';
+import { GalleryBlockComponent } from './cms-api/cms-shared/gallery-block/gallery-block.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDatePipe } from './shared/pipes/custom.datepipe';
 import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
 import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
@@ -48,6 +52,8 @@ import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
+import { CmsModule } from './cms/cms.module';
+import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
 import { TypeProjectComponent } from './type-project/type-project.component';
 import { TypeProjectHttp } from './type-project/TypeProjectHttp.service';
 import { TypeProjectService } from './type-project/type-project.service';
@@ -58,24 +64,30 @@ import { TypeProjectService } from './type-project/type-project.service';
     routingComponents,
     ToolbarComponent,
     ProjectComponent,
-    ProjectFormComponent,
+    HomeComponent,
     ProjectInfoComponent,
-    ProjectFormComponent,
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
+    ResourcesTableComponent,
+    PiranhaPageComponent,
+    BlockComponent,
+    GalleryBlockComponent,
+    ConfirmDialogComponent,
+    ErrorComponent,
+    ProjectFormComponent,
     ResourcesInternalTableComponent,
     GeneralResourcesTableComponent,
     GeneralResourcesInnerTableComponent,
-    ConfirmDialogComponent,
-    ErrorComponent,
-    HomeComponent
+    ToolbarItemComponent,
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
-    TypeProjectComponent,
     ProjectFormComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TypeProjectComponent,
+    TypeProjectHttp,
+    TypeProjectService
   ],
   imports: [
     BrowserModule,
@@ -132,9 +144,15 @@ import { TypeProjectService } from './type-project/type-project.service';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    NgbModule,
+    CmsModule,
   ],
-  exports: [ResourcesInternalTableComponent, GeneralResourcesTableComponent],
+  exports: [
+    ResourcesInternalTableComponent,
+    BlockComponent,
+    GalleryBlockComponent
+  ],
   providers: [
     ResourceService,
     HttpService,
@@ -142,10 +160,10 @@ import { TypeProjectService } from './type-project/type-project.service';
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     NotificationService,
     DialogService,
-    ResourceCategoriesService,
-    TypeProjectHttp,
-    TypeProjectService
+    ResourceCategoriesService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent, GalleryBlockComponent
+  ]
 })
 export class AppModule { }

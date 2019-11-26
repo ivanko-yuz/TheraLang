@@ -16,6 +16,9 @@ using MvcWeb.TheraLang.UnitOfWork;
 using MvcWeb.Validators;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
+using MvcWeb.TheraLang.Services;
+using MvcWeb.TheraLang.Repository;
+
 
 namespace MvcWeb
 {
@@ -74,6 +77,9 @@ namespace MvcWeb
 
             services.AddTransient<IValidator<ProjectViewModel>, ProjectViewModelValidator>();
             services.AddTransient<IProjectService, ProjectService>();
+            services.AddCors(options =>
+                options.AddPolicy("development mode", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())); //TODO: remove after app integrated
+
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
@@ -86,11 +92,11 @@ namespace MvcWeb
             app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
+                app.UseCors("development mode");
                 app.UseDeveloperExceptionPage();
             }
 
             App.Init(api);
-
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.Full;
 
@@ -121,10 +127,7 @@ namespace MvcWeb
             // Register middleware
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UsePiranha();
             app.UsePiranhaManager();
-            app.UsePiranhaSummernote();
-            //app.UsePiranhaTinyMCE();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",

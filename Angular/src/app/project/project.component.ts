@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
 import { Project } from './project';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { Resource } from '../resources-table/resource';
 import { TypeProjectComponent } from '../type-project/type-project.component';
 import { TypeProjectService } from '../type-project/type-project.service';
 import { ProjectFormComponent } from '../project-form/project-form.component';
