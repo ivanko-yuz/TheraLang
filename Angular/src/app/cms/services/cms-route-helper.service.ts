@@ -31,7 +31,6 @@ export class CmsRouteHelperService {
   private subscribeRoute(): void {
     const subscription = this.currentRouteSubject.subscribe(next => {
       this.currentRoute = next;
-      console.log(next); // in order to show that it works // TODO: remove logging cmsRoute
     });
     this.subscription.add(subscription);
   }
