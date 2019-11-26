@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using MvcWeb.TheraLang.Constants;
+using Microsoft.EntityFrameworkCore;
+using MvcWeb.Models;
 using MvcWeb.TheraLang.Entities;
+using MvcWeb.TheraLang.Repository;
 using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.Services
@@ -23,7 +25,7 @@ namespace MvcWeb.Services
             return _uow.Repository<Project>().Get().AsNoTracking().ToList();
         }
 
-        public async Task TryAddProject(Project projectViewModel)
+        public async Task Add(Project projectViewModel)
         {
             var newProject = new Project { Name = projectViewModel.Name, Details = projectViewModel.Details,
                 Description = projectViewModel.Description, IsActive = projectViewModel.IsActive,

@@ -368,4 +368,4 @@ upload/
 **/dist/
 
 # End of https://www.gitignore.io/api/visualstudio,visualstudiocode
-**/wwwroot/uploads
+**/uploads/

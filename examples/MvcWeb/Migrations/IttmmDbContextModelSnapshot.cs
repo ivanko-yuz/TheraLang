@@ -832,6 +832,9 @@ namespace MvcWeb.Migrations
                     b.Property<DateTime>("ProjectStart");
 
                     b.Property<int>("TypeId");
+                    b.Property<int>("StatusId")
+                        .HasMaxLength(250);
+                 
 
                     b.HasKey("Id");
 
@@ -1249,7 +1252,7 @@ namespace MvcWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MvcWeb.TheraLang.Entities.Resource", "Resource")
-                        .WithMany("ResourceProjects")
+                        .WithMany("ResourceToProjects")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

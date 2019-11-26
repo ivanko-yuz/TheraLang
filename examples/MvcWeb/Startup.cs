@@ -7,12 +7,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MvcWeb.Db;
 using MvcWeb.Services;
+using MvcWeb.TheraLang.Services;
 using MvcWeb.TheraLang.UnitOfWork;
 using Microsoft.Extensions.Logging;
 using MvcWeb.Helpers;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
 using MvcWeb.TheraLang.Services;
+using MvcWeb.TheraLang.Repository;
+
 
 namespace MvcWeb
 {
@@ -35,6 +38,7 @@ namespace MvcWeb
             services.AddLocalization(options =>
                 options.ResourcesPath = "Resources"
             );
+
             services.AddMvc()
                 .AddPiranhaManagerOptions()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -66,6 +70,9 @@ namespace MvcWeb
             services.AddTransient<IUnitOfWork, UnitOfWork.UnitOfWork>(provider =>
                new UnitOfWork.UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
             services.AddTransient<IProjectService, ProjectService>();
+            services.AddCors(options =>
+                options.AddPolicy("development mode", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())); //TODO: remove after app integrated
+
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
@@ -79,11 +86,12 @@ namespace MvcWeb
             app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
+                app.UseCors("development mode");
                 app.UseDeveloperExceptionPage();
             }
 
-            App.Init(api);
 
+            App.Init(api);
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.Full;
 
@@ -111,14 +119,10 @@ namespace MvcWeb
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
              */
-
             // Register middleware
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UsePiranha();
             app.UsePiranhaManager();
-            app.UsePiranhaSummernote();
-            //app.UsePiranhaTinyMCE();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",
@@ -128,6 +132,11 @@ namespace MvcWeb
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");
+
+                routes.MapRoute(
+                   name: "angular",
+                   template: "{*template}",
+                   defaults: new { controller = "Home", action = "Index" });
             });
 
             //Seed.RunAsync(api).GetAwaiter().GetResult(); //TODO: fix seeding
