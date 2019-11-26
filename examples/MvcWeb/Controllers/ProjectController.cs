@@ -4,7 +4,6 @@ using MvcWeb.TheraLang.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MvcWeb.TheraLang.Repository;
 
 namespace MvcWeb.Controllers
 {
@@ -45,7 +44,7 @@ namespace MvcWeb.Controllers
             var project = _projectService.GetById(id);            
             return Ok(project);            
         }
-            private readonly IProjectService _projectService;
+          
 
         [HttpPut("update/{id}")]
         public IActionResult EditProject(int id,Project project)
@@ -84,17 +83,6 @@ namespace MvcWeb.Controllers
             var projects =_projectService.GetProjects(page, pageSize);
             return Ok(projects);
         }
-
-            [HttpPut("{id}")]
-            public async Task<IActionResult> Approve(int id)
-            {
-                if (id == default)
-                {
-                    throw new ArgumentException($"{nameof(id)} cannot be 0");
-                }
-                await _projectService.ChangeStatus(id, ProjectStatus.Approved);
-                return Ok();
-            }
 
             [HttpPut("{id}")]
             public async Task<IActionResult> Reject(int id)

@@ -11,7 +11,7 @@ namespace MvcWeb.Services
 {
     public class ProjectService : IProjectService
     {
-        public ProjectService(IUnitOfWork unitOfWork)
+        public ProjectService(IUnitOfWork uow)
         {
             _uow = uow;
         }
