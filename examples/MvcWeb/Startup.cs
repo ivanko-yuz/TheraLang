@@ -96,6 +96,7 @@ namespace MvcWeb
                 app.UseDeveloperExceptionPage();
             }
 
+
             App.Init(api);
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.Full;

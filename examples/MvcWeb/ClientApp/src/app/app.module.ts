@@ -141,8 +141,8 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
       ResourceService,
       HttpService,
       EventService,
-      // {provide: ErrorHandler, useClass: ErrorHandlerService},
-        NotificationService,
+      {provide: ErrorHandler, useClass: ErrorHandlerService},
+      NotificationService,
       DialogService,
       ResourceCategoriesService
    ],
