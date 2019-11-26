@@ -7,7 +7,6 @@ import {ProjectInfoComponent} from './project-info/project-info.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { ProjectTypeComponent } from './project-type/project-type.component';
-import { ProjectType } from './project-type/project-type.model';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
