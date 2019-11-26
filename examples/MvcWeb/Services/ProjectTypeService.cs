@@ -33,9 +33,9 @@ namespace MvcWeb.Services
             }
         }
 
-        public async Task Add(ProjectType typeProject)
+        public async Task Add(string name)
         {
-                var projectType = new ProjectType { TypeName = typeProject.TypeName };               
+                var projectType = new ProjectType { TypeName = name };               
                 try
                 {
                     await _uow.Repository<ProjectType>().Add(projectType);
