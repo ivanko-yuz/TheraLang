@@ -1,5 +1,5 @@
 
-export const baseUrl = "https://localhost:44353/api/";
+export const baseUrl = "http://localhost:5000/api/";
 
 export const projectUrl = `${baseUrl}projects`;
 export const participantUrl = `${baseUrl}participants`;
