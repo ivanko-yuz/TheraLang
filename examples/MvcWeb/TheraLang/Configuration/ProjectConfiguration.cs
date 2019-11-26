@@ -28,9 +28,14 @@ namespace MvcWeb.TheraLang.Configuration
 
             builder.HasOne(e => e.Type).WithMany(p => p.Projects).HasForeignKey(d => d.TypeId);
 
-            builder.HasMany(x => x.ResourceProjects).WithOne(i => i.Project).HasForeignKey("ProjectId");
+            builder.HasMany(x => x.ProjectResources).WithOne(i => i.Project).HasForeignKey("ProjectId");
 
             builder.HasMany(x => x.ProjectParticipations).WithOne(i => i.Project).HasForeignKey("ProjectId");
+            
+            builder.Property(e => e.Name).HasMaxLength(250).IsRequired();         
+
+            builder.Property(e => e.StatusId).HasMaxLength(250).IsRequired().HasDefaultValue(Entities.ProjectStatus.New); 
+
         }
     }
 }

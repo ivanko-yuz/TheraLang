@@ -4,16 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MvcWeb.TheraLang.Constants;
+using MvcWeb.Models;
 using MvcWeb.TheraLang.Entities;
+using MvcWeb.TheraLang.Repository;
 using MvcWeb.TheraLang.UnitOfWork;
 
 namespace MvcWeb.Services
 {
     public class ProjectService : IProjectService
     {
-        public ProjectService(IUnitOfWork unitOfWork)
+        public ProjectService(IUnitOfWork uow)
         {
-            _uow = unitOfWork;
+            _uow = uow;
         }
 
         private readonly IUnitOfWork _uow;
@@ -50,6 +52,15 @@ namespace MvcWeb.Services
                 return projectsPerPages;
             }
             catch
+            {
+                throw new Exception($"Error while fetching the projects for {nameof(pageNumber)}={pageNumber} and {nameof(pageSize)}={pageSize}");
+            }
+        }
+
+        public async Task ChangeStatus(int projectId, ProjectStatus status)
+        {
+            var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == projectId);
+            if (project is null)
             {
                 throw new Exception($"Error while fetching the projects for {nameof(pageNumber)}={pageNumber} and {nameof(pageSize)}={pageSize}");
             }

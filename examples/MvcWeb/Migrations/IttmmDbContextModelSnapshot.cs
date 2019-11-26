@@ -826,7 +826,9 @@ namespace MvcWeb.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250);
-
+                    b.Property<int>("StatusId")
+                        .HasMaxLength(250);
+                        
                     b.Property<DateTime>("ProjectEnd");
 
                     b.Property<DateTime>("ProjectStart");

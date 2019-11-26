@@ -51,6 +51,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.AspNetCore.Identity.SQLServer", "core\Piranha.AspNetCore.Identity.SQLServer\Piranha.AspNetCore.Identity.SQLServer.csproj", "{CC742AA4-A544-46D4-901C-7A605B4F132B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcWeb", "examples\MvcWeb\MvcWeb.csproj", "{14F9CA8A-6532-40CC-81D6-9763351AFD91}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96510F63-4191-494B-B4A3-6C0497837F6A} = {96510F63-4191-494B-B4A3-6C0497837F6A}
+		{4BCC1E64-AACC-4D9B-973E-6072416D98A1} = {4BCC1E64-AACC-4D9B-973E-6072416D98A1}
+		{22D8ED84-0A3B-4A02-B17B-ED8839323CCC} = {22D8ED84-0A3B-4A02-B17B-ED8839323CCC}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.Extensions.Sync", "core\Piranha.Extensions.Sync\Piranha.Extensions.Sync.csproj", "{D17485D2-371E-4F7C-952F-57B26606FC6A}"
 EndProject
@@ -71,8 +76,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.Manager.TinyMCE", "core\Piranha.Manager.TinyMCE\Piranha.Manager.TinyMCE.csproj", "{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DataSeeding", "examples\TheraLang.DataSeeding\TheraLang.DataSeeding.csproj", "{98EB6508-7993-431B-B6BA-4E9EF374F376}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcWebTests", "MvcWebTests\MvcWebTests.csproj", "{403F9B35-90D8-4381-B96F-86ED06C0F86F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,11 +158,7 @@ Global
 		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Release|Any CPU.Build.0 = Release|Any CPU
-		{403F9B35-90D8-4381-B96F-86ED06C0F86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{403F9B35-90D8-4381-B96F-86ED06C0F86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{403F9B35-90D8-4381-B96F-86ED06C0F86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{403F9B35-90D8-4381-B96F-86ED06C0F86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Release|Any CPU.Build.0 = Release|Any CPU		
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
