@@ -3,10 +3,12 @@ using MvcWeb.Services;
 using MvcWeb.TheraLang.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using MvcWeb.TheraLang.Repository;
 
 namespace MvcWeb.Controllers
 {
-    [Route("api/projects")]
+    [Route("api/project")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
@@ -15,6 +17,7 @@ namespace MvcWeb.Controllers
         {
             _projectService = projectService;
         }
+        
         [HttpPost("create")]
         public IActionResult CreateProject(Project project)
         {
@@ -22,10 +25,10 @@ namespace MvcWeb.Controllers
             {
                 throw new ArgumentException($"{nameof(project)} cannot be null");
             }
-            _projectService.TryAddProject(project);
+            _projectService.Add(project);
             return  Ok(project);
         }
-
+        
         [HttpGet]
         public IEnumerable<Project> GetAllProjects()
         {
@@ -68,5 +71,27 @@ namespace MvcWeb.Controllers
             var projects =_projectService.GetProjects(page, pageSize);
             return Ok(projects);
         }
+
+            [HttpPut("{id}")]
+            public async Task<IActionResult> Approve(int id)
+            {
+                if (id == default)
+                {
+                    throw new ArgumentException($"{nameof(id)} cannot be 0");
+                }
+                await _projectService.ChangeStatus(id, ProjectStatus.Approved);
+                return Ok();
+            }
+
+            [HttpPut("{id}")]
+            public async Task<IActionResult> Reject(int id)
+            {
+                if (id == default)
+                {
+                    throw new ArgumentException($"{nameof(id)} cannot be 0");
+                }
+                await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
+                return Ok();
+            }
+        }
     }
-}

@@ -1,5 +1,5 @@
 
-export const baseUrl = "https://localhost:44353/api/";
+export const baseUrl = "http://localhost:5000/api/";
 
 export const projectUrl = baseUrl + "project";
 export const resourсeUrl = baseUrl + "resourсe";
@@ -8,3 +8,4 @@ export const categoryUrl = baseUrl + "category";
 export const participUrl = baseUrl + "participation";
 export const paymentUrl = baseUrl + "payment";
 export const projectType = baseUrl + "projectTypes";
+export const cmsSitemapUrl = `${baseUrl}sitemap`;

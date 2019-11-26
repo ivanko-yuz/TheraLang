@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using MvcWeb.TheraLang.Constants;
 using MvcWeb.TheraLang.Entities;
 using MvcWeb.TheraLang.Services;
@@ -10,6 +11,7 @@ namespace MvcWeb.TheraLang.Controllers
 {
     [Route("api/resource")]
     [ApiController]
+    [EnableCors("MyPolicy")]
     public class ResourceController : ControllerBase
     {
         public ResourceController(IResourceService service)
@@ -100,7 +102,7 @@ namespace MvcWeb.TheraLang.Controllers
             {
                 throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
             }
-            
+
             if (categoryId == default)
             {
                 throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
