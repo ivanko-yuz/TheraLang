@@ -36,8 +36,6 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
-import { GalleryBlockComponent } from './cms-api/cms-shared/gallery-block/gallery-block.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CustomDatePipe } from './shared/pipes/custom.datepipe';
 import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
 import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';

@@ -1,4 +1,4 @@
-import { Page } from '../models/root-object.model';
+import { Page } from '../../models/page.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from 'src/app/project/http.service';
 import { CmsRoute } from 'src/app/toolbar/toolbar-item/cms-route';

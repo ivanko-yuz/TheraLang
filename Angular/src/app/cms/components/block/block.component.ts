@@ -1,4 +1,4 @@
-import { Block } from './../../models/block.model';
+import { Block } from '../../models/block.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
