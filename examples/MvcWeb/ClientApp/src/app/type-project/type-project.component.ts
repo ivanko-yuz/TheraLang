@@ -26,8 +26,8 @@ export class TypeProjectComponent implements OnInit {
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
       );
-      return;
-    } else if (!this.service.form.get("id").value) {
+    }
+    if (!this.service.form.get("id").value) {
       this.service.btnPost(this.service.form.value);
       this.onClose();
     } else {
