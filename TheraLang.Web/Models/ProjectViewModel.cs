@@ -1,4 +1,6 @@
-﻿namespace TheraLang.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TheraLang.Web.Models
 {
     public class ProjectViewModel
     {

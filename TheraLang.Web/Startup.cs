@@ -8,11 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
+using TheraLang.DLL;
+using TheraLang.DLL.Services;
+using TheraLang.DLL.UnitOfWork;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Services;
-using TheraLang.Web.TheraLang.DLL;
-using TheraLang.Web.TheraLang.DLL.Services;
-using TheraLang.Web.TheraLang.DLL.UnitOfWork;
 
 namespace TheraLang.Web
 {

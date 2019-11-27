@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TheraLang.Web.TheraLang.DLL.Entities;
-using TheraLang.Web.TheraLang.DLL.UnitOfWork;
+using TheraLang.DLL.Entities;
+using TheraLang.DLL.UnitOfWork;
 
 namespace TheraLang.Web.Services
 {
@@ -29,7 +29,7 @@ namespace TheraLang.Web.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when geting project by {nameof(id)} = {id}: ", ex);
+                throw new Exception($"Error when getting project by {nameof(id)} = {id}: ", ex);
             }
         }
 
@@ -41,7 +41,7 @@ namespace TheraLang.Web.Services
                     await _uow.Repository<ProjectType>().Add(projectType);
                     await _uow.SaveChangesAsync();
                 }
-                 catch (Exception e)
+                catch (Exception e)
                 {
                     e.Data["project type"] = projectType;
                     throw;

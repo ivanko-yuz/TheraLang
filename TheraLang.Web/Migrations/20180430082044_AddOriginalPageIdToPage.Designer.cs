@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Piranha;
-using TheraLang.Web.TheraLang.DLL;
+using TheraLang.DLL;
 
 namespace TheraLang.Web.Migrations
 {

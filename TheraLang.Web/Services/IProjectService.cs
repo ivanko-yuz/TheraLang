@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TheraLang.Web.TheraLang.DLL.Entities;
+using TheraLang.DLL.Entities;
 
 namespace TheraLang.Web.Services
 {

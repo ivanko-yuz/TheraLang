@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TheraLang.Web.TheraLang.DLL.Constants;
-using TheraLang.Web.TheraLang.DLL.Entities;
-using TheraLang.Web.TheraLang.DLL.UnitOfWork;
+using TheraLang.DLL.Constants;
+using TheraLang.DLL.Entities;
+using TheraLang.DLL.UnitOfWork;
 
 namespace TheraLang.Web.Services
 {

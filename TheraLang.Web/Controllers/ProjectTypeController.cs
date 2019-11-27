@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using TheraLang.DLL.Entities;
 using TheraLang.Web.Services;
-using TheraLang.Web.TheraLang.DLL.Entities;
 
 namespace TheraLang.Web.Controllers
 {
