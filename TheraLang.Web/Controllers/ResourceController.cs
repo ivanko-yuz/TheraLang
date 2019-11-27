@@ -7,7 +7,7 @@ using TheraLang.DLL.Constants;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Services;
 
-namespace TheraLang.DLL.Controllers
+namespace TheraLang.Web.Controllers
 {
     [Route("api/resource")]
     [ApiController]

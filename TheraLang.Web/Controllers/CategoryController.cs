@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Services;
 
-namespace TheraLang.DLL.Controllers
+namespace TheraLang.Web.Controllers
 {
     [Route("api/category")]
     [ApiController]

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Services;
 
-namespace TheraLang.DLL.Controllers
+namespace TheraLang.Web.Controllers
 {
     [Route("api/participation")]
     [ApiController]
