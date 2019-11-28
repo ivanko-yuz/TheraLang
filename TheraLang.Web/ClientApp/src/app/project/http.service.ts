@@ -56,4 +56,8 @@ export class HttpService {
         return this.http.put(this.url + '/' + project.id, project, {observe: 'response'});
     }
 
+    getAllProjectTypes(){
+        return this.http.get(this.url + '/' + 'projectTypes');
+    }
+
 }
