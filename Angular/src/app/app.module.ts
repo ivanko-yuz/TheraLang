@@ -36,17 +36,11 @@ import { FooterComponent } from './footer/footer.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
 import { EventService } from './project-participants/event-service';
 import { HttpService } from './project/http.service';
-import { PiranhaPageComponent } from './cms-api/piranha-page/piranha-page.component';
-import { BlockComponent } from './cms-api/cms-shared/block/block.component';
-import { GalleryBlockComponent } from './cms-api/cms-shared/gallery-block/gallery-block.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { CustomDatePipe } from './shared/pipes/custom.datepipe';
-import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
-import { ResourcesInternalTableComponent } from './project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
-import { ResourceService } from './project-info/resources-table-for-project/resources-table/resource.service';
-import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
-import { GeneralResourcesInnerTableComponent } from './general-resources/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component';
-import { ResourceCategoriesService } from './project-info/resources-table-for-project/resources-table/resource-categories.service';
+import { CustomDatePipe } from './project-info/custom.datepipe';
+import { ResourcesTableComponent } from './resources-table/resources-table.component';
+import { ResourcesInternalTableComponent } from './resources-internal-table/resources-internal-table.component';
+import { ResourceService } from './resources-table/resource.service';
+import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
@@ -56,6 +50,7 @@ import { ResultComponent } from './result/result.component';
 import { DonationComponent } from './donation/donation.component';
 import { DonationService } from './donation/donation.service';
 import { ProjectParticipantService } from './project-participants/project-participant.service';
+import { ProjectTypeComponent } from './project-type/project-type.component';
 import {CmsModule} from './cms/cms.module';
 import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
 
@@ -83,7 +78,8 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
       GeneralResourcesInnerTableComponent,
       ResultComponent,
       DonationComponent,
-     ToolbarItemComponent
+      ToolbarItemComponent,
+      ProjectTypeComponent
    ],
 
    entryComponents: [
@@ -152,6 +148,7 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
    ],
    exports: [
       ResourcesInternalTableComponent,
+      GeneralResourcesTableComponent,
       BlockComponent,
       GalleryBlockComponent
    ],
@@ -161,7 +158,6 @@ import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.compon
       EventService,
       {provide: ErrorHandler, useClass: ErrorHandlerService},
       NotificationService,
-      DialogService,
       ResourceCategoriesService,
       DonationService,
       ProjectParticipantService

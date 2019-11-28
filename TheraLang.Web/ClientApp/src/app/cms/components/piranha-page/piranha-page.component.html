@@ -1,0 +1,4 @@
+<div *ngIf="ifGenerate">
+  <h1>{{this.page.title}}</h1>
+  <app-block *ngFor="let block of this.page.blocks" [model]="block"></app-block>
+</div>
