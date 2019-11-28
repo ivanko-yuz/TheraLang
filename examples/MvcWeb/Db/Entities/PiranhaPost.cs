@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MvcWeb.Db.Entities
+namespace TheraLangWeb.Db.Entities
 {
     public class PiranhaPost
     {

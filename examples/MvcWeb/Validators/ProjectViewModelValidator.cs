@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
 using FluentValidation;
-using MvcWeb.Models;
+using TheraLangWeb.Models;
 
-namespace MvcWeb.Validators
+namespace TheraLangWeb.Validators
 {
     public class ProjectViewModelValidator: AbstractValidator<ProjectViewModel>
     {

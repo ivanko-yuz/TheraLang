@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MvcWeb": {
+    "TheraLangWeb": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

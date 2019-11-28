@@ -1,4 +1,4 @@
-﻿namespace MvcWeb.TheraLang.Constants
+﻿namespace TheraLangWeb.TheraLang.DLL.Constants
 {
 
     public static class PaginationConstants

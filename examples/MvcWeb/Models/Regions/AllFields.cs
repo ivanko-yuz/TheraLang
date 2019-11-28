@@ -12,7 +12,7 @@ using Piranha.Extend;
 using Piranha.Extend.Fields;
 using Piranha.Models;
 
-namespace MvcWeb.Models.Regions
+namespace TheraLangWeb.Models.Regions
 {
     /// <summary>
     /// Test Field with all field types.

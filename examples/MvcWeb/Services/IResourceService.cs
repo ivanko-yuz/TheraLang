@@ -1,8 +1,8 @@
-﻿using MvcWeb.TheraLang.Entities;
+﻿using TheraLangWeb.TheraLang.DLL.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MvcWeb.TheraLang.Services
+namespace TheraLangWeb.Services
 {
     public interface IResourceService
     {

@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MvcWeb.Db;
+using TheraLangWeb.Db;
 
-namespace MvcWeb.Migrations
+namespace TheraLangWeb.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20191114074306_Change_Propery_maxLength")]
@@ -21,7 +21,7 @@ namespace MvcWeb.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaAlias", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaAlias", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -49,7 +49,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Aliases");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaBlock", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaBlock", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -74,7 +74,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Blocks");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaBlockField", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaBlockField", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -101,7 +101,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_BlockFields");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaCategory", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaCategory", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -127,7 +127,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Categories");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaMedia", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaMedia", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -162,7 +162,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Media");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaMediaFolder", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaMediaFolder", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -179,7 +179,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_MediaFolders");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaMediaVersion", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaMediaVersion", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -203,7 +203,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_MediaVersions");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPage", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPage", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -270,7 +270,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Pages");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPageBlock", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPageBlock", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -292,7 +292,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_PageBlocks");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPageField", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPageField", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -322,7 +322,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_PageFields");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPageRevision", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPageRevision", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -339,7 +339,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_PageRevisions");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPageType", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPageType", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -360,7 +360,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_PageTypes");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaParam", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaParam", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -385,7 +385,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Params");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPost", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPost", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -437,7 +437,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Posts");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPostBlock", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPostBlock", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -459,7 +459,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_PostBlocks");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPostField", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPostField", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -489,7 +489,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_PostFields");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPostRevision", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPostRevision", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -506,7 +506,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_PostRevisions");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPostTag", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPostTag", b =>
                 {
                     b.Property<Guid>("PostId");
 
@@ -519,7 +519,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_PostTags");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPostType", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPostType", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -540,7 +540,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_PostTypes");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaRole", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaRole", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -562,7 +562,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Roles");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaRoleClaim", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaRoleClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -581,7 +581,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_RoleClaims");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaSite", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaSite", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -620,7 +620,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Sites");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaSiteField", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaSiteField", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -650,7 +650,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_SiteFields");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaSiteType", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaSiteType", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -671,7 +671,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_SiteTypes");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaTag", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaTag", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -697,7 +697,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Tags");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaUser", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaUser", b =>
                 {
                     b.Property<Guid>("Id");
 
@@ -746,7 +746,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_Users");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaUserClaim", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaUserClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -765,7 +765,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_UserClaims");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaUserLogin", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaUserLogin", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -782,7 +782,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_UserLogins");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaUserRole", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaUserRole", b =>
                 {
                     b.Property<Guid>("UserId");
 
@@ -795,7 +795,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_UserRoles");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaUserToken", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaUserToken", b =>
                 {
                     b.Property<Guid>("UserId");
 
@@ -810,7 +810,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Piranha_UserTokens");
                 });
 
-            modelBuilder.Entity("MvcWeb.TheraLang.Entities.Project", b =>
+            modelBuilder.Entity("TheraLangWeb.TheraLang.DLL.Entities.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -829,7 +829,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ProjectParticipation", b =>
+            modelBuilder.Entity("TheraLangWeb.TheraLang.DLL.Entities.ProjectParticipation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -864,7 +864,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("ProjectParticipations");
                 });
 
-            modelBuilder.Entity("MvcWeb.TheraLang.Entities.Resource", b =>
+            modelBuilder.Entity("TheraLangWeb.TheraLang.DLL.Entities.Resource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -910,7 +910,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("Resources");
                 });
 
-            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ResourceCategory", b =>
+            modelBuilder.Entity("TheraLangWeb.TheraLang.DLL.Entities.ResourceCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -925,7 +925,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("ResourceCategories");
                 });
 
-            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ResourceProject", b =>
+            modelBuilder.Entity("TheraLangWeb.TheraLang.DLL.Entities.ResourceProject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -944,7 +944,7 @@ namespace MvcWeb.Migrations
                     b.ToTable("ResourceToProject");
                 });
 
-            modelBuilder.Entity("MvcWeb.TheraLang.Entities.User", b =>
+            modelBuilder.Entity("TheraLangWeb.TheraLang.DLL.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -976,242 +976,242 @@ namespace MvcWeb.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaAlias", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaAlias", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaSite", "Site")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaSite", "Site")
                         .WithMany("PiranhaAliases")
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaBlockField", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaBlockField", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaBlock", "Block")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaBlock", "Block")
                         .WithMany("PiranhaBlockFields")
                         .HasForeignKey("BlockId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaCategory", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaCategory", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPage", "Blog")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPage", "Blog")
                         .WithMany("PiranhaCategories")
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaMedia", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaMedia", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaMediaFolder", "Folder")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaMediaFolder", "Folder")
                         .WithMany("PiranhaMedia")
                         .HasForeignKey("FolderId");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaMediaVersion", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaMediaVersion", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaMedia", "Media")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaMedia", "Media")
                         .WithMany("PiranhaMediaVersions")
                         .HasForeignKey("MediaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPage", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPage", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPageType", "PageType")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPageType", "PageType")
                         .WithMany("PiranhaPages")
                         .HasForeignKey("PageTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPage", "Parent")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPage", "Parent")
                         .WithMany("InverseParent")
                         .HasForeignKey("ParentId");
 
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaSite", "Site")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaSite", "Site")
                         .WithMany("PiranhaPages")
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPageBlock", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPageBlock", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaBlock", "Block")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaBlock", "Block")
                         .WithMany("PiranhaPageBlocks")
                         .HasForeignKey("BlockId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPage", "Page")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPage", "Page")
                         .WithMany("PiranhaPageBlocks")
                         .HasForeignKey("PageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPageField", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPageField", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPage", "Page")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPage", "Page")
                         .WithMany("PiranhaPageFields")
                         .HasForeignKey("PageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPageRevision", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPageRevision", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPage", "Page")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPage", "Page")
                         .WithMany("PiranhaPageRevisions")
                         .HasForeignKey("PageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPost", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPost", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPage", "Blog")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPage", "Blog")
                         .WithMany("PiranhaPosts")
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaCategory", "Category")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaCategory", "Category")
                         .WithMany("PiranhaPosts")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPostType", "PostType")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPostType", "PostType")
                         .WithMany("PiranhaPosts")
                         .HasForeignKey("PostTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPostBlock", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPostBlock", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaBlock", "Block")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaBlock", "Block")
                         .WithMany("PiranhaPostBlocks")
                         .HasForeignKey("BlockId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPost", "Post")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPost", "Post")
                         .WithMany("PiranhaPostBlocks")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPostField", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPostField", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPost", "Post")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPost", "Post")
                         .WithMany("PiranhaPostFields")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPostRevision", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPostRevision", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPost", "Post")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPost", "Post")
                         .WithMany("PiranhaPostRevisions")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaPostTag", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaPostTag", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPost", "Post")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPost", "Post")
                         .WithMany("PiranhaPostTags")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaTag", "Tag")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaTag", "Tag")
                         .WithMany("PiranhaPostTags")
                         .HasForeignKey("TagId");
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaRoleClaim", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaRoleClaim", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaRole", "Role")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaRole", "Role")
                         .WithMany("PiranhaRoleClaims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaSiteField", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaSiteField", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaSite", "Site")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaSite", "Site")
                         .WithMany("PiranhaSiteFields")
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaTag", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaTag", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaPage", "Blog")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaPage", "Blog")
                         .WithMany("PiranhaTags")
                         .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaUserClaim", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaUserClaim", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaUser", "User")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaUser", "User")
                         .WithMany("PiranhaUserClaims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaUserLogin", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaUserLogin", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaUser", "User")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaUser", "User")
                         .WithMany("PiranhaUserLogins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaUserRole", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaUserRole", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaRole", "Role")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaRole", "Role")
                         .WithMany("PiranhaUserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaUser", "User")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaUser", "User")
                         .WithMany("PiranhaUserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.Db.Entities.PiranhaUserToken", b =>
+            modelBuilder.Entity("TheraLangWeb.Db.Entities.PiranhaUserToken", b =>
                 {
-                    b.HasOne("MvcWeb.Db.Entities.PiranhaUser", "User")
+                    b.HasOne("TheraLangWeb.Db.Entities.PiranhaUser", "User")
                         .WithMany("PiranhaUserTokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ProjectParticipation", b =>
+            modelBuilder.Entity("TheraLangWeb.TheraLang.DLL.Entities.ProjectParticipation", b =>
                 {
-                    b.HasOne("MvcWeb.TheraLang.Entities.Project", "Project")
+                    b.HasOne("TheraLangWeb.TheraLang.DLL.Entities.Project", "Project")
                         .WithMany("ProjectParticipations")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MvcWeb.TheraLang.Entities.User", "User")
+                    b.HasOne("TheraLangWeb.TheraLang.DLL.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("MvcWeb.TheraLang.Entities.Resource", b =>
+            modelBuilder.Entity("TheraLangWeb.TheraLang.DLL.Entities.Resource", b =>
                 {
-                    b.HasOne("MvcWeb.TheraLang.Entities.ResourceCategory", "ResourceCategory")
+                    b.HasOne("TheraLangWeb.TheraLang.DLL.Entities.ResourceCategory", "ResourceCategory")
                         .WithMany("Resources")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MvcWeb.TheraLang.Entities.User", "User")
+                    b.HasOne("TheraLangWeb.TheraLang.DLL.Entities.User", "User")
                         .WithMany("Resources")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("MvcWeb.TheraLang.Entities.ResourceProject", b =>
+            modelBuilder.Entity("TheraLangWeb.TheraLang.DLL.Entities.ResourceProject", b =>
                 {
-                    b.HasOne("MvcWeb.TheraLang.Entities.Project", "Project")
+                    b.HasOne("TheraLangWeb.TheraLang.DLL.Entities.Project", "Project")
                         .WithMany("ResourceProjects")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("MvcWeb.TheraLang.Entities.Resource", "Resource")
+                    b.HasOne("TheraLangWeb.TheraLang.DLL.Entities.Resource", "Resource")
                         .WithMany("ResourceProjects")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade);

@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Piranha;
 using Piranha.Models;
 using System;
-using MvcWeb.Db;
+using TheraLangWeb.Db;
 
-namespace MvcWeb.Migrations
+namespace TheraLangWeb.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20180124170844_AddMediaVersions")]

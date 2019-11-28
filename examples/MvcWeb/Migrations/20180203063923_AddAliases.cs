@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MvcWeb.Migrations
+namespace TheraLangWeb.Migrations
 {
     public partial class AddAliases : Migration
     {

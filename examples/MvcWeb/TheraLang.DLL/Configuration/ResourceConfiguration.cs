@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MvcWeb.TheraLang.Entities;
+using TheraLangWeb.TheraLang.DLL.Entities;
 
-namespace MvcWeb.TheraLang.Configuration
+namespace TheraLangWeb.TheraLang.DLL.Configuration
 {
     public class ResourceConfiguration : BaseEntityConfiguration<Resource>
     {

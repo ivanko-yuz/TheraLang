@@ -1,6 +1,6 @@
-﻿using MvcWeb.TheraLang.ProjectStatus;
+﻿using TheraLangWeb.TheraLang.DLL.ProjectStatus;
 
-namespace MvcWeb.TheraLang.Entities
+namespace TheraLangWeb.TheraLang.DLL.Entities
 {
     public class ProjectParticipation : BaseEntity
     {

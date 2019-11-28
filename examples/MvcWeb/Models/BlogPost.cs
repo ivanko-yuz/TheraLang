@@ -12,7 +12,7 @@ using Piranha.AttributeBuilder;
 using Piranha.Extend;
 using Piranha.Models;
 
-namespace MvcWeb.Models
+namespace TheraLangWeb.Models
 {
     /// <summary>
     /// Basic post with main content in markdown.

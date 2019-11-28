@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MvcWeb.Migrations
+namespace TheraLangWeb.Migrations
 {
     public partial class AddMediaVersionExtension : Migration
     {

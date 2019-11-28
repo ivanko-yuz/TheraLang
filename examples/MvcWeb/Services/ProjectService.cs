@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MvcWeb.TheraLang.Constants;
-using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.UnitOfWork;
+using TheraLangWeb.TheraLang.DLL.Constants;
+using TheraLangWeb.TheraLang.DLL.Entities;
+using TheraLangWeb.TheraLang.DLL.UnitOfWork;
 
-namespace MvcWeb.Services
+namespace TheraLangWeb.Services
 {
     public class ProjectService : IProjectService
     {

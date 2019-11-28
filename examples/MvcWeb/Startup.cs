@@ -5,19 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MvcWeb.Db;
-using MvcWeb.Services;
-using MvcWeb.TheraLang.Services;
-using MvcWeb.TheraLang.UnitOfWork;
+using TheraLangWeb.Db;
+using TheraLangWeb.Services;
+using TheraLangWeb.TheraLang.DLL.UnitOfWork;
 using Microsoft.Extensions.Logging;
-using MvcWeb.Helpers;
+using TheraLangWeb.Helpers;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
-using MvcWeb.TheraLang.Services;
-using MvcWeb.TheraLang.Repository;
+using TheraLangWeb.Services;
 
 
-namespace MvcWeb
+namespace TheraLangWeb
 {
     public class Startup
     {

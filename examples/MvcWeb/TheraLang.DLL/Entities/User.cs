@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 
-namespace MvcWeb.TheraLang.Entities
+namespace TheraLangWeb.TheraLang.DLL.Entities
 {
     public class User
     {

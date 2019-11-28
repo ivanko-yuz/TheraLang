@@ -1,4 +1,4 @@
-﻿namespace MvcWeb.TheraLang.Entities
+﻿namespace TheraLangWeb.TheraLang.DLL.Entities
 {
     public class ResourceProject
     {

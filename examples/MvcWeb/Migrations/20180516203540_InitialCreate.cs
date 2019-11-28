@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace MvcWeb.Migrations
+namespace TheraLangWeb.Migrations
 {
     public partial class InitialCreate2 : Migration
     {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MvcWeb.Models
+namespace TheraLangWeb.Models
 {
     public class ErrorDetails
     {

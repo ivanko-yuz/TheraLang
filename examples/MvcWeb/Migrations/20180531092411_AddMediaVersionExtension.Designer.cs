@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Piranha;
-using MvcWeb.Db;
+using TheraLangWeb.Db;
 
-namespace MvcWeb.Migrations
+namespace TheraLangWeb.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20180531092411_AddMediaVersionExtension")]

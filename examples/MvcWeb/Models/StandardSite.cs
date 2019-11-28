@@ -13,7 +13,7 @@ using Piranha.Extend;
 using Piranha.Models;
 using Piranha.Extend.Fields;
 
-namespace MvcWeb.Models
+namespace TheraLangWeb.Models
 {
     /// <summary>
     /// Basic page with main content in markdown.

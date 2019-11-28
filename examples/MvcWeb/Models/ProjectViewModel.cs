@@ -1,4 +1,4 @@
-﻿namespace MvcWeb.Models
+﻿namespace TheraLangWeb.Models
 {
     public class ProjectViewModel
     {

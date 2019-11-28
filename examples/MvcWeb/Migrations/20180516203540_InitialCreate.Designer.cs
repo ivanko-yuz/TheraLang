@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Piranha.AspNetCore.Identity.SQLServer;
 using System;
-using MvcWeb.Db;
+using TheraLangWeb.Db;
 
-namespace MvcWeb.Migrations
+namespace TheraLangWeb.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20180516203540_InitialCreate")]

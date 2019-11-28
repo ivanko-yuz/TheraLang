@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.ProjectStatus;
+using TheraLangWeb.TheraLang.DLL.Entities;
+using TheraLangWeb.TheraLang.DLL.ProjectStatus;
 
-namespace MvcWeb.TheraLang.Configuration
+namespace TheraLangWeb.TheraLang.DLL.Configuration
 {
     public class ProjectParticipationConfiguration : BaseEntityConfiguration<ProjectParticipation>
     {

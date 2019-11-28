@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MvcWeb.Db.Entities;
+using TheraLangWeb.Db.Entities;
 
-namespace MvcWeb.Db.Configuration
+namespace TheraLangWeb.Db.Configuration
 {
     public class PiranhaRoleConfiguration : IEntityTypeConfiguration<PiranhaRole>
     {

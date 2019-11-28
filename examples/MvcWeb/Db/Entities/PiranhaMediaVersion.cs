@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvcWeb.Db.Entities
+namespace TheraLangWeb.Db.Entities
 {
     public class PiranhaMediaVersion
     {

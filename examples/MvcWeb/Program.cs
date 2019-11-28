@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace MvcWeb
+namespace TheraLangWeb
 {
     public class Program
     {

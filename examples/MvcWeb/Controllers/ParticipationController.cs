@@ -1,11 +1,11 @@
-﻿using MvcWeb.TheraLang.Entities;
+﻿using TheraLangWeb.TheraLang.DLL.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MvcWeb.TheraLang.Services;
+using TheraLangWeb.Services;
 using System.Collections.Generic;
 using System;
 
-namespace MvcWeb.TheraLang.Controllers
+namespace TheraLangWeb.Controllers
 {
     [Route("api/participation")]
     [ApiController]

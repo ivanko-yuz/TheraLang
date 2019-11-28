@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MvcWeb.TheraLang.Entities
+namespace TheraLangWeb.TheraLang.DLL.Entities
 {
     public class Project
     {

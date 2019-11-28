@@ -1,4 +1,4 @@
-﻿namespace MvcWeb.TheraLang.ProjectStatus
+﻿namespace TheraLangWeb.TheraLang.DLL.ProjectStatus
 {
     public enum ProjectParticipationStatus
     {
