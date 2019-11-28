@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using MvcWeb.Db;
-using MvcWeb.TheraLang.Entities;
+using TheraLangWeb.Db;
+using TheraLangWeb.TheraLang.DLL.Entities;
 
 namespace TheraLang.DataSeeding
 {

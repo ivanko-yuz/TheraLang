@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TheraLangWeb.Controllers
 {
-    [Route("api/project")]
+    [Route("api/projects")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
