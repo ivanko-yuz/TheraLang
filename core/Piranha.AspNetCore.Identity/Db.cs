@@ -8,12 +8,12 @@
  * 
  */
 
-using System;
-using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Piranha.AspNetCore.Identity.Data;
+using System;
+using System.Linq;
 
 namespace Piranha.AspNetCore.Identity
 {
