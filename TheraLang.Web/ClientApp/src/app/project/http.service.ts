@@ -20,11 +20,11 @@ export class HttpService {
     }
 
     getAllProjectParticipants() {
-        return this.http.get(this.url + 'projectParticipants');
+        return this.http.get(this.url + 'participation/get');
     }
 
     changeParticipationStatus(requestId: number, requestStatus: number) {
-        return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
+        return this.http.put(this.url + 'participation/create' + '/' + requestId, requestStatus);
     }
 
     getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
@@ -41,7 +41,7 @@ export class HttpService {
     }
 
     getAllResourcesById(projectId: number) {
-        return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
+        return this.http.get(this.url + 'resource/all/' + projectId);
     }
 
     getPiranhaPageById(pageId: string) {

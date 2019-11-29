@@ -82,7 +82,7 @@ namespace TheraLang.Web
             app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
-                //app.UseCors("development mode");
+                app.UseCors("development mode");
                 app.UseDeveloperExceptionPage();
             }
 
