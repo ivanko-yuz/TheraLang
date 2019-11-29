@@ -56,14 +56,14 @@ namespace TheraLang.Web
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddPiranhaIdentityWithSeed<IdentitySQLServerDb>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
             #endregion
 
             #region register services via IServiceCollection
 
-             services.AddDbContext<IttmmDbContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<IttmmDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IUnitOfWork, UnitOfWork>(provider =>
                new UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
             services.AddTransient<IProjectService, ProjectService>();
@@ -82,7 +82,7 @@ namespace TheraLang.Web
             app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
-                app.UseCors("development mode");
+                //app.UseCors("development mode");
                 app.UseDeveloperExceptionPage();
             }
 

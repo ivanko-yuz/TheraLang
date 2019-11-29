@@ -8,7 +8,7 @@
 }
 @section script
 {
-    <script src="~/manager/assets/js/piranha.media.min.js"></script>
+    <script src="~/manager/assets/dist/js/piranha.media.min.js"></script>
 
     <script>
         piranha.permissions.load(function () {
@@ -43,7 +43,7 @@
             <nav class="my-3">
                 <ul class="nav nav-pills justify-content-center">
                     <li class="nav-item ">
-                        <a href="#" v-on:click.prevent="showList" v-bind:class="{ active: listView }" class="nav-link" ><i class="fas fa-list"></i> @Localizer.Media["List"]</a>
+                        <a href="#" v-on:click.prevent="showList" v-bind:class="{ active: listView }" class="nav-link"><i class="fas fa-list"></i> @Localizer.Media["List"]</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" v-on:click.prevent="showGallery" v-bind:class="{ active: !listView }" class="nav-link"><i class="fas fa-table"></i> @Localizer.Media["Gallery"]</a>
