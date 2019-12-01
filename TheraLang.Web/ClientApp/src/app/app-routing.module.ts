@@ -7,18 +7,19 @@ import { ProjectParticipantsComponent } from './project-participants/project-par
 import {CmsModule} from './cms/cms.module';
 import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import { ResultComponent } from './result/result.component';
 import { DonationComponent } from './donation/donation.component';
-import { ProjectTypeComponent } from './project-type/project-type.component';
+import { TransactionResultComponent } from './transaction-result/transaction-result.component';
+import { ProjectTypeComponent } from './project-info/resources-table-for-project/project-type/project-type.component';
+import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'participants', component:ProjectParticipantsComponent },
-  { path: 'project/:id', component: ProjectInfoComponent },
+  { path: 'projects/:id', component: ProjectInfoComponent },
   { path: 'projects', component: ProjectComponent },
   { path: 'donation/:projectId', component: DonationComponent },
   { path: 'resources', component: GeneralResourcesTableComponent },
-  { path: 'result/:donationId', component:ResultComponent },
+  { path: 'transaction/:donationId', component:TransactionResultComponent },
   { path: 'error', component: ErrorComponent },
   { path: '**', loadChildren: () => CmsModule},
   {path: 'projectTypes', component: ProjectTypeComponent}
@@ -33,7 +34,7 @@ export class AppRoutingModule { }
 
 export const routingComponents = [
   ProjectParticipantsComponent, ProjectComponent, HomeComponent, ProjectInfoComponent,
-  GeneralResourcesComponent, ErrorComponent, ProjectTypeComponent
-  ResultComponent, DonationComponent
+  GeneralResourcesComponent, ErrorComponent, ProjectTypeComponent,
+  TransactionResultComponent, DonationComponent
 ];
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Enums;
 using TheraLang.DLL.UnitOfWork;
 
 namespace TheraLang.DLL.Services

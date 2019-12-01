@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProjectParticipationRequest } from './project-participation-request';
 import { EventService } from './event-service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { ProjectParticipantService } from './project-participant.service';
-import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status.enum';
+import { ProjectParticipationService } from './project-participation.service';
+import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status';
+
 
 
 @Component({
@@ -18,7 +19,7 @@ export class ProjectParticipantsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = ['createdById', 'role', 'projectId', 'status', 'actions'];
 
-  constructor(private participantService: ProjectParticipantService, private eventService: EventService) { }
+  constructor(private participantService: ProjectParticipationService, private eventService: EventService) { }
 
   ngOnInit() {
     this.participantService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {

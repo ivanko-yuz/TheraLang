@@ -1,6 +1,6 @@
 ﻿
 
-namespace MvcWeb.TheraLang.Models
+namespace TheraLang.DLL.Models
 {
     public class LiqPayCheckoutModel
     {

@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row  class="toolbar">
       <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item>
-         <a mat-button class="toolbar-button" routerLink="/project" >Проекти</a>
+         <a mat-button class="toolbar-button" routerLink="/projects" >Проекти</a>
          <a mat-button class="toolbar-button" routerLink="/resources" >Ресурси</a>
          <a mat-button class="toolbar-button" routerLink="/participants" >Запити
          <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>

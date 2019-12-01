@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Enums;
 using TheraLang.DLL.Services;
 
 namespace TheraLang.Web.Controllers

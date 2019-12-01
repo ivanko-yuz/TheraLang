@@ -1,4 +1,4 @@
-import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status.enum';
+import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status';
 
 export class ProjectParticipationRequest {
     constructor(

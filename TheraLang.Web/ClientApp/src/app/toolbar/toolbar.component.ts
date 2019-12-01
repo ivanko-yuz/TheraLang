@@ -2,13 +2,12 @@ import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
 import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from '../project-participants/project-participation-request';
 import { EventService } from '../project-participants/event-service';
-import { RequestStatus } from '../request-status-enum';
 import {SiteMapService} from '../cms/services/site-map.service';
 import {ToolbarItem} from './toolbar-item/toolbar-item';
 import {Subscription} from 'rxjs';
-import { EventService } from '../project-participants/event-service';
-import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status.enum';
-import { ProjectParticipantService } from '../project-participants/project-participant.service';
+import { ProjectParticipationService } from '../project-participants/project-participation.service';
+import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status';
+
 
 
 @Component({
@@ -24,7 +23,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscription = new Subscription();
 
   constructor(
-    private participantService: ProjectParticipantService,
+    private participantService: ProjectParticipationService,
     private eventService: EventService,
     private siteMapService: SiteMapService
   ) { }
@@ -34,7 +33,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     const subscription =
       this.participantService.getAllProjectParticipants().subscribe((projectParticipation: ProjectParticipationRequest[]) => {
       this.projectParticipation = projectParticipation;
-      if ((this.projectParticipation.filter(x => x.status === RequestStatus.New)).length > 0) {
+      if ((this.projectParticipation.filter(x => x.status === ProjectParticipationRequestStatus.New)).length > 0) {
         this.hasNotification = true;
       }
     });

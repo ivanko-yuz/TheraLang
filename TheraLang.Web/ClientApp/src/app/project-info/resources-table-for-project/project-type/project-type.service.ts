@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProjectType } from './project-type.model';
-import { HttpService } from '../project/http.service';
+import { HttpService } from 'src/app/project/http.service';
+
 
 @Injectable ()
 export class ProjectTypeService{

@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 
-namespace MvcWeb.TheraLang.Models
+namespace TheraLang.DLL.Models
 {
     public class LiqPayHelper
     {
@@ -30,8 +30,8 @@ namespace MvcWeb.TheraLang.Models
                 Amount = Convert.ToDecimal(donationAmount),
                 Currency = "UAH",
                 Description = "Благодійність",
-                ResultUrl = $"http://localhost:4200/result/{donationId}",
-                ServerUrl = $"http://6a62a3af.ngrok.io/api/donation/{projectId}/{donationId}",
+                ResultUrl = $"http://theralang.azurewebsites.net/transaction/{donationId}",
+                ServerUrl = $"http://theralang.azurewebsites.net/api/donation/{projectId}/{donationId}",
                 Language = "uk"
             };
 

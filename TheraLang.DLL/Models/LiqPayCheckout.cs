@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 
-namespace MvcWeb.TheraLang.Models
+namespace TheraLang.DLL.Models
 {
     public class LiqPayCheckout
     {

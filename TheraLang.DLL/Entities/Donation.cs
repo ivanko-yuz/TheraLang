@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 
-namespace MvcWeb.TheraLang.Entities
+namespace TheraLang.DLL.Entities
 {
     public class Donation
     {
@@ -24,9 +24,6 @@ namespace MvcWeb.TheraLang.Entities
 
         [JsonProperty("payment_id")]
         public int PaymentId { get; set; }
-
-        [JsonProperty("acq_id")]
-        public int AcqId { get; set; }
 
         [JsonProperty("liqpay_order_id")]
         public string LiqpayOrderId { get; set; }

@@ -103,5 +103,6 @@ namespace TheraLang.DLL
             modelBuilder.ApplyConfiguration(new DonationConfiguration());
             #endregion
         }
+
     }
 }

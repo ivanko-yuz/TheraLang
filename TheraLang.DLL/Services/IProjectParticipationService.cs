@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Enums;
 
 namespace TheraLang.DLL.Services
 {

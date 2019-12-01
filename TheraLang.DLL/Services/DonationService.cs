@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.Models;
-using MvcWeb.TheraLang.UnitOfWork;
 using Newtonsoft.Json;
+using TheraLang.DLL.Entities;
+using TheraLang.DLL.Models;
+using TheraLang.DLL.UnitOfWork;
 
-namespace MvcWeb.TheraLang.Services
+namespace TheraLang.DLL.Services
 {
     public class DonationService : IDonationService
     {

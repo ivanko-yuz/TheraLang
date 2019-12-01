@@ -12,19 +12,11 @@ export class HttpService {
      private url = baseUrl;
 
     getAllProjects() {
-        return this.http.get(this.url + 'project');
+        return this.http.get(this.url + 'projects');
     }
 
     getProjectInfo(id: number) {
-        return this.http.get(this.url + 'project' + '/' + id);
-    }
-
-    getAllProjectParticipants() {
-        return this.http.get(this.url + 'projectParticipants');
-    }
-
-    changeParticipationStatus(requestId: number, requestStatus: number) {
-        return this.http.put(this.url + 'projectParticipants' + '/' + requestId, requestStatus);
+        return this.http.get(this.url + 'projects' + '/' + id);
     }
 
     getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
@@ -41,7 +33,7 @@ export class HttpService {
     }
 
     getAllResourcesById(projectId: number) {
-        return this.http.get(this.url + 'project' + '/' + projectId + '/' + 'resources');
+        return this.http.get(this.url + 'projects' + '/' + projectId + '/' + 'resources');
     }
 
     getPiranhaPageById(pageId: string) {
@@ -49,11 +41,15 @@ export class HttpService {
     }
 
     createProject(project:Project) {
-        return this.http.post(this.url + 'project' + '/' + 'create', project, {observe: 'response'});
+        return this.http.post(this.url + 'projects' + '/' + 'create', project, {observe: 'response'});
     }
 
     updateProject(project: Project) {
         return this.http.put(this.url + '/' + project.id, project, {observe: 'response'});
     }
+
+    getAllProjectTypes(){
+        return this.http.get(this.url + '/' + 'projectTypes');
+       }
 
 }

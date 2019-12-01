@@ -1,8 +1,8 @@
-﻿using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TheraLang.DLL.Entities;
+using TheraLang.DLL.Models;
 
-namespace MvcWeb.TheraLang.Services
+namespace TheraLang.DLL.Services
 {
     public interface IDonationService
     {

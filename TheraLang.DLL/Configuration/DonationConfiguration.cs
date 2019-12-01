@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MvcWeb.TheraLang.Entities;
+using TheraLang.DLL.Entities;
 
-
-namespace MvcWeb.TheraLang.Configuration
+namespace TheraLang.DLL.Configuration
 {
     public class DonationConfiguration : IEntityTypeConfiguration<Donation>
     {
