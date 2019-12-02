@@ -1,4 +1,4 @@
-﻿ <Project Sdk="Microsoft.NET.Sdk.Web">
+ <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <NoWarn>NU1701</NoWarn>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -8,10 +8,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="ClientApp\out-tsc - Copy\**" />
-    <Content Remove="ClientApp\out-tsc - Copy\**" />
-    <EmbeddedResource Remove="ClientApp\out-tsc - Copy\**" />
-    <None Remove="ClientApp\out-tsc - Copy\**" />
   </ItemGroup>
 
   <ItemGroup>
