@@ -7,7 +7,8 @@ import { ProjectParticipantsComponent } from './project-participants/project-par
 import {CmsModule} from './cms/cms.module';
 import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import { ProjectTypeComponent } from './project-type/project-type.component';
+import { ProjectTypeComponent } from './project-info/resources-table-for-project/project-type/project-type.component';
+import { GeneralResourcesComponent } from './general-resources/general-resources.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

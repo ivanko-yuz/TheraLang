@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using TheraLang.Web.TheraLang.DLL;
-using TheraLang.Web.TheraLang.DLL.Entities;
+using TheraLang.DLL;
+using TheraLang.DLL.Entities;
 
 namespace TheraLang.DataSeeding
 {
@@ -15,7 +15,7 @@ namespace TheraLang.DataSeeding
             using var dbContext = CreateDbContext();
 
             var projectTypes = ProjectTypes().ToArray();
-            dbContext.ClearAndSeed(projectTypes);           
+            dbContext.ClearAndSeed(projectTypes);
             dbContext.ClearAndSeed(Projects(projectTypes));
         }
 
@@ -55,5 +55,5 @@ namespace TheraLang.DataSeeding
 
             return new IttmmDbContext(dbContextOptions);
         }
-    };                    
+    };
 }
