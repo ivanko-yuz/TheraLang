@@ -4,12 +4,10 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Piranha;
 using TheraLang.DLL;
 
 namespace TheraLang.Web.Migrations
 {
-    [NoCoverage]
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20180430082044_AddOriginalPageIdToPage")]
     partial class AddOriginalPageIdToPage
