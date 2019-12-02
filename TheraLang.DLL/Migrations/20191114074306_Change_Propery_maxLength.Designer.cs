@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using TheraLang.DLL;
 
-namespace TheraLang.Web.Migrations
+namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20191114074306_Change_Propery_maxLength")]

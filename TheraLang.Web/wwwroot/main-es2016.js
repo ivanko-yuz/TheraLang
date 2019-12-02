@@ -1736,7 +1736,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "participationUrl", function () { return participationUrl; });
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "paymentUrl", function () { return paymentUrl; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            var baseUrl = "https://localhost:44353/api/";
+            var baseUrl = "http://localhost:5000/api/";
             var projectUrl = baseUrl + "project";
             var resourсeUrl = baseUrl + "resourсe";
             var requestUrl = baseUrl + "request";

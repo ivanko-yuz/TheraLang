@@ -11,7 +11,6 @@ namespace TheraLang.Web.Controllers
 {
     [Route("api/resource")]
     [ApiController]
-    [EnableCors("MyPolicy")]
     public class ResourceController : ControllerBase
     {
         public ResourceController(IResourceService service)

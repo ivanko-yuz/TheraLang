@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using TheraLang.DLL;
 
-namespace TheraLang.Web.Migrations
+namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20171215130248_AddBlogging")]

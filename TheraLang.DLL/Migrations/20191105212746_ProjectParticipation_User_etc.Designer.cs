@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using TheraLang.DLL;
 
-namespace TheraLang.Web.Migrations
+namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20191105212746_ProjectParticipation_User_etc")]
