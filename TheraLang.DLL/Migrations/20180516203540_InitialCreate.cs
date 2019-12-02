@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TheraLang.Web.Migrations
+namespace TheraLang.DLL.Migrations
 {
     public partial class InitialCreate2 : Migration
     {

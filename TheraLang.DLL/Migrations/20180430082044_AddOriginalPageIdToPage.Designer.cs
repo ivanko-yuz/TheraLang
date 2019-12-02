@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Piranha;
 using TheraLang.DLL;
 
-namespace TheraLang.Web.Migrations
+namespace TheraLang.DLL.Migrations
 {
     [NoCoverage]
     [DbContext(typeof(IttmmDbContext))]
