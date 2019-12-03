@@ -1,15 +1,17 @@
 using Microsoft.EntityFrameworkCore;
-using TheraLang.DLL.Piranha.Configuration;
-using TheraLang.DLL.Piranha.Entities;
+using System;
+using System.Linq;
 using TheraLang.DLL.Configuration;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Piranha.Configuration;
+using TheraLang.DLL.Piranha.Entities;
 
 namespace TheraLang.DLL
 {
     public class IttmmDbContext : DbContext
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
-        {          
+        {
         }
 
         #region UTTMM_Entities
@@ -100,6 +102,27 @@ namespace TheraLang.DLL
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
             #endregion
+        }
+
+        public override int SaveChanges()
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is BaseEntity && (
+                        e.State == EntityState.Added
+                        || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                ((BaseEntity)entityEntry.Entity).UpdatedDateUtc = DateTime.Now;
+
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entityEntry.Entity).CreatedDateUtc = DateTime.Now;
+                }
+            }
+
+            return base.SaveChanges();
         }
     }
 }
