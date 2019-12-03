@@ -33,7 +33,6 @@ namespace TheraLang.DLL.Services
         {
             try
             {
-                resource.CreatedDateUtc = DateTime.UtcNow;
                 await _unitOfWork.Repository<Resource>().Add(resource);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -47,7 +46,6 @@ namespace TheraLang.DLL.Services
         {
             try
             {
-                resource.UpdatedDateUtc = DateTime.UtcNow;
                 resource.UpdatedById = updatetById;
 
                 _unitOfWork.Repository<Resource>().Update(resource);

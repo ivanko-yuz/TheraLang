@@ -107,10 +107,10 @@ namespace TheraLang.DLL
         public override int SaveChanges()
         {
             var entries = ChangeTracker
-                .Entries()
-                .Where(e => e.Entity is BaseEntity && (
-                        e.State == EntityState.Added
-                        || e.State == EntityState.Modified));
+            .Entries()
+            .Where(e => e.Entity is BaseEntity && (
+            e.State == EntityState.Added
+            || e.State == EntityState.Modified));
 
             foreach (var entityEntry in entries)
             {
@@ -121,7 +121,6 @@ namespace TheraLang.DLL
                     ((BaseEntity)entityEntry.Entity).CreatedDateUtc = DateTime.Now;
                 }
             }
-
             return base.SaveChanges();
         }
     }
