@@ -3,10 +3,9 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TheraLang.DLL;
 
-namespace TheraLang.Web.Migrations
+
+namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     partial class IttmmDbContextModelSnapshot : ModelSnapshot
