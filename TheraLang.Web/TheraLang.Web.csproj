@@ -8,6 +8,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="ClientApp\out-tsc - Copy\**" />
+    <Content Remove="ClientApp\out-tsc - Copy\**" />
+    <EmbeddedResource Remove="ClientApp\out-tsc - Copy\**" />
+    <None Remove="ClientApp\out-tsc - Copy\**" />
   </ItemGroup>
 
   <ItemGroup>
