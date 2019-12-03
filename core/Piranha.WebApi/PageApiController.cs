@@ -8,7 +8,6 @@
  *
  */
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Piranha.Models;
 using System;
@@ -18,7 +17,7 @@ namespace Piranha.WebApi
 {
     [ApiController]
     [Route("api/page")]
-    [Authorize(Policy = Permissions.Pages)]
+    //[Authorize(Policy = Permissions.Pages)]
     public class PageApiController : Controller
     {
         private readonly IApi _api;

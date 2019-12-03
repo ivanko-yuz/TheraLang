@@ -8,7 +8,6 @@
  *
  */
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Piranha.Models;
 using System;
@@ -18,7 +17,7 @@ namespace Piranha.WebApi
 {
     [ApiController]
     [Route("api/sitemap")]
-    [Authorize(Policy = Permissions.Sitemap)]
+    //[Authorize(Policy = Permissions.Sitemap)]
     public class SitemapApiController : Controller
     {
         private readonly IApi _api;

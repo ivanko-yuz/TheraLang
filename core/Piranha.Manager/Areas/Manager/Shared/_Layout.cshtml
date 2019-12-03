@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/manager/assets/css/full.min.css">
     @foreach (var style in module.Styles)
     {
-    <link href="@Url.Content(style)" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content(style)" rel="stylesheet" type="text/css" />
     }
 
     <title>@ViewBag.Title</title>
@@ -29,7 +29,7 @@
     <partial name="~/Areas/Manager/Shared/Partial/_MediaUploadTemplate.cshtml" />
     @foreach (var partial in module.Partials)
     {
-    <partial name="@partial" />
+        <partial name="@partial" />
     }
 
     <script type="text/javascript">
@@ -41,27 +41,27 @@
     <partial name="~/Areas/Manager/Shared/Partial/_EditorConfig.cshtml" />
 
     @RenderSection("partials", required: false)
-    
-<environment include="Development">
-    <script type="text/javascript" src="~/manager/assets/js/piranha-dev.js"></script>
-</environment>
-<environment exclude="Development">
-    <script type="text/javascript" src="~/manager/assets/js/piranha.min.js"></script>
-</environment>
-<script type="text/javascript">
-    //Because developer revealed that this step needs to be taken first. Vue is supposed to have whatever types it works with available this way, otherwise it fails in dev mode.
-    Vue.prototype.piranha = window.piranha;
-</script>
+
+    <environment include="Development">
+        <script type="text/javascript" src="~/manager/assets/dist/js/piranha-dev.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script type="text/javascript" src="~/manager/assets/dist/js/piranha.min.js"></script>
+    </environment>
+    <script type="text/javascript">
+        //Because developer revealed that this step needs to be taken first. Vue is supposed to have whatever types it works with available this way, otherwise it fails in dev mode.
+        Vue.prototype.piranha = window.piranha;
+    </script>
 
     @if (!string.IsNullOrWhiteSpace(ViewBag.Message))
     {
-    <script>
+        <script>
         piranha.notifications.push({
             body: "@Html.Raw(ViewBag.Message)",
             type: "@Html.Raw(ViewBag.MessageCss)",
             hide: true
         });
-    </script>
+        </script>
     }
 
     <partial name="~/Areas/Manager/Shared/Partial/_Resources.cshtml" />

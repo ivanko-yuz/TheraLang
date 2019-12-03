@@ -155,7 +155,9 @@ namespace Piranha
                     if (!IsInitialized)
                     {
                         // Migrate database
-                        Database.Migrate(); 
+
+                        //TODO: fix Database.MIGRATE()
+                        //Database.Migrate();
                         // Seed
                         Seed();
 
