@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
 using TheraLang.DLL.Configuration;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Piranha.Configuration;
@@ -102,26 +100,6 @@ namespace TheraLang.DLL
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
             #endregion
-        }
-
-        public override int SaveChanges()
-        {
-            var entries = ChangeTracker
-            .Entries()
-            .Where(e => e.Entity is BaseEntity && (
-            e.State == EntityState.Added
-            || e.State == EntityState.Modified));
-
-            foreach (var entityEntry in entries)
-            {
-                ((BaseEntity)entityEntry.Entity).UpdatedDateUtc = DateTime.Now;
-
-                if (entityEntry.State == EntityState.Added)
-                {
-                    ((BaseEntity)entityEntry.Entity).CreatedDateUtc = DateTime.Now;
-                }
-            }
-            return base.SaveChanges();
         }
     }
 }
