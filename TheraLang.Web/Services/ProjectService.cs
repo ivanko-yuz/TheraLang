@@ -20,7 +20,7 @@ namespace TheraLang.Web.Services
 
         public IEnumerable<Project> GetAllProjects()
         {
-            return _uow.Repository<Project>().Get().Include(x=>x.Donations)/*.AsNoTracking()*/;
+            return _uow.Repository<Project>().Get().Include(x=>x.Donations);
         }
 
         public async Task Add(Project projectViewModel)
