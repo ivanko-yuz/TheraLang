@@ -1,7 +1,7 @@
-﻿using MvcWeb.TheraLang.Entities;
+﻿using TheraLang.DLL.Entities;
 using System.Threading.Tasks;
 
-namespace MvcWeb.Services
+namespace TheraLang.DLL.Services
 {
     public interface IProjectTypeService
     {

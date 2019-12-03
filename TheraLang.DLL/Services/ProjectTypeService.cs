@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using MvcWeb.Services;
-using MvcWeb.TheraLang.Entities;
-using MvcWeb.TheraLang.UnitOfWork;
+using TheraLang.DLL.Entities;
+using TheraLang.DLL.UnitOfWork;
 
-namespace MvcWeb.TheraLang.Services
+namespace TheraLang.DLL.Services
 {
     public class ProjectTypeService : IProjectTypeService
     {
