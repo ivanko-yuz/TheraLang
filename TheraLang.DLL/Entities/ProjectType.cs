@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-namespace MvcWeb.TheraLang.Entities
+
+namespace TheraLang.DLL.Entities
 {
     public class ProjectType : BaseEntity
     {
