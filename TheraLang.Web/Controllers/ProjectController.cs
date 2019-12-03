@@ -73,7 +73,7 @@ namespace TheraLang.Web.Controllers
         }
         
 
-            [HttpPut("{id}")]
+            /*[HttpPut("{id}")]
             public async Task<IActionResult> Approve(int id)
             {
                 if (id == default)
@@ -82,7 +82,7 @@ namespace TheraLang.Web.Controllers
                 }
                 await _projectService.ChangeStatus(id, ProjectStatus.Approved);
                 return Ok();
-            }
+            }//*/
 
         [HttpGet("page/{page}/{pagesize}")]
         public IActionResult ProjectsPagination(int page,  int pageSize)

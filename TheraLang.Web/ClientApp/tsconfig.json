@@ -11,8 +11,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2016",
-     "typeRoots": ["node_modules/@types"],
-     "lib": ["dom", "es7", "es2016.array.include"]
+    "lib": ["dom", "es7", "es2016" ]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

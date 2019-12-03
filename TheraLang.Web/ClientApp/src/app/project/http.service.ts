@@ -33,7 +33,7 @@ export class HttpService {
     }
 
     getAllResourcesById(projectId: number) {
-        return this.http.get(this.url + 'projects' + '/' + projectId + '/' + 'resources');
+        return this.http.get(this.url + 'resource/all/' + projectId);
     }
 
     getPiranhaPageById(pageId: string) {
@@ -50,6 +50,6 @@ export class HttpService {
 
     getAllProjectTypes(){
         return this.http.get(this.url + '/' + 'projectTypes');
-       }
+    }
 
 }

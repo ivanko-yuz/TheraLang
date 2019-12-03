@@ -7,7 +7,7 @@
 }
 @section script
 {
-    <script src="~/manager/assets/js/piranha.module.min.js"></script>
+    <script src="~/manager/assets/dist/js/piranha.module.min.js"></script>
 }
 
 <div id="module">
@@ -31,21 +31,21 @@
                             <th>@Localizer.Module["Package URL"]</th>
                             <th class="date text-center">@Localizer.General["Version"]</th>
                         </tr>
-                        <tbody>
-                            <tr v-for="item in items">
-                                <td>
-                                    <img class="img-thumbnail img-thumbnail-sm" src="~/assets/img/empty-image.png" v-bind:src="item.iconUrl">
-                                </td>
-                                <td class="align-middle">
-                                    <h5>{{ item.name }}</h5>
-                                    <span class="text-nooverflow">{{ item.description }}</span>
-                                </td>
-                                <td class="align-middle">
-                                    <a class="text-nooverflow" :href="item.packageUrl" target="_blank">{{ item.packageUrl }}</a>
-                                </td>
-                                <td class="align-middle text-center">{{ item.version }}</td>
-                            </tr>
-                        </tbody>
+                    <tbody>
+                        <tr v-for="item in items">
+                            <td>
+                                <img class="img-thumbnail img-thumbnail-sm" src="~/assets/img/empty-image.png" v-bind:src="item.iconUrl">
+                            </td>
+                            <td class="align-middle">
+                                <h5>{{ item.name }}</h5>
+                                <span class="text-nooverflow">{{ item.description }}</span>
+                            </td>
+                            <td class="align-middle">
+                                <a class="text-nooverflow" :href="item.packageUrl" target="_blank">{{ item.packageUrl }}</a>
+                            </td>
+                            <td class="align-middle text-center">{{ item.version }}</td>
+                        </tr>
+                    </tbody>
                     </thead>
                 </table>
             </div>
