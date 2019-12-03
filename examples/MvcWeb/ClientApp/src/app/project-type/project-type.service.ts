@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { TypeProject } from './TypeProject';
+import { ProjectType } from './ProjectType';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { TypeProjectHttp } from './TypeProjectHttp.service';
+import { ProjectTypeHttp } from './ProjectTypeHttp.service';
 import { NotificationService } from '../shared/services/notification.service';
 
 @Injectable({
   providedIn: "root"
 })
-export class TypeProjectService {
+export class ProjectTypeService {
   constructor(
     private fb: FormBuilder,
-    private http: TypeProjectHttp,
+    private http: ProjectTypeHttp,
     private notificationService: NotificationService
   ) { }
 
@@ -30,12 +30,12 @@ export class TypeProjectService {
     });
   }
 
-  populateForm(typeProject: TypeProject) {
-    this.form.setValue(typeProject);
+  populateForm(projectType: ProjectType) {
+    this.form.setValue(projectType);
   }
 
-  btnPut(typeProject: TypeProject) {
-    this.http.put(typeProject).subscribe(
+  btnPut(projectType: ProjectType) {
+    this.http.put(projectType).subscribe(
       response => {
         this.notificationService.success(
           "Project type was successfully updated"
@@ -47,8 +47,8 @@ export class TypeProjectService {
     );
   }
 
-  btnPost(newTypeProject: TypeProject): Observable<any> {
-    this.http.post(newTypeProject).subscribe(
+  btnPost(newProjectType: ProjectType): Observable<any> {
+    this.http.post(newProjectType).subscribe(
       response => {
         this.notificationService.success("Project type was successfully added");
       },
@@ -59,8 +59,8 @@ export class TypeProjectService {
     return;
   }
 
-  btnDelete(typeProjectId: number) {
-    this.http.delete(typeProjectId).subscribe(
+  btnDelete(projectTypeId: number) {
+    this.http.delete(projectTypeId).subscribe(
       response => {
         this.notificationService.success(
           "Project type was successfully deleted"

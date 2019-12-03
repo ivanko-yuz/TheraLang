@@ -54,9 +54,9 @@ import { DialogService } from './shared/services/dialog.service';
 import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
 import { CmsModule } from './cms/cms.module';
 import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
-import { TypeProjectComponent } from './type-project/type-project.component';
-import { TypeProjectHttp } from './type-project/TypeProjectHttp.service';
-import { TypeProjectService } from './type-project/type-project.service';
+import { ProjectTypeComponent } from './project-type/project-type.component';
+import { ProjectTypeHttp } from './project-type/ProjectTypeHttp.service';
+import { ProjectTypeService } from './project-type/project-type.service';
 
 @NgModule({
   declarations: [
@@ -80,14 +80,16 @@ import { TypeProjectService } from './type-project/type-project.service';
     GeneralResourcesTableComponent,
     GeneralResourcesInnerTableComponent,
     ToolbarItemComponent,
+    ProjectTypeService,
+    ProjectTypeHttp
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
     ProjectFormComponent,
     ConfirmDialogComponent,
-    TypeProjectComponent,
-    TypeProjectHttp,
-    TypeProjectService
+    ProjectTypeComponent,
+    // ProjectTypeService,
+    // ProjectTypeHttp
   ],
   imports: [
     BrowserModule,

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { TypeProjectService } from './type-project.service';
+import { ProjectTypeService } from './project-type.service';
 import { MatDialogRef } from '@angular/material';
 
 @Component({
-  selector: "app-type-project",
-  templateUrl: "./type-project.component.html",
-  styleUrls: ["./type-project.component.less"]
+  selector: "app-project-type",
+  templateUrl: "./project-type.component.html",
+  styleUrls: ["./project-type.component.less"]
 })
-export class TypeProjectComponent implements OnInit {
+export class ProjectTypeComponent implements OnInit {
   constructor(
-    private dialog: MatDialogRef<TypeProjectComponent>,
-    public service: TypeProjectService
+    private dialog: MatDialogRef<ProjectTypeComponent>,
+    public service: ProjectTypeService
   ) { }
 
   ngOnInit() { }
