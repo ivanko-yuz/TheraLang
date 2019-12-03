@@ -6,7 +6,6 @@
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
-<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
   <ItemGroup>
   </ItemGroup>
