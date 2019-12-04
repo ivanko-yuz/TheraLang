@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Enums;
 using TheraLang.DLL.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace TheraLang.Web.Controllers
 {
@@ -12,13 +13,15 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ParticipationController : ControllerBase
     {
-        public ParticipationController(IProjectParticipationService service)
+        public ParticipationController(IProjectParticipationService service, UserManager<IdentityUser> manager)
         {
             _service = service;
+            _userManager = manager;
         }
 
         private readonly IProjectParticipationService _service;
-        
+        private readonly UserManager<IdentityUser> _userManager;
+
 
         [HttpPut]
         [Route("{participantId}")]
@@ -44,12 +47,14 @@ namespace TheraLang.Web.Controllers
 
         [HttpPost]
         [Route("create/{projectId}")]
-        public async Task<IActionResult> Post([FromBody] int projectId, int userId)
+        public async Task<IActionResult> Post(int projectId)
         {
-            if( userId == default || projectId == default )
+            if (projectId == default)
             {
-                throw new ArgumentException($"{nameof(userId)} or {nameof(projectId)} can not be 0");
+                throw new ArgumentException($"The {nameof(projectId)} can not be 0");
             }
+
+            int userId = _userManager.GetUserAsync(HttpContext.User).Id;
             await _service.CreateRequest(userId, projectId);
             return Ok();
         }
