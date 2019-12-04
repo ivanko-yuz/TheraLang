@@ -20,6 +20,7 @@ namespace TheraLang.DLL
         public virtual DbSet<ResourceProject> ResourceProject { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
+        public virtual DbSet<Donation> Donations { get; set; }
         #endregion
 
         #region Piranha_Entities
@@ -99,7 +100,9 @@ namespace TheraLang.DLL
             modelBuilder.ApplyConfiguration(new ResourceProjectConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
+            modelBuilder.ApplyConfiguration(new DonationConfiguration());
             #endregion
         }
+
     }
 }

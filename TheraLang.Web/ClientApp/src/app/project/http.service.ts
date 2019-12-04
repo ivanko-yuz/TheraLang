@@ -12,19 +12,11 @@ export class HttpService {
      private url = baseUrl;
 
     getAllProjects() {
-        return this.http.get(this.url + 'project');
+        return this.http.get(this.url + 'projects');
     }
 
     getProjectInfo(id: number) {
-        return this.http.get(this.url + 'project' + '/' + id);
-    }
-
-    getAllProjectParticipants() {
-        return this.http.get(this.url + 'participation/get');
-    }
-
-    changeParticipationStatus(requestId: number, requestStatus: number) {
-        return this.http.put(this.url + 'participation/create' + '/' + requestId, requestStatus);
+        return this.http.get(this.url + 'projects' + '/' + id);
     }
 
     getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
@@ -49,7 +41,7 @@ export class HttpService {
     }
 
     createProject(project:Project) {
-        return this.http.post(this.url + 'project' + '/' + 'create', project, {observe: 'response'});
+        return this.http.post(this.url + 'projects' + '/' + 'create', project, {observe: 'response'});
     }
 
     updateProject(project: Project) {

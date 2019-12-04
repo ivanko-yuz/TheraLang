@@ -1,12 +1,12 @@
-import { RequestStatus } from '../request-status-enum';
+import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status';
 
 export class ProjectParticipationRequest {
     constructor(
-        public id:number,
+        public id: number,
         public createdById: number,
         public role: number,
         public projectId: number,
-        public status: RequestStatus
-        ) { }
+        public status: ProjectParticipationRequestStatus
+    ) { }
 }
 
