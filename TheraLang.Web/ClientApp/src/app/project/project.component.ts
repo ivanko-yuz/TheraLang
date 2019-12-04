@@ -4,6 +4,7 @@ import { Project } from './project';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { ProjectService } from './project.service';
 import { DialogService } from '../shared/services/dialog.service';
+import { NotificationService } from '../shared//services/notification.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class ProjectComponent implements OnInit {
 
   constructor(private httpService: HttpService,
     private dialogService: DialogService,
-    private service: ProjectService) { }
+    private service: ProjectService,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects);
@@ -34,4 +36,14 @@ export class ProjectComponent implements OnInit {
     this.dialogService.openFormDialog(ProjectFormComponent);
   }
 
+  onDelete(id) {
+    this.dialogService.openConfirmDialog('Are you sure to delete this project?')
+      .afterClosed().subscribe(res => {
+        if (res) {
+          this.service.deleteProject(id);
+          this.notificationService.warn('Deleted successfully!');
+        }
+      });
+
+  }
 }

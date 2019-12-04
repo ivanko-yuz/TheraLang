@@ -27,6 +27,7 @@
     <mat-card-actions class="get-details-button">
       <a mat-stroked-button [routerLink]="['/project', project.id]">Деталі</a>
       <button mat-stroked-button (click)="onEdit(project)">Змінити</button>
+      <button mat-stroked-button (click)="onDelete(project.id)">Видалити проект</button>
     </mat-card-actions>
   </mat-card>
 </div>

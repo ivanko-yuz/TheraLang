@@ -44,26 +44,39 @@ export class ProjectService {
   addProject(project: Project) {
     this.httpService.createProject(project).subscribe(
       (res) => {
-       if (res.ok){
-       this.notificationService.success('Проект успішно створено')
-       }
+        if (res.ok) {
+          this.notificationService.success('Проект успішно створено')
+        }
       },
       (error) => {
-         console.log(error);
-         this.notificationService.warn('Помилка при створенні')
+        console.log(error);
+        this.notificationService.warn('Помилка при створенні')
       });
   }
 
   editProject(project: Project) {
     this.httpService.updateProject(project).subscribe(
       (res) => {
-       if (res.ok){
-       this.notificationService.success('Проект успішно оновлено')
-       }
+        if (res.ok) {
+          this.notificationService.success('Проект успішно оновлено')
+        }
       },
       (error) => {
-         console.log(error);
-         this.notificationService.warn('Помилка при оновленні')
+        console.log(error);
+        this.notificationService.warn('Помилка при оновленні')
+      });
+  }
+
+  deleteProject(id: number) {
+    this.httpService.deleteProject(id).subscribe(
+      (res) => {
+        if (res.ok) {
+          this.notificationService.success('Проект успішно видалено')
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.notificationService.warn('Помилка при видаленні')
       });
   }
 }
