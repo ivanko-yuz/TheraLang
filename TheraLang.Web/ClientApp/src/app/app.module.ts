@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import {
-  MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
-  MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
-  MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
-  MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
-  MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
-  MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
+   MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
+   MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
+   MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
+   MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
+   MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
+   MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -73,16 +73,13 @@ import { ProjectTypeService } from './project-type/project-type.service';
       GeneralResourcesTableComponent,
       GeneralResourcesInnerTableComponent,
       ToolbarItemComponent,
-      ProjectTypeService,
-      ProjectTypeHttp
+      ProjectTypeComponent,
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
       ProjectFormComponent,
       ConfirmDialogComponent,
       ProjectTypeComponent,
-      // ProjectTypeService,
-      // ProjectTypeHttp
    ],
    imports: [
       BrowserModule,
@@ -152,7 +149,9 @@ import { ProjectTypeService } from './project-type/project-type.service';
       //{provide: ErrorHandler, useClass: ErrorHandlerService},
       NotificationService,
       DialogService,
-      ResourceCategoriesService
+      ResourceCategoriesService,
+      ProjectTypeService,
+      ProjectTypeHttp
    ],
    bootstrap: [
       AppComponent,
