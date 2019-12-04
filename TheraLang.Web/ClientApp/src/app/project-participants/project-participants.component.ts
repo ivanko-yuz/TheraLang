@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from './project-participation-request';
 import { EventService } from './event-service';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { RequestStatus } from '../request-status-enum';
+import { ProjectParticipationService } from './project-participation.service';
+import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status';
+
 
 
 @Component({
@@ -18,19 +19,20 @@ export class ProjectParticipantsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = ['createdById', 'role', 'projectId', 'status', 'actions'];
 
-  constructor(private httpService: HttpService, private eventService: EventService) { }
+  constructor(private participantService: ProjectParticipationService, private eventService: EventService) { }
 
   ngOnInit() {
-    this.httpService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
+    this.participantService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
       this.projectParticipationRequest.data = projectParticipants;
-      this.projectParticipationRequest.filterPredicate = (projectParticipant: ProjectParticipationRequest, filter: string) => projectParticipant.status.toString() == filter;
+      this.projectParticipationRequest.filterPredicate = (projectParticipant: ProjectParticipationRequest, filter: string) =>
+        projectParticipant.status.toString() === filter;
       this.projectParticipationRequest.paginator = this.paginator;
-      this.projectParticipationRequest.filter = RequestStatus.New.toString();
+      this.projectParticipationRequest.filter = ProjectParticipationRequestStatus.New.toString();
     });
   }
 
-  load() {
-    this.httpService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
+  loadPatricipants() {
+    this.participantService.getAllProjectParticipants().subscribe((projectParticipants: ProjectParticipationRequest[]) => {
       this.projectParticipationRequest.data = projectParticipants;
       this.removeNotificationIcon();
     });
@@ -38,32 +40,32 @@ export class ProjectParticipantsComponent implements OnInit {
 
   changeTab(tabPosition: number) {
     this.projectParticipationRequest.filter = this.changeFilter(tabPosition);
-    this.showActionButtons = (tabPosition === RequestStatus.New) ? true : false;
+    this.showActionButtons = (tabPosition === ProjectParticipationRequestStatus.New) ? true : false;
   }
 
-  changeFilter(tabPosition: number){
-    if(tabPosition === 1){
-      return RequestStatus.Aproved.toString();
+  changeFilter(tabPosition: number) {
+    if (tabPosition === 1) {
+      return ProjectParticipationRequestStatus.Approved.toString();
     }
-    else if(tabPosition === 2){
-      return RequestStatus.Rejected.toString();
+    else if (tabPosition === 2) {
+      return ProjectParticipationRequestStatus.Rejected.toString();
     }
-    else{
-      return RequestStatus.New.toString();
+    else {
+      return ProjectParticipationRequestStatus.New.toString();
     }
   }
 
   changeStatus(status: string, projectParticipant: ProjectParticipationRequest) {
-    projectParticipant.status = (status === 'aproved') ?  RequestStatus.Aproved : RequestStatus.Rejected;
-    this.httpService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
-      this.load();
+    projectParticipant.status = (status === 'approved') ? ProjectParticipationRequestStatus.Approved : ProjectParticipationRequestStatus.Rejected;
+    this.participantService.changeParticipationStatus(projectParticipant.id, projectParticipant.status).subscribe(data => {
+      this.loadPatricipants();
     });
   }
 
   removeNotificationIcon() {
     if (this.projectParticipationRequest.filteredData.length === 0) {
       this.eventService.emitChildEvent();
-    }  
+    }
   }
 
 }

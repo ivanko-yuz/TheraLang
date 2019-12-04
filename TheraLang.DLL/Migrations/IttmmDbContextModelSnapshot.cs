@@ -3,8 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TheraLang.DLL;
+
 
 namespace TheraLang.DLL.Migrations
 {
@@ -18,6 +17,40 @@ namespace TheraLang.DLL.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("TheraLang.DLL.Entities.Donation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<string>("Currency")
+                        .IsRequired();
+
+                    b.Property<string>("DonationId");
+
+                    b.Property<string>("LiqpayOrderId")
+                        .IsRequired();
+
+                    b.Property<int>("PaymentId");
+
+                    b.Property<int>("ProjectId");
+
+                    b.Property<decimal>("ReceiverCommission");
+
+                    b.Property<string>("Status")
+                        .IsRequired();
+
+                    b.Property<int>("TransactionId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Donations");
+                });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.Project", b =>
                 {
@@ -1008,6 +1041,14 @@ namespace TheraLang.DLL.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("Piranha_UserTokens");
+                });
+
+            modelBuilder.Entity("TheraLang.DLL.Entities.Donation", b =>
+                {
+                    b.HasOne("TheraLang.DLL.Entities.Project", "Project")
+                        .WithMany("Donations")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.Project", b =>
