@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.UnitOfWork;
+using TheraLang.DLL.Models;
 
 namespace TheraLang.DLL.Services
 {
@@ -29,24 +30,41 @@ namespace TheraLang.DLL.Services
             }
         }
 
-        public async Task AddResource(Resource resource)
+        public async Task AddResource(ResourceViewModel resourceModel, int userId)
         {
             try
             {
-                resource.CreatedDateUtc = DateTime.UtcNow;
+                Resource resource = new Resource
+                {
+                    Name = resourceModel.name,
+                    Description = resourceModel.description,
+                    Url = resourceModel.url,
+                    File = resourceModel.file,
+                    CategoryId = resourceModel.categoryId,
+                    CreatedById = userId,
+                    CreatedDateUtc = DateTime.UtcNow
+                };
+
                 await _unitOfWork.Repository<Resource>().Add(resource);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when adding the {nameof(resource)}: {resource.Id} ", ex);
+                throw new Exception($"Error when adding the {nameof(resourceModel)}: ", ex);
             }
         }
 
-        public async Task UpdateResource(Resource resource, int updatetById)
+        public async Task UpdateResource(ResourceViewModel resourceModel, int updatetById)
         {
             try
             {
+                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == resourceModel.id);
+
+                resource.Name = resourceModel.name;
+                resource.Description = resourceModel.description;
+                resource.Url = resourceModel.url;
+                resource.File = resourceModel.file;
+                resource.CategoryId = resourceModel.categoryId;
                 resource.UpdatedDateUtc = DateTime.UtcNow;
                 resource.UpdatedById = updatetById;
 
@@ -55,7 +73,7 @@ namespace TheraLang.DLL.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when updating the {nameof(resource)}: {resource.Id} ", ex);
+                throw new Exception($"Error when updating the {nameof(resourceModel)}: {resourceModel.id} ", ex);
             }
         }
 

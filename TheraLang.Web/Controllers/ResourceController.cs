@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Constants;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Services;
+using TheraLang.DLL.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace TheraLang.Web.Controllers
 {
@@ -13,12 +14,14 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service)
+        public ResourceController(IResourceService service, UserManager<IdentityUser> manager)
         {
             _service = service;
+            _userManager = manager;
         }
 
         private readonly IResourceService _service;
+        private readonly UserManager<IdentityUser> _userManager;
 
         /// <summary>
         /// create resource
@@ -26,14 +29,16 @@ namespace TheraLang.Web.Controllers
         /// <param name="resource">Resource param which was given through POST body</param>
         /// <returns>status code</returns>
         [HttpPost]
-        [Route("create/{resource}")]
-        public async Task<IActionResult> PostResource([FromBody]Resource resource)
+        [Route("create")]
+        public async Task<IActionResult> PostResource([FromBody] ResourceViewModel resourceModel)
         {
-            if (resource == null)
+            if (resourceModel == null)
             {
-                throw new ArgumentException($"{nameof(resource)} can not be null");
+                throw new ArgumentException($"{nameof(resourceModel)} can not be null");
             }
-            await _service.AddResource(resource);
+
+            int userId = _userManager.GetUserAsync(HttpContext.User).Id;
+            await _service.AddResource(resourceModel, userId);
             return Ok();
         }
 
@@ -44,18 +49,16 @@ namespace TheraLang.Web.Controllers
         /// <param name="updatedById"></param>
         /// <returns></returns>
         [HttpPut]
-        [Route("update/{resource}/{updatedById}")]
-        public async Task<IActionResult> PutResource([FromBody] Resource resource, int updatedById)
+        [Route("update")]
+        public async Task<IActionResult> PutResource([FromBody] ResourceViewModel resourceModel)
         {
-            if (updatedById == default)
+            if (resourceModel == null)
             {
-                throw new ArgumentException($"{nameof(updatedById)} can not be 0");
+                throw new ArgumentException($"{nameof(resourceModel)} can not be null");
             }
-            if (resource == null)
-            {
-                throw new ArgumentException($"{nameof(resource)} can not be null");
-            }
-            await _service.UpdateResource(resource, updatedById);
+
+            int userId = _userManager.GetUserAsync(HttpContext.User).Id;
+            await _service.AddResource(resourceModel, userId);
             return Ok();
         }
 

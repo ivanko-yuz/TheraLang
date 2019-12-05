@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Services;
+using System.Collections.Generic;
+using TheraLang.DLL.Entities;
 
 namespace TheraLang.Web.Controllers
 {
@@ -23,7 +25,7 @@ namespace TheraLang.Web.Controllers
         /// <param name="newTypeName">new name of selected category</param>
         /// <returns>wil return just status code</returns>
         [HttpPut]
-        [Route("create/{categoryId}/{newType}")]
+        [Route("update/{categoryId}/{newType}")]
         public async Task<IActionResult> PutType(int categoryId, string newTypeName)
         {
             if (categoryId == default)
@@ -36,6 +38,14 @@ namespace TheraLang.Web.Controllers
             }
             await _service.ChangeType(categoryId, newTypeName);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("get")]
+        public IEnumerable<ResourceCategory> GetAll()
+        {
+            IEnumerable<ResourceCategory> categories = _service.GetAllCategories();
+            return categories;
         }
     }
 }

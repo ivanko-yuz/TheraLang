@@ -1,4 +1,6 @@
-﻿using TheraLang.DLL.Statuses;
+﻿
+
+using TheraLang.DLL.Enums;
 
 namespace TheraLang.DLL.Entities
 {

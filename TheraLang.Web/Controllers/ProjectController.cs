@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
+using TheraLang.Web.Models;
 using TheraLang.Web.Services;
 
 namespace TheraLang.Web.Controllers
 {
-    [Route("api/project")]
+    [Route("api/projects")]
     [ApiController]
     public class ProjectController : ControllerBase
     {
@@ -29,9 +31,22 @@ namespace TheraLang.Web.Controllers
         }
         
         [HttpGet]
-        public IEnumerable<Project> GetAllProjects()
+        public IEnumerable<ProjectModel> GetAllProjects()
         {
-            return _projectService.GetAllProjects();
+            List<ProjectModel> projectModels = new List<ProjectModel>();
+            projectModels = _projectService.GetAllProjects().Select(p => new ProjectModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                DonationAmount = p.Donations.Sum(y => y.Amount),
+                Description = p.Description,
+                Details = p.Details,
+                ProjectStart = p.ProjectStart,
+                ProjectEnd = p.ProjectEnd
+                
+            }).ToList();
+
+            return projectModels;
         }
 
         [HttpGet("{id}")]
