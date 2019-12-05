@@ -19,7 +19,7 @@ namespace TheraLang.Web.Controllers
         private readonly IResourceCategoryService _service;
 
         [HttpPut]
-        [Route("update/{categoryId}/{newType}")]
+        [Route("update/{categoryId}/{newTypeName}")]
         public async Task<IActionResult> PutType(int categoryId, string newTypeName)
         {
             if (categoryId == default)
