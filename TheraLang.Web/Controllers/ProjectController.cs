@@ -71,6 +71,18 @@ namespace TheraLang.Web.Controllers
             _projectService.UpdateAsync(id,project);
             return Ok(project);
         }
+        
+
+            /*[HttpPut("{id}")]
+            public async Task<IActionResult> Approve(int id)
+            {
+                if (id == default)
+                {
+                    throw new ArgumentException($"{nameof(id)} cannot be 0");
+                }
+                await _projectService.ChangeStatus(id, ProjectStatus.Approved);
+                return Ok();
+            }//*/
 
         [HttpGet("page/{page}/{pagesize}")]
         public IActionResult ProjectsPagination(int page,  int pageSize)

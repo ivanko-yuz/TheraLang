@@ -40,16 +40,9 @@ export class ProjectComponent implements OnInit {
     this.dialogService.openConfirmDialog('Are you sure to delete this project?')
       .afterClosed().subscribe(res => {
         if (res) {
-          // this.httpService.deleteProject(id);
           this.httpService.deleteProject(id).subscribe(result => this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects));
           this.notificationService.warn('Deleted successfully!');
         }
       });
-
-    // onDelete(id) {
-    //   this.httpService.deleteProject(id).subscribe(result => this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects));
-    // }
-
-
   }
 }
