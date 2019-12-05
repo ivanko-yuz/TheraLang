@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TheraLang.Web.Controllers
 {
-    [Route("api/resource")]
+    [Route("api/resources")]
     [ApiController]
     public class ResourceController : ControllerBase
     {

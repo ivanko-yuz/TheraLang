@@ -7,7 +7,7 @@ using TheraLang.DLL.Entities;
 
 namespace TheraLang.Web.Controllers
 {
-    [Route("api/category")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
