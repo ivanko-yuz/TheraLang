@@ -53,7 +53,7 @@ export class HttpService {
     }
 
     deleteProject(id: number) {
-        return this.http.delete(this.url + '/' + id, { observe: 'response' });
+        return this.http.delete(this.url + '/' + 'projects' + '/' + id, { observe: 'response' });
     }
 
 }

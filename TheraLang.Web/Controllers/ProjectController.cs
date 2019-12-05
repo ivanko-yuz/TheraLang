@@ -111,7 +111,7 @@ namespace TheraLang.Web.Controllers
             }
 
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         public IActionResult DeleteProject(int id)
         {
             if (id == default)
