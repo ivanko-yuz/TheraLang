@@ -40,6 +40,10 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// get all ResourceCategories
+        /// </summary>
+        /// <returns>array of ResourceCategories</returns>
         [HttpGet]
         [Route("get")]
         public IEnumerable<ResourceCategory> GetAll()

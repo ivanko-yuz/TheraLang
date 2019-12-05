@@ -26,7 +26,7 @@ namespace TheraLang.Web.Controllers
         /// <summary>
         /// create resource
         /// </summary>
-        /// <param name="resource">Resource param which was given through POST body</param>
+        /// <param name="resourceModel">Resource param which was given through POST body</param>
         /// <returns>status code</returns>
         [HttpPost]
         [Route("create")]
@@ -43,11 +43,10 @@ namespace TheraLang.Web.Controllers
         }
 
         /// <summary>
-        /// Update resource
+        /// Create new Resource
         /// </summary>
-        /// <param name="resource"></param>
-        /// <param name="updatedById"></param>
-        /// <returns></returns>
+        /// <param name="resourceModel"></param>
+        /// <returns>status code</returns>
         [HttpPut]
         [Route("update")]
         public async Task<IActionResult> PutResource([FromBody] ResourceViewModel resourceModel)
@@ -62,9 +61,14 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Get Resource by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>selected resource</returns>
         [HttpGet]
         [Route("get/{Id}")]
-        public IActionResult GetResource([FromBody]int id)
+        public IActionResult GetResource(int id)
         {
             if (id == default)
             {
@@ -74,9 +78,14 @@ namespace TheraLang.Web.Controllers
             return Ok(resource);
         }
 
+        /// <summary>
+        /// Delete Resource by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>status code</returns>
         [HttpDelete]
         [Route("delete/{Id}")]
-        public async Task<IActionResult> DeleteResource([FromBody]int id)
+        public async Task<IActionResult> DeleteResource(int id)
         {
             if (id == default)
             {
@@ -86,6 +95,11 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Get all ResourcesCategories
+        /// </summary>
+        /// <param name="withAssignedResources">only those RC that are used</param>
+        /// <returns>array of categories</returns>
         [HttpGet]
         [Route("categories/{withAssignedResources}")]
         public IActionResult GetResourcesCategories(bool withAssignedResources)
@@ -94,6 +108,11 @@ namespace TheraLang.Web.Controllers
             return Ok(categories);
         }
 
+        /// <summary>
+        /// Get count of Resources that belong to Category
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns>count</returns>
         [HttpGet]
         [Route("count/{categoryId}")]
         public IActionResult CountResourcesByCategoryId(int categoryId)
@@ -106,6 +125,13 @@ namespace TheraLang.Web.Controllers
             return Ok(count);
         }
 
+        /// <summary>
+        /// Get all Resources by Category with pagination
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="recordsPerPage"></param>
+        /// <returns>array of resources</returns>
         [HttpGet]
         [Route("all/{categoryId}/{pageNumber}/{recordsPerPage?}")]
         public IActionResult GetAllResourcesByCategoryId(int categoryId, int pageNumber,
@@ -125,6 +151,11 @@ namespace TheraLang.Web.Controllers
             return Ok(resources);
         }
 
+        /// <summary>
+        /// Get all Resources by Project
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns>selected Project</returns>
         [HttpGet]
         [Route("all/{projectId}")]
         public IActionResult GetAllResourcesByProjectId(int projectId)
