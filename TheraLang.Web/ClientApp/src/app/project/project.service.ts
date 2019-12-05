@@ -66,17 +66,5 @@ export class ProjectService {
         this.notificationService.warn('Помилка при оновленні')
       });
   }
-
-  deleteProject(id: number) {
-    this.httpService.deleteProject(id).subscribe(
-      (res) => {
-        if (res.ok) {
-          this.notificationService.success('Проект успішно видалено')
-        }
-      },
-      (error) => {
-        console.log(error);
-        this.notificationService.warn('Помилка при видаленні')
-      });
-  }
 }
+
