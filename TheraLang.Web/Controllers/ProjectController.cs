@@ -109,5 +109,17 @@ namespace TheraLang.Web.Controllers
                 await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
                 return Ok();
             }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProject(int id)
+        {
+            if (id == default)
+            {
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
+            }
+            await _projectService.Delete(id);
+            return Ok();
         }
+    }
     }
