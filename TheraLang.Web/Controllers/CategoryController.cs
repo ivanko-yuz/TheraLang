@@ -16,6 +16,12 @@ namespace TheraLang.Web.Controllers
 
         private readonly IResourceCategoryService _service;
 
+        /// <summary>
+        /// change resource category
+        /// </summary>
+        /// <param name="categoryId">id of category you want to change</param>
+        /// <param name="newTypeName">new name of selected category</param>
+        /// <returns>wil return just status code</returns>
         [HttpPut]
         [Route("create/{categoryId}/{newType}")]
         public async Task<IActionResult> PutType(int categoryId, string newTypeName)

@@ -20,6 +20,11 @@ namespace TheraLang.Web.Controllers
 
         private readonly IResourceService _service;
 
+        /// <summary>
+        /// create resource
+        /// </summary>
+        /// <param name="resource">Resource param which was given through POST body</param>
+        /// <returns>status code</returns>
         [HttpPost]
         [Route("create/{resource}")]
         public async Task<IActionResult> PostResource([FromBody]Resource resource)
@@ -32,6 +37,12 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Update resource
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <param name="updatedById"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("update/{resource}/{updatedById}")]
         public async Task<IActionResult> PutResource([FromBody] Resource resource, int updatedById)
