@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
@@ -56,6 +57,24 @@ namespace TheraLang.DLL.Services
             catch (Exception ex)
             {
                 throw new Exception($"Error when updating the {nameof(ProjectType)}: {projectType.Id}: ", ex);
+            }
+        }
+
+        public IEnumerable<ProjectType> GetAllProjectsType()
+        {
+            return _uow.Repository<ProjectType>().Get().AsNoTracking().ToList();
+        }
+
+        public ProjectType GetProjectTypeById(int id)
+        {
+            try
+            {
+                ProjectType projectType = _uow.Repository<ProjectType>().Get().FirstOrDefault(p => p.Id == id);
+                return projectType;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error when getting project by {nameof(id)} = {id}: ", ex);
             }
         }
     }

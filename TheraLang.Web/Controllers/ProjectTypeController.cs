@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Services;
 using TheraLang.DLL.Entities;
+using System.Collections.Generic;
 
 namespace MvcWeb.TheraLang.Controllers
 {
@@ -17,8 +18,7 @@ namespace MvcWeb.TheraLang.Controllers
 
         private readonly IProjectTypeService _service;
 
-        [HttpPost]
-        [Route("create/{projectType}")]
+        [HttpPost("create")]
         public async Task<IActionResult> PostProjectType([FromBody]ProjectType projectType)
         {
             if (projectType == null)
@@ -29,8 +29,7 @@ namespace MvcWeb.TheraLang.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        [Route("update/{projectType}/{id}")]
+        [HttpPut("update/{id}")]       
         public async Task<IActionResult> PutProjectType([FromBody] ProjectType projectType, int id)
         {
             if (id == default)
@@ -46,9 +45,8 @@ namespace MvcWeb.TheraLang.Controllers
         }
 
         
-        [HttpDelete]
-        [Route("delete/{id}")]
-        public async Task<IActionResult> DeleteProjectType([FromBody]int id)
+        [HttpDelete("delete/{id}")]        
+        public async Task<IActionResult> DeleteProjectType(int id)
         {
             if (id == default)
             {
@@ -56,6 +54,32 @@ namespace MvcWeb.TheraLang.Controllers
             }
             await _service.Remove(id);
             return Ok();
+        }
+
+        /// <summary>
+        /// get all ProjectsTypes
+        /// </summary>
+        /// <returns>array of ProjectsTypes</returns>
+        [HttpGet]
+        public IEnumerable<ProjectType> GetAllTypes()
+        {
+            return _service.GetAllProjectsType();
+        }
+
+        /// <summary>
+        /// Get ProjectType by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>selected ProjectType</returns>
+        [HttpGet("{id}")]
+        public IActionResult GetType(int id)
+        {
+            if (id == default)
+            {
+                throw new ArgumentException($"{nameof(id)} can not be 0");
+            }
+            var type = _service.GetProjectTypeById(id);
+            return Ok(type);
         }
     }
 }

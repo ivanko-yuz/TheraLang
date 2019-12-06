@@ -15,7 +15,7 @@ namespace TheraLang.DLL.Configuration
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.Name).HasMaxLength(250).IsRequired();
-            
+
             builder.Property(e => e.Description).HasMaxLength(5000).IsRequired();
 
             builder.Property(e => e.ProjectStart).IsRequired();
@@ -31,7 +31,8 @@ namespace TheraLang.DLL.Configuration
             builder.HasMany(x => x.ProjectResources).WithOne(i => i.Project).HasForeignKey("ProjectId");
 
             builder.HasMany(x => x.ProjectParticipations).WithOne(i => i.Project).HasForeignKey("ProjectId");
-            builder.Property(e => e.Name).HasMaxLength(250).IsRequired();
+
+            builder.HasMany(e => e.Donations).WithOne(i => i.Project).HasForeignKey("ProjectId");
 
             builder.Property(e => e.StatusId).HasMaxLength(250).IsRequired().HasDefaultValue(Entities.ProjectStatus.New); 
 

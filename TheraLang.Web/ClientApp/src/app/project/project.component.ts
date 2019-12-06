@@ -7,6 +7,7 @@ import { DialogService } from '../shared/services/dialog.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ProjectTypeComponent } from '../project-type/project-type.component';
 import { ProjectTypeService } from '../project-type/project-type.service';
+import { NotificationService } from '../shared//services/notification.service';
 
 
 @Component({
@@ -23,8 +24,10 @@ export class ProjectComponent implements OnInit {
     private dialogService: DialogService,
     private service: ProjectService,
     private dialog: MatDialog,
-    private typeProjectService: ProjectTypeService
+    private typeProjectService: ProjectTypeService,
+    private notificationService: NotificationService
   ) { }
+
 
   ngOnInit() {
     this.httpService
@@ -42,13 +45,13 @@ export class ProjectComponent implements OnInit {
     this.dialogService.openFormDialog(ProjectFormComponent);
   }
 
-  onCreateTypeProject() {
-    this.typeProjectService.initializeFormGroup();
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "60%";
-    dialogConfig.panelClass = "form";
-    this.dialog.open(ProjectTypeComponent, dialogConfig);
+  onDelete(id) {
+    this.dialogService.openConfirmDialog('Are you sure to delete this project?')
+      .afterClosed().subscribe(res => {
+        if (res) {
+          this.httpService.deleteProject(id).subscribe(result => this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects));
+          this.notificationService.warn('Deleted successfully!');
+        }
+      });
   }
 }

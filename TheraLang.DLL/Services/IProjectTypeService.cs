@@ -1,5 +1,6 @@
 ﻿using TheraLang.DLL.Entities;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace TheraLang.DLL.Services
 {
@@ -11,6 +12,8 @@ namespace TheraLang.DLL.Services
 
         Task Update(ProjectType projectType, int id);
 
+        IEnumerable<ProjectType> GetAllProjectsType();
 
+        ProjectType GetProjectTypeById(int id);
     }
 }

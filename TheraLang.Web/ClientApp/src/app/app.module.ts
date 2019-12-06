@@ -50,9 +50,13 @@ import { DialogService } from './shared/services/dialog.service';
 import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
 import { CmsModule } from './cms/cms.module';
 import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
+import { DonationComponent } from './donation/donation.component';
+import { TransactionResultComponent } from './transaction-result/transaction-result.component';
+import { ProjectParticipationService } from './project-participants/project-participation.service';
+import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
+import { DonationService } from './donation/donation.service';
 import { ProjectTypeComponent } from './project-type/project-type.component';
 import { ProjectTypeHttp } from './project-type/ProjectTypeHttp.service';
-import { ProjectTypeService } from './project-type/project-type.service';
 
 @NgModule({
    declarations: [
@@ -73,6 +77,8 @@ import { ProjectTypeService } from './project-type/project-type.service';
       GeneralResourcesTableComponent,
       GeneralResourcesInnerTableComponent,
       ToolbarItemComponent,
+      DonationComponent,
+      TransactionResultComponent,
       ProjectTypeComponent,
    ],
    entryComponents: [
@@ -146,12 +152,14 @@ import { ProjectTypeService } from './project-type/project-type.service';
       ResourceService,
       HttpService,
       EventService,
-      //{provide: ErrorHandler, useClass: ErrorHandlerService},
+      // {provide: ErrorHandler, useClass: ErrorHandlerService},
       NotificationService,
       DialogService,
       ResourceCategoriesService,
+      ProjectParticipationService,
+      DonationService,
       ProjectTypeService,
-      ProjectTypeHttp
+      ProjectTypeHttp,
    ],
    bootstrap: [
       AppComponent,

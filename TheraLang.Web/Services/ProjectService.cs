@@ -20,7 +20,7 @@ namespace TheraLang.Web.Services
 
         public IEnumerable<Project> GetAllProjects()
         {
-            return _uow.Repository<Project>().Get().AsNoTracking().ToList();
+            return _uow.Repository<Project>().Get().Include(x=>x.Donations);
         }
 
         public async Task Add(Project projectViewModel)
@@ -36,6 +36,25 @@ namespace TheraLang.Web.Services
             catch(Exception e)
             {
                 e.Data["project"] = projectViewModel;
+                throw;
+            }
+        }
+
+        public async Task Delete(int id)
+        {
+            try
+            {
+                var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
+                if (project == null)
+                {
+                    throw new NullReferenceException($"Error while deleting project. Project with id {nameof(id)}={id} not found");
+                }
+                _uow.Repository<Project>().Remove(project);
+                await _uow.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                e.Data["projectId"] = id;
                 throw;
             }
         }

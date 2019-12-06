@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TheraLang.DLL.Entities;
-using TheraLang.DLL.Statuses;
+using TheraLang.DLL.Enums;
 
 namespace TheraLang.DLL.Configuration
 {
