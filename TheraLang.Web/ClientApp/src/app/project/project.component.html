@@ -6,8 +6,11 @@
     <mat-card-header class="header">
       <mat-card-title>
         <a mat-button class="donate-button" [routerLink]="['/donation', project.id]">Підтримати</a>
+        <div>Потрібно зібрати:
+          <h3 class="donation-target">₴ {{project?.donationAmount | number : '1.2-2'}}</h3>
+        </div>
         <div>Зібрано:
-          <h3 class="donation-amount">{{project?.donationAmount | number : '1.2-2'}} грн</h3>
+          <h5 class="donation-amount">₴ {{project?.donationAmount | number : '1.2-2'}}</h5>
         </div>
       </mat-card-title>
     </mat-card-header>

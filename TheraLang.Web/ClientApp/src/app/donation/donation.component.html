@@ -1,3 +1,9 @@
+<div *ngIf="projectId === 0; else projectDonation">
+  <h2 class="organization-donation-header">Підтримати нашу організацію</h2>
+</div>
+<ng-template #projectDonation>
+  <h2>Підтримати цей проект</h2>
+</ng-template>
 <h3 class="donation-header">Введіть суму допомоги</h3>
 <mat-form-field class="form-field">
   <input matInput type="text" placeholder="" [(ngModel)]="donationAmount" autofocus>
@@ -7,3 +13,4 @@
 </mat-form-field>
 <br>
 <span class="donate-button"><button mat-button color="primary" (click)="checkout()">Допомогти</button></span>
+<div><img src="assets/img/paymentmethods.png" alt="" class="main-icon"></div>
