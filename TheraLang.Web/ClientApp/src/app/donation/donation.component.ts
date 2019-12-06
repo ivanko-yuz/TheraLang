@@ -20,7 +20,6 @@ export class DonationComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.projectId = +params.get('projectId');
-      debugger
     });
   }
 

@@ -9,7 +9,7 @@ export class HttpService {
 
     constructor(private http: HttpClient) { }
 
-     private url = baseUrl;
+    private url = baseUrl;
 
     getAllProjects() {
         return this.http.get(this.url + 'projects');
@@ -21,7 +21,7 @@ export class HttpService {
 
     getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
         return this.http.get(this.url + 'resource/all/' + categoryId + '/' + pageNumber
-        + '/' + recordsPerPage);
+            + '/' + recordsPerPage);
     }
 
     getResourceCategories(withAssignedResources: boolean) {
@@ -45,11 +45,15 @@ export class HttpService {
     }
 
     updateProject(project: Project) {
-        return this.http.put(this.url + '/' + project.id, project, {observe: 'response'});
+        return this.http.put(this.url + '/' + project.id, project, { observe: 'response' });
     }
 
-    getAllProjectTypes(){
+    getAllProjectTypes() {
         return this.http.get(this.url + '/' + 'projectTypes');
+    }
+
+    deleteProject(id: number) {
+        return this.http.delete(this.url + 'projects' + '/' + id);
     }
 
 }
