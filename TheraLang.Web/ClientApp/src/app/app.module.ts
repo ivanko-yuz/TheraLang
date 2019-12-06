@@ -55,6 +55,9 @@ import { TransactionResultComponent } from './transaction-result/transaction-res
 import { ProjectParticipationService } from './project-participants/project-participation.service';
 import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
 import { DonationService } from './donation/donation.service';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserService } from './user/user.service';
 
 @NgModule({
    declarations: [
@@ -77,11 +80,14 @@ import { DonationService } from './donation/donation.service';
       ToolbarItemComponent,
       DonationComponent,
       TransactionResultComponent,
+      UserComponent,
+      LoginComponent,
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
       ProjectFormComponent,
       ConfirmDialogComponent,
+      LoginComponent
    ],
    imports: [
       BrowserModule,
@@ -154,7 +160,8 @@ import { DonationService } from './donation/donation.service';
       ResourceCategoriesService,
       ProjectParticipationService,
       ProjectTypeService,
-      DonationService
+      DonationService,
+      UserService
    ],
    bootstrap: [
       AppComponent,

@@ -11,6 +11,7 @@ import { DonationComponent } from './donation/donation.component';
 import { TransactionResultComponent } from './transaction-result/transaction-result.component';
 import { ProjectTypeComponent } from './project-info/resources-table-for-project/project-type/project-type.component';
 import { GeneralResourcesComponent } from './general-resources/general-resources.component';
+import { LoginComponent } from './user/login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,8 +22,9 @@ const routes: Routes = [
   { path: 'resources', component: GeneralResourcesTableComponent },
   { path: 'transaction/:donationId', component:TransactionResultComponent },
   { path: 'error', component: ErrorComponent },
-  { path: '**', loadChildren: () => CmsModule},
-  {path: 'projectTypes', component: ProjectTypeComponent}
+  // { path: '**', loadChildren: () => CmsModule},
+  { path: 'projectTypes', component: ProjectTypeComponent},
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
@@ -35,6 +37,6 @@ export class AppRoutingModule { }
 export const routingComponents = [
   ProjectParticipantsComponent, ProjectComponent, HomeComponent, ProjectInfoComponent,
   GeneralResourcesComponent, ErrorComponent, ProjectTypeComponent,
-  TransactionResultComponent, DonationComponent
+  TransactionResultComponent, DonationComponent, LoginComponent
 ];
 

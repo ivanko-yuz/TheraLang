@@ -9,3 +9,4 @@ export const participationUrl = baseUrl + "participants";
 export const donationUrl = baseUrl + "donation";
 export const projectType = baseUrl + "projectTypes";
 export const cmsSitemapUrl = baseUrl + "sitemap";
+export const accountUrl = baseUrl + "account";
