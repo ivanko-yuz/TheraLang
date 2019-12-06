@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.UnitOfWork;
+using System.Collections.Generic;
+using System;
 
 namespace TheraLang.DLL.Services
 {
@@ -25,11 +27,17 @@ namespace TheraLang.DLL.Services
                 _unitOfWork.Repository<ResourceCategory>().Update(category);
                 await _unitOfWork.SaveChangesAsync();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                throw new System.Exception($"Error when changing resource category for {nameof(categoryId)}:{categoryId} " +
+                throw new Exception($"Error when changing resource category for {nameof(categoryId)}:{categoryId} " +
                     $"and {nameof(newTypeName)}:{newTypeName}: ", ex);
             }
+        }
+
+        public IEnumerable<ResourceCategory> GetAllCategories()
+        {
+            IEnumerable<ResourceCategory> categories = _unitOfWork.Repository<ResourceCategory>().Get();
+            return categories;
         }
     }
 }

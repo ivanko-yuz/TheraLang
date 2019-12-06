@@ -11,6 +11,8 @@ namespace TheraLang.Web.Services
 
         Task Add(Project projectViewModel);
 
+        Task Delete(int id);
+
         Task UpdateAsync(int id, Project project);
 
         IEnumerable<Project> GetAllProjects();

@@ -74,6 +74,7 @@ namespace TheraLang.Web
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             services.AddTransient<IDonationService, DonationService>();
+            services.AddOpenApiDocument();
             #endregion
         }
 
@@ -85,6 +86,8 @@ namespace TheraLang.Web
             {
                 app.UseCors("development mode");
                 app.UseDeveloperExceptionPage();
+                app.UseOpenApi();
+                app.UseSwaggerUi3();
             }
 
 

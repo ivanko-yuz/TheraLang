@@ -15,12 +15,22 @@ namespace TheraLang.Web.Controllers
         {
             _service = service;
         }
+
+        /// <summary>
+        /// get all ProjectsTypes
+        /// </summary>
+        /// <returns>array of ProjectsTypes</returns>
         [HttpGet]
         public IEnumerable<ProjectType> GetAllTypes()
         {
             return _service.GetAllProjectsType();
         }
 
+        /// <summary>
+        /// Get ProjectType by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>selected ProjectType</returns>
         [HttpGet("{id}")]
         public IActionResult GetType(int id)
         {
