@@ -1,13 +1,13 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row  class="toolbar">
       <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item>
-         <a mat-button class="toolbar-button" routerLink="/projects" >Проекти</a>
-         <a mat-button class="toolbar-button" routerLink="/resources" >Ресурси</a>
-         <a mat-button class="toolbar-button" routerLink="/participants" >Запити
+         <a mat-button class="toolbar-button" routerLink="/projects" >{{'projects.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="/resources" >{{'resources.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="/participants" >{{'participants.title'|translate}}
          <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>
          <span class="fill-space"></span>
-         <a mat-button class="toolbar-button" routerLink="" >Реєстрація</a>
-         <a mat-button class="toolbar-button" routerLink="" >Вхід</a>    
-         <a mat-button class="toolbar-button" routerLink="/projectTypes" >Типи Проектів</a> 
-    </mat-toolbar-row >                
+         <a mat-button class="toolbar-button" routerLink="" >{{'account.signUp.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="" >{{'account.signIn.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="/projectTypes" >{{'projectTypes.title'|translate}}</a>
+    </mat-toolbar-row >
   </mat-toolbar>

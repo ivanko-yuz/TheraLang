@@ -1,0 +1,25 @@
+{
+  "home": {
+    "title": "Головна сторінка"
+  },
+  "projects": {
+    "title": "Проекти"
+  },
+  "resources": {
+    "title": "Ресурси"
+  },
+  "participants": {
+    "title": "Запити"
+  },
+  "account": {
+    "signUp": {
+      "title": "Реєстрація"
+    },
+    "signIn": {
+      "title": "Вхід"
+    }
+  },
+  "projectTypes": {
+    "title": "Типи Проектів"
+  }
+}

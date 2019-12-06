@@ -8,7 +8,7 @@ import {
   MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
   MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
 } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -55,6 +55,12 @@ import { TransactionResultComponent } from './transaction-result/transaction-res
 import { ProjectParticipationService } from './project-participants/project-participation.service';
 import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
 import { DonationService } from './donation/donation.service';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
    declarations: [
@@ -140,6 +146,13 @@ import { DonationService } from './donation/donation.service';
       PortalModule,
       ScrollingModule,
       CmsModule,
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      }),
    ],
    exports: [
       ResourcesInternalTableComponent,

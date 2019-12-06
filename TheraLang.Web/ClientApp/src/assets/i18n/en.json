@@ -1,0 +1,25 @@
+{
+  "home": {
+    "title": "Main page"
+  },
+  "projects": {
+    "title": "Projects"
+  },
+  "resources": {
+    "title": "Resources"
+  },
+  "participants": {
+    "title": "Participants requests"
+  },
+  "account": {
+    "signUp": {
+      "title": "Sign Up"
+    },
+    "signIn": {
+      "title": "Sign In"
+    }
+  },
+  "projectTypes": {
+    "title": "Types Of Project"
+  }
+}
