@@ -48,9 +48,9 @@ export class HttpService {
         return this.http.put(this.url + '/' + project.id, project, { observe: 'response' });
     }
 
-    getAllProjectTypes() {
-        return this.http.get(this.url + 'projectTypes');
-    }
+    // getAllProjectTypes() {
+    //     return this.http.get(this.url + 'projectTypes');
+    // }
 
     deleteProject(id: number) {
         return this.http.delete(this.url + 'projects' + '/' + id);

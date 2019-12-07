@@ -57,6 +57,7 @@ import { ProjectTypeService } from './project-info/resources-table-for-project/p
 import { DonationService } from './donation/donation.service';
 import { ProjectTypeComponent } from './project-type/project-type.component';
 import { ProjectTypeHttp } from './project-type/ProjectTypeHttp.service';
+import { ProjectTypeNewHttp } from './project-info/resources-table-for-project/project-type/project-type-newHttp.service';
 
 @NgModule({
    declarations: [
@@ -160,6 +161,7 @@ import { ProjectTypeHttp } from './project-type/ProjectTypeHttp.service';
       DonationService,
       ProjectTypeService,
       ProjectTypeHttp,
+      ProjectTypeNewHttp,
    ],
    bootstrap: [
       AppComponent,
