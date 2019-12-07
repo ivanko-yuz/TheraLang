@@ -49,7 +49,7 @@ export class HttpService {
     }
 
     getAllProjectTypes() {
-        return this.http.get(this.url + '/' + 'projectTypes');
+        return this.http.get(this.url + 'projectTypes');
     }
 
     deleteProject(id: number) {

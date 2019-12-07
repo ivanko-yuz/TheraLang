@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.UnitOfWork;
 
