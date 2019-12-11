@@ -57,6 +57,7 @@ import { ProjectTypeService } from './project-info/resources-table-for-project/p
 import { DonationService } from './donation/donation.service';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { LanguageComponent } from './toolbar/language/language.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -83,6 +84,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       ToolbarItemComponent,
       DonationComponent,
       TransactionResultComponent,
+      LanguageComponent,
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
