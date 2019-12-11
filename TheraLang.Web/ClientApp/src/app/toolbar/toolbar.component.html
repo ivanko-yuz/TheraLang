@@ -1,14 +1,14 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row  class="toolbar">
       <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item>
-         <a mat-button class="toolbar-button" routerLink="/projects" >{{'projects.title'|translate}}</a>
-         <a mat-button class="toolbar-button" routerLink="/resources" >{{'resources.title'|translate}}</a>
-         <a mat-button class="toolbar-button" routerLink="/participants" >{{'participants.title'|translate}}
+         <a mat-button class="toolbar-button" routerLink="/projects" >{{'components.projects.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="/resources" >{{'components.resources.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="/participants" >{{'components.participants.title'|translate}}
          <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>
          <span class="fill-space"></span>
          <app-language></app-language>
-         <a mat-button class="toolbar-button" routerLink="" >{{'account.signUp.title'|translate}}</a>
-         <a mat-button class="toolbar-button" routerLink="" >{{'account.signIn.title'|translate}}</a>
-         <a mat-button class="toolbar-button" routerLink="/projectTypes" >{{'projectTypes.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="" >{{'components.account.signUp.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="" >{{'components.account.signIn.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="/projectTypes" >{{'components.projectTypes.title'|translate}}</a>
     </mat-toolbar-row >
   </mat-toolbar>

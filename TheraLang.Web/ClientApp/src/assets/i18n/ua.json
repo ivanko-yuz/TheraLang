@@ -1,25 +1,27 @@
 {
-  "home": {
-    "title": "Головна сторінка"
-  },
-  "projects": {
-    "title": "Проекти"
-  },
-  "resources": {
-    "title": "Ресурси"
-  },
-  "participants": {
-    "title": "Запити"
-  },
-  "account": {
-    "signUp": {
-      "title": "Реєстрація"
+  "components": {
+    "home": {
+      "title": "Головна сторінка"
     },
-    "signIn": {
-      "title": "Вхід"
+    "projects": {
+      "title": "Проекти",
+    },
+    "resources": {
+      "title": "Ресурси"
+    },
+    "participants": {
+      "title": "Запити"
+    },
+    "account": {
+      "signUp": {
+        "title": "Реєстрація"
+      },
+      "signIn": {
+        "title": "Вхід"
+      }
+    },
+    "projectTypes": {
+      "title": "Типи Проектів"
     }
-  },
-  "projectTypes": {
-    "title": "Типи Проектів"
   }
 }
