@@ -1,10 +1,20 @@
 {
+  "common": {
+    "details": "Details",
+    "edit": "Edit"
+  },
   "components": {
     "home": {
       "title": "Main page"
     },
     "projects": {
       "title": "Projects",
+      "create": "Create project",
+      "delete": "Delete project",
+      "donate": "Donate",
+      "donated-amount": "Donated amount",
+      "project-starts": "Project starts",
+      "project-ends": "Project ends"
     },
     "resources": {
       "title": "Resources"

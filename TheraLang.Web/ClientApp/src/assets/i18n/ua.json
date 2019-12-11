@@ -1,10 +1,20 @@
 {
+  "common": {
+    "details": "Деталі",
+    "edit": "Змінити"
+  },
   "components": {
     "home": {
       "title": "Головна сторінка"
     },
     "projects": {
       "title": "Проекти",
+      "create": "Створити проект",
+      "delete": "Видалити проект",
+      "donate": "Підтримати",
+      "donated-amount": "Зібрано",
+      "project-starts": "Проект починається",
+      "project-ends": "Проект закінчується"
     },
     "resources": {
       "title": "Ресурси"

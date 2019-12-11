@@ -1,12 +1,12 @@
 <button mat-stroked-button (click)="onCreate()">
-  <mat-icon>add</mat-icon>Створити проект
+  <mat-icon>add</mat-icon>{{'components.projects.create'|translate}}
 </button>
 <div *ngFor="let project of projects">
   <mat-card class="project-card">
     <mat-card-header class="header">
       <mat-card-title>
-        <a mat-button class="donate-button" [routerLink]="['/donation', project.id]">Підтримати</a>
-        <div>Зібрано:
+        <a mat-button class="donate-button" [routerLink]="['/donation', project.id]">{{'components.projects.donate'|translate}}</a>
+        <div>{{'donated-amount'|translate}}:
           <h3 class="donation-amount">{{project?.donationAmount | number : '1.2-2'}} грн</h3>
         </div>
       </mat-card-title>
@@ -19,15 +19,15 @@
     <mat-card-content>
       <div class="project-info">
         {{project?.description}}
-        <p>Проект починається: {{project?.projectStart | date: 'dd/MM/yyyy'}}</p>
-        <p>Проект закінчується: {{project?.projectEnd | date: 'dd/MM/yyyy'}}</p>
+        <p>{{'components.projects.project-starts'|translate}}: {{project?.projectStart | date: 'dd/MM/yyyy'}}</p>
+        <p>{{'components.projects.project-ends'|translate}}: {{project?.projectEnd | date: 'dd/MM/yyyy'}}</p>
       </div>
     </mat-card-content>
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
-      <a mat-stroked-button [routerLink]="['/projects', project.id]">Деталі</a>
-      <button mat-stroked-button (click)="onEdit(project)">Змінити</button>
-      <button mat-stroked-button (click)="onDelete(project.id)">Видалити проект</button>
+      <a mat-stroked-button [routerLink]="['/projects', project.id]">{{'common:details'|translate}}</a>
+      <button mat-stroked-button (click)="onEdit(project)">{{'common:edit'|translate}}</button>
+      <button mat-stroked-button (click)="onDelete(project.id)">{{'common:delete'|translate}}</button>
     </mat-card-actions>
   </mat-card>
 </div>
