@@ -12,6 +12,7 @@ export class ProjectTypeComponent implements OnInit {
   projectTypes: ProjectType[];
   constructor(private projectTypeService: ProjectTypeService) { }
   displayedColumns: string[] = ['name'];
+  dataSource: any; //TODO: Ostap
 
   async ngOnInit() {
    this.projectTypes = await this.projectTypeService.getAllProjectTypes();
