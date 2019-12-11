@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
+using TheraLang.Web.Models;
 
 namespace TheraLang.Web.Services
 {
@@ -9,6 +10,8 @@ namespace TheraLang.Web.Services
         Task ChangeStatus(int id, ProjectStatus rejected);
 
         Task Add(Project projectViewModel);
+
+        Task Delete(int id);
 
         Task UpdateAsync(int id, Project project);
 

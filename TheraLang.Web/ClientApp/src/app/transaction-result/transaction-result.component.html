@@ -1,0 +1,4 @@
+<div *ngIf="liqpayResponse !== null">
+    <h1>Статус транзакції: <span class="status-color">{{liqpayResponse?.status}}</span></h1>
+    <h2>Сума: <span class="status-color">{{liqpayResponse?.amount}}</span> грн</h2>
+</div>

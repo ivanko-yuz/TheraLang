@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,8 +42,13 @@ namespace TheraLang.Web
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => { fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; });
 
-            #region Piranha setup
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
 
+            #region Piranha setup
             services.AddPiranha();
             services.AddPiranhaApplication();
             services.AddPiranhaFileStorage();
@@ -73,6 +79,8 @@ namespace TheraLang.Web
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
+            services.AddTransient<IDonationService, DonationService>();
+            services.AddOpenApiDocument();
             #endregion
         }
 
@@ -84,12 +92,14 @@ namespace TheraLang.Web
             {
                 //app.UseCors("development mode");
                 app.UseDeveloperExceptionPage();
+                app.UseOpenApi();
+                app.UseSwaggerUi3();
             }
 
 
             App.Init(api);
             // Configure cache level
-            App.CacheLevel = Piranha.Cache.CacheLevel.Full;
+            App.CacheLevel = Piranha.Cache.CacheLevel.None;
 
             // Build content types
             var pageTypeBuilder = new Piranha.AttributeBuilder.PageTypeBuilder(api)
@@ -117,6 +127,7 @@ namespace TheraLang.Web
              */
             // Register middleware
             app.UseStaticFiles();
+            app.UseSpaStaticFiles();
             app.UseAuthentication();
             app.UsePiranhaManager();
             app.UseMvc(routes =>
@@ -133,6 +144,19 @@ namespace TheraLang.Web
                    name: "angular",
                    template: "{*template}",
                    defaults: new { controller = "Home", action = "Index" });
+            });
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
             });
 
             //Seed.RunAsync(api).GetAwaiter().GetResult(); //TODO: fix seeding
