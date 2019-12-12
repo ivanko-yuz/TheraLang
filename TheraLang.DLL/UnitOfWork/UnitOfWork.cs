@@ -31,11 +31,13 @@ namespace TheraLang.DLL.UnitOfWork
 
             foreach (var entityEntry in entries)
             {
-                ((BaseEntity)entityEntry.Entity).UpdatedDateUtc = DateTime.Now;
-
                 if (entityEntry.State == EntityState.Added)
                 {
                     ((BaseEntity)entityEntry.Entity).CreatedDateUtc = DateTime.Now;
+                }
+                else if (entityEntry.State == EntityState.Modified)
+                {
+                    ((BaseEntity)entityEntry.Entity).UpdatedDateUtc = DateTime.Now;
                 }
             }
             return Context.SaveChangesAsync();
