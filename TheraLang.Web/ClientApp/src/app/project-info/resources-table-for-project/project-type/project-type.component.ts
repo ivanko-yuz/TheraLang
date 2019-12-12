@@ -20,16 +20,17 @@ export interface DialogData {
 })
 
 export class ProjectTypeComponent implements OnInit {
-
-  projectTypes: ProjectType[];
   id: number;
   name: string;
   displayedColumns: string[] = ['typeName', 'actions'];
+  projectTypes: ProjectType[];
 
-  constructor(public projectTypeService: ProjectTypeService,
+  constructor(private projectTypeService: ProjectTypeService,
     private dialogService: DialogService,
     private http: ProjectTypeHttp,
-    public dialog: MatDialog, ) { }
+    public dialog: MatDialog,
+  ) { }
+  dataSource: any; //TODO: Ostap
 
   async ngOnInit() {
     this.projectTypes = await this.projectTypeService.getAllProjectTypes();
