@@ -14,7 +14,9 @@
       "donate": "Donate",
       "donated-amount": "Donated amount",
       "project-starts": "Project starts",
-      "project-ends": "Project ends"
+      "project-ends": "Project ends",
+      "PROJECT-CREATION": "PROJECT CREATION",
+      "PROJECT-EDITING": "PROJECT EDITING"
     },
     "resources": {
       "title": "Resources"

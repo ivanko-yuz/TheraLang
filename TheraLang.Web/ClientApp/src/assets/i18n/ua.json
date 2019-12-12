@@ -14,7 +14,9 @@
       "donate": "Підтримати",
       "donated-amount": "Зібрано",
       "project-starts": "Проект починається",
-      "project-ends": "Проект закінчується"
+      "project-ends": "Проект закінчується",
+      "PROJECT-CREATION": "СТВОРЕННЯ ПРОЕКТУ",
+      "PROJECT EDITING": "РЕДАГУВАННЯ ПРОЕКТУ"
     },
     "resources": {
       "title": "Ресурси"

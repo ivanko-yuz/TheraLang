@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>
-  <span>{{this.service.form.controls['id'].value?"РЕДАГУВАННЯ ПРОЕКТУ":"СТВОРЕННЯ ПРОЕКТУ"}}</span>
+  <span>{{'components.projects.'+(this.service.form.controls['id'].value?'PROJECT-EDITING':'PROJECT-CREATION')|translate}}</span>
 </h2>
 <form [formGroup]="this.service.form">
   <mat-dialog-content>
