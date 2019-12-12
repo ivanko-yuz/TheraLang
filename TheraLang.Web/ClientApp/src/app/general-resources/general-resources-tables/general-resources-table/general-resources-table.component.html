@@ -1,3 +1,7 @@
+<button mat-stroked-button (click)="addResource()">
+    <mat-icon>add</mat-icon>Створити ресурс
+</button>
+
 <mat-tab-group mat-stretch-tabs class="resTab example-stretched-tabs mat-elevation-z4" *ngIf="showCategories">
     <mat-tab  *ngFor="let category of this.resourcesCategories" label="{{category.type}}">
         <app-general-resources-inner-table [resourcesCategoryId]="category.id">            
