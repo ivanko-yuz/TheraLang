@@ -18,10 +18,10 @@ namespace TheraLang.DLL.Entities
 
         public virtual ResourceCategory ResourceCategory { get; set; }
 
-        public virtual ICollection<ResourceProject> ResourceToProjects { get; set; }
+        public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
         public Resource()
         {
-            this.ResourceToProjects = new List<ResourceProject>();
+            this.ResourceProjects = new List<ResourceProject>();
         }
     }
 }
