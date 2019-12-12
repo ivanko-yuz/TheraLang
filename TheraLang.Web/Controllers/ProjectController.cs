@@ -48,6 +48,13 @@ namespace TheraLang.Web.Controllers
 
             return projectModels;
         }
+        [HttpGet("new")]
+        public IActionResult GetAllNewProjects()
+        {
+
+            var projects = _projectService.GetAllNewProjects();
+            return Ok(projects);
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)
@@ -71,18 +78,18 @@ namespace TheraLang.Web.Controllers
             _projectService.UpdateAsync(id,project);
             return Ok(project);
         }
-        
 
-            /*[HttpPut("{id}")]
-            public async Task<IActionResult> Approve(int id)
+
+        [HttpGet("approve/{id}")]
+        public async Task<IActionResult> Approve(int id)
+        {
+            if (id == default)
             {
-                if (id == default)
-                {
-                    throw new ArgumentException($"{nameof(id)} cannot be 0");
-                }
-                await _projectService.ChangeStatus(id, ProjectStatus.Approved);
-                return Ok();
-            }//*/
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
+            }
+            await _projectService.ChangeStatus(id,  ProjectStatus.Approved);
+            return Ok(ProjectStatus.Approved);
+        }
 
         [HttpGet("page/{page}/{pagesize}")]
         public IActionResult ProjectsPagination(int page,  int pageSize)
@@ -99,7 +106,7 @@ namespace TheraLang.Web.Controllers
             return Ok(projects);
         }
 
-            [HttpPut("{id}")]
+            [HttpGet("reject/{id}")]
             public async Task<IActionResult> Reject(int id)
             {
                 if (id == default)
@@ -107,7 +114,7 @@ namespace TheraLang.Web.Controllers
                     throw new ArgumentException($"{nameof(id)} cannot be 0");
                 }
                 await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
-                return Ok();
+                return Ok(ProjectStatus.Rejected);
             }
         }
     }

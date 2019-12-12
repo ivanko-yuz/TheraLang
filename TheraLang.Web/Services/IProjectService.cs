@@ -7,7 +7,7 @@ namespace TheraLang.Web.Services
 {
     public interface IProjectService
     {
-        Task ChangeStatus(int id, ProjectStatus rejected);
+        Task ChangeStatus(int id, ProjectStatus status);
 
         Task Add(Project projectViewModel);
 
@@ -18,5 +18,6 @@ namespace TheraLang.Web.Services
         Project GetById(int id);
 
         IEnumerable<Project> GetProjects(int pageNumber, int pageSize);
+        IEnumerable<Project> GetAllNewProjects();
     }
 }
