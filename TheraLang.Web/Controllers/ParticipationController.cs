@@ -13,14 +13,15 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ParticipationController : ControllerBase
     {
-        public ParticipationController(IProjectParticipationService service, UserManager<IdentityUser> manager)
+        public ParticipationController(IProjectParticipationService service,
+            UserManager<Piranha.AspNetCore.Identity.Data.User> manager)
         {
             _service = service;
             _userManager = manager;
         }
 
         private readonly IProjectParticipationService _service;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<Piranha.AspNetCore.Identity.Data.User> _userManager;
 
         /// <summary>
         /// Change status of participant

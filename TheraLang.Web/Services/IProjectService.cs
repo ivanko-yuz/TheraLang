@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
-using TheraLang.Web.Models;
 
 namespace TheraLang.Web.Services
 {
     public interface IProjectService
     {
-        Task ChangeStatus(int id, ProjectStatus rejected);
+        Task ChangeStatus(int id, ProjectStatus status);
 
         Task Add(Project projectViewModel);
 

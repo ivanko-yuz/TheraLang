@@ -23,10 +23,6 @@ namespace TheraLang.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public IConfiguration Configuration { get; set; }
 
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
-        /// <param name="configuration">The current configuration</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
