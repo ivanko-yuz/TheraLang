@@ -17,6 +17,9 @@ namespace TheraLang.DLL.Configuration
             builder.Property(e => e.TypeName).HasMaxLength(500);
 
             builder.HasIndex(e => e.TypeName).IsUnique(true);
+
+            builder.HasMany(e=>e.Projects).WithOne(x=>x.Type).
+                HasForeignKey(i=>i.TypeId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
