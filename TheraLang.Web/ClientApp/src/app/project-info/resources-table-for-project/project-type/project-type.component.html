@@ -1,3 +1,4 @@
+<button mat-raised-button (click)="onCreate()">Створити</button>
 <table mat-table [dataSource]="projectTypes" class="mat-elevation-z8">
 
   <ng-container matColumnDef="typeName">
@@ -10,10 +11,10 @@
     <mat-cell *matCellDef="let element">
       <div>
         <span class="editButton">
-          <button mat-raised-button (click)="btnEdit(element.id)">Редагувати</button>
+          <button mat-raised-button (click)="onEdit({id: element.id, typeName: element.typeName})">Редагувати</button>
         </span>
         <span class="deleteButton">
-          <button mat-raised-button (click)="btnDelete(element.id)">Видалити</button>
+          <button mat-raised-button (click)="onDelete(element.id)">Видалити</button>
         </span>
       </div>
     </mat-cell>

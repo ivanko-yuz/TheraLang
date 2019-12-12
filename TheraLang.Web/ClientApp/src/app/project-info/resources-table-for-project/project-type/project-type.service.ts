@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ProjectType } from './project-type.model';
-import { ProjectTypeNewHttp } from './project-type-newHttp.service';
-// import { HttpService } from 'src/app/project/http.service';
-
+import { ProjectTypeHttp } from './project-type-Http.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ProjectTypeService {
+
     allProjectTypes: ProjectType[];
+    public editId: number;
+    public editName: string;
+
     constructor(
-        // private http: HttpService
-        private http: ProjectTypeNewHttp
+        private http: ProjectTypeHttp,
+        private notificationService: NotificationService,
     ) { }
 
     getAllProjectTypes() {
@@ -19,4 +23,43 @@ export class ProjectTypeService {
         });
         return alldata;
     }
+
+    Update(projectType: ProjectType) {
+        this.http.put(projectType).subscribe(
+            response => {
+                this.notificationService.success(
+                    "Project type was successfully updated"
+                );
+            },
+            error => {
+                this.notificationService.warn("Project type was not updated");
+            }
+        );
+    }
+
+    Create(newProjectType: ProjectType): Observable<any> {
+        this.http.post(newProjectType).subscribe(
+            response => {
+                this.notificationService.success("Project type was successfully added");
+            },
+            error => {
+                this.notificationService.warn("Project type was not added");
+            }
+        );
+        return;
+    }
+
+    Delete(projectTypeId: number) {
+        this.http.delete(projectTypeId).subscribe(
+            response => {
+                this.notificationService.success(
+                    "Project type was successfully deleted"
+                );
+            },
+            error => {
+                this.notificationService.warn("Project type was not deleted");
+            }
+        );
+    }
+
 }

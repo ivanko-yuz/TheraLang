@@ -18,7 +18,7 @@ namespace MvcWeb.TheraLang.Controllers
 
         private readonly IProjectTypeService _service;
 
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> PostProjectType([FromBody]ProjectType projectType)
         {
             if (projectType == null)
@@ -29,23 +29,19 @@ namespace MvcWeb.TheraLang.Controllers
             return Ok();
         }
 
-        [HttpPut("update/{id}")]       
-        public async Task<IActionResult> PutProjectType([FromBody] ProjectType projectType, int id)
+        [HttpPut]       
+        public async Task<IActionResult> PutProjectType([FromBody] ProjectType projectType)
         {
-            if (id == default)
-            {
-                throw new ArgumentException($"{nameof(id)} can not be 0");
-            }
             if (projectType == null)
             {
                 throw new ArgumentException($"{nameof(projectType)} can not be null");
             }
-            await _service.Update(projectType, id);
+            await _service.Update(projectType, projectType.Id);
             return Ok();
         }
 
         
-        [HttpDelete("delete/{id}")]        
+        [HttpDelete("{id}")]        
         public async Task<IActionResult> DeleteProjectType(int id)
         {
             if (id == default)

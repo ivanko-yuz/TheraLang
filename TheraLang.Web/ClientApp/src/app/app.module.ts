@@ -55,9 +55,9 @@ import { TransactionResultComponent } from './transaction-result/transaction-res
 import { ProjectParticipationService } from './project-participants/project-participation.service';
 import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
 import { DonationService } from './donation/donation.service';
-import { ProjectTypeComponent } from './project-type/project-type.component';
-import { ProjectTypeHttp } from './project-type/ProjectTypeHttp.service';
-import { ProjectTypeNewHttp } from './project-info/resources-table-for-project/project-type/project-type-newHttp.service';
+import { ProjectTypeHttp } from './project-info/resources-table-for-project/project-type/project-type-Http.service';
+import { ProjectTypeFormComponent } from './project-type-form/project-type-form.component';
+import { ProjectTypeCreateFormComponent } from './project-type-create-form/project-type-create-form.component';
 
 @NgModule({
    declarations: [
@@ -80,13 +80,16 @@ import { ProjectTypeNewHttp } from './project-info/resources-table-for-project/p
       ToolbarItemComponent,
       DonationComponent,
       TransactionResultComponent,
-      ProjectTypeComponent,
+      ProjectTypeFormComponent,
+      ProjectTypeCreateFormComponent,
+
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
       ProjectFormComponent,
       ConfirmDialogComponent,
-      ProjectTypeComponent,
+      ProjectTypeFormComponent,
+      ProjectTypeCreateFormComponent,
    ],
    imports: [
       BrowserModule,
@@ -145,6 +148,7 @@ import { ProjectTypeNewHttp } from './project-info/resources-table-for-project/p
       PortalModule,
       ScrollingModule,
       CmsModule,
+
    ],
    exports: [
       ResourcesInternalTableComponent,
@@ -161,7 +165,7 @@ import { ProjectTypeNewHttp } from './project-info/resources-table-for-project/p
       DonationService,
       ProjectTypeService,
       ProjectTypeHttp,
-      ProjectTypeNewHttp,
+
    ],
    bootstrap: [
       AppComponent,
