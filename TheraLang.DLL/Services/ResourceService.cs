@@ -108,7 +108,7 @@ namespace TheraLang.DLL.Services
                                            File = res.File,
                                            CategoryId = res.CategoryId,
                                            ResourceCategory = res.ResourceCategory,
-                                           ResourceToProjects = res.ResourceToProjects,
+                                           ResourceProjects = res.ResourceProjects,
                                            UpdatedById = res.UpdatedById,
                                            CreatedDateUtc = res.CreatedDateUtc,
                                            UpdatedDateUtc = res.UpdatedDateUtc,
@@ -160,7 +160,7 @@ namespace TheraLang.DLL.Services
         {
             try
             {
-                var resources = _unitOfWork.Repository<Resource>().Get().Where(x => x.ResourceToProjects.Any(c => c.ProjectId == projectId));
+                var resources = _unitOfWork.Repository<Resource>().Get().Where(x => x.ResourceProjects.Any(c => c.ProjectId == projectId));
                 var joinedResources = (from res in resources
                                        select new Resource
                                        {
@@ -172,7 +172,7 @@ namespace TheraLang.DLL.Services
                                            File = res.File,
                                            CategoryId = res.CategoryId,
                                            ResourceCategory = res.ResourceCategory,
-                                           ResourceToProjects = res.ResourceToProjects,
+                                           ResourceProjects = res.ResourceProjects,
                                            UpdatedById = res.UpdatedById,
                                            CreatedDateUtc = res.CreatedDateUtc,
                                            UpdatedDateUtc = res.UpdatedDateUtc,
