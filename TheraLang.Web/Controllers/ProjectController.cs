@@ -18,9 +18,14 @@ namespace TheraLang.Web.Controllers
         {
             _projectService = projectService;
         }
-        
+
+        /// <summary>
+        /// Create new project
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns>status code</returns>
         [HttpPost("create")]
-        public IActionResult CreateProject(Project project)
+        public IActionResult CreateProject([FromBody]Project project)
         {
             if(project == null)
             {
@@ -29,7 +34,11 @@ namespace TheraLang.Web.Controllers
             _projectService.Add(project);
             return  Ok(project);
         }
-        
+
+        /// <summary>
+        /// get all Projects
+        /// </summary>
+        /// <returns>array of Projects</returns>
         [HttpGet]
         public IEnumerable<ProjectModel> GetAllProjects()
         {
@@ -49,6 +58,11 @@ namespace TheraLang.Web.Controllers
             return projectModels;
         }
 
+        /// <summary>
+        /// Get project by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>serialized project</returns>
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)
         {
@@ -59,10 +73,15 @@ namespace TheraLang.Web.Controllers
             var project = _projectService.GetById(id);            
             return Ok(project);            
         }
-          
 
+        /// <summary>
+        /// Edit project by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="project">new version</param>
+        /// <returns>edited project</returns>
         [HttpPut("update/{id}")]
-        public IActionResult EditProject(int id,Project project)
+        public IActionResult EditProject(int id, [FromBody]Project project)
         {
             if (id == default)
             {
@@ -71,20 +90,30 @@ namespace TheraLang.Web.Controllers
             _projectService.UpdateAsync(id,project);
             return Ok(project);
         }
-        
 
-            /*[HttpPut("{id}")]
-            public async Task<IActionResult> Approve(int id)
+        /// <summary>
+        /// Approve selected project
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>status code</returns>
+        [HttpPut("approve/{id}")]
+        public async Task<IActionResult> Approve(int id)
+        {
+            if (id == default)
             {
-                if (id == default)
-                {
-                    throw new ArgumentException($"{nameof(id)} cannot be 0");
-                }
-                await _projectService.ChangeStatus(id, ProjectStatus.Approved);
-                return Ok();
-            }//*/
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
+            }
+            await _projectService.ChangeStatus(id, ProjectStatus.Approved);
+            return Ok();
+        }
 
-        [HttpGet("page/{page}/{pagesize}")]
+        /// <summary>
+        /// Get projects on the page
+        /// </summary>
+        /// <param name="page">page number</param>
+        /// <param name="pageSize">number of projects on one page</param>
+        /// <returns>array of selected project</returns>
+        [HttpGet("page/{page}/{pageSize}")]
         public IActionResult ProjectsPagination(int page,  int pageSize)
         {
             if (page == default)
@@ -99,15 +128,36 @@ namespace TheraLang.Web.Controllers
             return Ok(projects);
         }
 
-            [HttpPut("{id}")]
-            public async Task<IActionResult> Reject(int id)
+        /// <summary>
+        /// Reject selected project
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>status code</returns>
+        [HttpPut("reject/{id}")]
+        public async Task<IActionResult> Reject(int id)
+        {
+            if (id == default)
             {
-                if (id == default)
-                {
-                    throw new ArgumentException($"{nameof(id)} cannot be 0");
-                }
-                await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
-                return Ok();
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
+            await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Delete project by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>status code</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProject(int id)
+        {
+            if (id == default)
+            {
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
+            }
+            await _projectService.Delete(id);
+            return Ok();
         }
     }
+}
