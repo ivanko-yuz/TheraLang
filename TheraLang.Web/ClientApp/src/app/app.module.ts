@@ -55,6 +55,8 @@ import { TransactionResultComponent } from './transaction-result/transaction-res
 import { ProjectParticipationService } from './project-participants/project-participation.service';
 import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
 import { DonationService } from './donation/donation.service';
+import { ResourceCreateComponent } from './general-resources/resource-create/resource-create.component';
+import { ResourceCreateService } from './general-resources/resource-create/resource-create.service';
 import { ProjectTypeHttp } from './project-info/resources-table-for-project/project-type/project-type-Http.service';
 import { ProjectTypeFormComponent } from './project-type-form/project-type-form.component';
 import { ProjectTypeCreateFormComponent } from './project-type-create-form/project-type-create-form.component';
@@ -80,14 +82,15 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
       ToolbarItemComponent,
       DonationComponent,
       TransactionResultComponent,
+      ResourceCreateComponent,
       ProjectTypeFormComponent,
       ProjectTypeCreateFormComponent,
-
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
       ProjectFormComponent,
       ConfirmDialogComponent,
+      ResourceCreateComponent,
       ProjectTypeFormComponent,
       ProjectTypeCreateFormComponent,
    ],
@@ -148,7 +151,6 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
       PortalModule,
       ScrollingModule,
       CmsModule,
-
    ],
    exports: [
       ResourcesInternalTableComponent,
@@ -164,8 +166,9 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
       ProjectParticipationService,
       DonationService,
       ProjectTypeService,
+      DonationService,
+      ResourceCreateService,
       ProjectTypeHttp,
-
    ],
    bootstrap: [
       AppComponent,
