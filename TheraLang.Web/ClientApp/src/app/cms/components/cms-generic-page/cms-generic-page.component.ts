@@ -10,8 +10,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./cms-generic-page.component.less']
 })
 export class CmsGenericPageComponent implements OnInit, OnDestroy {
-  private cmsRoute: CmsRoute;
-  private subscription = new Subscription();
+  cmsRoute: CmsRoute;
+  subscription = new Subscription();
 
   constructor(private cmsRouteHelperService: CmsRouteHelperService, private router: Router) {
   }

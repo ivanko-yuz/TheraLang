@@ -42,8 +42,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         public IEnumerable<ProjectModel> GetAllProjects()
         {
-            List<ProjectModel> projectModels = new List<ProjectModel>();
-            projectModels = _projectService.GetAllProjects().Select(p => new ProjectModel
+            var projectModels = _projectService.GetAllProjects().Select(p => new ProjectModel
             {
                 Id = p.Id,
                 Name = p.Name,

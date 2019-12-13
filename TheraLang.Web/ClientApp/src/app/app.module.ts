@@ -55,8 +55,10 @@ import { TransactionResultComponent } from './transaction-result/transaction-res
 import { ProjectParticipationService } from './project-participants/project-participation.service';
 import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
 import { DonationService } from './donation/donation.service';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { ResourceCreateComponent } from './general-resources/resource-create/resource-create.component';
+import { ResourceCreateService } from './general-resources/resource-create/resource-create.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageComponent } from './toolbar/language/language.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -84,12 +86,14 @@ export function HttpLoaderFactory(http: HttpClient) {
       ToolbarItemComponent,
       DonationComponent,
       TransactionResultComponent,
+      ResourceCreateComponent,
       LanguageComponent,
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
       ProjectFormComponent,
       ConfirmDialogComponent,
+      ResourceCreateComponent,
    ],
    imports: [
       BrowserModule,
@@ -169,7 +173,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       ResourceCategoriesService,
       ProjectParticipationService,
       ProjectTypeService,
-      DonationService
+      DonationService,
+      ResourceCreateService,
    ],
    bootstrap: [
       AppComponent,
