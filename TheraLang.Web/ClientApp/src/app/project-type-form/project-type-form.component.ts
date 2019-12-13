@@ -22,11 +22,11 @@ export class ProjectTypeFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, ) { }
 
 
-  onCancelClick(): void {
+  onCloseForm(): void {
     this.dialog.close();
   }
 
-  onOkClick() {
+  onSubmit() {
     let newData = new ProjectType();
     newData.id = this.data.id;
     newData.typeName = this.data.name;

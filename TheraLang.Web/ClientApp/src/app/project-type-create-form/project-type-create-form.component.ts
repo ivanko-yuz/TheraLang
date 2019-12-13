@@ -21,11 +21,11 @@ export class ProjectTypeCreateFormComponent implements OnInit {
     public dateAdapter: DateAdapter<Date>,
   ) { }
 
-  onCancelClick(): void {
+  onCloseForm(): void {
     this.dialog.close();
   }
 
-  onOkClick() {
+  onSubmit() {
     this.service.Create(this.newData);
   }
 
