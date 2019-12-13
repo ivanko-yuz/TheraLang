@@ -18,6 +18,11 @@ namespace MvcWeb.TheraLang.Controllers
 
         private readonly IProjectTypeService _service;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="projectType"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PostProjectType([FromBody]ProjectType projectType)
         {
@@ -29,14 +34,15 @@ namespace MvcWeb.TheraLang.Controllers
             return Ok();
         }
 
+
         [HttpPut]       
-        public async Task<IActionResult> PutProjectType([FromBody] ProjectType projectType)
+        public async Task<IActionResult> PutProjectType([FromBody] ProjectType projectType, int userId)
         {
             if (projectType == null)
             {
                 throw new ArgumentException($"{nameof(projectType)} can not be null");
             }
-            await _service.Update(projectType, projectType.Id);
+            await _service.Update(projectType, userId);
             return Ok();
         }
 

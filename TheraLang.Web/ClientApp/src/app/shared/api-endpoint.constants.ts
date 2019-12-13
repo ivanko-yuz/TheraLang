@@ -1,5 +1,5 @@
 export const liqpayCheckoutUrl = "https://www.liqpay.ua/api/3/checkout";
-export const baseUrl = "http://localhost:5000/api/";
+export const baseUrl = "/api/";
 
 export const projectUrl = baseUrl + "projects";
 export const resourсeUrl = baseUrl + "resourсe";

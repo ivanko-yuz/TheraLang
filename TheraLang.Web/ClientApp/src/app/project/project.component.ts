@@ -5,8 +5,6 @@ import { ProjectFormComponent } from '../project-form/project-form.component';
 import { ProjectService } from './project.service';
 import { DialogService } from '../shared/services/dialog.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-// import { ProjectTypeComponent } from '../project-type/project-type.component';
-// import { ProjectTypeService } from '../project-type/project-type.service';
 import { NotificationService } from '../shared//services/notification.service';
 
 
@@ -24,7 +22,6 @@ export class ProjectComponent implements OnInit {
     private dialogService: DialogService,
     private service: ProjectService,
     private dialog: MatDialog,
-    // private typeProjectService: ProjectTypeService,
     private notificationService: NotificationService
   ) { }
 

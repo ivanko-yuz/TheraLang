@@ -9,7 +9,7 @@ export class ProjectTypeHttp {
     constructor(private http: HttpClient) { }
 
     getAllProjectTypes() {
-        return this.http.get(projectTypeUrl + '/');
+        return this.http.get(projectTypeUrl);
     }
 
     put(data: ProjectType): Observable<any> {

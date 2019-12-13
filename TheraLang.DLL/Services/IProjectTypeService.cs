@@ -10,7 +10,7 @@ namespace TheraLang.DLL.Services
 
         Task Remove(int id);
 
-        Task Update(ProjectType projectType, int id);
+        Task Update(ProjectType projectType, int userId);
 
         IEnumerable<ProjectType> GetAllProjectsType();
 
