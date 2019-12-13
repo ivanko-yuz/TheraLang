@@ -18,7 +18,7 @@ export class ProjectFormComponent implements OnInit {
               private translate: TranslateService) { }
 
   ngOnInit() {
-    this.dateAdapter.setLocale(this.currentLang());
+    this.dateAdapter.setLocale(this.translate.currentLang);
     this.dateAdapter.getFirstDayOfWeek = () => 1;
   }
   onClose() {
@@ -33,20 +33,12 @@ export class ProjectFormComponent implements OnInit {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
       return;
-    }
-    else if (!this.service.form.get('id').value) {
+    } else if (!this.service.form.get('id').value) {
       this.service.addProject(this.service.form.value);
       this.onClose();
-    }
-    else {
+    } else {
       this.service.editProject(this.service.form.value);
       this.onClose();
     }
-  }
-
-  currentLang(): string {
-    const current = this.translate.currentLang;
-    if (current === 'ua') { return 'uk'; }
-    return current;
   }
 }
