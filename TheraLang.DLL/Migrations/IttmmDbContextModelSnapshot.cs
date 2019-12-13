@@ -3,7 +3,8 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using TheraLang.DLL;
 
 namespace TheraLang.DLL.Migrations
 {
@@ -130,8 +131,16 @@ namespace TheraLang.DLL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
                     b.Property<string>("TypeName")
                         .HasMaxLength(500);
+
+                    b.Property<int?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
 
                     b.HasKey("Id");
 

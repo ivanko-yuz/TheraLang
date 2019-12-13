@@ -1,8 +1,25 @@
-<table mat-table [dataSource]='dataSource' class="mat-elevation-z8">  
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<button mat-raised-button (click)="onCreate()">Створити</button>
+<table mat-table [dataSource]="projectTypes" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="typeName">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.typeName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <div>
+        <span class="editButton">
+          <button mat-raised-button (click)="onEdit({id: element.id, typeName: element.typeName})">Редагувати</button>
+        </span>
+        <span class="deleteButton">
+          <button mat-raised-button (click)="onDelete(element.id)">Видалити</button>
+        </span>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

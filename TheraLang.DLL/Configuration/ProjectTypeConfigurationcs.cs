@@ -4,9 +4,9 @@ using TheraLang.DLL.Entities;
 
 namespace TheraLang.DLL.Configuration
 {
-    public class ProjectTypeConfigurationcs : IEntityTypeConfiguration<ProjectType>
+    public class ProjectTypeConfigurationcs : BaseEntityConfiguration<ProjectType>
     {
-        public void Configure(EntityTypeBuilder<ProjectType> builder)
+        public override void Configure(EntityTypeBuilder<ProjectType> builder)
         {
             builder.ToTable("Types");
 
