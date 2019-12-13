@@ -372,3 +372,4 @@ upload/
 
 # Angular build result
 /wwwroot/scripts/
+/ClientApp/out-tsc/
