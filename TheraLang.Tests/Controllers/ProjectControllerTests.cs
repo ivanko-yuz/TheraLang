@@ -1,6 +1,7 @@
 ﻿using Moq;
 using TheraLang.DLL.Entities;
 using TheraLang.Web.Controllers;
+using TheraLang.Web.Models;
 using TheraLang.Web.Services;
 using Xunit;
 
@@ -21,7 +22,7 @@ namespace TheraLang.Tests.Controllers
         public void CreateProject_IfModelIsValid_ShouldCallAddOnce()
         {
             // arrange
-            var model = new Project
+            var model = new ProjectModel
             {
                 Name = nameof(CreateProject_IfModelIsValid_ShouldCallAddOnce)
             };
@@ -30,7 +31,7 @@ namespace TheraLang.Tests.Controllers
             _sutController.CreateProject(model);
 
             // assert
-            _projectServiceMock.Verify(mock => mock.Add(It.IsAny<Project>()), Times.Once);
+            _projectServiceMock.Verify(mock => mock.Add(It.IsAny<ProjectModel>(), 1), Times.Once);
         }
     }
 }

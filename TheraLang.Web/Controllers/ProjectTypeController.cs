@@ -16,13 +16,10 @@ namespace TheraLang.Web.Controllers
             _service = service;
         }
 
-<<<<<<< HEAD
-=======
         /// <summary>
         /// get all ProjectsTypes
         /// </summary>
         /// <returns>array of ProjectsTypes</returns>
->>>>>>> master
         [HttpGet]
         public IEnumerable<ProjectType> GetAllTypes()
         {

@@ -55,15 +55,12 @@ import { TransactionResultComponent } from './transaction-result/transaction-res
 import { ProjectParticipationService } from './project-participants/project-participation.service';
 import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
 import { DonationService } from './donation/donation.service';
-<<<<<<< HEAD
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { UserService } from './user/user.service';
 import { ProfileMenuComponent } from './toolbar/profile-menu/profile-menu.component';
-=======
 import { ResourceCreateComponent } from './general-resources/resource-create/resource-create.component';
 import { ResourceCreateService } from './general-resources/resource-create/resource-create.service';
->>>>>>> master
 
 @NgModule({
    declarations: [
@@ -86,24 +83,17 @@ import { ResourceCreateService } from './general-resources/resource-create/resou
       ToolbarItemComponent,
       DonationComponent,
       TransactionResultComponent,
-<<<<<<< HEAD
       UserComponent,
       LoginComponent,
       ProfileMenuComponent,
-      
-=======
       ResourceCreateComponent,
->>>>>>> master
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
       ProjectFormComponent,
       ConfirmDialogComponent,
-<<<<<<< HEAD
-      LoginComponent
-=======
+      LoginComponent,
       ResourceCreateComponent,
->>>>>>> master
    ],
    imports: [
       BrowserModule,
@@ -177,11 +167,8 @@ import { ResourceCreateService } from './general-resources/resource-create/resou
       ProjectParticipationService,
       ProjectTypeService,
       DonationService,
-<<<<<<< HEAD
-      UserService
-=======
+      UserService,
       ResourceCreateService,
->>>>>>> master
    ],
    bootstrap: [
       AppComponent,
