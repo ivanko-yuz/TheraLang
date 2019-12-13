@@ -40,14 +40,14 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of Projects</returns>
         [HttpGet]
-        public IEnumerable<ProjectModel> GetAllProjects()
+        public IEnumerable<ProjectDonationModel> GetAllProjects()
         {
-            List<ProjectModel> projectModels = new List<ProjectModel>();
-            projectModels = _projectService.GetAllProjects().Select(p => new ProjectModel
+            List<ProjectDonationModel> projectModels = new List<ProjectDonationModel>();
+            projectModels = _projectService.GetAllProjects().Select(p => new ProjectDonationModel
             {
                 Id = p.Id,
                 Name = p.Name,
-                DonationAmount = p.Donations.Sum(y => y.Amount),
+                DonationSum = p.Donations.Sum(y => y.Amount),
                 Description = p.Description,
                 Details = p.Details,
                 ProjectStart = p.ProjectStart,

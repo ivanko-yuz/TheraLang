@@ -1,5 +1,6 @@
 <div *ngIf="projectId === 0; else projectDonation">
   <h2 class="organization-donation-header">Підтримати нашу організацію</h2>
+  <h4>Зібрано: ₴ {{societyDontion?.donationSum | number : '1.2-2'}}</h4>
 </div>
 <ng-template #projectDonation>
   <h2>Підтримати цей проект</h2>

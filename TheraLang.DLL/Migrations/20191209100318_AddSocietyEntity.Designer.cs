@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DLL;
 
 namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191209100318_AddSocietyEntity")]
+    partial class AddSocietyEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +39,7 @@ namespace TheraLang.DLL.Migrations
 
                     b.Property<int>("PaymentId");
 
-                    b.Property<int?>("ProjectId");
+                    b.Property<int>("ProjectId");
 
                     b.Property<decimal>("ReceiverCommission");
 
@@ -1066,7 +1068,8 @@ namespace TheraLang.DLL.Migrations
                 {
                     b.HasOne("TheraLang.DLL.Entities.Project", "Project")
                         .WithMany("Donations")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TheraLang.DLL.Entities.Society", "Society")
                         .WithMany("Donations")

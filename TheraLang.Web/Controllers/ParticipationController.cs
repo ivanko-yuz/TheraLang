@@ -13,14 +13,14 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ParticipationController : ControllerBase
     {
-        public ParticipationController(IProjectParticipationService service, UserManager<IdentityUser> manager)
+        public ParticipationController(IProjectParticipationService service/*, UserManager<IdentityUser> manager*/)
         {
             _service = service;
-            _userManager = manager;
+            //_userManager = manager;
         }
 
         private readonly IProjectParticipationService _service;
-        private readonly UserManager<IdentityUser> _userManager;
+        //private readonly UserManager<IdentityUser> _userManager;
 
         /// <summary>
         /// Change status of participant
@@ -66,8 +66,8 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"The {nameof(projectId)} can not be 0");
             }
 
-            int userId = _userManager.GetUserAsync(HttpContext.User).Id;
-            await _service.CreateRequest(userId, projectId);
+            //int userId = _userManager.GetUserAsync(HttpContext.User).Id;
+            //await _service.CreateRequest(userId, projectId);
             return Ok();
         }
     }
