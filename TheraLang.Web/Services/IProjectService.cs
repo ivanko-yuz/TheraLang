@@ -9,7 +9,7 @@ namespace TheraLang.Web.Services
     {
         Task ChangeStatus(int id, ProjectStatus rejected);
 
-        Task Add(Project projectViewModel);
+        Task Add(ProjectModel projectModel, int userId);
 
         Task UpdateAsync(int id, Project project);
 

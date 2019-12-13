@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Piranha;
-//using Piranha.AspNetCore.Identity;
+using TheraLang.Web.Models;
 
 namespace TheraLang.Web.Controllers
 {
@@ -17,30 +17,31 @@ namespace TheraLang.Web.Controllers
             _service = service;
         }
 
-        [HttpPost("login/{username}/{password}")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignIn(string username, string password)
+        [HttpPost("login")]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> SignIn(LoginModel model)
         {
-            if (username == null)
+            // string.IsNullOrWhiteSpace()
+            if (model.UserName == null)
             {
-                throw new ArgumentException($"{nameof(username)} cannot be null");
+                throw new ArgumentException($"{nameof(model.UserName)} cannot be null");
             }
-            if (password == null)
+            if (model.Password == null)
             {
-                throw new ArgumentException($"{nameof(password)} cannot be null");
+                throw new ArgumentException($"{nameof(model.Password)} cannot be null");
             }
-            if (await _service.SignIn(HttpContext, username, password))
+            if (await _service.SignIn(HttpContext, model.UserName, model.Password))
             {
                 return Ok();
             }
             else
             {
-                return BadRequest();
+                return BadRequest(); //TODO an authorize
             }
         }
 
-        [HttpPost("logout")]
-        [ValidateAntiForgeryToken]
+        [HttpGet("logout")]
+        //[ValidateAntiForgeryToken] // to do add user stories
         public async Task<IActionResult> SignOut()
         {
             await _service.SignOut(HttpContext);

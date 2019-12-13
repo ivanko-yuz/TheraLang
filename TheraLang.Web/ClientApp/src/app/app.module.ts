@@ -6,7 +6,7 @@ import {
   MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
   MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
   MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
-  MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
+  MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -58,6 +58,7 @@ import { DonationService } from './donation/donation.service';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { UserService } from './user/user.service';
+import { ProfileMenuComponent } from './toolbar/profile-menu/profile-menu.component';
 
 @NgModule({
    declarations: [
@@ -82,6 +83,8 @@ import { UserService } from './user/user.service';
       TransactionResultComponent,
       UserComponent,
       LoginComponent,
+      ProfileMenuComponent,
+      
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
@@ -148,7 +151,7 @@ import { UserService } from './user/user.service';
       CmsModule,
    ],
    exports: [
-      ResourcesInternalTableComponent,
+       ResourcesInternalTableComponent,
    ],
    providers: [
       ResourceService,

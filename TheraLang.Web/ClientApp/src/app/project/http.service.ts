@@ -41,15 +41,15 @@ export class HttpService {
     }
 
     createProject(project:Project) {
-        return this.http.post(this.url + 'projects' + '/' + 'create', project, {observe: 'response'});
+        return this.http.post(this.url + 'projects' + '/' + 'create', project);
     }
 
     updateProject(project: Project) {
-        return this.http.put(this.url + '/' + project.id, project, {observe: 'response'});
+        return this.http.put(this.url + '/' + project.id, project);
     }
 
     getAllProjectTypes(){
-        return this.http.get(this.url + '/' + 'projectTypes');
+        return this.http.get(this.url + 'projectTypes');
     }
 
 }

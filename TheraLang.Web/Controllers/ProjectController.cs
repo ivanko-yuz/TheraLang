@@ -7,6 +7,7 @@ using TheraLang.DLL.Entities;
 using TheraLang.Web.Models;
 using TheraLang.Web.Services;
 
+
 namespace TheraLang.Web.Controllers
 {
     [Route("api/projects")]
@@ -20,21 +21,21 @@ namespace TheraLang.Web.Controllers
         }
         
         [HttpPost("create")]
-        public IActionResult CreateProject(Project project)
+        public IActionResult CreateProject(ProjectModel project)
         {
             if(project == null)
             {
                 throw new ArgumentException($"{nameof(project)} cannot be null");
             }
-            _projectService.Add(project);
+            _projectService.Add(project, 1);
             return  Ok(project);
         }
         
         [HttpGet]
         public IEnumerable<ProjectModel> GetAllProjects()
         {
-            List<ProjectModel> projectModels = new List<ProjectModel>();
-            projectModels = _projectService.GetAllProjects().Select(p => new ProjectModel
+            List<ProjectModel> projectModels = _projectService.GetAllProjects()
+                .Select(p => new ProjectModel
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -43,7 +44,6 @@ namespace TheraLang.Web.Controllers
                 Details = p.Details,
                 ProjectStart = p.ProjectStart,
                 ProjectEnd = p.ProjectEnd
-                
             }).ToList();
 
             return projectModels;

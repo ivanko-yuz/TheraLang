@@ -7,7 +7,7 @@ using TheraLang.Web.Services;
 namespace TheraLang.Web.Controllers
 {
     [ApiController]
-    [Route("api/types")]
+    [Route("api/projectTypes")]
     public class ProjectTypeController : ControllerBase
     {
         private readonly IProjectTypeService _service;
@@ -15,6 +15,7 @@ namespace TheraLang.Web.Controllers
         {
             _service = service;
         }
+
         [HttpGet]
         public IEnumerable<ProjectType> GetAllTypes()
         {

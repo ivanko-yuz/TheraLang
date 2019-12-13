@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\e2e\src\" />
+    <Folder Include="wwwroot\scripts\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
   <ItemGroup>

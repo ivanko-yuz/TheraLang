@@ -6,8 +6,8 @@
          <a mat-button class="toolbar-button" routerLink="/participants" >Запити
          <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>
          <span class="fill-space"></span>
-         <a mat-button class="toolbar-button" routerLink="" >Реєстрація</a>
-         <a mat-button class="toolbar-button" routerLink="login" >Увійти</a> 
+         <button mat-button class="toolbar-button" (click)="onLogin()">Увійти</button>
+         <app-profile-menu></app-profile-menu>
          <a mat-button class="toolbar-button" routerLink="/projectTypes" >Типи Проектів</a> 
     </mat-toolbar-row >                
   </mat-toolbar>

@@ -6,7 +6,7 @@
     <mat-form-field>
       <input type="hidden" formControlName="id">
       <input formControlName="name" autofocus required matInput placeholder="Назва проекту">
-      <mat-error *ngIf="service.form.controls['name'].errors?.required">Це поле є обов'язковим</mat-error>
+      <mat-error *ngIf="service.form.controls['name'].errors.required">Це поле є обов'язковим</mat-error>
       <mat-error *ngIf="service.form.controls['name'].errors?.minlength">Мінімум 3 знаки</mat-error>
       <mat-error *ngIf="service.form.controls['name'].errors?.maxlength">Завелика назва</mat-error>
     </mat-form-field>
@@ -33,8 +33,13 @@
       <mat-error *ngIf="service.form.controls['projectEnd'].hasError('matDatepickerFilter')">щось там</mat-error>
     </mat-form-field>
       <mat-form-field>
-        <input formControlName="type" required matInput placeholder="Тип">
-        <mat-error *ngIf="service.form.controls['type'].errors?.required">Це поле є обов'язковим</mat-error>
+        <mat-label>Тип</mat-label>
+        <mat-select formControlName="typeId" required>
+          <mat-option *ngFor="let type of projectTypes" [value]="type.id">
+            {{type.typeName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="service.form.controls['typeId'].errors?.required">Це поле є обов'язковим</mat-error>
       </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>
