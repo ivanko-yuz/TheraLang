@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using TheraLang.DLL.Entities;
 using TheraLang.DLL.Repository;
 
 namespace TheraLang.DLL.UnitOfWork
@@ -20,6 +23,23 @@ namespace TheraLang.DLL.UnitOfWork
 
         public Task<int> SaveChangesAsync()
         {
+            var entries = Context.ChangeTracker
+            .Entries()
+            .Where(e => e.Entity is BaseEntity && (
+            e.State == EntityState.Added
+            || e.State == EntityState.Modified));
+
+            foreach (var entityEntry in entries)
+            {
+                if (entityEntry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entityEntry.Entity).CreatedDateUtc = DateTime.Now;
+                }
+                else if (entityEntry.State == EntityState.Modified)
+                {
+                    ((BaseEntity)entityEntry.Entity).UpdatedDateUtc = DateTime.Now;
+                }
+            }
             return Context.SaveChangesAsync();
         }
 
