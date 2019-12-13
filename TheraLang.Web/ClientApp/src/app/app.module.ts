@@ -58,6 +58,7 @@ import { DonationService } from './donation/donation.service';
 import { ProjectTypeHttp } from './project-info/resources-table-for-project/project-type/project-type-Http.service';
 import { ProjectTypeFormComponent } from './project-type-form/project-type-form.component';
 import { ProjectTypeCreateFormComponent } from './project-type-create-form/project-type-create-form.component';
+import { AddResourcesToProjectComponent } from './add-resources-to-project/add-resources-to-project.component';
 
 @NgModule({
    declarations: [
@@ -82,6 +83,7 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
       TransactionResultComponent,
       ProjectTypeFormComponent,
       ProjectTypeCreateFormComponent,
+      AddResourcesToProjectComponent,
 
    ],
    entryComponents: [
@@ -90,6 +92,8 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
       ConfirmDialogComponent,
       ProjectTypeFormComponent,
       ProjectTypeCreateFormComponent,
+      AddResourcesToProjectComponent,
+
    ],
    imports: [
       BrowserModule,
@@ -165,6 +169,7 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
       DonationService,
       ProjectTypeService,
       ProjectTypeHttp,
+      AddResourcesToProjectComponent,
 
    ],
    bootstrap: [
