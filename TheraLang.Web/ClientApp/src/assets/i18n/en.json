@@ -1,7 +1,15 @@
 {
   "common": {
     "details": "Details",
-    "edit": "Edit"
+    "edit": "Edit",
+    "wth": "wth",
+    "validation": {
+      "field-is-required": "This field is required",
+      "line-too-long": "The line is too long",
+      "line-too-short": "The line is too short",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    }
   },
   "components": {
     "home": {
@@ -16,7 +24,11 @@
       "project-starts": "Project starts",
       "project-ends": "Project ends",
       "PROJECT-CREATION": "PROJECT CREATION",
-      "PROJECT-EDITING": "PROJECT EDITING"
+      "PROJECT-EDITING": "PROJECT EDITING",
+      "name-of-project": "Name of project",
+      "description": "Description",
+      "details": "Details",
+      "type": "Type of project"
     },
     "resources": {
       "title": "Resources"
