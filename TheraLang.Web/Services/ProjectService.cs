@@ -56,6 +56,25 @@ namespace TheraLang.Web.Services
             }
         }
 
+        public async Task Delete(int id)
+        {
+            try
+            {
+                var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
+                if (project == null)
+                {
+                    throw new NullReferenceException($"Error while deleting project. Project with id {nameof(id)}={id} not found");
+                }
+                _uow.Repository<Project>().Remove(project);
+                await _uow.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                e.Data["projectId"] = id;
+                throw;
+            }
+        }
+
         public IEnumerable<Project> GetProjects(int pageNumber, int pageSize = PaginationConstants.RecordsPerPage)
         {
             try

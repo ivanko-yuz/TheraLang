@@ -17,7 +17,12 @@ namespace TheraLang.Web.Controllers
             _donationService = donationService;
         }
 
-
+        /// <summary>
+        /// donation request
+        /// </summary>
+        /// <param name="donationAmount"></param>
+        /// <param name="projectId">a project to which you want donate</param>
+        /// <returns>LiqPayCheckoutModel</returns>
         [HttpGet("{donationAmount}/{projectId}")]
         public ActionResult<LiqPayCheckoutModel> Get(string donationAmount, int projectId)
         {
@@ -32,7 +37,11 @@ namespace TheraLang.Web.Controllers
             return _donationService.GetLiqPayCheckoutModel(donationAmount, projectId);
         }
 
-
+        /// <summary>
+        /// Get donation by Id
+        /// </summary>
+        /// <param name="donationId"></param>
+        /// <returns>Donation record</returns>
         [HttpGet("{donationId}")]
         public ActionResult<Donation> Get(string donationId)
         {
@@ -45,7 +54,14 @@ namespace TheraLang.Web.Controllers
             return Ok(donation);        
         }
 
-
+        /// <summary>
+        /// API for LiqPay check in 
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <param name="donationId"></param>
+        /// <param name="data"></param>
+        /// <param name="signature"></param>
+        /// <returns>status code</returns>
         [HttpPost("{projectId}/{donationId}")]
         public async Task<ActionResult> Post(int projectId, string donationId, [FromForm]string data, [FromForm]string signature)
         {

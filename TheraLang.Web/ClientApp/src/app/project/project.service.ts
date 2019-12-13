@@ -43,6 +43,7 @@ export class ProjectService {
 
   addProject(project: Project) {
     this.httpService.createProject(project).subscribe(
+<<<<<<< HEAD
       (msg: string) => {
        msg = 'Проект створено';
        this.notificationService.success(msg)
@@ -50,11 +51,22 @@ export class ProjectService {
       (error) => {
          console.log(error);
          this.notificationService.warn('Помилка при створенні проекту');
+=======
+      (res) => {
+        if (res.ok) {
+          this.notificationService.success('Проект успішно створено')
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.notificationService.warn('Помилка при створенні')
+>>>>>>> master
       });
   }
 
   editProject(project: Project) {
     this.httpService.updateProject(project).subscribe(
+<<<<<<< HEAD
       (msg: string) => {
         msg = 'Проект оновлено';
         this.notificationService.success(msg);
@@ -67,5 +79,17 @@ export class ProjectService {
 
   getProjectTypes(){
     return this.httpService.getAllProjectTypes();
+=======
+      (res) => {
+        if (res.ok) {
+          this.notificationService.success('Проект успішно оновлено')
+        }
+      },
+      (error) => {
+        console.log(error);
+        this.notificationService.warn('Помилка при оновленні')
+      });
+>>>>>>> master
   }
 }
+
