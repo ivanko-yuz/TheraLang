@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import {
-  MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
-  MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
-  MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
-  MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
-  MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
-  MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
+   MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
+   MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
+   MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
+   MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
+   MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
+   MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
@@ -48,7 +48,7 @@ import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
 import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
-import {CmsModule} from './cms/cms.module';
+import { CmsModule } from './cms/cms.module';
 import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
 import { DonationComponent } from './donation/donation.component';
 import { TransactionResultComponent } from './transaction-result/transaction-result.component';
@@ -57,6 +57,9 @@ import { ProjectTypeService } from './project-info/resources-table-for-project/p
 import { DonationService } from './donation/donation.service';
 import { ResourceCreateComponent } from './general-resources/resource-create/resource-create.component';
 import { ResourceCreateService } from './general-resources/resource-create/resource-create.service';
+import { ProjectTypeHttp } from './project-info/resources-table-for-project/project-type/project-type-Http.service';
+import { ProjectTypeFormComponent } from './project-type-form/project-type-form.component';
+import { ProjectTypeCreateFormComponent } from './project-type-create-form/project-type-create-form.component';
 
 @NgModule({
    declarations: [
@@ -80,12 +83,16 @@ import { ResourceCreateService } from './general-resources/resource-create/resou
       DonationComponent,
       TransactionResultComponent,
       ResourceCreateComponent,
+      ProjectTypeFormComponent,
+      ProjectTypeCreateFormComponent,
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
       ProjectFormComponent,
       ConfirmDialogComponent,
       ResourceCreateComponent,
+      ProjectTypeFormComponent,
+      ProjectTypeCreateFormComponent,
    ],
    imports: [
       BrowserModule,
@@ -160,6 +167,7 @@ import { ResourceCreateService } from './general-resources/resource-create/resou
       ProjectTypeService,
       DonationService,
       ResourceCreateService,
+      ProjectTypeHttp,
    ],
    bootstrap: [
       AppComponent,

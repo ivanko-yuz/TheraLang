@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Project } from './project';
 import { baseUrl } from '../shared/api-endpoint.constants';
-import { Page } from '../cms/models/page.model';
 
 @Injectable()
 export class HttpService {
@@ -46,10 +45,6 @@ export class HttpService {
 
     updateProject(project: Project) {
         return this.http.put(this.url + '/' + project.id, project, { observe: 'response' });
-    }
-
-    getAllProjectTypes() {
-        return this.http.get(this.url + '/' + 'projectTypes');
     }
 
     deleteProject(id: number) {
