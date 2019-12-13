@@ -41,8 +41,10 @@ namespace TheraLang.DLL.Services
                     Url = resourceModel.url,
                     File = resourceModel.file,
                     CategoryId = resourceModel.categoryId,
-                    CreatedById = userId
+                    CreatedById = userId,
+                    CreatedDateUtc = DateTime.UtcNow
                 };
+
                 await _unitOfWork.Repository<Resource>().Add(resource);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -63,6 +65,7 @@ namespace TheraLang.DLL.Services
                 resource.Url = resourceModel.url;
                 resource.File = resourceModel.file;
                 resource.CategoryId = resourceModel.categoryId;
+                resource.UpdatedDateUtc = DateTime.UtcNow;
                 resource.UpdatedById = updatetById;
 
                 _unitOfWork.Repository<Resource>().Update(resource);

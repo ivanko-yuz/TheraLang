@@ -44,13 +44,13 @@ namespace TheraLang.DLL.Services
         {
             try
             {
-                ProjectParticipation member = new ProjectParticipation
-                { CreatedById = userId, ProjectId = projectId };
+                ProjectParticipation member = new ProjectParticipation 
+                { CreatedById = userId, ProjectId = projectId, UpdatedDateUtc = DateTime.UtcNow };
 
                 await _unitOfWork.Repository<ProjectParticipation>().Add(member);
                 await _unitOfWork.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 throw new Exception($"Error when creating request for {nameof(userId)}:{userId}" +
                     $"and {nameof(projectId)}:{projectId}: ", ex);
