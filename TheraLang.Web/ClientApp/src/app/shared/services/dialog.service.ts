@@ -26,8 +26,6 @@ export class DialogService {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
     dialogConfig.panelClass = 'form';
-
-    this.dialog.open(formComponent, dialogConfig)
-
+    this.dialog.open(formComponent, dialogConfig);
   }
 }

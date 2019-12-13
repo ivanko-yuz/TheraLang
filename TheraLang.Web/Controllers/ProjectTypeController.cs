@@ -5,7 +5,7 @@ using TheraLang.DLL.Services;
 using TheraLang.DLL.Entities;
 using System.Collections.Generic;
 
-namespace MvcWeb.TheraLang.Controllers
+namespace TheraLang.Web.Controllers
 {
     [Route("api/projectTypes")]
     [ApiController]

@@ -164,7 +164,6 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
       DialogService,
       ResourceCategoriesService,
       ProjectParticipationService,
-      DonationService,
       ProjectTypeService,
       DonationService,
       ResourceCreateService,
