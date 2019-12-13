@@ -8,7 +8,7 @@ import {
    MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
    MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
 } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -60,6 +60,13 @@ import { ResourceCreateService } from './general-resources/resource-create/resou
 import { ProjectTypeHttp } from './project-info/resources-table-for-project/project-type/project-type-Http.service';
 import { ProjectTypeFormComponent } from './project-type-form/project-type-form.component';
 import { ProjectTypeCreateFormComponent } from './project-type-create-form/project-type-create-form.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageComponent } from './toolbar/language/language.component';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
    declarations: [
@@ -85,6 +92,7 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
       ResourceCreateComponent,
       ProjectTypeFormComponent,
       ProjectTypeCreateFormComponent,
+      LanguageComponent,
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
@@ -151,6 +159,13 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
       PortalModule,
       ScrollingModule,
       CmsModule,
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      }),
    ],
    exports: [
       ResourcesInternalTableComponent,
