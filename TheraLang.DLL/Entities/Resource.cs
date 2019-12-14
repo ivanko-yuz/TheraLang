@@ -16,12 +16,15 @@ namespace TheraLang.DLL.Entities
 
         public int CategoryId { get; set; }
 
+        public virtual ICollection<ResourceAttachment> ResourceAttachment { get; set; }
+
         public virtual ResourceCategory ResourceCategory { get; set; }
 
         public virtual ICollection<ResourceProject> ResourceToProjects { get; set; }
         public Resource()
         {
             this.ResourceToProjects = new List<ResourceProject>();
-        }
+            this.ResourceAttachment = new List<ResourceAttachment>();
+        }        
     }
 }

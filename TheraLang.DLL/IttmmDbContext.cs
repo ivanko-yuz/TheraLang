@@ -100,6 +100,7 @@ namespace TheraLang.DLL
             modelBuilder.ApplyConfiguration(new ResourceProjectConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             modelBuilder.ApplyConfiguration(new DonationConfiguration());
             #endregion
         }
