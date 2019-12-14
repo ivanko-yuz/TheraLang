@@ -2,11 +2,12 @@
 using System;
 using TheraLang.Web.Services;
 using TheraLang.DLL.Entities;
+using System.Collections.Generic;
 
 namespace TheraLang.Web.Controllers
 {
 
-    [Route("api/file")]
+    [Route("api/files")]
     [ApiController]  
     public class ResourceAttachmentController : ControllerBase
     {
@@ -26,6 +27,11 @@ namespace TheraLang.Web.Controllers
             _attachment.SaveAs(resource, overwrite: true, autoCreateDirectory: true);
             _attachment.Add(resource);
             return Ok(resource);
+        }
+        [HttpGet]
+        public IEnumerable<ResourceAttachment> GetAllTypes()
+        {
+            return _attachment.Get();
         }
     }
 }
