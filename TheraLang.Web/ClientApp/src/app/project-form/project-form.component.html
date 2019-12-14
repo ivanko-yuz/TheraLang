@@ -33,8 +33,13 @@
       <mat-error *ngIf="service.form.controls['projectEnd'].hasError('matDatepickerFilter')">{{'common.wth'|translate}}</mat-error>
     </mat-form-field>
       <mat-form-field>
-        <input formControlName="type" required matInput [placeholder]="'components.projects.type'|translate">
-        <mat-error *ngIf="service.form.controls['type'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+        <mat-label>Тип</mat-label>
+        <mat-select formControlName="typeId" required>
+          <mat-option *ngFor="let type of projectTypes" [value]="type.id">
+            {{type.typeName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="service.form.controls['typeId'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
       </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>

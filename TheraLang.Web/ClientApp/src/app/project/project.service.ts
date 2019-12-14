@@ -20,7 +20,7 @@ export class ProjectService {
     details: ['', Validators.maxLength(8000)],
     projectStart: ['', Validators.required],
     projectEnd: [''],
-    type: ['', [Validators.required, Validators.minLength(3)]],
+    typeId: ['', Validators.required],
   });
 
 
@@ -32,7 +32,7 @@ export class ProjectService {
       details: '',
       projectStart: '',
       projectEnd: '',
-      type: '',
+      typeId: '',
     });
   }
 
@@ -43,28 +43,30 @@ export class ProjectService {
 
   addProject(project: Project) {
     this.httpService.createProject(project).subscribe(
-      (res) => {
-        if (res.ok) {
-          this.notificationService.success('Проект успішно створено')
-        }
+      (msg: string) => {
+       msg = 'Проект створено';
+       this.notificationService.success(msg)
       },
       (error) => {
-        console.log(error);
-        this.notificationService.warn('Помилка при створенні')
+         console.log(error);
+         this.notificationService.warn('Помилка при створенні проекту');
       });
   }
 
   editProject(project: Project) {
     this.httpService.updateProject(project).subscribe(
-      (res) => {
-        if (res.ok) {
-          this.notificationService.success('Проект успішно оновлено')
-        }
-      },
-      (error) => {
-        console.log(error);
-        this.notificationService.warn('Помилка при оновленні')
-      });
+      (msg: string) => {
+        msg = 'Проект оновлено';
+        this.notificationService.success(msg);
+       },
+       (error) => {
+          console.log(error);
+          this.notificationService.warn('Помилка при оновленні проекту')
+       });
+  }
+
+  getProjectTypes(){
+    return this.httpService.getAllProjectTypes();
   }
 }
 

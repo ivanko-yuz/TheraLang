@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, DateAdapter } from '@angular/material';
 import { ProjectService } from '../project/project.service';
+import { ProjectType } from '../project-info/resources-table-for-project/project-type/project-type.model';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -12,14 +13,17 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ProjectFormComponent implements OnInit {
 
+  projectTypes: ProjectType[];
+
   constructor(private dialog: MatDialogRef<ProjectFormComponent>,
               public service: ProjectService,
               public dateAdapter: DateAdapter<Date>,
               private translate: TranslateService) { }
 
   ngOnInit() {
-    this.dateAdapter.setLocale(this.translate.currentLang);
-    this.dateAdapter.getFirstDayOfWeek = () => 1;
+    this.dateAdapter.setLocale(this.translate.currentLang),
+    this.dateAdapter.getFirstDayOfWeek = () => { return 1; },
+    this.service.getProjectTypes().subscribe((projectTypes: ProjectType[]) => this.projectTypes = projectTypes);
   }
   onClose() {
     this.service.form.reset();

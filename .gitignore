@@ -369,3 +369,7 @@ upload/
 
 # End of https://www.gitignore.io/api/visualstudio,visualstudiocode
 **/uploads/
+
+# Angular build result
+/wwwroot/scripts/
+/ClientApp/out-tsc/

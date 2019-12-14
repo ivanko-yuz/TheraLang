@@ -55,6 +55,10 @@ import { TransactionResultComponent } from './transaction-result/transaction-res
 import { ProjectParticipationService } from './project-participants/project-participation.service';
 import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
 import { DonationService } from './donation/donation.service';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserService } from './user/user.service';
+import { ProfileMenuComponent } from './toolbar/profile-menu/profile-menu.component';
 import { ResourceCreateComponent } from './general-resources/resource-create/resource-create.component';
 import { ResourceCreateService } from './general-resources/resource-create/resource-create.service';
 import { ProjectTypeHttp } from './project-info/resources-table-for-project/project-type/project-type-Http.service';
@@ -89,6 +93,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       ToolbarItemComponent,
       DonationComponent,
       TransactionResultComponent,
+      UserComponent,
+      LoginComponent,
+      ProfileMenuComponent,
       ResourceCreateComponent,
       ProjectTypeFormComponent,
       ProjectTypeCreateFormComponent,
@@ -98,6 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       ResourcesInternalTableComponent,
       ProjectFormComponent,
       ConfirmDialogComponent,
+      LoginComponent,
       ResourceCreateComponent,
       ProjectTypeFormComponent,
       ProjectTypeCreateFormComponent,
@@ -168,7 +176,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }),
    ],
    exports: [
-      ResourcesInternalTableComponent,
+       ResourcesInternalTableComponent,
    ],
    providers: [
       ResourceService,
@@ -181,6 +189,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       ProjectParticipationService,
       ProjectTypeService,
       DonationService,
+      UserService,
       ResourceCreateService,
       ProjectTypeHttp,
    ],

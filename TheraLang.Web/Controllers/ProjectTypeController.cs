@@ -9,6 +9,7 @@ namespace TheraLang.Web.Controllers
 {
     [Route("api/projectTypes")]
     [ApiController]
+ 
     public class ProjectTypeController : ControllerBase
     {
         public ProjectTypeController(IProjectTypeService service)

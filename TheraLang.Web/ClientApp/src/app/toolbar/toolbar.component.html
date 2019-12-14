@@ -6,9 +6,10 @@
          <a mat-button class="toolbar-button" routerLink="/participants" >{{'components.participants.title'|translate}}
          <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>
          <span class="fill-space"></span>
+         <button mat-button class="toolbar-button" (click)="onLogin()">{{'components.account.signIn.title'|translate}}</button>
+         <app-profile-menu></app-profile-menu>
+
          <app-language></app-language>
-         <a mat-button class="toolbar-button" routerLink="" >{{'components.account.signUp.title'|translate}}</a>
-         <a mat-button class="toolbar-button" routerLink="" >{{'components.account.signIn.title'|translate}}</a>
          <a mat-button class="toolbar-button" routerLink="/projectTypes" >{{'components.projectTypes.title'|translate}}</a>
     </mat-toolbar-row >
   </mat-toolbar>
