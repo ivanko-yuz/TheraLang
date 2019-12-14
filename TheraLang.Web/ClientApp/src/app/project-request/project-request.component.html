@@ -16,8 +16,12 @@
     </mat-card-content>
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
-      <button mat-stroked-button (click)="changeStatus('approved', project)">Прийняти</button>
-      <button mat-stroked-button (click)="changeStatus('rejected', project)">Відхилити</button>
+      <span class="aproveButton">
+        <button mat-stroked-button (click)="changeStatus('approved', project)">Прийняти</button>
+      </span>
+      <span class="rejectButton">
+        <button mat-stroked-button (click)="changeStatus('rejected', project)">Відхилити</button>
+      </span>
     </mat-card-actions>
   </mat-card>
 </div>

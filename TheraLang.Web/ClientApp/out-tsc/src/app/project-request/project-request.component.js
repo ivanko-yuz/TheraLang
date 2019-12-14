@@ -1,6 +1,5 @@
 import { __decorate } from "tslib";
 import { Component } from "@angular/core";
-import { ProjectStatusRequest } from "../shared/enums/project-status-request";
 let ProjectRequestComponent = class ProjectRequestComponent {
     //   projectRequest = new MatTableDataSource<ProjectRequest>();
     //   showActionButtons: boolean = true;
@@ -16,17 +15,14 @@ let ProjectRequestComponent = class ProjectRequestComponent {
         this.http = http;
         this.projectRequestService = projectRequestService;
     }
-    changeStatus(status) {
-        debugger;
+    changeStatus(status, project) {
         status === "approved"
-            ? this.projectRequestService.StatusApprove(projectRequest.id, ProjectStatusRequest.Approved //todo: remove
-            )
-            : this.projectRequestService.StatusReject(projectRequest.id, ProjectStatusRequest.Rejected //todo: remove
-            );
+            ? this.projectRequestService.StatusApprove(project.id)
+            : this.projectRequestService.StatusReject(project.id);
     }
     ngOnInit() {
         return this.http
-            .getAllProjects()
+            .getAllNewProjects()
             .subscribe((projects) => (this.projects = projects));
     }
 };

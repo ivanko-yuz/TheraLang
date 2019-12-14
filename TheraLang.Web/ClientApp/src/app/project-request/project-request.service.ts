@@ -14,10 +14,10 @@ export class ProjectRequestService {
     return this.http.get(this.url);
   }
 
-  StatusApprove(id: number) {
+  Approved(id: number) {
     return this.http.get(this.url + "/approve/" + id).subscribe();
   }
-  StatusReject(id: number) {
+  Rejected(id: number) {
     return this.http.get(this.url + "/reject/" + id).subscribe();
   }
 }

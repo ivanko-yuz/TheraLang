@@ -10,11 +10,10 @@ let ProjectRequestService = class ProjectRequestService {
         return this.http.get(this.url);
     }
     StatusApprove(id) {
-        debugger;
-        return this.http.put(this.url + "/approve/" + id);
+        return this.http.get(this.url + "/approve/" + id).subscribe();
     }
     StatusReject(id) {
-        return this.http.put(this.url + "/reject/" + id);
+        return this.http.get(this.url + "/reject/" + id).subscribe();
     }
 };
 ProjectRequestService = __decorate([
