@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TheraLang.DLL.Entities;
 
 namespace TheraLang.DLL.Piranha.Entities
 {
@@ -11,6 +12,8 @@ namespace TheraLang.DLL.Piranha.Entities
             PiranhaUserLogins = new HashSet<PiranhaUserLogin>();
             PiranhaUserRoles = new HashSet<PiranhaUserRole>();
             PiranhaUserTokens = new HashSet<PiranhaUserToken>();
+            Resources = new HashSet<Resource>();
+            ProjectParticipations = new HashSet<ProjectParticipation>();
         }
 
         public Guid Id { get; set; }
@@ -33,5 +36,7 @@ namespace TheraLang.DLL.Piranha.Entities
         public virtual ICollection<PiranhaUserLogin> PiranhaUserLogins { get; set; }
         public virtual ICollection<PiranhaUserRole> PiranhaUserRoles { get; set; }
         public virtual ICollection<PiranhaUserToken> PiranhaUserTokens { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
+        public virtual ICollection<ProjectParticipation> ProjectParticipations { get; set; }
     }
 }

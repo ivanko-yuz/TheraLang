@@ -8,7 +8,7 @@ namespace TheraLang.DLL.Configuration
     {
         public void Configure(EntityTypeBuilder<ProjectType> builder)
         {
-            builder.ToTable("Types");
+            builder.ToTable("ProjectTypes");
 
             builder.HasKey(e => e.Id);
 

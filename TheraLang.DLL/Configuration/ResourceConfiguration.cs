@@ -19,7 +19,6 @@ namespace TheraLang.DLL.Configuration
 
             builder.HasMany(x => x.ResourceProjects).WithOne(i => i.Resource).
                 HasForeignKey(e => e.ResourceId).OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(x => x.User).WithMany(i => i.Resources);
         }
     }
 }
