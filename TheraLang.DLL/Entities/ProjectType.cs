@@ -2,13 +2,11 @@
 
 namespace TheraLang.DLL.Entities
 {
-    public class ProjectType
-    {   
-        public int Id { get; set; }
-        
+    public class ProjectType : BaseEntity
+    {
         public string TypeName { get; set; }
 
-        public ICollection<Project> Projects { get; set; } 
+        public ICollection<Project> Projects { get; set; }
 
         public ProjectType()
         {

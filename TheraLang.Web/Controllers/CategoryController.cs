@@ -7,7 +7,7 @@ using TheraLang.DLL.Entities;
 
 namespace TheraLang.Web.Controllers
 {
-    [Route("api/category")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace TheraLang.Web.Controllers
         /// <param name="newTypeName">new name of selected category</param>
         /// <returns>wil return just status code</returns>
         [HttpPut]
-        [Route("update/{categoryId}/{newType}")]
+        [Route("update/{categoryId}/{newTypeName}")]
         public async Task<IActionResult> PutType(int categoryId, string newTypeName)
         {
             if (categoryId == default)

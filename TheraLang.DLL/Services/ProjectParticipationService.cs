@@ -40,17 +40,17 @@ namespace TheraLang.DLL.Services
         }
 
 
-        public async Task CreateRequest(int userId, int projectId)
+        public async Task CreateRequest(Guid userId, int projectId)
         {
             try
             {
-                ProjectParticipation member = new ProjectParticipation 
-                { CreatedById = userId, ProjectId = projectId, UpdatedDateUtc = DateTime.UtcNow };
+                ProjectParticipation member = new ProjectParticipation
+                { CreatedById = userId, ProjectId = projectId };
 
                 await _unitOfWork.Repository<ProjectParticipation>().Add(member);
                 await _unitOfWork.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"Error when creating request for {nameof(userId)}:{userId}" +
                     $"and {nameof(projectId)}:{projectId}: ", ex);

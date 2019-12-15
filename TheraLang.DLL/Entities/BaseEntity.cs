@@ -6,9 +6,9 @@ namespace TheraLang.DLL.Entities
     {
         public int Id { get; set; }
 
-        public int CreatedById { get; set; }
+        public Guid CreatedById { get; set; }
 
-        public int? UpdatedById { get; set; }   
+        public Guid? UpdatedById { get; set; }   
 
         public DateTime CreatedDateUtc { get; set; }
 

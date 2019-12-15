@@ -4,11 +4,11 @@ using TheraLang.DLL.Entities;
 
 namespace TheraLang.DLL.Configuration
 {
-    public class ProjectTypeConfigurationcs : IEntityTypeConfiguration<ProjectType>
+    public class ProjectTypeConfigurationcs : BaseEntityConfiguration<ProjectType>
     {
-        public void Configure(EntityTypeBuilder<ProjectType> builder)
+        public override void Configure(EntityTypeBuilder<ProjectType> builder)
         {
-            builder.ToTable("Types");
+            builder.ToTable("ProjectTypes");
 
             builder.HasKey(e => e.Id);
 
@@ -17,6 +17,9 @@ namespace TheraLang.DLL.Configuration
             builder.Property(e => e.TypeName).HasMaxLength(500);
 
             builder.HasIndex(e => e.TypeName).IsUnique(true);
+
+            builder.HasMany(e=>e.Projects).WithOne(x=>x.Type).
+                HasForeignKey(i=>i.TypeId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

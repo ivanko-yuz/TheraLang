@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import {
-  MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
-  MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
-  MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
-  MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
-  MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
-  MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
+   MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
+   MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
+   MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
+   MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
+   MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
+   MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
 } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,13 +48,29 @@ import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { NotificationService } from './shared/services/notification.service';
 import { DialogService } from './shared/services/dialog.service';
 import { ResourcesTableComponent } from './project-info/resources-table-for-project/resources-table/resources-table.component';
-import {CmsModule} from './cms/cms.module';
+import { CmsModule } from './cms/cms.module';
 import { ToolbarItemComponent } from './toolbar/toolbar-item/toolbar-item.component';
 import { DonationComponent } from './donation/donation.component';
 import { TransactionResultComponent } from './transaction-result/transaction-result.component';
 import { ProjectParticipationService } from './project-participants/project-participation.service';
 import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
 import { DonationService } from './donation/donation.service';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserService } from './user/user.service';
+import { ProfileMenuComponent } from './toolbar/profile-menu/profile-menu.component';
+import { ResourceCreateComponent } from './general-resources/resource-create/resource-create.component';
+import { ResourceCreateService } from './general-resources/resource-create/resource-create.service';
+import { ProjectTypeHttp } from './project-info/resources-table-for-project/project-type/project-type-Http.service';
+import { ProjectTypeFormComponent } from './project-type-form/project-type-form.component';
+import { ProjectTypeCreateFormComponent } from './project-type-create-form/project-type-create-form.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageComponent } from './toolbar/language/language.component';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
    declarations: [
@@ -77,11 +93,22 @@ import { DonationService } from './donation/donation.service';
       ToolbarItemComponent,
       DonationComponent,
       TransactionResultComponent,
+      UserComponent,
+      LoginComponent,
+      ProfileMenuComponent,
+      ResourceCreateComponent,
+      ProjectTypeFormComponent,
+      ProjectTypeCreateFormComponent,
+      LanguageComponent,
    ],
    entryComponents: [
       ResourcesInternalTableComponent,
       ProjectFormComponent,
       ConfirmDialogComponent,
+      LoginComponent,
+      ResourceCreateComponent,
+      ProjectTypeFormComponent,
+      ProjectTypeCreateFormComponent,
    ],
    imports: [
       BrowserModule,
@@ -140,9 +167,16 @@ import { DonationService } from './donation/donation.service';
       PortalModule,
       ScrollingModule,
       CmsModule,
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+        }
+      }),
    ],
    exports: [
-      ResourcesInternalTableComponent,
+       ResourcesInternalTableComponent,
    ],
    providers: [
       ResourceService,
@@ -154,7 +188,10 @@ import { DonationService } from './donation/donation.service';
       ResourceCategoriesService,
       ProjectParticipationService,
       ProjectTypeService,
-      DonationService
+      DonationService,
+      UserService,
+      ResourceCreateService,
+      ProjectTypeHttp,
    ],
    bootstrap: [
       AppComponent,

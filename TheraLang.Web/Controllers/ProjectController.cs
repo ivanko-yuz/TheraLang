@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.Web.Models;
 using TheraLang.Web.Services;
+using Microsoft.AspNetCore.Identity;
+using Piranha.AspNetCore.Identity.Data;
+
 
 namespace TheraLang.Web.Controllers
 {
@@ -14,9 +17,12 @@ namespace TheraLang.Web.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly IProjectService _projectService; 
-        public ProjectController(IProjectService projectService)
+        private readonly UserManager<User> _userManager;
+
+        public ProjectController(IProjectService projectService, UserManager<User> userManager)
         {
             _projectService = projectService;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -25,13 +31,16 @@ namespace TheraLang.Web.Controllers
         /// <param name="project"></param>
         /// <returns>status code</returns>
         [HttpPost("create")]
-        public IActionResult CreateProject([FromBody]Project project)
+        public async Task<IActionResult> CreateProjectAsync(ProjectModel project)
         {
             if(project == null)
             {
                 throw new ArgumentException($"{nameof(project)} cannot be null");
             }
-            _projectService.Add(project);
+            
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Guid userId = user.Id;
+            await _projectService.Add(project, userId);
             return  Ok(project);
         }
 
@@ -49,12 +58,11 @@ namespace TheraLang.Web.Controllers
                 Name = p.Name,
                 DonationsSum = p.Donations.Sum(y => y.Amount),
                 DonationTargetSum = p.DonationTarget,
-                SumLeftToCollect = (p.DonationTarget - p.Donations.Sum(y => y.Amount)),
+                SumLeftToCollect = p.DonationTarget - p.Donations.Sum(y => y.Amount),
                 Description = p.Description,
                 Details = p.Details,
                 ProjectStart = p.ProjectStart,
                 ProjectEnd = p.ProjectEnd
-                
             }).ToList();
 
             return projectModels;

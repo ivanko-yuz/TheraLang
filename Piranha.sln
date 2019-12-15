@@ -79,6 +79,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DataSeeding", "Th
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DLL", "TheraLang.DLL\TheraLang.DLL.csproj", "{A04A0C70-F9CA-4344-B8D5-66FB0874347D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheraLang.Tests", "TheraLang.Tests\TheraLang.Tests.csproj", "{EDE1BDFC-40DE-426F-87D3-917C4370B9F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{A04A0C70-F9CA-4344-B8D5-66FB0874347D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A04A0C70-F9CA-4344-B8D5-66FB0874347D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A04A0C70-F9CA-4344-B8D5-66FB0874347D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDE1BDFC-40DE-426F-87D3-917C4370B9F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE1BDFC-40DE-426F-87D3-917C4370B9F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE1BDFC-40DE-426F-87D3-917C4370B9F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE1BDFC-40DE-426F-87D3-917C4370B9F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +196,7 @@ Global
 		{A52B0CDE-AD56-4B85-9DD1-01B7494D17C9} = {42A64587-89B5-48F2-84D4-85B97F7847F1}
 		{98EB6508-7993-431B-B6BA-4E9EF374F376} = {A82A5922-BF05-4DD7-A2C1-DD22F1AD6A57}
 		{A04A0C70-F9CA-4344-B8D5-66FB0874347D} = {A82A5922-BF05-4DD7-A2C1-DD22F1AD6A57}
+		{EDE1BDFC-40DE-426F-87D3-917C4370B9F6} = {A82A5922-BF05-4DD7-A2C1-DD22F1AD6A57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF88AA05-D127-4707-8214-A230F0DA569B}

@@ -4,6 +4,7 @@ import { Project } from './project';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { ProjectService } from './project.service';
 import { DialogService } from '../shared/services/dialog.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { NotificationService } from '../shared//services/notification.service';
 
 
@@ -14,16 +15,21 @@ import { NotificationService } from '../shared//services/notification.service';
   providers: [ProjectService]
 })
 export class ProjectComponent implements OnInit {
-
   projects: Project[];
 
-  constructor(private httpService: HttpService,
+  constructor(
+    private httpService: HttpService,
     private dialogService: DialogService,
     private service: ProjectService,
-    private notificationService: NotificationService) { }
+    private dialog: MatDialog,
+    private notificationService: NotificationService
+  ) { }
+
 
   ngOnInit() {
-    this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects);
+    this.httpService
+      .getAllProjects()
+      .subscribe((projects: Project[]) => (this.projects = projects));
   }
 
   onCreate() {

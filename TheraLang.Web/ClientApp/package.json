@@ -23,6 +23,8 @@
     "@angular/router": "~8.2.11",
     "@material/fab": "^3.2.0",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
+    "@ngx-translate/core": "^11.0.1",
+    "@ngx-translate/http-loader": "^4.0.0",
     "@types/jquery": "^3.3.31",
     "bootstrap": "^4.3.1",
     "gulp": "^4.0.2",
@@ -38,7 +40,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.18",
+    "@angular-devkit/build-angular": "^0.803.20",
     "@angular/cli": "~8.3.14",
     "@angular/compiler-cli": "~8.2.11",
     "@angular/language-service": "~8.2.11",
