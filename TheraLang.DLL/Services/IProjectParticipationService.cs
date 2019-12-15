@@ -13,5 +13,6 @@ namespace TheraLang.DLL.Services
         Task CreateRequest(Guid userId, int projectId);
 
         Task ChangeStatusAsync(int participantId, ProjectParticipationStatus status);
+
     }
 }

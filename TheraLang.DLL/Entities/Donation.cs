@@ -7,9 +7,13 @@ namespace TheraLang.DLL.Entities
     {
         public int Id { get; set; }
 
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
 
         public virtual Project Project { get; set; }
+        
+        public int? SocietyId { get; set;}
+
+        public virtual Society Society { get; set; }
 
         public string DonationId { get; set; }
 

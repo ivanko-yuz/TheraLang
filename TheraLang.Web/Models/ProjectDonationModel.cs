@@ -3,7 +3,7 @@
 
 namespace TheraLang.Web.Models
 {
-    public class ProjectModel
+    public class ProjectDonationModel
     {
         public int Id { get; set; }
 
@@ -19,7 +19,11 @@ namespace TheraLang.Web.Models
 
         public DateTime ProjectEnd { get; set; }
 
-        public decimal DonationAmount { get; set; }
+        public decimal DonationsSum { get; set; }
+
+        public decimal DonationTargetSum { get; set; }
+
+        public decimal SumLeftToCollect { get; set; }
     }
 }
 
