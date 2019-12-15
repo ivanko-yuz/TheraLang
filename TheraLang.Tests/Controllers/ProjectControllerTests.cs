@@ -28,7 +28,7 @@ namespace TheraLang.Tests.Controllers
             };
 
             // act
-            _sutController.CreateProject(model);
+            _sutController.CreateProjectAsync(model);
 
             // assert
             _projectServiceMock.Verify(mock => mock.Add(It.IsAny<ProjectModel>(), 1), Times.Once);
