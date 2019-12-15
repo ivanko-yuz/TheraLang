@@ -47,7 +47,9 @@ namespace TheraLang.Web.Controllers
             {
                 Id = p.Id,
                 Name = p.Name,
-                DonationSum = p.Donations.Sum(y => y.Amount),
+                DonationsSum = p.Donations.Sum(y => y.Amount),
+                DonationTargetSum = p.DonationTarget,
+                SumLeftToCollect = (p.DonationTarget - p.Donations.Sum(y => y.Amount)),
                 Description = p.Description,
                 Details = p.Details,
                 ProjectStart = p.ProjectStart,

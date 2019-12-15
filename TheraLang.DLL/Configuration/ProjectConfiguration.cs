@@ -26,6 +26,8 @@ namespace TheraLang.DLL.Configuration
 
             builder.Property(e => e.IsActive);
 
+            builder.Property(e => e.DonationTarget).IsRequired().HasColumnType("decimal(5, 2)");
+
             builder.HasOne(e => e.Type).WithMany(p => p.Projects).HasForeignKey(d => d.TypeId);
 
             builder.HasMany(x => x.ProjectResources).WithOne(i => i.Project).HasForeignKey("ProjectId");

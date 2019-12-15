@@ -23,7 +23,7 @@ namespace TheraLang.DLL.Models
         static public LiqPayCheckoutModel GetLiqPayCheckoutModel(string donationAmount, int? projectId, HttpContext context)
         {
             string donationId = Guid.NewGuid().ToString();
-            var host = $"{context.Request.Scheme}://{context.Request.Host}";
+            var hostName = $"{context.Request.Scheme}://{context.Request.Host}";
             LiqPayCheckout dataSource = new LiqPayCheckout()
             {
                 PublicKey = _publicKey,
@@ -33,7 +33,7 @@ namespace TheraLang.DLL.Models
                 Currency = "UAH",
                 Description = "Благодійність",
                 ResultUrl = $"http://localhost:4200/transaction/{donationId}",
-                ServerUrl = $"http://0e8560c5.ngrok.io/api/donations/{donationId}/{projectId}",
+                ServerUrl = $"http://048716bc.ngrok.io/api/donations/{donationId}/{projectId}",
                 Language = "uk"
             };
 

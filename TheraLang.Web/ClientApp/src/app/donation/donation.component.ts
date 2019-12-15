@@ -22,7 +22,6 @@ export class DonationComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.projectId = +params.get('projectId');
-      debugger
       this.donationService.getSocietyDonationSum().subscribe((societyDontion: SocietyDonation) => this.societyDontion = societyDontion);
     });
   }
@@ -37,7 +36,6 @@ export class DonationComponent implements OnInit {
     else {
     this.donationService.getSocietyCheckoutModel(this.donationAmount).subscribe((checkoutModel: LiqpayCheckout) => {
       this.donationModel = checkoutModel;
-      debugger
       window.location.replace(`${liqpayCheckoutUrl}?data=${this.donationModel.data}&signature=${this.donationModel.signature}`);
     });
   }

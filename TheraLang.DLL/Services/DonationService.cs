@@ -58,7 +58,10 @@ namespace TheraLang.DLL.Services
                 Donation donation = JsonConvert.DeserializeObject<Donation>(decodedString);
                 donation.ProjectId = projectId;
                 donation.DonationId = donationId;
-                donation.SocietyId = _unitOfWork.Repository<Society>().Get().FirstOrDefault().Id;
+                if (projectId == null)
+                {
+                    donation.SocietyId = _unitOfWork.Repository<Society>().Get().FirstOrDefault().Id;
+                }
                 await _unitOfWork.Repository<Donation>().Add(donation);
                 await _unitOfWork.SaveChangesAsync();
             }

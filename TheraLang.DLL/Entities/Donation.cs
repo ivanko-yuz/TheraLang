@@ -11,7 +11,7 @@ namespace TheraLang.DLL.Entities
 
         public virtual Project Project { get; set; }
         
-        public int SocietyId { get; set;}
+        public int? SocietyId { get; set;}
 
         public virtual Society Society { get; set; }
 

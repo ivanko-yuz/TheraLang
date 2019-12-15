@@ -8,6 +8,8 @@ export class Project {
         public projectEnd?: Date,
         public type?: string,
         public isActive?: boolean,
-        public donationSum?: number
+        public donationsSum?: number,
+        public donationTargetSum?: number,
+        public sumLeftToCollect?: number
         ) { }
 }
