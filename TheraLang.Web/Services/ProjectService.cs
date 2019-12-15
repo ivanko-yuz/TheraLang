@@ -24,7 +24,7 @@ namespace TheraLang.Web.Services
             return _uow.Repository<Project>().Get().Include(x=>x.Donations);
         }
 
-        public async Task Add(ProjectModel projectModel, int userId)
+        public async Task Add(ProjectModel projectModel, Guid userId)
         {
             var newProject = new Project {
                 Name = projectModel.Name,
@@ -37,7 +37,7 @@ namespace TheraLang.Web.Services
             var newParticipant = new ProjectParticipation
             {
                 Role = DLL.Enums.MemberRole.ProjectOwner,
-                UserId = userId,
+                CreatedById = userId,
                 Status = DLL.Enums.ProjectParticipationStatus.Approved,
                 Project = newProject,
             };

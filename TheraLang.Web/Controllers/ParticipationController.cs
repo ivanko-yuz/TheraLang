@@ -6,6 +6,7 @@ using TheraLang.DLL.Entities;
 using TheraLang.DLL.Enums;
 using TheraLang.DLL.Services;
 using Microsoft.AspNetCore.Identity;
+using Piranha.AspNetCore.Identity.Data;
 
 namespace TheraLang.Web.Controllers
 {
@@ -13,15 +14,14 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ParticipationController : ControllerBase
     {
-        public ParticipationController(IProjectParticipationService service,
-            UserManager<Piranha.AspNetCore.Identity.Data.User> manager)
+        public ParticipationController(IProjectParticipationService service, UserManager<User> userManager)
         {
             _service = service;
-            _userManager = manager;
+            _userManager = userManager;
         }
 
         private readonly IProjectParticipationService _service;
-        private readonly UserManager<Piranha.AspNetCore.Identity.Data.User> _userManager;
+        private readonly UserManager<User> _userManager;
 
         /// <summary>
         /// Change status of participant
@@ -67,7 +67,8 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"The {nameof(projectId)} can not be 0");
             }
 
-            int userId = _userManager.GetUserAsync(HttpContext.User).Id;
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Guid userId = user.Id;
             await _service.CreateRequest(userId, projectId);
             return Ok();
         }

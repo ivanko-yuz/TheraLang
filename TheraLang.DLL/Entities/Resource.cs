@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using TheraLang.DLL.Piranha.Entities;
 
 namespace TheraLang.DLL.Entities
 {
     public class Resource : BaseEntity
     {
-        public virtual User User { get; set; }
+        public virtual PiranhaUser PiranhaUser { get; set; }
 
         public string Name { get; set; }
 
@@ -18,10 +19,10 @@ namespace TheraLang.DLL.Entities
 
         public virtual ResourceCategory ResourceCategory { get; set; }
 
-        public virtual ICollection<ResourceProject> ResourceToProjects { get; set; }
+        public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
         public Resource()
         {
-            this.ResourceToProjects = new List<ResourceProject>();
+            this.ResourceProjects = new List<ResourceProject>();
         }
     }
 }

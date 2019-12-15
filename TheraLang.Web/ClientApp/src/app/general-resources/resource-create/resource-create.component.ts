@@ -32,10 +32,6 @@ export class ResourceCreateComponent implements OnInit {
         .forEach(controlName => controls[controlName].markAsTouched());
       return;
     }
-    else if (!this.service.resourceForm.get('id').value) {
-      this.service.addResource(this.service.resourceForm.value);
-      this.onClose();
-    }
     else {
       this.service.addResource(this.service.resourceForm.value);
       this.onClose();
