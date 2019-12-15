@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DLL;
 
-namespace MvcWeb.Migrations
+namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     partial class IttmmDbContextModelSnapshot : ModelSnapshot
