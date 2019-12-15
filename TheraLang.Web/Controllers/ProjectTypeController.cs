@@ -70,7 +70,7 @@ namespace TheraLang.Web.Controllers
         /// get all ProjectsTypes
         /// </summary>
         /// <returns>array of ProjectsTypes</returns>
-        [HttpGet]
+        [HttpGet("")]
         public IEnumerable<ProjectType> GetAllTypes()
         {
             return _service.GetAllProjectsType();
