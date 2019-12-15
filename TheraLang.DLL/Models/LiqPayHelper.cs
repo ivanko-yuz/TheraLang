@@ -32,8 +32,8 @@ namespace TheraLang.DLL.Models
                 Amount = Convert.ToDecimal(donationAmount),
                 Currency = "UAH",
                 Description = "Благодійність",
-                ResultUrl = $"http://localhost:4200/transaction/{donationId}",
-                ServerUrl = $"http://048716bc.ngrok.io/api/donations/{donationId}/{projectId}",
+                ResultUrl = $"{hostName}/transaction/{donationId}",
+                ServerUrl = $"{hostName}/api/donations/{donationId}/{projectId}",
                 Language = "uk"
             };
 
