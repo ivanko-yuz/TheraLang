@@ -1,15 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using TheraLang.DLL.Piranha.Configuration;
-using TheraLang.DLL.Piranha.Entities;
 using TheraLang.DLL.Configuration;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Piranha.Configuration;
+using TheraLang.DLL.Piranha.Entities;
 
 namespace TheraLang.DLL
 {
     public class IttmmDbContext : DbContext
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
-        {          
+        {
         }
 
         #region UTTMM_Entities

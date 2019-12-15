@@ -4,7 +4,7 @@ import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectInfoComponent } from './project-info/project-info.component';
 import { ProjectParticipantsComponent } from './project-participants/project-participants.component';
-import {CmsModule} from './cms/cms.module';
+import { CmsModule } from './cms/cms.module';
 import { GeneralResourcesTableComponent } from './general-resources/general-resources-tables/general-resources-table/general-resources-table.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { DonationComponent } from './donation/donation.component';
@@ -14,15 +14,15 @@ import { GeneralResourcesComponent } from './general-resources/general-resources
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'participants', component:ProjectParticipantsComponent },
+  { path: 'participants', component: ProjectParticipantsComponent },
   { path: 'projects/:id', component: ProjectInfoComponent },
   { path: 'projects', component: ProjectComponent },
   { path: 'donation/:projectId', component: DonationComponent },
   { path: 'resources', component: GeneralResourcesTableComponent },
-  { path: 'transaction/:donationId', component:TransactionResultComponent },
+  { path: 'transaction/:donationId', component: TransactionResultComponent },
   { path: 'error', component: ErrorComponent },
-  { path: '**', loadChildren: () => CmsModule},
-  {path: 'projectTypes', component: ProjectTypeComponent}
+  { path: 'projectTypes', component: ProjectTypeComponent },
+  { path: '**', loadChildren: () => CmsModule },
 ];
 
 @NgModule({

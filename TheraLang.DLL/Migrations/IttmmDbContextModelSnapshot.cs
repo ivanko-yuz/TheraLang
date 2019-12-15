@@ -131,8 +131,16 @@ namespace TheraLang.DLL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
                     b.Property<string>("TypeName")
                         .HasMaxLength(500);
+
+                    b.Property<int?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
 
                     b.HasKey("Id");
 

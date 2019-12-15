@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TheraLang.Web.Controllers
 {
-    [Route("api/resource")]
+    [Route("api/resources")]
     [ApiController]
     public class ResourceController : ControllerBase
     {
