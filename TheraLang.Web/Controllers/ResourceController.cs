@@ -7,6 +7,7 @@ using TheraLang.DLL.Entities;
 using TheraLang.DLL.Services;
 using TheraLang.DLL.Models;
 using Microsoft.AspNetCore.Identity;
+using Piranha.AspNetCore.Identity.Data;
 
 namespace TheraLang.Web.Controllers
 {
@@ -14,14 +15,14 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service, UserManager<IdentityUser> manager)
+        public ResourceController(IResourceService service, UserManager<User> userManager)
         {
             _service = service;
-            _userManager = manager;
+            _userManager = userManager;
         }
 
         private readonly IResourceService _service;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
         /// <summary>
         /// create resource
@@ -37,7 +38,8 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(resourceModel)} can not be null");
             }
 
-            int userId = _userManager.GetUserAsync(HttpContext.User).Id;
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Guid userId = user.Id;
             await _service.AddResource(resourceModel, userId);
             return Ok();
         }
@@ -56,7 +58,8 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(resourceModel)} can not be null");
             }
 
-            int userId = _userManager.GetUserAsync(HttpContext.User).Id;
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Guid userId = user.Id;
             await _service.AddResource(resourceModel, userId);
             return Ok();
         }

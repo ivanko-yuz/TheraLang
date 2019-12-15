@@ -40,7 +40,7 @@ namespace TheraLang.DLL.Services
         }
 
 
-        public async Task CreateRequest(int userId, int projectId)
+        public async Task CreateRequest(Guid userId, int projectId)
         {
             try
             {

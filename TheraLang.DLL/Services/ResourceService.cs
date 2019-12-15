@@ -30,7 +30,7 @@ namespace TheraLang.DLL.Services
             }
         }
 
-        public async Task AddResource(ResourceViewModel resourceModel, int userId)
+        public async Task AddResource(ResourceViewModel resourceModel, Guid userId)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace TheraLang.DLL.Services
             }
         }
 
-        public async Task UpdateResource(ResourceViewModel resourceModel, int updatetById)
+        public async Task UpdateResource(ResourceViewModel resourceModel, Guid updatetById)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace TheraLang.DLL.Services
                                        select new Resource
                                        {
                                            Id = res.Id,
-                                           User = res.User,
+                                           PiranhaUser = res.PiranhaUser,
                                            Name = res.Name,
                                            Description = res.Description,
                                            Url = res.Url,
@@ -165,7 +165,7 @@ namespace TheraLang.DLL.Services
                                        select new Resource
                                        {
                                            Id = res.Id,
-                                           User = res.User,
+                                           PiranhaUser = res.PiranhaUser,
                                            Name = res.Name,
                                            Description = res.Description,
                                            Url = res.Url,
