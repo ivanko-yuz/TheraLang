@@ -7,5 +7,6 @@ export const requestUrl = baseUrl + "request";
 export const categoryUrl = baseUrl + "categories";
 export const participationUrl = baseUrl + "participants";
 export const donationUrl = baseUrl + "donation";
-export const projectType = baseUrl + "projectTypes";
+export const projectTypeUrl = baseUrl + "projectTypes";
 export const cmsSitemapUrl = baseUrl + "sitemap";
+export const accountUrl = baseUrl + "account";

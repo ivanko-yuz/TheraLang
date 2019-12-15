@@ -7,7 +7,8 @@ import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dia
 })
 export class DialogService {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,
+   ) { }
 
   openConfirmDialog(msg) {
     return this.dialog.open(ConfirmDialogComponent, {
@@ -26,6 +27,10 @@ export class DialogService {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
     dialogConfig.panelClass = 'form';
-    this.dialog.open(formComponent, dialogConfig)
+    this.dialog.open(formComponent, dialogConfig);
+  }
+
+  closeDialogs(){
+  this.dialog.closeAll();
   }
 }

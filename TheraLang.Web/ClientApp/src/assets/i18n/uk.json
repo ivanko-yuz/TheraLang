@@ -1,0 +1,51 @@
+{
+  "common": {
+    "details": "Деталі",
+    "edit": "Змінити",
+    "wth": "щось там",
+    "validation": {
+      "field-is-required": "Це поле є обов'язковим",
+      "line-too-long": "Стрічка задовга",
+      "line-too-short": "Стрічка закоротка",
+      "confirm": "Підтвердити",
+      "cancel": "Відмінити"
+    }
+  },
+  "components": {
+    "home": {
+      "title": "Головна сторінка"
+    },
+    "projects": {
+      "title": "Проекти",
+      "create": "Створити проект",
+      "delete": "Видалити проект",
+      "donate": "Підтримати",
+      "donated-amount": "Зібрано",
+      "project-starts": "Проект починається Дата початку",
+      "project-ends": "Проект закінчується Дата завершення",
+      "PROJECT-CREATION": "СТВОРЕННЯ ПРОЕКТУ",
+      "PROJECT EDITING": "РЕДАГУВАННЯ ПРОЕКТУ",
+      "name-of-project": "Назва проекту",
+      "description": "Опис",
+      "details": "Деталі",
+      "type": "Тип проекту"
+    },
+    "resources": {
+      "title": "Ресурси"
+    },
+    "participants": {
+      "title": "Запити"
+    },
+    "account": {
+      "signUp": {
+        "title": "Реєстрація"
+      },
+      "signIn": {
+        "title": "Вхід"
+      }
+    },
+    "projectTypes": {
+      "title": "Типи Проектів"
+    }
+  }
+}
