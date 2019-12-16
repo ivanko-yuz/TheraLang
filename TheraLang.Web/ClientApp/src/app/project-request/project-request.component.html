@@ -1,3 +1,13 @@
+<mat-tab-group class="participation-tab" animationDuration="0ms" #tabPosition
+  (selectedTabChange)="changeTab(tabPosition.selectedIndex)">
+  <mat-tab label="Нові"></mat-tab>
+  <mat-tab label="Підтверджені"></mat-tab>
+  <mat-tab label="Відхилені"> </mat-tab>
+</mat-tab-group>
+<!-- <div class="mat-elevation-z8">
+  <table mat-table [ ]="projects" *ngIf="projects.filteredData.length > 0"> -->
+
+
 <div *ngFor="let project of projects">
   <mat-card class="project-card">
     <mat-card-header class="header">

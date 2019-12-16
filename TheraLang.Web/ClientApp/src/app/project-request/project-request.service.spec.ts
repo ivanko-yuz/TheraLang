@@ -1,12 +1,11 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
+import { HttpProjectService } from "./http-project.service";
 
-import { ProjectRequestService } from './project-request.service';
-
-describe('ProjectRequestService', () => {
+describe("ProjectRequestService", () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
-    const service: ProjectRequestService = TestBed.get(ProjectRequestService);
+  it("should be created", () => {
+    const service: HttpProjectService = TestBed.get(HttpProjectService);
     expect(service).toBeTruthy();
   });
 });

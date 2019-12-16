@@ -19,5 +19,6 @@ namespace TheraLang.Web.Services
 
         IEnumerable<Project> GetProjects(int pageNumber, int pageSize);
         IEnumerable<Project> GetAllNewProjects();
+        IEnumerable<Project> GetProjectsByStatus(int status);
     }
 }

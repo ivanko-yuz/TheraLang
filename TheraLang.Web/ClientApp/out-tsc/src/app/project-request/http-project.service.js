@@ -1,7 +1,7 @@
 import { __decorate } from "tslib";
 import { Injectable } from "@angular/core";
 import { projectUrl } from "../shared/api-endpoint.constants";
-let ProjectRequestService = class ProjectRequestService {
+let HttpProjectService = class HttpProjectService {
     constructor(http) {
         this.http = http;
         this.url = projectUrl;
@@ -9,18 +9,18 @@ let ProjectRequestService = class ProjectRequestService {
     getAllProjectParticipants() {
         return this.http.get(this.url);
     }
-    GetStatusChangetOfProjects(status) {
+    GetProjectsByStatus(status) {
         return this.http.get(this.url + "/newstatus/" + status);
     }
-    Approved(id) {
+    Approve(id) {
         return this.http.get(this.url + "/approve/" + id);
     }
-    Rejected(id) {
+    Reject(id) {
         return this.http.get(this.url + "/reject/" + id);
     }
 };
-ProjectRequestService = __decorate([
+HttpProjectService = __decorate([
     Injectable()
-], ProjectRequestService);
-export { ProjectRequestService };
-//# sourceMappingURL=project-request.service.js.map
+], HttpProjectService);
+export { HttpProjectService };
+//# sourceMappingURL=http-project.service.js.map

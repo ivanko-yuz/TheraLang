@@ -52,6 +52,7 @@ import { ProjectParticipationService } from "./project-participants/project-part
 import { ProjectTypeService } from "./project-info/resources-table-for-project/project-type/project-type.service";
 import { DonationService } from "./donation/donation.service";
 import { ProjectRequestComponent } from "./project-request/project-request.component";
+import { HttpProjectService } from "./project-request/http-project.service";
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -152,7 +153,8 @@ AppModule = __decorate([
             ResourceCategoriesService,
             ProjectParticipationService,
             ProjectTypeService,
-            DonationService
+            DonationService,
+            HttpProjectService
         ],
         bootstrap: [AppComponent]
     })

@@ -18,7 +18,7 @@ namespace TheraLang.Web.Services
 
         private readonly IUnitOfWork _uow;
 
-        public IEnumerable<Project> GetAllProjects() //todo show only new on requests
+        public IEnumerable<Project> GetAllProjects()
         {
             return _uow.Repository<Project>().Get().Include(x=>x.Donations);
         }
@@ -38,6 +38,13 @@ namespace TheraLang.Web.Services
                                        ProjectEnd = p.ProjectEnd
                                    });
             return joinedProjects;
+        }
+
+        public IEnumerable<Project> GetProjectsByStatus(int status)
+        {
+            var projects = _uow.Repository<Project>().Get().Where(i => i.StatusId == (ProjectStatus) status).ToArray();
+
+            return projects;
         }
 
         public async Task Add(Project projectViewModel)
@@ -79,8 +86,8 @@ namespace TheraLang.Web.Services
                 {
                     throw new NullReferenceException($"{ nameof(project) } cannot be null");
                 }
-            project.StatusId = status;
-            _uow.Repository<Project>().Update(project);
+                project.StatusId = status;
+                _uow.Repository<Project>().Update(project);
                 
                 await _uow.SaveChangesAsync();          
         }

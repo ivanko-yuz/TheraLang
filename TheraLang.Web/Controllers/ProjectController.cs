@@ -116,5 +116,12 @@ namespace TheraLang.Web.Controllers
                 await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
                 return Ok(ProjectStatus.Rejected);
             }
-        }
+
+            [HttpGet("newstatus/{status}")]
+            public IActionResult GetProjectsByStatus(int status)
+            {
+                var projects = _projectService.GetProjectsByStatus(status);
+                return Ok(projects);
+            }
+    }
     }

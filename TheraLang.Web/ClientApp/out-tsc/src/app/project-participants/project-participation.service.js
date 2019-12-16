@@ -1,6 +1,6 @@
 import { __decorate } from "tslib";
-import { Injectable } from '@angular/core';
-import { participationUrl } from '../shared/api-endpoint.constants';
+import { Injectable } from "@angular/core";
+import { participationUrl } from "../shared/api-endpoint.constants";
 let ProjectParticipationService = class ProjectParticipationService {
     constructor(http) {
         this.http = http;
@@ -10,15 +10,17 @@ let ProjectParticipationService = class ProjectParticipationService {
         return this.http.get(this.url);
     }
     changeParticipationStatus(requestId, requestStatus) {
-        return this.http.put(this.url + '/' + requestId, requestStatus);
+        return this.http.put(this.url + "/" + requestId, requestStatus);
     }
     createParticipRequest(projectId) {
-        return this.http.post(this.url + '/' + 'create', projectId, { observe: 'response' });
+        return this.http.post(this.url + "/" + "create", projectId, {
+            observe: "response"
+        });
     }
 };
 ProjectParticipationService = __decorate([
     Injectable({
-        providedIn: 'root'
+        providedIn: "root"
     })
 ], ProjectParticipationService);
 export { ProjectParticipationService };
