@@ -45,7 +45,7 @@ namespace TheraLang.DLL.Services
             }
         }
 
-        public async Task Update(ProjectType projectType, int userId)
+        public async Task Update(ProjectType projectType, Guid userId)
         {
             try
             {

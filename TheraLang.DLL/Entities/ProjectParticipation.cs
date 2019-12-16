@@ -1,15 +1,12 @@
-﻿
-
-using System;
 using TheraLang.DLL.Enums;
+using TheraLang.DLL.Piranha.Entities;
 
 namespace TheraLang.DLL.Entities
 {
     public class ProjectParticipation : BaseEntity
     {
-        public Guid UserId { get; set; }
-        public virtual User User { get; set; }
-        
+        public virtual PiranhaUser PiranhaUser { get; set; }
+
         public MemberRole Role { get; set; }
 
         public ProjectParticipationStatus Status { get; set; }

@@ -38,7 +38,7 @@ namespace TheraLang.Web.Services
             var newParticipant = new ProjectParticipation
             {
                 Role = DLL.Enums.MemberRole.ProjectOwner,
-                UserId = userId,
+                CreatedById = userId,
                 Status = DLL.Enums.ProjectParticipationStatus.Approved,
                 Project = newProject,
             };
@@ -46,6 +46,9 @@ namespace TheraLang.Web.Services
             {
                 await _uow.Repository<Project>().Add(newProject);
                 //await _uow.SaveChangesAsync();
+                await _uow.Repository<ProjectParticipation>().Add(newParticipant);
+                await _uow.SaveChangesAsync();
+                // newParticipant.ProjectId = newProject.Id;
                 await _uow.Repository<ProjectParticipation>().Add(newParticipant);
                 await _uow.SaveChangesAsync();
             }

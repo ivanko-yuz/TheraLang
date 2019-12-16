@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.Web.Models;
 using TheraLang.Web.Services;
+using Microsoft.AspNetCore.Identity;
+using Piranha.AspNetCore.Identity.Data;
+
 
 
 
@@ -49,13 +52,16 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of Projects</returns>
         [HttpGet]
-        public IEnumerable<ProjectModel> GetAllProjects()
+        public IEnumerable<ProjectDonationModel> GetAllProjects()
         {
-            var projectModels = _projectService.GetAllProjects().Select(p => new ProjectModel
+            List<ProjectDonationModel> projectModels = new List<ProjectDonationModel>();
+            projectModels = _projectService.GetAllProjects().Select(p => new ProjectDonationModel
             {
                 Id = p.Id,
                 Name = p.Name,
-                DonationAmount = p.Donations.Sum(y => y.Amount),
+                DonationsSum = p.Donations.Sum(y => y.Amount),
+                DonationTargetSum = p.DonationTarget,
+                SumLeftToCollect = p.DonationTarget - p.Donations.Sum(y => y.Amount),
                 Description = p.Description,
                 Details = p.Details,
                 ProjectStart = p.ProjectStart,
