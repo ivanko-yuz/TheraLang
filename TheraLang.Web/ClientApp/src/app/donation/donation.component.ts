@@ -4,6 +4,8 @@ import { DonationService } from './donation.service';
 import { ActivatedRoute } from '@angular/router';
 import { liqpayCheckoutUrl } from '../shared/api-endpoint.constants';
 import { SocietyDonation } from './society-donation';
+import { FormControl, Validators } from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 @Component({
   selector: 'app-donation',
@@ -25,6 +27,11 @@ export class DonationComponent implements OnInit {
       this.donationService.getSocietyDonationSum().subscribe((societyDontion: SocietyDonation) => this.societyDontion = societyDontion);
     });
   }
+
+  a: FormControl = new FormControl('');
+  reg = /^[0-9]{10,10}$/;
+  amount:FormControl = new FormControl('',[Validators.pattern(this.reg)]);
+  matcher = new ErrorStateMatcher();
 
   checkout() {
     if(this.projectId !== 0) {
