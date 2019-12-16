@@ -1,5 +1,9 @@
-<mat-tab-group class="participation-tab" animationDuration="0ms" #tabPosition
-  (selectedTabChange)="changeTab(tabPosition.selectedIndex)">
+<mat-tab-group
+  class="participation-tab"
+  animationDuration="0ms"
+  #tabPosition
+  (selectedTabChange)="changeTab(tabPosition.selectedIndex)"
+>
   <mat-tab label="Нові"></mat-tab>
   <mat-tab label="Підтверджені"></mat-tab>
   <mat-tab label="Відхилені"> </mat-tab>
@@ -7,31 +11,48 @@
 <!-- <div class="mat-elevation-z8">
   <table mat-table [ ]="projects" *ngIf="projects.filteredData.length > 0"> -->
 
-
 <div *ngFor="let project of projects">
   <mat-card class="project-card">
-    <mat-card-header class="header">
-    </mat-card-header>
-    <mat-card-title>{{project?.name}}</mat-card-title>
-    <mat-card-subtitle>Ukraine, id - {{project?.id}}</mat-card-subtitle>
-    <img class="project-image" mat-card-image
+    <mat-card-header class="header"> </mat-card-header>
+    <mat-card-title>{{ project?.name }}</mat-card-title>
+    <mat-card-subtitle>Ukraine, id - {{ project?.id }}</mat-card-subtitle>
+    <img
+      class="project-image"
+      mat-card-image
       src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg"
-      alt="">
+      alt=""
+    />
     <mat-card-content>
       <div class="project-info">
-        {{project?.description}}
-        <p>Проект починається: {{project?.projectStart | date: 'dd/MM/yyyy'}}</p>
-        <p>Проект закінчується: {{project?.projectEnd | date: 'dd/MM/yyyy'}}</p>
+        {{ project?.description }}
+        <p>
+          Проект починається: {{ project?.projectStart | date: "dd/MM/yyyy" }}
+        </p>
+        <p>
+          Проект закінчується: {{ project?.projectEnd | date: "dd/MM/yyyy" }}
+        </p>
       </div>
     </mat-card-content>
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
-      <span class="aproveButton">
-        <button mat-stroked-button (click)="changeStatus('approved', project)">Прийняти</button>
-      </span>
-      <span class="rejectButton">
-        <button mat-stroked-button (click)="changeStatus('rejected', project)">Відхилити</button>
-      </span>
+      <div *ngIf="showActionButtons">
+        <span class="aproveButton">
+          <button
+            mat-stroked-button
+            (click)="changeStatus('approved', project)"
+          >
+            Прийняти
+          </button>
+        </span>
+        <span class="rejectButton">
+          <button
+            mat-stroked-button
+            (click)="changeStatus('rejected', project)"
+          >
+            Відхилити
+          </button>
+        </span>
+      </div>
     </mat-card-actions>
   </mat-card>
 </div>

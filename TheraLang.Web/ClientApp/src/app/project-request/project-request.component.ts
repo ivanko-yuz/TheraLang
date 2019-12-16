@@ -12,6 +12,7 @@ import { ProjectStatusRequest } from "../shared/enums/project-status-request";
 export class ProjectRequestComponent implements OnInit {
   projects: Project[];
   projectService: HttpProjectService;
+  showActionButtons: boolean = true;
 
   constructor(
     private http: HttpService,
@@ -20,8 +21,12 @@ export class ProjectRequestComponent implements OnInit {
 
   changeStatus(status: string, project: Project) {
     status === "approved"
-      ? this.projectRequestService.Approve(project.id).subscribe(data => this.loadNewProjects())
-      : this.projectRequestService.Reject(project.id).subscribe(data => this.loadNewProjects());
+      ? this.projectRequestService
+          .Approve(project.id)
+          .subscribe(data => this.loadNewProjects())
+      : this.projectRequestService
+          .Reject(project.id)
+          .subscribe(data => this.loadNewProjects());
   }
 
   ngOnInit() {
@@ -38,14 +43,17 @@ export class ProjectRequestComponent implements OnInit {
 
   changeTab(tabPosition: number) {
     if (tabPosition === 1) {
+      this.showActionButtons = false;
       return this.projectRequestService
         .GetProjectsByStatus(ProjectStatusRequest.Approved)
         .subscribe((projects: Project[]) => (this.projects = projects));
     } else if (tabPosition === 2) {
+      this.showActionButtons = false;
       return this.projectRequestService
         .GetProjectsByStatus(ProjectStatusRequest.Rejected)
         .subscribe((projects: Project[]) => (this.projects = projects));
     } else {
+      this.showActionButtons = true;
       return this.http
         .getAllNewProjects()
         .subscribe((projects: Project[]) => (this.projects = projects));
