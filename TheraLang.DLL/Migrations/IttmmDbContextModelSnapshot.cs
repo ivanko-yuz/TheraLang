@@ -15,7 +15,7 @@ namespace TheraLang.DLL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -140,16 +140,8 @@ namespace TheraLang.DLL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreatedById");
-
-                    b.Property<DateTime>("CreatedDateUtc");
-
                     b.Property<string>("TypeName")
                         .HasMaxLength(500);
-
-                    b.Property<int?>("UpdatedById");
-
-                    b.Property<DateTime?>("UpdatedDateUtc");
 
                     b.HasKey("Id");
 
@@ -271,38 +263,6 @@ namespace TheraLang.DLL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Society");
-                });
-
-            modelBuilder.Entity("TheraLang.DLL.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<bool>("IsEmailConfirmed");
-
-                    b.Property<bool>("IsPhoneNumberConfirmed");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<string>("PhooneNumber")
-                        .IsRequired();
-
-                    b.Property<DateTime>("RegistrationDate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Piranha.Entities.PiranhaAlias", b =>
