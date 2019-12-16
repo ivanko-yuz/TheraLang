@@ -2,7 +2,7 @@
 
 namespace TheraLang.DLL.Entities
 {
-    public class ProjectType : BaseEntity
+    public class ProjectType
     {
         public int Id { get; set; }
 

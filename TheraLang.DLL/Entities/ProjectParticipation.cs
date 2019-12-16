@@ -1,12 +1,13 @@
 ﻿
 
+using System;
 using TheraLang.DLL.Enums;
 
 namespace TheraLang.DLL.Entities
 {
     public class ProjectParticipation : BaseEntity
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public virtual User User { get; set; }
         
         public MemberRole Role { get; set; }

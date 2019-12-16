@@ -7,8 +7,8 @@
     <mat-card-header class="header">
       <mat-card-title>
         <a mat-button class="donate-button" [routerLink]="['/donation', project.id]">{{'components.projects.donate'|translate}}</a>
-        <div>{{'donated-amount'|translate}}:
-          <h3 class="donation-amount">{{project?.donationAmount | number : '1.2-2'}} грн</h3>
+        <div>{{'components.projects.donated-amount'|translate}}:
+          <h3 class="donation-amount">{{project.donationAmount | number : '1.2-2'}} грн</h3>
         </div>
       </mat-card-title>
     </mat-card-header>
@@ -26,9 +26,9 @@
     </mat-card-content>
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
-      <a mat-stroked-button [routerLink]="['/projects', project.id]">{{'common:details'|translate}}</a>
-      <button mat-stroked-button (click)="onEdit(project)">{{'common:edit'|translate}}</button>
-      <button mat-stroked-button (click)="onDelete(project.id)">{{'common:delete'|translate}}</button>
+      <a mat-stroked-button [routerLink]="['/projects', project.id]">{{'common.details'|translate}}</a>
+      <button mat-stroked-button (click)="onEdit(project)">{{'common.edit'|translate}}</button>
+      <button mat-stroked-button (click)="onDelete(project.id)">{{'components.projects.delete'|translate}}</button>
     </mat-card-actions>
   </mat-card>
 </div>

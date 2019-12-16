@@ -43,26 +43,38 @@ export class ProjectService {
 
   addProject(project: Project) {
     this.httpService.createProject(project).subscribe(
-      (msg: string) => {
-       msg = 'Проект створено';
-       this.notificationService.success(msg)
-      },
-      (error) => {
-         console.log(error);
-         this.notificationService.warn('Помилка при створенні проекту');
+      (msg: Project) => {
+        console.log(msg);
       });
+      //   msg = 'Проект оновлено';
+      //   this.notificationService.success(msg);
+      //  },
+      //  (error) => {
+      //     console.log(error);
+      //     this.notificationService.warn('Помилка при оновленні проекту')
+      //  });
+      // (msg: string) => {
+      //  msg = 'Проект створено';
+      //  this.notificationService.success(msg)
+      // },
+      // (error) => {
+      //    console.log(error);
+      //    this.notificationService.warn('Помилка при створенні проекту');
+      // });
   }
 
   editProject(project: Project) {
     this.httpService.updateProject(project).subscribe(
-      (msg: string) => {
-        msg = 'Проект оновлено';
-        this.notificationService.success(msg);
-       },
-       (error) => {
-          console.log(error);
-          this.notificationService.warn('Помилка при оновленні проекту')
-       });
+      (msg: Project) => {
+        console.log(msg);
+      });
+      //   msg = 'Проект оновлено';
+      //   this.notificationService.success(msg);
+      //  },
+      //  (error) => {
+      //     console.log(error);
+      //     this.notificationService.warn('Помилка при оновленні проекту')
+      //  });
   }
 
   getProjectTypes(){

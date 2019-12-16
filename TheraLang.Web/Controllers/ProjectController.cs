@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.Web.Models;
 using TheraLang.Web.Services;
+
 
 
 namespace TheraLang.Web.Controllers
@@ -14,10 +16,13 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        private readonly IProjectService _projectService; 
-        public ProjectController(IProjectService projectService)
+        private readonly IProjectService _projectService;
+        private readonly UserManager<Piranha.AspNetCore.Identity.Data.User> _userManager;
+
+        public ProjectController(IProjectService projectService, UserManager<Piranha.AspNetCore.Identity.Data.User> userManager)
         {
             _projectService = projectService;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -26,13 +31,16 @@ namespace TheraLang.Web.Controllers
         /// <param name="project"></param>
         /// <returns>status code</returns>
         [HttpPost("create")]
-        public IActionResult CreateProject(ProjectModel project)
+        public async Task <IActionResult> CreateProject([FromBody]ProjectModel project)
         {
             if(project == null)
             {
                 throw new ArgumentException($"{nameof(project)} cannot be null");
             }
-            _projectService.Add(project, 1);
+            var userName = User.Identity.Name;
+            Piranha.AspNetCore.Identity.Data.User user = await _userManager.FindByNameAsync(userName);
+            Guid userId = user.Id;
+            await _projectService.Add(project, userId);
             return  Ok(project);
         }
 

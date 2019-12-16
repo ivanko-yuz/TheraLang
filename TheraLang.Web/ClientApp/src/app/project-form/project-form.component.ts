@@ -23,7 +23,11 @@ export class ProjectFormComponent implements OnInit {
   ngOnInit() {
     this.dateAdapter.setLocale(this.translate.currentLang),
     this.dateAdapter.getFirstDayOfWeek = () => { return 1; },
-    this.service.getProjectTypes().subscribe((projectTypes: ProjectType[]) => this.projectTypes = projectTypes);
+    this.service.getProjectTypes().subscribe((projectTypes: ProjectType[]) => {
+      this.projectTypes = projectTypes;
+      console.log(this.projectTypes);
+    });
+    
   }
   onClose() {
     this.service.form.reset();

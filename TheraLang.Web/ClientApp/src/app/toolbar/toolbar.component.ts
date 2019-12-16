@@ -68,4 +68,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   onLogin(){
    this.dialog.openFormDialog(LoginComponent);
   }
+
+  onTest(){
+    this.userService.test();
+  }
 }
