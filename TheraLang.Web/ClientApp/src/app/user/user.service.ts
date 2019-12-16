@@ -35,4 +35,8 @@ export class UserService {
        },
     )
   }
+
+    isAuthenticated(){
+    return this.http.get(this.baseUrl + '/isAuthenticated');
+  }
 }

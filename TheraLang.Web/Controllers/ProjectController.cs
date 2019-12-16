@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.Web.Models;
 using TheraLang.Web.Services;
-using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
 
 
@@ -20,9 +19,9 @@ namespace TheraLang.Web.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly IProjectService _projectService;
-        private readonly UserManager<Piranha.AspNetCore.Identity.Data.User> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public ProjectController(IProjectService projectService, UserManager<Piranha.AspNetCore.Identity.Data.User> userManager)
+        public ProjectController(IProjectService projectService, UserManager<User> userManager)
         {
             _projectService = projectService;
             _userManager = userManager;
@@ -40,8 +39,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(project)} cannot be null");
             }
-            var userName = User.Identity.Name;
-            Piranha.AspNetCore.Identity.Data.User user = await _userManager.FindByNameAsync(userName);
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
             Guid userId = user.Id;
             await _projectService.Add(project, userId);
             return  Ok(project);

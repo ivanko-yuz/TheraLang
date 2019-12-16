@@ -24,6 +24,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   projectParticipation: ProjectParticipationRequest[];
   toolbarItems: ToolbarItem[] = [];
   private subscription = new Subscription();
+  isAuthinticated: boolean;
 
   constructor(
     private participantService: ProjectParticipationService,
@@ -43,7 +44,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     this.subscription.add(subscription);
+    this.userService.isAuthenticated().subscribe((isAuthinticated: boolean) => (this.isAuthinticated = isAuthinticated));
   }
+  
 
   ngAfterViewInit(): void {
     this.eventService.childEventListner().subscribe(click => {
@@ -72,4 +75,5 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   onTest(){
     this.userService.test();
   }
+  isauth:boolean;
 }
