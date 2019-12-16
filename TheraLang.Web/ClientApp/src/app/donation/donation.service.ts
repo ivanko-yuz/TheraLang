@@ -8,12 +8,20 @@ export class DonationService {
 
     constructor(private http: HttpClient) { }
 
-    getCheckoutModel(donationAmount: string, projectId: number) {
-        return this.http.get(`${donationUrl}/${donationAmount}/${projectId}`);
+    getProjectCheckoutModel(donationAmount: string, projectId: number) {
+        return this.http.get(`${donationUrl}/${donationAmount}/${projectId}`);           
     }
 
-    getLiqpayResponse(donationId: string) {
-        return this.http.get(`${donationUrl}/${donationId}`);
+    getSocietyCheckoutModel(donationAmount: string) {
+        return this.http.get(`${donationUrl}/${donationAmount}`);           
+    }
+
+    getDonationTransaction(donationId: string) {
+        return this.http.get(`${donationUrl}/transaction/${donationId}`);
+    }
+
+    getSocietyDonationSum() {
+        return this.http.get(`${donationUrl}/society`)
 
     }
 

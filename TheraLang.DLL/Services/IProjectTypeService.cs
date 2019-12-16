@@ -1,6 +1,7 @@
 ﻿using TheraLang.DLL.Entities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System;
 
 namespace TheraLang.DLL.Services
 {
@@ -10,7 +11,7 @@ namespace TheraLang.DLL.Services
 
         Task Remove(int id);
 
-        Task Update(ProjectType projectType, int userId);
+        Task Update(ProjectType projectType, Guid userId);
 
         IEnumerable<ProjectType> GetAllProjectsType();
 

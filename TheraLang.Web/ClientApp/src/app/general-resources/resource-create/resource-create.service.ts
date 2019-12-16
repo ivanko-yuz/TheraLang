@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Resource } from '../resource-models/resource';
-import { ResourceCategory } from '../resource-models/resource-category';
 import { NotificationService } from '../../shared/services/notification.service';
 import { resourсeUrl, categoryUrl } from '../../shared/api-endpoint.constants';
 import { HttpClient } from '@angular/common/http';
@@ -11,9 +10,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ResourceCreateService {
 
-//   private allCategories : ResourceCategory[] = [];
-  private resourceUrl = resourсeUrl + '/';
-  private categoryUrl = categoryUrl + '/';
+  private resourceUrl = resourсeUrl;
+  private categoryUrl = categoryUrl;
 
   constructor(private formBuilder : FormBuilder,
       private notificationService : NotificationService,
@@ -42,15 +40,15 @@ export class ResourceCreateService {
   }
 
   postResource(resource : Resource){
-      return this.http.post(this.resourceUrl + 'create', resource);
+      return this.http.post(this.resourceUrl +'/' + 'create', resource);
   }
 
   putResource(resource : Resource){
-      return this.http.put(this.resourceUrl + 'update', resource);
+      return this.http.put(this.resourceUrl +'/' + 'update', resource);
   }
 
   getCategories(){
-      return this.http.get(this.categoryUrl + 'get');
+      return this.http.get(this.categoryUrl +'/' + 'get');
   }
 
   populateForm(resource){
