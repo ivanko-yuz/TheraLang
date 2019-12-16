@@ -24,7 +24,7 @@ namespace TheraLang.DLL.Entities
         public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
         public Resource()
         {
-            this.ResourceToProjects = new List<ResourceProject>();
+            this.ResourceProjects = new List<ResourceProject>();
             this.ResourceAttachment = new List<ResourceAttachment>();
         }        
     }
