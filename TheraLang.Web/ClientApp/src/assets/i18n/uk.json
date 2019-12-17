@@ -9,7 +9,9 @@
       "line-too-short": "Стрічка закоротка",
       "confirm": "Підтвердити",
       "cancel": "Відмінити"
-    }
+    },
+    "deleted-successfully": "Видалено успішно!",
+    "r-u-sure": "Ви впевнені?"
   },
   "components": {
     "home": {
