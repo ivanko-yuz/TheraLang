@@ -45,7 +45,6 @@ namespace TheraLang.Web.Services
             {
                 await _uow.Repository<Project>().Add(newProject);
                 await _uow.SaveChangesAsync();
-                newParticipant.ProjectId = newProject.Id;
                 await _uow.Repository<ProjectParticipation>().Add(newParticipant);
                 await _uow.SaveChangesAsync();
             }

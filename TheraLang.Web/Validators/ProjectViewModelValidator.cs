@@ -13,7 +13,8 @@ namespace TheraLang.Web.Validators
         public ProjectModelValidator()
         {
             ValidateStringLength(p => p.Name, 3, 30);
-            ValidateStringLength(p => p.Type, 3, 30);
+            RuleFor(p => p.TypeId).GreaterThan(-1)
+               .WithMessage("");
         }
 
         private void ValidateStringLength(Expression<Func<ProjectModel, string>> expression, int minLength, int maxLength)
