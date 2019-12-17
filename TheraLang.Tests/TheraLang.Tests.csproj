@@ -17,4 +17,8 @@
     <ProjectReference Include="..\TheraLang.Web\TheraLang.Web.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

@@ -10,8 +10,8 @@ using TheraLang.DLL;
 namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    [Migration("20191217155156_ChangedPrecisionDonationTarget")]
-    partial class ChangedPrecisionDonationTarget
+    [Migration("20191217174624_AddSocietyEntity")]
+    partial class AddSocietyEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

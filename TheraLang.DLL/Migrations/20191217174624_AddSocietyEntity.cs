@@ -2,10 +2,18 @@
 
 namespace TheraLang.DLL.Migrations
 {
-    public partial class ChangedPrecisionDonationTarget : Migration
+    public partial class AddSocietyEntity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "ReceiverCommission",
+                table: "Donations");
+
+            migrationBuilder.DropColumn(
+                name: "TransactionId",
+                table: "Donations");
+
             migrationBuilder.AlterColumn<decimal>(
                 name: "DonationTarget",
                 table: "Projects",
@@ -40,6 +48,19 @@ namespace TheraLang.DLL.Migrations
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "decimal(18, 2)");
+
+            migrationBuilder.AddColumn<decimal>(
+                name: "ReceiverCommission",
+                table: "Donations",
+                type: "decimal(5, 2)",
+                nullable: false,
+                defaultValue: 0m);
+
+            migrationBuilder.AddColumn<int>(
+                name: "TransactionId",
+                table: "Donations",
+                nullable: false,
+                defaultValue: 0);
         }
     }
 }
