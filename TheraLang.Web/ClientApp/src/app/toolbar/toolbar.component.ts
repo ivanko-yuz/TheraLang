@@ -1,5 +1,4 @@
 import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
-import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from '../project-participants/project-participation-request';
 import { EventService } from '../project-participants/event-service';
 import {SiteMapService} from '../cms/services/site-map.service';
@@ -24,6 +23,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   projectParticipation: ProjectParticipationRequest[];
   toolbarItems: ToolbarItem[] = [];
   private subscription = new Subscription();
+  isAuthinticated: boolean;
 
   constructor(
     private participantService: ProjectParticipationService,
@@ -43,7 +43,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     this.subscription.add(subscription);
+    this.userService.isAuthenticated().subscribe((isAuthinticated: boolean) => (this.isAuthinticated = isAuthinticated));
   }
+  
 
   ngAfterViewInit(): void {
     this.eventService.childEventListner().subscribe(click => {

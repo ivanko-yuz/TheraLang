@@ -1,3 +1,4 @@
+import { ProjectStatusRequest } from "../shared/enums/project-status-request";
 export class Project {
     constructor(
         public id?: number,
@@ -6,10 +7,11 @@ export class Project {
         public details?: string,
         public projectStart?: Date,
         public projectEnd?: Date,
-        public type?: string,
+        public typeId?: number,
         public isActive?: boolean,
         public donationsSum?: number,
         public donationTargetSum?: number,
-        public sumLeftToCollect?: number
+        public sumLeftToCollect?: number,
+        public statusId?: ProjectStatusRequest
         ) { }
 }
