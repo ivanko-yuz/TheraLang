@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace TheraLang.Web.Models
 {
@@ -13,7 +16,6 @@ namespace TheraLang.Web.Models
         public string Description { get; set; }
 
         public string Details { get; set; }
-
         public DateTime ProjectStart { get; set; }
 
         public DateTime ProjectEnd { get; set; }
