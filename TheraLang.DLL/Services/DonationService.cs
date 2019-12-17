@@ -54,8 +54,11 @@ namespace TheraLang.DLL.Services
             try
             {
                 byte[] responseData = Convert.FromBase64String(data);
-                string decodedString = Encoding.UTF8.GetString(responseData);                           
+                string decodedString = Encoding.UTF8.GetString(responseData);
+                var donationModel = JsonConvert.DeserializeObject<Dictionary<string,object>>(decodedString);
+                decimal donationCommission = Convert.ToDecimal(donationModel["receiver_commission"]);
                 Donation donation = JsonConvert.DeserializeObject<Donation>(decodedString);
+                donation.Amount -= donationCommission;
                 donation.ProjectId = projectId;
                 donation.DonationId = donationId;
                 if (projectId == null)

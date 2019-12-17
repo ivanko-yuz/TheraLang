@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DLL;
 
 namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191217142548_DeletUselessPropertiesDonation")]
+    partial class DeletUselessPropertiesDonation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,7 @@ namespace TheraLang.DLL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(5, 2)");
 
                     b.Property<string>("Currency")
                         .IsRequired();
@@ -70,7 +72,7 @@ namespace TheraLang.DLL.Migrations
                         .HasMaxLength(5000);
 
                     b.Property<decimal>("DonationTarget")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(5, 2)");
 
                     b.Property<bool>("IsActive");
 

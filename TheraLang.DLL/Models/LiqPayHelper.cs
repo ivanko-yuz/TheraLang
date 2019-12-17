@@ -33,7 +33,7 @@ namespace TheraLang.DLL.Models
                 Currency = "UAH",
                 Description = "Благодійність",
                 ResultUrl = $"{hostName}/transaction/{donationId}",
-                ServerUrl = $"http://f3c84f67.ngrok.io/api/donations/{donationId}/{projectId}",
+                ServerUrl = $"http://e1ac595c.ngrok.io/api/donations/{donationId}/{projectId}",
                 Language = "uk"
             };
 

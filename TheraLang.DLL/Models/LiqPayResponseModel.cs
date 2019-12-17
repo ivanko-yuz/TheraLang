@@ -1,24 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-
-namespace TheraLang.DLL.Entities
+namespace TheraLang.DLL.Models
 {
-    public class Donation
+    class LiqPayResponseModel
     {
-        public int Id { get; set; }
-
-        public int? ProjectId { get; set; }
-
-        public virtual Project Project { get; set; }
-        
-        public int? SocietyId { get; set;}
-
-        public virtual Society Society { get; set; }
-
-        public string DonationId { get; set; }
-
         [JsonProperty("status")]
-        public string Status { get; set; }      
+        public string Status { get; set; }
 
         [JsonProperty("amount")]
         public decimal Amount { get; set; }
@@ -32,6 +19,7 @@ namespace TheraLang.DLL.Entities
         [JsonProperty("liqpay_order_id")]
         public string LiqpayOrderId { get; set; }
 
-
+        [JsonProperty("receiver_commission")]
+        public decimal ReceiverCommission { get; set; }
     }
 }
