@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DLL;
 
 namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191216172328_Donation")]
+    partial class Donation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,10 +44,6 @@ namespace TheraLang.DLL.Migrations
 
                     b.Property<decimal>("ReceiverCommission")
                         .HasColumnType("decimal(5, 2)");
-
-                    b.Property<int?>("SocietyId")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(null);
 
                     b.Property<int?>("SocietyId")
                         .ValueGeneratedOnAdd()
@@ -247,8 +245,6 @@ namespace TheraLang.DLL.Migrations
 
                     b.ToTable("Society");
                 });
-
-          
 
             modelBuilder.Entity("TheraLang.DLL.Piranha.Entities.PiranhaAlias", b =>
                 {

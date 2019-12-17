@@ -4,6 +4,7 @@ import { DonationService } from './donation.service';
 import { ActivatedRoute } from '@angular/router';
 import { liqpayCheckoutUrl } from '../shared/api-endpoint.constants';
 import { SocietyDonation } from './society-donation';
+import { SocietyDonation } from './society-donation';
 import { FormControl, Validators } from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
