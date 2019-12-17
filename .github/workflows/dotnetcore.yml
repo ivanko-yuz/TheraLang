@@ -21,12 +21,12 @@ jobs:
       run: dotnet build --configuration Release
       
     - name: dotnet publish
-      if: github.ref == 'refs/heads/master'
+      #if: github.ref == 'refs/heads/master'
       run: |
         dotnet publish -c Release -o myapp 
 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
-      if: github.ref == 'refs/heads/master'
+      #if: github.ref == 'refs/heads/master'
       uses: azure/webapps-deploy@v1
       with: 
         app-name: TheraLang
