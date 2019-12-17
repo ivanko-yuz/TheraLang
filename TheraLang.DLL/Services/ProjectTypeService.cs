@@ -45,13 +45,10 @@ namespace TheraLang.DLL.Services
             }
         }
 
-        public async Task Update(ProjectType projectType, int id)
+        public async Task Update(ProjectType projectType)
         {
             try
             {
-                projectType.UpdatedDateUtc = DateTime.UtcNow;
-                projectType.UpdatedById = id;
-
                 _uow.Repository<ProjectType>().Update(projectType);
                 await _uow.SaveChangesAsync();
             }

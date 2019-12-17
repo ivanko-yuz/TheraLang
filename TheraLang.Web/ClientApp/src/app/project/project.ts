@@ -7,6 +7,9 @@ export class Project {
         public projectStart?: Date,
         public projectEnd?: Date,
         public type?: string,
-        public isActive?: boolean
+        public isActive?: boolean,
+        public donationsSum?: number,
+        public donationTargetSum?: number,
+        public sumLeftToCollect?: number
         ) { }
 }

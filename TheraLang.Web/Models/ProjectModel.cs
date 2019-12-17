@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace TheraLang.Web.Models
 {
     public class ProjectModel
@@ -22,4 +21,3 @@ namespace TheraLang.Web.Models
         public decimal DonationAmount { get; set; }
     }
 }
-

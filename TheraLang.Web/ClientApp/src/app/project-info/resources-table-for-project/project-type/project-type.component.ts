@@ -53,9 +53,4 @@ export class ProjectTypeComponent implements OnInit {
     this.http.delete(id).subscribe(
       async res => { this.projectTypes = await this.projectTypeService.getAllProjectTypes(); });
   }
-
-
-
-
-
 }

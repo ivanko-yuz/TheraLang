@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import {
-   MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
-   MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
-   MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
-   MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
-   MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
-   MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
+      MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
+      MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
+      MatStepperModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
+      MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressBarModule,
+      MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
+      MatSnackBarModule, MatSortModule, MatTooltipModule, MatTreeModule, MatFormField,
 } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -55,127 +55,154 @@ import { TransactionResultComponent } from './transaction-result/transaction-res
 import { ProjectParticipationService } from './project-participants/project-participation.service';
 import { ProjectTypeService } from './project-info/resources-table-for-project/project-type/project-type.service';
 import { DonationService } from './donation/donation.service';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserService } from './user/user.service';
+import { ProfileMenuComponent } from './toolbar/profile-menu/profile-menu.component';
+import { ResourceCreateComponent } from './general-resources/resource-create/resource-create.component';
+import { ResourceCreateService } from './general-resources/resource-create/resource-create.service';
 import { ProjectTypeHttp } from './project-info/resources-table-for-project/project-type/project-type-Http.service';
 import { ProjectTypeFormComponent } from './project-type-form/project-type-form.component';
 import { ProjectTypeCreateFormComponent } from './project-type-create-form/project-type-create-form.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageComponent } from './toolbar/language/language.component';
 import { AddResourcesToProjectComponent } from './add-resources-to-project/add-resources-to-project.component';
 import { ResourcesFilterPipe } from './add-resources-to-project/resources-filter.pipe';
 
+
+export function HttpLoaderFactory(http: HttpClient) {
+      return new TranslateHttpLoader(http);
+}
+
 @NgModule({
-   declarations: [
-      AppComponent,
-      routingComponents,
-      ToolbarComponent,
-      ProjectComponent,
-      HomeComponent,
-      ProjectInfoComponent,
-      FooterComponent,
-      ProjectParticipantsComponent,
-      CustomDatePipe,
-      ResourcesTableComponent,
-      ConfirmDialogComponent,
-      ErrorComponent,
-      ProjectFormComponent,
-      ResourcesInternalTableComponent,
-      GeneralResourcesTableComponent,
-      GeneralResourcesInnerTableComponent,
-      ToolbarItemComponent,
-      DonationComponent,
-      TransactionResultComponent,
-      ProjectTypeFormComponent,
-      ProjectTypeCreateFormComponent,
-      AddResourcesToProjectComponent,
-      ResourcesFilterPipe,
-
-   ],
-   entryComponents: [
-      ResourcesInternalTableComponent,
-      ProjectFormComponent,
-      ConfirmDialogComponent,
-      ProjectTypeFormComponent,
-      ProjectTypeCreateFormComponent,
-      AddResourcesToProjectComponent,
-
-   ],
-   imports: [
-      BrowserModule,
-      AppRoutingModule,
-      BrowserAnimationsModule,
-      MatToolbarModule,
-      MatButtonModule,
-      HttpClientModule,
-      MatCardModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatGridListModule,
-      MatFormFieldModule,
-      MatTabsModule,
-      MatTableModule,
-      MatProgressSpinnerModule,
-      MatPaginatorModule,
-      A11yModule,
-      CdkStepperModule,
-      CdkTableModule,
-      CdkTreeModule,
-      DragDropModule,
-      MatAutocompleteModule,
-      MatBadgeModule,
-      MatBottomSheetModule,
-      MatButtonModule,
-      MatButtonToggleModule,
-      MatCardModule,
-      MatCheckboxModule,
-      MatChipsModule,
-      MatStepperModule,
-      MatDatepickerModule,
-      MatDialogModule,
-      MatDividerModule,
-      MatExpansionModule,
-      MatIconModule,
-      MatInputModule,
-      MatListModule,
-      MatMenuModule,
-      MatNativeDateModule,
-      MatPaginatorModule,
-      MatProgressBarModule,
-      MatProgressSpinnerModule,
-      MatRadioModule,
-      MatRippleModule,
-      MatSelectModule,
-      MatSidenavModule,
-      MatSliderModule,
-      MatSlideToggleModule,
-      MatSnackBarModule,
-      MatSortModule,
-      MatTableModule,
-      MatToolbarModule,
-      MatTooltipModule,
-      MatTreeModule,
-      PortalModule,
-      ScrollingModule,
-      CmsModule,
-
-   ],
-   exports: [
-      ResourcesInternalTableComponent,
-   ],
-   providers: [
-      ResourceService,
-      HttpService,
-      EventService,
-      // {provide: ErrorHandler, useClass: ErrorHandlerService},
-      NotificationService,
-      DialogService,
-      ResourceCategoriesService,
-      ProjectParticipationService,
-      DonationService,
-      ProjectTypeService,
-      ProjectTypeHttp,
-      AddResourcesToProjectComponent,
-
-   ],
-   bootstrap: [
-      AppComponent,
-   ]
+      declarations: [
+            AppComponent,
+            routingComponents,
+            ToolbarComponent,
+            ProjectComponent,
+            HomeComponent,
+            ProjectInfoComponent,
+            FooterComponent,
+            ProjectParticipantsComponent,
+            CustomDatePipe,
+            ResourcesTableComponent,
+            ConfirmDialogComponent,
+            ErrorComponent,
+            ProjectFormComponent,
+            ResourcesInternalTableComponent,
+            GeneralResourcesTableComponent,
+            GeneralResourcesInnerTableComponent,
+            ToolbarItemComponent,
+            DonationComponent,
+            TransactionResultComponent,
+            UserComponent,
+            LoginComponent,
+            ProfileMenuComponent,
+            ResourceCreateComponent,
+            ProjectTypeFormComponent,
+            ProjectTypeCreateFormComponent,
+            LanguageComponent,
+            AddResourcesToProjectComponent,
+            ResourcesFilterPipe,
+      ],
+      entryComponents: [
+            ResourcesInternalTableComponent,
+            ProjectFormComponent,
+            ConfirmDialogComponent,
+            LoginComponent,
+            ResourceCreateComponent,
+            ProjectTypeFormComponent,
+            ProjectTypeCreateFormComponent,
+            AddResourcesToProjectComponent,
+      ],
+      imports: [
+            BrowserModule,
+            AppRoutingModule,
+            BrowserAnimationsModule,
+            MatToolbarModule,
+            MatButtonModule,
+            HttpClientModule,
+            MatCardModule,
+            FormsModule,
+            ReactiveFormsModule,
+            MatGridListModule,
+            MatFormFieldModule,
+            MatTabsModule,
+            MatTableModule,
+            MatProgressSpinnerModule,
+            MatPaginatorModule,
+            A11yModule,
+            CdkStepperModule,
+            CdkTableModule,
+            CdkTreeModule,
+            DragDropModule,
+            MatAutocompleteModule,
+            MatBadgeModule,
+            MatBottomSheetModule,
+            MatButtonModule,
+            MatButtonToggleModule,
+            MatCardModule,
+            MatCheckboxModule,
+            MatChipsModule,
+            MatStepperModule,
+            MatDatepickerModule,
+            MatDialogModule,
+            MatDividerModule,
+            MatExpansionModule,
+            MatIconModule,
+            MatInputModule,
+            MatListModule,
+            MatMenuModule,
+            MatNativeDateModule,
+            MatPaginatorModule,
+            MatProgressBarModule,
+            MatProgressSpinnerModule,
+            MatRadioModule,
+            MatRippleModule,
+            MatSelectModule,
+            MatSidenavModule,
+            MatSliderModule,
+            MatSlideToggleModule,
+            MatSnackBarModule,
+            MatSortModule,
+            MatTableModule,
+            MatToolbarModule,
+            MatTooltipModule,
+            MatTreeModule,
+            PortalModule,
+            ScrollingModule,
+            CmsModule,
+            TranslateModule.forRoot({
+                  loader: {
+                        provide: TranslateLoader,
+                        useFactory: HttpLoaderFactory,
+                        deps: [HttpClient]
+                  }
+            }),
+      ],
+      exports: [
+            ResourcesInternalTableComponent,
+      ],
+      providers: [
+            ResourceService,
+            HttpService,
+            EventService,
+            // {provide: ErrorHandler, useClass: ErrorHandlerService},
+            NotificationService,
+            DialogService,
+            ResourceCategoriesService,
+            ProjectParticipationService,
+            DonationService,
+            ProjectTypeService,
+            DonationService,
+            UserService,
+            ResourceCreateService,
+            ProjectTypeHttp,
+            AddResourcesToProjectComponent,
+      ],
+      bootstrap: [
+            AppComponent,
+      ]
 })
 export class AppModule { }

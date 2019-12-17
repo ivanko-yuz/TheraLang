@@ -2,14 +2,15 @@
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Models;
+using System;
 
 namespace TheraLang.DLL.Services
 {
     public interface IResourceService
     {
-        Task AddResource(ResourceViewModel resourceModel, int userId);
+        Task AddResource(ResourceViewModel resourceModel, Guid userId);
 
-        Task UpdateResource(ResourceViewModel resource, int updatedById);
+        Task UpdateResource(ResourceViewModel resourceModel, Guid updatedById);
 
         Task RemoveResource(int id);
 

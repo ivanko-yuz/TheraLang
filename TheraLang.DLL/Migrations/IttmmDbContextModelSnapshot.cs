@@ -15,7 +15,7 @@ namespace TheraLang.DLL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -25,7 +25,8 @@ namespace TheraLang.DLL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Amount");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(5, 2)");
 
                     b.Property<string>("Currency")
                         .IsRequired();
@@ -37,9 +38,14 @@ namespace TheraLang.DLL.Migrations
 
                     b.Property<int>("PaymentId");
 
-                    b.Property<int>("ProjectId");
+                    b.Property<int?>("ProjectId");
 
-                    b.Property<decimal>("ReceiverCommission");
+                    b.Property<decimal>("ReceiverCommission")
+                        .HasColumnType("decimal(5, 2)");
+
+                    b.Property<int?>("SocietyId")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(null);
 
                     b.Property<string>("Status")
                         .IsRequired();
@@ -49,6 +55,8 @@ namespace TheraLang.DLL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProjectId");
+
+                    b.HasIndex("SocietyId");
 
                     b.ToTable("Donations");
                 });
@@ -65,6 +73,9 @@ namespace TheraLang.DLL.Migrations
 
                     b.Property<string>("Details")
                         .HasMaxLength(5000);
+
+                    b.Property<decimal>("DonationTarget")
+                        .HasColumnType("decimal(5, 2)");
 
                     b.Property<bool>("IsActive");
 
@@ -96,7 +107,7 @@ namespace TheraLang.DLL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreatedById");
+                    b.Property<Guid>("CreatedById");
 
                     b.Property<DateTime>("CreatedDateUtc");
 
@@ -110,17 +121,15 @@ namespace TheraLang.DLL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(0);
 
-                    b.Property<int?>("UpdatedById");
+                    b.Property<Guid?>("UpdatedById");
 
                     b.Property<DateTime?>("UpdatedDateUtc");
 
-                    b.Property<int?>("UserId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("CreatedById");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("ProjectParticipations");
                 });
@@ -148,7 +157,7 @@ namespace TheraLang.DLL.Migrations
                         .IsUnique()
                         .HasFilter("[TypeName] IS NOT NULL");
 
-                    b.ToTable("Types");
+                    b.ToTable("ProjectTypes");
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.Resource", b =>
@@ -159,7 +168,7 @@ namespace TheraLang.DLL.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<int>("CreatedById");
+                    b.Property<Guid>("CreatedById");
 
                     b.Property<DateTime>("CreatedDateUtc");
 
@@ -175,7 +184,7 @@ namespace TheraLang.DLL.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int?>("UpdatedById");
+                    b.Property<Guid?>("UpdatedById");
 
                     b.Property<DateTime?>("UpdatedDateUtc");
 
@@ -183,16 +192,14 @@ namespace TheraLang.DLL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(null);
 
-                    b.Property<int?>("UserId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("CreatedById");
+
                     b.HasIndex("Name")
                         .IsUnique();
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Resources");
                 });
@@ -231,36 +238,18 @@ namespace TheraLang.DLL.Migrations
                     b.ToTable("ResourceToProject");
                 });
 
-            modelBuilder.Entity("TheraLang.DLL.Entities.User", b =>
+            modelBuilder.Entity("TheraLang.DLL.Entities.Society", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<bool>("IsEmailConfirmed");
-
-                    b.Property<bool>("IsPhoneNumberConfirmed");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.Property<string>("PhooneNumber")
+                    b.Property<string>("Name")
                         .IsRequired();
-
-                    b.Property<DateTime>("RegistrationDate");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Society");
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Piranha.Entities.PiranhaAlias", b =>
@@ -1056,8 +1045,11 @@ namespace TheraLang.DLL.Migrations
                 {
                     b.HasOne("TheraLang.DLL.Entities.Project", "Project")
                         .WithMany("Donations")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProjectId");
+
+                    b.HasOne("TheraLang.DLL.Entities.Society", "Society")
+                        .WithMany("Donations")
+                        .HasForeignKey("SocietyId");
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.Project", b =>
@@ -1065,19 +1057,20 @@ namespace TheraLang.DLL.Migrations
                     b.HasOne("TheraLang.DLL.Entities.ProjectType", "Type")
                         .WithMany("Projects")
                         .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.ProjectParticipation", b =>
                 {
+                    b.HasOne("TheraLang.DLL.Piranha.Entities.PiranhaUser", "PiranhaUser")
+                        .WithMany("ProjectParticipations")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("TheraLang.DLL.Entities.Project", "Project")
                         .WithMany("ProjectParticipations")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TheraLang.DLL.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.Resource", b =>
@@ -1085,11 +1078,12 @@ namespace TheraLang.DLL.Migrations
                     b.HasOne("TheraLang.DLL.Entities.ResourceCategory", "ResourceCategory")
                         .WithMany("Resources")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("TheraLang.DLL.Entities.User", "User")
+                    b.HasOne("TheraLang.DLL.Piranha.Entities.PiranhaUser", "PiranhaUser")
                         .WithMany("Resources")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.ResourceProject", b =>
@@ -1100,9 +1094,9 @@ namespace TheraLang.DLL.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TheraLang.DLL.Entities.Resource", "Resource")
-                        .WithMany("ResourceToProjects")
+                        .WithMany("ResourceProjects")
                         .HasForeignKey("ResourceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Piranha.Entities.PiranhaAlias", b =>
