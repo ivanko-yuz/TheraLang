@@ -6,6 +6,7 @@
          <a mat-button class="toolbar-button" routerLink="/participants" >{{'components.participants.title'|translate}}
          <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>
          <a mat-button class="toolbar-button" routerLink="/donations" >Допомогти</a>
+         <a mat-button class="toolbar-button" routerLink="/projectRequest">Нові Проекти</a>
          <span class="fill-space"></span>
          <button mat-button *ngIf="!isAuthinticated" class="toolbar-button" (click)="onLogin()">{{'components.account.signIn.title'|translate}}</button>
          <button mat-button class="toolbar-button" (click)="onTest()">Тест</button>

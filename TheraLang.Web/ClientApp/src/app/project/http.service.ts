@@ -55,4 +55,7 @@ export class HttpService {
         return this.http.delete(this.url + 'projects' + '/' + id);
     }
 
+  getAllNewProjects() {
+    return this.http.get(this.url + "projects/new");
+  }
 }

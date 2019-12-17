@@ -67,6 +67,15 @@ namespace TheraLang.Web.Controllers
 
             return projectModels;
         }
+        [HttpGet("new")]
+        public IActionResult GetAllNewProjects()
+        {
+
+            var projects = _projectService.GetAllNewProjects();
+            return Ok(projects);
+        }
+
+
 
         /// <summary>
         /// Get project by Id
@@ -106,7 +115,7 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>status code</returns>
-        [HttpPut("approve/{id}")]
+        [HttpGet("approve/{id}")]
         public async Task<IActionResult> Approve(int id)
         {
             if (id == default)
@@ -114,7 +123,7 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
             await _projectService.ChangeStatus(id, ProjectStatus.Approved);
-            return Ok();
+            return Ok(ProjectStatus.Approved);
         }
 
         /// <summary>
@@ -143,7 +152,7 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>status code</returns>
-        [HttpPut("reject/{id}")]
+        [HttpGet("reject/{id}")]
         public async Task<IActionResult> Reject(int id)
         {
             if (id == default)
@@ -151,7 +160,7 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
             await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
-            return Ok();
+            return Ok(ProjectStatus.Rejected);
         }
 
         /// <summary>
@@ -168,6 +177,13 @@ namespace TheraLang.Web.Controllers
             }
             await _projectService.Delete(id);
             return Ok();
+        }
+
+        [HttpGet("newstatus/{status}")]
+        public IActionResult GetProjectsByStatus(int status)
+        {
+            var projects = _projectService.GetProjectsByStatus(status);
+            return Ok(projects);
         }
     }
 }
