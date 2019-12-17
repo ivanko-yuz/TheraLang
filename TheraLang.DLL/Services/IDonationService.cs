@@ -11,6 +11,5 @@ namespace TheraLang.DLL.Services
         LiqPayCheckoutModel GetLiqPayCheckoutModel(string donationAmount, int? projectId, HttpContext context);
         Donation GetDonation(string donationId);
         Task AddDonation(int? projectId, string donationId, string data, string signature);
-        Society GetSocietyDonationSum();
     }
 }

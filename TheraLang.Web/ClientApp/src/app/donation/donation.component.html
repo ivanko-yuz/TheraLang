@@ -1,34 +1,16 @@
 <div *ngIf="projectId === 0; else projectDonation">
   <h2 class="organization-donation-header">Підтримати нашу організацію</h2>
-  <h4 class="donated"> Зібрано: ₴ {{societyDontion?.donationSum | number : '1.2-2'}}</h4>
 </div>
 <ng-template #projectDonation>
-  <h2 class="organization-donation-header">Підтримати цей проект</h2>
+  <h2 class="organization-donation-header">Підтримати цей проект</h2> (Буде знято комісію з поатежу)
 </ng-template>
 <h3 class="donation-header">Введіть суму допомоги</h3>
 <mat-form-field class="form-field">
-  <input matInput type="text" placeholder="" [(ngModel)]="donationAmount" autofocus>
+  <input matInput type="number" placeholder="" [(ngModel)]="donationAmount" autofocus>
   <button mat-button *ngIf="donationAmount" matSuffix mat-icon-button aria-label="Clear" (click)="donationAmount = ''">
     <mat-icon>close</mat-icon>
   </button>
 </mat-form-field>
-<br>
-<span class="donate-button"><button mat-button color="primary" (click)="checkout()">Допомогти</button></span>
-<div><img src="assets/img/paymentmethods.png" alt="" class="payment-methods"></div> 
-
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Enter amount" [formControl]="amount
-           [errorStateMatcher]="matcher">
-    <mat-hint>Errors appear instantly!</mat-hint>
-    <mat-error *ngIf="amount.hasError('pattern') && !amount.hasError('required')">
-      Please enter a valid amount
-    </mat-error>
-    <mat-error *ngIf="amount.hasError('required')">
-      Email is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-</form>
 <br>
 <span class="donate-button"><button mat-button color="primary" (click)="checkout()">Допомогти</button></span>
 <div><img src="assets/img/paymentmethods.png" alt="" class="payment-methods"></div> 

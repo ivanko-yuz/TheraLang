@@ -72,18 +72,5 @@ namespace TheraLang.DLL.Services
         
         }
 
-        public Society GetSocietyDonationSum()
-        {
-            try
-            {
-                var society = _unitOfWork.Repository<Society>().Get().Include(x=>x.Donations).SingleOrDefault();                  
-                return society;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error while receiving a donation", ex);
-            }
-
-        }
     }
 }

@@ -89,15 +89,7 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
-            [HttpGet("society")]
-            public ActionResult<SocietyDonationModel> GetSocietyDonation()
-            {
-
-            SocietyDonationModel societyDonation = new SocietyDonationModel();
-            societyDonation.DonationSum = _donationService.GetSocietyDonationSum().Donations.Where(x=>x.ProjectId==null)
-                .Sum(x=>x.Amount);        
-            return societyDonation;
-         }
+            
     }
 
     

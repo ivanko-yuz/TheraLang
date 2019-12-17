@@ -27,12 +27,12 @@ namespace TheraLang.Web.Services
         public async Task Add(ProjectModel projectModel, Guid userId)
         {
             var newProject = new Project {
-                Name = projectModel.Name,
-                Details = projectModel.Details,
-                Description = projectModel.Description,
-                IsActive = true,
-                ProjectStart = projectModel.ProjectStart,
-                ProjectEnd = projectModel.ProjectEnd
+                //Name = projectModel.Name,
+                //Details = projectModel.Details,
+                //Description = projectModel.Description,
+                //IsActive = true,
+                //ProjectStart = projectModel.ProjectStart,
+                //ProjectEnd = projectModel.ProjectEnd
             };
             var newParticipant = new ProjectParticipation
             {
