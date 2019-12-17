@@ -59,6 +59,7 @@ import { ProjectTypeHttp } from './project-info/resources-table-for-project/proj
 import { ProjectTypeFormComponent } from './project-type-form/project-type-form.component';
 import { ProjectTypeCreateFormComponent } from './project-type-create-form/project-type-create-form.component';
 import { AddResourcesToProjectComponent } from './add-resources-to-project/add-resources-to-project.component';
+import { ResourcesFilterPipe } from './add-resources-to-project/resources-filter.pipe';
 
 @NgModule({
    declarations: [
@@ -84,6 +85,7 @@ import { AddResourcesToProjectComponent } from './add-resources-to-project/add-r
       ProjectTypeFormComponent,
       ProjectTypeCreateFormComponent,
       AddResourcesToProjectComponent,
+      ResourcesFilterPipe,
 
    ],
    entryComponents: [

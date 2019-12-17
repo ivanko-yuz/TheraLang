@@ -40,10 +40,10 @@ export class ResourceService {
 
     getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number): Promise<Resource[]> {
         const allData = this.http.getResourcesByCategoryId(categoryId, pageNumber, recordsPerPage).toPromise()
-        .then((data: Resource[]) => {
-            this.allResources = data;
-            return data;
-        });
+            .then((data: Resource[]) => {
+                this.allResources = data;
+                return data;
+            });
         return allData;
     }
 

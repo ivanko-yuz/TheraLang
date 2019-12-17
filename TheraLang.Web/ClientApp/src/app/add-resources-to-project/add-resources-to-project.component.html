@@ -1,51 +1,19 @@
-<p>add-resources-to-project works!</p>
+<p>Додавання ресурсу до проекту!</p>
 
-<!-- <button mat-raised-button (click)="onCreate()">Створити</button> -->
+<button mat-raised-button (click)="onCreate()">Створити ресурс</button>
 
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
-            [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of options" [value]="option">
-                {{option}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-</form>
+<mat-form-field class="example-full-width">
+    <!-- <input matInput placeholder="find..." value="testTXT" (change)="doFilter()"> -->
+    <input matInput placeholder="find..." value="testTXT" [(ngModel)]="searchTerm">
+</mat-form-field>
 
-<!-- 
-<table mat-table [dataSource]="this.resources" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> name </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let element">
-            <div>
-                <span class="editButton">
-                    <button mat-raised-button
-                        (click)="onEdit({id: element.id, typeName: element.typeName})">Редагувати</button>
-                </span>
-                <span class="deleteButton">
-                    <button mat-raised-button (click)="onDelete(element.id)">Видалити</button>
-                </span>
-
-                <span>
-                    <mat-checkbox>check me please!!!</mat-checkbox>
-                </span>
-            </div>
-        </mat-cell>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> -->
+<div *ngFor="let resource of filteredResources">
+    <tr>
+        <td>
+            id: {{resource.id}}, name: {{resource.name}}
+        </td>
+        <td>
+            <button mat-raised-button (click)="Add(resource.id)">Додати</button>
+        </td>
+    </tr>
+</div>

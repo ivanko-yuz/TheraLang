@@ -15,6 +15,8 @@ namespace TheraLang.DLL.Configuration
 
             builder.Property(x => x.ProjectId).IsRequired();
             builder.Property(x => x.ResourceId).IsRequired();
+
+            builder.HasIndex(x => new { x.ResourceId, x.ProjectId }).IsUnique();
         }
     }
 }

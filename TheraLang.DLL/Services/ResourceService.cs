@@ -184,5 +184,19 @@ namespace TheraLang.DLL.Services
                 throw new Exception($"Error when get all resources by {nameof(projectId)} = {projectId} ", ex);
             }
         }
+
+        public async Task AddResourceToProject(ResourceProject resourceProject, int userId)
+        {
+            try
+            {
+                await _unitOfWork.Repository<ResourceProject>().Add(resourceProject);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                ex.Data[nameof(ResourceProject)] = resourceProject;
+                throw new Exception($"Error when trying to add new {nameof(ResourceProject)}", ex);
+            }
+        }
     }
 }

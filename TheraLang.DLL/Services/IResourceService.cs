@@ -22,5 +22,7 @@ namespace TheraLang.DLL.Services
         IEnumerable<Resource> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
 
         IEnumerable<Resource> GetAllResourcesByProjectId(int projectId);
+
+        Task AddResourceToProject(ResourceProject resourceProject, int userId);
     }
 }

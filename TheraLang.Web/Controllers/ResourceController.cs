@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Constants;
-using TheraLang.DLL.Entities;
 using TheraLang.DLL.Services;
 using TheraLang.DLL.Models;
 using Microsoft.AspNetCore.Identity;
+using TheraLang.Web.Models;
+using TheraLang.DLL.Entities;
 
 namespace TheraLang.Web.Controllers
 {
@@ -14,14 +15,14 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service, UserManager<IdentityUser> manager)
+        public ResourceController(IResourceService service, UserManager<Piranha.AspNetCore.Identity.Data.User> manager)
         {
             _service = service;
             _userManager = manager;
         }
 
         private readonly IResourceService _service;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<Piranha.AspNetCore.Identity.Data.User> _userManager;
 
         /// <summary>
         /// create resource
@@ -167,6 +168,28 @@ namespace TheraLang.Web.Controllers
 
             IEnumerable<Resource> resources = _service.GetAllResourcesByProjectId(projectId);
             return Ok(resources);
+        }
+
+        /// <summary>
+        /// Create new reference resource to project
+        /// </summary>
+        /// <param name="resourceToProjectViewModel"></param>
+        /// <returns>Status code</returns>
+        [HttpPost]
+        [Route("resourceToProject")]
+        public async Task<IActionResult> PostResourceProject([FromBody]ResourceToProjectViewModel resourceToProjectViewModel)
+        {
+            if (resourceToProjectViewModel == null)
+            {
+                throw new ArgumentException($"{nameof(resourceToProjectViewModel)} can not be null");
+            }
+            ResourceProject resourceToProject = new ResourceProject()
+            {
+                ProjectId = resourceToProjectViewModel.ProjectId,
+                ResourceId = resourceToProjectViewModel.ResourceId
+            };
+            await _service.AddResourceToProject(resourceToProject, 0);
+            return Ok();
         }
     }
 }
