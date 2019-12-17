@@ -45,7 +45,12 @@ namespace TheraLang.DLL.Services
             try
             {
                 ProjectParticipation member = new ProjectParticipation
-                { CreatedById = userId, ProjectId = projectId };
+                { 
+                  CreatedById = userId, 
+                  ProjectId = projectId,
+                  Status = ProjectParticipationStatus.New,
+
+                };
 
                 await _unitOfWork.Repository<ProjectParticipation>().Add(member);
                 await _unitOfWork.SaveChangesAsync();

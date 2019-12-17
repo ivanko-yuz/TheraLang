@@ -18,6 +18,6 @@ namespace TheraLang.Web.Models
 
         public DateTime ProjectEnd { get; set; }
 
-        public decimal DonationAmount { get; set; }
+        public decimal DonationTargetSum { get; set; }
     }
 }

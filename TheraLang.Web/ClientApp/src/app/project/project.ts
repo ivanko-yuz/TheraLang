@@ -7,7 +7,7 @@ export class Project {
         public details?: string,
         public projectStart?: Date,
         public projectEnd?: Date,
-        public type?: string,
+        public typeId?: number,
         public isActive?: boolean,
         public donationsSum?: number,
         public donationTargetSum?: number,
