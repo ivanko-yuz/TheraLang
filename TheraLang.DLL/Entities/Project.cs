@@ -8,8 +8,8 @@ namespace TheraLang.DLL.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
-        
-        public ProjectStatus StatusId { get; set;  }
+
+        public ProjectStatus StatusId { get; set; }
 
         public string Description { get; set; }
 

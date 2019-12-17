@@ -59,8 +59,8 @@ namespace TheraLang.Web.Controllers
         /// <param name="projectId">Id of project that you want participate</param>
         /// <returns>status code</returns>
         [HttpPost]
-        [Route("create/{projectId}")]
-        public async Task<IActionResult> Post(int projectId)
+        [Route("create")]
+        public async Task<IActionResult> Post([FromBody]int projectId)
         {
             if (projectId == default)
             {
@@ -68,8 +68,7 @@ namespace TheraLang.Web.Controllers
             }
 
             User user = await _userManager.FindByNameAsync(User.Identity.Name);
-            Guid userId = user.Id;
-            await _service.CreateRequest(userId, projectId);
+            await _service.CreateRequest(user.Id, projectId);
             return Ok();
         }
     }

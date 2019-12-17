@@ -1,56 +1,51 @@
-<mat-tab-group class="participation-tab" animationDuration="0ms" #tabPosition (selectedTabChange)="changeTab(tabPosition.selectedIndex)">
-        <mat-tab label="Нові"></mat-tab>
-        <mat-tab label="Підтверджені"></mat-tab>
-        <mat-tab label="Відхилені"> </mat-tab>
+<mat-tab-group class="participation-tab" animationDuration="0ms" #tabPosition
+  (selectedTabChange)="changeTab(tabPosition.selectedIndex)">
+  <mat-tab label="Нові"></mat-tab>
+  <mat-tab label="Підтверджені"></mat-tab>
+  <mat-tab label="Відхилені"> </mat-tab>
 </mat-tab-group>
-        <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="projectParticipationRequest" *ngIf="projectParticipationRequest.filteredData.length > 0">
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="projectParticipationRequest" *ngIf="projectParticipationRequest.filteredData.length > 0">
 
-                        <ng-container matColumnDef="createdById">
-                                <th mat-header-cell *matHeaderCellDef> Ім’я/Id</th>
-                                <td mat-cell *matCellDef="let element"> {{element.createdById}} </td>
-                        </ng-container>
+    <ng-container matColumnDef="createdById">
+      <th mat-header-cell *matHeaderCellDef> Ім’я/Id</th>
+      <td mat-cell *matCellDef="let element"> {{element.createdById}} </td>
+    </ng-container>
 
-                        <ng-container matColumnDef="role">
-                                <th mat-header-cell *matHeaderCellDef> Роль користувача </th>
-                                <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-                        </ng-container>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> Роль користувача </th>
+      <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+    </ng-container>
 
-                        <ng-container matColumnDef="projectId">
-                                <th mat-header-cell *matHeaderCellDef> Id проекту </th>
-                                <td mat-cell *matCellDef="let element"> {{element.projectId}} </td>
-                        </ng-container>
+    <ng-container matColumnDef="projectId">
+      <th mat-header-cell *matHeaderCellDef> Id проекту </th>
+      <td mat-cell *matCellDef="let element"> {{element.projectId}} </td>
+    </ng-container>
 
-                        <ng-container matColumnDef="status">
-                                <th mat-header-cell *matHeaderCellDef> Статус </th>
-                                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-                        </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Статус </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
 
-                        <ng-container matColumnDef="actions">
-                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                                <mat-cell *matCellDef="let participationRequest">
-                                        <div *ngIf="showActionButtons">
-                                                <span class="aproveButton">
-                                                        <button mat-raised-button
-                                                                (click)="changeStatus('approved', participationRequest)">Прийняти</button>
-                                                </span>
-                                                <span class="rejectButton">
-                                                        <button mat-raised-button
-                                                                (click)="changeStatus('rejected', participationRequest)">Відхилити</button>
-                                                </span>
-                                        </div>
-                                </mat-cell>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-                <div class="noData"*ngIf="projectParticipationRequest.filteredData.length === 0">
-                         <h2>Немає запитів</h2>
-                </div>
-                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let participationRequest">
+        <div *ngIf="showActionButtons">
+          <span class="aproveButton">
+            <button mat-raised-button (click)="changeStatus('approved', participationRequest)">Прийняти</button>
+          </span>
+          <span class="rejectButton">
+            <button mat-raised-button (click)="changeStatus('rejected', participationRequest)">Відхилити</button>
+          </span>
         </div>
-         
+      </mat-cell>
+    </ng-container>
 
-
-
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="noData" *ngIf="projectParticipationRequest.filteredData.length === 0">
+    <h2>Немає запитів</h2>
+  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

@@ -54,8 +54,10 @@ namespace TheraLang.DLL.Services
             try
             {
                 byte[] responseData = Convert.FromBase64String(data);
-                string decodedString = Encoding.UTF8.GetString(responseData);                           
+                string decodedString = Encoding.UTF8.GetString(responseData);
+                var commissionModel = JsonConvert.DeserializeObject<LiqPayCommissionModel>(decodedString);
                 Donation donation = JsonConvert.DeserializeObject<Donation>(decodedString);
+                donation.Amount -= commissionModel.ReceiverCommission;
                 donation.ProjectId = projectId;
                 donation.DonationId = donationId;
                 if (projectId == null)
@@ -72,18 +74,5 @@ namespace TheraLang.DLL.Services
         
         }
 
-        public Society GetSocietyDonationSum()
-        {
-            try
-            {
-                var society = _unitOfWork.Repository<Society>().Get().Include(x=>x.Donations).SingleOrDefault();                  
-                return society;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error while receiving a donation", ex);
-            }
-
-        }
     }
 }

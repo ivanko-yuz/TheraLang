@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DLL;
 
 namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191217174624_AddSocietyEntity")]
+    partial class AddSocietyEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,27 +191,6 @@ namespace TheraLang.DLL.Migrations
                         .IsUnique();
 
                     b.ToTable("Resources");
-                });
-
-            modelBuilder.Entity("TheraLang.DLL.Entities.ResourceAttachment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FileName")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("Path")
-                        .HasMaxLength(1000);
-
-                    b.Property<int>("ResourceId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResourceId");
-
-                    b.ToTable("ResourceAttachment");
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.ResourceCategory", b =>
@@ -1092,13 +1073,6 @@ namespace TheraLang.DLL.Migrations
                         .WithMany("Resources")
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("TheraLang.DLL.Entities.ResourceAttachment", b =>
-                {
-                    b.HasOne("TheraLang.DLL.Entities.Resource", "Resource")
-                        .WithMany("ResourceAttachment")
-                        .HasForeignKey("ResourceId");
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.ResourceProject", b =>

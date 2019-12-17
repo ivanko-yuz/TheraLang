@@ -32,11 +32,6 @@ namespace TheraLang.DLL.Entities
         [JsonProperty("liqpay_order_id")]
         public string LiqpayOrderId { get; set; }
 
-        [JsonProperty("transaction_id")]
-        public int TransactionId { get; set; }
-
-        [JsonProperty("receiver_commission")]
-        public decimal ReceiverCommission { get; set; }
 
     }
 }

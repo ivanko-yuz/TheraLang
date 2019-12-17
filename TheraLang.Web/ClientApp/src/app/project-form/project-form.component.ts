@@ -18,7 +18,7 @@ export class ProjectFormComponent implements OnInit {
   constructor(private dialog: MatDialogRef<ProjectFormComponent>,
               public service: ProjectService,
               public dateAdapter: DateAdapter<Date>,
-              private translate: TranslateService) { }
+              private translate: TranslateService) {} 
 
   ngOnInit() {
     this.dateAdapter.setLocale(this.translate.currentLang),
