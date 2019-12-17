@@ -5,7 +5,7 @@
   <mat-tab label="Відхилені"> </mat-tab>
 </mat-tab-group>
 <div class="mat-elevation-z8">
-  <table mat-table [ ]="projectParticipationRequest" *ngIf="projectParticipationRequest.filteredData.length > 0">
+  <table mat-table [dataSource]="projectParticipationRequest" *ngIf="projectParticipationRequest.filteredData.length > 0">
 
     <ng-container matColumnDef="createdById">
       <th mat-header-cell *matHeaderCellDef> Ім’я/Id</th>
