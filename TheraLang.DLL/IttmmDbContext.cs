@@ -1,15 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using TheraLang.DLL.Piranha.Configuration;
-using TheraLang.DLL.Piranha.Entities;
 using TheraLang.DLL.Configuration;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Piranha.Configuration;
+using TheraLang.DLL.Piranha.Entities;
 
 namespace TheraLang.DLL
 {
     public class IttmmDbContext : DbContext
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
-        {          
+        {
         }
 
         #region UTTMM_Entities
@@ -18,9 +18,9 @@ namespace TheraLang.DLL
         public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<ResourceProject> ResourceProject { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
         public virtual DbSet<Donation> Donations { get; set; }
+        public virtual DbSet<Society> Societies { get; set; }
         #endregion
 
         #region Piranha_Entities
@@ -98,9 +98,9 @@ namespace TheraLang.DLL
             modelBuilder.ApplyConfiguration(new ResourceCategoriesConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceProjectConfiguration());
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
             modelBuilder.ApplyConfiguration(new DonationConfiguration());
+            modelBuilder.ApplyConfiguration(new SocietyConfiguration());
             #endregion
         }
 

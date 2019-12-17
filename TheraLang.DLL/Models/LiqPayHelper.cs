@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -19,9 +20,10 @@ namespace TheraLang.DLL.Models
             _privateKey = "sandbox_nqmktFe8ozPyPOGdjck7HgIfXp14kr0vcBF0RHhY"; //TODO: set via env variables
         }
 
-        static public LiqPayCheckoutModel GetLiqPayCheckoutModel(string donationAmount, int projectId)
+        static public LiqPayCheckoutModel GetLiqPayCheckoutModel(string donationAmount, int? projectId, HttpContext context)
         {
             string donationId = Guid.NewGuid().ToString();
+            var hostName = $"{context.Request.Scheme}://{context.Request.Host}";
             LiqPayCheckout dataSource = new LiqPayCheckout()
             {
                 PublicKey = _publicKey,
@@ -30,8 +32,8 @@ namespace TheraLang.DLL.Models
                 Amount = Convert.ToDecimal(donationAmount),
                 Currency = "UAH",
                 Description = "Благодійність",
-                ResultUrl = $"http://theralang.azurewebsites.net/transaction/{donationId}",
-                ServerUrl = $"http://theralang.azurewebsites.net/api/donation/{projectId}/{donationId}",
+                ResultUrl = $"{hostName}/transaction/{donationId}",
+                ServerUrl = $"{hostName}/api/donations/{donationId}/{projectId}",
                 Language = "uk"
             };
 

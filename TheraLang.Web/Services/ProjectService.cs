@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using TheraLang.DLL.Constants;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.UnitOfWork;
+using TheraLang.Web.Models;
 
 namespace TheraLang.Web.Services
 {
@@ -56,10 +57,32 @@ namespace TheraLang.Web.Services
             {
                 await _uow.Repository<Project>().Add(newProject);
                 await _uow.SaveChangesAsync();
+                // newParticipant.ProjectId = newProject.Id;
+                await _uow.Repository<ProjectParticipation>().Add(newParticipant);
+                await _uow.SaveChangesAsync();
             }
             catch(Exception e)
             {
-                e.Data["project"] = projectViewModel;
+                e.Data["project"] = projectModel;
+                throw;
+            }
+        }
+
+        public async Task Delete(int id)
+        {
+            try
+            {
+                var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
+                if (project == null)
+                {
+                    throw new NullReferenceException($"Error while deleting project. Project with id {nameof(id)}={id} not found");
+                }
+                _uow.Repository<Project>().Remove(project);
+                await _uow.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                e.Data["projectId"] = id;
                 throw;
             }
         }

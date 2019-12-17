@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: "projects/:id", component: ProjectInfoComponent },
   { path: "projects", component: ProjectComponent },
   { path: "donation/:projectId", component: DonationComponent },
+  { path: 'donations', component: DonationComponent },
   { path: "resources", component: GeneralResourcesTableComponent },
   { path: "transaction/:donationId", component: TransactionResultComponent },
   { path: "error", component: ErrorComponent },

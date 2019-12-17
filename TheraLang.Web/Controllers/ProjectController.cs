@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.Web.Models;
 using TheraLang.Web.Services;
+using Microsoft.AspNetCore.Identity;
+using Piranha.AspNetCore.Identity.Data;
+
 
 namespace TheraLang.Web.Controllers
 {
@@ -14,36 +17,52 @@ namespace TheraLang.Web.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly IProjectService _projectService; 
-        public ProjectController(IProjectService projectService)
+        private readonly UserManager<User> _userManager;
+
+        public ProjectController(IProjectService projectService, UserManager<User> userManager)
         {
             _projectService = projectService;
+            _userManager = userManager;
         }
-        
+
+        /// <summary>
+        /// Create new project
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns>status code</returns>
         [HttpPost("create")]
-        public IActionResult CreateProject(Project project)
+        public async Task<IActionResult> CreateProjectAsync(ProjectModel project)
         {
             if(project == null)
             {
                 throw new ArgumentException($"{nameof(project)} cannot be null");
             }
-            _projectService.Add(project);
+            
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Guid userId = user.Id;
+            await _projectService.Add(project, userId);
             return  Ok(project);
         }
-        
+
+        /// <summary>
+        /// get all Projects
+        /// </summary>
+        /// <returns>array of Projects</returns>
         [HttpGet]
-        public IEnumerable<ProjectModel> GetAllProjects()
+        public IEnumerable<ProjectDonationModel> GetAllProjects()
         {
-            List<ProjectModel> projectModels = new List<ProjectModel>();
-            projectModels = _projectService.GetAllProjects().Select(p => new ProjectModel
+            List<ProjectDonationModel> projectModels = new List<ProjectDonationModel>();
+            projectModels = _projectService.GetAllProjects().Select(p => new ProjectDonationModel
             {
                 Id = p.Id,
                 Name = p.Name,
-                DonationAmount = p.Donations.Sum(y => y.Amount),
+                DonationsSum = p.Donations.Sum(y => y.Amount),
+                DonationTargetSum = p.DonationTarget,
+                SumLeftToCollect = p.DonationTarget - p.Donations.Sum(y => y.Amount),
                 Description = p.Description,
                 Details = p.Details,
                 ProjectStart = p.ProjectStart,
                 ProjectEnd = p.ProjectEnd
-                
             }).ToList();
 
             return projectModels;
@@ -56,6 +75,11 @@ namespace TheraLang.Web.Controllers
             return Ok(projects);
         }
 
+        /// <summary>
+        /// Get project by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>serialized project</returns>
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)
         {
@@ -66,10 +90,15 @@ namespace TheraLang.Web.Controllers
             var project = _projectService.GetById(id);            
             return Ok(project);            
         }
-          
 
+        /// <summary>
+        /// Edit project by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="project">new version</param>
+        /// <returns>edited project</returns>
         [HttpPut("update/{id}")]
-        public IActionResult EditProject(int id,Project project)
+        public IActionResult EditProject(int id, [FromBody]Project project)
         {
             if (id == default)
             {
@@ -77,6 +106,22 @@ namespace TheraLang.Web.Controllers
             }
             _projectService.UpdateAsync(id,project);
             return Ok(project);
+        }
+
+        /// <summary>
+        /// Approve selected project
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>status code</returns>
+        [HttpPut("approve/{id}")]
+        public async Task<IActionResult> Approve(int id)
+        {
+            if (id == default)
+            {
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
+            }
+            await _projectService.ChangeStatus(id, ProjectStatus.Approved);
+            return Ok();
         }
 
 
@@ -91,7 +136,13 @@ namespace TheraLang.Web.Controllers
             return Ok(ProjectStatus.Approved);
         }
 
-        [HttpGet("page/{page}/{pagesize}")]
+        /// <summary>
+        /// Get projects on the page
+        /// </summary>
+        /// <param name="page">page number</param>
+        /// <param name="pageSize">number of projects on one page</param>
+        /// <returns>array of selected project</returns>
+        [HttpGet("page/{page}/{pageSize}")]
         public IActionResult ProjectsPagination(int page,  int pageSize)
         {
             if (page == default)
@@ -106,22 +157,36 @@ namespace TheraLang.Web.Controllers
             return Ok(projects);
         }
 
-            [HttpGet("reject/{id}")]
-            public async Task<IActionResult> Reject(int id)
+        /// <summary>
+        /// Reject selected project
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>status code</returns>
+        [HttpPut("reject/{id}")]
+        public async Task<IActionResult> Reject(int id)
+        {
+            if (id == default)
             {
-                if (id == default)
-                {
-                    throw new ArgumentException($"{nameof(id)} cannot be 0");
-                }
-                await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
-                return Ok(ProjectStatus.Rejected);
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
+            await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
+            return Ok();
+        }
 
-            [HttpGet("newstatus/{status}")]
-            public IActionResult GetProjectsByStatus(int status)
+        /// <summary>
+        /// Delete project by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>status code</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProject(int id)
+        {
+            if (id == default)
             {
-                var projects = _projectService.GetProjectsByStatus(status);
-                return Ok(projects);
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
+            await _projectService.Delete(id);
+            return Ok();
+        }
     }
-    }
+}

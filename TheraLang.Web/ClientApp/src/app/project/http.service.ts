@@ -18,21 +18,10 @@ export class HttpService {
     return this.http.get(this.url + "projects" + "/" + id);
   }
 
-  getResourcesByCategoryId(
-    categoryId: number,
-    pageNumber: number,
-    recordsPerPage: number
-  ) {
-    return this.http.get(
-      this.url +
-        "resource/all/" +
-        categoryId +
-        "/" +
-        pageNumber +
-        "/" +
-        recordsPerPage
-    );
-  }
+    getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
+        return this.http.get(this.url + 'resource/all/' + categoryId + '/' + pageNumber
+            + '/' + recordsPerPage);
+    }
 
   getResourceCategories(withAssignedResources: boolean) {
     return this.http.get(
@@ -52,21 +41,21 @@ export class HttpService {
     return this.http.get(this.url + "page/" + pageId);
   }
 
-  createProject(project: Project) {
-    return this.http.post(this.url + "projects" + "/" + "create", project, {
-      observe: "response"
-    });
-  }
+    createProject(project:Project) {
+        return this.http.post(this.url + 'projects' + '/' + 'create', project);
+    }
 
-  updateProject(project: Project) {
-    return this.http.put(this.url + "/" + project.id, project, {
-      observe: "response"
-    });
-  }
+    updateProject(project: Project) {
+        return this.http.put(this.url + '/' + project.id, project);
+    }
 
-  getAllProjectTypes() {
-    return this.http.get(this.url + "/" + "projectTypes");
-  }
+    getAllProjectTypes(){
+        return this.http.get(this.url + 'projectTypes');
+    }
+
+    deleteProject(id: number) {
+        return this.http.delete(this.url + 'projects' + '/' + id);
+    }
 
   getAllNewProjects() {
     return this.http.get(this.url + "projects/new");

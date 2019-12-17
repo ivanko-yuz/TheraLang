@@ -3,6 +3,9 @@ import { User } from './user';
 import { ResourceCategory } from './resource-category';
 
 export class Resource {
+    toLowerCase() {
+        throw new Error("Method not implemented.");
+    }
     user: User;
     name: string;
     description: string;

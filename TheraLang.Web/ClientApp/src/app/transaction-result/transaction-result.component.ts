@@ -19,7 +19,7 @@ export class TransactionResultComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.donationId = params.get('donationId');
-      this.donationService.getLiqpayResponse(this.donationId).subscribe((liqpayResponseData: LiqpayResponse) => {
+      this.donationService.getDonationTransaction(this.donationId).subscribe((liqpayResponseData: LiqpayResponse) => {
         this.liqpayResponse = liqpayResponseData;
       });
     });
