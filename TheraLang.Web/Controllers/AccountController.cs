@@ -25,7 +25,6 @@ namespace TheraLang.Web.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> SignIn(LoginModel model)
         {
-            // string.IsNullOrWhiteSpace()
             if (string.IsNullOrWhiteSpace(model.UserName))
             {
                 throw new ArgumentException($"{nameof(model.UserName)} cannot be null");
@@ -40,7 +39,7 @@ namespace TheraLang.Web.Controllers
             }
             else
             {
-                return BadRequest(); //TODO an authorize
+                return BadRequest(); 
             }
         }
 
@@ -57,14 +56,6 @@ namespace TheraLang.Web.Controllers
         {
             var isAuthenticated = User.Identity.IsAuthenticated;
             return isAuthenticated;
-        }
-
-        [HttpGet("getUserId")]
-        public async Task<Guid> GetActiveUserId()
-        {
-            User user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var userId = user.Id;
-            return userId;
         }
     }
 }

@@ -28,15 +28,7 @@ export class UserService {
     return this.http.get(this.baseUrl + '/logout');
   }
 
-  test(){
-    return this.http.get(this.baseUrl + '/getUserId').subscribe(
-      (msg) => {
-        console.log(msg)
-       },
-    )
-  }
-
-    isAuthenticated(){
+  isAuthenticated(){
     return this.http.get(this.baseUrl + '/isAuthenticated');
   }
 }

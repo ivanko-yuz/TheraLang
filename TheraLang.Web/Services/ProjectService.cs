@@ -33,8 +33,10 @@ namespace TheraLang.Web.Services
                 IsActive = true,
                 ProjectStart = projectModel.ProjectStart,
                 ProjectEnd = projectModel.ProjectEnd,
-                TypeId = projectModel.TypeId
+                TypeId = projectModel.TypeId,
+                DonationTarget = projectModel.DonationTargetSum
             };
+
             var newParticipant = new ProjectParticipation
             {
                 Role = DLL.Enums.MemberRole.ProjectOwner,
@@ -45,10 +47,7 @@ namespace TheraLang.Web.Services
             try
             {
                 await _uow.Repository<Project>().Add(newProject);
-                //await _uow.SaveChangesAsync();
-                await _uow.Repository<ProjectParticipation>().Add(newParticipant);
                 await _uow.SaveChangesAsync();
-                // newParticipant.ProjectId = newProject.Id;
                 await _uow.Repository<ProjectParticipation>().Add(newParticipant);
                 await _uow.SaveChangesAsync();
             }

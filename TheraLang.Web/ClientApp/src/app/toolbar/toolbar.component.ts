@@ -1,5 +1,4 @@
 import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
-import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from '../project-participants/project-participation-request';
 import { EventService } from '../project-participants/event-service';
 import {SiteMapService} from '../cms/services/site-map.service';
@@ -71,9 +70,4 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   onLogin(){
    this.dialog.openFormDialog(LoginComponent);
   }
-
-  onTest(){
-    this.userService.test();
-  }
-  isauth:boolean;
 }

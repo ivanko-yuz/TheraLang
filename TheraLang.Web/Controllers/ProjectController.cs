@@ -40,8 +40,7 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(project)} cannot be null");
             }
             User user = await _userManager.FindByNameAsync(User.Identity.Name);
-            Guid userId = user.Id;
-            await _projectService.Add(project, userId);
+            await _projectService.Add(project, user.Id);
             return  Ok(project);
         }
 

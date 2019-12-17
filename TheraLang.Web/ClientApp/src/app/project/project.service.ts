@@ -16,11 +16,12 @@ export class ProjectService {
   public form = this.fb.group({
     id: [null],
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-    description: ['', [Validators.required, Validators.maxLength(8000)]],
+    description: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(8000)]],
     details: ['', Validators.maxLength(8000)],
     projectStart: ['', Validators.required],
     projectEnd: [''],
     typeId: ['', Validators.required],
+    donationTargetSum: ['']
   });
 
 
@@ -33,6 +34,7 @@ export class ProjectService {
       projectStart: '',
       projectEnd: '',
       typeId: '',
+      donationTargetSum: '',
     });
   }
 

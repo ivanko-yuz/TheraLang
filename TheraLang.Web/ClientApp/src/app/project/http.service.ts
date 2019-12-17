@@ -40,7 +40,6 @@ export class HttpService {
     }
 
     createProject(project:Project) {
-        debugger
         return this.http.post(this.url + 'projects' + '/' + 'create', project);
     }
 
