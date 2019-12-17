@@ -48,20 +48,32 @@ namespace TheraLang.Web.Services
             return projects;
         }
 
-        public async Task Add(Project projectViewModel)
+        public async Task Add(ProjectModel projectModel, Guid userId)
         {
-            var newProject = new Project { Name = projectViewModel.Name, Details = projectViewModel.Details,
-                Description = projectViewModel.Description, IsActive = projectViewModel.IsActive,
-                ProjectStart = projectViewModel.ProjectStart, ProjectEnd = projectViewModel.ProjectEnd  };
+            var newProject = new Project
+            {
+                Name = projectModel.Name,
+                Details = projectModel.Details,
+                Description = projectModel.Description,
+                IsActive = true,
+                ProjectStart = projectModel.ProjectStart,
+                ProjectEnd = projectModel.ProjectEnd,
+                TypeId = projectModel.TypeId
+            };
+            var newParticipant = new ProjectParticipation
+            {
+                Role = DLL.Enums.MemberRole.ProjectOwner,
+                CreatedById = userId,
+                Status = DLL.Enums.ProjectParticipationStatus.Approved,
+                Project = newProject,
+            };
             try
             {
                 await _uow.Repository<Project>().Add(newProject);
-                await _uow.SaveChangesAsync();
-                // newParticipant.ProjectId = newProject.Id;
                 await _uow.Repository<ProjectParticipation>().Add(newParticipant);
                 await _uow.SaveChangesAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 e.Data["project"] = projectModel;
                 throw;

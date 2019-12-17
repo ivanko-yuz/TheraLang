@@ -75,6 +75,8 @@ namespace TheraLang.Web.Controllers
             return Ok(projects);
         }
 
+
+
         /// <summary>
         /// Get project by Id
         /// </summary>
@@ -113,18 +115,6 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>status code</returns>
-        [HttpPut("approve/{id}")]
-        public async Task<IActionResult> Approve(int id)
-        {
-            if (id == default)
-            {
-                throw new ArgumentException($"{nameof(id)} cannot be 0");
-            }
-            await _projectService.ChangeStatus(id, ProjectStatus.Approved);
-            return Ok();
-        }
-
-
         [HttpGet("approve/{id}")]
         public async Task<IActionResult> Approve(int id)
         {
@@ -132,7 +122,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
-            await _projectService.ChangeStatus(id,  ProjectStatus.Approved);
+            await _projectService.ChangeStatus(id, ProjectStatus.Approved);
             return Ok(ProjectStatus.Approved);
         }
 
@@ -162,7 +152,7 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>status code</returns>
-        [HttpPut("reject/{id}")]
+        [HttpGet("reject/{id}")]
         public async Task<IActionResult> Reject(int id)
         {
             if (id == default)
@@ -170,7 +160,7 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
             await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
-            return Ok();
+            return Ok(ProjectStatus.Rejected);
         }
 
         /// <summary>
@@ -187,6 +177,13 @@ namespace TheraLang.Web.Controllers
             }
             await _projectService.Delete(id);
             return Ok();
+        }
+
+        [HttpGet("newstatus/{status}")]
+        public IActionResult GetProjectsByStatus(int status)
+        {
+            var projects = _projectService.GetProjectsByStatus(status);
+            return Ok(projects);
         }
     }
 }
