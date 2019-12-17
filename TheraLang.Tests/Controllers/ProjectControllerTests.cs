@@ -9,29 +9,29 @@ namespace TheraLang.Tests.Controllers
 {
     public class ProjectControllerTests
     {
-        //private Mock<IProjectService> _projectServiceMock;
-        //private ProjectController _sutController;
+        private Mock<IProjectService> _projectServiceMock;
+        private ProjectController _sutController;
 
-        //public ProjectControllerTests()
-        //{
-        //    _projectServiceMock = new Mock<IProjectService>();
-        //    _sutController = new ProjectController(_projectServiceMock.Object);
-        //}
+        public ProjectControllerTests()
+        {
+            _projectServiceMock = new Mock<IProjectService>();
+            _sutController = new ProjectController(_projectServiceMock.Object);
+        }
 
-        //[Fact]
-        //public void CreateProject_IfModelIsValid_ShouldCallAddOnce()
-        //{
-        //    // arrange
-        //    var model = new ProjectModel
-        //    {
-        //        Name = nameof(CreateProject_IfModelIsValid_ShouldCallAddOnce)
-        //    };
+        [Fact]
+        public void CreateProject_IfModelIsValid_ShouldCallAddOnce()
+        {
+            // arrange
+            var model = new ProjectModel
+            {
+                Name = nameof(CreateProject_IfModelIsValid_ShouldCallAddOnce)
+            };
 
-        //    // act
-        //    _sutController.CreateProjectAsync(model);
+            // act
+            _sutController.CreateProjectAsync(model);
 
-        //    // assert
-        //    _projectServiceMock.Verify(mock => mock.Add(It.IsAny<ProjectModel>(), 1), Times.Once);
-        //}
+            // assert
+            _projectServiceMock.Verify(mock => mock.Add(It.IsAny<ProjectModel>(), 1), Times.Once);
+        }
     }
 }
