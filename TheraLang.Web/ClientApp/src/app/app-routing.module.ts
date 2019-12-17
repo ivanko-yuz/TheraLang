@@ -15,18 +15,16 @@ import { GeneralResourcesComponent } from "./general-resources/general-resources
 import { ProjectRequestComponent } from "./project-request/project-request.component";
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
-  { path: "participants", component: ProjectParticipantsComponent },
-  { path: "projects/:id", component: ProjectInfoComponent },
-  { path: "projects", component: ProjectComponent },
-  { path: "donation/:projectId", component: DonationComponent },
-  { path: 'donations', component: DonationComponent },
-  { path: "resources", component: GeneralResourcesTableComponent },
-  { path: "transaction/:donationId", component: TransactionResultComponent },
-  { path: "error", component: ErrorComponent },
-  { path: "projectTypes", component: ProjectTypeComponent },
-  { path: "projectRequest", component: ProjectRequestComponent },
-  { path: "**", loadChildren: () => CmsModule }
+    { path: '', component: HomeComponent },
+    { path: 'participants', component: ProjectParticipantsComponent },
+    { path: 'projects/:id', component: ProjectInfoComponent },
+    { path: 'projects', component: ProjectComponent },
+    { path: 'donations/:projectId', component: DonationComponent },
+    { path: 'resources', component: GeneralResourcesTableComponent },
+    { path: 'transaction/:donationId', component: TransactionResultComponent },
+    { path: 'error', component: ErrorComponent },
+    { path: 'projectTypes', component: ProjectTypeComponent },
+    { path: '**', loadChildren: () => CmsModule },
 ];
 
 @NgModule({
