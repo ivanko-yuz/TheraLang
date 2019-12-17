@@ -1,4 +1,4 @@
-﻿using TheraLang.DLL.Enums;
+using TheraLang.DLL.Enums;
 using TheraLang.DLL.Piranha.Entities;
 
 namespace TheraLang.DLL.Entities

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.notificationService.warn('Помилка входу')
+        this.notificationService.warn('Неправильний логін або пароль')
         this.userService.loginForm.reset;
       });
 

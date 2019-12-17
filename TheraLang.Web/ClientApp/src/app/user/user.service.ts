@@ -27,4 +27,8 @@ export class UserService {
   logout(){
     return this.http.get(this.baseUrl + '/logout');
   }
+
+  isAuthenticated(){
+    return this.http.get(this.baseUrl + '/isAuthenticated');
+  }
 }

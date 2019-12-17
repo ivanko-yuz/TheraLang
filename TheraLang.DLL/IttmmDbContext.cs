@@ -10,6 +10,7 @@ namespace TheraLang.DLL
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
         {
+            Database.Migrate();
         }
 
         #region UTTMM_Entities

@@ -7,7 +7,7 @@
 </ng-template>
 <h3 class="donation-header">Введіть суму допомоги</h3>
 <mat-form-field class="form-field">
-  <input matInput type="text" placeholder="" [(ngModel)]="donationAmount" autofocus>
+  <input matInput type="number" placeholder="" [(ngModel)]="donationAmount" autofocus>
   <button mat-button *ngIf="donationAmount" matSuffix mat-icon-button aria-label="Clear" (click)="donationAmount = ''">
     <mat-icon>close</mat-icon>
   </button>
