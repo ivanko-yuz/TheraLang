@@ -91,6 +91,11 @@ namespace TheraLang.Web
                 app.UseOpenApi();
                 app.UseSwaggerUi3();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
 
             App.Init(api);
@@ -127,11 +132,21 @@ namespace TheraLang.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");
+            });
 
-                routes.MapRoute(
-                   name: "angular",
-                   template: "{*template}",
-                   defaults: new { controller = "Home", action = "Index" });
+            // Handle Angular app refresh & passing the route
+            app.Use(async (context, next) =>
+            {
+                var request = context.Request;
+
+                if (request.Path != "/" && request.Path.Value.Contains("/api"))
+                {
+                    context.Response.Redirect("/" + "?currentRoutePath=" + request.Path);
+                }
+                else
+                {
+                    await next.Invoke();
+                }
             });
 
             app.UseSpa(spa =>

@@ -1,0 +1,65 @@
+﻿@page
+
+@using Microsoft.Extensions.Configuration;
+@using System.Net;
+@using System.IO;
+
+@inject IConfiguration _configuration
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment _env
+
+@model IndexModel
+
+
+<head>
+    <meta charset="utf-8">
+    <title>UTTMM</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+@{
+    // Uncomment and use to promote setting from appsettings.json if needed
+    //AppSettings appSettings = new AppSettings();
+    //_configuration.GetSection("AppSettings").Bind(appSettings);
+    var settings = string.Empty; //Convert.ToString(Json.Serialize(appSettings));
+
+    var bundles = new List<string> { "runtime", "polyfills", "styles", "scripts", "main" };
+
+    var fileEntries = Directory.EnumerateFiles(Model._wwwroot).ToList();
+
+
+    <app-root settings="@settings"></app-root>
+
+    <script>
+        history.pushState({}, null, "@Model._currentRoutePath");
+    </script>
+
+    foreach (var bundleName in bundles)
+    {
+        foreach (var fileName in fileEntries)
+        {
+            var fileInformation = new FileInfo(fileName);
+
+            if (fileInformation.Name.Contains("polyfills-es5-es2016") &&
+                fileInformation.Name.Contains(".js"))
+            {
+                <script src="@fileInformation.Name" nomodule defer></script>
+            }
+            else
+            if (fileInformation.Name.Contains(bundleName) &&
+                fileInformation.Name.Contains(".js"))
+            {
+                <script src="@fileInformation.Name" defer></script>
+            }
+
+            @if (fileInformation.Name.Contains(bundleName) &&
+             fileInformation.Name.Contains(".css"))
+            {
+                <link href="@fileInformation.Name" rel="stylesheet">
+            }
+        }
+    }
+}
