@@ -14,9 +14,21 @@ namespace TheraLang.DataSeeding
         {
             using var dbContext = CreateDbContext();
 
+            dbContext.Clear<Donation>();
+            dbContext.Clear<ProjectParticipation>();
+            dbContext.Clear<ResourceProject>();
+            dbContext.Clear<Project>();
+            dbContext.Clear<Resource>();
+            dbContext.Clear<ResourceCategory>();
+            dbContext.Clear<ProjectType>();
+            
             var projectTypes = ProjectTypes().ToArray();
-            dbContext.ClearAndSeed(projectTypes);
-            dbContext.ClearAndSeed(Projects(projectTypes));
+            dbContext.Seed(projectTypes);
+            dbContext.Seed(Projects(projectTypes));
+
+            var resourceCategories = ResourceCategories().ToArray();
+            dbContext.Seed(resourceCategories);
+            //dbContext.Seed(Resources(resourceCategories));
         }
 
         private static IEnumerable<Project> Projects(ProjectType[] projectTypes)
@@ -36,7 +48,31 @@ namespace TheraLang.DataSeeding
         {
             yield return new ProjectType
             {
-                TypeName = "name"
+                TypeName = "ProjectType1"
+            };
+            yield return new ProjectType
+            {
+                TypeName = "ProjectType2"
+            };
+        }
+
+        private static IEnumerable<ResourceCategory> ResourceCategories()
+        {
+            yield return new ResourceCategory
+            {
+                Type = "ResourceCategory1"
+            };
+        }
+        
+        private static IEnumerable<Resource> Resources(ResourceCategory[] resourceCategories)
+        {
+            yield return new Resource
+            {
+                Name = "Name1",
+                Description = "Description1",
+                ResourceCategory = resourceCategories[0],
+                Url = "https://google.com/"
+                
             };
         }
         private static DbContext CreateDbContext()
