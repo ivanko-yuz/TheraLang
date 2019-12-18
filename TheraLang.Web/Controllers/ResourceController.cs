@@ -175,7 +175,7 @@ namespace TheraLang.Web.Controllers
         }
 
         /// <summary>
-        /// Create new reference resource to project
+        /// Add resource to project
         /// </summary>
         /// <param name="resourceToProjectViewModel"></param>
         /// <returns>Status code</returns>
@@ -194,6 +194,18 @@ namespace TheraLang.Web.Controllers
             };
             await _service.AddResourceToProject(resourceToProject, 0);
             return Ok();
+        }
+
+        /// <summary>
+        /// get all resource
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("all")]
+        public IActionResult GetAllTypes()
+        {
+            IEnumerable<Resource> resources = _service.GetAllResources();
+            return Ok(resources);
         }
     }
 }

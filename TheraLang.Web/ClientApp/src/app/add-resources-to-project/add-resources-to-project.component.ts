@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Resource } from '../general-resources/resource-models/resource';
 import { Observable } from 'rxjs';
-import { AddResourcesToProjectService } from './add-resources-to-project.service';
+import { ResourcesToProjectService } from './resources-to-project.service';
 import { ResourceToProject } from './resource-to-project';
 import { NotificationService } from '../shared/services/notification.service';
+import { DialogData } from '../project-info/resources-table-for-project/project-type/project-type.component';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-add-resources-to-project',
@@ -30,23 +32,25 @@ export class AddResourcesToProjectComponent implements OnInit {
   }
 
   constructor(
-    private service: AddResourcesToProjectService,
+    private service: ResourcesToProjectService,
     private notificationService: NotificationService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
 
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     debugger
-    let var1 = new Resource();
-    var1.id = 1;
-    var1.name = 'some text1';
-    let var2 = new Resource();
-    var2.id = 2;
-    var2.name = 'some text2';
-    let var3 = new Resource();
-    var3.id = 3;
-    var3.name = 'some text3';
-    this.resources = new Array(var1, var2, var3);
+    // let var1 = new Resource();
+    // var1.id = 1;
+    // var1.name = 'some text1';
+    // let var2 = new Resource();
+    // var2.id = 2;
+    // var2.name = 'some text2';
+    // let var3 = new Resource();
+    // var3.id = 3;
+    // var3.name = 'some text3';
+    // this.resources = new Array(var1, var2, var3);
+    this.resources = await this.service.getAllResourcess()
 
     this.filteredResources = this.resources;
     debugger
@@ -55,8 +59,8 @@ export class AddResourcesToProjectComponent implements OnInit {
   Add(_resourceId: number): Observable<any> {
     debugger;
     const newResourceToProject = new ResourceToProject();
-    newResourceToProject.resourceId = 1;
-    newResourceToProject.projectId = 86;
+    newResourceToProject.resourceId = _resourceId;
+    newResourceToProject.projectId = this.data.id;
     debugger;
     this.service.post(newResourceToProject).subscribe(
       response => {
@@ -71,8 +75,8 @@ export class AddResourcesToProjectComponent implements OnInit {
     return;
   }
 
-  Delete(resourceToProjectId: number) {
-    this.service.delete(resourceToProjectId).subscribe(
+  Delete(resourceToProject: ResourceToProject) {
+    this.service.delete(resourceToProject).subscribe(
       response => {
         this.notificationService.success(
           "Ресурс з проекту видалено!"

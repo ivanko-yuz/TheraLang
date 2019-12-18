@@ -3,6 +3,8 @@ import { Component, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
 import * as Constants from '../../../shared/constants/resources-table';
+import { ResourcesToProjectService } from 'src/app/add-resources-to-project/resources-to-project.service';
+import { ResourceToProject } from 'src/app/add-resources-to-project/resource-to-project';
 
 @Component({
   selector: 'app-resources-internal-table',
@@ -18,12 +20,21 @@ export class ResourcesInternalTableComponent implements AfterViewInit {
   pageSizeOptions: number[];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(
+    private resourcesToProjectService: ResourcesToProjectService,
+  ) { }
 
   ngAfterViewInit() {
     this.pageSize = Constants.ResourcesTableConstants.COLUMNS_PER_PAGE;
     this.pageSizeOptions = Constants.ResourcesTableConstants.PAGE_SIZE_OPTIONS;
     this.dataSource.paginator = this.paginator;
+  }
+
+  onDelete(resourceId: number) {
+    const resourceToProject = new ResourceToProject();
+    resourceToProject.resourceId = resourceId;
+    this.resourcesToProjectService.delete(resourceToProject);
+
   }
 }
 

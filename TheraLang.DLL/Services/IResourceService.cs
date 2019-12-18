@@ -25,5 +25,8 @@ namespace TheraLang.DLL.Services
         IEnumerable<Resource> GetAllResourcesByProjectId(int projectId);
 
         Task AddResourceToProject(ResourceProject resourceProject, int userId);
+
+        IEnumerable<Resource> GetAllResources();
+        
     }
 }

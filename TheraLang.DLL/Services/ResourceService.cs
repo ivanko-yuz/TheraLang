@@ -182,6 +182,25 @@ namespace TheraLang.DLL.Services
             }
         }
 
+        public IEnumerable<Resource> GetAllResources()
+        {
+            try
+            {
+                var resources = _unitOfWork.Repository<Resource>().Get();
+                var joinedResources = (from res in resources
+                                       select new Resource
+                                       {
+                                           Id = res.Id,
+                                           Name = res.Name,                                           
+                                       });
+                return joinedResources.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error when get all resources", ex);
+            }
+        }
+
         public async Task AddResourceToProject(ResourceProject resourceProject, int userId)
         {
             try
