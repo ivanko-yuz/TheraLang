@@ -9,6 +9,7 @@ import { ProjectParticipationRequestStatus } from '../shared/enums/project-parti
 import { DialogService } from '../shared/services/dialog.service';
 import { LoginComponent } from '../user/login/login.component';
 import { UserService } from '../user/user.service';
+import {PermissionsService} from './Permissions/permissions.service';
 
 
 
@@ -30,7 +31,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private eventService: EventService,
     private siteMapService: SiteMapService,
     private dialog: DialogService,
-    private userService: UserService
+    private userService: UserService,
+    private role: PermissionsService
   ) { }
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.add(subscription);
     this.userService.isAuthenticated().subscribe((isAuthinticated: boolean) => (this.isAuthinticated = isAuthinticated));
   }
-  
+
 
   ngAfterViewInit(): void {
     this.eventService.childEventListner().subscribe(click => {
@@ -69,5 +71,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onLogin(){
    this.dialog.openFormDialog(LoginComponent);
+  }
+
+  isRoleMaster(): boolean {
+    return this.role.role > 1;
+  }
+
+  isRoleAdmin(): boolean {
+    return this.role.role > 2;
   }
 }

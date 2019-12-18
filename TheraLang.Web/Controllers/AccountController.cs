@@ -57,5 +57,13 @@ namespace TheraLang.Web.Controllers
             var isAuthenticated = User.Identity.IsAuthenticated;
             return isAuthenticated;
         }
+
+        [HttpGet("role")]
+        public string GetRole()
+        {
+            var rs = new[] {"Admin", "Master", "Slave"};
+            var rnd = new Random();
+            return rs[rnd.Next(3)];
+        }
     }
 }

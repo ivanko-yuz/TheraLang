@@ -2,11 +2,11 @@
     <mat-toolbar-row  class="toolbar">
       <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item>
          <a mat-button class="toolbar-button" routerLink="/projects" >{{'components.projects.title'|translate}}</a>
-         <a mat-button class="toolbar-button" routerLink="/resources" >{{'components.resources.title'|translate}}</a>
-         <a mat-button class="toolbar-button" routerLink="/participants" >{{'components.participants.title'|translate}}
+         <a mat-button class="toolbar-button" routerLink="/resources" *ngIf="isRoleMaster()">{{'components.resources.title'|translate}}</a>
+         <a mat-button class="toolbar-button" routerLink="/participants" *ngIf="isRoleMaster()">{{'components.participants.title'|translate}}
          <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>
          <a mat-button class="toolbar-button" routerLink="/donations" >Допомогти</a>
-         <a mat-button class="toolbar-button" routerLink="/projectRequest">Нові Проекти</a>
+         <a mat-button class="toolbar-button" routerLink="/projectRequest" *ngIf="isRoleAdmin()">Нові Проекти</a>
          <a mat-button class="toolbar-button" routerLink="/projectTypes" >{{'components.projectTypes.title'|translate}}</a>
          <span class="fill-space"></span>
          <button mat-button *ngIf="!isAuthinticated" class="toolbar-button" (click)="onLogin()">{{'components.account.signIn.title'|translate}}</button>
