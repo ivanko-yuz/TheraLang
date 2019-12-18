@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using TheraLang.Web.Services;
-using TheraLang.DLL.Entities;
-using System.Collections.Generic;
 
+using System.Collections.Generic;
+using TheraLang.DLL.Models;
 namespace TheraLang.Web.Controllers
 {
 
@@ -18,7 +18,7 @@ namespace TheraLang.Web.Controllers
         private readonly IResourceAttachmentService _attachment;
 
         [HttpPost("attach")]
-        public IActionResult UploadFile([FromBody]ResourceAttachment resource)
+        public IActionResult UploadFile([FromBody] ResourceAttachModel resource)
         {
             if (resource == null)
             {
@@ -29,7 +29,7 @@ namespace TheraLang.Web.Controllers
             return Ok(resource);
         }
         [HttpGet]
-        public IEnumerable<ResourceAttachment> GetAllTypes()
+        public IEnumerable<DLL.Entities.ResourceAttachment> GetAllTypes()
         {
             return _attachment.Get();
         }

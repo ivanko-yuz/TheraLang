@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Models;
 using TheraLang.DLL.UnitOfWork;
 
 namespace TheraLang.Web.Services
@@ -21,7 +22,7 @@ namespace TheraLang.Web.Services
         }
         public Stream InputStream { get; set; }
 
-        public async Task Add(ResourceAttachment file)
+        public async Task Add(ResourceAttachModel file)
         {
             var newFile = new ResourceAttachment { FileName = file.FileName, Path = file.Path, ResourceId = file.ResourceId };
             try
@@ -35,7 +36,7 @@ namespace TheraLang.Web.Services
                 throw;
             }
         }
-        public void SaveAs(ResourceAttachment resource, bool overwrite = true, bool autoCreateDirectory = true)
+        public void SaveAs(ResourceAttachModel resource, bool overwrite = true, bool autoCreateDirectory = true)
         {
             try
             {
