@@ -52,7 +52,7 @@ namespace TheraLang.Web.Controllers
         public IEnumerable<ProjectDonationModel> GetAllProjects()
         {
             List<ProjectDonationModel> projectModels = new List<ProjectDonationModel>();
-            projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatus.New)
+            projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatus.Approved)
                 .Select(p => new ProjectDonationModel
             {
                 Id = p.Id,

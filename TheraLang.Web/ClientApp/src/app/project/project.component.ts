@@ -5,7 +5,9 @@ import { ProjectFormComponent } from '../project-form/project-form.component';
 import { ProjectService } from './project.service';
 import { DialogService } from '../shared/services/dialog.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { NotificationService } from '../shared//services/notification.service';
+import { NotificationService } from '../shared/services/notification.service';
+import {TranslateService} from '@ngx-translate/core';
+import {AsyncScheduler} from 'rxjs/internal/scheduler/AsyncScheduler';
 
 
 @Component({
@@ -22,7 +24,8 @@ export class ProjectComponent implements OnInit {
     private dialogService: DialogService,
     private service: ProjectService,
     private dialog: MatDialog,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private translate: TranslateService,
   ) { }
 
 
@@ -42,12 +45,15 @@ export class ProjectComponent implements OnInit {
     this.dialogService.openFormDialog(ProjectFormComponent);
   }
 
-  onDelete(id) {
-    this.dialogService.openConfirmDialog('Are you sure to delete this project?')
-      .afterClosed().subscribe(res => {
+  async onDelete(id) {
+    this.dialogService.openConfirmDialog(await this.translate.get('common.r-u-sure').toPromise())
+      .afterClosed().subscribe(async res => {
         if (res) {
-          this.httpService.deleteProject(id).subscribe(result => this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects));
-          this.notificationService.warn('Deleted successfully!');
+          this.httpService.deleteProject(id)
+            .subscribe(result => {
+              this.httpService.getAllProjects().subscribe((projects: Project[]) => this.projects = projects);
+            });
+          this.notificationService.warn(await this.translate.get('common.deleted-successfully').toPromise());
         }
       });
   }

@@ -9,7 +9,9 @@
       "line-too-short": "The line is too short",
       "confirm": "Confirm",
       "cancel": "Cancel"
-    }
+    },
+    "deleted-successfully": "Deleted successfully!",
+    "r-u-sure": "Are you sure?"
   },
   "components": {
     "home": {
