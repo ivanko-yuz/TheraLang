@@ -20,9 +20,4 @@ export class DonationService {
         return this.http.get(`${donationUrl}/transaction/${donationId}`);
     }
 
-    getSocietyDonationSum() {
-        return this.http.get(`${donationUrl}/society`)
-
-    }
-
 }

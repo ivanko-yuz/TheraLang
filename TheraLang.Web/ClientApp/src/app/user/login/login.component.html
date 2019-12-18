@@ -1,5 +1,5 @@
 <h2 mat-dialog-title >Вхід</h2>
-<form [formGroup]="this.userService.loginForm" autocomplete="off" (submit)="onSubmit()">
+<form [formGroup]="this.userService.loginForm" autocomplete="off">
     <mat-dialog-content>
       <mat-form-field >
         <mat-label>Логін</mat-label>
@@ -8,13 +8,13 @@
       <mat-form-field>
         <mat-label>Пароль</mat-label>
         <input formControlName="password"  matInput required placeholder="Пароль" [type]="hide ? 'password' : 'text'">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="'hide'">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
       </mat-form-field>
      </mat-dialog-content>
      <mat-dialog-actions>
-      <button mat-raised-button color="primary" type="submit" [disabled]="this.userService.loginForm.invalid">Підтвердити</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="this.userService.loginForm.invalid" (click)="onSubmit()">Підтвердити</button>
       <button mat-raised-button color="warn" type="reset" (click)="onClose()">Відмінити</button>
     </mat-dialog-actions>
  </form>

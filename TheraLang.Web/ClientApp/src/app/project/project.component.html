@@ -8,13 +8,13 @@
       <mat-card-title>
         <a mat-button class="donate-button" [routerLink]="['/donations', project.id]">Підтримати</a>
         <div>Потрібно зібрати:
-          <h3 class="donation-target">₴ {{project?.donationTargetSum | number : '1.2-2'}}</h3>
+          <h3 class="donation-target">₴ {{project?.donationTargetSum}}</h3>
         </div>
         <div>Зібрано:
-          <h5 class="donation-sum">₴ {{project?.donationsSum | number : '1.2-2'}}</h5>
+          <h5 class="donation-sum">₴ {{project?.donationsSum}}</h5>
         </div>
         <div>Залишилося зібрати:
-          <h5 class="donation-left-to-collect">₴ {{project?.sumLeftToCollect | number : '1.2-2'}}</h5>
+          <h5 class="donation-left-to-collect">₴ {{project?.sumLeftToCollect}}</h5>
         </div>
       </mat-card-title>
     </mat-card-header>
@@ -32,9 +32,9 @@
     </mat-card-content>
     <div class="clear"></div>
     <mat-card-actions class="get-details-button">
-      <a mat-stroked-button [routerLink]="['/projects', project.id]">{{'common:details'|translate}}</a>
-      <button mat-stroked-button (click)="onEdit(project)">{{'common:edit'|translate}}</button>
-      <button mat-stroked-button (click)="onDelete(project.id)">{{'common:delete'|translate}}</button>
+      <a mat-stroked-button [routerLink]="['/projects', project.id]">{{'common.details'|translate}}</a>
+      <button mat-stroked-button (click)="onEdit(project)">{{'common.edit'|translate}}</button>
+      <button mat-stroked-button (click)="onDelete(project.id)">{{'components.projects.delete'|translate}}</button>
     </mat-card-actions>
   </mat-card>
 </div>

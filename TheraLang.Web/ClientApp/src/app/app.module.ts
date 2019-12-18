@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, ErrorHandler } from "@angular/core";
 import {
       MatToolbarModule, MatButtonModule, MatAutocompleteModule, MatBadgeModule,
       MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule,
@@ -67,9 +67,10 @@ import { ProjectTypeCreateFormComponent } from './project-type-create-form/proje
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageComponent } from './toolbar/language/language.component';
+import { ProjectRequestComponent } from "./project-request/project-request.component";
+import { HttpProjectService } from "./project-request/http-project.service";
 import { AddResourcesToProjectComponent } from './add-resources-to-project/add-resources-to-project.component';
 import { ResourcesFilterPipe } from './add-resources-to-project/resources-filter.pipe';
-
 
 export function HttpLoaderFactory(http: HttpClient) {
       return new TranslateHttpLoader(http);
@@ -96,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
             ToolbarItemComponent,
             DonationComponent,
             TransactionResultComponent,
+            ProjectRequestComponent,
             UserComponent,
             LoginComponent,
             ProfileMenuComponent,
@@ -193,9 +195,9 @@ export function HttpLoaderFactory(http: HttpClient) {
             DialogService,
             ResourceCategoriesService,
             ProjectParticipationService,
-            DonationService,
             ProjectTypeService,
             DonationService,
+            HttpProjectService,
             UserService,
             ResourceCreateService,
             ProjectTypeHttp,

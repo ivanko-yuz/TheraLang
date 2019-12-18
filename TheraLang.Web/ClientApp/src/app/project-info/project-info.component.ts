@@ -60,10 +60,9 @@ export class ProjectInfoComponent implements OnInit {
 
   onJoin() {
     this.participService.createParticipRequest(this.projectId).subscribe(
-      (res) => {
-        if (res.ok) {
-          this.notificationService.success('Заявку надіслано')
-        }
+      (msg) => {
+        msg = 'Заявку надіслано'
+        this.notificationService.success(msg)
       },
       (error) => {
         console.log(error);
