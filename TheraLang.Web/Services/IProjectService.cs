@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
+using TheraLang.Web.Models;
 
 namespace TheraLang.Web.Services
 {
@@ -8,7 +10,7 @@ namespace TheraLang.Web.Services
     {
         Task ChangeStatus(int id, ProjectStatus status);
 
-        Task Add(Project projectViewModel);
+        Task Add(ProjectModel projectModel, Guid userId);
 
         Task Delete(int id);
 
@@ -19,5 +21,7 @@ namespace TheraLang.Web.Services
         Project GetById(int id);
 
         IEnumerable<Project> GetProjects(int pageNumber, int pageSize);
+        IEnumerable<Project> GetAllNewProjects();
+        IEnumerable<Project> GetProjectsByStatus(int status);
     }
 }

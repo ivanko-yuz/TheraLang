@@ -1,45 +1,54 @@
 <h2 mat-dialog-title>
-  <span>{{this.service.form.controls['id'].value?"РЕДАГУВАННЯ ПРОЕКТУ":"СТВОРЕННЯ ПРОЕКТУ"}}</span>
+  <span>{{'components.projects.'+(this.service.form.controls['id'].value?'PROJECT-EDITING':'PROJECT-CREATION')|translate}}</span>
 </h2>
 <form [formGroup]="this.service.form">
   <mat-dialog-content>
     <mat-form-field>
       <input type="hidden" formControlName="id">
-      <input formControlName="name" autofocus required matInput placeholder="Назва проекту">
-      <mat-error *ngIf="service.form.controls['name'].errors?.required">Це поле є обов'язковим</mat-error>
-      <mat-error *ngIf="service.form.controls['name'].errors?.minlength">Мінімум 3 знаки</mat-error>
-      <mat-error *ngIf="service.form.controls['name'].errors?.maxlength">Завелика назва</mat-error>
+      <input formControlName="name" autofocus required matInput [placeholder]="'components.projects.name-of-project'|translate">
+      <mat-error *ngIf="service.form.controls['name'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+      <mat-error *ngIf="service.form.controls['name'].errors?.minlength">{{'common.validation.line-too-short'|translate}}</mat-error>
+      <mat-error *ngIf="service.form.controls['name'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input formControlName="description"  required matInput placeholder="Опис">
-      <mat-error *ngIf="service.form.controls['description'].errors?.required">Це поле є обов'язковим</mat-error>
-      <mat-error *ngIf="service.form.controls['description'].errors?.minlength">Мінімум 5 знаків</mat-error>
-      <mat-error *ngIf="service.form.controls['description'].errors?.maxlength">Завеликий опис</mat-error>
+      <mat-label>Тип</mat-label>
+      <mat-select formControlName="typeId" required>
+        <mat-option *ngFor="let type of projectTypes" [value]="type.id">
+          {{type.typeName}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="service.form.controls['typeId'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input formControlName="details" matInput placeholder="Деталі">
-      <mat-error *ngIf="service.form.controls['details'].errors?.maxlength">Завеликий опис</mat-error>
+      <textarea formControlName="description"  required matTextareaAutosize matInput [placeholder]="'components.projects.description'|translate"></textarea>
+      <mat-error *ngIf="service.form.controls['description'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+      <mat-error *ngIf="service.form.controls['description'].errors?.minlength">{{'common.validation.line-too-short'|translate}}</mat-error>
+      <mat-error *ngIf="service.form.controls['description'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input formControlName="projectStart" type=[valueAsDate] matInput [matDatepicker]="picker" required placeholder="Дата початку">
+      <textarea formControlName="details" matTextareaAutosize matInput [placeholder]="'components.projects.details'|translate"></textarea>
+      <mat-error *ngIf="service.form.controls['details'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="projectStart" type=[valueAsDate] matInput [matDatepicker]="picker" required [placeholder]="'components.projects.project-starts'|translate" readonly>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="service.form.controls['projectStart'].errors?.required">Це поле є обов'язковим</mat-error>
+      <mat-error *ngIf="service.form.controls['projectStart'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input formControlName="projectEnd" matInput [matDatepicker]="picker1" placeholder="Дата завершення">
+      <input formControlName="projectEnd" matInput [matDatepicker]="picker1" [placeholder]="'components.projects.project-ends'|translate" readonly>
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1 ></mat-datepicker>
-      <mat-error *ngIf="service.form.controls['projectEnd'].hasError('matDatepickerFilter')">щось там</mat-error>
+      <mat-datepicker #picker1></mat-datepicker>
+      <mat-error *ngIf="service.form.controls['projectEnd'].hasError('matDatepickerFilter')">{{'common.wth'|translate}}</mat-error>
     </mat-form-field>
-      <mat-form-field>
-        <input formControlName="type" required matInput placeholder="Тип">
-        <mat-error *ngIf="service.form.controls['type'].errors?.required">Це поле є обов'язковим</mat-error>
-      </mat-form-field>
+    <mat-form-field>
+      <input formControlName="donationTargetSum" matInput placeholder="Необхідно зібрати" type="number">
+      <span matPrefix>₴&nbsp;</span>
+    </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-raised-button color="primary" type="submit" [disabled]="this.service.form.invalid"
-      (click)='onSubmit()'>Підтвердити</button>
-    <button mat-raised-button color="warn" type="reset" (click)="onClose()">Відмінити</button>
+      (click)='onSubmit()'>{{'common.validation.confirm'|translate}}</button>
+    <button mat-raised-button color="warn" type="reset" (click)="onClose()">{{'common.validation.cancel'|translate}}</button>
   </mat-dialog-actions>
 </form>

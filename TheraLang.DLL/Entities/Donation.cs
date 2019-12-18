@@ -7,9 +7,13 @@ namespace TheraLang.DLL.Entities
     {
         public int Id { get; set; }
 
-        public int ProjectId { get; set; }
+        public int? ProjectId { get; set; }
 
         public virtual Project Project { get; set; }
+        
+        public int? SocietyId { get; set;}
+
+        public virtual Society Society { get; set; }
 
         public string DonationId { get; set; }
 
@@ -28,11 +32,6 @@ namespace TheraLang.DLL.Entities
         [JsonProperty("liqpay_order_id")]
         public string LiqpayOrderId { get; set; }
 
-        [JsonProperty("transaction_id")]
-        public int TransactionId { get; set; }
-
-        [JsonProperty("receiver_commission")]
-        public decimal ReceiverCommission { get; set; }
 
     }
 }

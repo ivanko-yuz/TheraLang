@@ -1,5 +1,4 @@
 import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
-import { HttpService } from '../project/http.service';
 import { ProjectParticipationRequest } from '../project-participants/project-participation-request';
 import { EventService } from '../project-participants/event-service';
 import {SiteMapService} from '../cms/services/site-map.service';
@@ -7,6 +6,9 @@ import {ToolbarItem} from './toolbar-item/toolbar-item';
 import {Subscription} from 'rxjs';
 import { ProjectParticipationService } from '../project-participants/project-participation.service';
 import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status';
+import { DialogService } from '../shared/services/dialog.service';
+import { LoginComponent } from '../user/login/login.component';
+import { UserService } from '../user/user.service';
 
 
 
@@ -21,11 +23,14 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   projectParticipation: ProjectParticipationRequest[];
   toolbarItems: ToolbarItem[] = [];
   private subscription = new Subscription();
+  isAuthinticated: boolean;
 
   constructor(
     private participantService: ProjectParticipationService,
     private eventService: EventService,
-    private siteMapService: SiteMapService
+    private siteMapService: SiteMapService,
+    private dialog: DialogService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -38,7 +43,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     this.subscription.add(subscription);
+    this.userService.isAuthenticated().subscribe((isAuthinticated: boolean) => (this.isAuthinticated = isAuthinticated));
   }
+  
 
   ngAfterViewInit(): void {
     this.eventService.childEventListner().subscribe(click => {
@@ -58,5 +65,9 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
       this.subscription.unsubscribe();
+  }
+
+  onLogin(){
+   this.dialog.openFormDialog(LoginComponent);
   }
 }

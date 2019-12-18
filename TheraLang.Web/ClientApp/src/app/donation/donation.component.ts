@@ -24,10 +24,18 @@ export class DonationComponent implements OnInit {
   }
 
   checkout() {
-    this.donationService.getCheckoutModel(this.donationAmount, this.projectId).subscribe((checkoutModel: LiqpayCheckout) => {
+    if(this.projectId !== 0) {
+      this.donationService.getProjectCheckoutModel(this.donationAmount, this.projectId).subscribe((checkoutModel: LiqpayCheckout) => {
+        this.donationModel = checkoutModel;
+        window.location.replace(`${liqpayCheckoutUrl}?data=${this.donationModel.data}&signature=${this.donationModel.signature}`);
+      });
+    }
+    else {
+    this.donationService.getSocietyCheckoutModel(this.donationAmount).subscribe((checkoutModel: LiqpayCheckout) => {
       this.donationModel = checkoutModel;
-      window.open(`${liqpayCheckoutUrl}?data=${this.donationModel.data}&signature=${this.donationModel.signature}`);
+      window.location.replace(`${liqpayCheckoutUrl}?data=${this.donationModel.data}&signature=${this.donationModel.signature}`);
     });
+  }
 
   }
 }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using TheraLang.DLL.Constants;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.UnitOfWork;
+using TheraLang.Web.Models;
 
 namespace TheraLang.Web.Services
 {
@@ -23,19 +24,61 @@ namespace TheraLang.Web.Services
             return _uow.Repository<Project>().Get().Include(x=>x.Donations);
         }
 
-        public async Task Add(Project projectViewModel)
+        public IEnumerable<Project> GetAllNewProjects()
         {
-            var newProject = new Project { Name = projectViewModel.Name, Details = projectViewModel.Details,
-                Description = projectViewModel.Description, IsActive = projectViewModel.IsActive,
-                ProjectStart = projectViewModel.ProjectStart, ProjectEnd = projectViewModel.ProjectEnd  };
+            var projects = _uow.Repository<Project>().Get().Where(i => i.StatusId==0);
+            var joinedProjects = (from p in projects
+                                   select new Project
+                                   {
+                                       Id = p.Id,
+                                       StatusId = p.StatusId,
+                                       Name = p.Name,
+                                       Description = p.Description,
+                                       Details = p.Details,
+                                       ProjectStart = p.ProjectStart,
+                                       ProjectEnd = p.ProjectEnd
+                                   });
+            return joinedProjects;
+        }
+
+        public IEnumerable<Project> GetProjectsByStatus(int status)
+        {
+            var projects = _uow.Repository<Project>().Get().Where(i => i.StatusId == (ProjectStatus) status).ToArray();
+
+            return projects;
+        }
+
+        public async Task Add(ProjectModel projectModel, Guid userId)
+        {
+            var newProject = new Project
+            {
+                Name = projectModel.Name,
+                Details = projectModel.Details,
+                Description = projectModel.Description,
+                IsActive = true,
+                ProjectStart = projectModel.ProjectStart,
+                ProjectEnd = projectModel.ProjectEnd,
+                TypeId = projectModel.TypeId,
+                DonationTarget = projectModel.DonationTargetSum
+            };
+
+            var newParticipant = new ProjectParticipation
+            {
+                Role = DLL.Enums.MemberRole.ProjectOwner,
+                CreatedById = userId,
+                Status = DLL.Enums.ProjectParticipationStatus.Approved,
+                Project = newProject,
+            };
             try
             {
                 await _uow.Repository<Project>().Add(newProject);
                 await _uow.SaveChangesAsync();
+                await _uow.Repository<ProjectParticipation>().Add(newParticipant);
+                await _uow.SaveChangesAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                e.Data["project"] = projectViewModel;
+                e.Data["project"] = projectModel;
                 throw;
             }
         }
@@ -76,13 +119,14 @@ namespace TheraLang.Web.Services
 
         public async Task ChangeStatus(int projectId, ProjectStatus status)
         {
- 
                 var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == projectId);
                 if (project is null)
                 {
                     throw new NullReferenceException($"{ nameof(project) } cannot be null");
                 }
                 project.StatusId = status;
+                _uow.Repository<Project>().Update(project);
+                
                 await _uow.SaveChangesAsync();          
         }
 

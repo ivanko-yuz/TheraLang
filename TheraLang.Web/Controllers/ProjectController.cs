@@ -2,10 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.Web.Models;
 using TheraLang.Web.Services;
+using Piranha.AspNetCore.Identity.Data;
+
+
+
 
 namespace TheraLang.Web.Controllers
 {
@@ -13,10 +18,13 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        private readonly IProjectService _projectService; 
-        public ProjectController(IProjectService projectService)
+        private readonly IProjectService _projectService;
+        private readonly UserManager<User> _userManager;
+
+        public ProjectController(IProjectService projectService, UserManager<User> userManager)
         {
             _projectService = projectService;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -25,13 +33,14 @@ namespace TheraLang.Web.Controllers
         /// <param name="project"></param>
         /// <returns>status code</returns>
         [HttpPost("create")]
-        public IActionResult CreateProject([FromBody]Project project)
+        public async Task <IActionResult> CreateProject([FromBody]ProjectModel project)
         {
             if(project == null)
             {
                 throw new ArgumentException($"{nameof(project)} cannot be null");
             }
-            _projectService.Add(project);
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            await _projectService.Add(project, user.Id);
             return  Ok(project);
         }
 
@@ -40,22 +49,34 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of Projects</returns>
         [HttpGet]
-        public IEnumerable<ProjectModel> GetAllProjects()
+        public IEnumerable<ProjectDonationModel> GetAllProjects()
         {
-            var projectModels = _projectService.GetAllProjects().Select(p => new ProjectModel
+            List<ProjectDonationModel> projectModels = new List<ProjectDonationModel>();
+            projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatus.New)
+                .Select(p => new ProjectDonationModel
             {
                 Id = p.Id,
                 Name = p.Name,
-                DonationAmount = p.Donations.Sum(y => y.Amount),
+                DonationsSum = p.Donations.Sum(y => y.Amount),
+                DonationTargetSum = p.DonationTarget,
+                SumLeftToCollect = p.DonationTarget - p.Donations.Sum(y => y.Amount),
                 Description = p.Description,
                 Details = p.Details,
                 ProjectStart = p.ProjectStart,
                 ProjectEnd = p.ProjectEnd
-                
             }).ToList();
 
             return projectModels;
         }
+        [HttpGet("new")]
+        public IActionResult GetAllNewProjects()
+        {
+
+            var projects = _projectService.GetAllNewProjects();
+            return Ok(projects);
+        }
+
+
 
         /// <summary>
         /// Get project by Id
@@ -95,7 +116,7 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>status code</returns>
-        [HttpPut("approve/{id}")]
+        [HttpGet("approve/{id}")]
         public async Task<IActionResult> Approve(int id)
         {
             if (id == default)
@@ -103,7 +124,7 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
             await _projectService.ChangeStatus(id, ProjectStatus.Approved);
-            return Ok();
+            return Ok(ProjectStatus.Approved);
         }
 
         /// <summary>
@@ -132,7 +153,7 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>status code</returns>
-        [HttpPut("reject/{id}")]
+        [HttpGet("reject/{id}")]
         public async Task<IActionResult> Reject(int id)
         {
             if (id == default)
@@ -140,7 +161,7 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
             await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
-            return Ok();
+            return Ok(ProjectStatus.Rejected);
         }
 
         /// <summary>
@@ -157,6 +178,13 @@ namespace TheraLang.Web.Controllers
             }
             await _projectService.Delete(id);
             return Ok();
+        }
+
+        [HttpGet("newstatus/{status}")]
+        public IActionResult GetProjectsByStatus(int status)
+        {
+            var projects = _projectService.GetProjectsByStatus(status);
+            return Ok(projects);
         }
     }
 }

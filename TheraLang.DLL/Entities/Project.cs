@@ -8,8 +8,8 @@ namespace TheraLang.DLL.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
-        
-        public ProjectStatus StatusId { get; set;  }
+
+        public ProjectStatus StatusId { get; set; }
 
         public string Description { get; set; }
 
@@ -23,7 +23,9 @@ namespace TheraLang.DLL.Entities
 
         public virtual ProjectType Type {get; set;}
 
-        public int TypeId { get; set; }    
+        public int TypeId { get; set; }   
+        
+        public decimal DonationTarget { get; set; }
 
         public virtual ICollection<ResourceProject> ProjectResources { get; set; }
 

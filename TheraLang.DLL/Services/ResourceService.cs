@@ -30,7 +30,7 @@ namespace TheraLang.DLL.Services
             }
         }
 
-        public async Task AddResource(ResourceViewModel resourceModel, int userId)
+        public async Task AddResource(ResourceViewModel resourceModel, Guid userId)
         {
             try
             {
@@ -41,10 +41,8 @@ namespace TheraLang.DLL.Services
                     Url = resourceModel.url,
                     File = resourceModel.file,
                     CategoryId = resourceModel.categoryId,
-                    CreatedById = userId,
-                    CreatedDateUtc = DateTime.UtcNow
+                    CreatedById = userId
                 };
-
                 await _unitOfWork.Repository<Resource>().Add(resource);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -54,7 +52,7 @@ namespace TheraLang.DLL.Services
             }
         }
 
-        public async Task UpdateResource(ResourceViewModel resourceModel, int updatetById)
+        public async Task UpdateResource(ResourceViewModel resourceModel, Guid updatetById)
         {
             try
             {
@@ -65,7 +63,6 @@ namespace TheraLang.DLL.Services
                 resource.Url = resourceModel.url;
                 resource.File = resourceModel.file;
                 resource.CategoryId = resourceModel.categoryId;
-                resource.UpdatedDateUtc = DateTime.UtcNow;
                 resource.UpdatedById = updatetById;
 
                 _unitOfWork.Repository<Resource>().Update(resource);
@@ -101,14 +98,14 @@ namespace TheraLang.DLL.Services
                                        select new Resource
                                        {
                                            Id = res.Id,
-                                           User = res.User,
+                                           PiranhaUser = res.PiranhaUser,
                                            Name = res.Name,
                                            Description = res.Description,
                                            Url = res.Url,
                                            File = res.File,
                                            CategoryId = res.CategoryId,
                                            ResourceCategory = res.ResourceCategory,
-                                           ResourceToProjects = res.ResourceToProjects,
+                                           ResourceProjects = res.ResourceProjects,
                                            UpdatedById = res.UpdatedById,
                                            CreatedDateUtc = res.CreatedDateUtc,
                                            UpdatedDateUtc = res.UpdatedDateUtc,
@@ -160,19 +157,19 @@ namespace TheraLang.DLL.Services
         {
             try
             {
-                var resources = _unitOfWork.Repository<Resource>().Get().Where(x => x.ResourceToProjects.Any(c => c.ProjectId == projectId));
+                var resources = _unitOfWork.Repository<Resource>().Get().Where(x => x.ResourceProjects.Any(c => c.ProjectId == projectId));
                 var joinedResources = (from res in resources
                                        select new Resource
                                        {
                                            Id = res.Id,
-                                           User = res.User,
+                                           PiranhaUser = res.PiranhaUser,
                                            Name = res.Name,
                                            Description = res.Description,
                                            Url = res.Url,
                                            File = res.File,
                                            CategoryId = res.CategoryId,
                                            ResourceCategory = res.ResourceCategory,
-                                           ResourceToProjects = res.ResourceToProjects,
+                                           ResourceProjects = res.ResourceProjects,
                                            UpdatedById = res.UpdatedById,
                                            CreatedDateUtc = res.CreatedDateUtc,
                                            UpdatedDateUtc = res.UpdatedDateUtc,

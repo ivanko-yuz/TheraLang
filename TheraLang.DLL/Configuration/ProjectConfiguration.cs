@@ -26,7 +26,10 @@ namespace TheraLang.DLL.Configuration
 
             builder.Property(e => e.IsActive);
 
-            builder.HasOne(e => e.Type).WithMany(p => p.Projects).HasForeignKey(d => d.TypeId);
+            builder.HasOne(e => e.Type).WithMany(p => p.Projects).
+                HasForeignKey(d => d.TypeId).OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(e => e.DonationTarget).IsRequired().HasColumnType("decimal(18, 2)");     
 
             builder.HasMany(x => x.ProjectResources).WithOne(i => i.Project).HasForeignKey("ProjectId");
 
@@ -34,8 +37,10 @@ namespace TheraLang.DLL.Configuration
 
             builder.HasMany(e => e.Donations).WithOne(i => i.Project).HasForeignKey("ProjectId");
 
-            builder.Property(e => e.StatusId).HasMaxLength(250).IsRequired().HasDefaultValue(Entities.ProjectStatus.New); 
+            builder.Property(e => e.StatusId).HasMaxLength(250).IsRequired().HasDefaultValue(Entities.ProjectStatus.New);
 
+            builder.HasMany(x => x.ProjectParticipations).WithOne(i => i.Project)
+                .HasForeignKey(e => e.ProjectId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
