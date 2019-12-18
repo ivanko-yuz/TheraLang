@@ -17,7 +17,6 @@ namespace TheraLang.Web.Controllers
     public class ResourceController : ControllerBase
     {
         public ResourceController(IResourceService service, UserManager<User> userManager)
-
         {
             _service = service;
             _userManager = userManager;

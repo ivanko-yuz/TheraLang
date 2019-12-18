@@ -4,9 +4,9 @@ using TheraLang.DLL.Entities;
 
 namespace TheraLang.DLL.Configuration
 {
-    public class ProjectTypeConfigurationcs : BaseEntityConfiguration<ProjectType>
+    public class ProjectTypeConfigurationcs : IEntityTypeConfiguration<ProjectType>
     {
-        public override void Configure(EntityTypeBuilder<ProjectType> builder)
+        public void Configure(EntityTypeBuilder<ProjectType> builder)
         {
             builder.ToTable("ProjectTypes");
 
@@ -18,8 +18,8 @@ namespace TheraLang.DLL.Configuration
 
             builder.HasIndex(e => e.TypeName).IsUnique(true);
 
-            builder.HasMany(e=>e.Projects).WithOne(x=>x.Type).
-                HasForeignKey(i=>i.TypeId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(e => e.Projects).WithOne(x => x.Type).
+                HasForeignKey(i => i.TypeId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
