@@ -1,11 +1,6 @@
 <div class="mat-elevation-z8" *ngIf="showTable">
   <table mat-table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let i = index"> {{i+1}} </td>
-    </ng-container>
-
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Назва </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>

@@ -3,7 +3,16 @@
 </h2>
 
 <form [formGroup]="this.service.resourceForm">
-    <mat-dialog-content style="height: 380px">
+    <mat-dialog-content style="height: 450px">
+
+        <mat-form-field>
+            <mat-select  formControlName="categoryId" required placeholder="Тип ресурсу">
+              <mat-option *ngFor="let category of categories" formControlName="categoryId" [value]="category.id">
+                {{category.type}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
         <mat-form-field>
             <input formControlName="name" autofocus required matInput placeholder="Назва ресурсу" >
         </mat-form-field>
@@ -17,18 +26,14 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input formControlName="file" matInput placeholder="Файл" >
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-select  formControlName="categoryId" required placeholder="Тип ресурсу">
-              <mat-option *ngFor="let category of categories" formControlName="categoryId" [value]="category.id">
-                {{category.type}}
-              </mat-option>
-            </mat-select>
+            <input formControlName="fileName" matInput placeholder="Назва файлу" >
         </mat-form-field>
 
         <mat-dialog-actions>
+            <input mat-raised-button color="primary" type="file" formControlName="file" placeholder="Додати ресурс">
+        </mat-dialog-actions>
+
+        <mat-dialog-actions class = "submitButton">
             <button mat-raised-button color="primary" type="submit" [disabled]="this.service.resourceForm.invalid" (click)='onSubmit()'>
                 Підтвердити
             </button>

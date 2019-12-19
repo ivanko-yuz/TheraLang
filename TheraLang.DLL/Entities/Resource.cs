@@ -13,6 +13,8 @@ namespace TheraLang.DLL.Entities
 
         public string Url { get; set; }
 
+        public string FileName { get; set; }
+
         public string File { get; set; }
 
         public int CategoryId { get; set; }
