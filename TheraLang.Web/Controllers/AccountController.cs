@@ -59,11 +59,14 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpGet("role")]
-        public string GetRole()
+        public ActionResult<string> GetRole()
         {
-            var rs = new[] {"Admin", "Master", "Slave"};
-            var rnd = new Random();
-            return rs[rnd.Next(3)];
+            switch (User.Identity.Name)
+            {
+                case "Admin": return "Admin";
+                case "Admin": return "Master";
+                default: return "Slave";
+            }
         }
     }
 }

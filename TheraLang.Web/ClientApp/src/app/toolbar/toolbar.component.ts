@@ -1,16 +1,16 @@
-import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
-import { ProjectParticipationRequest } from '../project-participants/project-participation-request';
-import { EventService } from '../project-participants/event-service';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {ProjectParticipationRequest} from '../project-participants/project-participation-request';
+import {EventService} from '../project-participants/event-service';
 import {SiteMapService} from '../cms/services/site-map.service';
 import {ToolbarItem} from './toolbar-item/toolbar-item';
 import {Subscription} from 'rxjs';
-import { ProjectParticipationService } from '../project-participants/project-participation.service';
-import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status';
-import { DialogService } from '../shared/services/dialog.service';
-import { LoginComponent } from '../user/login/login.component';
-import { UserService } from '../user/user.service';
+import {ProjectParticipationService} from '../project-participants/project-participation.service';
+import {ProjectParticipationRequestStatus} from '../shared/enums/project-participation-request-status';
+import {DialogService} from '../shared/services/dialog.service';
+import {LoginComponent} from '../user/login/login.component';
+import {UserService} from '../user/user.service';
 import {PermissionsService} from './Permissions/permissions.service';
-
+import {Permissions} from './Permissions/permissions.enum';
 
 
 @Component({
@@ -74,10 +74,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   isRoleMaster(): boolean {
-    return this.role.role > 1;
+    return this.role.role < Permissions.Slave;
   }
 
   isRoleAdmin(): boolean {
-    return this.role.role > 2;
+    return this.role.role < Permissions.Master;
   }
 }
