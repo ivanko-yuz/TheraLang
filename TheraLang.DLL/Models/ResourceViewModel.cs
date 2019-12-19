@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace TheraLang.DLL.Models
+﻿namespace TheraLang.DLL.Models
 {
     public class ResourceViewModel
     {
@@ -12,9 +10,7 @@ namespace TheraLang.DLL.Models
 
         public string url { get; set; }
 
-        public string fileName { get; set; }
-
-        public IFormFile file { get; set; }
+        public string file { get; set; }
 
         public int categoryId { get; set; }
     }

@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.UnitOfWork;
 using TheraLang.DLL.Models;
-using System.IO;
-using System.Text;
 
 namespace TheraLang.DLL.Services
 {
@@ -36,28 +34,15 @@ namespace TheraLang.DLL.Services
         {
             try
             {
-                string resourceFileString = "";
-
-                if (resourceModel.file != null)
-                {
-                    using (BinaryReader binaryReader = new BinaryReader(resourceModel.file.OpenReadStream()))
-                    {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceModel.file.Length);
-                        resourceFileString = BitConverter.ToString(byteFile);
-                    }
-                }
-
                 Resource resource = new Resource
                 {
                     Name = resourceModel.name,
                     Description = resourceModel.description,
                     Url = resourceModel.url,
-                    FileName = resourceModel.fileName,
-                    File = resourceFileString,
+                    File = resourceModel.file,
                     CategoryId = resourceModel.categoryId,
                     CreatedById = userId
                 };
-
                 await _unitOfWork.Repository<Resource>().Add(resource);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -71,24 +56,12 @@ namespace TheraLang.DLL.Services
         {
             try
             {
-                string resourceFileString = "";
-
-                if (resourceModel.file != null)
-                {
-                    using (BinaryReader binaryReader = new BinaryReader(resourceModel.file.OpenReadStream()))
-                    {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceModel.file.Length);
-                        resourceFileString = BitConverter.ToString(byteFile);
-                    }
-                }
-
                 Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == resourceModel.id);
 
                 resource.Name = resourceModel.name;
                 resource.Description = resourceModel.description;
                 resource.Url = resourceModel.url;
-                resource.FileName = resourceModel.fileName;
-                resource.File = resourceFileString;
+                resource.File = resourceModel.file;
                 resource.CategoryId = resourceModel.categoryId;
                 resource.UpdatedById = updatetById;
 
