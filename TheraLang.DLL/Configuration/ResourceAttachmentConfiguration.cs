@@ -16,7 +16,8 @@ namespace TheraLang.DLL.Configuration
 
             builder.Property(e => e.Path).HasMaxLength(1000);
 
-            builder.HasOne(e => e.Resource).WithMany(e => e.ResourceAttach).HasForeignKey("ResourceId").OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(e => e.Resource).WithMany(e => e.ResourceAttachments)
+                .HasForeignKey(x=>x.ResourceId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
