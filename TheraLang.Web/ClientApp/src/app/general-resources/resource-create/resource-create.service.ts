@@ -24,7 +24,8 @@ export class ResourceCreateService {
       name : ['', [Validators.required, Validators.maxLength(50)]],
       description : ['', [Validators.required, Validators.maxLength(5000)]],
       url : [''],
-      file : [''],
+      fileName : [''],
+      file: [null],
       categoryId : [null, Validators.required],
   })
 
@@ -34,12 +35,13 @@ export class ResourceCreateService {
           name : '',
           description : '',
           url : '',
-          file : '',
+          fileName : '',
+          file : File,
           categoryId : null,
       });
   }
 
-  postResource(resource : Resource){
+  postResource(resource : Resource){ 
       return this.http.post(this.resourceUrl +'/' + 'create', resource);
   }
 
