@@ -33,6 +33,12 @@ namespace TheraLang.Web
                 options.ResourcesPath = "Resources"
             );
 
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+
             services.AddMvc()
                 .AddPiranhaManagerOptions()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -91,7 +97,7 @@ namespace TheraLang.Web
 
             App.Init(api);
             // Configure cache level
-            App.CacheLevel = Piranha.Cache.CacheLevel.Full;
+            App.CacheLevel = Piranha.Cache.CacheLevel.None;
 
             // Build content types
             var pageTypeBuilder = new Piranha.AttributeBuilder.PageTypeBuilder(api)
@@ -111,6 +117,7 @@ namespace TheraLang.Web
 
             // Register middleware
             app.UseStaticFiles();
+            app.UseSpaStaticFiles();
             app.UseAuthentication();
             app.UsePiranhaManager();
             app.UseMvc(routes =>
