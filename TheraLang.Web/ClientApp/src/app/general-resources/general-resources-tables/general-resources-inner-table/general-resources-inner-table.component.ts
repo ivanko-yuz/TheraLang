@@ -17,7 +17,7 @@ export class GeneralResourcesInnerTableComponent implements OnInit {
   allResourcesCount: number;
   columnsPerPage =  Constants.ResourcesTableConstants.COLUMNS_PER_PAGE;
   pageSizeOptions = Constants.ResourcesTableConstants.PAGE_SIZE_OPTIONS;
-  displayedColumns: string[] = ['id', 'name', 'date', 'description'];
+  displayedColumns: string[] = ['name', 'date', 'description'];
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(public resourceService: ResourceService) { }

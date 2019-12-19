@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DLL;
 
 namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191219141059_addedSomeNewFields")]
+    partial class addedSomeNewFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,16 +137,8 @@ namespace TheraLang.DLL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CreatedById");
-
-                    b.Property<DateTime>("CreatedDateUtc");
-
                     b.Property<string>("TypeName")
                         .HasMaxLength(500);
-
-                    b.Property<int?>("UpdatedById");
-
-                    b.Property<DateTime?>("UpdatedDateUtc");
 
                     b.HasKey("Id");
 
