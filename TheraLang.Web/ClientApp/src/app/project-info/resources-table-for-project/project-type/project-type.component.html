@@ -1,8 +1,8 @@
-<button mat-raised-button (click)="onCreate()">Створити</button>
+<button mat-raised-button class="create" (click)="onCreate()">Створити</button>
 <table mat-table [dataSource]="projectTypes" class="mat-elevation-z8">
 
   <ng-container matColumnDef="typeName">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <th mat-header-cell *matHeaderCellDef> Назва </th>
     <td mat-cell *matCellDef="let element"> {{element.typeName}} </td>
   </ng-container>
 

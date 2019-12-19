@@ -28,11 +28,11 @@ export class ProjectTypeService {
         this.http.put(projectType).subscribe(
             response => {
                 this.notificationService.success(
-                    "Project type was successfully updated"
+                    "Проект успішно оновлено"
                 );
             },
             error => {
-                this.notificationService.warn("Project type was not updated");
+                this.notificationService.warn("Не вдалося оновити проект");
             }
         );
     }
@@ -40,10 +40,10 @@ export class ProjectTypeService {
     Create(newProjectType: ProjectType): Observable<any> {
         this.http.post(newProjectType).subscribe(
             response => {
-                this.notificationService.success("Project type was successfully added");
+                this.notificationService.success("Проект успішно створено");
             },
             error => {
-                this.notificationService.warn("Project type was not added");
+                this.notificationService.warn("Не вдалося створити проект");
             }
         );
         return;
@@ -53,11 +53,11 @@ export class ProjectTypeService {
         this.http.delete(projectTypeId).subscribe(
             response => {
                 this.notificationService.success(
-                    "Project type was successfully deleted"
+                    "Проект видалено"
                 );
             },
             error => {
-                this.notificationService.warn("Project type was not deleted");
+                this.notificationService.warn("Не вдалося видалити проект");
             }
         );
     }

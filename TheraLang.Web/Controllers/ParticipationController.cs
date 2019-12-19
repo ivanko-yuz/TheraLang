@@ -7,6 +7,8 @@ using TheraLang.DLL.Enums;
 using TheraLang.DLL.Services;
 using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
+using TheraLang.DLL.Models;
+using System.Linq;
 
 namespace TheraLang.Web.Controllers
 {
@@ -47,10 +49,20 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of ProjectParticipants</returns>
         [HttpGet]
-        public ActionResult<IEnumerable<ProjectParticipation>> Get()
+        public ActionResult<IEnumerable<ParticipantModel>> Get()
         {
             IEnumerable<ProjectParticipation> members = _service.GetAll();
-            return Ok(members);
+            var part = _service.GetAll().Select(p => new ParticipantModel
+            {
+                Id = p.Id,
+                ProjectId = p.ProjectId,
+                Role = p.Role,
+                Status = p.Status,
+                UserName = "Олексій Гордієнко",
+                UserEmail = "gordienko@gmail.com"
+            }).ToList();
+
+            return Ok(part);
         }
 
         /// <summary>
