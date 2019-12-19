@@ -10,7 +10,6 @@ export class ResourcesFilterPipe implements PipeTransform {
     private counter = 0;
     transform(resources: Resource[], searchTerm: string): Resource[] {
         this.counter++;
-        console.log('filter pipe exec.. ' + this.counter);
         if (!resources || !searchTerm) {
             return resources;
         }

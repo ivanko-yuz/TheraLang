@@ -6,8 +6,8 @@ import { ProjectService } from './project.service';
 import { DialogService } from '../shared/services/dialog.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { NotificationService } from '../shared/services/notification.service';
-import {TranslateService} from '@ngx-translate/core';
-import {AsyncScheduler} from 'rxjs/internal/scheduler/AsyncScheduler';
+import { TranslateService } from '@ngx-translate/core';
+import { AsyncScheduler } from 'rxjs/internal/scheduler/AsyncScheduler';
 
 
 @Component({

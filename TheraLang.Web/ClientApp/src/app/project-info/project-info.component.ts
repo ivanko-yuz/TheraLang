@@ -74,7 +74,7 @@ export class ProjectInfoComponent implements OnInit {
     let dialogRef = this.dialog.open(AddResourcesToProjectComponent, {
       width: '420px',
       height: '500px',
-      data: { projectId: this.projectId },
+      data: { id: this.projectId },
     }).afterClosed().subscribe(res => { this.ngOnInit() });
   }
 }

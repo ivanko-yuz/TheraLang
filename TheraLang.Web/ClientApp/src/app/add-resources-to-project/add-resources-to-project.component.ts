@@ -17,6 +17,7 @@ export class AddResourcesToProjectComponent implements OnInit {
   resources: Resource[];
   filteredResources: Resource[];
   private _searchTerm: string;
+  displayedColumns: string[] = ['description', 'actions'];
 
   get searchTerm(): string {
     return this._searchTerm;
@@ -39,29 +40,14 @@ export class AddResourcesToProjectComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    debugger
-    // let var1 = new Resource();
-    // var1.id = 1;
-    // var1.name = 'some text1';
-    // let var2 = new Resource();
-    // var2.id = 2;
-    // var2.name = 'some text2';
-    // let var3 = new Resource();
-    // var3.id = 3;
-    // var3.name = 'some text3';
-    // this.resources = new Array(var1, var2, var3);
-    this.resources = await this.service.getAllResourcess()
-
+    this.resources = await this.service.getAllResourcesNotAttached(this.data.id);
     this.filteredResources = this.resources;
-    debugger
   }
 
   Add(_resourceId: number): Observable<any> {
-    debugger;
     const newResourceToProject = new ResourceToProject();
     newResourceToProject.resourceId = _resourceId;
     newResourceToProject.projectId = this.data.id;
-    debugger;
     this.service.post(newResourceToProject).subscribe(
       response => {
         this.notificationService.success("Ресурс до проекту додано!");
@@ -87,5 +73,4 @@ export class AddResourcesToProjectComponent implements OnInit {
       }
     );
   }
-
 }

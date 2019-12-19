@@ -201,11 +201,23 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("all")]
-        public IActionResult GetAllTypes()
+        [Route("allNotAttached/{projectId}")]
+        public IActionResult GetAllNotAttachedRes(int projectId)
         {
-            IEnumerable<Resource> resources = _service.GetAllResources();
+            IEnumerable<Resource> resources = _service.GetAllNotAttachedResources(projectId);
             return Ok(resources);
+        }
+
+        /// <summary>
+        /// Remove resource from project
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("resourceToProject/{id}")]      
+        public async Task<IActionResult> RemoveResourceFromProject([FromBody]ResourceProject resourceProject)
+        {
+            await _service.RemoveResourceFromProject(resourceProject);
+            return Ok();
         }
     }
 }

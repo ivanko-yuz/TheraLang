@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { resourсeUrl } from '../shared/api-endpoint.constants';
 import { ResourceToProject } from './resource-to-project';
@@ -18,19 +18,27 @@ export class ResourcesToProjectService {
   }
 
   delete(resourceToProject: ResourceToProject): Observable<any> {
-    const urlParams = new HttpParams().set("resId", resourceToProject.resourceId.toString());
-    urlParams.set("projId", resourceToProject.projectId.toString());
-    return this.http.delete(resourсeUrl + '/' + 'resourceToProject' + '/' + resourceToProject.resourceId, { params: urlParams });
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        projectId: resourceToProject.projectId,
+        resourceId: resourceToProject.resourceId,
+      },
+    };
+    return this.http.delete(resourсeUrl + '/' + 'resourceToProject' + '/' + resourceToProject.projectId, options);
   }
 
-  getAllResourcess() {
-    const alldata = this.getAllResources().toPromise().then((data: Resource[]) => {
+  getAllResourcesNotAttached(id: number) {
+    const alldata = this.getAllResources(id).toPromise().then((data: Resource[]) => {
       return data;
     });
     return alldata;
   }
 
-  getAllResources() {
-    return this.http.get(resourсeUrl + '/' + 'all');
+  getAllResources(id: number) {
+    debugger
+    return this.http.get(resourсeUrl + '/' + 'allNotAttached' + '/' + id);
   }
 }

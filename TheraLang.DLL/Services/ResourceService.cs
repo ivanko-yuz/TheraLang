@@ -182,22 +182,27 @@ namespace TheraLang.DLL.Services
             }
         }
 
-        public IEnumerable<Resource> GetAllResources()
+        public IEnumerable<Resource> GetAllNotAttachedResources(int projectId)
         {
             try
             {
-                var resources = _unitOfWork.Repository<Resource>().Get();
+                List<int> attached = _unitOfWork.Repository<ResourceProject>().Get().
+                    Where(x => x.ProjectId == projectId).Select(x => x.ResourceId).ToList();
+
+                var resources = _unitOfWork.Repository<Resource>().Get().
+                    Where(x => !attached.Contains(x.Id)).ToList();
                 var joinedResources = (from res in resources
                                        select new Resource
                                        {
                                            Id = res.Id,
                                            Name = res.Name,                                           
-                                       });
+                                       }).ToList();
                 return joinedResources.ToList();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when get all resources", ex);
+                ex.Data[nameof(projectId)] = projectId;
+                throw new Exception($"Error when get all not attached resources", ex);
             }
         }
 
@@ -205,8 +210,16 @@ namespace TheraLang.DLL.Services
         {
             try
             {
-                await _unitOfWork.Repository<ResourceProject>().Add(resourceProject);
-                await _unitOfWork.SaveChangesAsync();
+                ResourceProject tempResourceProject = _unitOfWork.Repository<ResourceProject>().Get().
+                    Where(x => (x.ProjectId == resourceProject.ProjectId &&
+                                x.ResourceId == resourceProject.ResourceId)).FirstOrDefault();
+
+                if(tempResourceProject == null)
+                {
+                    await _unitOfWork.Repository<ResourceProject>().Add(resourceProject);
+                    await _unitOfWork.SaveChangesAsync();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -214,5 +227,23 @@ namespace TheraLang.DLL.Services
                 throw new Exception($"Error when trying to add new {nameof(ResourceProject)}", ex);
             }
         }
+       
+        public async Task RemoveResourceFromProject(ResourceProject _resourceProject)
+        {
+            try
+            {
+                ResourceProject resourceProject = _unitOfWork.Repository<ResourceProject>().
+                    Get().Where(x => (x.ProjectId == _resourceProject.ProjectId &&
+                                      x.ResourceId == _resourceProject.ResourceId)).FirstOrDefault();
+                _unitOfWork.Repository<ResourceProject>().Remove(resourceProject);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                ex.Data[nameof(ResourceProject)] = _resourceProject;
+                throw new Exception($"Error when trying to remove resource from project {nameof(ResourceProject)}", ex);
+            }
+        }
+
     }
 }
