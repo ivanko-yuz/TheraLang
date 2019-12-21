@@ -16,7 +16,8 @@
     "yes": "Yes",
     "no": "No",
     "error-so-sorry": "Oops, an error occurred while processing your request = (",
-    "return-home": "Back to homepage"
+    "return-home": "Back to homepage",
+    "money-amount": "Amount of money:"
   },
   "components": {
     "home": {
@@ -54,7 +55,8 @@
       "title": "Types Of Project"
     },
     "donation": {
-      "title": "Donate"
+      "title": "Donate",
+      "transaction-status": "Transaction status:"
     }
   }
 }
