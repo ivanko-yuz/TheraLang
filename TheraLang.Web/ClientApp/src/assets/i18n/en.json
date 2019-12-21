@@ -12,7 +12,11 @@
     },
     "deleted-successfully": "Deleted successfully!",
     "r-u-sure": "Are you sure?",
-    "error": "Error"
+    "error": "Error",
+    "yes": "Yes",
+    "no": "No",
+    "error-so-sorry": "Oops, an error occurred while processing your request = (",
+    "return-home": "Back to homepage"
   },
   "components": {
     "home": {
