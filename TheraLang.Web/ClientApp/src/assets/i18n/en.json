@@ -17,7 +17,9 @@
     "no": "No",
     "error-so-sorry": "Oops, an error occurred while processing your request = (",
     "return-home": "Back to homepage",
-    "money-amount": "Amount of money:"
+    "money-amount": "Amount of money:",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "components": {
     "home": {
@@ -49,7 +51,11 @@
       "signUp": "Sign Up",
       "signIn": "Sign In",
       "logout": "Logout",
-      "logged-out-successfully": "You are successfully logged out"
+      "logged-out-successfully": "You are successfully logged out",
+      "logged-in-successfully": "You are logged in",
+      "incorrect-login-or-password": "Incorrect login or password",
+      "login": "Login",
+      "password": "Password"
     },
     "projectTypes": {
       "title": "Types Of Project"

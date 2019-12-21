@@ -17,7 +17,9 @@
     "no": "НІ",
     "error-so-sorry": "Упс, трапилася помилка при обробці Вашого запиту =(",
     "return-home": "Повернутися на головну сторінку",
-    "money-amount": "Сума:"
+    "money-amount": "Сума:",
+    "confirm": "Підтвердити",
+    "cancel": "Відмінити"
   },
   "components": {
     "home": {
@@ -49,7 +51,11 @@
       "signUp": "Реєстрація",
       "signIn": "Вхід",
       "logout": "Вийти",
-      "logged-out-successfully": "Ви вийшли з облікового запису"
+      "logged-out-successfully": "Ви вийшли з облікового запису",
+      "logged-in-successfully": "Вхід успішний",
+      "incorrect-login-or-password": "Неправильний логін або пароль",
+      "login": "Логін",
+      "password": "Пароль"
     },
     "projectTypes": {
       "title": "Типи Проектів"
