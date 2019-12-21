@@ -2,7 +2,7 @@
   "common": {
     "details": "Деталі",
     "edit": "Змінити",
-    "wth": "щось там",
+    "wth": "Щось пішло не так...",
     "validation": {
       "field-is-required": "Це поле є обов'язковим",
       "line-too-long": "Стрічка задовга",
@@ -11,7 +11,8 @@
       "cancel": "Відмінити"
     },
     "deleted-successfully": "Видалено успішно!",
-    "r-u-sure": "Ви впевнені?"
+    "r-u-sure": "Ви впевнені?",
+    "error": "Помилка"
   },
   "components": {
     "home": {
@@ -40,12 +41,10 @@
       "title": "Запити"
     },
     "account": {
-      "signUp": {
-        "title": "Реєстрація"
-      },
-      "signIn": {
-        "title": "Вхід"
-      }
+      "signUp": "Реєстрація",
+      "signIn": "Вхід",
+      "logout": "Вийти",
+      "logged-out-successfully": "Ви вийшли з облікового запису"
     },
     "projectTypes": {
       "title": "Типи Проектів"

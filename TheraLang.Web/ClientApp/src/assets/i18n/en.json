@@ -2,7 +2,7 @@
   "common": {
     "details": "Details",
     "edit": "Edit",
-    "wth": "wth",
+    "wth": "Something went wrong...",
     "validation": {
       "field-is-required": "This field is required",
       "line-too-long": "The line is too long",
@@ -11,7 +11,8 @@
       "cancel": "Cancel"
     },
     "deleted-successfully": "Deleted successfully!",
-    "r-u-sure": "Are you sure?"
+    "r-u-sure": "Are you sure?",
+    "error": "Error"
   },
   "components": {
     "home": {
@@ -40,12 +41,10 @@
       "title": "Participants requests"
     },
     "account": {
-      "signUp": {
-        "title": "Sign Up"
-      },
-      "signIn": {
-        "title": "Sign In"
-      }
+      "signUp": "Sign Up",
+      "signIn": "Sign In",
+      "logout": "Logout",
+      "logged-out-successfully": "You are successfully logged out"
     },
     "projectTypes": {
       "title": "Types Of Project"
