@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Piranha;
+using Piranha.AspNetCore.Identity.Data;
 using TheraLang.Web.Models;
 
 namespace TheraLang.Web.Controllers
@@ -11,22 +13,23 @@ namespace TheraLang.Web.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ISecurity _service;
+        private readonly UserManager<User> _userManager;
 
-        public AccountController(ISecurity service)
+        public AccountController(ISecurity service, UserManager<User> userManager)
         {
             _service = service;
+            _userManager = userManager;
         }
 
         [HttpPost("login")]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> SignIn(LoginModel model)
         {
-            // string.IsNullOrWhiteSpace()
-            if (model.UserName == null)
+            if (string.IsNullOrWhiteSpace(model.UserName))
             {
                 throw new ArgumentException($"{nameof(model.UserName)} cannot be null");
             }
-            if (model.Password == null)
+            if (string.IsNullOrWhiteSpace(model.Password))
             {
                 throw new ArgumentException($"{nameof(model.Password)} cannot be null");
             }
@@ -36,7 +39,7 @@ namespace TheraLang.Web.Controllers
             }
             else
             {
-                return BadRequest(); //TODO an authorize
+                return BadRequest(); 
             }
         }
 
@@ -46,6 +49,13 @@ namespace TheraLang.Web.Controllers
         {
             await _service.SignOut(HttpContext);
             return Ok();
+        }
+
+        [HttpGet("isAuthenticated")]
+        public bool UserIsAuthenticated()
+        {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            return isAuthenticated;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace TheraLang.DLL
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
         {
+            Database.Migrate();
         }
 
         #region UTTMM_Entities
@@ -21,6 +22,7 @@ namespace TheraLang.DLL
         public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
         public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<Society> Societies { get; set; }
+        public virtual DbSet<ResourceAttachment> ResourceAttachments { get; set; }
         #endregion
 
         #region Piranha_Entities
@@ -101,6 +103,7 @@ namespace TheraLang.DLL
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
             modelBuilder.ApplyConfiguration(new DonationConfiguration());
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             #endregion
         }
 

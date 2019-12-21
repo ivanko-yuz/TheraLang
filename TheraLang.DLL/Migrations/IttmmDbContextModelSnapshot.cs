@@ -15,7 +15,7 @@ namespace TheraLang.DLL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -26,7 +26,7 @@ namespace TheraLang.DLL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(5, 2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Currency")
                         .IsRequired();
@@ -40,17 +40,12 @@ namespace TheraLang.DLL.Migrations
 
                     b.Property<int?>("ProjectId");
 
-                    b.Property<decimal>("ReceiverCommission")
-                        .HasColumnType("decimal(5, 2)");
-
                     b.Property<int?>("SocietyId")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(null);
 
                     b.Property<string>("Status")
                         .IsRequired();
-
-                    b.Property<int>("TransactionId");
 
                     b.HasKey("Id");
 
@@ -75,7 +70,7 @@ namespace TheraLang.DLL.Migrations
                         .HasMaxLength(5000);
 
                     b.Property<decimal>("DonationTarget")
-                        .HasColumnType("decimal(5, 2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<bool>("IsActive");
 
@@ -168,7 +163,9 @@ namespace TheraLang.DLL.Migrations
                         .IsRequired()
                         .HasMaxLength(5000);
 
-                    b.Property<string>("File")
+                    b.Property<string>("File");
+
+                    b.Property<string>("FileName")
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(null);
 
@@ -194,6 +191,27 @@ namespace TheraLang.DLL.Migrations
                         .IsUnique();
 
                     b.ToTable("Resources");
+                });
+
+            modelBuilder.Entity("TheraLang.DLL.Entities.ResourceAttachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FileName")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("Path")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("ResourceId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResourceId");
+
+                    b.ToTable("ResourceAttachments");
                 });
 
             modelBuilder.Entity("TheraLang.DLL.Entities.ResourceCategory", b =>
@@ -1075,6 +1093,14 @@ namespace TheraLang.DLL.Migrations
                     b.HasOne("TheraLang.DLL.Piranha.Entities.PiranhaUser", "PiranhaUser")
                         .WithMany("Resources")
                         .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("TheraLang.DLL.Entities.ResourceAttachment", b =>
+                {
+                    b.HasOne("TheraLang.DLL.Entities.Resource", "Resource")
+                        .WithMany("ResourceAttach")
+                        .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

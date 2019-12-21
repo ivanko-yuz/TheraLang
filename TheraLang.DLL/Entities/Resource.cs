@@ -13,6 +13,8 @@ namespace TheraLang.DLL.Entities
 
         public string Url { get; set; }
 
+        public string FileName { get; set; }
+
         public string File { get; set; }
 
         public int CategoryId { get; set; }
@@ -20,8 +22,10 @@ namespace TheraLang.DLL.Entities
         public virtual ResourceCategory ResourceCategory { get; set; }
 
         public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
+        public virtual ICollection<ResourceAttachment> ResourceAttach { get; set; }
         public Resource()
         {
+            this.ResourceAttach = new List<ResourceAttachment>();
             this.ResourceProjects = new List<ResourceProject>();
         }
     }

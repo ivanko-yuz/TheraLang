@@ -9,10 +9,8 @@
          <a mat-button class="toolbar-button" routerLink="/projectRequest">{{'components.projects.new-projects'|translate}}</a>
          <a mat-button class="toolbar-button" routerLink="/projectTypes" >{{'components.projectTypes.title'|translate}}</a>
          <span class="fill-space"></span>
-         <button mat-button class="toolbar-button" (click)="onLogin()">{{'components.account.signIn.title'|translate}}</button>
-         <app-profile-menu></app-profile-menu>
-
+         <button mat-button *ngIf="!isAuthinticated" class="toolbar-button" (click)="onLogin()">{{'components.account.signIn.title'|translate}}</button>
+         <div *ngIf="isAuthinticated"><app-profile-menu></app-profile-menu></div>
          <app-language></app-language>
-         <a mat-button class="toolbar-button" routerLink="/projectTypes" >{{'components.projectTypes.title'|translate}}</a>
     </mat-toolbar-row >
   </mat-toolbar>

@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -76,6 +77,7 @@ namespace TheraLang.Web
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             services.AddTransient<IDonationService, DonationService>();
+            services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddOpenApiDocument();
             #endregion
         }
