@@ -30,7 +30,8 @@
       "name-of-project": "Name of project",
       "description": "Description",
       "details": "Details",
-      "type": "Type of project"
+      "type": "Type of project",
+      "new-projects": "New projects"
     },
     "resources": {
       "title": "Resources"
@@ -48,6 +49,9 @@
     },
     "projectTypes": {
       "title": "Types Of Project"
+    },
+    "donation": {
+      "title": "Donate"
     }
   }
 }

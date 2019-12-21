@@ -19,15 +19,15 @@ export class ProfileMenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLogout(){
+  onLogout() {
     this.userService.logout().subscribe(
-      (msg:string) => {
+      (msg: string) => {
         msg = 'Ви вийшли з облікового запису';
         this.notification.success(msg);
       },
       (error) => {
         console.log(error);
-        this.notification.warn('Помилка')
+        this.notification.warn('Помилка');
       });
     }
 }

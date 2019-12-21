@@ -30,7 +30,8 @@
       "name-of-project": "Назва проекту",
       "description": "Опис",
       "details": "Деталі",
-      "type": "Тип проекту"
+      "type": "Тип проекту",
+      "new-projects": "Нові проекти"
     },
     "resources": {
       "title": "Ресурси"
@@ -48,6 +49,9 @@
     },
     "projectTypes": {
       "title": "Типи Проектів"
+    },
+    "donation": {
+      "title": "Допомогти"
     }
   }
 }
