@@ -13,6 +13,7 @@
     },
     "deleted-successfully": "Deleted successfully!",
     "added-successfully": "Added successfully!",
+    "created-successfully": "Created successfully!",
     "updated-successfully": "Updated successfully!",
     "r-u-sure": "Are you sure?",
     "error": "Error",
@@ -37,7 +38,8 @@
     "name": "Name",
     "create": "Create",
     "description": "Description",
-    "date-of-creation": "Date of creation"
+    "date-of-creation": "Date of creation",
+    "type": "Type"
   },
   "components": {
     "home": {
@@ -88,7 +90,13 @@
     },
     "donation": {
       "title": "Donate",
-      "transaction-status": "Transaction status:"
+      "transaction-status": "Transaction status:",
+      "need": "Need to raise money:",
+      "raised": "Raised",
+      "to-be-raised": "To be raised",
+      "donate-4-org": "Підтримати нашу організацію",
+      "donate-4-project": "Підтримати цей проект",
+      "message": "Введіть суму допомоги (Буде знято комісію з платежу)"
     }
   }
 }

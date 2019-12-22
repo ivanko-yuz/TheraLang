@@ -11,7 +11,7 @@
       <mat-error *ngIf="service.form.controls['name'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Тип</mat-label>
+      <mat-label>{{'common.type'|translate}}</mat-label>
       <mat-select formControlName="typeId" required>
         <mat-option *ngFor="let type of projectTypes" [value]="type.id">
           {{type.typeName}}

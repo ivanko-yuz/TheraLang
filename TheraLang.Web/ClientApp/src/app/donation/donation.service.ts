@@ -9,11 +9,11 @@ export class DonationService {
     constructor(private http: HttpClient) { }
 
     getProjectCheckoutModel(donationAmount: string, projectId: number) {
-        return this.http.get(`${donationUrl}/${donationAmount}/${projectId}`);           
+        return this.http.get(`${donationUrl}/${donationAmount}/${projectId}`);
     }
 
     getSocietyCheckoutModel(donationAmount: string) {
-        return this.http.get(`${donationUrl}/${donationAmount}`);           
+        return this.http.get(`${donationUrl}/${donationAmount}`);
     }
 
     getDonationTransaction(donationId: string) {
