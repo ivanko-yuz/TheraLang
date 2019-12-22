@@ -19,7 +19,12 @@
     "return-home": "Повернутися на головну сторінку",
     "money-amount": "Сума:",
     "confirm": "Підтвердити",
-    "cancel": "Відмінити"
+    "cancel": "Відмінити",
+    "reject": "Відхилити",
+    "approve": "Прийняти",
+    "new": "Нові",
+    "approved": "Підтверджені",
+    "rejected": "Відхилені"
   },
   "components": {
     "home": {

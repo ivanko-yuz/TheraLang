@@ -19,7 +19,12 @@
     "return-home": "Back to homepage",
     "money-amount": "Amount of money:",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "reject": "Reject",
+    "approve": "Approve",
+    "new": "New",
+    "approved": "Approved",
+    "rejected": "Rejected"
   },
   "components": {
     "home": {
