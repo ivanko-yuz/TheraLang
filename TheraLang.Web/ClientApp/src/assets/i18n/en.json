@@ -12,6 +12,8 @@
       "cancel": "Cancel"
     },
     "deleted-successfully": "Deleted successfully!",
+    "added-successfully": "Added successfully!",
+    "updated-successfully": "Updated successfully!",
     "r-u-sure": "Are you sure?",
     "error": "Error",
     "yes": "Yes",
