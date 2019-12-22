@@ -24,7 +24,8 @@
     "approve": "Прийняти",
     "new": "Нові",
     "approved": "Підтверджені",
-    "rejected": "Відхилені"
+    "rejected": "Відхилені",
+    "status": "Статус"
   },
   "components": {
     "home": {
@@ -49,8 +50,11 @@
     "resources": {
       "title": "Ресурси"
     },
-    "participants": {
-      "title": "Запити"
+    "participation": {
+      "title": "Запити",
+      "id-of-project": "Id проекту",
+      "empty-list": "Немає запитів",
+      "name-or-id": "Ім’я/Id"
     },
     "account": {
       "signUp": "Реєстрація",
@@ -60,7 +64,8 @@
       "logged-in-successfully": "Вхід успішний",
       "incorrect-login-or-password": "Неправильний логін або пароль",
       "login": "Логін",
-      "password": "Пароль"
+      "password": "Пароль",
+      "role": "Роль користувача"
     },
     "projectTypes": {
       "title": "Типи Проектів",

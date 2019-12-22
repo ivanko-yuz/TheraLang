@@ -24,7 +24,8 @@
     "approve": "Approve",
     "new": "New",
     "approved": "Approved",
-    "rejected": "Rejected"
+    "rejected": "Rejected",
+    "status": "Status"
   },
   "components": {
     "home": {
@@ -49,8 +50,11 @@
     "resources": {
       "title": "Resources"
     },
-    "participants": {
-      "title": "Participants requests"
+    "participation": {
+      "title": "Participants requests",
+      "id-of-project": "Id of project",
+      "empty-list": "The list is empty",
+      "name-or-id": "Name/Id"
     },
     "account": {
       "signUp": "Sign Up",
@@ -60,7 +64,8 @@
       "logged-in-successfully": "You are logged in",
       "incorrect-login-or-password": "Incorrect login or password",
       "login": "Login",
-      "password": "Password"
+      "password": "Password",
+      "role": "User role"
     },
     "projectTypes": {
       "title": "Types Of Project",
