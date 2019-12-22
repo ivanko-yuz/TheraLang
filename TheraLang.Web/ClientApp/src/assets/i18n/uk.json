@@ -35,7 +35,9 @@
     },
     "added-by": "Доданий:",
     "name": "Ім’я",
-    "create": "Створити"
+    "create": "Створити",
+    "description": "Опис",
+    "date-of-creation": "Дата створення"
   },
   "components": {
     "home": {

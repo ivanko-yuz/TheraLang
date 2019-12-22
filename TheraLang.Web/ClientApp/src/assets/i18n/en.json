@@ -35,7 +35,9 @@
     },
     "added-by": "Added by:",
     "name": "Name",
-    "create": "Create"
+    "create": "Create",
+    "description": "Description",
+    "date-of-creation": "Date of creation"
   },
   "components": {
     "home": {
