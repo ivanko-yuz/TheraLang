@@ -2,6 +2,7 @@
   "common": {
     "details": "Details",
     "edit": "Edit",
+    "delete": "Delete",
     "wth": "Something went wrong...",
     "validation": {
       "field-is-required": "This field is required",
@@ -25,7 +26,14 @@
     "new": "New",
     "approved": "Approved",
     "rejected": "Rejected",
-    "status": "Status"
+    "status": "Status",
+    "messages": {
+      "request-sent": "The application has been sent",
+      "cant-send-request": "Can't send request"
+    },
+    "added-by": "Added by:",
+    "name": "Name",
+    "create": "Create"
   },
   "components": {
     "home": {
@@ -45,7 +53,9 @@
       "description": "Description",
       "details": "Details",
       "type": "Type of project",
-      "new-projects": "New projects"
+      "new-projects": "New projects",
+      "owner": "Project Owner",
+      "join": "Join project"
     },
     "resources": {
       "title": "Resources"

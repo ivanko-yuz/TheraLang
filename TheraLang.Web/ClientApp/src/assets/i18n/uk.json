@@ -1,7 +1,8 @@
 {
   "common": {
     "details": "Деталі",
-    "edit": "Змінити",
+    "edit": "Змінити|Редагувати",
+    "delete": "Видалити",
     "wth": "Щось пішло не так...",
     "validation": {
       "field-is-required": "Це поле є обов'язковим",
@@ -25,7 +26,14 @@
     "new": "Нові",
     "approved": "Підтверджені",
     "rejected": "Відхилені",
-    "status": "Статус"
+    "status": "Статус",
+    "messages": {
+      "request-sent": "Заявку надіслано",
+      "cant-send-request": "Неможливо надіслати запит"
+    },
+    "added-by": "Доданий:",
+    "name": "Ім’я",
+    "create": "Створити"
   },
   "components": {
     "home": {
@@ -45,7 +53,9 @@
       "description": "Опис",
       "details": "Деталі",
       "type": "Тип проекту",
-      "new-projects": "Нові проекти"
+      "new-projects": "Нові проекти",
+      "owner": "Царь и Властелин Проекта",
+      "join": "Приєднатися"
     },
     "resources": {
       "title": "Ресурси"

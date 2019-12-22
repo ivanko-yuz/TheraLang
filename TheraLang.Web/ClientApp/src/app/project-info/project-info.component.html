@@ -3,8 +3,10 @@
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title class="headerUpText">{{projectInfo.name}}</mat-card-title>
-      <mat-card-subtitle class="headerDownText">Added by: <a class="ownerLink"
-          href="http://localhost:4200/project/{{projectInfo.id}}">Project Owner</a></mat-card-subtitle>
+      <mat-card-subtitle class="headerDownText">
+        {{'common.added-by'|translate}}
+        <a class="ownerLink" routerLink="/project/{{projectInfo.id}}">{{'components.projects.owner'|translate}}</a>
+      </mat-card-subtitle>
     </mat-card-header>
 
     <img mat-card-image class="ProjImg" src="../../assets/img/hatiko.gif" alt="Photo">
@@ -13,8 +15,8 @@
     </mat-card-content>
   </mat-card>
   <div class="bottom-buttons">
-    <button mat-raised-button class="resButton" (click)="onJoin()">Приєднатися</button>
-    <button mat-raised-button class="resButton" (click)="getResourcesData()">Ресурси</button>
+    <button mat-raised-button class="resButton" (click)="onJoin()">{{'components.projects.join'|translate}}</button>
+    <button mat-raised-button class="resButton" (click)="getResourcesData()">{{'components.resources.title'|translate}}</button>
   </div>
   <div>
     <app-resources-table [@openClose]="isOpen ? 'open' : 'closed'" id="resTabId" *ngIf="generateOnceResourcesTable"
