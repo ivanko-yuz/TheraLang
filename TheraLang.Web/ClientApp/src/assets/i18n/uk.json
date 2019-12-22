@@ -58,7 +58,8 @@
       "password": "Пароль"
     },
     "projectTypes": {
-      "title": "Типи Проектів"
+      "title": "Типи Проектів",
+      "enter-new-type-name": "Введіть нову назву типу проекту"
     },
     "donation": {
       "title": "Допомогти",

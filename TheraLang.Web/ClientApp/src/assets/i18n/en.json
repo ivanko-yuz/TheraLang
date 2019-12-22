@@ -58,7 +58,8 @@
       "password": "Password"
     },
     "projectTypes": {
-      "title": "Types Of Project"
+      "title": "Types Of Project",
+      "enter-new-type-name": "Enter a new project type name"
     },
     "donation": {
       "title": "Donate",
