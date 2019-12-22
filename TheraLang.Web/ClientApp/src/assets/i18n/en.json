@@ -59,7 +59,8 @@
     },
     "projectTypes": {
       "title": "Types Of Project",
-      "enter-new-type-name": "Enter a new project type name"
+      "enter-new-type-name": "Enter a new project type name",
+      "new-p-t-creation": "Creating a new project type"
     },
     "donation": {
       "title": "Donate",

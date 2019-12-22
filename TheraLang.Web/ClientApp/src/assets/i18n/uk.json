@@ -59,7 +59,8 @@
     },
     "projectTypes": {
       "title": "Типи Проектів",
-      "enter-new-type-name": "Введіть нову назву типу проекту"
+      "enter-new-type-name": "Введіть назву нового типу проекту",
+      "new-p-t-creation": "Створення нового типу проекту"
     },
     "donation": {
       "title": "Допомогти",
