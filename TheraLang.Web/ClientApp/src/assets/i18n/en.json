@@ -64,7 +64,13 @@
       "join": "Join project"
     },
     "resources": {
-      "title": "Resources"
+      "title": "Resources",
+      "name": "Resource name",
+      "type": "Resource type",
+      "url": "URL",
+      "file-name": "Name of file",
+      "add": "Add resource",
+      "create": "Create resource"
     },
     "participation": {
       "title": "Participants requests",

@@ -2,22 +2,23 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Resource } from '../resource-models/resource';
 import { NotificationService } from '../../shared/services/notification.service';
-import { resourсeUrl, categoryUrl } from '../../shared/api-endpoint.constants';
+import { resourceUrl, categoryUrl } from '../../shared/api-endpoint.constants';
 import { HttpClient } from '@angular/common/http';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResourceCreateService {
 
-  private resourceUrl = resourсeUrl;
+  private resourceUrl = resourceUrl;
   private categoryUrl = categoryUrl;
 
-  constructor(private formBuilder : FormBuilder,
-      private notificationService : NotificationService,
-      private http: HttpClient){
-
-      }
+  constructor(private formBuilder: FormBuilder,
+              private notificationService: NotificationService,
+              private http: HttpClient,
+              private translate: TranslateService
+  ) { }
 
   public resourceForm = this.formBuilder.group({
       id : [null],
@@ -27,9 +28,9 @@ export class ResourceCreateService {
       fileName : [''],
       file: [null],
       categoryId : [null, Validators.required],
-  })
+  });
 
-  initializeForm(){
+  initializeForm() {
       this.resourceForm.setValue({
           id : null,
           name : '',
@@ -41,39 +42,39 @@ export class ResourceCreateService {
       });
   }
 
-  postResource(resource : Resource){ 
-      return this.http.post(this.resourceUrl +'/' + 'create', resource);
+  postResource(resource: Resource) {
+      return this.http.post(this.resourceUrl + '/' + 'create', resource);
   }
 
-  putResource(resource : Resource){
-      return this.http.put(this.resourceUrl +'/' + 'update', resource);
+  putResource(resource: Resource) {
+      return this.http.put(this.resourceUrl + '/' + 'update', resource);
   }
 
-  getCategories(){
-      return this.http.get(this.categoryUrl +'/' + 'get');
+  getCategories() {
+      return this.http.get(this.categoryUrl + '/' + 'get');
   }
 
-  populateForm(resource){
+  populateForm(resource) {
       this.resourceForm.setValue(resource);
   }
 
-  addResource(resource : Resource){
+  addResource(resource: Resource) {
       this.postResource(resource).subscribe(
-          response => {
-              this.notificationService.success("Ресурс створено!");
+          async response => {
+              this.notificationService.success(await this.translate.get('common.created-successfully').toPromise());
           },
-          error => {
-              this.notificationService.warn("Помилка");
+        async error => {
+              this.notificationService.warn(await this.translate.get('common.wth').toPromise());
           });
   }
 
-  updateResource(resource : Resource){
+  updateResource(resource: Resource) {
       this.putResource(resource).subscribe(
-          response => {
-              this.notificationService.success("Ресурс оновлено!");
+        async response => {
+              this.notificationService.success(await this.translate.get('common.updated-successfully').toPromise());
           },
-          error => {
-              this.notificationService.warn("Помилка");
+        async error => {
+              this.notificationService.warn(await this.translate.get('common.wth').toPromise());
           });
   }
 }
