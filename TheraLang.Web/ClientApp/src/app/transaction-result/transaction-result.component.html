@@ -1,4 +1,4 @@
 <div *ngIf="liqpayResponse !== null">
-    <h1>Статус транзакції: <span class="status-color">{{liqpayResponse?.status}}</span></h1>
-    <h2>Сума: <span class="status-color">{{liqpayResponse?.amount}}</span> грн</h2>
+    <h1>{{'components.donation.transaction-status'|translate}} <span class="status-color">{{liqpayResponse?.status}}</span></h1>
+    <h2>{{'common.money-amount'|translate}} <span class="status-color">{{liqpayResponse?.amount}}</span> ₴</h2>
 </div>

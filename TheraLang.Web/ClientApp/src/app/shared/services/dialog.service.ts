@@ -15,7 +15,7 @@ export class DialogService {
       width: '390px',
       panelClass: 'confirm-dialog-container',
       disableClose: true,
-      position: { top: "10px" },
+      position: { top: '10px' },
       data: {
         message: msg
       }
@@ -30,7 +30,7 @@ export class DialogService {
     this.dialog.open(formComponent, dialogConfig);
   }
 
-  closeDialogs(){
+  closeDialogs() {
   this.dialog.closeAll();
   }
 }

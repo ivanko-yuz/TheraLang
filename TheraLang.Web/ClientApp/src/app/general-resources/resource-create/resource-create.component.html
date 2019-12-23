@@ -6,39 +6,40 @@
     <mat-dialog-content style="height: 450px">
 
         <mat-form-field>
-            <mat-select  formControlName="categoryId" required placeholder="Тип ресурсу">
+            <mat-select  formControlName="categoryId" required [placeholder]="'components.resources.type'|translate">
               <mat-option *ngFor="let category of categories" formControlName="categoryId" [value]="category.id">
                 {{category.type}}
               </mat-option>
             </mat-select>
         </mat-form-field>
-        
+
         <mat-form-field>
-            <input formControlName="name" autofocus required matInput placeholder="Назва ресурсу" >
-        </mat-form-field>
-        
-        <mat-form-field>
-            <input formControlName="description" required matInput placeholder="Опис" >
+            <input formControlName="name" autofocus required matInput [placeholder]="'components.resources.name'|translate">
         </mat-form-field>
 
         <mat-form-field>
-            <input formControlName="url" matInput placeholder="Посилання" >
+            <input formControlName="description" required matInput [placeholder]="'common.description'|translate" >
         </mat-form-field>
 
         <mat-form-field>
-            <input formControlName="fileName" matInput placeholder="Назва файлу" >
+            <input formControlName="url" matInput [placeholder]="'components.resources.url'|translate">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input formControlName="fileName" matInput [placeholder]="'components.resources.file-name'|translate">
         </mat-form-field>
 
         <mat-dialog-actions>
-            <input mat-raised-button color="primary" type="file" formControlName="file" placeholder="Додати ресурс">
+            <input mat-raised-button color="primary" type="file" formControlName="file"
+                   [placeholder]="'components.resources.add'|translate">
         </mat-dialog-actions>
 
         <mat-dialog-actions class = "submitButton">
             <button mat-raised-button color="primary" type="submit" [disabled]="this.service.resourceForm.invalid" (click)='onSubmit()'>
-                Підтвердити
+                {{'common.confirm'|translate}}
             </button>
             <button mat-raised-button color="warn" type="reset" (click)="onClose()">
-                Відмінити
+                {{'common.cancel'|translate}}
             </button>
         </mat-dialog-actions>
     </mat-dialog-content>

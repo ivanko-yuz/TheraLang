@@ -23,12 +23,12 @@ export class UserService {
   login(loginData) {
     return this.http.post(this.baseUrl + '/login', loginData);
   }
-  
-  logout(){
+
+  logout() {
     return this.http.get(this.baseUrl + '/logout');
   }
 
-  isAuthenticated(){
+  isAuthenticated() {
     return this.http.get(this.baseUrl + '/isAuthenticated');
   }
 }
