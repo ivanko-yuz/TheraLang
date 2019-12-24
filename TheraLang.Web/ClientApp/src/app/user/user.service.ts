@@ -30,5 +30,9 @@ export class UserService {
 
   isAuthenticated(){
     return this.http.get(this.baseUrl + '/isAuthenticated');
-  }
+    }
+   getUserName() {
+        return this.http.get(this.baseUrl + '/getUserName', {responseType:'text'});
+    }
+
 }

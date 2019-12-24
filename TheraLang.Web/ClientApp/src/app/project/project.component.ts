@@ -14,7 +14,7 @@ import {AsyncScheduler} from 'rxjs/internal/scheduler/AsyncScheduler';
   selector: 'app-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.less'],
-  providers: [ProjectService]
+  providers: []
 })
 export class ProjectComponent implements OnInit {
   projects: Project[];
@@ -22,7 +22,7 @@ export class ProjectComponent implements OnInit {
   constructor(
     private httpService: HttpService,
     private dialogService: DialogService,
-    private service: ProjectService,
+    public service: ProjectService,
     private dialog: MatDialog,
     private notificationService: NotificationService,
     private translate: TranslateService,
@@ -41,6 +41,7 @@ export class ProjectComponent implements OnInit {
   }
 
   onEdit(project) {
+    this.service.initializeFormGroup();
     this.service.populateForm(project);
     this.dialogService.openFormDialog(ProjectFormComponent);
   }

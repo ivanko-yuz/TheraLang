@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Project } from './project';
 import { HttpService } from './http.service';
 import { NotificationService } from '../shared/services/notification.service';
@@ -13,8 +13,8 @@ export class ProjectService {
     private httpService: HttpService,
     private notificationService: NotificationService) { }
 
-  public form = this.fb.group({
-    id: [null],
+    form:FormGroup = this.fb.group({
+    id: [''],
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     description: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(8000)]],
     details: ['', Validators.maxLength(8000)],
@@ -39,8 +39,17 @@ export class ProjectService {
   }
 
 
-  populateForm(project) {
-    this.form.setValue(project);
+  populateForm(project:Project) {
+    this.form.setValue({
+      id: project.id,
+      name: project.name,
+      description: project.description,
+      details: project.details,
+      projectStart: project.projectStart,
+      projectEnd: project.projectEnd,
+      typeId: project.typeId,
+      donationTargetSum: project.donationTargetSum,
+    });
   }
 
   addProject(project: Project) {
