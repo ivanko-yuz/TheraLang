@@ -3,6 +3,7 @@ import { ProjectType } from './project-type.model';
 import { ProjectTypeHttp } from './project-type-Http.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class ProjectTypeService {
@@ -14,6 +15,7 @@ export class ProjectTypeService {
     constructor(
         private http: ProjectTypeHttp,
         private notificationService: NotificationService,
+        private translate: TranslateService
     ) { }
 
     getAllProjectTypes() {
@@ -26,24 +28,26 @@ export class ProjectTypeService {
 
     Update(projectType: ProjectType) {
         this.http.put(projectType).subscribe(
-            response => {
-                this.notificationService.success(
-                    "Тип проекту оновлено!"
-                );
+            async response => {
+                this.notificationService.success(await this.getLocalization('common.updated-successfully'));
+                // "Project type was successfully updated"
             },
-            error => {
-                this.notificationService.warn("Помилка оновлення!");
+            async error => {
+                this.notificationService.warn(await this.getLocalization('common.wth'));
+                // "Project type was not updated"
             }
         );
     }
 
     Create(newProjectType: ProjectType): Observable<any> {
         this.http.post(newProjectType).subscribe(
-            response => {
-                this.notificationService.success("Тип проекту створено!");
+            async response => {
+                this.notificationService.success(await this.getLocalization('common.added-successfully'));
+                // "Project type was successfully added"
             },
-            error => {
-                this.notificationService.warn("Помилка створення типу проекту!");
+            async error => {
+                this.notificationService.warn(await this.getLocalization('common.wth'));
+                // "Project type was not added"
             }
         );
         return;
@@ -51,15 +55,18 @@ export class ProjectTypeService {
 
     Delete(projectTypeId: number) {
         this.http.delete(projectTypeId).subscribe(
-            response => {
-                this.notificationService.success(
-                    "Тип проекту видалено!"
-                );
+            async response => {
+                this.notificationService.success(await this.getLocalization('common.deleted-successfully'));
+                // "Project type was successfully deleted"
             },
-            error => {
-                this.notificationService.warn("Помилка видалення типу проекту!");
+            async error => {
+                this.notificationService.warn(await this.getLocalization('common.wth'));
+                // "Project type was not deleted"
             }
         );
     }
 
+    getLocalization(locPath: string): Promise<string> {
+        return this.translate.get(locPath).toPromise();
+    }
 }

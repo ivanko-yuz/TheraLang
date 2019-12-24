@@ -7,8 +7,10 @@ import { HttpService } from '../project/http.service';
 import { ProjectParticipationService } from '../project-participants/project-participation.service';
 import { ResourceService } from './resources-table-for-project/resources-table/resource.service';
 import { NotificationService } from '../shared/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material';
 import { AddResourcesToProjectComponent } from '../add-resources-to-project/add-resources-to-project.component';
+
 
 @Component({
   selector: 'app-project-info',
@@ -33,7 +35,9 @@ export class ProjectInfoComponent implements OnInit {
     private resourceService: ResourceService,
     private participService: ProjectParticipationService,
     private notificationService: NotificationService,
-    public dialog: MatDialog, ) { }
+    private translate: TranslateService,
+    public dialog: MatDialog,
+  ) { }
 
   projectInfo: Project;
   projectId: number;
@@ -60,14 +64,14 @@ export class ProjectInfoComponent implements OnInit {
 
   onJoin() {
     this.participService.createParticipRequest(this.projectId).subscribe(
-      (msg) => {
-        msg = 'Заявку надіслано'
-        this.notificationService.success(msg)
+      async (msg) => {
+        msg = await this.translate.get('common.messages.request-sent').toPromise();
+        this.notificationService.success(msg);
       },
-      (error) => {
+      async (error) => {
         console.log(error);
-        this.notificationService.warn('Неможливо надіслати заявку')
-      });;
+        this.notificationService.warn(await this.translate.get('common.messages.cant-send-request').toPromise());
+      });
   }
 
   addResToProject() {
