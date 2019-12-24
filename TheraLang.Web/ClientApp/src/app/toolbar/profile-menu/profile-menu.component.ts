@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/user/user.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile-menu',
@@ -13,21 +14,23 @@ export class ProfileMenuComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
   }
 
-  onLogout(){
+  onLogout() {
     this.userService.logout().subscribe(
-      (msg:string) => {
-        msg = 'Ви вийшли з облікового запису';
+      async (msg: string) => {
+        msg = await this.translate.get('components.account.logged-out-successfully').toPromise();
         this.notification.success(msg);
       },
-      (error) => {
+      async (error) => {
         console.log(error);
-        this.notification.warn('Помилка')
+        const msg = await this.translate.get('common.error').toPromise();
+        this.notification.warn(msg);
       });
     }
 }

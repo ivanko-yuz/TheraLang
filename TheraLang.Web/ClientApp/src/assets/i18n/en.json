@@ -2,7 +2,8 @@
   "common": {
     "details": "Details",
     "edit": "Edit",
-    "wth": "wth",
+    "delete": "Delete",
+    "wth": "Something went wrong...",
     "validation": {
       "field-is-required": "This field is required",
       "line-too-long": "The line is too long",
@@ -11,7 +12,34 @@
       "cancel": "Cancel"
     },
     "deleted-successfully": "Deleted successfully!",
-    "r-u-sure": "Are you sure?"
+    "added-successfully": "Added successfully!",
+    "created-successfully": "Created successfully!",
+    "updated-successfully": "Updated successfully!",
+    "r-u-sure": "Are you sure?",
+    "error": "Error",
+    "yes": "Yes",
+    "no": "No",
+    "error-so-sorry": "Oops, an error occurred while processing your request = (",
+    "return-home": "Back to homepage",
+    "money-amount": "Amount of money:",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "reject": "Reject",
+    "approve": "Approve",
+    "new": "New",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "status": "Status",
+    "messages": {
+      "request-sent": "The application has been sent",
+      "cant-send-request": "Can't send request"
+    },
+    "added-by": "Added by:",
+    "name": "Name",
+    "create": "Create",
+    "description": "Description",
+    "date-of-creation": "Date of creation",
+    "type": "Type"
   },
   "components": {
     "home": {
@@ -30,24 +58,51 @@
       "name-of-project": "Name of project",
       "description": "Description",
       "details": "Details",
-      "type": "Type of project"
+      "type": "Type of project",
+      "new-projects": "New projects",
+      "owner": "Project Owner",
+      "join": "Join project"
     },
     "resources": {
-      "title": "Resources"
+      "title": "Resources",
+      "name": "Resource name",
+      "type": "Resource type",
+      "url": "URL",
+      "file-name": "Name of file",
+      "add": "Add resource",
+      "create": "Create resource"
     },
-    "participants": {
-      "title": "Participants requests"
+    "participation": {
+      "title": "Participants requests",
+      "id-of-project": "Id of project",
+      "empty-list": "The list is empty",
+      "name-or-id": "Name/Id"
     },
     "account": {
-      "signUp": {
-        "title": "Sign Up"
-      },
-      "signIn": {
-        "title": "Sign In"
-      }
+      "signUp": "Sign Up",
+      "signIn": "Sign In",
+      "logout": "Logout",
+      "logged-out-successfully": "You are successfully logged out",
+      "logged-in-successfully": "You are logged in",
+      "incorrect-login-or-password": "Incorrect login or password",
+      "login": "Login",
+      "password": "Password",
+      "role": "User role"
     },
     "projectTypes": {
-      "title": "Types Of Project"
+      "title": "Types Of Project",
+      "enter-new-type-name": "Enter a new project type name",
+      "new-p-t-creation": "Creating a new project type"
+    },
+    "donation": {
+      "title": "Donate",
+      "transaction-status": "Transaction status:",
+      "need": "Need to raise money:",
+      "raised": "Raised",
+      "to-be-raised": "To be raised",
+      "donate-4-org": "Підтримати нашу організацію",
+      "donate-4-project": "Підтримати цей проект",
+      "message": "Введіть суму допомоги (Буде знято комісію з платежу)"
     }
   }
 }

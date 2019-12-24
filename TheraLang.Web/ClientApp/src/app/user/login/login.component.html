@@ -1,21 +1,21 @@
-<h2 mat-dialog-title >Вхід</h2>
+<h2 mat-dialog-title >{{'components.account.signIn'|translate}}</h2>
 <form [formGroup]="this.userService.loginForm" autocomplete="off">
-    <mat-dialog-content>
-      <mat-form-field >
-        <mat-label>Логін</mat-label>
-        <input formControlName="username" autofocus required matInput placeholder="Логін">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Пароль</mat-label>
-        <input formControlName="password"  matInput required placeholder="Пароль" [type]="hide ? 'password' : 'text'">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="'hide'">
+  <mat-dialog-content>
+    <mat-form-field >
+      <mat-label>{{'components.account.login'|translate}}</mat-label>
+      <input formControlName="username" autofocus required matInput [placeholder]="'components.account.login'|translate">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{'components.account.password'|translate}}</mat-label>
+      <input formControlName="password"  matInput required [placeholder]="'components.account.password'|translate" [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="'hide'">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
-      </mat-form-field>
-     </mat-dialog-content>
-     <mat-dialog-actions>
-      <button mat-raised-button color="primary" type="submit" [disabled]="this.userService.loginForm.invalid" (click)="onSubmit()">Підтвердити</button>
-      <button mat-raised-button color="warn" type="reset" (click)="onClose()">Відмінити</button>
-    </mat-dialog-actions>
- </form>
-  
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="this.userService.loginForm.invalid" (click)="onSubmit()">{{'common.confirm'|translate}}</button>
+    <button mat-raised-button color="warn" type="reset" (click)="onClose()">{{'common.cancel'|translate}}</button>
+  </mat-dialog-actions>
+</form>
+

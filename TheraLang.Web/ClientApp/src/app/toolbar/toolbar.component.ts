@@ -45,7 +45,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription.add(subscription);
       this.userService.isAuthenticated().subscribe((isAuthinticated: boolean) => (this.isAuthinticated = isAuthinticated));
   }
-  
 
   ngAfterViewInit(): void {
     this.eventService.childEventListner().subscribe(click => {
@@ -67,7 +66,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
       this.subscription.unsubscribe();
   }
 
-  onLogin(){
+  onLogin() {
    this.dialog.openFormDialog(LoginComponent);
   }
 }

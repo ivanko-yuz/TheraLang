@@ -1,3 +1,1 @@
-export abstract class DateFormatsConstants {
- static readonly LONG_DATE_STRING = "y/MM/dd H:mm";
-}
+export const LONG_DATE_STRING = 'y/MM/dd H:mm';

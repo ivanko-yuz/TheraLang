@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Project } from './project';
 import { HttpService } from './http.service';
 import { NotificationService } from '../shared/services/notification.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,15 @@ import { NotificationService } from '../shared/services/notification.service';
 export class ProjectService {
 
   constructor(private fb: FormBuilder,
-    private httpService: HttpService,
-    private notificationService: NotificationService) { }
+              private httpService: HttpService,
+              private notificationService: NotificationService,
+              private translate: TranslateService
+  ) { }
 
     form:FormGroup = this.fb.group({
     id: [''],
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-    description: ['', [Validators.required,Validators.minLength(10), Validators.maxLength(8000)]],
+    description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(8000)]],
     details: ['', Validators.maxLength(8000)],
     projectStart: ['', Validators.required],
     projectEnd: [''],
@@ -54,30 +57,30 @@ export class ProjectService {
 
   addProject(project: Project) {
     this.httpService.createProject(project).subscribe(
-      (msg: string) => {
-       msg = 'Проект створено';
-       this.notificationService.success(msg)
+      async (msg: string) => {
+       msg = await this.translate.get('common.created-successfully').toPromise();
+       this.notificationService.success(msg);
       },
-      (error) => {
+      async (error) => {
          console.log(error);
-         this.notificationService.warn('Помилка при створенні проекту');
+         this.notificationService.warn(await this.translate.get('common.wth').toPromise());
       });
-  
+
   }
 
   editProject(project: Project) {
     this.httpService.updateProject(project).subscribe(
-      (msg: string) => {
-        msg = 'Проект оновлено';
+      async (msg: string) => {
+        msg = await this.translate.get('updated-successfully').toPromise();
         this.notificationService.success(msg);
        },
-       (error) => {
+       async (error) => {
           console.log(error);
-          this.notificationService.warn('Помилка при оновленні проекту')
+          this.notificationService.warn(await this.translate.get('common.wth').toPromise());
        });
   }
 
-  getProjectTypes(){
+  getProjectTypes() {
     return this.httpService.getAllProjectTypes();
   }
 }

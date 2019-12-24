@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>Створення нового типу проекту</h1>
+<h1 mat-dialog-title>{{'components.projectTypes.new-p-t-creation'|translate}}</h1>
 <div mat-dialog-content>
-    <p>Введіть назву нового типу проекту</p>
+    <p>{{'components.projectTypes.enter-new-type-name'|translate}}</p>
     <mat-form-field>
         <input matInput [(ngModel)]="this.newData.typeName">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="onCloseForm()">Cancel</button>
-    <button mat-button [mat-dialog-close]="this.newData.typeName" cdkFocusInitial (click)="onSubmit()">Ok</button>
+    <button mat-button (click)="onCloseForm()">{{'common.cancel'|translate}}</button>
+    <button mat-button [mat-dialog-close]="this.newData.typeName" cdkFocusInitial (click)="onSubmit()">{{'common.confirm'|translate}}</button>
 </div>
