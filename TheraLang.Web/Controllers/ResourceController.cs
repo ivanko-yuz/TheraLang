@@ -192,7 +192,7 @@ namespace TheraLang.Web.Controllers
                 ProjectId = resourceToProjectViewModel.ProjectId,
                 ResourceId = resourceToProjectViewModel.ResourceId
             };
-            await _service.AddResourceToProject(resourceToProject, 0);
+            await _service.AddResourceToProject(resourceToProject);
             return Ok();
         }
 

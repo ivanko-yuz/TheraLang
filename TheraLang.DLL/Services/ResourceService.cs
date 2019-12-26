@@ -232,7 +232,7 @@ namespace TheraLang.DLL.Services
             }
         }
 
-        public async Task AddResourceToProject(ResourceProject resourceProject, int userId)
+        public async Task AddResourceToProject(ResourceProject resourceProject)
         {
             try
             {

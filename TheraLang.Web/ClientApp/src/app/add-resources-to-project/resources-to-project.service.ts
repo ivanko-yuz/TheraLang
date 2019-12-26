@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { resourсeUrl } from '../shared/api-endpoint.constants';
+import { resourceUrl } from '../shared/api-endpoint.constants';
 import { ResourceToProject } from './resource-to-project';
 import { Resource } from '../general-resources/resource-models/resource';
 
@@ -14,7 +14,7 @@ export class ResourcesToProjectService {
   ) { }
 
   post(newResourceToProject: ResourceToProject): Observable<any> {
-    return this.http.post(resourсeUrl + '/' + 'resourceToProject', newResourceToProject);
+    return this.http.post(resourceUrl + '/' + 'resourceToProject', newResourceToProject);
   }
 
   delete(resourceToProject: ResourceToProject): Observable<any> {
@@ -27,7 +27,7 @@ export class ResourcesToProjectService {
         resourceId: resourceToProject.resourceId,
       },
     };
-    return this.http.delete(resourсeUrl + '/' + 'resourceToProject' + '/' + resourceToProject.projectId, options);
+    return this.http.delete(resourceUrl + '/' + 'resourceToProject' + '/' + resourceToProject.projectId, options);
   }
 
   getAllResourcesNotAttached(id: number) {
@@ -39,6 +39,6 @@ export class ResourcesToProjectService {
 
   getAllResources(id: number) {
     debugger
-    return this.http.get(resourсeUrl + '/' + 'allNotAttached' + '/' + id);
+    return this.http.get(resourceUrl + '/' + 'allNotAttached' + '/' + id);
   }
 }
