@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { accountUrl } from '../shared/api-endpoint.constants';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Injectable({
@@ -30,9 +30,9 @@ export class UserService {
 
   isAuthenticated() {
     return this.http.get(this.baseUrl + '/isAuthenticated');
-    }
-   getUserName() {
-        return this.http.get(this.baseUrl + '/getUserName', {responseType:'text'});
-    }
+  }
+  getUserName() {
+    return this.http.get(this.baseUrl + '/getUserName', { responseType: 'text' });
+  }
 
 }

@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Project } from './project';
 import { HttpService } from './http.service';
 import { NotificationService } from '../shared/services/notification.service';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +11,12 @@ import {TranslateService} from '@ngx-translate/core';
 export class ProjectService {
 
   constructor(private fb: FormBuilder,
-              private httpService: HttpService,
-              private notificationService: NotificationService,
-              private translate: TranslateService
+    private httpService: HttpService,
+    private notificationService: NotificationService,
+    private translate: TranslateService
   ) { }
 
-    form:FormGroup = this.fb.group({
+  form: FormGroup = this.fb.group({
     id: [''],
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(8000)]],
@@ -42,7 +42,7 @@ export class ProjectService {
   }
 
 
-  populateForm(project:Project) {
+  populateForm(project: Project) {
     this.form.setValue({
       id: project.id,
       name: project.name,
@@ -58,12 +58,12 @@ export class ProjectService {
   addProject(project: Project) {
     this.httpService.createProject(project).subscribe(
       async (msg: string) => {
-       msg = await this.translate.get('common.created-successfully').toPromise();
-       this.notificationService.success(msg);
+        msg = await this.translate.get('common.created-successfully').toPromise();
+        this.notificationService.success(msg);
       },
       async (error) => {
-         console.log(error);
-         this.notificationService.warn(await this.translate.get('common.wth').toPromise());
+        console.log(error);
+        this.notificationService.warn(await this.translate.get('common.wth').toPromise());
       });
 
   }
@@ -73,11 +73,11 @@ export class ProjectService {
       async (msg: string) => {
         msg = await this.translate.get('updated-successfully').toPromise();
         this.notificationService.success(msg);
-       },
-       async (error) => {
-          console.log(error);
-          this.notificationService.warn(await this.translate.get('common.wth').toPromise());
-       });
+      },
+      async (error) => {
+        console.log(error);
+        this.notificationService.warn(await this.translate.get('common.wth').toPromise());
+      });
   }
 
   getProjectTypes() {
