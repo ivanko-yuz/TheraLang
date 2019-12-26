@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import { ResourceCreateService } from './resource-create.service';
 import { ResourceCategory } from '../resource-models/resource-category';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+
 
 @Component({
   selector: 'app-resource-create',

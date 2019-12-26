@@ -17,8 +17,7 @@ export class ProjectParticipantsComponent implements OnInit {
   projectParticipationRequest = new MatTableDataSource<ProjectParticipationRequest>();
   showActionButtons: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['createdById', 'role', 'projectId', 'status', 'actions'];
-
+  displayedColumns: string[] = ['userName',  'userEmail', 'projectId', 'actions'];
   constructor(private participantService: ProjectParticipationService, private eventService: EventService) { }
 
   ngOnInit() {

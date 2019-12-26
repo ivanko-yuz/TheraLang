@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { UserService } from '../user.service';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +14,15 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   constructor(private notificationService: NotificationService,
-              private dialog: DialogService,
-              public userService: UserService,
-              private translate: TranslateService
+    private dialog: DialogService,
+    public userService: UserService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
   }
 
-    onSubmit() {
+  onSubmit() {
     this.userService.login(this.userService.loginForm.value).subscribe(
       async (msg: string) => {
         msg = await this.translate.get('components.account.logged-in-successfully').toPromise();
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       async (error) => {
         console.log(error);
         this.notificationService.warn(await this.translate.get('components.account.incorrect-login-or-password').toPromise());
-        this.userService.loginForm.reset;
+        this.userService.loginForm.reset();
       });
 
   }

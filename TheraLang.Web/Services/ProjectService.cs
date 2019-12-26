@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.DLL.Constants;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Enums;
 using TheraLang.DLL.UnitOfWork;
 using TheraLang.Web.Models;
 

@@ -69,7 +69,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageComponent } from './toolbar/language/language.component';
 import { ProjectRequestComponent } from "./project-request/project-request.component";
 import { HttpProjectService } from "./project-request/http-project.service";
-import { NgxFileDropModule } from 'ngx-file-drop';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -171,7 +170,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       PortalModule,
       ScrollingModule,
       CmsModule,
-      NgxFileDropModule,
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,

@@ -1,9 +1,9 @@
-import {Component, OnInit, AfterViewInit, OnDestroy} from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ProjectParticipationRequest } from '../project-participants/project-participation-request';
 import { EventService } from '../project-participants/event-service';
-import {SiteMapService} from '../cms/services/site-map.service';
-import {ToolbarItem} from './toolbar-item/toolbar-item';
-import {Subscription} from 'rxjs';
+import { SiteMapService } from '../cms/services/site-map.service';
+import { ToolbarItem } from './toolbar-item/toolbar-item';
+import { Subscription } from 'rxjs';
 import { ProjectParticipationService } from '../project-participants/project-participation.service';
 import { ProjectParticipationRequestStatus } from '../shared/enums/project-participation-request-status';
 import { DialogService } from '../shared/services/dialog.service';
@@ -37,11 +37,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscribeOnSiteMapService();
     const subscription =
       this.participantService.getAllProjectParticipants().subscribe((projectParticipation: ProjectParticipationRequest[]) => {
-      this.projectParticipation = projectParticipation;
-      if ((this.projectParticipation.filter(x => x.status === ProjectParticipationRequestStatus.New)).length > 0) {
-        this.hasNotification = true;
-      }
-    });
+        this.projectParticipation = projectParticipation;
+        if ((this.projectParticipation.filter(x => x.status === ProjectParticipationRequestStatus.New)).length > 0) {
+          this.hasNotification = true;
+        }
+      });
     this.subscription.add(subscription);
     this.userService.isAuthenticated().subscribe((isAuthinticated: boolean) => (this.isAuthinticated = isAuthinticated));
   }
@@ -63,10 +63,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   onLogin() {
-   this.dialog.openFormDialog(LoginComponent);
+    this.dialog.openFormDialog(LoginComponent);
   }
 }
