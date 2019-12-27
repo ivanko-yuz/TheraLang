@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -15,6 +16,8 @@ using TheraLang.DLL.Services;
 using TheraLang.DLL.UnitOfWork;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Services;
+using TheraLang.DLL.Models;
+using TheraLang.Web.Validators;
 
 namespace TheraLang.Web
 {
@@ -28,6 +31,7 @@ namespace TheraLang.Web
         {
             Configuration = configuration;
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddLocalization(options =>
@@ -79,6 +83,7 @@ namespace TheraLang.Web
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddOpenApiDocument();
+            services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             #endregion
         }
 
