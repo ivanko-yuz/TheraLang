@@ -8,6 +8,7 @@ using TheraLang.DLL.Services;
 using TheraLang.DLL.Models;
 using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
+using FluentValidation;
 
 namespace TheraLang.Web.Controllers
 {
@@ -15,14 +16,16 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service, UserManager<User> userManager)
+        public ResourceController(IResourceService service, UserManager<User> userManager, IValidator<ResourceViewModel> validator)
         {
             _service = service;
             _userManager = userManager;
+            _validator = validator;
         }
 
         private readonly IResourceService _service;
         private readonly UserManager<User> _userManager;
+        private readonly IValidator<ResourceViewModel> _validator;
 
         /// <summary>
         /// create resource
@@ -33,9 +36,11 @@ namespace TheraLang.Web.Controllers
         [Route("create")]
         public async Task<IActionResult> PostResource([FromBody] ResourceViewModel resourceModel)
         {
-            if (resourceModel == null)
+            var validationResult = _validator.Validate(resourceModel);
+            
+            if (!validationResult.IsValid)
             {
-                throw new ArgumentException($"{nameof(resourceModel)} can not be null");
+                throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
 
             User user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -53,9 +58,11 @@ namespace TheraLang.Web.Controllers
         [Route("update")]
         public async Task<IActionResult> PutResource([FromBody] ResourceViewModel resourceModel)
         {
-            if (resourceModel == null)
+            var validationResult = _validator.Validate(resourceModel);
+
+            if (!validationResult.IsValid)
             {
-                throw new ArgumentException($"{nameof(resourceModel)} can not be null");
+                throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
 
             User user = await _userManager.FindByNameAsync(User.Identity.Name);

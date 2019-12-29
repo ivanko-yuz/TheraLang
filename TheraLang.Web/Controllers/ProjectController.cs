@@ -9,9 +9,6 @@ using TheraLang.Web.Models;
 using TheraLang.Web.Services;
 using Piranha.AspNetCore.Identity.Data;
 
-
-
-
 namespace TheraLang.Web.Controllers
 {
     [Route("api/projects")]

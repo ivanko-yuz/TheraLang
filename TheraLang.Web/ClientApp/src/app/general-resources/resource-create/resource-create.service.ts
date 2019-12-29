@@ -22,8 +22,8 @@ export class ResourceCreateService {
 
   public resourceForm = this.formBuilder.group({
       id : [null],
-      name : ['', [Validators.required, Validators.maxLength(50)]],
-      description : ['', [Validators.required, Validators.maxLength(5000)]],
+      name : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      description : ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5000)]],
       url : [''],
       fileName : [''],
       file: [null],
