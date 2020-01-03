@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
 
-namespace TheraLang.Web.Services
+namespace TheraLang.DLL.Services
 {
    public interface IResourceAttachmentService
    {

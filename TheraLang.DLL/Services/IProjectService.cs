@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
-using TheraLang.Web.Models;
+using TheraLang.DLL.Models;
 
-namespace TheraLang.Web.Services
+namespace TheraLang.DLL.Services
 {
     public interface IProjectService
     {

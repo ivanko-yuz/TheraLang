@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using TheraLang.Web.Services;
+using TheraLang.DLL.Services;
 using TheraLang.DLL.Entities;
 using System.Collections.Generic;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using FluentValidation;
-using TheraLang.Web.Models;
+using TheraLang.DLL.Models;
 
 namespace TheraLang.Web.Validators
 {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.UnitOfWork;
 
-namespace TheraLang.Web.Services
+namespace TheraLang.DLL.Services
 {
     public class ResourceAttachmentService : IResourceAttachmentService
     {
