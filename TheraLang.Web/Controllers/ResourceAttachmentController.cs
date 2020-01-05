@@ -30,7 +30,7 @@ namespace TheraLang.Web.Controllers
            return Ok(resource);
        }
        [HttpGet]
-       public IEnumerable<ResourceAttachment> GetAllTypes()
+       public IEnumerable<ResourceAttachment> Get()
        {
            return _attachment.Get();
        }
