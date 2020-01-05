@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Models;
 using TheraLang.DLL.UnitOfWork;
 
 namespace TheraLang.DLL.Services
@@ -18,40 +20,23 @@ namespace TheraLang.DLL.Services
         {
             _uow = uow;
             _appEnvironment = appEnvironment;
-        }
-        public Stream InputStream { get; set; }
+        }        
 
-        public async Task Add(ResourceAttachment file)
+        public async Task Add(ResourceAttachModel file)
         {
-            var newFile = new ResourceAttachment { FileName = file.FileName, Path = file.Path, ResourceId = file.ResourceId };
-            try
+            if (file != null)
             {
-                await _uow.Repository<ResourceAttachment>().Add(newFile);
-                await _uow.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                e.Data["file"] = file;
-                throw;
-            }
-        }
-        public void SaveAs(ResourceAttachment resource, bool overwrite = true, bool autoCreateDirectory = true)
-        {
-            try
-            {
-                if (autoCreateDirectory)
+                string path = "/Files/" + file.FileName;
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
-                    var directory = new FileInfo(Path.Combine(resource.Path, resource.FileName)).Directory;
-                    if (directory == null) directory.Create();
+                    await file.File.CopyToAsync(fileStream);
                 }
-                var newPath = Path.Combine(_appEnvironment.WebRootPath, "uploads", resource.FileName);
-                File.Copy(Path.Combine(resource.Path, resource.FileName), newPath, overwrite);
-            }
-            catch (Exception e)
-            {
-                throw new Exception($"Error when adding the {nameof(resource)}: ", e);
-            }
-        }
+                ResourceAttachment model = new ResourceAttachment { FileName = file.FileName, Path = file.Path, ResourceId = file.ResourceId };
+                await _uow.Repository<ResourceAttachment>().Add(model);
+                await _uow.SaveChangesAsync();
+            }           
+        } 
+        
         public IEnumerable<ResourceAttachment> Get()
         {
             return _uow.Repository<ResourceAttachment>().Get().AsNoTracking().ToList();
