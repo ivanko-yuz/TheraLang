@@ -24,17 +24,25 @@ namespace TheraLang.DLL.Services
 
         public async Task Add(ResourceAttachModel file)
         {
-            if (file != null)
+            try
             {
-                string path = "/Files/" + file.FileName;
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                if (file.File != null)
                 {
-                    await file.File.CopyToAsync(fileStream);
+                    string path = "/Files/" + file.FileName;
+                    using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                    {
+                        await file.File.CopyToAsync(fileStream);
+                    }
+                    ResourceAttachment model = new ResourceAttachment { FileName = file.FileName, Path = file.Path, ResourceId = file.ResourceId };
+                    await _uow.Repository<ResourceAttachment>().Add(model);
+                    await _uow.SaveChangesAsync();
                 }
-                ResourceAttachment model = new ResourceAttachment { FileName = file.FileName, Path = file.Path, ResourceId = file.ResourceId };
-                await _uow.Repository<ResourceAttachment>().Add(model);
-                await _uow.SaveChangesAsync();
-            }           
+            }
+            catch (Exception ex)
+            {                
+                ex.Data[nameof(ResourceAttachModel)] = file;
+                throw new Exception("Error when adding file {nameof(ProjectType)}", ex);
+            }
         } 
         
         public IEnumerable<ResourceAttachment> Get()
