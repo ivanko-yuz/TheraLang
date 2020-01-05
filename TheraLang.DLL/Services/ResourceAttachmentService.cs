@@ -41,7 +41,7 @@ namespace TheraLang.DLL.Services
             catch (Exception ex)
             {                
                 ex.Data[nameof(ResourceAttachModel)] = file;
-                throw new Exception("Error when adding file {nameof(ProjectType)}", ex);
+                throw new Exception($"Error when adding file {nameof(ProjectType)}", ex);
             }
         } 
         
