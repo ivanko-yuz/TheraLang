@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.DLL.Entities;
+using TheraLang.DLL.Models;
 
-namespace TheraLang.Web.Services
+namespace TheraLang.DLL.Services
 {
    public interface IResourceAttachmentService
    {
-       Task Add(ResourceAttachment file);       
-
-        void SaveAs(ResourceAttachment resource, bool overwrite = true, bool autoCreateDirectory = true);
+       Task Add(ResourceAttachModel file);              
 
        IEnumerable<ResourceAttachment> Get();
    }

@@ -1,6 +1,4 @@
-﻿
-
-namespace TheraLang.DLL.Models
+﻿namespace TheraLang.DLL.Models
 {
     public class LiqPayCheckoutModel
     {

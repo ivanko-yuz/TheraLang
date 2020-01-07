@@ -7,9 +7,9 @@ using TheraLang.DLL.Constants;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Enums;
 using TheraLang.DLL.UnitOfWork;
-using TheraLang.Web.Models;
+using TheraLang.DLL.Models;
 
-namespace TheraLang.Web.Services
+namespace TheraLang.DLL.Services
 {
     public class ProjectService : IProjectService
     {

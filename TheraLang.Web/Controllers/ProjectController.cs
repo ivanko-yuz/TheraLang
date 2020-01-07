@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
-using TheraLang.Web.Models;
-using TheraLang.Web.Services;
+using TheraLang.DLL.Models;
+using TheraLang.DLL.Services;
 using Piranha.AspNetCore.Identity.Data;
 
 namespace TheraLang.Web.Controllers

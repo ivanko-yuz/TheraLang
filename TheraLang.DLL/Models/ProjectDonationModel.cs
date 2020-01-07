@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace TheraLang.Web.Models
+namespace TheraLang.DLL.Models
 {
     public class ProjectDonationModel
     {
