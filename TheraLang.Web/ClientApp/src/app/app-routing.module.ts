@@ -1,17 +1,17 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { HomeComponent } from "./modules/user-module/home/home.component";
-import { ProjectParticipantsComponent } from "./modules/project-module/project-participants/project-participants.component";
-import { ProjectInfoComponent } from "./modules/project-module/project-info/project-info.component";
-import { ProjectComponent } from "./modules/user-module/project/project.component";
-import { DonationComponent } from "./modules/user-module/donation/donation.component";
-import { GeneralResourcesTableComponent } from "./modules/resource-module/general-resources-tables/general-resources-table/general-resources-table.component";
+import { HomeComponent } from "./modules/user/pages/home/home.component";
+import { ProjectParticipantsComponent } from "./modules/user/pages/project/project-participants/project-participants.component";
+import { ProjectInfoComponent } from "./modules/user/pages/project/project-info/project-info.component";
+import { ProjectComponent } from "./modules/user/pages/project/project.component";
+import { DonationComponent } from "./modules/user/pages/donation/donation.component";
 import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
 import { ErrorComponent } from "./shared/components/error/error.component";
-import { ProjectTypeComponent } from "./modules/project-module/project-info/resources-table-for-project/project-type/project-type.component";
-import { ProjectRequestComponent } from "./modules/project-module/project-request/project-request.component";
-import { GeneralResourcesComponent } from "./modules/resource-module/general-resources.component";
-import { CmsModule } from "./modules/cms-module/cms.module";
+import { ProjectTypeComponent } from "./modules/user/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
+import { ProjectRequestComponent } from "./modules/user/pages/project/project-request/project-request.component";
+import { CmsModule } from "./modules/cms-generic/cms.module";
+import { GeneralResourcesComponent } from "./modules/user/pages/resource/general-resources.component";
+import { GeneralResourcesTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
