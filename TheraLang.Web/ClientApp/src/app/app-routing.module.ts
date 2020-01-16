@@ -1,32 +1,31 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { ProjectComponent } from "./project/project.component";
-import { HomeComponent } from "./home/home.component";
-import { ProjectInfoComponent } from "./project-info/project-info.component";
-import { ProjectParticipantsComponent } from "./project-participants/project-participants.component";
-import { CmsModule } from "./cms/cms.module";
-// tslint:disable-next-line:max-line-length
-import { GeneralResourcesTableComponent } from "./general-resources/general-resources-tables/general-resources-table/general-resources-table.component";
+import { HomeComponent } from "./modules/user-module/home/home.component";
+import { ProjectParticipantsComponent } from "./modules/project-module/project-participants/project-participants.component";
+import { ProjectInfoComponent } from "./modules/project-module/project-info/project-info.component";
+import { ProjectComponent } from "./modules/user-module/project/project.component";
+import { DonationComponent } from "./modules/user-module/donation/donation.component";
+import { GeneralResourcesTableComponent } from "./modules/resource-module/general-resources-tables/general-resources-table/general-resources-table.component";
+import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
 import { ErrorComponent } from "./shared/components/error/error.component";
-import { DonationComponent } from "./donation/donation.component";
-import { TransactionResultComponent } from "./transaction-result/transaction-result.component";
-import { ProjectTypeComponent } from "./project-info/resources-table-for-project/project-type/project-type.component";
-import { GeneralResourcesComponent } from "./general-resources/general-resources.component";
-import { ProjectRequestComponent } from "./project-request/project-request.component";
+import { ProjectTypeComponent } from "./modules/project-module/project-info/resources-table-for-project/project-type/project-type.component";
+import { ProjectRequestComponent } from "./modules/project-module/project-request/project-request.component";
+import { GeneralResourcesComponent } from "./modules/resource-module/general-resources.component";
+import { CmsModule } from "./modules/cms-module/cms.module";
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'participants', component: ProjectParticipantsComponent },
-    { path: 'projects/:id', component: ProjectInfoComponent },
-    { path: 'projects', component: ProjectComponent },
-    { path: 'donations/:projectId', component: DonationComponent },
-    { path: 'donations', component: DonationComponent },
-    { path: 'resources', component: GeneralResourcesTableComponent },
-    { path: 'transaction/:donationId', component: TransactionResultComponent },
-    { path: 'error', component: ErrorComponent },
-    { path: 'projectTypes', component: ProjectTypeComponent },
-    { path: 'projectRequest', component: ProjectRequestComponent},
-    { path: '**', loadChildren: () => CmsModule },
+  { path: "", component: HomeComponent },
+  { path: "participants", component: ProjectParticipantsComponent },
+  { path: "projects/:id", component: ProjectInfoComponent },
+  { path: "projects", component: ProjectComponent },
+  { path: "donations/:projectId", component: DonationComponent },
+  { path: "donations", component: DonationComponent },
+  { path: "resources", component: GeneralResourcesTableComponent },
+  { path: "transaction/:donationId", component: TransactionResultComponent },
+  { path: "error", component: ErrorComponent },
+  { path: "projectTypes", component: ProjectTypeComponent },
+  { path: "projectRequest", component: ProjectRequestComponent },
+  { path: "**", loadChildren: () => CmsModule }
 ];
 
 @NgModule({
