@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Models;
-using TheraLang.DLL.Services;
+using TheraLang.BLL.Services;
 using Piranha.AspNetCore.Identity.Data;
 
 namespace TheraLang.Web.Controllers

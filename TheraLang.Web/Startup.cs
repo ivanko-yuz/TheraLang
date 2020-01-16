@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
 using TheraLang.DLL;
-using TheraLang.DLL.Services;
+using TheraLang.BLL.Services;
 using TheraLang.DLL.UnitOfWork;
 using TheraLang.Web.Helpers;
 using TheraLang.DLL.Models;

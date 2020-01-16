@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.DLL.Constants;
 using TheraLang.DLL.Entities;
-using TheraLang.DLL.Services;
+using TheraLang.BLL.Services;
 using TheraLang.DLL.Models;
 using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;

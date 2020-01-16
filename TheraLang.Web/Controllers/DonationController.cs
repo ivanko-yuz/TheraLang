@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Models;
-using TheraLang.DLL.Services;
+using TheraLang.BLL.Services;
 using TheraLang.Web.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Http;

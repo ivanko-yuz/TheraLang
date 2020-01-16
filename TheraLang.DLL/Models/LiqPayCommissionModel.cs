@@ -2,7 +2,7 @@
 
 namespace TheraLang.DLL.Models
 {
-    class LiqPayCommissionModel
+    public class LiqPayCommissionModel
     {
         [JsonProperty("receiver_commission")]
         public decimal ReceiverCommission { get; set; }

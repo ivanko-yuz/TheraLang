@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.DLL.Services;
+using TheraLang.BLL.Services;
 using TheraLang.DLL.Entities;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
