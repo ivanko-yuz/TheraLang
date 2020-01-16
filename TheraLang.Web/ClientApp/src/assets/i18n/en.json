@@ -100,9 +100,9 @@
       "need": "Need to raise money:",
       "raised": "Raised",
       "to-be-raised": "To be raised",
-      "donate-4-org": "Підтримати нашу організацію",
-      "donate-4-project": "Підтримати цей проект",
-      "message": "Введіть суму допомоги (Буде знято комісію з платежу)"
+      "donate-4-org": "Donate for our organisation",
+      "donate-4-project": "Donate for this project",
+      "message": "Enter donation amount (Payment will be charged)"
     }
   }
 }
