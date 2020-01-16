@@ -9,7 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class LanguageComponent implements OnInit {
 
   @ViewChild('menu', {static: false}) menu: any;
-  languages = ['en', 'uk'];
+  languages = ['en', 'ua'];
 
   constructor(private translate: TranslateService) { }
 
