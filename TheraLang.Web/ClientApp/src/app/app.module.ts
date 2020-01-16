@@ -69,7 +69,7 @@ import { ToolbarItemComponent } from "./core/toolbar/toolbar-item/toolbar-item.c
 import { DonationComponent } from "./modules/user/pages/donation/donation.component";
 import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
 import { ProjectRequestComponent } from "./modules/user/pages/project/project-request/project-request.component";
-import { LoginComponent } from "./core/auth/login/login.component";
+import { LoginComponent } from "./modules/user/components/login/login.component";
 import { ProfileMenuComponent } from "./core/toolbar/profile-menu/profile-menu.component";
 import { ProjectTypeFormComponent } from "./modules/user/pages/project/project-type-form/project-type-form.component";
 import { ProjectTypeCreateFormComponent } from "./modules/user/pages/project/project-type-create-form/project-type-create-form.component";
