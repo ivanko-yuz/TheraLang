@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TheraLang.DLL\TheraLang.DLL.csproj" />
+    <ProjectReference Include="..\TheraLang.DAL\TheraLang.DAL.csproj" />
   </ItemGroup>
 
 </Project>

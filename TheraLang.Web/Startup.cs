@@ -11,11 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
-using TheraLang.DLL;
+using TheraLang.BLL.Interfaces;
+using TheraLang.DAL;
 using TheraLang.BLL.Services;
-using TheraLang.DLL.UnitOfWork;
+using TheraLang.DAL.UnitOfWork;
 using TheraLang.Web.Helpers;
-using TheraLang.DLL.Models;
+using TheraLang.DAL.Models;
 using TheraLang.Web.Validators;
 
 namespace TheraLang.Web

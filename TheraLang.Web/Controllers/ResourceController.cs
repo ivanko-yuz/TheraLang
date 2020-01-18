@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TheraLang.DLL.Constants;
-using TheraLang.DLL.Entities;
+using TheraLang.DAL.Constants;
+using TheraLang.DAL.Entities;
 using TheraLang.BLL.Services;
-using TheraLang.DLL.Models;
+using TheraLang.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
 using FluentValidation;
+using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.Web.Controllers
 {

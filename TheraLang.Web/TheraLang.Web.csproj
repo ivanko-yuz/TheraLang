@@ -82,6 +82,6 @@
     <ProjectReference Include="..\data\Piranha.Data.EF\Piranha.Data.EF.csproj" />
     <ProjectReference Include="..\core\Piranha.WebApi\Piranha.WebApi.csproj" />
     <ProjectReference Include="..\TheraLang.BLL\TheraLang.BLL.csproj" />
-    <ProjectReference Include="..\TheraLang.DLL\TheraLang.DLL.csproj" />
+    <ProjectReference Include="..\TheraLang.DAL\TheraLang.DAL.csproj" />
   </ItemGroup>
 </Project>

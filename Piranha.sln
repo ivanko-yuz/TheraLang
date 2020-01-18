@@ -77,11 +77,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Piranha.Manager.TinyMCE", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DataSeeding", "TheraLang.DataSeeding\TheraLang.DataSeeding.csproj", "{98EB6508-7993-431B-B6BA-4E9EF374F376}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DLL", "TheraLang.DLL\TheraLang.DLL.csproj", "{A04A0C70-F9CA-4344-B8D5-66FB0874347D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DAL", "TheraLang.DAL\TheraLang.DAL.csproj", "{A04A0C70-F9CA-4344-B8D5-66FB0874347D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.Tests", "TheraLang.Tests\TheraLang.Tests.csproj", "{EDE1BDFC-40DE-426F-87D3-917C4370B9F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheraLang.BLL", "TheraLang.BLL\TheraLang.BLL.csproj", "{689D7B65-077E-46DF-9551-B960826F3652}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.BLL", "TheraLang.BLL\TheraLang.BLL.csproj", "{689D7B65-077E-46DF-9551-B960826F3652}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

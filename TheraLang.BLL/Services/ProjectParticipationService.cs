@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheraLang.DLL.Entities;
-using TheraLang.DLL.Enums;
-using TheraLang.DLL.UnitOfWork;
+using TheraLang.BLL.Interfaces;
+using TheraLang.DAL.Entities;
+using TheraLang.DAL.Enums;
+using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {

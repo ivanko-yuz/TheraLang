@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using TheraLang.DLL.Entities;
-using TheraLang.DLL.UnitOfWork;
+using TheraLang.DAL.Entities;
+using TheraLang.DAL.UnitOfWork;
 using System.Collections.Generic;
 using System;
+using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.BLL.Services
 {

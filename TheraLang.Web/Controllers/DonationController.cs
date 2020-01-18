@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.DLL.Entities;
-using TheraLang.DLL.Models;
+using TheraLang.DAL.Entities;
+using TheraLang.DAL.Models;
 using TheraLang.BLL.Services;
 using TheraLang.Web.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.Web.Controllers
 {

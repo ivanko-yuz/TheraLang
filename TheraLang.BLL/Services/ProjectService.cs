@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TheraLang.DLL.Constants;
-using TheraLang.DLL.Entities;
-using TheraLang.DLL.Enums;
-using TheraLang.DLL.UnitOfWork;
-using TheraLang.DLL.Models;
+using TheraLang.BLL.Interfaces;
+using TheraLang.DAL.Constants;
+using TheraLang.DAL.Entities;
+using TheraLang.DAL.Enums;
+using TheraLang.DAL.UnitOfWork;
+using TheraLang.DAL.Models;
 
 namespace TheraLang.BLL.Services
 {
@@ -65,9 +66,9 @@ namespace TheraLang.BLL.Services
 
             var newParticipant = new ProjectParticipation
             {
-                Role = DLL.Enums.MemberRole.ProjectOwner,
+                Role = DAL.Enums.MemberRole.ProjectOwner,
                 CreatedById = userId,
-                Status = DLL.Enums.ProjectParticipationStatus.Approved,
+                Status = DAL.Enums.ProjectParticipationStatus.Approved,
                 Project = newProject,
             };
             try

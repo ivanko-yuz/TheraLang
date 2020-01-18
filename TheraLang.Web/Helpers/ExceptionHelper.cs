@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using TheraLang.DLL.Models;
+using TheraLang.DAL.Models;
 
 namespace TheraLang.Web.Helpers
 {

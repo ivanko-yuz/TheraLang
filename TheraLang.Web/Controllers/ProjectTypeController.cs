@@ -2,10 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.Services;
-using TheraLang.DLL.Entities;
+using TheraLang.DAL.Entities;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
+using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.Web.Controllers
 {

@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using TheraLang.BLL.Services;
-using TheraLang.DLL.Entities;
+using TheraLang.DAL.Entities;
 using System.Collections.Generic;
-using TheraLang.DLL.Models;
+using TheraLang.BLL.Interfaces;
+using TheraLang.DAL.Models;
 
 namespace TheraLang.Web.Controllers
 {
