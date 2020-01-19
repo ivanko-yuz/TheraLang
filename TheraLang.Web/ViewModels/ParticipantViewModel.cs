@@ -1,14 +1,14 @@
 ﻿using TheraLang.DAL.Enums;
 
-namespace TheraLang.DAL.Models
+namespace TheraLang.Web.ViewModels
 {
-    public class ParticipantModel
+    public class ParticipantViewModel
     {
         public int Id { get; set; }
 
-        public MemberRole Role { get; set; }
+        public MemberRoleViewModel Role { get; set; }
 
-        public ProjectParticipationStatus Status { get; set; }
+        public ProjectParticipationStatusViewModel Status { get; set; }
 
         public int ProjectId { get; set; }
         

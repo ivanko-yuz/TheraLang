@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Models;
@@ -21,9 +23,9 @@ namespace TheraLang.BLL.Services
         {
             _uow = uow;
             _appEnvironment = appEnvironment;
-        }        
+        }
 
-        public async Task Add(ResourceAttachModel file)
+        public async Task Add(ResourceAttachDto file)
         {
             try
             {
@@ -34,21 +36,29 @@ namespace TheraLang.BLL.Services
                     {
                         await file.File.CopyToAsync(fileStream);
                     }
-                    ResourceAttachment model = new ResourceAttachment { FileName = file.FileName, Path = file.Path, ResourceId = file.ResourceId };
-                    await _uow.Repository<ResourceAttachment>().Add(model);
+
+                    var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachDto, ResourceAttachment>()).CreateMapper();
+                    var resource = mapper.Map<ResourceAttachDto, ResourceAttachment>(file);
+
+                    await _uow.Repository<ResourceAttachment>().Add(resource);
                     await _uow.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
-            {                
-                ex.Data[nameof(ResourceAttachModel)] = file;
+            {
+                ex.Data[nameof(ResourceAttachDto)] = file;
                 throw new Exception("Error when adding file {nameof(ProjectType)}", ex);
             }
-        } 
-        
-        public IEnumerable<ResourceAttachment> Get()
+        }
+
+        public IEnumerable<ResourceAttachDto> Get()
         {
-            return _uow.Repository<ResourceAttachment>().Get().AsNoTracking().ToList();
+            var resources = _uow.Repository<ResourceAttachment>().Get().AsNoTracking().ToList();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachment, ResourceAttachDto>()).CreateMapper();
+            var resourceDto = mapper.Map<IEnumerable<ResourceAttachment>, IEnumerable<ResourceAttachDto>>(resources);
+
+            return resourceDto;
         }
     }
 }

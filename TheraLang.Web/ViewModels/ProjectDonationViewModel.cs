@@ -1,9 +1,8 @@
 ﻿using System;
 
-
 namespace TheraLang.Web.ViewModels
 { 
-    public class ProjectDonationModel
+    public class ProjectDonationViewModel
     {
         public int? Id { get; set; }
 

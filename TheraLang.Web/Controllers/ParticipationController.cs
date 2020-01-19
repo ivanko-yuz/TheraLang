@@ -7,9 +7,11 @@ using TheraLang.DAL.Enums;
 using TheraLang.BLL.Services;
 using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
-using TheraLang.DAL.Models;
 using System.Linq;
+using AutoMapper;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -34,14 +36,17 @@ namespace TheraLang.Web.Controllers
         /// <returns>status code</returns>
         [HttpPut]
         [Route("{participantId}")]
-        public async Task<IActionResult> ChangeStatus(int participantId, [FromBody]ProjectParticipationStatus status)
+        public async Task<IActionResult> ChangeStatus(int participantId, [FromBody]ProjectParticipationStatusViewModel status)
         {
             if (participantId == default)
             {
                 throw new ArgumentException($"{nameof(participantId)} can not be 0");
             }
 
-            await _service.ChangeStatusAsync(participantId, status);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationStatusViewModel, ProjectParticipationStatusDto>()).CreateMapper();
+            var statusDto = mapper.Map<ProjectParticipationStatusViewModel, ProjectParticipationStatusDto>(status);
+
+            await _service.ChangeStatusAsync(participantId, statusDto);
             return Ok();
         }
 
@@ -50,20 +55,22 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of ProjectParticipants</returns>
         [HttpGet]
-        public ActionResult<IEnumerable<ParticipantModel>> Get()
+        public ActionResult<IEnumerable<ParticipantViewModel>> Get()
         {
-            IEnumerable<ProjectParticipation> members = _service.GetAll();
-            var part = _service.GetAll().Select(p => new ParticipantModel
-            {
-                Id = p.Id,
-                ProjectId = p.ProjectId,
-                Role = p.Role,
-                Status = p.Status,
-                UserName = "Олексій Гордієнко",
-                UserEmail = "gordienko@gmail.com"
-            }).ToList();
+            var members = _service.GetAll().ToList();
 
-            return Ok(part);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationDto, ParticipantViewModel>()
+                .ForMember(m => m.Id, opt => opt.MapFrom(m => m.PiranhaUser.Id))
+                .ForMember(m => m.Role, opt => opt.MapFrom(m => m.Role))
+                .ForMember(m => m.Status, opt => opt.MapFrom(m => m.Status))
+                .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))
+                .ForMember(m => m.UserName, opt => opt.MapFrom(m => m.PiranhaUser.UserName))
+                .ForMember(m => m.UserEmail, opt => opt.MapFrom(m => m.PiranhaUser.Email))
+            ).CreateMapper();
+
+            var membersModel = mapper.Map<IEnumerable<ProjectParticipationDto>, IEnumerable<ParticipantViewModel>>(members);
+
+            return Ok(membersModel);
         }
 
         /// <summary>

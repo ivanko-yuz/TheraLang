@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace TheraLang.DAL.Models
+namespace TheraLang.BLL.DataTransferObjects
 {
-    public class ResourceAttachModel
+    public class ResourceAttachDto
     {
         public int ResourceId { get; set; }
 
@@ -10,6 +10,6 @@ namespace TheraLang.DAL.Models
 
         public string Path { get; set; }
 
-        public IFormFile File { get; set;}       
+        public IFormFile File { get; set; }
     }
 }

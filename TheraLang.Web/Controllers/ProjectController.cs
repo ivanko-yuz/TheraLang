@@ -51,11 +51,11 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of Projects</returns>
         [HttpGet]
-        public IEnumerable<ProjectDonationModel> GetAllProjects()
+        public IEnumerable<ProjectDonationViewModel> GetAllProjects()
         {
-            List<ProjectDonationModel> projectModels = new List<ProjectDonationModel>();
+            List<ProjectDonationViewModel> projectModels = new List<ProjectDonationViewModel>();
             projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatusDto.Approved)
-                .Select(p => new ProjectDonationModel
+                .Select(p => new ProjectDonationViewModel
                 {
                     Id = p.Id,
                     Name = p.Name,
