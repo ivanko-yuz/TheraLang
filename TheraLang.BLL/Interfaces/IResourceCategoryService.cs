@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using TheraLang.DAL.Entities;
+using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.BLL.Interfaces
 {
@@ -8,6 +8,6 @@ namespace TheraLang.BLL.Interfaces
     {
         Task ChangeType(int categoryId, string newType);
 
-        IEnumerable<ResourceCategory> GetAllCategories();
+        IEnumerable<ResourceCategoryDto> GetAllCategories();
     }
 }

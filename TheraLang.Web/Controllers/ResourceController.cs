@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using TheraLang.DAL.Constants;
 using TheraLang.DAL.Entities;
-using TheraLang.BLL.Services;
-using TheraLang.DAL.Models;
+using TheraLang.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
 using FluentValidation;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.Web.Controllers
@@ -46,7 +47,11 @@ namespace TheraLang.Web.Controllers
 
             User user = await _userManager.FindByNameAsync(User.Identity.Name);
             Guid userId = user.Id;
-            await _service.AddResource(resourceModel, userId);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
+            var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
+
+            await _service.AddResource(resourceDto, userId);
             return Ok();
         }
 
@@ -68,7 +73,11 @@ namespace TheraLang.Web.Controllers
 
             User user = await _userManager.FindByNameAsync(User.Identity.Name);
             Guid userId = user.Id;
-            await _service.AddResource(resourceModel, userId);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
+            var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
+
+            await _service.AddResource(resourceDto, userId);
             return Ok();
         }
 
@@ -85,7 +94,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            Resource resource = _service.GetResourceById(id);
+            var resource = _service.GetResourceById(id);
             return Ok(resource);
         }
 
@@ -158,7 +167,7 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
             }
 
-            IEnumerable<Resource> resources = _service.GetResourcesByCategoryId(categoryId, pageNumber, recordsPerPage);
+            var resources = _service.GetResourcesByCategoryId(categoryId, pageNumber, recordsPerPage);
             return Ok(resources);
         }
 
@@ -176,7 +185,7 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(projectId)} cannot be 0");
             }
 
-            IEnumerable<Resource> resources = _service.GetAllResourcesByProjectId(projectId);
+            var resources = _service.GetAllResourcesByProjectId(projectId);
             return Ok(resources);
         }
     }

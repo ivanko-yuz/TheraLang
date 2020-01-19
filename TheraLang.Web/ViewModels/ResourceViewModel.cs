@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace TheraLang.DAL.Models
+namespace TheraLang.Web.ViewModels
 {
     public class ResourceViewModel
     {

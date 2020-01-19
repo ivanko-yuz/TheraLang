@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.DAL.Entities;
-using TheraLang.DAL.Models;
-using TheraLang.BLL.Services;
 using Piranha.AspNetCore.Identity.Data;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -57,7 +54,7 @@ namespace TheraLang.Web.Controllers
         public IEnumerable<ProjectDonationModel> GetAllProjects()
         {
             List<ProjectDonationModel> projectModels = new List<ProjectDonationModel>();
-            projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatus.Approved)
+            projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatusDto.Approved)
                 .Select(p => new ProjectDonationModel
                 {
                     Id = p.Id,
@@ -129,8 +126,11 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
-            await _projectService.ChangeStatus(id, ProjectStatus.Approved);
-            return Ok(ProjectStatus.Approved);
+
+            var statusApproved = ProjectStatusDto.Approved;
+
+            await _projectService.ChangeStatus(id, statusApproved);
+            return Ok(ProjectStatusDto.Approved);
         }
 
         /// <summary>
@@ -166,8 +166,11 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
-            await _projectService.ChangeStatus(id, ProjectStatus.Rejected);
-            return Ok(ProjectStatus.Rejected);
+
+            var statusRejected = ProjectStatusDto.Rejected;
+
+            await _projectService.ChangeStatus(id, statusRejected);
+            return Ok(ProjectStatusDto.Rejected);
         }
 
         /// <summary>

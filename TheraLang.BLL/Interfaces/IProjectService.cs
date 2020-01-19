@@ -8,7 +8,7 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IProjectService
     {
-        Task ChangeStatus(int id, ProjectStatus status);
+        Task ChangeStatus(int id, ProjectStatusDto status);
 
         Task Add(ProjectDto projectModel, Guid userId);
 

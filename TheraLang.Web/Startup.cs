@@ -16,8 +16,8 @@ using TheraLang.DAL;
 using TheraLang.BLL.Services;
 using TheraLang.DAL.UnitOfWork;
 using TheraLang.Web.Helpers;
-using TheraLang.DAL.Models;
 using TheraLang.Web.Validators;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web
 {

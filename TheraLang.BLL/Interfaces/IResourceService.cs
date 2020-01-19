@@ -3,25 +3,26 @@ using System.Threading.Tasks;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Models;
 using System;
+using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.BLL.Interfaces
 {
     public interface IResourceService
     {
-        Task AddResource(ResourceViewModel resourceModel, Guid userId);
+        Task AddResource(ResourceDto resource, Guid userId);
 
-        Task UpdateResource(ResourceViewModel resourceModel, Guid updatedById);
+        Task UpdateResource(ResourceDto resource, Guid updatedById);
 
         Task RemoveResource(int id);
 
-        Resource GetResourceById(int id);
+        ResourceDto GetResourceById(int id);
 
-        IEnumerable<ResourceCategory> GetResourcesCategories(bool withAssignedResources);
+        IEnumerable<ResourceCategoryDto> GetResourcesCategories(bool withAssignedResources);
 
         int GetResourcesCount(int categoryId);
 
-        IEnumerable<Resource> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
+        IEnumerable<ResourceDto> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
 
-        IEnumerable<Resource> GetAllResourcesByProjectId(int projectId);
+        IEnumerable<ResourceDto> GetAllResourcesByProjectId(int projectId);
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL.Services;
-using TheraLang.DAL.Entities;
 using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;

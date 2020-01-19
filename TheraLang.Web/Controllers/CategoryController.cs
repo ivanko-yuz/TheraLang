@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL.Services;
 using System.Collections.Generic;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.DAL.Entities;
 
 namespace TheraLang.Web.Controllers
 {
@@ -47,9 +46,9 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of ResourceCategories</returns>
         [HttpGet]
         [Route("get")]
-        public IEnumerable<ResourceCategory> GetAll()
+        public IEnumerable<ResourceCategoryDto> GetAll()
         {
-            IEnumerable<ResourceCategory> categories = _service.GetAllCategories();
+            var categories = _service.GetAllCategories();
             return categories;
         }
     }

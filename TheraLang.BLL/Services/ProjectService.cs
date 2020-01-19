@@ -128,14 +128,18 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task ChangeStatus(int projectId, ProjectStatus status)
+        public async Task ChangeStatus(int projectId, ProjectStatusDto status)
         {
             var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == projectId);
             if (project is null)
             {
                 throw new NullReferenceException($"{ nameof(project) } cannot be null");
             }
-            project.StatusId = status;
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectStatusDto, ProjectStatus>()).CreateMapper();
+            var projectStatus = mapper.Map<ProjectStatusDto, ProjectStatus>(status);
+
+            project.StatusId = projectStatus;
             _uow.Repository<Project>().Update(project);
 
             await _uow.SaveChangesAsync();

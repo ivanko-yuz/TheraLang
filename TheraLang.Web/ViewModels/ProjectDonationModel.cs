@@ -1,8 +1,8 @@
 ﻿using System;
 
 
-namespace TheraLang.DAL.Models
-{
+namespace TheraLang.Web.ViewModels
+{ 
     public class ProjectDonationModel
     {
         public int? Id { get; set; }

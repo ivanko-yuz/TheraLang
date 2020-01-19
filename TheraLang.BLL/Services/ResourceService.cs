@@ -6,6 +6,8 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using TheraLang.DAL.Models;
 using System.IO;
+using AutoMapper;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.BLL.Services
@@ -19,12 +21,25 @@ namespace TheraLang.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Resource GetResourceById(int id)
+        public ResourceDto GetResourceById(int id)
         {
             try
             {
                 Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == id);
-                return resource;
+
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()
+                        .ForMember(r => r.name, opt => opt.MapFrom(r => r.Name))
+                        .ForMember(r => r.description, opt => opt.MapFrom(r => r.Description))
+                        .ForMember(r => r.url, opt => opt.MapFrom(r => r.Url))
+                        .ForMember(r => r.fileName, opt => opt.MapFrom(r => r.FileName))
+                        .ForMember(r => r.file, opt => opt.MapFrom(r => r.File))
+                        .ForMember(r => r.categoryId, opt => opt.MapFrom(r => r.CategoryId))
+                    )
+                    .CreateMapper();
+
+                var resourceDto = mapper.Map<Resource, ResourceDto>(resource);
+
+                return resourceDto;
             }
             catch (Exception ex)
             {
@@ -32,72 +47,74 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task AddResource(ResourceViewModel resourceModel, Guid userId)
+        public async Task AddResource(ResourceDto resourceDto, Guid userId)
         {
             try
             {
                 string resourceFileString = "";
 
-                if (resourceModel.file != null)
+                if (resourceDto.file != null)
                 {
-                    using (BinaryReader binaryReader = new BinaryReader(resourceModel.file.OpenReadStream()))
+                    using (BinaryReader binaryReader = new BinaryReader(resourceDto.file.OpenReadStream()))
                     {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceModel.file.Length);
+                        byte[] byteFile = binaryReader.ReadBytes((int)resourceDto.file.Length);
                         resourceFileString = BitConverter.ToString(byteFile);
                     }
                 }
 
-                Resource resource = new Resource
-                {
-                    Name = resourceModel.name,
-                    Description = resourceModel.description,
-                    Url = resourceModel.url,
-                    FileName = resourceModel.fileName,
-                    File = resourceFileString,
-                    CategoryId = resourceModel.categoryId,
-                    CreatedById = userId
-                };
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
+                        .ForMember(r => r.Name, opt => opt.MapFrom(r => r.name))
+                        .ForMember(r => r.Description, opt => opt.MapFrom(r => r.description))
+                        .ForMember(r => r.Url, opt => opt.MapFrom(r => r.url))
+                        .ForMember(r => r.FileName, opt => opt.MapFrom(r => r.fileName))
+                        .ForMember(r => r.File, opt => opt.MapFrom(r => r.file))
+                        .ForMember(r => r.CategoryId, opt => opt.MapFrom(r => r.categoryId))
+                        .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId))
+                    )
+                    .CreateMapper();
+
+                var resource = mapper.Map<ResourceDto, Resource>(resourceDto);
 
                 await _unitOfWork.Repository<Resource>().Add(resource);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when adding the {nameof(resourceModel)}: ", ex);
+                throw new Exception($"Error when adding the {nameof(resourceDto)}: ", ex);
             }
         }
 
-        public async Task UpdateResource(ResourceViewModel resourceModel, Guid updatetById)
+        public async Task UpdateResource(ResourceDto resourceDto, Guid updatedById)
         {
             try
             {
                 string resourceFileString = "";
 
-                if (resourceModel.file != null)
+                if (resourceDto.file != null)
                 {
-                    using (BinaryReader binaryReader = new BinaryReader(resourceModel.file.OpenReadStream()))
+                    using (BinaryReader binaryReader = new BinaryReader(resourceDto.file.OpenReadStream()))
                     {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceModel.file.Length);
+                        byte[] byteFile = binaryReader.ReadBytes((int)resourceDto.file.Length);
                         resourceFileString = BitConverter.ToString(byteFile);
                     }
                 }
 
-                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == resourceModel.id);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == resourceDto.id);
 
-                resource.Name = resourceModel.name;
-                resource.Description = resourceModel.description;
-                resource.Url = resourceModel.url;
-                resource.FileName = resourceModel.fileName;
+                resource.Name = resourceDto.name;
+                resource.Description = resourceDto.description;
+                resource.Url = resourceDto.url;
+                resource.FileName = resourceDto.fileName;
                 resource.File = resourceFileString;
-                resource.CategoryId = resourceModel.categoryId;
-                resource.UpdatedById = updatetById;
+                resource.CategoryId = resourceDto.categoryId;
+                resource.UpdatedById = updatedById;
 
                 _unitOfWork.Repository<Resource>().Update(resource);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when updating the {nameof(resourceModel)}: {resourceModel.id} ", ex);
+                throw new Exception($"Error when updating the {nameof(resourceDto)}: {resourceDto.id} ", ex);
             }
         }
 
@@ -116,7 +133,7 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public IEnumerable<Resource> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage)
+        public IEnumerable<ResourceDto> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage)
         {
             try
             {
@@ -140,7 +157,20 @@ namespace TheraLang.BLL.Services
 
                 var resourcesPerPages = joinedResources.Skip((pageNumber - 1) * recordsPerPage)
                     .Take(recordsPerPage).ToList();
-                return resourcesPerPages;
+
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()
+                        .ForMember(r => r.name, opt => opt.MapFrom(r => r.Name))
+                        .ForMember(r => r.description, opt => opt.MapFrom(r => r.Description))
+                        .ForMember(r => r.url, opt => opt.MapFrom(r => r.Url))
+                        .ForMember(r => r.fileName, opt => opt.MapFrom(r => r.FileName))
+                        .ForMember(r => r.file, opt => opt.MapFrom(r => r.File))
+                        .ForMember(r => r.categoryId, opt => opt.MapFrom(r => r.CategoryId))
+                    )
+                    .CreateMapper();
+
+                var resourcesPerPagesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resourcesPerPages);
+
+                return resourcesPerPagesDto;
             }
             catch (Exception ex)
             {
@@ -161,18 +191,22 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public IEnumerable<ResourceCategory> GetResourcesCategories(bool withAssignedResources)
+        public IEnumerable<ResourceCategoryDto> GetResourcesCategories(bool withAssignedResources)
         {
             try
             {
-                var query = _unitOfWork.Repository<ResourceCategory>().Get();
+                IEnumerable<ResourceCategory> query = _unitOfWork.Repository<ResourceCategory>().Get().ToList();
 
                 if (withAssignedResources)
                 {
                     query = query.Where(x => x.Resources.Any());
                 }
 
-                return query.ToList();
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceCategory, ResourceCategoryDto>())
+                    .CreateMapper();
+                var resourceCategoriesDto = mapper.Map<IEnumerable<ResourceCategory>, IEnumerable<ResourceCategoryDto>>(query);
+
+                return resourceCategoriesDto;
             }
             catch (Exception ex)
             {
@@ -180,7 +214,7 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public IEnumerable<Resource> GetAllResourcesByProjectId(int projectId)
+        public IEnumerable<ResourceDto> GetAllResourcesByProjectId(int projectId)
         {
             try
             {
@@ -200,8 +234,21 @@ namespace TheraLang.BLL.Services
                                            UpdatedById = res.UpdatedById,
                                            CreatedDateUtc = res.CreatedDateUtc,
                                            UpdatedDateUtc = res.UpdatedDateUtc,
-                                       });
-                return joinedResources.ToList();
+                                       }).ToList();
+
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()
+                        .ForMember(r => r.name, opt => opt.MapFrom(r => r.Name))
+                        .ForMember(r => r.description, opt => opt.MapFrom(r => r.Description))
+                        .ForMember(r => r.url, opt => opt.MapFrom(r => r.Url))
+                        .ForMember(r => r.fileName, opt => opt.MapFrom(r => r.FileName))
+                        .ForMember(r => r.file, opt => opt.MapFrom(r => r.File))
+                        .ForMember(r => r.categoryId, opt => opt.MapFrom(r => r.CategoryId))
+                    )
+                    .CreateMapper();
+
+                var joinedResourcesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(joinedResources);
+
+                return joinedResourcesDto;
             }
             catch (Exception ex)
             {

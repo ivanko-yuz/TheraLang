@@ -4,6 +4,8 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using System.Collections.Generic;
 using System;
+using AutoMapper;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.BLL.Services
@@ -35,10 +37,15 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public IEnumerable<ResourceCategory> GetAllCategories()
+        public IEnumerable<ResourceCategoryDto> GetAllCategories()
         {
-            IEnumerable<ResourceCategory> categories = _unitOfWork.Repository<ResourceCategory>().Get();
-            return categories;
+
+            var categories = _unitOfWork.Repository<ResourceCategory>().Get();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceCategory, ResourceCategoryDto>()).CreateMapper();
+            var categoriesDto = mapper.Map<IEnumerable<ResourceCategory>, IEnumerable<ResourceCategoryDto>>(categories);
+
+            return categoriesDto;
         }
     }
 }

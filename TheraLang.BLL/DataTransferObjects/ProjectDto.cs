@@ -11,7 +11,7 @@ namespace TheraLang.BLL.DataTransferObjects
 
         public string Name { get; set; }
 
-        public ProjectStatus StatusId { get; set; }
+        public ProjectStatusDto StatusId { get; set; }
 
         public string Description { get; set; }
 
