@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Models;
 using TheraLang.BLL.Services;
 using Piranha.AspNetCore.Identity.Data;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -28,18 +31,22 @@ namespace TheraLang.Web.Controllers
         /// <summary>
         /// Create new project
         /// </summary>
-        /// <param name="project"></param>
+        /// <param name="projectModel"></param>
         /// <returns>status code</returns>
         [HttpPost("create")]
-        public async Task <IActionResult> CreateProject([FromBody]ProjectModel project)
+        public async Task<IActionResult> CreateProject([FromBody]ProjectViewModel projectModel)
         {
-            if(project == null)
+            if (projectModel == null)
             {
-                throw new ArgumentException($"{nameof(project)} cannot be null");
+                throw new ArgumentException($"{nameof(projectModel)} cannot be null");
             }
             User user = await _userManager.FindByNameAsync(User.Identity.Name);
-            await _projectService.Add(project, user.Id);
-            return  Ok(project);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
+            var projectDto = mapper.Map<ProjectViewModel, ProjectDto>(projectModel);
+
+            await _projectService.Add(projectDto, user.Id);
+            return Ok(projectDto);
         }
 
         /// <summary>
@@ -52,29 +59,26 @@ namespace TheraLang.Web.Controllers
             List<ProjectDonationModel> projectModels = new List<ProjectDonationModel>();
             projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatus.Approved)
                 .Select(p => new ProjectDonationModel
-            {
-                Id = p.Id,
-                Name = p.Name,
-                DonationsSum = p.Donations.Sum(y => y.Amount),
-                DonationTargetSum = p.DonationTarget,
-                SumLeftToCollect = p.DonationTarget - p.Donations.Sum(y => y.Amount),
-                Description = p.Description,
-                Details = p.Details,
-                ProjectStart = p.ProjectStart,
-                ProjectEnd = p.ProjectEnd
-            }).ToList();
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    DonationsSum = p.Donations.Sum(y => y.Amount),
+                    DonationTargetSum = p.DonationTargetSum,
+                    SumLeftToCollect = p.DonationTargetSum - p.Donations.Sum(y => y.Amount),
+                    Description = p.Description,
+                    Details = p.Details,
+                    ProjectStart = p.ProjectStart,
+                    ProjectEnd = p.ProjectEnd
+                }).ToList();
 
             return projectModels;
         }
         [HttpGet("new")]
         public IActionResult GetAllNewProjects()
         {
-
             var projects = _projectService.GetAllNewProjects();
             return Ok(projects);
         }
-
-
 
         /// <summary>
         /// Get project by Id
@@ -88,25 +92,29 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            var project = _projectService.GetById(id);            
-            return Ok(project);            
+            var project = _projectService.GetById(id);
+            return Ok(project);
         }
 
         /// <summary>
         /// Edit project by Id
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="project">new version</param>
+        /// <param name="projectModel">new version</param>
         /// <returns>edited project</returns>
         [HttpPut("update/{id}")]
-        public IActionResult EditProject(int id, [FromBody]Project project)
+        public IActionResult EditProject(int id, [FromBody]ProjectViewModel projectModel)
         {
             if (id == default)
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            _projectService.UpdateAsync(id,project);
-            return Ok(project);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
+            var projectDto = mapper.Map<ProjectViewModel, ProjectDto>(projectModel);
+
+            _projectService.UpdateAsync(id, projectDto);
+            return Ok(projectDto);
         }
 
         /// <summary>
@@ -132,7 +140,7 @@ namespace TheraLang.Web.Controllers
         /// <param name="pageSize">number of projects on one page</param>
         /// <returns>array of selected project</returns>
         [HttpGet("page/{page}/{pageSize}")]
-        public IActionResult ProjectsPagination(int page,  int pageSize)
+        public IActionResult ProjectsPagination(int page, int pageSize)
         {
             if (page == default)
             {
@@ -142,7 +150,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(pageSize)} can not be 0");
             }
-            var projects =_projectService.GetProjects(page, pageSize);
+            var projects = _projectService.GetProjects(page, pageSize);
             return Ok(projects);
         }
 

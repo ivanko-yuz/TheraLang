@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.DAL.Entities;
-using TheraLang.DAL.Models;
 
 namespace TheraLang.BLL.Interfaces
 {
@@ -10,18 +10,18 @@ namespace TheraLang.BLL.Interfaces
     {
         Task ChangeStatus(int id, ProjectStatus status);
 
-        Task Add(ProjectModel projectModel, Guid userId);
+        Task Add(ProjectDto projectModel, Guid userId);
 
         Task Delete(int id);
 
-        Task UpdateAsync(int id, Project project);
+        Task UpdateAsync(int id, ProjectDto project);
 
-        IEnumerable<Project> GetAllProjects();
+        IEnumerable<ProjectDto> GetAllProjects();
 
-        Project GetById(int id);
+        ProjectDto GetById(int id);
 
-        IEnumerable<Project> GetProjects(int pageNumber, int pageSize);
-        IEnumerable<Project> GetAllNewProjects();
-        IEnumerable<Project> GetProjectsByStatus(int status);
+        IEnumerable<ProjectDto> GetProjects(int pageNumber, int pageSize);
+        IEnumerable<ProjectDto> GetAllNewProjects();
+        IEnumerable<ProjectDto> GetProjectsByStatus(int status);
     }
 }

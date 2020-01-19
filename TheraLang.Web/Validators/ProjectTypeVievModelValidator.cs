@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using System;
 using System.Linq.Expressions;
-using TheraLang.DAL.Models;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Validators
 {
-    public class ProjectTypeVievModelValidator :  AbstractValidator<ProjectTypeModel>
+    public class ProjectTypeVievModelValidator :  AbstractValidator<ProjectTypeViewModel>
     {
         private static string ValidateStringLengthMessage =>
         "The field {PropertyName} has to be less than {MinLength} and more than {MaxLength}. Current length is {TotalLength}";
@@ -14,7 +14,7 @@ namespace TheraLang.Web.Validators
             ValidateStringLength(p => p.TypeName, 3, 40);            
         }
 
-        private void ValidateStringLength(Expression<Func<ProjectTypeModel, string>> expression, int minLength, int maxLength)
+        private void ValidateStringLength(Expression<Func<ProjectTypeViewModel, string>> expression, int minLength, int maxLength)
         {
             RuleFor(expression)
                 .NotEmpty()

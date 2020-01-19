@@ -52,6 +52,7 @@
   </Target>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.0" />
     <PackageReference Include="FineUploader.AspNet.Mvc" Version="1.0.0-beta2" />
     <PackageReference Include="FluentValidation" Version="8.5.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0" />
