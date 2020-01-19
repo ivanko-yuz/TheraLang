@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Models;
@@ -23,11 +25,13 @@ namespace TheraLang.BLL.Services
         }
 
 
-        public LiqPayCheckoutModel GetLiqPayCheckoutModel(string donationAmount, int? projectId, HttpContext context)
+        public LiqPayCheckoutDto GetLiqPayCheckoutModel(string donationAmount, int? projectId, HttpContext context)
         {
             try
             {
-                return LiqPayHelper.GetLiqPayCheckoutModel(donationAmount, projectId, context);
+                var liqPayCheckoutDto = LiqPayHelper.GetLiqPayCheckoutModel(donationAmount, projectId, context);
+
+                return liqPayCheckoutDto;
             }
             catch (Exception ex)
             {
@@ -36,12 +40,16 @@ namespace TheraLang.BLL.Services
            
         }
 
-        public Donation GetDonation(string donationId)
+        public DonationDto GetDonation(string donationId)
         {
             try
             {
                 Donation donation = _unitOfWork.Repository<Donation>().Get().SingleOrDefault(x => x.DonationId == donationId);
-                return donation;
+
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Donation, DonationDto>()).CreateMapper();
+                var projectsDto = mapper.Map<Donation, DonationDto>(donation);
+
+                return projectsDto;
             }
             catch (Exception ex)
             {
@@ -72,8 +80,6 @@ namespace TheraLang.BLL.Services
             {
                 throw new Exception($"Error, while adding the donation, {nameof(donationId)}: {donationId} ", ex);
             }
-        
         }
-
     }
 }

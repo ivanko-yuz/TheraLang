@@ -1,5 +1,5 @@
-﻿namespace TheraLang.DAL.Models
-{
+﻿namespace TheraLang.Web.ViewModels
+{ 
     public class LoginModel
     {
         public string UserName { get; set; }

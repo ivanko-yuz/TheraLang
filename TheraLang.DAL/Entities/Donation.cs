@@ -31,7 +31,5 @@ namespace TheraLang.DAL.Entities
 
         [JsonProperty("liqpay_order_id")]
         public string LiqpayOrderId { get; set; }
-
-
     }
 }

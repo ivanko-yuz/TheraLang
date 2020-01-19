@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TheraLang.DAL.Models
+namespace TheraLang.Web.ViewModels
 {
     public class ErrorDetails
     {

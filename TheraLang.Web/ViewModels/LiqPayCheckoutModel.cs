@@ -1,4 +1,4 @@
-﻿namespace TheraLang.DAL.Models
+﻿namespace TheraLang.Web.ViewModels
 {
     public class LiqPayCheckoutModel
     {

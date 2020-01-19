@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using TheraLang.DAL.Constants;
-using TheraLang.DAL.Entities;
 using TheraLang.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
 using FluentValidation;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
+using TheraLang.Web.Constants;
 
 namespace TheraLang.Web.Controllers
 {

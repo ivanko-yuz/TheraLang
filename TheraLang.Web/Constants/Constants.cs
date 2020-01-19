@@ -1,4 +1,4 @@
-﻿namespace TheraLang.DAL.Constants
+﻿namespace TheraLang.Web.Constants
 {
 
     public static class PaginationConstants

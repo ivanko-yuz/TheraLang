@@ -1,6 +1,4 @@
-﻿using TheraLang.DAL.Enums;
-
-namespace TheraLang.Web.ViewModels
+﻿namespace TheraLang.Web.ViewModels
 {
     public class ParticipantViewModel
     {

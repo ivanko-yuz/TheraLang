@@ -3,14 +3,15 @@ using Newtonsoft.Json;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using TheraLang.BLL.DataTransferObjects;
+using TheraLang.DAL.Models;
 
-
-namespace TheraLang.DAL.Models
+namespace TheraLang.BLL
 {
     public class LiqPayHelper
     {
-        static private readonly string _privateKey;
-        static private readonly string _publicKey;
+        private static readonly string _privateKey;
+        private static readonly string _publicKey;
         private const int ApiVersion = 3;
         
 
@@ -20,7 +21,7 @@ namespace TheraLang.DAL.Models
             _privateKey = "sandbox_nqmktFe8ozPyPOGdjck7HgIfXp14kr0vcBF0RHhY"; //TODO: set via env variables
         }
 
-        static public LiqPayCheckoutModel GetLiqPayCheckoutModel(string donationAmount, int? projectId, HttpContext context)
+        public static LiqPayCheckoutDto GetLiqPayCheckoutModel(string donationAmount, int? projectId, HttpContext context)
         {
             string donationId = Guid.NewGuid().ToString();
             var hostName = $"{context.Request.Scheme}://{context.Request.Host}";
@@ -37,12 +38,11 @@ namespace TheraLang.DAL.Models
                 Language = "uk"
             };
 
-
             string jsonString = JsonConvert.SerializeObject(dataSource);
             string data = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
             string signature = GetLiqPaySignature(data);
 
-            LiqPayCheckoutModel checkoutModel = new LiqPayCheckoutModel()
+            LiqPayCheckoutDto checkoutModel = new LiqPayCheckoutDto()
             {
                 Data = data,
                 Signature = signature,
