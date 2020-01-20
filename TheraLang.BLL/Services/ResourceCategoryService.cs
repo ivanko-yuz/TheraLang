@@ -19,7 +19,7 @@ namespace TheraLang.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task ChangeType(int categoryId, string newTypeName)
+        public async Task ChangeTypeName(int categoryId, string newTypeName)
         {
             try
             {

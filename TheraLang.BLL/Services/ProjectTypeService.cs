@@ -13,10 +13,10 @@ namespace TheraLang.BLL.Services
 {
     public class ProjectTypeService : IProjectTypeService
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork _unitOfWork;
         public ProjectTypeService(IUnitOfWork unitOfWork)
         {
-            _uow = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task Add(ProjectTypeDto projectTypeDto)
@@ -26,8 +26,8 @@ namespace TheraLang.BLL.Services
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeDto, ProjectType>()).CreateMapper();
                 var projectType = mapper.Map<ProjectTypeDto, ProjectType>(projectTypeDto);
 
-                await _uow.Repository<ProjectType>().Add(projectType);
-                await _uow.SaveChangesAsync();
+                await _unitOfWork.Repository<ProjectType>().Add(projectType);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -40,10 +40,10 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                ProjectType projectType = _uow.Repository<ProjectType>().Get().SingleOrDefault(i => i.Id == projectTypeId);
-                _uow.Repository<ProjectType>().Remove(projectType);
+                ProjectType projectType = _unitOfWork.Repository<ProjectType>().Get().SingleOrDefault(i => i.Id == projectTypeId);
+                _unitOfWork.Repository<ProjectType>().Remove(projectType);
 
-                await _uow.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -58,8 +58,8 @@ namespace TheraLang.BLL.Services
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeDto, ProjectType>()).CreateMapper();
                 var projectType = mapper.Map<ProjectTypeDto, ProjectType>(projectTypeDto);
 
-                _uow.Repository<ProjectType>().Update(projectType);
-                await _uow.SaveChangesAsync();
+                _unitOfWork.Repository<ProjectType>().Update(projectType);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@ namespace TheraLang.BLL.Services
 
         public IEnumerable<ProjectTypeDto> GetAllProjectsType()
         {
-            var projectTypes = _uow.Repository<ProjectType>().Get().AsNoTracking().ToList();
+            var projectTypes = _unitOfWork.Repository<ProjectType>().Get().AsNoTracking().ToList();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectType, ProjectTypeDto>()).CreateMapper();
             var projectTypesDto = mapper.Map<IEnumerable<ProjectType>, IEnumerable<ProjectTypeDto>>(projectTypes);
@@ -81,7 +81,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                ProjectType projectType = _uow.Repository<ProjectType>().Get().FirstOrDefault(p => p.Id == id);
+                ProjectType projectType = _unitOfWork.Repository<ProjectType>().Get().FirstOrDefault(p => p.Id == id);
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectType, ProjectTypeDto>()).CreateMapper();
                 var projectTypeDto = mapper.Map<ProjectType, ProjectTypeDto>(projectType);

@@ -13,12 +13,12 @@ namespace TheraLang.BLL.Services
 {
     public class ProjectParticipationService : IProjectParticipationService
     {
-        public ProjectParticipationService(IUnitOfWork unit)
-        {
-            _unitOfWork = unit;
-        }
-
         private readonly IUnitOfWork _unitOfWork;
+
+        public ProjectParticipationService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         public async Task ChangeStatusAsync(int participantId, ProjectParticipationStatusDto statusDto)
         {
@@ -52,9 +52,9 @@ namespace TheraLang.BLL.Services
             var projectParticipations = _unitOfWork.Repository<ProjectParticipation>().Get().ToList();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()).CreateMapper();
-            var projectParticipationsDto = mapper.Map<IEnumerable<ProjectParticipation>, IEnumerable<ProjectParticipationDto>>(projectParticipations);
+            var projectParticipationDtos = mapper.Map<IEnumerable<ProjectParticipation>, IEnumerable<ProjectParticipationDto>>(projectParticipations);
 
-            return projectParticipationsDto;
+            return projectParticipationDtos;
         }
 
 

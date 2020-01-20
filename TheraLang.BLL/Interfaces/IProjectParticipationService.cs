@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TheraLang.DAL.Entities;
 using System;
 using TheraLang.BLL.DataTransferObjects;
 

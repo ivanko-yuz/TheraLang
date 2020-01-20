@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects
@@ -11,10 +9,6 @@ namespace TheraLang.BLL.DataTransferObjects
 
         public string Type { get; set; }
 
-        public virtual ICollection<Resource> Resources { get; set; }
-        public ResourceCategoryDto()
-        {
-            this.Resources = new List<Resource>();
-        }
+        public ICollection<Resource> Resources { get; set; }
     }
 }

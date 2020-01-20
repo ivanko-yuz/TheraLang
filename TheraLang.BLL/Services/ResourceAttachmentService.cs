@@ -17,11 +17,11 @@ namespace TheraLang.BLL.Services
 {
     public class ResourceAttachmentService : IResourceAttachmentService
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IHostingEnvironment _appEnvironment;
-        public ResourceAttachmentService(IUnitOfWork uow, IHostingEnvironment appEnvironment)
+        public ResourceAttachmentService(IUnitOfWork unitOfWork, IHostingEnvironment appEnvironment)
         {
-            _uow = uow;
+            _unitOfWork = unitOfWork;
             _appEnvironment = appEnvironment;
         }
 
@@ -40,8 +40,8 @@ namespace TheraLang.BLL.Services
                     var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachDto, ResourceAttachment>()).CreateMapper();
                     var resource = mapper.Map<ResourceAttachDto, ResourceAttachment>(file);
 
-                    await _uow.Repository<ResourceAttachment>().Add(resource);
-                    await _uow.SaveChangesAsync();
+                    await _unitOfWork.Repository<ResourceAttachment>().Add(resource);
+                    await _unitOfWork.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
@@ -53,7 +53,7 @@ namespace TheraLang.BLL.Services
 
         public IEnumerable<ResourceAttachDto> Get()
         {
-            var resources = _uow.Repository<ResourceAttachment>().Get().AsNoTracking().ToList();
+            var resources = _unitOfWork.Repository<ResourceAttachment>().Get().AsNoTracking().ToList();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachment, ResourceAttachDto>()).CreateMapper();
             var resourceDto = mapper.Map<IEnumerable<ResourceAttachment>, IEnumerable<ResourceAttachDto>>(resources);

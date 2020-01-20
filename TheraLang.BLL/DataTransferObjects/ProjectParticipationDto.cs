@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TheraLang.DAL.Entities;
-using TheraLang.DAL.Enums;
-using TheraLang.DAL.Piranha.Entities;
+﻿using TheraLang.DAL.Piranha.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects
 {
     public class ProjectParticipationDto
     {
-        public virtual PiranhaUser PiranhaUser { get; set; }
+        public PiranhaUser PiranhaUser { get; set; }
 
         public MemberRoleDto Role { get; set; }
 

@@ -36,7 +36,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(newTypeName)} can not be null");
             }
-            await _service.ChangeType(categoryId, newTypeName);
+            await _service.ChangeTypeName(categoryId, newTypeName);
             return Ok();
         }
 

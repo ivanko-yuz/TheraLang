@@ -14,7 +14,6 @@ namespace TheraLang.BLL
         private static readonly string _publicKey;
         private const int ApiVersion = 3;
         
-
         static LiqPayHelper()
         {
             _publicKey = "sandbox_i42859998914";
@@ -38,9 +37,9 @@ namespace TheraLang.BLL
                 Language = "uk"
             };
 
-            string jsonString = JsonConvert.SerializeObject(dataSource);
-            string data = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
-            string signature = GetLiqPaySignature(data);
+            var jsonString = JsonConvert.SerializeObject(dataSource);
+            var data = Convert.ToBase64String(Encoding.UTF8.GetBytes(jsonString));
+            var signature = GetLiqPaySignature(data);
 
             LiqPayCheckoutDto checkoutModel = new LiqPayCheckoutDto()
             {
@@ -51,7 +50,7 @@ namespace TheraLang.BLL
             return checkoutModel;
         }
 
-        static public string GetLiqPaySignature(string data)
+        public static string GetLiqPaySignature(string data)
         {
             return Convert.ToBase64String(SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(_privateKey + data + _privateKey)));
         }

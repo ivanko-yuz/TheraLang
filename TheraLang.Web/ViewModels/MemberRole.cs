@@ -1,6 +1,4 @@
-﻿
-
-namespace TheraLang.Web.ViewModels
+﻿namespace TheraLang.Web.ViewModels
 {
     public enum MemberRoleViewModel
     {

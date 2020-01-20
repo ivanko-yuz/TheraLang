@@ -27,16 +27,7 @@ namespace TheraLang.BLL.Services
             {
                 Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()
-                        .ForMember(r => r.name, opt => opt.MapFrom(r => r.Name))
-                        .ForMember(r => r.description, opt => opt.MapFrom(r => r.Description))
-                        .ForMember(r => r.url, opt => opt.MapFrom(r => r.Url))
-                        .ForMember(r => r.fileName, opt => opt.MapFrom(r => r.FileName))
-                        .ForMember(r => r.file, opt => opt.MapFrom(r => r.File))
-                        .ForMember(r => r.categoryId, opt => opt.MapFrom(r => r.CategoryId))
-                    )
-                    .CreateMapper();
-
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
                 var resourceDto = mapper.Map<Resource, ResourceDto>(resource);
 
                 return resourceDto;
@@ -53,25 +44,18 @@ namespace TheraLang.BLL.Services
             {
                 string resourceFileString = "";
 
-                if (resourceDto.file != null)
+                if (resourceDto.File != null)
                 {
-                    using (BinaryReader binaryReader = new BinaryReader(resourceDto.file.OpenReadStream()))
+                    using (BinaryReader binaryReader = new BinaryReader(resourceDto.File.OpenReadStream()))
                     {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceDto.file.Length);
+                        byte[] byteFile = binaryReader.ReadBytes((int)resourceDto.File.Length);
                         resourceFileString = BitConverter.ToString(byteFile);
                     }
                 }
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
-                        .ForMember(r => r.Name, opt => opt.MapFrom(r => r.name))
-                        .ForMember(r => r.Description, opt => opt.MapFrom(r => r.description))
-                        .ForMember(r => r.Url, opt => opt.MapFrom(r => r.url))
-                        .ForMember(r => r.FileName, opt => opt.MapFrom(r => r.fileName))
-                        .ForMember(r => r.File, opt => opt.MapFrom(r => r.file))
-                        .ForMember(r => r.CategoryId, opt => opt.MapFrom(r => r.categoryId))
-                        .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId))
-                    )
-                    .CreateMapper();
+                    .ForMember(r => r.File, opt => opt.MapFrom(r => resourceFileString))
+                ).CreateMapper();
 
                 var resource = mapper.Map<ResourceDto, Resource>(resourceDto);
 
@@ -90,31 +74,34 @@ namespace TheraLang.BLL.Services
             {
                 string resourceFileString = "";
 
-                if (resourceDto.file != null)
+                if (resourceDto.File != null)
                 {
-                    using (BinaryReader binaryReader = new BinaryReader(resourceDto.file.OpenReadStream()))
+                    using (BinaryReader binaryReader = new BinaryReader(resourceDto.File.OpenReadStream()))
                     {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceDto.file.Length);
+                        byte[] byteFile = binaryReader.ReadBytes((int)resourceDto.File.Length);
                         resourceFileString = BitConverter.ToString(byteFile);
                     }
                 }
 
-                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == resourceDto.id);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == resourceDto.Id);
 
-                resource.Name = resourceDto.name;
-                resource.Description = resourceDto.description;
-                resource.Url = resourceDto.url;
-                resource.FileName = resourceDto.fileName;
-                resource.File = resourceFileString;
-                resource.CategoryId = resourceDto.categoryId;
-                resource.UpdatedById = updatedById;
+                if (resource != null)
+                {
+                    resource.Name = resourceDto.Name;
+                    resource.Description = resourceDto.Description;
+                    resource.Url = resourceDto.Url;
+                    resource.FileName = resourceDto.FileName;
+                    resource.File = resourceFileString;
+                    resource.CategoryId = resourceDto.CategoryId;
+                    resource.UpdatedById = updatedById;
 
-                _unitOfWork.Repository<Resource>().Update(resource);
-                await _unitOfWork.SaveChangesAsync();
+                    _unitOfWork.Repository<Resource>().Update(resource);
+                    await _unitOfWork.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when updating the {nameof(resourceDto)}: {resourceDto.id} ", ex);
+                throw new Exception($"Error when updating the {nameof(resourceDto)}: {resourceDto.Id} ", ex);
             }
         }
 
@@ -158,16 +145,7 @@ namespace TheraLang.BLL.Services
                 var resourcesPerPages = joinedResources.Skip((pageNumber - 1) * recordsPerPage)
                     .Take(recordsPerPage).ToList();
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()
-                        .ForMember(r => r.name, opt => opt.MapFrom(r => r.Name))
-                        .ForMember(r => r.description, opt => opt.MapFrom(r => r.Description))
-                        .ForMember(r => r.url, opt => opt.MapFrom(r => r.Url))
-                        .ForMember(r => r.fileName, opt => opt.MapFrom(r => r.FileName))
-                        .ForMember(r => r.file, opt => opt.MapFrom(r => r.File))
-                        .ForMember(r => r.categoryId, opt => opt.MapFrom(r => r.CategoryId))
-                    )
-                    .CreateMapper();
-
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
                 var resourcesPerPagesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resourcesPerPages);
 
                 return resourcesPerPagesDto;
@@ -236,16 +214,7 @@ namespace TheraLang.BLL.Services
                                            UpdatedDateUtc = res.UpdatedDateUtc,
                                        }).ToList();
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()
-                        .ForMember(r => r.name, opt => opt.MapFrom(r => r.Name))
-                        .ForMember(r => r.description, opt => opt.MapFrom(r => r.Description))
-                        .ForMember(r => r.url, opt => opt.MapFrom(r => r.Url))
-                        .ForMember(r => r.fileName, opt => opt.MapFrom(r => r.FileName))
-                        .ForMember(r => r.file, opt => opt.MapFrom(r => r.File))
-                        .ForMember(r => r.categoryId, opt => opt.MapFrom(r => r.CategoryId))
-                    )
-                    .CreateMapper();
-
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
                 var joinedResourcesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(joinedResources);
 
                 return joinedResourcesDto;

@@ -15,16 +15,16 @@ namespace TheraLang.BLL.Services
 {
     public class ProjectService : IProjectService
     {
-        public ProjectService(IUnitOfWork uow)
-        {
-            _uow = uow;
-        }
+        private readonly IUnitOfWork _unitOfWork;
 
-        private readonly IUnitOfWork _uow;
+        public ProjectService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         public IEnumerable<ProjectDto> GetAllProjects()
         {
-            var projects = _uow.Repository<Project>().Get().Include(x => x.Donations);
+            var projects = _unitOfWork.Repository<Project>().Get().Include(x => x.Donations);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
                     .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
@@ -36,7 +36,7 @@ namespace TheraLang.BLL.Services
 
         public IEnumerable<ProjectDto> GetAllNewProjects()
         {
-            var projects = _uow.Repository<Project>().Get().Where(i => i.StatusId == 0);
+            var projects = _unitOfWork.Repository<Project>().Get().Where(i => i.StatusId == 0);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
                     .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
@@ -48,7 +48,7 @@ namespace TheraLang.BLL.Services
 
         public IEnumerable<ProjectDto> GetProjectsByStatus(int status)
         {
-            var projects = _uow.Repository<Project>().Get().Where(i => i.StatusId == (ProjectStatus)status).ToArray();
+            var projects = _unitOfWork.Repository<Project>().Get().Where(i => i.StatusId == (ProjectStatus)status).ToArray();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
                     .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
@@ -76,10 +76,9 @@ namespace TheraLang.BLL.Services
             };
             try
             {
-                await _uow.Repository<Project>().Add(project);
-                await _uow.SaveChangesAsync();
-                await _uow.Repository<ProjectParticipation>().Add(newParticipant);
-                await _uow.SaveChangesAsync();
+                await _unitOfWork.Repository<Project>().Add(project);
+                await _unitOfWork.Repository<ProjectParticipation>().Add(newParticipant);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
             {
@@ -92,13 +91,13 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
+                var project = _unitOfWork.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
                 if (project == null)
                 {
                     throw new NullReferenceException($"Error while deleting project. Project with id {nameof(id)}={id} not found");
                 }
-                _uow.Repository<Project>().Remove(project);
-                await _uow.SaveChangesAsync();
+                _unitOfWork.Repository<Project>().Remove(project);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
             {
@@ -111,15 +110,15 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var projects = _uow.Repository<Project>().Get().AsNoTracking();
-                var projectsPerPages = projects.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+                var projects = _unitOfWork.Repository<Project>().Get().AsNoTracking();
+                var projectsPerPage = projects.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
                     .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
                     .CreateMapper();
-                var projectsPerPagesDto = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectDto>>(projectsPerPages);
+                var projectDtosPerPage = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectDto>>(projectsPerPage);
 
-                return projectsPerPagesDto;
+                return projectDtosPerPage;
             }
             catch
             {
@@ -129,7 +128,7 @@ namespace TheraLang.BLL.Services
 
         public async Task ChangeStatus(int projectId, ProjectStatusDto status)
         {
-            var project = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == projectId);
+            var project = _unitOfWork.Repository<Project>().Get().SingleOrDefault(p => p.Id == projectId);
             if (project is null)
             {
                 throw new NullReferenceException($"{ nameof(project) } cannot be null");
@@ -139,16 +138,16 @@ namespace TheraLang.BLL.Services
             var projectStatus = mapper.Map<ProjectStatusDto, ProjectStatus>(status);
 
             project.StatusId = projectStatus;
-            _uow.Repository<Project>().Update(project);
+            _unitOfWork.Repository<Project>().Update(project);
 
-            await _uow.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(int id, ProjectDto projectDto)
         {
             try
             {
-                var proj = _uow.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
+                var proj = _unitOfWork.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
                 if (proj == null)
                 {
                     throw new NullReferenceException($"Error while updating project. Project with id {nameof(id)}={id} not found");
@@ -159,8 +158,8 @@ namespace TheraLang.BLL.Services
                     .CreateMapper();
                 var project = mapper.Map<ProjectDto, Project>(projectDto);
 
-                _uow.Repository<Project>().Update(project);
-                await _uow.SaveChangesAsync();
+                _unitOfWork.Repository<Project>().Update(project);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
             {
@@ -173,7 +172,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var project = _uow.Repository<Project>().Get().SingleOrDefault(i => i.Id == id);
+                var project = _unitOfWork.Repository<Project>().Get().SingleOrDefault(i => i.Id == id);
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
                         .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(src => src.DonationTarget)))

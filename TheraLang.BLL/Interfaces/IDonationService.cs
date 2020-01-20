@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects;
-using TheraLang.DAL.Entities;
-using TheraLang.DAL.Models;
 
 namespace TheraLang.BLL.Interfaces
 {

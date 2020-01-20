@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -24,7 +22,6 @@ namespace TheraLang.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-
         public LiqPayCheckoutDto GetLiqPayCheckoutModel(string donationAmount, int? projectId, HttpContext context)
         {
             try
@@ -37,7 +34,6 @@ namespace TheraLang.BLL.Services
             {
                 throw new Exception($"Error while generation a request to LiqPay platform, {nameof(donationAmount)} or {nameof(projectId)} is invalid ", ex);
             }
-           
         }
 
         public DonationDto GetDonation(string donationId)
@@ -55,7 +51,6 @@ namespace TheraLang.BLL.Services
             {
                 throw new Exception($"Error while receiving a donation by {nameof(donationId)}: {donationId} ", ex);
             }
-           
         }
 
         public async Task AddDonation(int? projectId, string donationId, string data, string signature)
@@ -71,7 +66,8 @@ namespace TheraLang.BLL.Services
                 donation.DonationId = donationId;
                 if (projectId == null)
                 {
-                    donation.SocietyId = _unitOfWork.Repository<Society>().Get().FirstOrDefault().Id;
+                    if (_unitOfWork != null)
+                        donation.SocietyId = _unitOfWork.Repository<Society>().Get().FirstOrDefault().Id;
                 }
                 await _unitOfWork.Repository<Donation>().Add(donation);
                 await _unitOfWork.SaveChangesAsync();

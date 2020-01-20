@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
-
-namespace TheraLang.BLL.DataTransferObjects
+﻿namespace TheraLang.BLL.DataTransferObjects
 {
     public class DonationDto
     {
