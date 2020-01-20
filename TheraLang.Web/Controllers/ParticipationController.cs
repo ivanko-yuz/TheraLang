@@ -58,9 +58,6 @@ namespace TheraLang.Web.Controllers
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationDto, ParticipantViewModel>()
                 .ForMember(m => m.Id, opt => opt.MapFrom(m => m.PiranhaUser.Id))
-                .ForMember(m => m.Role, opt => opt.MapFrom(m => m.Role))
-                .ForMember(m => m.Status, opt => opt.MapFrom(m => m.Status))
-                .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))
                 .ForMember(m => m.UserName, opt => opt.MapFrom(m => m.PiranhaUser.UserName))
                 .ForMember(m => m.UserEmail, opt => opt.MapFrom(m => m.PiranhaUser.Email))
             ).CreateMapper();

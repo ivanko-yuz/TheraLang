@@ -6,11 +6,10 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.DAL.Constants;
+using TheraLang.BLL.Constants;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Enums;
 using TheraLang.DAL.UnitOfWork;
-using TheraLang.DAL.Models;
 
 namespace TheraLang.BLL.Services
 {
@@ -70,9 +69,9 @@ namespace TheraLang.BLL.Services
 
             var newParticipant = new ProjectParticipation
             {
-                Role = DAL.Enums.MemberRole.ProjectOwner,
+                Role = MemberRole.ProjectOwner,
                 CreatedById = userId,
-                Status = DAL.Enums.ProjectParticipationStatus.Approved,
+                Status = ProjectParticipationStatus.Approved,
                 Project = project,
             };
             try

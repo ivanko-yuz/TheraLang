@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
+using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL;
 using TheraLang.BLL.Services;
@@ -70,9 +71,9 @@ namespace TheraLang.Web
 
             #region register services via IServiceCollection
 
-            services.AddDbContext<IttmmDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IUnitOfWork, UnitOfWork>(provider =>
-               new UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
+            services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddUnitOfWork();
+
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
             services.AddCors(options =>

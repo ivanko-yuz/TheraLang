@@ -6,9 +6,9 @@ using TheraLang.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
 using FluentValidation;
+using TheraLang.BLL.Constants;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.Constants;
 
 namespace TheraLang.Web.Controllers
 {
