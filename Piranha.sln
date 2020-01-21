@@ -11,30 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{8805
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{A1B6ED88-8C91-45B0-9585-036E8A1C4A3C}"
-	ProjectSection(SolutionItems) = preProject
-		nuspec\Piranha.AspNetCore.Identity.nuspec = nuspec\Piranha.AspNetCore.Identity.nuspec
-		nuspec\Piranha.AspNetCore.Identity.SQLite.nuspec = nuspec\Piranha.AspNetCore.Identity.SQLite.nuspec
-		nuspec\Piranha.AspNetCore.Identity.SQLServer.nuspec = nuspec\Piranha.AspNetCore.Identity.SQLServer.nuspec
-		nuspec\Piranha.AspNetCore.nuspec = nuspec\Piranha.AspNetCore.nuspec
-		nuspec\Piranha.AspNetCore.SimpleSecurity.nuspec = nuspec\Piranha.AspNetCore.SimpleSecurity.nuspec
-		nuspec\Piranha.AttributeBuilder.nuspec = nuspec\Piranha.AttributeBuilder.nuspec
-		nuspec\Piranha.Azure.BlobStorage.nuspec = nuspec\Piranha.Azure.BlobStorage.nuspec
-		nuspec\Piranha.Data.EF.nuspec = nuspec\Piranha.Data.EF.nuspec
-		nuspec\Piranha.Extensions.Sync.nuspec = nuspec\Piranha.Extensions.Sync.nuspec
-		nuspec\Piranha.ImageSharp.nuspec = nuspec\Piranha.ImageSharp.nuspec
-		nuspec\Piranha.Local.FileStorage.nuspec = nuspec\Piranha.Local.FileStorage.nuspec
-		nuspec\Piranha.Manager.nuspec = nuspec\Piranha.Manager.nuspec
-		nuspec\Piranha.nuspec = nuspec\Piranha.nuspec
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{BB78ACA1-9978-4B95-8124-D92FBCC52C9B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.Web", "TheraLang.Web\TheraLang.Web.csproj", "{14F9CA8A-6532-40CC-81D6-9763351AFD91}"
 	ProjectSection(ProjectDependencies) = postProject
-		{96510F63-4191-494B-B4A3-6C0497837F6A} = {96510F63-4191-494B-B4A3-6C0497837F6A}
-		{4BCC1E64-AACC-4D9B-973E-6072416D98A1} = {4BCC1E64-AACC-4D9B-973E-6072416D98A1}
-		{22D8ED84-0A3B-4A02-B17B-ED8839323CCC} = {22D8ED84-0A3B-4A02-B17B-ED8839323CCC}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DataSeeding", "TheraLang.DataSeeding\TheraLang.DataSeeding.csproj", "{98EB6508-7993-431B-B6BA-4E9EF374F376}"
