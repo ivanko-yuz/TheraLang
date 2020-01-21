@@ -13,6 +13,8 @@
       "launchBrowser": true,
       "launchUrl": "http://localhost:5000",
       "environmentVariables": {
+        "LIQPAY_PRIVATE": "sandbox_nqmktFe8ozPyPOGdjck7HgIfXp14kr0vcBF0RHhY",
+        "LIQPAY_PUBLIC": "sandbox_i42859998914",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
