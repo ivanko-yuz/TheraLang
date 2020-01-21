@@ -66,8 +66,11 @@ namespace TheraLang.BLL.Services
                 donation.DonationId = donationId;
                 if (projectId == null)
                 {
-                    if (_unitOfWork != null)
-                        donation.SocietyId = _unitOfWork.Repository<Society>().Get().FirstOrDefault().Id;
+                    var society = _unitOfWork.Repository<Society>().Get().FirstOrDefault();
+                    if (society == null)
+                        throw new ArgumentNullException($"Society with {nameof(society.Id)} not found");
+
+                    donation.SocietyId = society.Id;
                 }
                 await _unitOfWork.Repository<Donation>().Add(donation);
                 await _unitOfWork.SaveChangesAsync();

@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace TheraLang.Web.ViewModels
+﻿namespace TheraLang.Web.ViewModels
 {
     public class DonationViewModel
     {

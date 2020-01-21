@@ -6,7 +6,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.BLL.Constants;
+using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Enums;
 using TheraLang.DAL.UnitOfWork;

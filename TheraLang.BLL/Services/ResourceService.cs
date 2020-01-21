@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
-using TheraLang.DAL.Models;
 using System.IO;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;

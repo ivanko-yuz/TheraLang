@@ -1,7 +1,4 @@
-﻿
-using System.IO;
-
-namespace TheraLang.DAL.Entities
+﻿namespace TheraLang.DAL.Entities
 {
     public class ResourceAttachment 
     {
