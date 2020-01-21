@@ -1,5 +1,5 @@
 ﻿//using Moq;
-//using TheraLang.DLL.Entities;
+//using TheraLang.DAL.Entities;
 //using TheraLang.Web.Controllers;
 //using TheraLang.Web.Models;
 //using TheraLang.Web.Services;
