@@ -18,12 +18,12 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_Categories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlogId = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
-                    Slug = table.Column<string>(maxLength: 64, nullable: false),
-                    Title = table.Column<string>(maxLength: 64, nullable: false)
+                    Id = table.Column<Guid>(),
+                    BlogId = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(),
+                    Slug = table.Column<string>(maxLength: 64),
+                    Title = table.Column<string>(maxLength: 64)
                 },
                 constraints: table =>
                 {
@@ -40,10 +40,10 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_PostTypes",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 64, nullable: false),
+                    Id = table.Column<string>(maxLength: 64),
                     Body = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false)
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>()
                 },
                 constraints: table =>
                 {
@@ -54,12 +54,12 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_Tags",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlogId = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
-                    Slug = table.Column<string>(maxLength: 64, nullable: false),
-                    Title = table.Column<string>(maxLength: 64, nullable: false)
+                    Id = table.Column<Guid>(),
+                    BlogId = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(),
+                    Slug = table.Column<string>(maxLength: 64),
+                    Title = table.Column<string>(maxLength: 64)
                 },
                 constraints: table =>
                 {
@@ -76,20 +76,20 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_Posts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlogId = table.Column<Guid>(nullable: false),
-                    CategoryId = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    BlogId = table.Column<Guid>(),
+                    CategoryId = table.Column<Guid>(),
+                    Created = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(),
                     MetaDescription = table.Column<string>(maxLength: 256, nullable: true),
                     MetaKeywords = table.Column<string>(maxLength: 128, nullable: true),
-                    PostTypeId = table.Column<string>(maxLength: 64, nullable: false),
+                    PostTypeId = table.Column<string>(maxLength: 64),
                     Published = table.Column<DateTime>(nullable: true),
-                    RedirectType = table.Column<int>(nullable: false),
+                    RedirectType = table.Column<int>(),
                     RedirectUrl = table.Column<string>(maxLength: 256, nullable: true),
                     Route = table.Column<string>(maxLength: 256, nullable: true),
-                    Slug = table.Column<string>(maxLength: 128, nullable: false),
-                    Title = table.Column<string>(maxLength: 128, nullable: false)
+                    Slug = table.Column<string>(maxLength: 128),
+                    Title = table.Column<string>(maxLength: 128)
                 },
                 constraints: table =>
                 {
@@ -118,12 +118,12 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_PostFields",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    CLRType = table.Column<string>(maxLength: 256, nullable: false),
-                    FieldId = table.Column<string>(maxLength: 64, nullable: false),
-                    PostId = table.Column<Guid>(nullable: false),
-                    RegionId = table.Column<string>(maxLength: 64, nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    CLRType = table.Column<string>(maxLength: 256),
+                    FieldId = table.Column<string>(maxLength: 64),
+                    PostId = table.Column<Guid>(),
+                    RegionId = table.Column<string>(maxLength: 64),
+                    SortOrder = table.Column<int>(),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -141,8 +141,8 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_PostTags",
                 columns: table => new
                 {
-                    PostId = table.Column<Guid>(nullable: false),
-                    TagId = table.Column<Guid>(nullable: false)
+                    PostId = table.Column<Guid>(),
+                    TagId = table.Column<Guid>()
                 },
                 constraints: table =>
                 {

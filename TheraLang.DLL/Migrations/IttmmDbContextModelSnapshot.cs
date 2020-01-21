@@ -3,13 +3,11 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TheraLang.DLL;
 
 namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    class IttmmDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -42,7 +40,7 @@ namespace TheraLang.DLL.Migrations
 
                     b.Property<int?>("SocietyId")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(null);
+                        .HasDefaultValue();
 
                     b.Property<string>("Status")
                         .IsRequired();
@@ -167,7 +165,7 @@ namespace TheraLang.DLL.Migrations
 
                     b.Property<string>("FileName")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(null);
+                        .HasDefaultValue();
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -179,7 +177,7 @@ namespace TheraLang.DLL.Migrations
 
                     b.Property<string>("Url")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValue(null);
+                        .HasDefaultValue();
 
                     b.HasKey("Id");
 

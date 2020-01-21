@@ -2,7 +2,6 @@ using FluentValidation.AspNetCore;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -104,17 +103,17 @@ namespace TheraLang.Web
             App.CacheLevel = Piranha.Cache.CacheLevel.None;
 
             // Build content types
-            var pageTypeBuilder = new Piranha.AttributeBuilder.PageTypeBuilder(api)
+            new Piranha.AttributeBuilder.PageTypeBuilder(api)
                 .AddType(typeof(Models.BlogArchive))
                 .AddType(typeof(Models.StandardPage))
                 .AddType(typeof(Models.TeaserPage))
                 .Build()
                 .DeleteOrphans();
-            var postTypeBuilder = new Piranha.AttributeBuilder.PostTypeBuilder(api)
+            new Piranha.AttributeBuilder.PostTypeBuilder(api)
                 .AddType(typeof(Models.BlogPost))
                 .Build()
                 .DeleteOrphans();
-            var siteTypeBuilder = new Piranha.AttributeBuilder.SiteTypeBuilder(api)
+            new Piranha.AttributeBuilder.SiteTypeBuilder(api)
                 .AddType(typeof(Models.StandardSite))
                 .Build()
                 .DeleteOrphans();

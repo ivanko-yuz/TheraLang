@@ -11,10 +11,10 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_PostBlocks",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    BlockId = table.Column<Guid>(nullable: false),
-                    PostId = table.Column<Guid>(nullable: false),
-                    SortOrder = table.Column<int>(nullable: false)
+                    Id = table.Column<Guid>(),
+                    BlockId = table.Column<Guid>(),
+                    PostId = table.Column<Guid>(),
+                    SortOrder = table.Column<int>()
                 },
                 constraints: table =>
                 {

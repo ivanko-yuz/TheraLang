@@ -3,9 +3,9 @@ using TheraLang.DLL.Piranha.Entities;
 
 namespace TheraLang.DLL.Entities
 {
-    public class Resource : BaseEntity
+    public sealed class Resource : BaseEntity
     {
-        public virtual PiranhaUser PiranhaUser { get; set; }
+        public PiranhaUser PiranhaUser { get; set; }
 
         public string Name { get; set; }
 
@@ -19,10 +19,10 @@ namespace TheraLang.DLL.Entities
 
         public int CategoryId { get; set; }
 
-        public virtual ResourceCategory ResourceCategory { get; set; }
+        public ResourceCategory ResourceCategory { get; set; }
 
-        public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
-        public virtual ICollection<ResourceAttachment> ResourceAttach { get; set; }
+        public ICollection<ResourceProject> ResourceProjects { get; set; }
+        public ICollection<ResourceAttachment> ResourceAttach { get; set; }
         public Resource()
         {
             this.ResourceAttach = new List<ResourceAttachment>();

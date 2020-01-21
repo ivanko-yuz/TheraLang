@@ -11,7 +11,7 @@ namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20191214112929_TheraLang_Base_Mig")]
-    partial class TheraLang_Base_Mig
+    partial class TheraLangBaseMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

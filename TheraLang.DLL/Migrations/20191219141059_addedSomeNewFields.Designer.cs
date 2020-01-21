@@ -11,7 +11,7 @@ namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20191219141059_addedSomeNewFields")]
-    partial class addedSomeNewFields
+    partial class AddedSomeNewFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

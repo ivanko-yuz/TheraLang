@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DLL.Piranha.Entities
 {
-    public class PiranhaMediaFolder
+    public sealed class PiranhaMediaFolder
     {
         public PiranhaMediaFolder()
         {
@@ -15,6 +15,6 @@ namespace TheraLang.DLL.Piranha.Entities
         public string Name { get; set; }
         public Guid? ParentId { get; set; }
 
-        public virtual ICollection<PiranhaMedia> PiranhaMedia { get; set; }
+        public ICollection<PiranhaMedia> PiranhaMedia { get; set; }
     }
 }

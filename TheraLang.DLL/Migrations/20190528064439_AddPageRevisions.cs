@@ -11,10 +11,10 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_PageRevisions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(),
                     Data = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    PageId = table.Column<Guid>(nullable: false)
+                    Created = table.Column<DateTime>(),
+                    PageId = table.Column<Guid>()
                 },
                 constraints: table =>
                 {

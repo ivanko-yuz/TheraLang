@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DLL.Entities
 {
-    public class Project
+    public sealed class Project
     {
         public int Id { get; set; }
 
@@ -21,17 +21,17 @@ namespace TheraLang.DLL.Entities
 
         public bool IsActive { get; set; }
 
-        public virtual ProjectType Type {get; set;}
+        public ProjectType Type {get; set;}
 
         public int TypeId { get; set; }   
         
         public decimal DonationTarget { get; set; }
 
-        public virtual ICollection<ResourceProject> ProjectResources { get; set; }
+        public ICollection<ResourceProject> ProjectResources { get; set; }
 
-        public virtual ICollection<ProjectParticipation> ProjectParticipations { get; set; }
+        public ICollection<ProjectParticipation> ProjectParticipations { get; set; }
 
-        public virtual ICollection<Donation> Donations { get; set; }
+        public ICollection<Donation> Donations { get; set; }
 
         public Project()
         {

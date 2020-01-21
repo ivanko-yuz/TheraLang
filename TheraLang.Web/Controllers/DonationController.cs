@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.DLL.Entities;
 using TheraLang.DLL.Models;
 using TheraLang.DLL.Services;
-using TheraLang.Web.Models;
-using System.Linq;
-using Microsoft.AspNetCore.Http;
 
 namespace TheraLang.Web.Controllers
 {
@@ -27,7 +24,8 @@ namespace TheraLang.Web.Controllers
         /// <param name="projectId">a project that you want to donate to</param>
         /// <returns>LiqPayCheckoutModel</returns>
         [HttpGet("{donationAmount}/{projectId?}")]
-        public ActionResult<LiqPayCheckoutModel> Get(string donationAmount, int? projectId = null)
+        
+        public ActionResult<LiqPayCheckoutModel> Get(string donationAmount, int? projectId)
         {
             if (projectId == default(int))
             {

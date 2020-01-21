@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DLL.Piranha.Entities
 {
-    public class PiranhaRole
+    public sealed class PiranhaRole
     {
         public PiranhaRole()
         {
@@ -16,7 +16,7 @@ namespace TheraLang.DLL.Piranha.Entities
         public string Name { get; set; }
         public string NormalizedName { get; set; }
 
-        public virtual ICollection<PiranhaRoleClaim> PiranhaRoleClaims { get; set; }
-        public virtual ICollection<PiranhaUserRole> PiranhaUserRoles { get; set; }
+        public ICollection<PiranhaRoleClaim> PiranhaRoleClaims { get; set; }
+        public ICollection<PiranhaUserRole> PiranhaUserRoles { get; set; }
     }
 }

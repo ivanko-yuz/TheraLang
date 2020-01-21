@@ -1,6 +1,4 @@
 ﻿
-using System.IO;
-
 namespace TheraLang.DLL.Entities
 {
     public class ResourceAttachment 

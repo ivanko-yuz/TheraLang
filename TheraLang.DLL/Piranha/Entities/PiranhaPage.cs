@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DLL.Piranha.Entities
 {
-    public class PiranhaPage
+    public sealed class PiranhaPage
     {
         public PiranhaPage()
         {
@@ -36,15 +36,15 @@ namespace TheraLang.DLL.Piranha.Entities
         public string ContentType { get; set; }
         public Guid? OriginalPageId { get; set; }
 
-        public virtual PiranhaPageType PageType { get; set; }
-        public virtual PiranhaPage Parent { get; set; }
-        public virtual PiranhaSite Site { get; set; }
-        public virtual ICollection<PiranhaPage> InverseParent { get; set; }
-        public virtual ICollection<PiranhaCategory> PiranhaCategories { get; set; }
-        public virtual ICollection<PiranhaPageBlock> PiranhaPageBlocks { get; set; }
-        public virtual ICollection<PiranhaPageField> PiranhaPageFields { get; set; }
-        public virtual ICollection<PiranhaPageRevision> PiranhaPageRevisions { get; set; }
-        public virtual ICollection<PiranhaPost> PiranhaPosts { get; set; }
-        public virtual ICollection<PiranhaTag> PiranhaTags { get; set; }
+        public PiranhaPageType PageType { get; set; }
+        public PiranhaPage Parent { get; set; }
+        public PiranhaSite Site { get; set; }
+        public ICollection<PiranhaPage> InverseParent { get; set; }
+        public ICollection<PiranhaCategory> PiranhaCategories { get; set; }
+        public ICollection<PiranhaPageBlock> PiranhaPageBlocks { get; set; }
+        public ICollection<PiranhaPageField> PiranhaPageFields { get; set; }
+        public ICollection<PiranhaPageRevision> PiranhaPageRevisions { get; set; }
+        public ICollection<PiranhaPost> PiranhaPosts { get; set; }
+        public ICollection<PiranhaTag> PiranhaTags { get; set; }
     }
 }

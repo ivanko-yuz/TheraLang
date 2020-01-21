@@ -3,17 +3,19 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheraLang.DLL.Migrations
 {
-    public partial class files : Migration
+    public partial class Files : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "ResourceAttachments",
                 columns: table => new
+                    
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ResourceId = table.Column<int>(nullable: false),
+                    
+                    ResourceId = table.Column<int>(),
                     FileName = table.Column<string>(maxLength: 250, nullable: true),
                     Path = table.Column<string>(maxLength: 1000, nullable: true)
                 },

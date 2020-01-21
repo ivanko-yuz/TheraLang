@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TheraLang.DLL.Entities;
 
 namespace TheraLang.DLL.Configuration
@@ -19,7 +16,7 @@ namespace TheraLang.DLL.Configuration
 
             builder.Property(p => p.Name).IsRequired();
 
-            builder.HasMany(p => p.Donations).WithOne(i => i.Society).HasForeignKey("SocietyId"); ;
+            builder.HasMany(p => p.Donations).WithOne(i => i.Society).HasForeignKey("SocietyId");
         }
     }
 }

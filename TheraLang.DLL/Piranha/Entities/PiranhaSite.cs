@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DLL.Piranha.Entities
 {
-    public class PiranhaSite
+    public sealed class PiranhaSite
     {
         public PiranhaSite()
         {
@@ -24,8 +24,8 @@ namespace TheraLang.DLL.Piranha.Entities
         public DateTime? ContentLastModified { get; set; }
         public string Culture { get; set; }
 
-        public virtual ICollection<PiranhaAlias> PiranhaAliases { get; set; }
-        public virtual ICollection<PiranhaPage> PiranhaPages { get; set; }
-        public virtual ICollection<PiranhaSiteField> PiranhaSiteFields { get; set; }
+        public ICollection<PiranhaAlias> PiranhaAliases { get; set; }
+        public ICollection<PiranhaPage> PiranhaPages { get; set; }
+        public ICollection<PiranhaSiteField> PiranhaSiteFields { get; set; }
     }
 }

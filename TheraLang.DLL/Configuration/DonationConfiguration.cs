@@ -13,7 +13,7 @@ namespace TheraLang.DLL.Configuration
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Property(p => p.ProjectId);
-            builder.Property(p => p.SocietyId).HasDefaultValue(null);
+            builder.Property(p => p.SocietyId).HasDefaultValue();
             builder.Property(p => p.Status).IsRequired();
             builder.Property(p => p.Amount).IsRequired().HasColumnType("decimal(18, 2)");
             builder.Property(p => p.Currency).IsRequired();

@@ -10,7 +10,7 @@ namespace TheraLang.DLL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20180331212736_AddCLRContentType")]
-    partial class AddCLRContentType
+    partial class AddClrContentType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.DLL.Entities;
 using TheraLang.DLL.Enums;
 using TheraLang.DLL.Services;
 using Microsoft.AspNetCore.Identity;
@@ -51,7 +50,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ParticipantModel>> Get()
         {
-            IEnumerable<ProjectParticipation> members = _service.GetAll();
+            _service.GetAll();
             var part = _service.GetAll().Select(p => new ParticipantModel
             {
                 Id = p.Id,
