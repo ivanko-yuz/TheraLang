@@ -24,10 +24,10 @@ namespace TheraLang.BLL.DataTransferObjects
 
         public decimal DonationTargetSum { get; set; }
 
-        public virtual ICollection<ResourceProject> ProjectResources { get; set; }
+        public virtual IEnumerable<ResourceProject> ProjectResources { get; set; }
 
-        public virtual ICollection<ProjectParticipation> ProjectParticipations { get; set; }
+        public virtual IEnumerable<ProjectParticipation> ProjectParticipations { get; set; }
 
-        public virtual ICollection<Donation> Donations { get; set; }
+        public virtual IEnumerable<Donation> Donations { get; set; }
     }
 }

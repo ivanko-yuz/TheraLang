@@ -94,7 +94,7 @@ namespace TheraLang.BLL.Services
                 var project = _unitOfWork.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
                 if (project == null)
                 {
-                    throw new NullReferenceException($"Error while deleting project. Project with id {nameof(id)}={id} not found");
+                    throw new ArgumentNullException($"Error while deleting project. Project with id {nameof(id)}={id} not found");
                 }
                 _unitOfWork.Repository<Project>().Remove(project);
                 await _unitOfWork.SaveChangesAsync();
@@ -129,9 +129,9 @@ namespace TheraLang.BLL.Services
         public async Task ChangeStatus(int projectId, ProjectStatusDto status)
         {
             var project = _unitOfWork.Repository<Project>().Get().SingleOrDefault(p => p.Id == projectId);
-            if (project is null)
+            if (project == null)
             {
-                throw new NullReferenceException($"{ nameof(project) } cannot be null");
+                throw new ArgumentNullException($"Error while changing status. Project with id {nameof(projectId)}={projectId} not found");
             }
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectStatusDto, ProjectStatus>()).CreateMapper();
@@ -150,7 +150,7 @@ namespace TheraLang.BLL.Services
                 var proj = _unitOfWork.Repository<Project>().Get().SingleOrDefault(p => p.Id == id);
                 if (proj == null)
                 {
-                    throw new NullReferenceException($"Error while updating project. Project with id {nameof(id)}={id} not found");
+                    throw new ArgumentNullException($"Error while updating project. Project with id {nameof(id)}={id} not found");
                 }
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, Project>()
