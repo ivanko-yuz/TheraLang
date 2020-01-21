@@ -16,8 +16,8 @@ namespace TheraLang.BLL
         
         static LiqPayHelper()
         {
-            _publicKey = "sandbox_i42859998914";
-            _privateKey = "sandbox_nqmktFe8ozPyPOGdjck7HgIfXp14kr0vcBF0RHhY"; //TODO: set via env variables
+            _publicKey = Environment.GetEnvironmentVariable("LIQPAY_PUBLIC");
+            _privateKey = Environment.GetEnvironmentVariable("LIQPAY_PRIVATE");
         }
 
         public static LiqPayCheckoutDto GetLiqPayCheckoutModel(string donationAmount, int? projectId, HttpContext context)
