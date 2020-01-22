@@ -12,7 +12,7 @@ import { LoginComponent } from "../../modules/user/components/login/login.compon
 @Component({
   selector: "app-toolbar",
   templateUrl: "./toolbar.component.html",
-  styleUrls: ["./toolbar.component.less"]
+  styleUrls: ["./toolbar.component.less", "./toolbar-menu-item.less"]
 })
 export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   hasNotification: boolean = false;

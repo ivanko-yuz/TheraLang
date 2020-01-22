@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-cms-pages-toolbar-item',
   templateUrl: './cms-pages-toolbar-item.component.html',
-  styleUrls: ['./cms-pages-toolbar-item.component.less']
+  styleUrls: ['./cms-pages-toolbar-item.component.less', '../toolbar-menu-item.less']
 })
 export class CmsPagesToolbarItemComponent implements OnInit {
 
