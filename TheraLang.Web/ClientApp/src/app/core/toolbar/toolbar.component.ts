@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from "@angular/core";
 import { ProjectParticipationRequest } from "src/app/shared/models/project-participation/project-participation-request";
-import { ToolbarItem } from "./toolbar-item/toolbar-item";
 import { Subscription } from "rxjs";
 import { ProjectParticipationService } from "../http/project-participants/project-participation.service";
 import { EventService } from "../services/event/event-service";
@@ -18,20 +17,18 @@ import { LoginComponent } from "../../modules/user/components/login/login.compon
 export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   hasNotification: boolean = false;
   projectParticipation: ProjectParticipationRequest[];
-  toolbarItems: ToolbarItem[] = [];
+  
   private subscription = new Subscription();
   isAuthinticated: boolean;
 
   constructor(
     private participantService: ProjectParticipationService,
     private eventService: EventService,
-    private siteMapService: SiteMapService,
     private dialog: DialogService,
     private userService: UserService
   ) {}
 
   ngOnInit() {
-    this.subscribeOnSiteMapService();
     const subscription = this.participantService
       .getAllProjectParticipants()
       .subscribe((projectParticipation: ProjectParticipationRequest[]) => {
@@ -56,14 +53,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.eventService.childEventListner().subscribe(click => {
       this.hasNotification = false;
     });
-  }
-
-  subscribeOnSiteMapService(): void {
-    const toolbarItemsSubscription = this.siteMapService.toolbarItems.subscribe(
-      next => (this.toolbarItems = next),
-      error => "do nothing for now"
-    );
-    this.subscription.add(toolbarItemsSubscription);
   }
 
   ngOnDestroy(): void {

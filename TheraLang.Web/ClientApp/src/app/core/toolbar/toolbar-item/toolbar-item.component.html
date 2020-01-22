@@ -1,4 +1,4 @@
-<ng-template [ngIf]="isFinalMenu()">
+<!-- <ng-template [ngIf]="isFinalMenu()">
   <button mat-menu-item [routerLink]="toolbarItem.permalink" [innerText]="toolbarItem.title" (click)="onClick()"></button>
 </ng-template>
 
@@ -7,4 +7,13 @@
   <mat-menu #menu="matMenu">
     <app-toolbar-item *ngFor="let subItem of toolbarItem.subItems" [toolbarItem]="subItem"></app-toolbar-item>
   </mat-menu>
-</ng-template>
+</ng-template> -->
+
+
+<!-- TODO: Component with button and <app-toolbar-item>s inside and use this component in toolbar -->
+<ng-template [ngIf]="true">
+  <button  mat-menu-item [matMenuTriggerFor]="menu">Test</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="menu">Test</button>
+  </mat-menu>
+</ng-template> 

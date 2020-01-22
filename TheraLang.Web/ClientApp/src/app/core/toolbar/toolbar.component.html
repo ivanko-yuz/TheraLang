@@ -28,8 +28,8 @@
         <img src="assets/img/uttmm.png" alt="Home" class="img-wrapper">
       </a>
       
-      <!-- <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item> -->
-
+      <app-cms-pages-toolbar-item></app-cms-pages-toolbar-item>
+      
       <a mat-button class="menu-item" routerLink="/projects">{{'components.projects.title'|translate}}</a>
       <a mat-button class="menu-item" routerLink="/donations">{{'components.donation.title'|translate}}</a>
       <a mat-button class="menu-item" *ngIf="isAuthinticated"
@@ -54,9 +54,9 @@
       </span>
       <button mat-flat-button color="primary" *ngIf="!isAuthinticated" class="toolbar-button"
         (click)="onLogin()">{{'components.account.signIn'|translate}}</button>
-      <div *ngIf="isAuthinticated">
+      <span *ngIf="isAuthinticated">
         <app-profile-menu></app-profile-menu>
-      </div>
+      </span>
     </div>
   </mat-toolbar>
 
@@ -71,7 +71,7 @@
       </div>
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
-      Awesome content
+      <router>
     </mat-sidenav-content>
   </mat-sidenav-container> -->
 </div>
