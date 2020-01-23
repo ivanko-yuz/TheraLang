@@ -2,7 +2,7 @@
 
 namespace TheraLang.DAL.Entities
 {
-    public sealed class ResourceCategory
+    public class ResourceCategory
     {
         public int Id { get; set; }
 

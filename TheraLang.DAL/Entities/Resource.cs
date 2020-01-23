@@ -3,7 +3,7 @@ using TheraLang.DAL.Piranha.Entities;
 
 namespace TheraLang.DAL.Entities
 {
-    public sealed class Resource : BaseEntity
+    public class Resource : BaseEntity
     {
         public PiranhaUser PiranhaUser { get; set; }
 

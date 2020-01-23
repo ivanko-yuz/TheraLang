@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DAL.Entities
 {
-    public sealed class Project
+    public class Project
     {
         public int Id { get; set; }
 
