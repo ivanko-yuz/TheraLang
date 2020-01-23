@@ -11,13 +11,13 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_Aliases",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(),
-                    AliasUrl = table.Column<string>(maxLength: 256),
-                    Created = table.Column<DateTime>(),
-                    LastModified = table.Column<DateTime>(),
-                    RedirectUrl = table.Column<string>(maxLength: 256),
-                    SiteId = table.Column<Guid>(),
-                    Type = table.Column<int>()
+                    Id = table.Column<Guid>(nullable: false),
+                    AliasUrl = table.Column<string>(maxLength: 256, nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    RedirectUrl = table.Column<string>(maxLength: 256, nullable: false),
+                    SiteId = table.Column<Guid>(nullable: false),
+                    Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -17,12 +17,12 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_SiteFields",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(),
-                    CLRType = table.Column<string>(maxLength: 256),
-                    FieldId = table.Column<string>(maxLength: 64),
-                    RegionId = table.Column<string>(maxLength: 64),
-                    SiteId = table.Column<Guid>(),
-                    SortOrder = table.Column<int>(),
+                    Id = table.Column<Guid>(nullable: false),
+                    CLRType = table.Column<string>(maxLength: 256, nullable: false),
+                    FieldId = table.Column<string>(maxLength: 64, nullable: false),
+                    RegionId = table.Column<string>(maxLength: 64, nullable: false),
+                    SiteId = table.Column<Guid>(nullable: false),
+                    SortOrder = table.Column<int>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -40,11 +40,11 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_SiteTypes",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 64),
+                    Id = table.Column<string>(maxLength: 64, nullable: false),
                     Body = table.Column<string>(nullable: true),
                     CLRType = table.Column<string>(maxLength: 256, nullable: true),
-                    Created = table.Column<DateTime>(),
-                    LastModified = table.Column<DateTime>()
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

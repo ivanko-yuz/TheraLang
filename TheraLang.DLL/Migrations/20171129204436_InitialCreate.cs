@@ -8,12 +8,12 @@ namespace TheraLang.DLL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                "Piranha_MediaFolders",
+                name: "Piranha_MediaFolders",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(),
-                    Created = table.Column<DateTime>(),
-                    Name = table.Column<string>(maxLength: 128),
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
                     ParentId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -25,10 +25,10 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_PageTypes",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 64),
+                    Id = table.Column<string>(maxLength: 64, nullable: false),
                     Body = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(),
-                    LastModified = table.Column<DateTime>()
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,11 +39,11 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_Params",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(),
-                    Created = table.Column<DateTime>(),
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 256, nullable: true),
-                    Key = table.Column<string>(maxLength: 64),
-                    LastModified = table.Column<DateTime>(),
+                    Key = table.Column<string>(maxLength: 64, nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -55,13 +55,14 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_Sites",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(),
-                    Created = table.Column<DateTime>(),
+
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 256, nullable: true),
                     Hostnames = table.Column<string>(maxLength: 256, nullable: true),
-                    InternalId = table.Column<string>(maxLength: 64),
-                    IsDefault = table.Column<bool>(),
-                    LastModified = table.Column<DateTime>(),
+                    InternalId = table.Column<string>(maxLength: 64, nullable: false),
+                    IsDefault = table.Column<bool>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(maxLength: 128, nullable: true)
                 },
                 constraints: table =>
@@ -73,15 +74,15 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_Media",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(),
-                    ContentType = table.Column<string>(maxLength: 256),
-                    Created = table.Column<DateTime>(),
-                    Filename = table.Column<string>(maxLength: 128),
+                    Id = table.Column<Guid>(nullable: false),
+                    ContentType = table.Column<string>(maxLength: 256, nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Filename = table.Column<string>(maxLength: 128, nullable: false),
                     FolderId = table.Column<Guid>(nullable: true),
-                    LastModified = table.Column<DateTime>(),
+                    LastModified = table.Column<DateTime>(nullable: false),
                     PublicUrl = table.Column<string>(nullable: true),
-                    Size = table.Column<long>(),
-                    Type = table.Column<int>()
+                    Size = table.Column<long>(nullable: false),
+                    Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,23 +99,23 @@ namespace TheraLang.DLL.Migrations
                 name: "Piranha_Pages",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(),
-                    Created = table.Column<DateTime>(),
-                    IsHidden = table.Column<bool>(),
-                    LastModified = table.Column<DateTime>(),
+                    Id = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    IsHidden = table.Column<bool>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
                     MetaDescription = table.Column<string>(maxLength: 256, nullable: true),
                     MetaKeywords = table.Column<string>(maxLength: 128, nullable: true),
                     NavigationTitle = table.Column<string>(maxLength: 128, nullable: true),
-                    PageTypeId = table.Column<string>(maxLength: 64),
+                    PageTypeId = table.Column<string>(maxLength: 64, nullable: false),
                     ParentId = table.Column<Guid>(nullable: true),
                     Published = table.Column<DateTime>(nullable: true),
-                    RedirectType = table.Column<int>(),
+                    RedirectType = table.Column<int>(nullable: false),
                     RedirectUrl = table.Column<string>(maxLength: 256, nullable: true),
                     Route = table.Column<string>(maxLength: 256, nullable: true),
-                    SiteId = table.Column<Guid>(),
-                    Slug = table.Column<string>(maxLength: 128),
-                    SortOrder = table.Column<int>(),
-                    Title = table.Column<string>(maxLength: 128)
+                    SiteId = table.Column<Guid>(nullable: false),
+                    Slug = table.Column<string>(maxLength: 128, nullable: false),
+                    SortOrder = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(maxLength: 128, nullable: false)
                 },
                 constraints: table =>
                 {

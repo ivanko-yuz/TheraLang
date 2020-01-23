@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheraLang.DLL.Migrations
@@ -47,9 +48,9 @@ namespace TheraLang.DLL.Migrations
                 name: "Society",
                 columns: table => new
                 {
-                    Id = table.Column<int>()
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>()
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
