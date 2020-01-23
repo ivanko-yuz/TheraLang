@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.DLL.Entities;
-using TheraLang.DLL.Models;
-using TheraLang.DLL.Services;
+using AutoMapper;
+using TheraLang.BLL;
+using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.Interfaces;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -37,7 +39,12 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(donationAmount)} can not be null");
             }
 
-            return _donationService.GetLiqPayCheckoutModel(donationAmount, projectId, HttpContext);
+            var  liqPayCheckoutDto = _donationService.GetLiqPayCheckoutModel(donationAmount, projectId, HttpContext);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LiqPayCheckoutDto, LiqPayCheckoutModel>()).CreateMapper();
+            var liqPayCheckoutModel = mapper.Map<LiqPayCheckoutDto, LiqPayCheckoutModel>(liqPayCheckoutDto);
+
+            return liqPayCheckoutModel;
         }
 
         /// <summary>
@@ -46,15 +53,19 @@ namespace TheraLang.Web.Controllers
         /// <param name="donationId"></param>
         /// <returns>Donation record</returns>
         [HttpGet("transaction/{donationId}")]
-        public ActionResult<Donation> Get(string donationId)
+        public ActionResult<DonationViewModel> Get(string donationId)
         {
             if (String.IsNullOrEmpty(donationId))
             {
                 throw new ArgumentException($"{nameof(donationId)} can not be null");
             }
+            
+            var donationDto = _donationService.GetDonation(donationId);
 
-            var donation = _donationService.GetDonation(donationId);
-            return Ok(donation);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DonationDto, DonationViewModel>()).CreateMapper();
+            var donationModel = mapper.Map<DonationDto, DonationViewModel>(donationDto);
+
+            return Ok(donationModel);
         }
 
         /// <summary>

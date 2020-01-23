@@ -52,6 +52,7 @@
   </Target>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.1.0" />
     <PackageReference Include="FineUploader.AspNet.Mvc" Version="1.0.0-beta2" />
     <PackageReference Include="FluentValidation" Version="8.5.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0" />
@@ -81,6 +82,6 @@
     <ProjectReference Include="..\core\Piranha.Manager.TinyMCE\Piranha.Manager.TinyMCE.csproj" />
     <ProjectReference Include="..\data\Piranha.Data.EF\Piranha.Data.EF.csproj" />
     <ProjectReference Include="..\core\Piranha.WebApi\Piranha.WebApi.csproj" />
-    <ProjectReference Include="..\TheraLang.DLL\TheraLang.DLL.csproj" />
+    <ProjectReference Include="..\TheraLang.BLL\TheraLang.BLL.csproj" />
   </ItemGroup>
 </Project>

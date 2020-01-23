@@ -3,8 +3,8 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TheraLang.DLL;
-using TheraLang.DLL.Entities;
+using TheraLang.DAL;
+using TheraLang.DAL.Entities;
 
 namespace TheraLang.DataSeeding
 {

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using TheraLang.DLL.Models;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Validators
 {

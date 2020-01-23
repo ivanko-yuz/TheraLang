@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using TheraLang.DLL.Services;
-using TheraLang.DLL.Entities;
 using System.Collections.Generic;
-using TheraLang.DLL.Models;
+using AutoMapper;
+using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.Interfaces;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -19,18 +20,21 @@ namespace TheraLang.Web.Controllers
        private readonly IResourceAttachmentService _attachment;
 
        [HttpPost("attach")]
-       public IActionResult UploadFile([FromBody]ResourceAttachModel resource)
+       public IActionResult UploadFile([FromBody]ResourceAttachViewModel resourceModel)
        {
-           if (resource == null)
+           if (resourceModel == null)
            {
-               throw new ArgumentException($"{nameof(resource)} cannot be null");
+               throw new ArgumentException($"{nameof(resourceModel)} cannot be null");
            }
-          
-           _attachment.Add(resource);
-           return Ok(resource);
+
+           var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachViewModel, ResourceAttachDto>()).CreateMapper();
+           var resourceDto = mapper.Map<ResourceAttachViewModel, ResourceAttachDto>(resourceModel);
+
+            _attachment.Add(resourceDto);
+           return Ok(resourceDto);
        }
        [HttpGet]
-       public IEnumerable<ResourceAttachment> GetAllTypes()
+       public IEnumerable<ResourceAttachDto> GetAllTypes()
        {
            return _attachment.Get();
        }

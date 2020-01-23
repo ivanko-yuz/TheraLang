@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.DLL.Services;
 using System.Collections.Generic;
-using TheraLang.DLL.Entities;
+using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.Web.Controllers
 {
@@ -36,7 +36,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(newTypeName)} can not be null");
             }
-            await _service.ChangeType(categoryId, newTypeName);
+            await _service.ChangeTypeName(categoryId, newTypeName);
             return Ok();
         }
 
@@ -46,9 +46,9 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of ResourceCategories</returns>
         [HttpGet]
         [Route("get")]
-        public IEnumerable<ResourceCategory> GetAll()
+        public IEnumerable<ResourceCategoryDto> GetAll()
         {
-            IEnumerable<ResourceCategory> categories = _service.GetAllCategories();
+            var categories = _service.GetAllCategories();
             return categories;
         }
     }
