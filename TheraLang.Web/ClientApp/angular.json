@@ -28,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "src/assets/themes/purple-white.css",
               "src/styles.less",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
@@ -95,7 +95,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "src/assets/themes/purple-white.css",
               "src/styles.less"
             ],
             "scripts": []
