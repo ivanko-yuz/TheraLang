@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Piranha;
-using Piranha.AspNetCore.Identity.Data;
 using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers

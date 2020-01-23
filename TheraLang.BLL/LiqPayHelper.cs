@@ -26,7 +26,7 @@ namespace TheraLang.BLL
             var hostName = $"{context.Request.Scheme}://{context.Request.Host}";
             LiqPayCheckout dataSource = new LiqPayCheckout()
             {
-                PublicKey = PublicKey,
+                PublicKey = _publicKey,
                 Version = ApiVersion,
                 Action = "pay",
                 Amount = Convert.ToDecimal(donationAmount),
@@ -52,7 +52,7 @@ namespace TheraLang.BLL
 
         public static string GetLiqPaySignature(string data)
         {
-            return Convert.ToBase64String(SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(PrivateKey + data + PrivateKey)));
+            return Convert.ToBase64String(SHA1.Create().ComputeHash(Encoding.UTF8.GetBytes(_privateKey + data + _privateKey)));
         }
     }
 }
