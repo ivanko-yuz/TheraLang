@@ -3,7 +3,6 @@ import { ProjectParticipationRequest } from "src/app/shared/models/project-parti
 import { Subscription } from "rxjs";
 import { ProjectParticipationService } from "../http/project-participants/project-participation.service";
 import { EventService } from "../services/event/event-service";
-import { SiteMapService } from "../http/cms/site-map.service";
 import { DialogService } from "../services/dialog/dialog.service";
 import { UserService } from "../auth/user.service";
 import { ProjectParticipationRequestStatus } from "src/app/configs/project-participation-request-status";
