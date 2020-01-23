@@ -45,6 +45,9 @@
     "home": {
       "title": "Головна сторінка"
     },
+    "cms-pages": {
+      "title": "CMS Pages"
+    },
     "projects": {
       "title": "Проекти",
       "create": "Створити проект",

@@ -45,6 +45,9 @@
     "home": {
       "title": "Main page"
     },
+    "cms-pages": {
+      "title": "CMS Pages"
+    },
     "projects": {
       "title": "Projects",
       "create": "Create project",
