@@ -6,6 +6,8 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using System.IO;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Piranha.AspNetCore.Identity.Data;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 
@@ -41,7 +43,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                string resourceFileString = "";
+                string resourceFileString = null;
 
                 if (resourceDto.File != null)
                 {
@@ -54,6 +56,7 @@ namespace TheraLang.BLL.Services
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
                     .ForMember(r => r.File, opt => opt.MapFrom(r => resourceFileString))
+                    .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId))
                 ).CreateMapper();
 
                 var resource = mapper.Map<ResourceDto, Resource>(resourceDto);
@@ -67,11 +70,11 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task UpdateResource(ResourceDto resourceDto, Guid updatedById)
+        public async Task UpdateResource(int id, ResourceDto resourceDto, Guid updatedById)
         {
             try
             {
-                string resourceFileString = "";
+                string resourceFileString = null;
 
                 if (resourceDto.File != null)
                 {
@@ -82,17 +85,17 @@ namespace TheraLang.BLL.Services
                     }
                 }
 
-                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == resourceDto.Id);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == id);
 
                 if (resource != null)
                 {
                     resource.Name = resourceDto.Name;
-                    resource.Description = resourceDto.Description;
-                    resource.Url = resourceDto.Url;
-                    resource.FileName = resourceDto.FileName;
-                    resource.File = resourceFileString;
-                    resource.CategoryId = resourceDto.CategoryId;
-                    resource.UpdatedById = updatedById;
+                    //resource.Description = resourceDto.Description;
+                    //resource.Url = resourceDto.Url;
+                    //resource.FileName = resourceDto.FileName;
+                    //resource.File = resourceFileString;
+                    //resource.CategoryId = resourceDto.CategoryId;
+                    //resource.UpdatedById = updatedById;
 
                     _unitOfWork.Repository<Resource>().Update(resource);
                     await _unitOfWork.SaveChangesAsync();
@@ -100,7 +103,7 @@ namespace TheraLang.BLL.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when updating the {nameof(resourceDto)}: {resourceDto.Id} ", ex);
+                throw new Exception($"Error when updating the {nameof(resourceDto)}: {id} ", ex);
             }
         }
 
@@ -172,7 +175,9 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                IEnumerable<ResourceCategory> query = _unitOfWork.Repository<ResourceCategory>().Get().ToList();
+                IEnumerable<ResourceCategory> query = _unitOfWork.Repository<ResourceCategory>().Get()
+                    .Include(x => x.Resources)
+                    .ToList();
 
                 if (withAssignedResources)
                 {
@@ -222,6 +227,16 @@ namespace TheraLang.BLL.Services
             {
                 throw new Exception($"Error when get all resources by {nameof(projectId)} = {projectId} ", ex);
             }
+        }
+
+        public IEnumerable<ResourceDto> GetAllResources()
+        {
+            var resources = _unitOfWork.Repository<Resource>().Get().ToList();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
+            var resourceDtos = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resources);
+
+            return resourceDtos;
         }
     }
 }

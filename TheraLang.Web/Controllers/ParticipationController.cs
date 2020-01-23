@@ -52,7 +52,7 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of ProjectParticipants</returns>
         [HttpGet]
-        public ActionResult<IEnumerable<ParticipantViewModel>> Get()
+        public ActionResult<IEnumerable<ParticipantViewModel>> GetAllParticipants()
         {
             var members = _service.GetAll().ToList();
 
@@ -74,7 +74,7 @@ namespace TheraLang.Web.Controllers
         /// <returns>status code</returns>
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Post([FromBody]int projectId)
+        public async Task<IActionResult> CreateParticipant([FromBody]int projectId)
         {
             if (projectId == default)
             {

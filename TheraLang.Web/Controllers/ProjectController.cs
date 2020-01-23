@@ -35,8 +35,9 @@ namespace TheraLang.Web.Controllers
         {
             if (projectModel == null)
             {
-                throw new ArgumentException($"{nameof(projectModel)} cannot be null");
+                return BadRequest();
             }
+
             User user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
@@ -53,8 +54,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         public IEnumerable<ProjectDonationViewModel> GetAllProjects()
         {
-            List<ProjectDonationViewModel> projectModels = new List<ProjectDonationViewModel>();
-            projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatusDto.Approved)
+            var projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatusDto.Approved)
                 .Select(p => new ProjectDonationViewModel
                 {
                     Id = p.Id,
@@ -70,6 +70,7 @@ namespace TheraLang.Web.Controllers
 
             return projectModels;
         }
+
         [HttpGet("new")]
         public IActionResult GetAllNewProjects()
         {
@@ -85,11 +86,13 @@ namespace TheraLang.Web.Controllers
         [HttpGet("{id}")]
         public IActionResult GetProject(int id)
         {
-            if (id == default)
-            {
-                throw new ArgumentException($"{nameof(id)} can not be 0");
-            }
             var project = _projectService.GetById(id);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+
             return Ok(project);
         }
 
@@ -100,17 +103,19 @@ namespace TheraLang.Web.Controllers
         /// <param name="projectModel">new version</param>
         /// <returns>edited project</returns>
         [HttpPut("update/{id}")]
-        public IActionResult EditProject(int id, [FromBody]ProjectViewModel projectModel)
+        public async Task<IActionResult> EditProject(int id, [FromBody]ProjectViewModel projectModel)
         {
-            if (id == default)
+            var project = _projectService.GetById(id);
+
+            if (project == null)
             {
-                throw new ArgumentException($"{nameof(id)} can not be 0");
+                return NotFound();
             }
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
             var projectDto = mapper.Map<ProjectViewModel, ProjectDto>(projectModel);
 
-            _projectService.UpdateAsync(id, projectDto);
+            await _projectService.UpdateAsync(id, projectDto);
             return Ok(projectDto);
         }
 
@@ -181,10 +186,13 @@ namespace TheraLang.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProject(int id)
         {
-            if (id == default)
+            var project = _projectService.GetById(id);
+
+            if (project == null)
             {
-                throw new ArgumentException($"{nameof(id)} cannot be 0");
+                return NotFound();
             }
+
             await _projectService.Delete(id);
             return Ok();
         }

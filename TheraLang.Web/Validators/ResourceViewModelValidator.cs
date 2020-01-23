@@ -7,10 +7,10 @@ namespace TheraLang.Web.Validators
         {
             public ResourceViewModelValidator()
             {
-                RuleFor(x => x.name).NotNull().NotEmpty().MinimumLength(3).MaximumLength(50);
-                RuleFor(x => x.description).NotNull().NotEmpty().MinimumLength(5).MaximumLength(5000);
-                RuleFor(x => x.url).MaximumLength(200);
-                RuleFor(x => x.categoryId).NotNull().NotEmpty();
+                RuleFor(x => x.Name).NotNull().NotEmpty().MinimumLength(3).MaximumLength(50);
+                RuleFor(x => x.Description).NotNull().NotEmpty().MinimumLength(5).MaximumLength(5000);
+                RuleFor(x => x.Url).MaximumLength(200);
+                RuleFor(x => x.CategoryId).NotNull().NotEmpty();
             }
         }
 }

@@ -51,7 +51,8 @@ namespace TheraLang.BLL.Services
         {
             var projectParticipations = _unitOfWork.Repository<ProjectParticipation>().Get().ToList();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()
+                .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))).CreateMapper();
             var projectParticipationDtos = mapper.Map<IEnumerable<ProjectParticipation>, IEnumerable<ProjectParticipationDto>>(projectParticipations);
 
             return projectParticipationDtos;
@@ -67,7 +68,6 @@ namespace TheraLang.BLL.Services
                     CreatedById = userId,
                     ProjectId = projectId,
                     Status = ProjectParticipationStatus.New,
-
                 };
 
                 await _unitOfWork.Repository<ProjectParticipation>().Add(member);
