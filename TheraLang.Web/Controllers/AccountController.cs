@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Piranha;
 using Piranha.AspNetCore.Identity.Data;
-using TheraLang.DLL.Models;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
