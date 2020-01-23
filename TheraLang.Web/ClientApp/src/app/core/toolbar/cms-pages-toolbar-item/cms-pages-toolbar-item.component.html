@@ -1,5 +1,5 @@
-<button mat-button class="menu-item" [matMenuTriggerFor]="menu">CMS Pages</button>
-<mat-menu #menu="matMenu">
-    <app-toolbar-item></app-toolbar-item>
-    <!-- <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item> -->
+<a mat-button class="menu-item" [matMenuTriggerFor]="menu">CMS Pages</a>
+<mat-menu *ngIf="toolbarItems.length > 0" #menu="matMenu">
+    <!-- <app-toolbar-item></app-toolbar-item> -->
+    <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item>
 </mat-menu>
