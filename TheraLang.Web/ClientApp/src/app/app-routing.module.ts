@@ -13,20 +13,23 @@ import { CmsModule } from "./modules/cms-generic/cms.module";
 import { LoginComponent}  from "./modules/user/pages/login/login.component"
 import { GeneralResourcesComponent } from "./modules/user/pages/resource/general-resources.component";
 import { GeneralResourcesTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
+import { MainComponent } from './modules/user/pages/main/main.component';
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
-  { path: "participants", component: ProjectParticipantsComponent },
-  { path: "projects/:id", component: ProjectInfoComponent },
-  { path: "projects", component: ProjectComponent },
-  { path: "donations/:projectId", component: DonationComponent },
-  { path: "donations", component: DonationComponent },
-  { path: "resources", component: GeneralResourcesTableComponent },
-  { path: "transaction/:donationId", component: TransactionResultComponent },
-  { path: "error", component: ErrorComponent },
-  { path: "projectTypes", component: ProjectTypeComponent },
-  { path: "projectRequest", component: ProjectRequestComponent },
+  { path: "", component: MainComponent, children:[
+      {path: "", component: HomeComponent},
+      { path: "participants", component: ProjectParticipantsComponent },
+      { path: "projects/:id", component: ProjectInfoComponent },
+      { path: "projects", component: ProjectComponent },
+      { path: "donations/:projectId", component: DonationComponent },
+      { path: "donations", component: DonationComponent },
+      { path: "resources", component: GeneralResourcesTableComponent },
+      { path: "transaction/:donationId", component: TransactionResultComponent },
+      { path: "projectTypes", component: ProjectTypeComponent },
+      { path: "projectRequest", component: ProjectRequestComponent }
+  ]},
   { path: "login", component: LoginComponent },
+  { path: "error", component: ErrorComponent },
   { path: "**", loadChildren: () => CmsModule }
 ];
 
@@ -47,5 +50,6 @@ export const routingComponents = [
   TransactionResultComponent,
   DonationComponent,
   ProjectRequestComponent,
-  LoginComponent
+  LoginComponent,
+  MainComponent
 ];

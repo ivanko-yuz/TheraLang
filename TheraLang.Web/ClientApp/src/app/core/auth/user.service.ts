@@ -8,7 +8,7 @@ import { accountUrl } from "src/app/configs/api-endpoint.constants";
 export class UserService {
   constructor(private http: HttpClient, private fb: FormBuilder) {}
   loginForm = this.fb.group({
-    username: [
+    me: [
       "",
       [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
     ],
