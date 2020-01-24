@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, ErrorHandler } from "@angular/core";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -91,6 +92,7 @@ import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
 import { GeneralResourcesInnerTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component";
 import { ResourceCreateComponent } from "./modules/user/pages/resource/resource-create/resource-create.component";
+import { CmsPagesToolbarItemComponent } from './core/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -123,7 +125,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResourceCreateComponent,
     ProjectTypeFormComponent,
     ProjectTypeCreateFormComponent,
-    LanguageComponent
+    LanguageComponent,
+    CmsPagesToolbarItemComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -138,6 +141,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
     HttpClientModule,

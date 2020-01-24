@@ -1,16 +1,87 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row  class="toolbar">
-      <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item>
-         <a mat-button class="toolbar-button" routerLink="/projects" >{{'components.projects.title'|translate}}</a>
-         <a mat-button class="toolbar-button" routerLink="/donations" >{{'components.donation.title'|translate}}</a>
-         <a mat-button class="toolbar-button" *ngIf="isAuthinticated" routerLink="/resources" >{{'components.resources.title'|translate}}</a>
-         <a mat-button class="toolbar-button" *ngIf="isAuthinticated" routerLink="/participants" >{{'components.participation.title'|translate}}
-         <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>
-         <a mat-button class="toolbar-button" *ngIf="isAuthinticated" routerLink="/projectRequest">{{'components.projects.new-projects'|translate}}</a>
-         <a mat-button class="toolbar-button" *ngIf="isAuthinticated" routerLink="/projectTypes" >{{'components.projectTypes.title'|translate}}</a>
-         <span class="fill-space"></span>
-         <button mat-button *ngIf="!isAuthinticated" class="toolbar-button" (click)="onLogin()">{{'components.account.signIn'|translate}}</button>
-         <div *ngIf="isAuthinticated"><app-profile-menu></app-profile-menu></div>
-         <app-language></app-language>
-    </mat-toolbar-row >
+<div>
+  <mat-toolbar class="mat-elevation-z3">
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <div fxShow="true" fxHide.lt-md="true" class="img-wrapper">
+      <a mat-button class="img-wrapper" routerLink="/">
+        <img src="assets/img/uttmm.png" alt="Home" class="img-wrapper">
+      </a>
+
+      <app-cms-pages-toolbar-item></app-cms-pages-toolbar-item>
+
+      <a mat-button class="menu-item" routerLink="/projects">{{'components.projects.title'|translate}}</a>
+      <a mat-button class="menu-item" routerLink="/donations">{{'components.donation.title'|translate}}</a>
+      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+        routerLink="/resources">{{'components.resources.title'|translate}}</a>
+      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+        routerLink="/participants">{{'components.participation.title'|translate}}
+        <span>
+          <mat-icon *ngIf="hasNotification">notifications</mat-icon>
+        </span>
+      </a>
+      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+        routerLink="/projectRequest">{{'components.projects.new-projects'|translate}}</a>
+      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+        routerLink="/projectTypes">{{'components.projectTypes.title'|translate}}</a>
+    </div>
+
+    <span class="fill-space"></span>
+
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button *ngIf="!isAuthinticated" mat-icon-button (click)="onLogin()">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </div>
+
+    <div fxShow="true" fxHide.lt-md="true">
+      <span class="language">
+        <app-language></app-language>
+      </span>
+      <button mat-flat-button color="primary" *ngIf="!isAuthinticated" class="toolbar-button"
+        (click)="onLogin()">{{'components.account.signIn'|translate}}</button>
+    </div>
+
+    <span *ngIf="isAuthinticated">
+      <app-profile-menu></app-profile-menu>
+    </span>
+
   </mat-toolbar>
+
+  <!-- <mat-sidenav-container fxFlexFill class="sidenav-container">
+    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+      <div fxLayout="column">
+        <app-cms-pages-toolbar-item></app-cms-pages-toolbar-item>
+
+        <a mat-button class="menu-item" routerLink="/projects">{{'components.projects.title'|translate}}</a>
+        <a mat-button class="menu-item" routerLink="/donations">{{'components.donation.title'|translate}}</a>
+        <a mat-button class="menu-item" *ngIf="isAuthinticated"
+          routerLink="/resources">{{'components.resources.title'|translate}}</a>
+        <a mat-button class="menu-item" *ngIf="isAuthinticated"
+          routerLink="/participants">{{'components.participation.title'|translate}}
+          <span>
+            <mat-icon *ngIf="hasNotification">notifications</mat-icon>
+          </span>
+        </a>
+        <a mat-button class="menu-item" *ngIf="isAuthinticated"
+          routerLink="/projectRequest">{{'components.projects.new-projects'|translate}}</a>
+        <a mat-button class="menu-item" *ngIf="isAuthinticated"
+          routerLink="/projectTypes">{{'components.projectTypes.title'|translate}}</a>
+
+        <span class="fill-space"></span>
+        
+        <a class="menu-item">
+          <app-language label="Language"></app-language>
+        </a>
+        footer integrated in sidenav
+      </div>
+      <mat-sidenav-content fxFlexFill>
+      </mat-sidenav-content>
+    </mat-sidenav>
+  </mat-sidenav-container> -->
+     
+  <div class="fill-toolbar-space"></div>
+</div>

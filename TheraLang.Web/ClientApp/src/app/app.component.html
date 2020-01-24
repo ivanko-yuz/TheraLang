@@ -1,10 +1,6 @@
-<div class="header">
-  <a href=""><img src="assets/img/uttmm2.png" alt="" class="main-icon"/></a>
-  <div class="remove">_</div>
-  <div class="remove">_</div>
-  <h6 class="title">+38 (068) 33 623 77</h6>
-  <h6 class="title">+38 (066) 47 654 64</h6>
+<div class="app-container" fxLayout="column" fxLayoutAlign="start stretch">
+    <div><app-toolbar></app-toolbar></div>
+    <div><router-outlet></router-outlet></div>
+    <div fxFlex fxFlexFill></div>
+    <div><app-footer></app-footer></div>
 </div>
-<app-toolbar></app-toolbar>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
