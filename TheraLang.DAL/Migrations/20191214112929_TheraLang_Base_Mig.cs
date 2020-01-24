@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheraLang.DAL.Migrations
 {
-    public partial class TheraLang_Base_Mig : Migration
+    public partial class TheraLangBaseMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,17 +60,17 @@ namespace TheraLang.DAL.Migrations
                 name: "Donations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ProjectId = table.Column<int>(nullable: false),
+                    ProjectId = table.Column<int>(),
                     DonationId = table.Column<string>(nullable: true),
-                    Status = table.Column<string>(nullable: false),
-                    Amount = table.Column<decimal>(nullable: false),
-                    Currency = table.Column<string>(nullable: false),
-                    PaymentId = table.Column<int>(nullable: false),
-                    LiqpayOrderId = table.Column<string>(nullable: false),
-                    TransactionId = table.Column<int>(nullable: false),
-                    ReceiverCommission = table.Column<decimal>(nullable: false)
+                    Status = table.Column<string>(),
+                    Amount = table.Column<decimal>(),
+                    Currency = table.Column<string>(),
+                    PaymentId = table.Column<int>(),
+                    LiqpayOrderId = table.Column<string>(),
+                    TransactionId = table.Column<int>(),
+                    ReceiverCommission = table.Column<decimal>()
                 },
                 constraints: table =>
                 {
@@ -87,15 +87,15 @@ namespace TheraLang.DAL.Migrations
                 name: "ProjectParticipations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedById = table.Column<Guid>(nullable: false),
+                    CreatedById = table.Column<Guid>(),
                     UpdatedById = table.Column<Guid>(nullable: true),
-                    CreatedDateUtc = table.Column<DateTime>(nullable: false),
+                    CreatedDateUtc = table.Column<DateTime>(),
                     UpdatedDateUtc = table.Column<DateTime>(nullable: true),
                     Role = table.Column<int>(nullable: false, defaultValue: 0),
                     Status = table.Column<int>(nullable: false, defaultValue: 0),
-                    ProjectId = table.Column<int>(nullable: false)
+                    ProjectId = table.Column<int>()
                 },
                 constraints: table =>
                 {
@@ -118,7 +118,7 @@ namespace TheraLang.DAL.Migrations
                 name: "ProjectTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     TypeName = table.Column<string>(maxLength: 500, nullable: true)
                 },
@@ -131,9 +131,9 @@ namespace TheraLang.DAL.Migrations
                 name: "ResourceCategories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Type = table.Column<string>(maxLength: 50, nullable: false)
+                    Type = table.Column<string>(maxLength: 50)
                 },
                 constraints: table =>
                 {
@@ -144,17 +144,17 @@ namespace TheraLang.DAL.Migrations
                 name: "Resources",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedById = table.Column<Guid>(nullable: false),
+                    CreatedById = table.Column<Guid>(),
                     UpdatedById = table.Column<Guid>(nullable: true),
-                    CreatedDateUtc = table.Column<DateTime>(nullable: false),
+                    CreatedDateUtc = table.Column<DateTime>(),
                     UpdatedDateUtc = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Description = table.Column<string>(maxLength: 5000, nullable: false),
+                    Name = table.Column<string>(maxLength: 50),
+                    Description = table.Column<string>(maxLength: 5000),
                     Url = table.Column<string>(nullable: true),
                     File = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>()
                 },
                 constraints: table =>
                 {
@@ -177,10 +177,10 @@ namespace TheraLang.DAL.Migrations
                 name: "ResourceToProject",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>()
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ResourceId = table.Column<int>(nullable: false),
-                    ProjectId = table.Column<int>(nullable: false)
+                    ResourceId = table.Column<int>(),
+                    ProjectId = table.Column<int>()
                 },
                 constraints: table =>
                 {

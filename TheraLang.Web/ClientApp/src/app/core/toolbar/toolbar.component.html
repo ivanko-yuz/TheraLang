@@ -1,16 +1,42 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row  class="toolbar">
-      <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item>
-         <a mat-button class="toolbar-button" routerLink="/projects" >{{'components.projects.title'|translate}}</a>
-         <a mat-button class="toolbar-button" routerLink="/donations" >{{'components.donation.title'|translate}}</a>
-         <a mat-button class="toolbar-button" *ngIf="isAuthinticated" routerLink="/resources" >{{'components.resources.title'|translate}}</a>
-         <a mat-button class="toolbar-button" *ngIf="isAuthinticated" routerLink="/participants" >{{'components.participation.title'|translate}}
-         <span ><mat-icon *ngIf="hasNotification">notifications</mat-icon></span></a>
-         <a mat-button class="toolbar-button" *ngIf="isAuthinticated" routerLink="/projectRequest">{{'components.projects.new-projects'|translate}}</a>
-         <a mat-button class="toolbar-button" *ngIf="isAuthinticated" routerLink="/projectTypes" >{{'components.projectTypes.title'|translate}}</a>
-         <span class="fill-space"></span>
-         <button mat-button *ngIf="!isAuthinticated" class="toolbar-button" (click)="onLogin()">{{'components.account.signIn'|translate}}</button>
-         <div *ngIf="isAuthinticated"><app-profile-menu></app-profile-menu></div>
-         <app-language></app-language>
-    </mat-toolbar-row >
+<div>
+  <mat-toolbar class="mat-elevation-z3">
+    <div class="img-wrapper">
+      <a mat-button class="img-wrapper" routerLink="/">
+        <img src="assets/img/uttmm.png" alt="Home" class="img-wrapper">
+      </a>
+
+      <app-cms-pages-toolbar-item></app-cms-pages-toolbar-item>
+
+      <a mat-button class="menu-item" routerLink="/projects">{{'components.projects.title'|translate}}</a>
+      <a mat-button class="menu-item" routerLink="/donations">{{'components.donation.title'|translate}}</a>
+      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+        routerLink="/resources">{{'components.resources.title'|translate}}</a>
+      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+        routerLink="/participants">{{'components.participation.title'|translate}}
+        <span>
+          <mat-icon *ngIf="hasNotification">notifications</mat-icon>
+        </span>
+      </a>
+      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+        routerLink="/projectRequest">{{'components.projects.new-projects'|translate}}</a>
+      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+        routerLink="/projectTypes">{{'components.projectTypes.title'|translate}}</a>
+    </div>
+
+    <span class="fill-space"></span>
+
+    <div>
+      <span class="language">
+        <app-language></app-language>
+      </span>
+      <button mat-flat-button color="primary" *ngIf="!isAuthinticated" class="toolbar-button"
+      routerLink="/login">{{'components.account.signIn'|translate}}</button>
+    </div>
+
+    <span *ngIf="isAuthinticated">
+      <app-profile-menu></app-profile-menu>
+    </span>
+
   </mat-toolbar>
+  <div class="fill-toolbar-space"></div>
+</div>

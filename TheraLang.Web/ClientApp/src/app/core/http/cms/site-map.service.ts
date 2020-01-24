@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { SiteMap } from "../../../shared/models/site-map/site-map";
 import { Observable, Subject } from "rxjs";
-import { ToolbarItem } from "../../toolbar/toolbar-item/toolbar-item";
+import { ToolbarItem } from "../../toolbar/cms-pages-toolbar-item/toolbar-item";
 import { CmsRoute } from "../../toolbar/toolbar-item/cms-route";
 import { cmsSitemapUrl } from "src/app/configs/api-endpoint.constants";
 

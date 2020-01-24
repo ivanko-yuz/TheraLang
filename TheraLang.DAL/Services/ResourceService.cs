@@ -37,23 +37,23 @@ namespace TheraLang.DLL.Services
             {
                 string resourceFileString = "";
 
-                if (resourceModel.file != null)
+                if (resourceModel.File != null)
                 {
-                    using (BinaryReader binaryReader = new BinaryReader(resourceModel.file.OpenReadStream()))
+                    using (BinaryReader binaryReader = new BinaryReader(resourceModel.File.OpenReadStream()))
                     {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceModel.file.Length);
+                        byte[] byteFile = binaryReader.ReadBytes((int)resourceModel.File.Length);
                         resourceFileString = BitConverter.ToString(byteFile);
                     }
                 }
 
                 Resource resource = new Resource
                 {
-                    Name = resourceModel.name,
-                    Description = resourceModel.description,
-                    Url = resourceModel.url,
-                    FileName = resourceModel.fileName,
+                    Name = resourceModel.Name,
+                    Description = resourceModel.Description,
+                    Url = resourceModel.Url,
+                    FileName = resourceModel.FileName,
                     File = resourceFileString,
-                    CategoryId = resourceModel.categoryId,
+                    CategoryId = resourceModel.CategoryId,
                     CreatedById = userId
                 };
 
@@ -72,23 +72,23 @@ namespace TheraLang.DLL.Services
             {
                 string resourceFileString = "";
 
-                if (resourceModel.file != null)
+                if (resourceModel.File != null)
                 {
-                    using (BinaryReader binaryReader = new BinaryReader(resourceModel.file.OpenReadStream()))
+                    using (BinaryReader binaryReader = new BinaryReader(resourceModel.File.OpenReadStream()))
                     {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceModel.file.Length);
+                        byte[] byteFile = binaryReader.ReadBytes((int)resourceModel.File.Length);
                         resourceFileString = BitConverter.ToString(byteFile);
                     }
                 }
 
-                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == resourceModel.id);
+                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == resourceModel.Id);
 
-                resource.Name = resourceModel.name;
-                resource.Description = resourceModel.description;
-                resource.Url = resourceModel.url;
-                resource.FileName = resourceModel.fileName;
+                resource.Name = resourceModel.Name;
+                resource.Description = resourceModel.Description;
+                resource.Url = resourceModel.Url;
+                resource.FileName = resourceModel.FileName;
                 resource.File = resourceFileString;
-                resource.CategoryId = resourceModel.categoryId;
+                resource.CategoryId = resourceModel.CategoryId;
                 resource.UpdatedById = updatetById;
 
                 _unitOfWork.Repository<Resource>().Update(resource);
@@ -96,7 +96,7 @@ namespace TheraLang.DLL.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when updating the {nameof(resourceModel)}: {resourceModel.id} ", ex);
+                throw new Exception($"Error when updating the {nameof(resourceModel)}: {resourceModel.Id} ", ex);
             }
         }
 

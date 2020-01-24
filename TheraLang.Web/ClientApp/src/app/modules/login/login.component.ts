@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../../../core/auth/user.service";
+import { UserService } from "../../core/auth/user.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { DialogService } from "src/app/core/services/dialog/dialog.service";
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: "app-login",
@@ -11,12 +14,13 @@ import { DialogService } from "src/app/core/services/dialog/dialog.service";
 })
 export class LoginComponent implements OnInit {
   hide = true;
-
+  
   constructor(
     private notificationService: NotificationService,
     private dialog: DialogService,
     public userService: UserService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -28,7 +32,8 @@ export class LoginComponent implements OnInit {
           .get("components.account.logged-in-successfully")
           .toPromise();
         this.notificationService.success(msg);
-        this.onClose();
+
+        this.router.navigate(['']);
       },
       async error => {
         console.log(error);
@@ -37,7 +42,7 @@ export class LoginComponent implements OnInit {
             .get("components.account.incorrect-login-or-password")
             .toPromise()
         );
-        this.userService.loginForm.reset();
+        
       }
     );
   }

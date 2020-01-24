@@ -14,7 +14,7 @@ namespace TheraLang.DAL.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     BlockId = table.Column<Guid>(nullable: false),
                     PostId = table.Column<Guid>(nullable: false),
-                    SortOrder = table.Column<int>(nullable: false)
+                    SortOrder = table.Column<int>()
                 },
                 constraints: table =>
                 {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { ToolbarItem } from "./toolbar-item";
+import { ToolbarItem } from "../cms-pages-toolbar-item/toolbar-item";
 import { CmsRouteHelperService } from "../../services/cms/cms-route-helper.service";
 
 @Component({
