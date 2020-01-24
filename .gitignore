@@ -374,3 +374,6 @@ upload/
 /wwwroot/scripts/
 TheraLang.Web/wwwroot/fileuploads/
 /ClientApp/out-tsc/
+
+# Rider 
+.idea/
