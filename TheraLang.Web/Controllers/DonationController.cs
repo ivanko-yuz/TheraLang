@@ -26,7 +26,8 @@ namespace TheraLang.Web.Controllers
         /// <param name="projectId">a project that you want to donate to</param>
         /// <returns>LiqPayCheckoutModel</returns>
         [HttpGet("{donationAmount}/{projectId?}")]
-        public ActionResult<LiqPayCheckoutModel> Get(string donationAmount, int? projectId = null)
+        
+        public ActionResult<LiqPayCheckoutModel> Get(string donationAmount, int? projectId)
         {
             if (projectId == default(int))
             {

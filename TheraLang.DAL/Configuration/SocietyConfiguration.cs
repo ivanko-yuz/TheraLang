@@ -16,7 +16,7 @@ namespace TheraLang.DAL.Configuration
 
             builder.Property(p => p.Name).IsRequired();
 
-            builder.HasMany(p => p.Donations).WithOne(i => i.Society).HasForeignKey("SocietyId"); ;
+            builder.HasMany(p => p.Donations).WithOne(i => i.Society).HasForeignKey("SocietyId");
         }
     }
 }

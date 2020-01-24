@@ -1,30 +1,35 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { HomeComponent } from "./modules/user/pages/home/home.component";
-import { ProjectParticipantsComponent } from "./modules/user/pages/project/project-participants/project-participants.component";
-import { ProjectInfoComponent } from "./modules/user/pages/project/project-info/project-info.component";
-import { ProjectComponent } from "./modules/user/pages/project/project.component";
-import { DonationComponent } from "./modules/user/pages/donation/donation.component";
-import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
-import { ErrorComponent } from "./shared/components/error/error.component";
-import { ProjectTypeComponent } from "./modules/user/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
-import { ProjectRequestComponent } from "./modules/user/pages/project/project-request/project-request.component";
-import { CmsModule } from "./modules/cms-generic/cms.module";
-import { GeneralResourcesComponent } from "./modules/user/pages/resource/general-resources.component";
-import { GeneralResourcesTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
+import { ProjectComponent } from './modules/main/pages/project/project.component';
+import { MainComponent } from './modules/main/main.component';
+import { HomeComponent } from './modules/main/pages/home/home.component';
+import { ProjectParticipantsComponent } from './modules/main/pages/project/project-participants/project-participants.component';
+import { ProjectInfoComponent } from './modules/main/pages/project/project-info/project-info.component';
+import { DonationComponent } from './modules/main/pages/donation/donation.component';
+import { GeneralResourcesTableComponent } from './modules/main/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component';
+import { TransactionResultComponent } from './shared/components/transaction-result/transaction-result.component';
+import { ProjectTypeComponent } from './modules/main/pages/project/project-info/resources-table-for-project/project-type/project-type.component';
+import { ProjectRequestComponent } from './modules/main/pages/project/project-request/project-request.component';
+import { LoginComponent } from './modules/login/login.component';
+import { ErrorComponent } from './shared/components/error/error.component';
+import { CmsModule } from './modules/cms-generic/cms.module';
+import { GeneralResourcesComponent } from './modules/main/pages/resource/general-resources.component';
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
-  { path: "participants", component: ProjectParticipantsComponent },
-  { path: "projects/:id", component: ProjectInfoComponent },
-  { path: "projects", component: ProjectComponent },
-  { path: "donations/:projectId", component: DonationComponent },
-  { path: "donations", component: DonationComponent },
-  { path: "resources", component: GeneralResourcesTableComponent },
-  { path: "transaction/:donationId", component: TransactionResultComponent },
+  { path: "", component: MainComponent, children:[
+      {path: "", component: HomeComponent},
+      { path: "participants", component: ProjectParticipantsComponent },
+      { path: "projects/:id", component: ProjectInfoComponent },
+      { path: "projects", component: ProjectComponent },
+      { path: "donations/:projectId", component: DonationComponent },
+      { path: "donations", component: DonationComponent },
+      { path: "resources", component: GeneralResourcesTableComponent },
+      { path: "transaction/:donationId", component: TransactionResultComponent },
+      { path: "projectTypes", component: ProjectTypeComponent },
+      { path: "projectRequest", component: ProjectRequestComponent }
+  ]},
+  { path: "login", component: LoginComponent },
   { path: "error", component: ErrorComponent },
-  { path: "projectTypes", component: ProjectTypeComponent },
-  { path: "projectRequest", component: ProjectRequestComponent },
   { path: "**", loadChildren: () => CmsModule }
 ];
 
@@ -44,5 +49,7 @@ export const routingComponents = [
   ProjectTypeComponent,
   TransactionResultComponent,
   DonationComponent,
-  ProjectRequestComponent
+  ProjectRequestComponent,
+  LoginComponent,
+  MainComponent
 ];

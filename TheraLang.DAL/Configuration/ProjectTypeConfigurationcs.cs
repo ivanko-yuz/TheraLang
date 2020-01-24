@@ -16,7 +16,7 @@ namespace TheraLang.DAL.Configuration
 
             builder.Property(e => e.TypeName).HasMaxLength(500);
 
-            builder.HasIndex(e => e.TypeName).IsUnique(true);
+            builder.HasIndex(e => e.TypeName).IsUnique();
 
             builder.HasMany(e=>e.Projects).WithOne(x=>x.Type).
                 HasForeignKey(i=>i.TypeId).OnDelete(DeleteBehavior.Restrict);

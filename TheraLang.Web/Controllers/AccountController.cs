@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Piranha;
-using Piranha.AspNetCore.Identity.Data;
 using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -13,12 +11,10 @@ namespace TheraLang.Web.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ISecurity _service;
-        private readonly UserManager<User> _userManager;
 
-        public AccountController(ISecurity service, UserManager<User> userManager)
+        public AccountController(ISecurity service)
         {
             _service = service;
-            _userManager = userManager;
         }
 
         [HttpPost("login")]
