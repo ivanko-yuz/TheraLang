@@ -1,0 +1,44 @@
+<mat-card>
+  <a href = "#"><img class="back-img" type="image" src="/assets/img/back.png"></a>
+  <mat-card-title><img src="/assets/img/login.png" alt=""></mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="this.userService.loginForm" autocomplete="off">
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'components.account.login'|translate}}</mat-label>
+          <input formControlName="username" autofocus matInput [placeholder]="'components.account.login'|translate">
+          <mat-error *ngIf="this.userService.loginForm.get('username').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
+          <mat-error
+            *ngIf="this.userService.loginForm.get('username').errors?.minlength || this.userService.loginForm.get('username').errors?.maxlength">
+            {{'components.account.error-input-login-length'|translate}}</mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'components.account.password'|translate}}</mat-label>
+          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+
+          <mat-error *ngIf="this.userService.loginForm.get('password').errors?.required">{{'components.account.error-input-required'|translate}} </mat-error>
+          <mat-error
+            *ngIf="this.userService.loginForm.get('password').errors?.minlength || this.userService.loginForm.get('password').errors?.maxlength">
+            {{'components.account.error-input-password-length'|translate}}</mat-error>
+
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="'hide'">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+
+        </mat-form-field>
+      </p>
+
+
+      <div class="button">
+        <button mat-raised-button color="primary" type="submit" [disabled]="this.userService.loginForm.invalid"
+          (click)="onSubmit()">{{'common.confirm'|translate}}</button>
+      </div>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>

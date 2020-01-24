@@ -6,7 +6,7 @@ import { EventService } from "../services/event/event-service";
 import { DialogService } from "../services/dialog/dialog.service";
 import { UserService } from "../auth/user.service";
 import { ProjectParticipationRequestStatus } from "src/app/configs/project-participation-request-status";
-import { LoginComponent } from "../../modules/user/components/login/login.component";
+import { LoginComponent } from "../../modules/user/pages/login/login.component";
 
 @Component({
   selector: "app-toolbar",

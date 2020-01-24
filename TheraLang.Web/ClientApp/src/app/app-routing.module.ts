@@ -10,6 +10,7 @@ import { ErrorComponent } from "./shared/components/error/error.component";
 import { ProjectTypeComponent } from "./modules/user/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
 import { ProjectRequestComponent } from "./modules/user/pages/project/project-request/project-request.component";
 import { CmsModule } from "./modules/cms-generic/cms.module";
+import { LoginComponent}  from "./modules/user/pages/login/login.component"
 import { GeneralResourcesComponent } from "./modules/user/pages/resource/general-resources.component";
 import { GeneralResourcesTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: "error", component: ErrorComponent },
   { path: "projectTypes", component: ProjectTypeComponent },
   { path: "projectRequest", component: ProjectRequestComponent },
+  { path: "login", component: LoginComponent },
   { path: "**", loadChildren: () => CmsModule }
 ];
 
@@ -44,5 +46,6 @@ export const routingComponents = [
   ProjectTypeComponent,
   TransactionResultComponent,
   DonationComponent,
-  ProjectRequestComponent
+  ProjectRequestComponent,
+  LoginComponent
 ];
