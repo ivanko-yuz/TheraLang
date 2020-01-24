@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Input} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -7,6 +7,7 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./language.component.less']
 })
 export class LanguageComponent implements OnInit {
+
 
   @ViewChild('menu', {static: false}) menu: any;
   languages = ['en', 'ua'];

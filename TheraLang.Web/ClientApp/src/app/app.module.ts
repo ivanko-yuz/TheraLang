@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, ErrorHandler } from "@angular/core";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -56,23 +57,7 @@ import { ErrorComponent } from "./shared/components/error/error.component";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ToolbarComponent } from "./core/toolbar/toolbar.component";
-import { ProjectComponent } from "./modules/user/pages/project/project.component";
-import { HomeComponent } from "./modules/user/pages/home/home.component";
-import { ProjectInfoComponent } from "./modules/user/pages/project/project-info/project-info.component";
-import { FooterComponent } from "./core/footer/footer.component";
-import { ProjectParticipantsComponent } from "./modules/user/pages/project/project-participants/project-participants.component";
-import { CustomDatePipe } from "./shared/pipes/custom.datepipe";
-import { ResourcesTableComponent } from "./modules/user/pages/project/project-info/resources-table-for-project/resources-table/resources-table.component";
-import { ProjectFormComponent } from "./modules/user/pages/project/project-form/project-form.component";
-import { ResourcesInternalTableComponent } from "./modules/user/pages/project/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component";
-import { ToolbarItemComponent } from "./core/toolbar/toolbar-item/toolbar-item.component";
-import { DonationComponent } from "./modules/user/pages/donation/donation.component";
-import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
-import { ProjectRequestComponent } from "./modules/user/pages/project/project-request/project-request.component";
-import { LoginComponent } from "./modules/user/components/login/login.component";
-import { ProfileMenuComponent } from "./core/toolbar/profile-menu/profile-menu.component";
-import { ProjectTypeFormComponent } from "./modules/user/pages/project/project-type-form/project-type-form.component";
-import { ProjectTypeCreateFormComponent } from "./modules/user/pages/project/project-type-create-form/project-type-create-form.component";
+
 import { LanguageComponent } from "./core/toolbar/language/language.component";
 import { ResourceService } from "./core/http/resource/resource.service";
 import { HttpService } from "./core/http/http/http.service";
@@ -88,9 +73,28 @@ import { UserService } from "./core/auth/user.service";
 import { ResourceCreateService } from "./core/http/resource/resource-create.service";
 import { ProjectTypeHttp } from "./core/http/project-type/project-type-Http.service";
 import { CmsModule } from "./modules/cms-generic/cms.module";
-import { GeneralResourcesTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
-import { GeneralResourcesInnerTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component";
-import { ResourceCreateComponent } from "./modules/user/pages/resource/resource-create/resource-create.component";
+import { CmsPagesToolbarItemComponent } from './core/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component';
+import { ProjectComponent } from './modules/main/pages/project/project.component';
+import { HomeComponent } from './modules/main/pages/home/home.component';
+import { ProjectInfoComponent } from './modules/main/pages/project/project-info/project-info.component';
+import { FooterComponent } from './core/footer/footer.component';
+import { ProjectParticipantsComponent } from './modules/main/pages/project/project-participants/project-participants.component';
+import { CustomDatePipe } from './shared/pipes/custom.datepipe';
+import { ResourcesTableComponent } from './modules/main/pages/project/project-info/resources-table-for-project/resources-table/resources-table.component';
+import { ProjectFormComponent } from './modules/main/pages/project/project-form/project-form.component';
+import { ResourcesInternalTableComponent } from './modules/main/pages/project/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component';
+import { GeneralResourcesTableComponent } from './modules/main/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component';
+import { GeneralResourcesInnerTableComponent } from './modules/main/pages/resource/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component';
+import { ToolbarItemComponent } from './core/toolbar/toolbar-item/toolbar-item.component';
+import { DonationComponent } from './modules/main/pages/donation/donation.component';
+import { TransactionResultComponent } from './shared/components/transaction-result/transaction-result.component';
+import { ProjectRequestComponent } from './modules/main/pages/project/project-request/project-request.component';
+import { LoginComponent } from './modules/login/login.component';
+import { ProfileMenuComponent } from './core/toolbar/profile-menu/profile-menu.component';
+import { ResourceCreateComponent } from './modules/main/pages/resource/resource-create/resource-create.component';
+import { ProjectTypeFormComponent } from './modules/main/pages/project/project-type-form/project-type-form.component';
+import { ProjectTypeCreateFormComponent } from './modules/main/pages/project/project-type-create-form/project-type-create-form.component';
+import { MainComponent } from './modules/main/main.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -123,7 +127,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResourceCreateComponent,
     ProjectTypeFormComponent,
     ProjectTypeCreateFormComponent,
-    LanguageComponent
+    LanguageComponent,
+    MainComponent,
+    CmsPagesToolbarItemComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -138,6 +144,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
     HttpClientModule,

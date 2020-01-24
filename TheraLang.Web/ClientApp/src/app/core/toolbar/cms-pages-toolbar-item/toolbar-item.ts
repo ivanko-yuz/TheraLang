@@ -1,4 +1,4 @@
-import { CmsRoute } from "./cms-route";
+import { CmsRoute } from "../toolbar-item/cms-route";
 
 export class ToolbarItem {
   title: string;

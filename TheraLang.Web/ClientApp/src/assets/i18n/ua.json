@@ -45,6 +45,9 @@
     "home": {
       "title": "Головна сторінка"
     },
+    "cms-pages": {
+      "title": "CMS Pages"
+    },
     "projects": {
       "title": "Проекти",
       "create": "Створити проект",
@@ -88,6 +91,9 @@
       "incorrect-login-or-password": "Неправильний логін або пароль",
       "login": "Логін",
       "password": "Пароль",
+      "error-input-required": "Це поле не може бути пустим",
+      "error-input-login-length": "Логін повинен містити 3-50 символів",
+      "error-input-password-length": "Пароль повинен містити 3-50 символів",
       "role": "Роль користувача"
     },
     "projectTypes": {
