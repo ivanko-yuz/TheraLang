@@ -51,7 +51,7 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task Update(ProjectTypeDto projectTypeDto, Guid userId)
+        public async Task Update(ProjectTypeDto projectTypeDto)
         {
             try
             {

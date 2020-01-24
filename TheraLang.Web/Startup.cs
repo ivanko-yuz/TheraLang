@@ -10,9 +10,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Piranha;
 using Piranha.AspNetCore.Identity.SQLServer;
+using TheraLang.BLL.FileManager;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
+using TheraLang.BLL.Services.File;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
@@ -70,6 +72,8 @@ namespace TheraLang.Web
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
+            services.AddAzureStorageClientFactory(Configuration.GetConnectionString("AzureConnection"));
+            services.AddTransient<IFileService, LocalFileService>();
 
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();

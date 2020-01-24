@@ -46,7 +46,7 @@ namespace TheraLang.Web.Controllers
         }
 
 
-        [HttpPut]       
+        [HttpPut]
         public async Task<IActionResult> PutProjectType([FromBody] ProjectTypeViewModel projectTypeModel)
         {
             if (projectTypeModel == null)
@@ -54,13 +54,10 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(projectTypeModel)} can not be null");
             }
 
-            User user = await _userManager.FindByNameAsync(User.Identity.Name);
-            Guid userId = user.Id;
-
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
             var projectTypeDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
 
-            await _service.Update(projectTypeDto, userId);
+            await _service.Update(projectTypeDto);
             return Ok();
         }
 

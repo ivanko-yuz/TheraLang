@@ -7,5 +7,5 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onCloseForm()">{{'common.cancel'|translate}}</button>
-    <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial (click)="onSubmit()">{{'common.confirm'|translate}}</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="data.name" cdkFocusInitial (click)="onSubmit()">{{'common.confirm'|translate}}</button>
 </div>

@@ -1,6 +1,7 @@
 {
   "common": {
     "details": "Details",
+    "download": "Download",
     "edit": "Edit",
     "delete": "Delete",
     "wth": "Something went wrong...",

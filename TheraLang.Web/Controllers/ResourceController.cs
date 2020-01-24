@@ -34,10 +34,10 @@ namespace TheraLang.Web.Controllers
         /// <returns>status code</returns>
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> PostResource([FromBody] ResourceViewModel resourceModel)
+        public async Task<IActionResult> PostResource([FromForm] ResourceViewModel resourceModel)
         {
             var validationResult = _validator.Validate(resourceModel);
-            
+
             if (!validationResult.IsValid)
             {
                 throw new ArgumentException($"{nameof(resourceModel)} is not valid");
@@ -56,12 +56,21 @@ namespace TheraLang.Web.Controllers
         /// <summary>
         /// Create new Resource
         /// </summary>
+        ///  <param name="id"></param>
         /// <param name="resourceModel"></param>
         /// <returns>status code</returns>
         [HttpPut]
-        [Route("update")]
-        public async Task<IActionResult> PutResource([FromBody] ResourceViewModel resourceModel)
+        [Route("update/{id}")]
+        public async Task<IActionResult> PutResource(int id, [FromBody] ResourceViewModel resourceModel)
         {
+
+            var resource = _service.GetResourceById(id);
+
+            if (resource == null)
+            {
+                return NotFound();
+            }
+
             var validationResult = _validator.Validate(resourceModel);
 
             if (!validationResult.IsValid)
@@ -75,7 +84,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, userId);
+            await _service.UpdateResource(id, resourceDto, userId);
             return Ok();
         }
 
@@ -124,6 +133,17 @@ namespace TheraLang.Web.Controllers
         {
             var categories = _service.GetResourcesCategories(withAssignedResources);
             return Ok(categories);
+        }
+
+        /// <summary>
+        /// Get all Resources
+        /// </summary>
+        /// <returns>array of resources</returns>
+        [HttpGet]
+        public IActionResult GetAllResources()
+        {
+            var resources = _service.GetAllResources();
+            return Ok(resources);
         }
 
         /// <summary>

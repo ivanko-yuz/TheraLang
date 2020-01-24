@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace TheraLang.BLL.DataTransferObjects
 {
@@ -17,5 +18,7 @@ namespace TheraLang.BLL.DataTransferObjects
         public IFormFile File { get; set; }
 
         public int CategoryId { get; set; }
+        
+        public DateTime CreatedDateUtc { get; set; }
     }
 }

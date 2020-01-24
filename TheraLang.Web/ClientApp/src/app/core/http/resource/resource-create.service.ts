@@ -8,6 +8,8 @@ import {
 import { HttpClient } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "../../services/notification/notification.service";
+import { ForbiddenExts } from "src/app/configs/resource.constants";
+import { forbiddenExtensionValidator } from "src/app/shared/directives/files/forbidden-extension.directive";
 
 @Injectable({
   providedIn: "root"
@@ -33,9 +35,9 @@ export class ResourceCreateService {
       "",
       [Validators.required, Validators.minLength(5), Validators.maxLength(5000)]
     ],
-    url: [""],
-    fileName: [""],
-    file: [null],
+    // url: [""],
+    // fileName: [""],
+    file: ["", [forbiddenExtensionValidator(ForbiddenExts)]],
     categoryId: [null, Validators.required]
   });
 
@@ -44,15 +46,22 @@ export class ResourceCreateService {
       id: null,
       name: "",
       description: "",
-      url: "",
-      fileName: "",
+      // url: "",
+      // fileName: "",
       file: File,
       categoryId: null
     });
   }
 
   postResource(resource: Resource) {
-    return this.http.post(this.resourceUrl + "/" + "create", resource);
+    const formData = new FormData();
+    formData.append("name", resource.name);
+    formData.append("description", resource.description);
+    formData.append("categoryId", resource.categoryId.toString());
+    formData.append("File", resource.file as File);
+    console.log(formData);
+
+    return this.http.post(this.resourceUrl + "/" + "create", formData);
   }
 
   putResource(resource: Resource) {

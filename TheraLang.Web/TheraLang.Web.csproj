@@ -84,4 +84,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TheraLang.BLL\TheraLang.BLL.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\fileuploads" />
+  </ItemGroup>
 </Project>
