@@ -55,6 +55,7 @@ namespace TheraLang.DAL.Migrations
                 name: "Piranha_Sites",
                 columns: table => new
                 {
+
                     Id = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 256, nullable: true),
@@ -143,12 +144,12 @@ namespace TheraLang.DAL.Migrations
                 name: "Piranha_PageFields",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    CLRType = table.Column<string>(maxLength: 256, nullable: false),
-                    FieldId = table.Column<string>(maxLength: 64, nullable: false),
-                    PageId = table.Column<Guid>(nullable: false),
-                    RegionId = table.Column<string>(maxLength: 64, nullable: false),
-                    SortOrder = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(),
+                    CLRType = table.Column<string>(maxLength: 256),
+                    FieldId = table.Column<string>(maxLength: 64),
+                    PageId = table.Column<Guid>(),
+                    RegionId = table.Column<string>(maxLength: 64),
+                    SortOrder = table.Column<int>(),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

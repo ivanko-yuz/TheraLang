@@ -2,7 +2,7 @@
 
 namespace TheraLang.DAL.Migrations
 {
-    public partial class addedSomeNewFields : Migration
+    public partial class AddedSomeNewFields : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

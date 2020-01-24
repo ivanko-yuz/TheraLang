@@ -37,7 +37,7 @@ namespace TheraLang.DAL.Configuration
 
             builder.HasMany(e => e.Donations).WithOne(i => i.Project).HasForeignKey("ProjectId");
 
-            builder.Property(e => e.StatusId).HasMaxLength(250).IsRequired().HasDefaultValue(Entities.ProjectStatus.New);
+            builder.Property(e => e.StatusId).HasMaxLength(250).IsRequired().HasDefaultValue(ProjectStatus.New);
 
             builder.HasMany(x => x.ProjectParticipations).WithOne(i => i.Project)
                 .HasForeignKey(e => e.ProjectId).OnDelete(DeleteBehavior.Cascade);

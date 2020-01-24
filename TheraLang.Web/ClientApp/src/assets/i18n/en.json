@@ -45,6 +45,9 @@
     "home": {
       "title": "Main page"
     },
+    "cms-pages": {
+      "title": "CMS Pages"
+    },
     "projects": {
       "title": "Projects",
       "create": "Create project",
@@ -56,6 +59,7 @@
       "PROJECT-CREATION": "PROJECT CREATION",
       "PROJECT-EDITING": "PROJECT EDITING",
       "name-of-project": "Name of project",
+      "need": "Need to raise money",
       "description": "Description",
       "details": "Details",
       "type": "Type of project",
@@ -87,6 +91,9 @@
       "incorrect-login-or-password": "Incorrect login or password",
       "login": "Login",
       "password": "Password",
+      "error-input-required": "This field can’t be empty",
+      "error-input-login-length": "Login length must be 3-50 characters",
+      "error-input-password-length": "Password length must be 3-50 characters",
       "role": "User role"
     },
     "projectTypes": {

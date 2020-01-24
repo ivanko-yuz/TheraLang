@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { SiteMapService } from "../../http/cms/site-map.service";
 import { Subject, Subscription } from "rxjs";
 import { CmsRoute } from "../../toolbar/toolbar-item/cms-route";
-import { ToolbarItem } from "../../toolbar/toolbar-item/toolbar-item";
+import { ToolbarItem } from "../../toolbar/cms-pages-toolbar-item/toolbar-item";
 
 @Injectable({
   providedIn: "root"

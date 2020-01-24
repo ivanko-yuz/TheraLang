@@ -65,9 +65,9 @@ namespace TheraLang.DLL.Services
 
             var newParticipant = new ProjectParticipation
             {
-                Role = DLL.Enums.MemberRole.ProjectOwner,
+                Role = MemberRole.ProjectOwner,
                 CreatedById = userId,
-                Status = DLL.Enums.ProjectParticipationStatus.Approved,
+                Status = ProjectParticipationStatus.Approved,
                 Project = newProject,
             };
             try

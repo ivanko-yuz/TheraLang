@@ -90,6 +90,7 @@ namespace TheraLang.DAL.Migrations
                     Route = table.Column<string>(maxLength: 256, nullable: true),
                     Slug = table.Column<string>(maxLength: 128, nullable: false),
                     Title = table.Column<string>(maxLength: 128, nullable: false)
+
                 },
                 constraints: table =>
                 {
