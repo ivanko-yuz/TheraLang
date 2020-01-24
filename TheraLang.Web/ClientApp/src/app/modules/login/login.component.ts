@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../../../core/auth/user.service";
+import { UserService } from "../../core/auth/user.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { DialogService } from "src/app/core/services/dialog/dialog.service";
