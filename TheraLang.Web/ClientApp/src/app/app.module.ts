@@ -92,6 +92,7 @@ import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
 import { GeneralResourcesInnerTableComponent } from "./modules/user/pages/resource/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component";
 import { ResourceCreateComponent } from "./modules/user/pages/resource/resource-create/resource-create.component";
+import { MainComponent } from './modules/user/pages/main/main.component';
 import { CmsPagesToolbarItemComponent } from './core/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -126,6 +127,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectTypeFormComponent,
     ProjectTypeCreateFormComponent,
     LanguageComponent,
+    MainComponent,
     CmsPagesToolbarItemComponent
   ],
   entryComponents: [

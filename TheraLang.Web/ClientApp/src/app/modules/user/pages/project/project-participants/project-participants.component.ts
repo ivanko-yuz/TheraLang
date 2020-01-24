@@ -17,8 +17,8 @@ export class ProjectParticipantsComponent implements OnInit {
   showActionButtons: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = [
-    "userName",
-    "userEmail",
+    "userName",  
+    "userEmail",  
     "projectId",
     "actions"
   ];
@@ -49,7 +49,7 @@ export class ProjectParticipantsComponent implements OnInit {
         this.removeNotificationIcon();
       });
   }
-
+  
   changeTab(tabPosition: number) {
     this.projectParticipationRequest.filter = this.changeFilter(tabPosition);
     this.showActionButtons =
