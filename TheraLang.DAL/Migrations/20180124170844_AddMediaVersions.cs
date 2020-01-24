@@ -21,11 +21,11 @@ namespace TheraLang.DAL.Migrations
                 name: "Piranha_MediaVersions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(),
                     Height = table.Column<int>(nullable: true),
-                    MediaId = table.Column<Guid>(nullable: false),
-                    Size = table.Column<long>(nullable: false),
-                    Width = table.Column<int>(nullable: false)
+                    MediaId = table.Column<Guid>(),
+                    Size = table.Column<long>(),
+                    Width = table.Column<int>()
                 },
                 constraints: table =>
                 {
