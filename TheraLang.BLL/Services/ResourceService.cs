@@ -90,12 +90,9 @@ namespace TheraLang.BLL.Services
                 if (resource != null)
                 {
                     resource.Name = resourceDto.Name;
-                    //resource.Description = resourceDto.Description;
-                    //resource.Url = resourceDto.Url;
-                    //resource.FileName = resourceDto.FileName;
-                    //resource.File = resourceFileString;
-                    //resource.CategoryId = resourceDto.CategoryId;
-                    //resource.UpdatedById = updatedById;
+                    resource.Description = resourceDto.Description;
+                    resource.Url = resourceDto.Url;
+                    resource.FileName = resourceDto.FileName;
 
                     _unitOfWork.Repository<Resource>().Update(resource);
                     await _unitOfWork.SaveChangesAsync();
