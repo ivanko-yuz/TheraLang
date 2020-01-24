@@ -42,7 +42,7 @@
       <mat-error *ngIf="service.form.controls['projectEnd'].hasError('matDatepickerFilter')">{{'common.wth'|translate}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input formControlName="donationTargetSum" matInput placeholder="Необхідно зібрати" type="number">
+      <input formControlName="donationTargetSum" matInput [placeholder]="'components.projects.need'|translate"  type="number">
       <span matPrefix>₴&nbsp;</span>
     </mat-form-field>
   </mat-dialog-content>
