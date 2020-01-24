@@ -11,7 +11,7 @@ namespace TheraLang.DAL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
     [Migration("20191217213520_files")]
-    partial class files
+    partial class Files
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

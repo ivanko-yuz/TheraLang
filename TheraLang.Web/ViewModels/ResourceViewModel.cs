@@ -1,21 +1,29 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace TheraLang.Web.ViewModels
 {
     public class ResourceViewModel
     {
-        public int? id { get; set; }
+        [JsonProperty("id")]
+        public int? Id { get; set; }
+        
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public string name { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
 
-        public string description { get; set; }
+        [JsonProperty("url")]
+        public string Url { get; set; }
 
-        public string url { get; set; }
+        [JsonProperty("fileName")]
+        public string FileName { get; set; }
 
-        public string fileName { get; set; }
+        [JsonProperty("file")]
+        public IFormFile File { get; set; }
 
-        public IFormFile file { get; set; }
-
-        public int categoryId { get; set; }
+        [JsonProperty("categoryId")]
+        public int CategoryId { get; set; }
     }
 }

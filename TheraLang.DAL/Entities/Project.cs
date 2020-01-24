@@ -21,7 +21,7 @@ namespace TheraLang.DAL.Entities
 
         public bool IsActive { get; set; }
 
-        public virtual ProjectType Type {get; set;}
+        public virtual ProjectType Type { get; set; }
 
         public int TypeId { get; set; }   
         

@@ -7,6 +7,7 @@ namespace TheraLang.DAL.Piranha.Entities
     {
         public PiranhaPost()
         {
+            
             PiranhaPostBlocks = new HashSet<PiranhaPostBlock>();
             PiranhaPostFields = new HashSet<PiranhaPostField>();
             PiranhaPostRevisions = new HashSet<PiranhaPostRevision>();
