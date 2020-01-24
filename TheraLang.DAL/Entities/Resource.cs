@@ -5,7 +5,7 @@ namespace TheraLang.DAL.Entities
 {
     public class Resource : BaseEntity
     {
-        public PiranhaUser PiranhaUser { get; set; }
+        public virtual PiranhaUser PiranhaUser { get; set; }
 
         public string Name { get; set; }
 
@@ -19,10 +19,10 @@ namespace TheraLang.DAL.Entities
 
         public int CategoryId { get; set; }
 
-        public ResourceCategory ResourceCategory { get; set; }
+        public virtual ResourceCategory ResourceCategory { get; set; }
 
-        public ICollection<ResourceProject> ResourceProjects { get; set; }
-        public ICollection<ResourceAttachment> ResourceAttach { get; set; }
+        public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
+        public virtual ICollection<ResourceAttachment> ResourceAttach { get; set; }
         public Resource()
         {
             this.ResourceAttach = new List<ResourceAttachment>();

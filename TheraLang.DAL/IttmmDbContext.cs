@@ -6,7 +6,7 @@ using TheraLang.DAL.Piranha.Entities;
 
 namespace TheraLang.DAL
 {
-    public sealed class IttmmDbContext : DbContext
+    public class IttmmDbContext : DbContext
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
         {
@@ -14,48 +14,48 @@ namespace TheraLang.DAL
         }
 
         #region UTTMM_Entities
-        public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectType> Types { get; set; }
-        public DbSet<ResourceCategory> ResourceCategories { get; set; }
-        public DbSet<Resource> Resources { get; set; }
-        public DbSet<ResourceProject> ResourceProject { get; set; }
-        public DbSet<ProjectParticipation> ProjectParticipations { get; set; }
-        public DbSet<Donation> Donations { get; set; }
-        public DbSet<Society> Societies { get; set; }
-        public DbSet<ResourceAttachment> ResourceAttachments { get; set; }
+        public virtual DbSet<Project> Projects { get; set; }
+        public virtual DbSet<ProjectType> Types { get; set; }
+        public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
+        public virtual DbSet<Resource> Resources { get; set; }
+        public virtual DbSet<ResourceProject> ResourceProject { get; set; }
+        public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
+        public virtual DbSet<Donation> Donations { get; set; }
+        public virtual DbSet<Society> Societies { get; set; }
+        public virtual DbSet<ResourceAttachment> ResourceAttachments { get; set; }
         #endregion
 
         #region Piranha_Entities
-        public DbSet<PiranhaAlias> PiranhaAliases { get; set; }
-        public DbSet<PiranhaBlockField> PiranhaBlockFields { get; set; }
-        public DbSet<PiranhaBlock> PiranhaBlocks { get; set; }
-        public DbSet<PiranhaCategory> PiranhaCategories { get; set; }
-        public DbSet<PiranhaMedia> PiranhaMedia { get; set; }
-        public DbSet<PiranhaMediaFolder> PiranhaMediaFolders { get; set; }
-        public DbSet<PiranhaMediaVersion> PiranhaMediaVersions { get; set; }
-        public DbSet<PiranhaPageBlock> PiranhaPageBlocks { get; set; }
-        public DbSet<PiranhaPageField> PiranhaPageFields { get; set; }
-        public DbSet<PiranhaPageRevision> PiranhaPageRevisions { get; set; }
-        public DbSet<PiranhaPageType> PiranhaPageTypes { get; set; }
-        public DbSet<PiranhaPage> PiranhaPages { get; set; }
-        public DbSet<PiranhaParam> PiranhaParams { get; set; }
-        public DbSet<PiranhaPostBlock> PiranhaPostBlocks { get; set; }
-        public DbSet<PiranhaPostField> PiranhaPostFields { get; set; }
-        public DbSet<PiranhaPostRevision> PiranhaPostRevisions { get; set; }
-        public DbSet<PiranhaPostTag> PiranhaPostTags { get; set; }
-        public DbSet<PiranhaPostType> PiranhaPostTypes { get; set; }
-        public DbSet<PiranhaPost> PiranhaPosts { get; set; }
-        public DbSet<PiranhaRoleClaim> PiranhaRoleClaims { get; set; }
-        public DbSet<PiranhaRole> PiranhaRoles { get; set; }
-        public DbSet<PiranhaSiteField> PiranhaSiteFields { get; set; }
-        public DbSet<PiranhaSiteType> PiranhaSiteTypes { get; set; }
-        public DbSet<PiranhaSite> PiranhaSites { get; set; }
-        public DbSet<PiranhaTag> PiranhaTags { get; set; }
-        public DbSet<PiranhaUserClaim> PiranhaUserClaims { get; set; }
-        public DbSet<PiranhaUserLogin> PiranhaUserLogins { get; set; }
-        public DbSet<PiranhaUserRole> PiranhaUserRoles { get; set; }
-        public DbSet<PiranhaUserToken> PiranhaUserTokens { get; set; }
-        public DbSet<PiranhaUser> PiranhaUsers { get; set; }
+        public virtual DbSet<PiranhaAlias> PiranhaAliases { get; set; }
+        public virtual DbSet<PiranhaBlockField> PiranhaBlockFields { get; set; }
+        public virtual DbSet<PiranhaBlock> PiranhaBlocks { get; set; }
+        public virtual DbSet<PiranhaCategory> PiranhaCategories { get; set; }
+        public virtual DbSet<PiranhaMedia> PiranhaMedia { get; set; }
+        public virtual DbSet<PiranhaMediaFolder> PiranhaMediaFolders { get; set; }
+        public virtual DbSet<PiranhaMediaVersion> PiranhaMediaVersions { get; set; }
+        public virtual DbSet<PiranhaPageBlock> PiranhaPageBlocks { get; set; }
+        public virtual DbSet<PiranhaPageField> PiranhaPageFields { get; set; }
+        public virtual DbSet<PiranhaPageRevision> PiranhaPageRevisions { get; set; }
+        public virtual DbSet<PiranhaPageType> PiranhaPageTypes { get; set; }
+        public virtual DbSet<PiranhaPage> PiranhaPages { get; set; }
+        public virtual DbSet<PiranhaParam> PiranhaParams { get; set; }
+        public virtual DbSet<PiranhaPostBlock> PiranhaPostBlocks { get; set; }
+        public virtual DbSet<PiranhaPostField> PiranhaPostFields { get; set; }
+        public virtual DbSet<PiranhaPostRevision> PiranhaPostRevisions { get; set; }
+        public virtual DbSet<PiranhaPostTag> PiranhaPostTags { get; set; }
+        public virtual DbSet<PiranhaPostType> PiranhaPostTypes { get; set; }
+        public virtual DbSet<PiranhaPost> PiranhaPosts { get; set; }
+        public virtual DbSet<PiranhaRoleClaim> PiranhaRoleClaims { get; set; }
+        public virtual DbSet<PiranhaRole> PiranhaRoles { get; set; }
+        public virtual DbSet<PiranhaSiteField> PiranhaSiteFields { get; set; }
+        public virtual DbSet<PiranhaSiteType> PiranhaSiteTypes { get; set; }
+        public virtual DbSet<PiranhaSite> PiranhaSites { get; set; }
+        public virtual DbSet<PiranhaTag> PiranhaTags { get; set; }
+        public virtual DbSet<PiranhaUserClaim> PiranhaUserClaims { get; set; }
+        public virtual DbSet<PiranhaUserLogin> PiranhaUserLogins { get; set; }
+        public virtual DbSet<PiranhaUserRole> PiranhaUserRoles { get; set; }
+        public virtual DbSet<PiranhaUserToken> PiranhaUserTokens { get; set; }
+        public virtual DbSet<PiranhaUser> PiranhaUsers { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

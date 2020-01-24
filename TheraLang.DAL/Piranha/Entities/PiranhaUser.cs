@@ -4,7 +4,7 @@ using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Piranha.Entities
 {
-    public sealed class PiranhaUser
+    public class PiranhaUser
     {
         public PiranhaUser()
         {
@@ -32,11 +32,11 @@ namespace TheraLang.DAL.Piranha.Entities
         public bool TwoFactorEnabled { get; set; }
         public string UserName { get; set; }
 
-        public ICollection<PiranhaUserClaim> PiranhaUserClaims { get; set; }
-        public ICollection<PiranhaUserLogin> PiranhaUserLogins { get; set; }
-        public ICollection<PiranhaUserRole> PiranhaUserRoles { get; set; }
-        public ICollection<PiranhaUserToken> PiranhaUserTokens { get; set; }
-        public ICollection<Resource> Resources { get; set; }
-        public ICollection<ProjectParticipation> ProjectParticipations { get; set; }
+        public virtual ICollection<PiranhaUserClaim> PiranhaUserClaims { get; set; }
+        public virtual ICollection<PiranhaUserLogin> PiranhaUserLogins { get; set; }
+        public virtual ICollection<PiranhaUserRole> PiranhaUserRoles { get; set; }
+        public virtual ICollection<PiranhaUserToken> PiranhaUserTokens { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
+        public virtual ICollection<ProjectParticipation> ProjectParticipations { get; set; }
     }
 }

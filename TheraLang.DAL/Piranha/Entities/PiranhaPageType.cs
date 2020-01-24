@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DAL.Piranha.Entities
 {
-    public sealed class PiranhaPageType
+    public class PiranhaPageType
     {
         public PiranhaPageType()
         {
@@ -16,6 +16,6 @@ namespace TheraLang.DAL.Piranha.Entities
         public DateTime LastModified { get; set; }
         public string ClrType { get; set; }
 
-        public ICollection<PiranhaPage> PiranhaPages { get; set; }
+        public virtual ICollection<PiranhaPage> PiranhaPages { get; set; }
     }
 }

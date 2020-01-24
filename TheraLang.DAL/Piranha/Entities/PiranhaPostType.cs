@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DAL.Piranha.Entities
 {
-    public sealed class PiranhaPostType
+    public class PiranhaPostType
     {
         public PiranhaPostType()
         {
@@ -16,6 +16,6 @@ namespace TheraLang.DAL.Piranha.Entities
         public DateTime LastModified { get; set; }
         public string ClrType { get; set; }
 
-        public ICollection<PiranhaPost> PiranhaPosts { get; set; }
+        public virtual ICollection<PiranhaPost> PiranhaPosts { get; set; }
     }
 }

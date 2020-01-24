@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DAL.Piranha.Entities
 {
-    public sealed class PiranhaMedia
+    public class PiranhaMedia
     {
         public PiranhaMedia()
         {
@@ -22,7 +22,7 @@ namespace TheraLang.DAL.Piranha.Entities
         public int? Height { get; set; }
         public int? Width { get; set; }
 
-        public PiranhaMediaFolder Folder { get; set; }
-        public ICollection<PiranhaMediaVersion> PiranhaMediaVersions { get; set; }
+        public virtual PiranhaMediaFolder Folder { get; set; }
+        public virtual ICollection<PiranhaMediaVersion> PiranhaMediaVersions { get; set; }
     }
 }

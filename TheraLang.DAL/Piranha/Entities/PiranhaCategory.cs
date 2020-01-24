@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DAL.Piranha.Entities
 {
-    public sealed class PiranhaCategory
+    public class PiranhaCategory
     {
         public PiranhaCategory()
         {
@@ -17,7 +17,7 @@ namespace TheraLang.DAL.Piranha.Entities
         public string Slug { get; set; }
         public string Title { get; set; }
 
-        public PiranhaPage Blog { get; set; }
-        public ICollection<PiranhaPost> PiranhaPosts { get; set; }
+        public virtual PiranhaPage Blog { get; set; }
+        public virtual ICollection<PiranhaPost> PiranhaPosts { get; set; }
     }
 }

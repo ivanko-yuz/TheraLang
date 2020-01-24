@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TheraLang.DAL.Piranha.Entities
 {
-    public sealed class PiranhaPost
+    public class PiranhaPost
     {
         public PiranhaPost()
         {
@@ -29,12 +29,12 @@ namespace TheraLang.DAL.Piranha.Entities
         public string Slug { get; set; }
         public string Title { get; set; }
 
-        public PiranhaPage Blog { get; set; }
-        public PiranhaCategory Category { get; set; }
-        public PiranhaPostType PostType { get; set; }
-        public ICollection<PiranhaPostBlock> PiranhaPostBlocks { get; set; }
-        public ICollection<PiranhaPostField> PiranhaPostFields { get; set; }
-        public ICollection<PiranhaPostRevision> PiranhaPostRevisions { get; set; }
-        public ICollection<PiranhaPostTag> PiranhaPostTags { get; set; }
+        public virtual PiranhaPage Blog { get; set; }
+        public virtual PiranhaCategory Category { get; set; }
+        public virtual PiranhaPostType PostType { get; set; }
+        public virtual ICollection<PiranhaPostBlock> PiranhaPostBlocks { get; set; }
+        public virtual ICollection<PiranhaPostField> PiranhaPostFields { get; set; }
+        public virtual ICollection<PiranhaPostRevision> PiranhaPostRevisions { get; set; }
+        public virtual ICollection<PiranhaPostTag> PiranhaPostTags { get; set; }
     }
 }
