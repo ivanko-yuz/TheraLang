@@ -42,7 +42,7 @@
         <app-language></app-language>
       </span>
       <button mat-flat-button color="primary" *ngIf="!isAuthinticated" class="toolbar-button"
-        (click)="onLogin()">{{'components.account.signIn'|translate}}</button>
+      routerLink="/login">{{'components.account.signIn'|translate}}</button>
     </div>
 
     <span *ngIf="isAuthinticated">
