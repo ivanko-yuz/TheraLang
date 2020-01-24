@@ -24,3 +24,5 @@ https://semver.org/
 i.e. uttmm-4510 Added tests for GetOffers method.
 2. Pull request should not contain any files that is not required by task.
 In case of any violations, pull request will be rejected.
+
+
