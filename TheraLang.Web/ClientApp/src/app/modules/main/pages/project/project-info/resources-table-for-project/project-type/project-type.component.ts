@@ -38,9 +38,7 @@ export class ProjectTypeComponent implements OnInit {
 
   onCreate() {
     let dialogRef = this.dialog
-      .open(ProjectTypeCreateFormComponent, {
-        width: "250px"
-      })
+      .open(ProjectTypeCreateFormComponent, { })
       .afterClosed()
       .subscribe(res => {
         this.ngOnInit();
@@ -50,7 +48,6 @@ export class ProjectTypeComponent implements OnInit {
   onEdit(projectType: ProjectType) {
     let dialogRef = this.dialog
       .open(ProjectTypeFormComponent, {
-        width: "250px",
         data: { name: projectType.typeName, id: projectType.id }
       })
       .afterClosed()
