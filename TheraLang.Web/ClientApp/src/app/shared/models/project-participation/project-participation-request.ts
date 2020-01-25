@@ -2,9 +2,12 @@ import { ProjectParticipationRequestStatus } from "src/app/configs/project-parti
 export class ProjectParticipationRequest {
   constructor(
     public id: number,
-    public createdById: number,
     public role: number,
+    public status: ProjectParticipationRequestStatus,
     public projectId: number,
-    public status: ProjectParticipationRequestStatus
+    public requstedGuidUserId: string,
+    public projectName: string,
+    public requestedUserName: string,
+    public requestedUserEmail: string
   ) {}
 }
