@@ -35,6 +35,18 @@
         <mat-card-title>{{project?.name}}</mat-card-title>
         <div class="project-description"> {{project?.description.substring(0, 250)}}</div>
        
+        <div class="progress-bar-block">
+          <span class="example-h2">{{project.donationsSum}} of {{project.donationTargetSum}}</span>
+          <section class="example-section">
+            <mat-progress-bar
+                class="example-margin"
+                [color]="primary"
+                [mode]="determinate"
+                [value]="getProjectProgress(project) * 100">
+            </mat-progress-bar>
+          </section>
+        </div>
+
         <a mat-button class="donate-button"  [routerLink]="['/donations', project.id]">Підтримати</a>
 
       </div>
@@ -47,10 +59,6 @@
           <mat-icon>delete</mat-icon>
         </button>
       </div>
-
-  
-
-
     </mat-card-content>
   </mat-card>
 </div>

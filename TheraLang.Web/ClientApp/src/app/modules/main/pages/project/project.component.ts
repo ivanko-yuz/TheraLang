@@ -8,6 +8,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { AsyncScheduler } from "rxjs/internal/scheduler/AsyncScheduler";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
+import { PercentPipe } from '@angular/common';
 
 @Component({
   selector: "app-project",
@@ -61,5 +62,9 @@ export class ProjectComponent implements OnInit {
           );
         }
       });
+  }
+
+  getProjectProgress(project: Project) {
+    return (project.donationsSum / project.donationTargetSum);
   }
 }
