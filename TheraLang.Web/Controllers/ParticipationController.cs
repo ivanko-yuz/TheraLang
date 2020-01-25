@@ -74,7 +74,7 @@ namespace TheraLang.Web.Controllers
 
             if (project == null)
             {
-                NotFound();
+                return NotFound();
             }
 
             User user = await _userManager.FindByNameAsync(User.Identity.Name);
