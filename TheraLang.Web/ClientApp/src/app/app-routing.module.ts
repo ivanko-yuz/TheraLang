@@ -14,6 +14,7 @@ import { LoginComponent } from './modules/login/login.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { CmsModule } from './modules/cms-generic/cms.module';
 import { GeneralResourcesComponent } from './modules/main/pages/resource/general-resources.component';
+import { ProjectFormComponent } from './modules/main/pages/project/project-form/project-form.component';
 
 const routes: Routes = [
   { path: "", component: MainComponent, children:[
@@ -23,6 +24,8 @@ const routes: Routes = [
       { path: "projects", component: ProjectComponent },
       { path: "donations/:projectId", component: DonationComponent },
       { path: "donations", component: DonationComponent },
+      { path: "donations", component: DonationComponent },
+      { path: "create", component: ProjectFormComponent },
       { path: "resources", component: GeneralResourcesTableComponent },
       { path: "transaction/:donationId", component: TransactionResultComponent },
       { path: "projectTypes", component: ProjectTypeComponent },
@@ -40,6 +43,7 @@ const routes: Routes = [
 export class AppRoutingModule {}
 
 export const routingComponents = [
+  ProjectFormComponent,
   ProjectParticipantsComponent,
   ProjectComponent,
   HomeComponent,

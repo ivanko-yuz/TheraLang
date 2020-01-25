@@ -14,7 +14,7 @@ export class ProjectFormComponent implements OnInit {
   projectTypes: ProjectType[];
 
   constructor(
-    private dialog: MatDialogRef<ProjectFormComponent>,
+    
     public service: ProjectService,
     public dateAdapter: DateAdapter<Date>,
     private translate: TranslateService
@@ -34,7 +34,7 @@ export class ProjectFormComponent implements OnInit {
   onClose() {
     this.service.form.reset();
     this.service.initializeFormGroup();
-    this.dialog.close();
+  
   }
 
   onSubmit() {
