@@ -153,12 +153,14 @@ namespace TheraLang.BLL.Services
                     throw new ArgumentNullException($"Error while updating project. Project with id {nameof(id)}={id} not found");
                 }
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, Project>()
-                        .ForMember(p => p.DonationTarget, opt => opt.MapFrom(src => src.DonationTargetSum)))
-                    .CreateMapper();
-                var project = mapper.Map<ProjectDto, Project>(projectDto);
+                proj.Name = projectDto.Name;
+                proj.Description = projectDto.Description;
+                proj.Details = projectDto.Details;
+                proj.ProjectStart = projectDto.ProjectStart;
+                proj.ProjectEnd = projectDto.ProjectEnd;
+                proj.DonationTarget = projectDto.DonationTargetSum;
 
-                _unitOfWork.Repository<Project>().Update(project);
+                _unitOfWork.Repository<Project>().Update(proj);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)

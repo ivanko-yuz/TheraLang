@@ -9,7 +9,7 @@ namespace TheraLang.BLL.Interfaces
     {
         Task AddResource(ResourceDto resource, Guid userId);
 
-        Task UpdateResource(ResourceDto resource, Guid updatedById);
+        Task UpdateResource(int id, ResourceDto resource, Guid updatedById);
 
         Task RemoveResource(int id);
 
@@ -22,5 +22,7 @@ namespace TheraLang.BLL.Interfaces
         IEnumerable<ResourceDto> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
 
         IEnumerable<ResourceDto> GetAllResourcesByProjectId(int projectId);
+
+        IEnumerable<ResourceDto> GetAllResources();
     }
 }
