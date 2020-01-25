@@ -38,6 +38,11 @@
             <button mat-raised-button (click)="changeStatus('rejected', participationRequest)">{{'common.reject'|translate}}</button>
           </span>
         </div>
+        <div *ngIf="!showActionButtons">
+          <span class="toNewButton" >
+            <button mat-raised-button (click)="changeStatus('new', participationRequest)">{{'common.toNew'|translate}}</button>
+          </span>
+        </div>
       </mat-cell>
     </ng-container>
 

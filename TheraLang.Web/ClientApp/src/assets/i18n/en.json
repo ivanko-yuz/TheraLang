@@ -27,6 +27,7 @@
     "reject": "Reject",
     "approve": "Approve",
     "new": "New",
+    "toNew": "To new",
     "approved": "Approved",
     "rejected": "Rejected",
     "status": "Status",
