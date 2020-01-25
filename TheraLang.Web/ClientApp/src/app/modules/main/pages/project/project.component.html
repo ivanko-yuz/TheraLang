@@ -36,8 +36,8 @@
         <div class="project-description"> {{project?.description.substring(0, 250)}}</div>
        
         <div class="progress-bar-block">
-          <span class="example-h2">{{project.donationsSum}} of {{project.donationTargetSum}}</span>
-          <section class="example-section">
+          <span>{{project.donationsSum}} of {{project.donationTargetSum}}</span>
+          <section class="progress-bar-section">
             <mat-progress-bar
                 class="example-margin"
                 [color]="primary"
@@ -45,6 +45,11 @@
                 [value]="getProjectProgress(project) * 100">
             </mat-progress-bar>
           </section>
+        </div>
+
+        <div class="days-left-block">
+          <span>{{project | daysLeft}}</span>
+          <span *ngIf="(project | daysLeft) >= 0">  Days left</span>
         </div>
 
         <a mat-button class="donate-button"  [routerLink]="['/donations', project.id]">Підтримати</a>
