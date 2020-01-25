@@ -1,40 +1,56 @@
 <button mat-stroked-button (click)="onCreate()">
   <mat-icon>add</mat-icon>{{'components.projects.create'|translate}}
 </button>
+<!-- <a mat-button class="donate-button" [routerLink]="['/donations', project.id]">Підтримати</a>
+<div>{{'components.donation.need'|translate}}
+  <h3 class="donation-target">₴ {{project?.donationTargetSum}}</h3>
+</div>
+<div>{{'components.donation.raised'|translate}}
+  <h5 class="donation-sum">₴ {{project?.donationsSum}}</h5>
+</div>
+<div>{{'components.donation.to-be-raised'|translate}}
+  <h5 class="donation-left-to-collect">₴ {{project?.sumLeftToCollect}}</h5>
+</div> -->
+<!-- 
+<div class="project-info">
+  {{project?.description}}
+  <p>{{'components.projects.project-starts'|translate}}: {{project?.projectStart | date: 'dd/MM/yyyy'}}</p>
+  <p>{{'components.projects.project-ends'|translate}}: {{project?.projectEnd | date: 'dd/MM/yyyy'}}</p>
+</div> -->
+
+<!-- <mat-card-actions class="get-details-button">
+  <a mat-stroked-button [routerLink]="['/projects', project.id]">{{'common.details'|translate}}</a>
+  <button mat-stroked-button (click)="onEdit(project)">{{'common.edit'|translate}}</button>
+  <button mat-stroked-button (click)="onDelete(project.id)">{{'components.projects.delete'|translate}}</button>
+</mat-card-actions> -->
 
 <div *ngFor="let project of projects">
-  <mat-card class="project-card">
-    <mat-card-header class="header">
-      <mat-card-title>
-        <a mat-button class="donate-button" [routerLink]="['/donations', project.id]">Підтримати</a>
-        <div>{{'components.donation.need'|translate}}
-          <h3 class="donation-target">₴ {{project?.donationTargetSum}}</h3>
-        </div>
-        <div>{{'components.donation.raised'|translate}}
-          <h5 class="donation-sum">₴ {{project?.donationsSum}}</h5>
-        </div>
-        <div>{{'components.donation.to-be-raised'|translate}}
-          <h5 class="donation-left-to-collect">₴ {{project?.sumLeftToCollect}}</h5>
-        </div>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-title>{{project?.name}}</mat-card-title>
-    <mat-card-subtitle>Ukraine, id - {{project?.id}}</mat-card-subtitle>
-    <img class="project-image" mat-card-image
-      src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg"
-      alt="">
-    <mat-card-content>
-      <div class="project-info">
-        {{project?.description}}
-        <p>{{'components.projects.project-starts'|translate}}: {{project?.projectStart | date: 'dd/MM/yyyy'}}</p>
-        <p>{{'components.projects.project-ends'|translate}}: {{project?.projectEnd | date: 'dd/MM/yyyy'}}</p>
+  <mat-card class="home-card">
+    <mat-card-content class="home-card-content">
+      <img mat-card-image
+        src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg"
+        alt="">
+     
+      <div class="project-content" >
+        <mat-card-title>{{project?.name}}</mat-card-title>
+        <div class="project-description"> {{project?.description.substring(0, 250)}}</div>
+       
+        <a mat-button class="donate-button"  [routerLink]="['/donations', project.id]">Підтримати</a>
+
       </div>
+
+      <div class="buttons">
+        <button mat-icon-button (click)="onEdit(project)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onDelete(project.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+  
+
+
     </mat-card-content>
-    <div class="clear"></div>
-    <mat-card-actions class="get-details-button">
-      <a mat-stroked-button [routerLink]="['/projects', project.id]">{{'common.details'|translate}}</a>
-      <button mat-stroked-button (click)="onEdit(project)">{{'common.edit'|translate}}</button>
-      <button mat-stroked-button (click)="onDelete(project.id)">{{'components.projects.delete'|translate}}</button>
-    </mat-card-actions>
   </mat-card>
 </div>

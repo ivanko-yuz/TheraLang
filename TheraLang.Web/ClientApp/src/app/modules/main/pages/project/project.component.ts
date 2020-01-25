@@ -22,7 +22,6 @@ export class ProjectComponent implements OnInit {
     private httpService: HttpService,
     private dialogService: DialogService,
     public service: ProjectService,
-    private dialog: MatDialog,
     private notificationService: NotificationService,
     private translate: TranslateService
   ) {}
