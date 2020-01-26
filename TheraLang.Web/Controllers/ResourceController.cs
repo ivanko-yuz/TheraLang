@@ -3,13 +3,12 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using TheraLang.Web.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Piranha.AspNetCore.Identity.Data;
 using FluentValidation;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.Extensions;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
 {
@@ -17,7 +16,7 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service, IUserManagementService userManager, IValidator<ResourceViewModel> validator)
+        public ResourceController(IResourceService service, UserManager<User> userManager, IValidator<ResourceViewModel> validator)
         {
             _service = service;
             _userManager = userManager;
@@ -25,7 +24,7 @@ namespace TheraLang.Web.Controllers
         }
 
         private readonly IResourceService _service;
-        private readonly IUserManagementService _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IValidator<ResourceViewModel> _validator;
 
         /// <summary>
@@ -34,7 +33,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="resourceModel">Resource param which was given through POST body</param>
         /// <returns>status code</returns>
         [HttpPost]
-        [Authorize]
         [Route("create")]
         public async Task<IActionResult> PostResource([FromBody] ResourceViewModel resourceModel)
         {
@@ -44,14 +42,14 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Guid userId = user.Id;
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, UserId.Value);
+            await _service.AddResource(resourceDto, userId);
             return Ok();
         }
 
@@ -62,7 +60,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="resourceModel"></param>
         /// <returns>status code</returns>
         [HttpPut]
-        [Authorize]
         [Route("update/{id}")]
         public async Task<IActionResult> PutResource(int id, [FromBody] ResourceViewModel resourceModel)
         {
@@ -81,14 +78,13 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
 
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Guid userId = user.Id;
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, UserId.Value);
+            await _service.UpdateResource(id, resourceDto, userId);
             return Ok();
         }
 
@@ -99,7 +95,6 @@ namespace TheraLang.Web.Controllers
         /// <returns>selected resource</returns>
         [HttpGet]
         [Route("get/{Id}")]
-        [Authorize]
         public IActionResult GetResource(int id)
         {
             if (id == default)
@@ -117,7 +112,6 @@ namespace TheraLang.Web.Controllers
         /// <returns>status code</returns>
         [HttpDelete]
         [Route("delete/{Id}")]
-        [Authorize]
         public async Task<IActionResult> DeleteResource(int id)
         {
             if (id == default)
@@ -135,7 +129,6 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of categories</returns>
         [HttpGet]
         [Route("categories/{withAssignedResources}")]
-        [Authorize]
         public IActionResult GetResourcesCategories(bool withAssignedResources)
         {
             var categories = _service.GetResourcesCategories(withAssignedResources);
@@ -160,7 +153,6 @@ namespace TheraLang.Web.Controllers
         /// <returns>count</returns>
         [HttpGet]
         [Route("count/{categoryId}")]
-        [Authorize]
         public IActionResult CountResourcesByCategoryId(int categoryId)
         {
             if (categoryId == default)
@@ -180,7 +172,6 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of resources</returns>
         [HttpGet]
         [Route("all/{categoryId}/{pageNumber}/{recordsPerPage?}")]
-        [Authorize]
         public IActionResult GetAllResourcesByCategoryId(int categoryId, int pageNumber,
             int recordsPerPage = PaginationConstants.RecordsPerPage)
         {
@@ -205,7 +196,6 @@ namespace TheraLang.Web.Controllers
         /// <returns>selected Project</returns>
         [HttpGet]
         [Route("all/{projectId}")]
-        [Authorize]
         public IActionResult GetAllResourcesByProjectId(int projectId)
         {
             if (projectId == default)

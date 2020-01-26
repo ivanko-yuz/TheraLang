@@ -1,13 +1,11 @@
 ﻿using System;
 using TheraLang.DAL.Piranha.Entities;
-﻿using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects
 {
     public class ProjectParticipationDto
     {
         public int Id { get; set; }
-        public User User { get; set; }
 
         public MemberRoleDto Role { get; set; }
 

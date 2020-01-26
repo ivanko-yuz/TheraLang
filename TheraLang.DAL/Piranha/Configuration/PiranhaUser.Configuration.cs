@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TheraLang.DAL.Entities;
+using TheraLang.DAL.Piranha.Entities;
 
 namespace TheraLang.DAL.Piranha.Configuration
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class PiranhaUserConfiguration : IEntityTypeConfiguration<PiranhaUser>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<PiranhaUser> builder)
         {
-            builder.ToTable("Users");
+            builder.ToTable("Piranha_Users");
 
             builder.HasIndex(e => e.NormalizedEmail)
                 .HasName("EmailIndex");
@@ -28,9 +28,10 @@ namespace TheraLang.DAL.Piranha.Configuration
 
             builder.Property(e => e.UserName).HasMaxLength(256);
 
-            builder.HasMany(x => x.Resources).WithOne(i => i.User).
+            builder.HasMany(x => x.Resources).WithOne(i => i.PiranhaUser).
                 HasForeignKey(e => e.CreatedById).OnDelete(DeleteBehavior.Restrict);
-          
+            builder.HasMany(x => x.ProjectParticipations).WithOne(i => i.PiranhaUser).
+                HasForeignKey(e => e.CreatedById).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -128,7 +128,7 @@ namespace TheraLang.BLL.Services
                                        select new Resource
                                        {
                                            Id = res.Id,
-                                           User = res.User,
+                                           PiranhaUser = res.PiranhaUser,
                                            Name = res.Name,
                                            Description = res.Description,
                                            Url = res.Url,
@@ -202,7 +202,7 @@ namespace TheraLang.BLL.Services
                                        select new Resource
                                        {
                                            Id = res.Id,
-                                           User = res.User,
+                                           PiranhaUser = res.PiranhaUser,
                                            Name = res.Name,
                                            Description = res.Description,
                                            Url = res.Url,

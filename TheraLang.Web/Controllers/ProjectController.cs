@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Piranha.AspNetCore.Identity.Data;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.Extensions;
 using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -17,9 +17,9 @@ namespace TheraLang.Web.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly IProjectService _projectService;
-        private readonly IUserManagementService _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public ProjectController(IProjectService projectService, IUserManagementService userManager)
+        public ProjectController(IProjectService projectService, UserManager<User> userManager)
         {
             _projectService = projectService;
             _userManager = userManager;
@@ -31,7 +31,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="projectModel"></param>
         /// <returns>status code</returns>
         [HttpPost("create")]
-        [Authorize]
         public async Task<IActionResult> CreateProject([FromBody]ProjectViewModel projectModel)
         {
             if (projectModel == null)
@@ -39,9 +38,7 @@ namespace TheraLang.Web.Controllers
                 return BadRequest();
             }
 
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
             var projectDto = mapper.Map<ProjectViewModel, ProjectDto>(projectModel);
@@ -55,7 +52,6 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of Projects</returns>
         [HttpGet]
-        [AllowAnonymous]
         public IEnumerable<ProjectDonationViewModel> GetAllProjects()
         {
             var projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatusDto.Approved)
@@ -76,7 +72,6 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpGet("new")]
-        [Authorize]
         public IActionResult GetAllNewProjects()
         {
             var projects = _projectService.GetAllNewProjects();
@@ -89,7 +84,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="id"></param>
         /// <returns>serialized project</returns>
         [HttpGet("{id}")]
-        [AllowAnonymous]
         public IActionResult GetProject(int id)
         {
             var project = _projectService.GetById(id);
@@ -109,7 +103,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="projectModel">new version</param>
         /// <returns>edited project</returns>
         [HttpPut("update/{id}")]
-        [Authorize]
         public async Task<IActionResult> EditProject(int id, [FromBody]ProjectViewModel projectModel)
         {
             var project = _projectService.GetById(id);
@@ -132,7 +125,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="id"></param>
         /// <returns>status code</returns>
         [HttpGet("approve/{id}")]
-        [Authorize]
         public async Task<IActionResult> Approve(int id)
         {
             if (id == default)
@@ -153,7 +145,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="pageSize">number of projects on one page</param>
         /// <returns>array of selected project</returns>
         [HttpGet("page/{page}/{pageSize}")]
-        [AllowAnonymous]
         public IActionResult ProjectsPagination(int page, int pageSize)
         {
             if (page == default)
@@ -174,7 +165,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="id"></param>
         /// <returns>status code</returns>
         [HttpGet("reject/{id}")]
-        [Authorize]
         public async Task<IActionResult> Reject(int id)
         {
             if (id == default)
@@ -194,7 +184,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="id"></param>
         /// <returns>status code</returns>
         [HttpDelete("{id}")]
-        [Authorize]
         public async Task<IActionResult> DeleteProject(int id)
         {
             var project = _projectService.GetById(id);
@@ -209,7 +198,6 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpGet("newstatus/{status}")]
-        [AllowAnonymous]
         public IActionResult GetProjectsByStatus(int status)
         {
             var projects = _projectService.GetProjectsByStatus(status);

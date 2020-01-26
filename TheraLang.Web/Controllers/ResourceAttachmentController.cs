@@ -5,7 +5,6 @@ using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
 {
@@ -21,8 +20,7 @@ namespace TheraLang.Web.Controllers
        private readonly IResourceAttachmentService _attachment;
 
        [HttpPost("attach")]
-        [Authorize]
-        public IActionResult UploadFile([FromBody]ResourceAttachViewModel resourceModel)
+       public IActionResult UploadFile([FromBody]ResourceAttachViewModel resourceModel)
        {
            if (resourceModel == null)
            {
@@ -36,8 +34,7 @@ namespace TheraLang.Web.Controllers
            return Ok(resourceDto);
        }
        [HttpGet]
-        [Authorize]
-        public IEnumerable<ResourceAttachDto> GetAllTypes()
+       public IEnumerable<ResourceAttachDto> GetAllTypes()
        {
            return _attachment.Get();
        }

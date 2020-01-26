@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
 {
@@ -26,7 +25,6 @@ namespace TheraLang.Web.Controllers
         /// <param name="newTypeName">new name of selected category</param>
         /// <returns>wil return just status code</returns>
         [HttpPut]
-        [Authorize]
         [Route("update/{categoryId}/{newTypeName}")]
         public async Task<IActionResult> PutType(int categoryId, string newTypeName)
         {
@@ -47,7 +45,6 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of ResourceCategories</returns>
         [HttpGet]
-        [Authorize]
         [Route("get")]
         public IEnumerable<ResourceCategoryDto> GetAll()
         {

@@ -51,7 +51,7 @@ namespace TheraLang.BLL.Services
         public IEnumerable<ProjectParticipationDto> GetAll()
         {
             var projectParticipations = _unitOfWork.Repository<ProjectParticipation>().Get()
-                .Include(p => p.User)
+                .Include(p => p.PiranhaUser)
                 .Include(p => p.Project)
                 .ToList();
 
@@ -59,8 +59,8 @@ namespace TheraLang.BLL.Services
                 .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))
                 .ForMember(m => m.ProjectName, opt => opt.MapFrom(m => m.Project.Name))
                 .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.CreatedById))
-                .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.User.UserName))
-                .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.User.Email))
+                .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.PiranhaUser.UserName))
+                .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.PiranhaUser.Email))
             ).CreateMapper();
             var projectParticipationDtos = mapper.Map<IEnumerable<ProjectParticipation>, IEnumerable<ProjectParticipationDto>>(projectParticipations);
 
