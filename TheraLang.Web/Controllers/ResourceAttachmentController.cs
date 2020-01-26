@@ -11,7 +11,7 @@ namespace TheraLang.Web.Controllers
 {
 
    [Route("api/files")]
-   [ApiController]  
+   [ApiController]
    public class ResourceAttachmentController : ControllerBase
    {
        public ResourceAttachmentController(IResourceAttachmentService attachment)

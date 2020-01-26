@@ -10,6 +10,7 @@ import { ResourceCreateService } from "src/app/core/http/resource/resource-creat
 })
 export class ResourceCreateComponent implements OnInit {
   categories: ResourceCategory[];
+  fileName : string;
 
   constructor(
     private dialog: MatDialogRef<ResourceCreateComponent>,
@@ -30,8 +31,9 @@ export class ResourceCreateComponent implements OnInit {
     this.dialog.close();
   }
 
-  onFileChange(event) {
-    return true;
+  onFileChange(fileInput: any) {
+    let file = fileInput.target.files[0];
+    this.fileName = file.name;
   }
 
   onSubmit() {

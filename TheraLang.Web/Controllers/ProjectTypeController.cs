@@ -62,7 +62,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
             var projectTypeDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
 
-            await _service.Update(projectTypeDto, UserId.Value);
+            await _service.Update(projectTypeDto);
             return Ok();
         }
 

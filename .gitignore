@@ -372,6 +372,8 @@ upload/
 
 # Angular build result
 /wwwroot/scripts/
+TheraLang.Web/wwwroot/fileuploads/
 /ClientApp/out-tsc/
 
-.idea
+# Rider 
+.idea/

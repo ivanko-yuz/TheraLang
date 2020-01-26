@@ -39,7 +39,7 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> PostResource([FromBody] ResourceViewModel resourceModel)
         {
             var validationResult = _validator.Validate(resourceModel);
-            
+
             if (!validationResult.IsValid)
             {
                 throw new ArgumentException($"{nameof(resourceModel)} is not valid");
@@ -58,13 +58,22 @@ namespace TheraLang.Web.Controllers
         /// <summary>
         /// Create new Resource
         /// </summary>
+        ///  <param name="id"></param>
         /// <param name="resourceModel"></param>
         /// <returns>status code</returns>
         [HttpPut]
         [Authorize]
-        [Route("update")]
-        public async Task<IActionResult> PutResource([FromBody] ResourceViewModel resourceModel)
+        [Route("update/{id}")]
+        public async Task<IActionResult> PutResource(int id, [FromBody] ResourceViewModel resourceModel)
         {
+
+            var resource = _service.GetResourceById(id);
+
+            if (resource == null)
+            {
+                return NotFound();
+            }
+
             var validationResult = _validator.Validate(resourceModel);
 
             if (!validationResult.IsValid)
@@ -131,6 +140,17 @@ namespace TheraLang.Web.Controllers
         {
             var categories = _service.GetResourcesCategories(withAssignedResources);
             return Ok(categories);
+        }
+
+        /// <summary>
+        /// Get all Resources
+        /// </summary>
+        /// <returns>array of resources</returns>
+        [HttpGet]
+        public IActionResult GetAllResources()
+        {
+            var resources = _service.GetAllResources();
+            return Ok(resources);
         }
 
         /// <summary>

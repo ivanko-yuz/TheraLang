@@ -21,6 +21,10 @@ export class CmsPagesToolbarItemComponent implements OnInit {
     this.subscribeOnSiteMapService();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   subscribeOnSiteMapService(): void {
     const toolbarItemsSubscription = this.siteMapService.toolbarItems.subscribe(
       next => (this.toolbarItems = next),

@@ -7,19 +7,19 @@
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="projectParticipationRequest" *ngIf="projectParticipationRequest.filteredData.length > 0">
 
-    <ng-container matColumnDef="createdById">
-      <th mat-header-cell *matHeaderCellDef>{{'components.participation.name-or-id'|translate}}</th>
-      <td mat-cell *matCellDef="let element"> {{element.createdById}} </td>
+    <ng-container matColumnDef="requestedUserName">
+      <th mat-header-cell *matHeaderCellDef>{{'components.user.username'|translate}}</th>
+      <td mat-cell *matCellDef="let element"> {{element.requestedUserName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef>{{'components.account.role'|translate}}</th>
-      <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+    <ng-container matColumnDef="requestedUserEmail">
+      <th mat-header-cell *matHeaderCellDef>{{'components.user.email'|translate}}</th>
+      <td mat-cell *matCellDef="let element"> {{element.requestedUserEmail}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="projectId">
-      <th mat-header-cell *matHeaderCellDef>{{'components.participation.id-of-project'|translate}}</th>
-      <td mat-cell *matCellDef="let element"> {{element.projectId}} </td>
+    <ng-container matColumnDef="projectName">
+      <th mat-header-cell *matHeaderCellDef>{{'components.projects.name-of-project'|translate}}</th>
+      <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
@@ -36,6 +36,11 @@
           </span>
           <span class="rejectButton">
             <button mat-raised-button (click)="changeStatus('rejected', participationRequest)">{{'common.reject'|translate}}</button>
+          </span>
+        </div>
+        <div *ngIf="!showActionButtons">
+          <span class="toNewButton" >
+            <button mat-raised-button (click)="changeStatus('new', participationRequest)">{{'common.toNew'|translate}}</button>
           </span>
         </div>
       </mat-cell>

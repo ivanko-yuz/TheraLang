@@ -11,7 +11,7 @@ namespace TheraLang.BLL.Interfaces
 
         Task Remove(int id);
 
-        Task Update(ProjectTypeDto projectType, Guid userId);
+        Task Update(ProjectTypeDto projectType);
 
         IEnumerable<ProjectTypeDto> GetAllProjectsType();
 

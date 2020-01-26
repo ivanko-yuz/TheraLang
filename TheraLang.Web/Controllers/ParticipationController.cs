@@ -18,14 +18,16 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ParticipationController : ControllerBase
     {
-        public ParticipationController(IProjectParticipationService service, IUserManagementService userManager)
+        public ParticipationController(IProjectParticipationService projectParticipationServiceservice, IUserManagementService userManager, IProjectService projectService)
         {
-            _service = service;
+            _projectParticipationServiceservice = projectParticipationServiceservice;
             _userManager = userManager;
+            _projectService = projectService;
         }
 
-        private readonly IProjectParticipationService _service;
+        private readonly IProjectParticipationService _projectParticipationServiceservice;
         private readonly IUserManagementService _userManager;
+        private readonly IProjectService _projectService;
 
         /// <summary>
         /// Change status of participant
@@ -46,7 +48,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationStatusViewModel, ProjectParticipationStatusDto>()).CreateMapper();
             var statusDto = mapper.Map<ProjectParticipationStatusViewModel, ProjectParticipationStatusDto>(status);
 
-            await _service.ChangeStatusAsync(participantId, statusDto);
+            await _projectParticipationServiceservice.ChangeStatusAsync(participantId, statusDto);
             return Ok();
         }
 
@@ -58,7 +60,7 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public ActionResult<IEnumerable<ParticipantViewModel>> Get()
         {
-            var members = _service.GetAll().ToList();
+            var members = _projectParticipationServiceservice.GetAll().ToList();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationDto, ParticipantViewModel>()
                 .ForMember(m => m.Id, opt => opt.MapFrom(m => m.User.Id))
@@ -79,18 +81,20 @@ namespace TheraLang.Web.Controllers
         [HttpPost]
         [Authorize]
         [Route("create")]
-        public async Task<IActionResult> Post([FromBody]int projectId)
+        public async Task<IActionResult> CreateParticipant([FromBody]int projectId)
         {
-            if (projectId == default)
+            var project = _projectService.GetById(projectId);
+
+            if (project == null)
             {
-                throw new ArgumentException($"The {nameof(projectId)} can not be 0");
+                return NotFound();
             }
 
             var UserId = User.Claims.GetUserId();
             if (UserId == null) return BadRequest();
             var user = _userManager.GetUserById(UserId.Value);
 
-            await _service.CreateRequest(user.Id, projectId);
+            await _projectParticipationServiceservice.CreateRequest(user.Id, projectId);
             return Ok();
         }
     }

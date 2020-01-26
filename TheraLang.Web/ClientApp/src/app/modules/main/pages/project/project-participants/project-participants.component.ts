@@ -17,9 +17,10 @@ export class ProjectParticipantsComponent implements OnInit {
   showActionButtons: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = [
-    "userName",  
-    "userEmail",  
-    "projectId",
+    "requestedUserName",  
+    "requestedUserEmail",
+    "projectName",
+    "status",
     "actions"
   ];
   constructor(
@@ -70,10 +71,13 @@ export class ProjectParticipantsComponent implements OnInit {
     status: string,
     projectParticipant: ProjectParticipationRequest
   ) {
-    projectParticipant.status =
-      status === "approved"
-        ? ProjectParticipationRequestStatus.Approved
-        : ProjectParticipationRequestStatus.Rejected;
+    if (status === "approved")
+      projectParticipant.status = ProjectParticipationRequestStatus.Approved;
+    else if (status === "rejected")
+      projectParticipant.status = ProjectParticipationRequestStatus.Rejected;
+    else if (status === "new")
+      projectParticipant.status = ProjectParticipationRequestStatus.New;
+
     this.participantService
       .changeParticipationStatus(
         projectParticipant.id,
