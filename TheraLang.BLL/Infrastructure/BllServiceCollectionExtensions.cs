@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using TheraLang.BLL.Infrastructure.AzureConnectionFactory;
 using TheraLang.DAL;
 using TheraLang.DAL.UnitOfWork;
 
@@ -16,6 +17,11 @@ namespace TheraLang.BLL.Infrastructure
         {
             return services.AddTransient<IUnitOfWork, UnitOfWork>(provider =>
                 new UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
+        }
+        public static IServiceCollection AddAzureStorageClientFactory(this IServiceCollection services,string connectionString)
+        {
+            return services.AddTransient<IAzureConnectionFactory, AzureConnectionFactory.AzureConnectionFactory>(serviceProvider =>
+                new AzureConnectionFactory.AzureConnectionFactory(connectionString));
         }
     }
 }

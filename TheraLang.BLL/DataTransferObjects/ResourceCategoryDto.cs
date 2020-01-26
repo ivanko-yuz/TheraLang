@@ -9,5 +9,6 @@ namespace TheraLang.BLL.DataTransferObjects
 
         public string Type { get; set; }
 
+        public IEnumerable<ResourceDto> Resources { get; set; }
     }
 }

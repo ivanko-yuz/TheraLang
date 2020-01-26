@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using TheraLang.Web.Validators.ValidationRules;
 using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Validators
@@ -11,6 +12,7 @@ namespace TheraLang.Web.Validators
                 RuleFor(x => x.Description).NotNull().NotEmpty().MinimumLength(5).MaximumLength(5000);
                 RuleFor(x => x.Url).MaximumLength(200);
                 RuleFor(x => x.CategoryId).NotNull().NotEmpty();
+                RuleFor(x => x.File).IsSafe();
             }
         }
 }

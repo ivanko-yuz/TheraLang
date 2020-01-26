@@ -16,10 +16,12 @@ namespace TheraLang.BLL.Services
     public class ResourceService : IResourceService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IFileService _fileService;
 
-        public ResourceService(IUnitOfWork unitOfWork)
+        public ResourceService(IUnitOfWork unitOfWork, IFileService fileService)
         {
             _unitOfWork = unitOfWork;
+            _fileService = fileService;
         }
 
         public ResourceDto GetResourceById(int id)
@@ -43,19 +45,11 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                string resourceFileString = null;
-
-                if (resourceDto.File != null)
-                {
-                    using (BinaryReader binaryReader = new BinaryReader(resourceDto.File.OpenReadStream()))
-                    {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceDto.File.Length);
-                        resourceFileString = BitConverter.ToString(byteFile);
-                    }
-                }
-
+                var fileUri = await _fileService.SaveFile(resourceDto.File);
+                resourceDto.Url = fileUri.ToString();
+             
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
-                    .ForMember(r => r.File, opt => opt.MapFrom(r => resourceFileString))
+                    .ForMember(r => r.File, opt => opt.Ignore())
                     .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId))
                 ).CreateMapper();
 
@@ -123,29 +117,18 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var resources = _unitOfWork.Repository<Resource>().Get().Where(x => x.CategoryId == categoryId);
-                var joinedResources = (from res in resources
-                                       select new Resource
-                                       {
-                                           Id = res.Id,
-                                           PiranhaUser = res.PiranhaUser,
-                                           Name = res.Name,
-                                           Description = res.Description,
-                                           Url = res.Url,
-                                           File = res.File,
-                                           CategoryId = res.CategoryId,
-                                           ResourceCategory = res.ResourceCategory,
-                                           ResourceProjects = res.ResourceProjects,
-                                           UpdatedById = res.UpdatedById,
-                                           CreatedDateUtc = res.CreatedDateUtc,
-                                           UpdatedDateUtc = res.UpdatedDateUtc,
-                                       });
-
-                var resourcesPerPages = joinedResources.Skip((pageNumber - 1) * recordsPerPage)
+                var resources = _unitOfWork.Repository<Resource>().Get()
+                    .Where(x => x.CategoryId == categoryId)
+                    .Skip((pageNumber - 1) * recordsPerPage)
                     .Take(recordsPerPage).ToList();
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
-                var resourcesPerPagesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resourcesPerPages);
+
+                var mapper = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Resource, ResourceDto>()
+                        .ForMember(res=>res.File,opt=>opt.Ignore());
+                }).CreateMapper();
+                var resourcesPerPagesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resources);
 
                 return resourcesPerPagesDto;
             }
@@ -172,18 +155,21 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                IEnumerable<ResourceCategory> query = _unitOfWork.Repository<ResourceCategory>().Get()
-                    .Include(x => x.Resources)
-                    .ToList();
-
+                var query = _unitOfWork.Repository<ResourceCategory>().Get();
                 if (withAssignedResources)
                 {
-                    query = query.Where(x => x.Resources.Any());
+                    query = query.Where(cat=>cat.Resources.Any());
                 }
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceCategory, ResourceCategoryDto>())
+                var resourceEntities = query.ToList();
+                var mapper = new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<ResourceCategory, ResourceCategoryDto>(MemberList.None);
+                        cfg.CreateMap<Resource, ResourceDto>(MemberList.None)
+                            .ForMember(r=>r.File,opt=>opt.Ignore());
+                    })
                     .CreateMapper();
-                var resourceCategoriesDto = mapper.Map<IEnumerable<ResourceCategory>, IEnumerable<ResourceCategoryDto>>(query);
+                var resourceCategoriesDto = mapper.Map<IEnumerable<ResourceCategory>, IEnumerable<ResourceCategoryDto>>(resourceEntities);
 
                 return resourceCategoriesDto;
             }

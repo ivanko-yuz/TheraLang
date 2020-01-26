@@ -13,6 +13,7 @@ using Piranha.AspNetCore.Identity.SQLServer;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
+using TheraLang.BLL.Services.File;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
@@ -70,6 +71,8 @@ namespace TheraLang.Web
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
+            services.AddAzureStorageClientFactory(Configuration.GetConnectionString("AzureConnection"));
+            services.AddTransient<IFileService, LocalFileService>();
 
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
@@ -82,6 +85,8 @@ namespace TheraLang.Web
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddOpenApiDocument();
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
+            services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
+
             #endregion
         }
 
