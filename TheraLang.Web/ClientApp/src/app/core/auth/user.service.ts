@@ -2,11 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, Validators } from "@angular/forms";
 import { accountUrl } from "src/app/configs/api-endpoint.constants";
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
-  constructor(private http: HttpClient, private fb: FormBuilder) {}
+  constructor(private http: HttpClient, private fb: FormBuilder,private router: Router,private jwtHelper: JwtHelperService ) {}
   loginForm = this.fb.group({
     username: [
       "",
@@ -22,10 +24,18 @@ export class UserService {
     return this.http.post(this.baseUrl + "/login", loginData);
   }
   logout() {
-    return this.http.get(this.baseUrl + "/logout");
-  }
+    localStorage.removeItem("jwt");
+ }
   isAuthenticated() {
-    return this.http.get(this.baseUrl + "/isAuthenticated");
+   
+      let token: string = localStorage.getItem("jwt");
+      if (token && !this.jwtHelper.isTokenExpired(token)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    
   }
   getUserName() {
     return this.http.get(this.baseUrl + "/getUserName", {
