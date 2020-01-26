@@ -35,7 +35,7 @@
   </table>
 
   <mat-paginator
-    *ngIf="resourceCount > columnsPerPage"
+    *ngIf="resources.length > columnsPerPage"
     [length]="this.allResourcesCount"
     [pageSize]="this.columnsPerPage"
     [pageSizeOptions]="this.pageSizeOptions"
