@@ -26,7 +26,6 @@ export class UserService {
     localStorage.removeItem("jwt");
  }
   isAuthenticated() {
-   
       let token: string = localStorage.getItem("jwt");
       if (token && !this.jwtHelper.isTokenExpired(token)) {
         return true;
@@ -34,7 +33,6 @@ export class UserService {
       else {
         return false;
       }
-    
   }
   getUserName() {
     return this.http.get(this.baseUrl + "/getUserName", {

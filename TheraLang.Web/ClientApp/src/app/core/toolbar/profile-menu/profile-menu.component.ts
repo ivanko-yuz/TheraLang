@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { UserService } from "../../auth/user.service";
 import { NotificationService } from "../../services/notification/notification.service";
+import {Router} from '@angular/router';
 
 @Component({
   selector: "app-profile-menu",
@@ -14,12 +15,14 @@ export class ProfileMenuComponent implements OnInit {
   constructor(
     private userService: UserService,
     private notification: NotificationService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {}
 
   ngOnInit() {}
 
   onLogout() {
-    this.userService.logout()
+    this.userService.logout();
+    window.location.reload();
   }
 }
