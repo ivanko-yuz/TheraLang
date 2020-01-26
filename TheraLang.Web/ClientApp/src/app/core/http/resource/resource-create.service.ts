@@ -73,6 +73,9 @@ export class ResourceCreateService {
     if (fileInput.files.length == 0) {
       return true;
     }
+    if (fileInput.files[0].size == 0) {
+      return true;
+    }
 
     return false;
   }

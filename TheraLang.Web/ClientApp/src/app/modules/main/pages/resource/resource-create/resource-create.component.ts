@@ -46,10 +46,10 @@ export class ResourceCreateComponent implements OnInit {
       return;
     } else {
       const resource: Resource = this.service.resourceForm.value;
-      if (resource.url == "") {
-        resource.file = this.service.resourceForm.value.file.files[0];
+      resource.file = this.service.resourceForm.value.file.files[0];
+      if (this.service.resourceForm.get("url").disabled) {
+        resource.url = "";
       }
-
       this.service.addResource(resource);
       this.onClose();
     }
