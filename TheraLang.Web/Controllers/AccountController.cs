@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Piranha;
+using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -10,48 +13,35 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly ISecurity _service;
 
-        public AccountController(ISecurity service)
+        private readonly IAuthenticateService _authService;
+        public AccountController(IAuthenticateService authService)
         {
-            _service = service;
+            _authService = authService;
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignIn(LoginModel model)
+        public async Task<IActionResult> SignIn([FromBody]LoginModel login)
         {
-            if (string.IsNullOrWhiteSpace(model.UserName))
+            if (!ModelState.IsValid)
             {
-                throw new ArgumentException($"{nameof(model.UserName)} cannot be null");
+                return BadRequest(ModelState);
             }
-            if (string.IsNullOrWhiteSpace(model.Password))
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LoginModel, LoginModelDto>()).CreateMapper();
+            var loginDto = mapper.Map<LoginModel, LoginModelDto>(login);
+
+            if (_authService.IsAuthenticated(loginDto, out var token))
             {
-                throw new ArgumentException($"{nameof(model.Password)} cannot be null");
+                return Ok(new LoginResponse()
+                {
+                    Token = token,
+                });
             }
-            if (await _service.SignIn(HttpContext, model.UserName, model.Password))
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest(); 
-            }
+
+            return BadRequest("Invalid Request");
         }
 
-        [HttpGet("logout")]
-        //[ValidateAntiForgeryToken] // to do add user stories
-        public async Task<IActionResult> SignOut()
-        {
-            await _service.SignOut(HttpContext);
-            return Ok();
-        }
-
-        [HttpGet("isAuthenticated")]
-        public bool UserIsAuthenticated()
-        {
-            var isAuthenticated = User.Identity.IsAuthenticated;
-            return isAuthenticated;
-        }
     }
 }

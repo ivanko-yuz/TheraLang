@@ -95,8 +95,16 @@ import { ResourceCreateComponent } from './modules/main/pages/resource/resource-
 import { ProjectTypeFormComponent } from './modules/main/pages/project/project-type-form/project-type-form.component';
 import { ProjectTypeCreateFormComponent } from './modules/main/pages/project/project-type-create-form/project-type-create-form.component';
 import { MainComponent } from './modules/main/main.component';
+
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthGuard } from './guards/auth-guard.service';
+
 import { DaysLeftPipe } from './modules/main/pages/project/days-left.pipe';
 
+
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+}
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -206,6 +214,13 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
+    }), 
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["localhost:5000"],
+        blacklistedRoutes: []
+      }
     })
   ],
   exports: [ResourcesInternalTableComponent],
@@ -223,7 +238,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpProjectService,
     UserService,
     ResourceCreateService,
-    ProjectTypeHttp
+    ProjectTypeHttp, 
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

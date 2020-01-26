@@ -17,6 +17,7 @@ using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
 
+
 namespace TheraLang.Web
 {
     public class Startup
@@ -32,14 +33,14 @@ namespace TheraLang.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLocalization(options =>
-                options.ResourcesPath = "Resources"
-            );
+            //services.AddLocalization(options =>
+            //    options.ResourcesPath = "Resources"
+            //);
 
-            services.AddMvc()
-                .AddPiranhaManagerOptions()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation(fv => { fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; });
+            //services.AddMvc()
+            //    //.AddPiranhaManagerOptions()
+            //    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            //    .AddFluentValidation(fv => { fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -47,6 +48,11 @@ namespace TheraLang.Web
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
+            services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
+            services.AddScoped<IUserManagementService, UserManagementService>();
+            
             #region Piranha setup
             services.AddPiranha();
             services.AddPiranhaApplication();
@@ -59,8 +65,6 @@ namespace TheraLang.Web
 
             services.AddPiranhaEF(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddPiranhaIdentityWithSeed<IdentitySQLServerDb>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
@@ -70,6 +74,7 @@ namespace TheraLang.Web
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
+            services.AddAuthentication(Configuration);
 
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
@@ -103,20 +108,20 @@ namespace TheraLang.Web
             App.CacheLevel = Piranha.Cache.CacheLevel.None;
 
             // Build content types
-            new Piranha.AttributeBuilder.PageTypeBuilder(api)
-                .AddType(typeof(Models.BlogArchive))
-                .AddType(typeof(Models.StandardPage))
-                .AddType(typeof(Models.TeaserPage))
-                .Build()
-                .DeleteOrphans();
-            new Piranha.AttributeBuilder.PostTypeBuilder(api)
-                .AddType(typeof(Models.BlogPost))
-                .Build()
-                .DeleteOrphans();
-            new Piranha.AttributeBuilder.SiteTypeBuilder(api)
-                .AddType(typeof(Models.StandardSite))
-                .Build()
-                .DeleteOrphans();
+            //new Piranha.AttributeBuilder.PageTypeBuilder(api)
+            //    .AddType(typeof(Models.BlogArchive))
+            //    .AddType(typeof(Models.StandardPage))
+            //    .AddType(typeof(Models.TeaserPage))
+            //    .Build()
+            //    .DeleteOrphans();
+            //new Piranha.AttributeBuilder.PostTypeBuilder(api)
+            //    .AddType(typeof(Models.BlogPost))
+            //    .Build()
+            //    .DeleteOrphans();
+            //new Piranha.AttributeBuilder.SiteTypeBuilder(api)
+            //    .AddType(typeof(Models.StandardSite))
+            //    .Build()
+            //    .DeleteOrphans();
 
             // Register middleware
             app.UseStaticFiles();
