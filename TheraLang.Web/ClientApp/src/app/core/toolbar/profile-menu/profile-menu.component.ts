@@ -20,6 +20,18 @@ export class ProfileMenuComponent implements OnInit {
   ngOnInit() {}
 
   onLogout() {
-    this.userService.logout()
+    this.userService.logout().subscribe(
+      async (msg: string) => {
+        msg = await this.translate
+          .get("components.account.logged-out-successfully")
+          .toPromise();
+        this.notification.success(msg);
+      },
+      async error => {
+        console.log(error);
+        const msg = await this.translate.get("common.error").toPromise();
+        this.notification.warn(msg);
+      }
+    );
   }
 }
