@@ -1,6 +1,7 @@
 .mat-stroked-button {
-    background-color: rgb(139, 147, 150);
+    background-color: #4a1e5f;
     margin-left: 15px;
+    color: white;
 }
 
 .clear {
@@ -8,58 +9,115 @@
     border      : 1px solid;
     border-color: #ffffff;
 }
-    .buttons{
-        display: flex;
-        justify-content: right;
-        height: 50px;
-        float: left;
-    }
-.project-content{
-    margin-top: 15px;
-    margin-left: 15px;
-    max-height: 150px;
-    width: 100%;
+
+.mat-card-title{
+    font-size: 32px;
+    margin-bottom: 4px;
+   
 }
+.detailes{
+    color: black;
+}
+
+.project-image {
+    margin: 0;
+    margin-right: 20px;
+    width: 350px;
+    height: 350px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
 .project-description{
-    font-family: Adamina;
+    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     line-height: 1.5;
     font-size: 20px;
     line-height: 28px;
+    width: 100%;
 }
-.mat-card-title{
-    font-size: 35px;
-    margin-bottom: 4px;
-}
-.mat-raised-button{
-    color: #59B0A1;
-    margin-top: 40px;
-    display: flex;
-    float: right;
-}
-.mat-card-image {
-    margin: 0;
-    margin-right: 10px;
-    width: 250px;
-    height: 250px;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-  }
-.home-card {
 
+.home-card {
     padding: 0;
     margin: 40px;
     margin-left: 50px;
     margin-right: 50px;
 }
 
-.home-card-content {
-    display: flex;
-    justify-content: space-between;
+.buttons-container{
+    height: 24px;
 }
 
 .mat-progress-bar {
     height: 20px;
-    width: 400px;
+    width: 100%;
 }
+
+.main-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.actions-conteiner {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.donate-button{
+    width: 100px;
+    height: 50px;
+}
+
+.mat-raised-button{
+    margin-right: 25px;
+    float: right;
+    height: 50px;
+    width: 200px;
+    font-size: 24px;
+}
+.mat-raised-button.mat-primary {
+    background-color:   #59B0A1;
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+    background-color: #59B0A1;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+    background: #C4C4C4 ;
+}
+
+.donation-sum{
+    color: #59B0A1;
+    font-size: 26px;
+}
+
+.rised-sum{
+    color: #534E4E;
+    font-size: 24px;
+    margin-left: 5px;
+}
+
+.text-content{
+    display: flex;
+    justify-content: center;
+}   
+
+.days-left-block{
+    padding-left: 20px;
+}
+
+.days{
+    font-size: 35px;
+    color: #423D3D;
+    height: 38px;
+    
+    text-align: center;
+}
+
+.ng-star-inserted{
+    font-size: 16px;
+    color: #534E4E;
+}
+

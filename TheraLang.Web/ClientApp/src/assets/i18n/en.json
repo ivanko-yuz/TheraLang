@@ -65,7 +65,9 @@
       "type": "Type of project",
       "new-projects": "New projects",
       "owner": "Project Owner",
-      "join": "Join project"
+      "join": "Join project",
+      "days-left": "Days left",
+      "rised-of": "rised of"
     },
     "resources": {
       "title": "Resources",
