@@ -76,7 +76,7 @@ namespace TheraLang.Web
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
             services.AddAzureStorageClientFactory(Configuration.GetConnectionString("AzureConnection"));
-            services.AddTransient<IFileService, LocalFileService>();
+            services.AddTransient<IFileService, AzureFileService>();
             services.AddAuthentication(Configuration);
 
             services.AddTransient<IProjectService, ProjectService>();
