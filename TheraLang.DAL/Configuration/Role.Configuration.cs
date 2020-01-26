@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TheraLang.DAL.Piranha.Entities;
+using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Piranha.Configuration
 {
-    public class PiranhaRoleConfiguration : IEntityTypeConfiguration<PiranhaRole>
+    public class PiranhaRoleConfiguration : IEntityTypeConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<PiranhaRole> builder)
+        public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.ToTable("Piranha_Roles");
+            builder.ToTable("Roles");
 
             builder.HasIndex(e => e.NormalizedName)
                 .HasName("RoleNameIndex")

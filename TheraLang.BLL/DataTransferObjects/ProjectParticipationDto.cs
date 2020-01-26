@@ -1,10 +1,10 @@
-﻿using TheraLang.DAL.Piranha.Entities;
+﻿using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects
 {
     public class ProjectParticipationDto
     {
-        public PiranhaUser PiranhaUser { get; set; }
+        public User User { get; set; }
 
         public MemberRoleDto Role { get; set; }
 

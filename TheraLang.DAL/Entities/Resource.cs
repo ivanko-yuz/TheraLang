@@ -5,7 +5,7 @@ namespace TheraLang.DAL.Entities
 {
     public class Resource : BaseEntity
     {
-        public virtual PiranhaUser PiranhaUser { get; set; }
+        public virtual User User { get; set; }
 
         public string Name { get; set; }
 
