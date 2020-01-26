@@ -8,7 +8,7 @@
   <table mat-table [dataSource]="projectParticipationRequest" *ngIf="projectParticipationRequest.filteredData.length > 0">
 
     <ng-container matColumnDef="requestedUserName">
-      <th mat-header-cell *matHeaderCellDef>{{'components.user.username'|translate}}</th>
+      <th mat-header-cell *matHeaderCellDef>{{'components.user.user-name'|translate}}</th>
       <td mat-cell *matCellDef="let element"> {{element.requestedUserName}} </td>
     </ng-container>
 
