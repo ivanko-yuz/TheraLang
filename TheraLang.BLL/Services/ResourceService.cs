@@ -43,9 +43,11 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var fileUri = await _fileService.SaveFile(resourceDto.File);
-                resourceDto.Url = fileUri.ToString();
-             
+                if (resourceDto.Url == null)
+                {
+                    var fileUri = await _fileService.SaveFile(resourceDto.File);
+                    resourceDto.Url = fileUri.ToString();
+                }
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
                     .ForMember(r => r.File, opt => opt.Ignore())
                     .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId))

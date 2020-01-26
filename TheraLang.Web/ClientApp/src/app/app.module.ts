@@ -96,6 +96,7 @@ import { ProjectTypeFormComponent } from "./modules/main/pages/project/project-t
 import { ProjectTypeCreateFormComponent } from "./modules/main/pages/project/project-type-create-form/project-type-create-form.component";
 import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
+import { RxReactiveFormsModule } from "@rxweb/reactive-form-validators";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -206,7 +207,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    RxReactiveFormsModule
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [
