@@ -6,6 +6,7 @@ using TheraLang.BLL;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
 {
@@ -26,7 +27,7 @@ namespace TheraLang.Web.Controllers
         /// <param name="projectId">a project that you want to donate to</param>
         /// <returns>LiqPayCheckoutModel</returns>
         [HttpGet("{donationAmount}/{projectId?}")]
-        
+        [AllowAnonymous]
         public ActionResult<LiqPayCheckoutModel> Get(string donationAmount, int? projectId)
         {
             if (projectId == default(int))
@@ -53,6 +54,7 @@ namespace TheraLang.Web.Controllers
         /// <param name="donationId"></param>
         /// <returns>Donation record</returns>
         [HttpGet("transaction/{donationId}")]
+        [AllowAnonymous]
         public ActionResult<DonationViewModel> Get(string donationId)
         {
             if (String.IsNullOrEmpty(donationId))
@@ -77,6 +79,7 @@ namespace TheraLang.Web.Controllers
         /// <param name="signature"></param>
         /// <returns>status code</returns>
         [HttpPost("{donationId}/{projectId?}")]
+        [AllowAnonymous]
         public async Task<ActionResult> Post(string donationId, int? projectId, [FromForm]string data, [FromForm]string signature)
         {
             if (string.IsNullOrEmpty(data))
