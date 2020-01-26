@@ -32,31 +32,31 @@
           [placeholder]="'common.description' | translate"
         />
       </mat-form-field>
-      <div formGroupName="urlFile">
-        <mat-form-field class="example-full-width">
-          <input
-            formControlName="url"
-            matInput
-            [placeholder]="'components.resources.url' | translate"
-          />
-        </mat-form-field>
 
-        <!-- <mat-form-field class="example-full-width">
-          <input
-            formControlName="fileName"
-            matInput
-            [placeholder]="'components.resources.file-name' | translate"
-          />
-        </mat-form-field> -->
-        <mat-form-field>
-          <ngx-mat-file-input
-            formControlName="file"
-            [valuePlaceholder]="'components.resources.add' | translate"
-          ></ngx-mat-file-input>
-          <mat-icon matSuffix>folder</mat-icon>
-        </mat-form-field>
-      </div>
+      <mat-form-field class="example-full-width">
+        <input
+          formControlName="url"
+          matInput
+          [placeholder]="'components.resources.url' | translate"
+        />
+      </mat-form-field>
+
+      <!-- <mat-form-field class="example-full-width">
+        <input
+          formControlName="fileName"
+          matInput
+          [placeholder]="'components.resources.file-name' | translate"
+        />
+      </mat-form-field> -->
     </div>
+
+    <mat-form-field>
+      <ngx-mat-file-input
+        formControlName="file"
+        [valuePlaceholder]="'components.resources.add' | translate"
+      ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
 
     <mat-dialog-actions class="submitButton">
       <button
