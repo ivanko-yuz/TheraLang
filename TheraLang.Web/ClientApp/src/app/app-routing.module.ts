@@ -14,16 +14,17 @@ import { LoginComponent } from './modules/login/login.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { CmsModule } from './modules/cms-generic/cms.module';
 import { GeneralResourcesComponent } from './modules/main/pages/resource/general-resources.component';
+import { AuthGuard } from './guards/auth-guard.service';
 
 const routes: Routes = [
   { path: "", component: MainComponent, children:[
       {path: "", component: HomeComponent},
-      { path: "participants", component: ProjectParticipantsComponent },
-      { path: "projects/:id", component: ProjectInfoComponent },
+      { path: "participants", component: ProjectParticipantsComponent,  canActivate: [AuthGuard] },
+      { path: "projects/:id", component: ProjectInfoComponent,  canActivate: [AuthGuard]  },
       { path: "projects", component: ProjectComponent },
       { path: "donations/:projectId", component: DonationComponent },
-      { path: "donations", component: DonationComponent },
-      { path: "resources", component: GeneralResourcesTableComponent },
+      { path: "donations", component: DonationComponent, canActivate: [AuthGuard]  },
+      { path: "resources", component: GeneralResourcesTableComponent, canActivate: [AuthGuard]  },
       { path: "transaction/:donationId", component: TransactionResultComponent },
       { path: "projectTypes", component: ProjectTypeComponent },
       { path: "projectRequest", component: ProjectRequestComponent }

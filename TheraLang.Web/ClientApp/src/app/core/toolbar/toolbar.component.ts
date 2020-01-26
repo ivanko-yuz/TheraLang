@@ -41,11 +41,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     this.subscription.add(subscription);
-    this.userService
-      .isAuthenticated()
-      .subscribe(
-        (isAuthinticated: boolean) => (this.isAuthinticated = isAuthinticated)
-      );
+    this.isAuthinticated= this.userService.isAuthenticated();
   }
 
   ngAfterViewInit(): void {
