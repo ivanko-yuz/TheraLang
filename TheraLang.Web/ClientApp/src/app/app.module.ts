@@ -97,6 +97,14 @@ import { ProjectTypeCreateFormComponent } from "./modules/main/pages/project/pro
 import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
 
+import { JwtModule } from "@auth0/angular-jwt";
+import { AuthGuard } from "./guards/auth-guard.service";
+
+import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
+
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+}
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -130,7 +138,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectTypeCreateFormComponent,
     LanguageComponent,
     MainComponent,
-    CmsPagesToolbarItemComponent
+    CmsPagesToolbarItemComponent,
+    DaysLeftPipe
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -206,7 +215,14 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    MaterialFileInputModule
+    MaterialFileInputModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["localhost:5000"],
+        blacklistedRoutes: []
+      }
+    })
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [
@@ -223,7 +239,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpProjectService,
     UserService,
     ResourceCreateService,
-    ProjectTypeHttp
+    ProjectTypeHttp,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

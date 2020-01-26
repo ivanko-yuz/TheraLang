@@ -16,7 +16,7 @@ import { LoginComponent } from 'src/app/modules/login/login.component';
 export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   hasNotification: boolean = false;
   projectParticipation: ProjectParticipationRequest[];
-  
+
   private subscription = new Subscription();
   isAuthinticated: boolean;
 
@@ -41,11 +41,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     this.subscription.add(subscription);
-    this.userService
-      .isAuthenticated()
-      .subscribe(
-        (isAuthinticated: boolean) => (this.isAuthinticated = isAuthinticated)
-      );
+    this.isAuthinticated = this.userService.isAuthenticated();
   }
 
   ngAfterViewInit(): void {

@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Piranha.AspNetCore.Identity.Data;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
+using TheraLang.Web.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
 {
@@ -16,14 +16,14 @@ namespace TheraLang.Web.Controllers
  
     public class ProjectTypeController : ControllerBase
     {
-        public ProjectTypeController(IProjectTypeService service, UserManager<User> userManager)
+        public ProjectTypeController(IProjectTypeService service, IUserManagementService userManager)
         {
             _service = service;
             _userManager = userManager;
         }
 
         private readonly IProjectTypeService _service;
-        private readonly UserManager<User> _userManager;
+        private readonly IUserManagementService _userManager;
 
         /// <summary>
         /// create project type
@@ -31,6 +31,7 @@ namespace TheraLang.Web.Controllers
         /// <param name="projectTypeModel"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> PostProjectType([FromBody]ProjectTypeViewModel projectTypeModel)
         {
             if (projectTypeModel == null)
@@ -46,13 +47,17 @@ namespace TheraLang.Web.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPut]       
+        [Authorize]
         public async Task<IActionResult> PutProjectType([FromBody] ProjectTypeViewModel projectTypeModel)
         {
             if (projectTypeModel == null)
             {
                 throw new ArgumentException($"{nameof(projectTypeModel)} can not be null");
             }
+            var UserId = User.Claims.GetUserId();
+            if (UserId == null) return BadRequest();
+            var user = _userManager.GetUserById(UserId.Value);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
             var projectTypeDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
@@ -62,7 +67,8 @@ namespace TheraLang.Web.Controllers
         }
 
         
-        [HttpDelete("{id}")]        
+        [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteProjectType(int id)
         {
             if (id == default)
@@ -78,6 +84,7 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of ProjectsTypes</returns>
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<ProjectTypeDto> GetAllTypes()
         {
             return _service.GetAllProjectsType();
@@ -89,6 +96,7 @@ namespace TheraLang.Web.Controllers
         /// <param name="id"></param>
         /// <returns>selected ProjectType</returns>
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetType(int id)
         {
             if (id == default)

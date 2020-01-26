@@ -126,7 +126,7 @@ namespace TheraLang.BLL.Services
                 var mapper = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Resource, ResourceDto>()
-                        .ForMember(res=>res.File,opt=>opt.Ignore());
+                        .ForMember(res => res.File, opt => opt.Ignore());
                 }).CreateMapper();
                 var resourcesPerPagesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resources);
 
@@ -158,7 +158,7 @@ namespace TheraLang.BLL.Services
                 var query = _unitOfWork.Repository<ResourceCategory>().Get();
                 if (withAssignedResources)
                 {
-                    query = query.Where(cat=>cat.Resources.Any());
+                    query = query.Where(cat => cat.Resources.Any());
                 }
 
                 var resourceEntities = query.ToList();
@@ -166,7 +166,7 @@ namespace TheraLang.BLL.Services
                     {
                         cfg.CreateMap<ResourceCategory, ResourceCategoryDto>(MemberList.None);
                         cfg.CreateMap<Resource, ResourceDto>(MemberList.None)
-                            .ForMember(r=>r.File,opt=>opt.Ignore());
+                            .ForMember(r => r.File, opt => opt.Ignore());
                     })
                     .CreateMapper();
                 var resourceCategoriesDto = mapper.Map<IEnumerable<ResourceCategory>, IEnumerable<ResourceCategoryDto>>(resourceEntities);
@@ -188,7 +188,7 @@ namespace TheraLang.BLL.Services
                                        select new Resource
                                        {
                                            Id = res.Id,
-                                           PiranhaUser = res.PiranhaUser,
+                                           User = res.User,
                                            Name = res.Name,
                                            Description = res.Description,
                                            Url = res.Url,

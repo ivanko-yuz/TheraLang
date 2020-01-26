@@ -1,4 +1,7 @@
+using Common.Helpers.PasswordHelper;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using TheraLang.DAL.Configuration;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Piranha.Configuration;
@@ -12,7 +15,7 @@ namespace TheraLang.DAL
         {
             //Database.Migrate();
         }
-
+        
         #region UTTMM_Entities
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectType> Types { get; set; }
@@ -23,6 +26,9 @@ namespace TheraLang.DAL
         public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<Society> Societies { get; set; }
         public virtual DbSet<ResourceAttachment> ResourceAttachments { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+
         #endregion
 
         #region Piranha_Entities
@@ -45,21 +51,16 @@ namespace TheraLang.DAL
         public virtual DbSet<PiranhaPostTag> PiranhaPostTags { get; set; }
         public virtual DbSet<PiranhaPostType> PiranhaPostTypes { get; set; }
         public virtual DbSet<PiranhaPost> PiranhaPosts { get; set; }
-        public virtual DbSet<PiranhaRoleClaim> PiranhaRoleClaims { get; set; }
-        public virtual DbSet<PiranhaRole> PiranhaRoles { get; set; }
         public virtual DbSet<PiranhaSiteField> PiranhaSiteFields { get; set; }
         public virtual DbSet<PiranhaSiteType> PiranhaSiteTypes { get; set; }
         public virtual DbSet<PiranhaSite> PiranhaSites { get; set; }
         public virtual DbSet<PiranhaTag> PiranhaTags { get; set; }
-        public virtual DbSet<PiranhaUserClaim> PiranhaUserClaims { get; set; }
-        public virtual DbSet<PiranhaUserLogin> PiranhaUserLogins { get; set; }
-        public virtual DbSet<PiranhaUserRole> PiranhaUserRoles { get; set; }
-        public virtual DbSet<PiranhaUserToken> PiranhaUserTokens { get; set; }
-        public virtual DbSet<PiranhaUser> PiranhaUsers { get; set; }
+
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+           
             #region Piranha_Entities_Cfg
             modelBuilder.ApplyConfiguration(new PiranhaAliasConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaBlockFieldConfiguration());
@@ -80,18 +81,11 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new PiranhaPostTagConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaPostTypeConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaPostConfiguration());
-            modelBuilder.ApplyConfiguration(new PiranhaRoleClaimConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaRoleConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaSiteFieldConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaSiteTypeConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaSiteConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaTagConfiguration());
-            modelBuilder.ApplyConfiguration(new PiranhaUserClaimConfiguration());
-            modelBuilder.ApplyConfiguration(new PiranhaUserLoginConfiguration());
-            modelBuilder.ApplyConfiguration(new PiranhaUserRoleConfiguration());
-            modelBuilder.ApplyConfiguration(new PiranhaUserTokenConfiguration());
-            modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
-            modelBuilder.ApplyConfiguration(new PiranhaUserConfiguration());
             #endregion
 
             #region UTTMM_Entities_Cfg
@@ -104,8 +98,16 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new DonationConfiguration());
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            var AdminRoleID = Guid.NewGuid();
+            var MemberRoleId = Guid.NewGuid();
+            modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
+            modelBuilder.Entity<Role>().HasData(new Role { Id = MemberRoleId, Name = "Member", NormalizedName = "MEMBER" });
+            modelBuilder.Entity<Role>().HasData(new Role { Id = Guid.NewGuid(), Name = "Guest", NormalizedName = "GUEST" });
+            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), UserName = "Admin", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = AdminRoleID });
+            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), UserName = "Member", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = MemberRoleId });
             #endregion
-        }
 
+        }
     }
 }
