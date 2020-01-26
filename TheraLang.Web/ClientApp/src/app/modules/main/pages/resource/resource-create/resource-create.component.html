@@ -1,50 +1,76 @@
 <h2 mat-dialog-title>
-    <p>Створити ресурс</p>
+  <p>Створити ресурс</p>
 </h2>
 
-<form [formGroup]="this.service.resourceForm">
-    <mat-dialog-content style="height: 450px">
-        <div fxLayout="column">
-            <mat-form-field class="example-full-width">
-                <mat-select formControlName="categoryId" required [placeholder]="'components.resources.type'|translate">
-                    <mat-option *ngFor="let category of categories" formControlName="categoryId" [value]="category.id">
-                        {{category.type}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+<form [formGroup]="service.resourceForm">
+  <mat-dialog-content style="height: 350px">
+    <div fxLayout="column">
+      <mat-form-field class="example-full-width">
+        <mat-select
+          formControlName="categoryId"
+          [placeholder]="'components.resources.type' | translate"
+        >
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <input formControlName="name" autofocus required matInput
-                    [placeholder]="'components.resources.name'|translate">
-            </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          formControlName="name"
+          autofocus
+          matInput
+          [placeholder]="'components.resources.name' | translate"
+        />
+      </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <input formControlName="description" required matInput [placeholder]="'common.description'|translate">
-            </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          formControlName="description"
+          matInput
+          [placeholder]="'common.description' | translate"
+        />
+      </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <input formControlName="url" matInput [placeholder]="'components.resources.url'|translate">
-            </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          formControlName="url"
+          matInput
+          [placeholder]="'components.resources.url' | translate"
+        />
+      </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <input formControlName="fileName" matInput [placeholder]="'components.resources.file-name'|translate">
-            </mat-form-field>
-        </div>
+      <!-- <mat-form-field class="example-full-width">
+        <input
+          formControlName="fileName"
+          matInput
+          [placeholder]="'components.resources.file-name' | translate"
+        />
+      </mat-form-field> -->
+    </div>
 
-        <mat-dialog-actions>
-            <button mat-raised-button color="primary" (click)="file.click()">{{'components.resources.add'|translate}}</button>
-            <span *ngIf="fileName" class="file-name">{{fileName}}</span>
-            <input #file type="file" formControlName="file" (change)="onFileChange($event)">
-        </mat-dialog-actions>
-    
-        <mat-dialog-actions class="submitButton">
-            <button mat-raised-button color="warn" type="reset" (click)="onClose()">
-                {{'common.cancel'|translate}}
-            </button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="this.service.resourceForm.invalid"
-                (click)='onSubmit()'>
-                {{'common.confirm'|translate}}
-            </button>
-        </mat-dialog-actions>
-    </mat-dialog-content>
+    <mat-form-field>
+      <ngx-mat-file-input
+        formControlName="file"
+        [valuePlaceholder]="'components.resources.add' | translate"
+      ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+
+    <mat-dialog-actions class="submitButton">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="this.service.resourceForm.invalid"
+        (click)="onSubmit()"
+      >
+        {{ "common.confirm" | translate }}
+      </button>
+      <button mat-raised-button color="warn" type="reset" (click)="onClose()">
+        {{ "common.cancel" | translate }}
+      </button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
 </form>

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects
 {
@@ -9,5 +8,6 @@ namespace TheraLang.BLL.DataTransferObjects
 
         public string Type { get; set; }
 
+        public IEnumerable<ResourceDto> Resources { get; set; }
     }
 }

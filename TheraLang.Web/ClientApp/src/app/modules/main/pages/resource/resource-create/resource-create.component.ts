@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { ResourceCategory } from "src/app/shared/models/resource/resource-category";
 import { ResourceCreateService } from "src/app/core/http/resource/resource-create.service";
+import { Resource } from "src/app/shared/models/resource/resource";
 
 @Component({
   selector: "app-resource-create",
@@ -10,7 +11,7 @@ import { ResourceCreateService } from "src/app/core/http/resource/resource-creat
 })
 export class ResourceCreateComponent implements OnInit {
   categories: ResourceCategory[];
-  fileName : string;
+  fileName: string;
 
   constructor(
     private dialog: MatDialogRef<ResourceCreateComponent>,
@@ -44,7 +45,15 @@ export class ResourceCreateComponent implements OnInit {
       );
       return;
     } else {
-      this.service.addResource(this.service.resourceForm.value);
+      const resource: Resource = this.service.resourceForm.value;
+      if(resource.file != null){
+        resource.file = this.service.resourceForm.value.file.files[0];
+      }
+
+      if (this.service.resourceForm.get("url").disabled) {
+        resource.url = "";
+      }
+      this.service.addResource(resource);
       this.onClose();
     }
   }

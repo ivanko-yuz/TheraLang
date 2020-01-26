@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 
 namespace TheraLang.Web.ViewModels
 {
     public class ResourceViewModel
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }

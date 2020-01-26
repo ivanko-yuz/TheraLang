@@ -36,7 +36,7 @@ namespace TheraLang.Web.Controllers
         [HttpPost]
         [Authorize]
         [Route("create")]
-        public async Task<IActionResult> PostResource([FromBody] ResourceViewModel resourceModel)
+        public async Task<IActionResult> PostResource([FromForm] ResourceViewModel resourceModel)
         {
             var validationResult = _validator.Validate(resourceModel);
 
