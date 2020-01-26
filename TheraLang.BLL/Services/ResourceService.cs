@@ -6,8 +6,6 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using System.IO;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Piranha.AspNetCore.Identity.Data;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 

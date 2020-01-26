@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects
 {

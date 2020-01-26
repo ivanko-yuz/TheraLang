@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using FluentValidation;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
@@ -14,7 +13,7 @@ namespace TheraLang.Web.Controllers
         private readonly IFileService _fileManager;
         private readonly IValidator<FileViewModel> _validator;
         
-        public FileController(IHostingEnvironment env, IFileService fileManager, IValidator<FileViewModel> validator)
+        public FileController(IFileService fileManager, IValidator<FileViewModel> validator)
         {
             _fileManager = fileManager;
             _validator = validator;
