@@ -72,15 +72,16 @@ namespace TheraLang.BLL.Services
         {
             try
             {
+                var user = _unitOfWork.Repository<User>().Get().Where(u => u.Id == userId).FirstOrDefault();
                 var isRequested = _unitOfWork.Repository<ProjectParticipation>()
                     .Get()
-                    .Any(p => p.ProjectId == projectId && p.CreatedById == userId);
+                    .Any(p => p.ProjectId == projectId && p.User.Id == userId);
 
                 if (!isRequested)
                 {
                     ProjectParticipation member = new ProjectParticipation
                     {
-                        CreatedById = userId,
+                        User = user,
                         ProjectId = projectId,
                         Status = ProjectParticipationStatus.New,
                     };
