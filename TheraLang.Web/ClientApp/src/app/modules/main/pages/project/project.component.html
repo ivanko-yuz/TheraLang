@@ -3,38 +3,59 @@
 </button>
 
 <div *ngFor="let project of projects">
-  <mat-card class="project-card">
-    <mat-card-header class="header">
-      <mat-card-title>
-        <a mat-button class="donate-button" [routerLink]="['/donations', project.id]">Підтримати</a>
-        <div>{{'components.donation.need'|translate}}
-          <h3 class="donation-target">₴ {{project?.donationTargetSum}}</h3>
+  <mat-card class="home-card mat-elevation-z5">
+    <mat-card-content class="home-card-content" fxLayout="row">
+      
+      <div class="image-container" >
+        <img class="project-image" src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg" alt="">
+      </div>
+
+      <div class="main-container" fxLayout="column" >
+        
+        <div class="content-container"  fxLayout="row" fxFlex = "85">
+          <div class="text-conteiner" fxLayout = "column"  fxFlex = "95">
+            <mat-card-title>
+              <a class = "detailes" [routerLink]="['/projects', project.id]"> {{project?.name}}</a>
+            </mat-card-title>
+            <div class = "project-description" fxFlex = "100">
+            {{project?.description.substring(0, 550)}}
+            </div>
+          </div>
+          <div class="buttons-container" fxLayout="row" fxFlex>
+            <button mat-icon-button (click)="onEdit(project)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onDelete(project.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
-        <div>{{'components.donation.raised'|translate}}
-          <h5 class="donation-sum">₴ {{project?.donationsSum}}</h5>
+   
+     
+        <div class="actions-conteiner"  fxLayout="row">
+          <div class="progress-bar-block" fxFlex = "33">
+            <div class="text-content" >
+              <span class="donation-sum">₴{{project.donationsSum}} </span> 
+              <span class="rised-sum"> {{'components.projects.rised-of'|translate}} {{project.donationTargetSum}}</span>
+            </div>
+            <section class="progress-bar-section">
+              <mat-progress-bar
+                class="example-margin"
+                [color]="primary"
+                [mode]="determinate"
+                [value]="getProjectProgress(project) * 100">
+              </mat-progress-bar>
+            </section>
+          </div>
+          <div class="days-left-block"  fxLayout="column" fxFlex = "none">
+            <span class="days">{{project | daysLeft}}</span>
+            <span  *ngIf="(project | daysLeft) >= 0" clas="texter">{{'components.projects.days-left'|translate}}</span>
+          </div>
+          <div class="donate-button" fxFlexAlign="end end" fxFlex = "70" fxLayoutAlign="end end">
+            <button mat-raised-button color = "primary" [routerLink]="['/donations', project.id]">{{'components.projects.donate'|translate}}</button>
+          </div>
         </div>
-        <div>{{'components.donation.to-be-raised'|translate}}
-          <h5 class="donation-left-to-collect">₴ {{project?.sumLeftToCollect}}</h5>
-        </div>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-title>{{project?.name}}</mat-card-title>
-    <mat-card-subtitle>Ukraine, id - {{project?.id}}</mat-card-subtitle>
-    <img class="project-image" mat-card-image
-      src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg"
-      alt="">
-    <mat-card-content>
-      <div class="project-info">
-        {{project?.description}}
-        <p>{{'components.projects.project-starts'|translate}}: {{project?.projectStart | date: 'dd/MM/yyyy'}}</p>
-        <p>{{'components.projects.project-ends'|translate}}: {{project?.projectEnd | date: 'dd/MM/yyyy'}}</p>
       </div>
     </mat-card-content>
-    <div class="clear"></div>
-    <mat-card-actions class="get-details-button">
-      <a mat-stroked-button [routerLink]="['/projects', project.id]">{{'common.details'|translate}}</a>
-      <button mat-stroked-button (click)="onEdit(project)">{{'common.edit'|translate}}</button>
-      <button mat-stroked-button (click)="onDelete(project.id)">{{'components.projects.delete'|translate}}</button>
-    </mat-card-actions>
   </mat-card>
 </div>
