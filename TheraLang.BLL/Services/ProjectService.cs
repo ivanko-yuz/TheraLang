@@ -60,6 +60,8 @@ namespace TheraLang.BLL.Services
 
         public async Task Add(ProjectDto projectDto, Guid userId)
         {
+            var user = _unitOfWork.Repository<User>().Get().Where(u => u.Id == userId).FirstOrDefault();
+
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, Project>()
                 .ForMember(p => p.DonationTarget, opt => opt.MapFrom(src => src.DonationTargetSum))
                 .ForMember(p => p.IsActive, opt => opt.MapFrom(src => true)))
@@ -70,7 +72,7 @@ namespace TheraLang.BLL.Services
             var newParticipant = new ProjectParticipation
             {
                 Role = MemberRole.ProjectOwner,
-                CreatedById = userId,
+                User = user,
                 Status = ProjectParticipationStatus.Approved,
                 Project = project,
             };

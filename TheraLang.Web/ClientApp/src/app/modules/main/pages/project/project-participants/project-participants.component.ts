@@ -17,8 +17,7 @@ export class ProjectParticipantsComponent implements OnInit {
   showActionButtons: boolean = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = [
-    "requestedUserName",  
-    "requestedUserEmail",
+    "requestedUserName",
     "projectName",
     "status",
     "actions"
