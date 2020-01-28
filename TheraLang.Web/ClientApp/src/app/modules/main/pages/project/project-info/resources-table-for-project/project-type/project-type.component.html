@@ -1,4 +1,7 @@
-<button mat-raised-button (click)="onCreate()">{{'common.create'|translate}}</button>
+<button mat-raised-button color="primary" (click)="onCreate()">
+  <mat-icon>add</mat-icon>  {{'common.create'|translate}}
+</button>
+
 <table mat-table [dataSource]="projectTypes" class="mat-elevation-z8">
 
   <ng-container matColumnDef="typeName">
@@ -11,10 +14,10 @@
     <mat-cell *matCellDef="let element">
       <div>
         <span class="editButton">
-          <button mat-raised-button (click)="onEdit({id: element.id, typeName: element.typeName})">{{'common.edit'|translate}}</button>
+          <button mat-raised-button color="primary" (click)="onEdit({id: element.id, typeName: element.typeName})">{{'common.edit'|translate}}</button>
         </span>
         <span class="deleteButton">
-          <button mat-raised-button (click)="onDelete(element.id)">{{'common.delete'|translate}}</button>
+          <button mat-raised-button color="warn" (click)="onDelete(element.id)">{{'common.delete'|translate}}</button>
         </span>
       </div>
     </mat-cell>

@@ -32,14 +32,14 @@
       <mat-cell *matCellDef="let participationRequest">
         <div *ngIf="showActionButtons">
           <span class="aproveButton">
-            <button mat-raised-button (click)="changeStatus('approved', participationRequest)">{{'common.approve'|translate}}</button>
+            <button mat-raised-button color="primary" (click)="changeStatus('approved', participationRequest)">{{'common.approve'|translate}}</button>
           </span>
           <span class="rejectButton">
-            <button mat-raised-button (click)="changeStatus('rejected', participationRequest)">{{'common.reject'|translate}}</button>
+            <button mat-raised-button color="warn" (click)="changeStatus('rejected', participationRequest)">{{'common.reject'|translate}}</button>
           </span>
         </div>
         <div *ngIf="!showActionButtons">
-          <span class="toNewButton" >
+          <span class="toNewButton">
             <button mat-raised-button (click)="changeStatus('new', participationRequest)">{{'common.toNew'|translate}}</button>
           </span>
         </div>
