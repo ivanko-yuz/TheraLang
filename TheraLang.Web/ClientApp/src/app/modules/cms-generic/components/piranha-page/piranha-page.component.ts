@@ -1,7 +1,7 @@
 import { Page } from "../../../../shared/models/page/page.model";
 import { Component, OnInit, Input } from "@angular/core";
 import { CmsPageService } from "../../../../core/http/cms/cms-page.service";
-import { CmsRoute } from "src/app/core/toolbar/toolbar-item/cms-route";
+import { CmsRoute } from "src/app/modules/main/toolbar/toolbar-item/cms-route";
 
 @Component({
   selector: "app-piranha-page",
