@@ -98,13 +98,13 @@ import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
 
 import { JwtModule } from "@auth0/angular-jwt";
-import { AuthGuard } from "./guards/auth-guard.service";
 
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { ManagerComponent } from './modules/manager/manager.component';
 import { PageManagerComponent } from './modules/manager/page-manager/page-manager.component';
 import { CreatePageComponent } from './modules/manager/page-manager/create-page/create-page.component';
 import { QuillModule } from 'ngx-quill';
+import { AuthGuard } from "./shared/guards/auth-guard.service";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
