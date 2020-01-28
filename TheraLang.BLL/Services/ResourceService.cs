@@ -43,7 +43,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                if (resourceDto.Url == null)
+                if (resourceDto.File != null)
                 {
                     var fileUri = await _fileService.SaveFile(resourceDto.File);
                     resourceDto.Url = fileUri.ToString();

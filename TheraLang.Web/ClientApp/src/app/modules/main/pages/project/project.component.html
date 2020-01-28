@@ -1,24 +1,28 @@
 <button mat-stroked-button (click)="onCreate()">
-  <mat-icon>add</mat-icon>{{'components.projects.create'|translate}}
+  <mat-icon>add</mat-icon>{{ "components.projects.create" | translate }}
 </button>
 
 <div *ngFor="let project of projects">
   <mat-card class="home-card mat-elevation-z5">
     <mat-card-content class="home-card-content" fxLayout="row">
-      
-      <div class="image-container" >
-        <img class="project-image" src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg" alt="">
+      <div class="image-container">
+        <img
+          class="project-image"
+          src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg"
+          alt=""
+        />
       </div>
 
-      <div class="main-container" fxLayout="column" >
-        
-        <div class="content-container"  fxLayout="row" fxFlex = "85">
-          <div class="text-conteiner" fxLayout = "column"  fxFlex = "95">
+      <div class="main-container" fxLayout="column">
+        <div class="content-container" fxLayout="row" fxFlex="85">
+          <div class="text-conteiner" fxLayout="column" fxFlex="95">
             <mat-card-title>
-              <a class = "detailes" [routerLink]="['/projects', project.id]"> {{project?.name}}</a>
+              <a class="detailes" [routerLink]="['/projects', project.id]">
+                {{ project?.name }}</a
+              >
             </mat-card-title>
-            <div class = "project-description" fxFlex = "100">
-            {{project?.description.substring(0, 550)}}
+            <div class="project-description" fxFlex="100">
+              {{ project?.description.substring(0, 550) }}
             </div>
           </div>
           <div class="buttons-container" fxLayout="row" fxFlex>
@@ -30,29 +34,44 @@
             </button>
           </div>
         </div>
-   
-     
-        <div class="actions-conteiner"  fxLayout="row">
-          <div class="progress-bar-block" fxFlex = "33">
-            <div class="text-content" >
-              <span class="donation-sum">₴{{project.donationsSum}} </span> 
-              <span class="rised-sum"> {{'components.projects.rised-of'|translate}} {{project.donationTargetSum}}</span>
+
+        <div class="actions-conteiner" fxLayout="row">
+          <div class="progress-bar-block" fxFlex="33">
+            <div class="text-content">
+              <span class="donation-sum">₴{{ project.donationsSum }} </span>
+              <span class="rised-sum">
+                {{ "components.projects.rised-of" | translate }}
+                {{ project.donationTargetSum }}</span
+              >
             </div>
             <section class="progress-bar-section">
               <mat-progress-bar
                 class="example-margin"
-                [color]="primary"
-                [mode]="determinate"
-                [value]="getProjectProgress(project) * 100">
+                mode="determinate"
+                [value]="getProjectProgress(project) * 100"
+              >
               </mat-progress-bar>
             </section>
           </div>
-          <div class="days-left-block"  fxLayout="column" fxFlex = "none">
-            <span class="days">{{project | daysLeft}}</span>
-            <span  *ngIf="(project | daysLeft) >= 0" clas="texter">{{'components.projects.days-left'|translate}}</span>
+          <div class="days-left-block" fxLayout="column" fxFlex="none">
+            <span class="days">{{ project | daysLeft }}</span>
+            <span *ngIf="(project | daysLeft) >= 0" clas="texter">{{
+              "components.projects.days-left" | translate
+            }}</span>
           </div>
-          <div class="donate-button" fxFlexAlign="end end" fxFlex = "70" fxLayoutAlign="end end">
-            <button mat-raised-button color = "primary" [routerLink]="['/donations', project.id]">{{'components.projects.donate'|translate}}</button>
+          <div
+            class="donate-button"
+            fxFlexAlign="end end"
+            fxFlex="70"
+            fxLayoutAlign="end end"
+          >
+            <button
+              mat-raised-button
+              color="primary"
+              [routerLink]="['/donations', project.id]"
+            >
+              {{ "components.projects.donate" | translate }}
+            </button>
           </div>
         </div>
       </div>
