@@ -100,6 +100,10 @@ import { MaterialFileInputModule } from "ngx-material-file-input";
 import { JwtModule } from "@auth0/angular-jwt";
 
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
+import { ManagerComponent } from './modules/manager/manager.component';
+import { PageManagerComponent } from './modules/manager/page-manager/page-manager.component';
+import { CreatePageComponent } from './modules/manager/page-manager/create-page/create-page.component';
+import { QuillModule } from 'ngx-quill';
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 
 export function tokenGetter() {
@@ -139,7 +143,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageComponent,
     MainComponent,
     CmsPagesToolbarItemComponent,
-    DaysLeftPipe
+    DaysLeftPipe,
+    ManagerComponent,
+    PageManagerComponent,
+    CreatePageComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -208,6 +215,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PortalModule,
     ScrollingModule,
     CmsModule,
+    QuillModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -224,7 +232,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  exports: [ResourcesInternalTableComponent],
+  exports: [
+    ResourcesInternalTableComponent,
+    QuillModule
+  ],
   providers: [
     ResourceService,
     HttpService,
