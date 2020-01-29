@@ -1,4 +1,4 @@
-<button mat-stroked-button (click)="onCreate()">
+<button mat-raised-button class="create-button" color = "primary" (click)="onCreate()">
   <mat-icon>add</mat-icon>{{ "components.projects.create" | translate }}
 </button>
 
@@ -38,7 +38,7 @@
         <div class="actions-conteiner" fxLayout="row">
           <div class="progress-bar-block" fxFlex="33">
             <div class="text-content">
-              <span class="donation-sum">₴{{ project.donationsSum }} </span>
+              <span class="donation-sum color-accent">₴{{ project.donationsSum }} </span>
               <span class="rised-sum">
                 {{ "components.projects.rised-of" | translate }}
                 {{ project.donationTargetSum }}</span
@@ -46,6 +46,7 @@
             </div>
             <section class="progress-bar-section">
               <mat-progress-bar
+                color="accent"
                 class="example-margin"
                 mode="determinate"
                 [value]="getProjectProgress(project) * 100"
@@ -66,8 +67,9 @@
             fxLayoutAlign="end end"
           >
             <button
+              class="donate"
               mat-raised-button
-              color="primary"
+              color="accent"
               [routerLink]="['/donations', project.id]"
             >
               {{ "components.projects.donate" | translate }}
