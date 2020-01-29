@@ -98,7 +98,6 @@ import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
 
 import { JwtModule } from "@auth0/angular-jwt";
-
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { ManagerComponent } from './modules/manager/manager.component';
 import { PageManagerComponent } from './modules/manager/page-manager/page-manager.component';
