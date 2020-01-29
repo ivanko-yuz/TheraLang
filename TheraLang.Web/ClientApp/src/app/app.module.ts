@@ -98,9 +98,9 @@ import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
 
 import { JwtModule } from "@auth0/angular-jwt";
-import { AuthGuard } from "./guards/auth-guard.service";
 
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
+import { AuthGuard } from "./shared/guards/auth-guard.service";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");

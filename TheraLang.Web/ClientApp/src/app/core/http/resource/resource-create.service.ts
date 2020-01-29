@@ -53,12 +53,21 @@ export class ResourceCreateService {
       },
       { validators: [atLeastOne(Validators.required, ["url", "file"])] }
     );
+
     this.resourceForm.get("file").valueChanges.subscribe(val => {
       const isValidFile = !this.isNullOrEmpty(val);
       if (isValidFile) {
         this.resourceForm.get("url").disable();
       } else if (this.resourceForm.get("url").disabled) {
         this.resourceForm.get("url").enable();
+      }
+    });
+    this.resourceForm.get("url").valueChanges.subscribe(val => {
+      const isValidUrl = val !== "";
+      if (isValidUrl) {
+        this.resourceForm.get("file").disable();
+      } else if (this.resourceForm.get("file").disabled) {
+        this.resourceForm.get("file").enable();
       }
     });
   }
