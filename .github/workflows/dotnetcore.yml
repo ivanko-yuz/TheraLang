@@ -33,13 +33,4 @@ jobs:
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
         package: './myapp' 
         
-    - name: 'Run Smarter.ASP deploy action using FTP'
-      if: github.ref == 'refs/heads/master'
-      env:
-        INPUT_LOCALDIR: myapp
-        INPUT_REMOTEDIR: site
-      run: |
-        choco install lftp
-        lftp ${{ secrets.SmarterAsp_FTP_Url }} -u iittmm-001,${{ secrets.SmarterAsp_FTP_Password }} -e "set ssl:verify-certificate false; mirror --reverse --continue --dereference -x ^\.git/$ $INPUT_LOCALDIR $INPUT_REMOTEDIR; quit"
-      shell: bash
         
