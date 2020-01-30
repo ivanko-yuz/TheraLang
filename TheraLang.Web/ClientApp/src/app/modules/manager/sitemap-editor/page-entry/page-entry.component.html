@@ -1,0 +1,15 @@
+<div [class.item]="!isRoot">
+  <div *ngIf="isRoot">Root</div>
+  <div *ngIf="!isRoot">{{ page.title }}</div>
+
+  <div
+    *ngIf="page.items"
+    class="item-child"
+    [sortablejs]="page.items"
+    [sortablejsOptions]="options"
+  >
+    <div *ngFor="let subpage of page.items">
+      <app-page-entry [page]="subpage"></app-page-entry>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,7 @@ export class SiteMapService {
     this.updateSiteMap();
   }
 
-  private getSiteMap(): Observable<SiteMap[]> {
+  public getSiteMap(): Observable<SiteMap[]> {
     return this.http.get<SiteMap[]>(cmsSitemapUrl);
   }
 
@@ -32,7 +32,7 @@ export class SiteMapService {
 
     const subscription = this.getSiteMap().subscribe(
       next => {
-        this.siteMap.next(next);
+        this.siteMap.next(next["pages"]);
         this.siteMapUpdating = false;
         subscription.unsubscribe();
       },
