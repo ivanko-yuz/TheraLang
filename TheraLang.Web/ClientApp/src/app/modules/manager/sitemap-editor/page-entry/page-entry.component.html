@@ -1,6 +1,26 @@
-<div [class.item]="!isRoot">
-  <div *ngIf="isRoot">Root</div>
-  <div *ngIf="!isRoot">{{ page.title }}</div>
+<div [class.item]="!isRoot" class="entry">
+  <mat-card class="page-row" *ngIf="!isRoot">
+    <div class="page-info">
+      <mat-icon class="handle drag-icon">more_vert</mat-icon>
+      <mat-card-title class="title">{{ page.title }}</mat-card-title>
+    </div>
+    <div class="filler"></div>
+    <div class="page-controls">
+      <a mat-icon-button><mat-icon>keyboard_arrow_down</mat-icon></a>
+      <a mat-icon-button color="warn"><mat-icon>delete</mat-icon></a>
+    </div>
+  </mat-card>
+  <mat-card class="page-row" *ngIf="isRoot">
+    <mat-card-title class="root">{{
+      "common.mainpage" | translate
+    }}</mat-card-title>
+    <div class="filler"></div>
+    <div class="page-controls">
+      <a mat-stroked-button routerLink="create">{{
+        "manager.add-new-page" | translate
+      }}</a>
+    </div>
+  </mat-card>
 
   <div
     *ngIf="page.items"

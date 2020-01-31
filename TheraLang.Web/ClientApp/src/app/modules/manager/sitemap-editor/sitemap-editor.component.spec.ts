@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SitemapEditorComponent } from './sitemap-editor.component';
+import { SitemapEditorComponent } from "./sitemap-editor.component";
 
-describe('SitemapEditorComponent', () => {
+describe("SitemapEditorComponent", () => {
   let component: SitemapEditorComponent;
   let fixture: ComponentFixture<SitemapEditorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SitemapEditorComponent ]
-    })
-    .compileComponents();
+      declarations: [SitemapEditorComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('SitemapEditorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
