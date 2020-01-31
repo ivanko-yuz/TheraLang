@@ -14,6 +14,7 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpClient } from "@angular/common/http";
 import { MatCardModule } from "@angular/material/card";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { PageManagerComponent } from "./page-manager/page-manager.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
     CreatePageComponent,
     ManagerComponent,
     SitemapEditorComponent,
-    PageEntryComponent
+    PageEntryComponent,
+    PageManagerComponent
   ],
   imports: [
     CommonModule,
