@@ -9,46 +9,77 @@ namespace TheraLang.DAL.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
+        private DbSet<TEntity> DbSet { get; }
         public Repository(DbSet<TEntity> dbSet)
         {
             DbSet = dbSet;
         }
-
-        private DbSet<TEntity> DbSet { get; }
-
-        public IQueryable<TEntity> Get()
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> where)
         {
-            return DbSet;
+            var entity = await DbSet.FirstOrDefaultAsync(where);
+            return entity;
+        }
+        public async Task<TEntity> GetAsync()
+        {
+            var entity = await DbSet.FirstOrDefaultAsync();
+            return entity;
         }
 
-        public void Remove(TEntity entity)
+        public async Task<IQueryable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> where)
         {
-            DbSet.Remove(entity);
+            return DbSet.Where(where);
         }
 
-        public void RemoveRange(IEnumerable<TEntity> entities)
+        public async Task<IQueryable<TEntity>> GetListAsync()
+        {
+            return DbSet.AsQueryable();
+        }
+
+        public async Task RemoveAsync(TEntity entity)
+        {
+              DbSet.Remove(entity);
+        }
+
+        public async Task RemoveRangeAsync(IEnumerable<TEntity> entities)
         {
             DbSet.RemoveRange(entities);
         }
 
-        public Task Add(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
-            return DbSet.AddAsync(entity);
+            await DbSet.AddAsync(entity);
         }
 
-        public Task AddRange(IEnumerable<TEntity> entities)
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
-            return DbSet.AddRangeAsync(entities);
+            await DbSet.AddRangeAsync(entities);
         }
 
-        public void Update(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             DbSet.Update(entity);
         }
 
-        public void Attach(TEntity entity)
+        public async Task AttachAsync(TEntity entity)
         {
             DbSet.Attach(entity);
         }
+
+        public async Task<TEntity> GetWithIncludeAsync(Expression<Func<TEntity, bool>> where, params string[] include)
+        {
+            var query = DbSet.AsQueryable();
+
+            query = include.Aggregate(query, (current, property) => current.Include(property));
+
+            return await query.FirstOrDefaultAsync(where);
+        }
+
+        public async Task<IQueryable<TEntity>> GetListWithIncludeAsync(params string[] include)
+        {
+            var query = DbSet.AsQueryable();
+            query = include.Aggregate(query, (current, property) => current.Include(property));
+            return  query;
+        }
+
     }
 }

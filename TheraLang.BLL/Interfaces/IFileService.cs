@@ -6,6 +6,6 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IFileService
     {
-        Task<Uri> SaveFile(IFormFile file);
+        Task<Uri> SaveFileAsync(IFormFile file);
     }
 }

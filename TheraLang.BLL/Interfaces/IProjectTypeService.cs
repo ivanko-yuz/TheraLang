@@ -7,14 +7,14 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IProjectTypeService
     {
-        Task Add(ProjectTypeDto projectType);
+        Task AddAsync(ProjectTypeDto projectType);
 
-        Task Remove(int id);
+        Task RemoveAsync(int id);
 
-        Task Update(ProjectTypeDto projectType);
+        Task UpdateAsync(ProjectTypeDto projectType);
 
-        IEnumerable<ProjectTypeDto> GetAllProjectsType();
+        Task<IEnumerable<ProjectTypeDto>> GetAllProjectsTypeAsync();
 
-        ProjectTypeDto GetProjectTypeById(int id);
+        Task<ProjectTypeDto> GetProjectTypeByIdAsync(int id);
     }
 }

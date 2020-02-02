@@ -7,22 +7,22 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IResourceService
     {
-        Task AddResource(ResourceDto resource, Guid userId);
+        Task AddResourceAsync(ResourceDto resource, Guid userId);
 
-        Task UpdateResource(int id, ResourceDto resource, Guid updatedById);
+        Task UpdateResourceAsync(int id, ResourceDto resource, Guid updatedById);
 
-        Task RemoveResource(int id);
+        Task RemoveResourceAsync(int id);
 
-        ResourceDto GetResourceById(int id);
+        Task<ResourceDto> GetResourceByIdAsync(int id);
 
-        IEnumerable<ResourceCategoryDto> GetResourcesCategories(bool withAssignedResources);
+        Task<IEnumerable<ResourceCategoryDto>> GetResourcesCategoriesAsync(bool withAssignedResources);
 
-        int GetResourcesCount(int categoryId);
+        Task<int> GetResourcesCountAsync(int categoryId);
 
-        IEnumerable<ResourceDto> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
+        Task<IEnumerable<ResourceDto>> GetResourcesByCategoryIdAsync(int categoryId, int pageNumber, int recordsPerPage);
 
-        IEnumerable<ResourceDto> GetAllResourcesByProjectId(int projectId);
+        Task<IEnumerable<ResourceDto>> GetAllResourcesByProjectIdAsync(int projectId);
 
-        IEnumerable<ResourceDto> GetAllResources();
+        Task<IEnumerable<ResourceDto>> GetAllResourcesAsync();
     }
 }

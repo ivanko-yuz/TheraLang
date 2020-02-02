@@ -6,8 +6,8 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IResourceCategoryService
     {
-        Task ChangeTypeName(int categoryId, string newTypeName);
+        Task ChangeTypeNameAsync(int categoryId, string newTypeName);
 
-        IEnumerable<ResourceCategoryDto> GetAllCategories();
+        Task<IEnumerable<ResourceCategoryDto>> GetAllCategoriesAsync();
     }
 }

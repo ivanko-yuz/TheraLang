@@ -16,7 +16,7 @@ namespace TheraLang.BLL.Services.File
             _env = env;
         }
         
-        public async Task<Uri> SaveFile(IFormFile file)
+        public async Task<Uri> SaveFileAsync(IFormFile file)
         {
             var extension = Path.GetExtension(file.FileName);
             var uniqueName = Guid.NewGuid().ToString();

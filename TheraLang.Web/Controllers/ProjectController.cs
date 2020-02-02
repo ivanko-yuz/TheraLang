@@ -32,7 +32,7 @@ namespace TheraLang.Web.Controllers
         /// <returns>status code</returns>
         [HttpPost("create")]
         [Authorize]
-        public async Task<IActionResult> CreateProject([FromBody]ProjectViewModel projectModel)
+        public async Task<IActionResult> CreateProject([FromBody] ProjectViewModel projectModel)
         {
             if (projectModel == null)
             {
@@ -41,12 +41,12 @@ namespace TheraLang.Web.Controllers
 
             var UserId = User.Claims.GetUserId();
             if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            var user = await _userManager.GetUserByIdAsync(UserId.Value);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
             var projectDto = mapper.Map<ProjectViewModel, ProjectDto>(projectModel);
 
-            await _projectService.Add(projectDto, user.Id);
+            await _projectService.AddAsync(projectDto, user.Id);
             return Ok(projectDto);
         }
 
@@ -56,9 +56,10 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of Projects</returns>
         [HttpGet]
         [AllowAnonymous]
-        public IEnumerable<ProjectDonationViewModel> GetAllProjects()
+        public async Task<IEnumerable<ProjectDonationViewModel>> GetAllProjects()
         {
-            var projectModels = _projectService.GetAllProjects().Where(x => x.StatusId == ProjectStatusDto.Approved)
+            var projectModels = (await _projectService.GetAllProjectsAsync())
+                .Where(x => x.StatusId == ProjectStatusDto.Approved)
                 .Select(p => new ProjectDonationViewModel
                 {
                     Id = p.Id,
@@ -71,15 +72,16 @@ namespace TheraLang.Web.Controllers
                     ProjectStart = p.ProjectStart,
                     ProjectEnd = p.ProjectEnd
                 }).ToList();
+                
 
             return projectModels;
         }
 
         [HttpGet("new")]
         [Authorize]
-        public IActionResult GetAllNewProjects()
+        public async Task<IActionResult> GetAllNewProjects()
         {
-            var projects = _projectService.GetAllNewProjects();
+            var projects = await _projectService.GetAllNewProjectsAsync();
             return Ok(projects);
         }
 
@@ -90,9 +92,9 @@ namespace TheraLang.Web.Controllers
         /// <returns>serialized project</returns>
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public IActionResult GetProject(int id)
+        public async Task<IActionResult> GetProject(int id)
         {
-            var project = _projectService.GetById(id);
+            var project = await _projectService.GetByIdAsync(id);
 
             if (project == null)
             {
@@ -110,9 +112,9 @@ namespace TheraLang.Web.Controllers
         /// <returns>edited project</returns>
         [HttpPut("update/{id}")]
         [Authorize]
-        public async Task<IActionResult> EditProject(int id, [FromBody]ProjectViewModel projectModel)
+        public async Task<IActionResult> EditProject(int id, [FromBody] ProjectViewModel projectModel)
         {
-            var project = _projectService.GetById(id);
+            var project = _projectService.GetByIdAsync(id);
 
             if (project == null)
             {
@@ -142,7 +144,7 @@ namespace TheraLang.Web.Controllers
 
             var statusApproved = ProjectStatusDto.Approved;
 
-            await _projectService.ChangeStatus(id, statusApproved);
+            await _projectService.ChangeStatusAsync(id, statusApproved);
             return Ok(ProjectStatusDto.Approved);
         }
 
@@ -154,17 +156,19 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of selected project</returns>
         [HttpGet("page/{page}/{pageSize}")]
         [AllowAnonymous]
-        public IActionResult ProjectsPagination(int page, int pageSize)
+        public async Task<IActionResult> ProjectsPagination(int page, int pageSize)
         {
             if (page == default)
             {
                 throw new ArgumentException($"{nameof(page)} can not be 0");
             }
+
             if (pageSize == default)
             {
                 throw new ArgumentException($"{nameof(pageSize)} can not be 0");
             }
-            var projects = _projectService.GetProjects(page, pageSize);
+
+            var projects = await _projectService.GetProjectsAsync(page, pageSize);
             return Ok(projects);
         }
 
@@ -184,7 +188,7 @@ namespace TheraLang.Web.Controllers
 
             var statusRejected = ProjectStatusDto.Rejected;
 
-            await _projectService.ChangeStatus(id, statusRejected);
+            await _projectService.ChangeStatusAsync(id, statusRejected);
             return Ok(ProjectStatusDto.Rejected);
         }
 
@@ -197,22 +201,22 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteProject(int id)
         {
-            var project = _projectService.GetById(id);
+            var project = _projectService.GetByIdAsync(id);
 
             if (project == null)
             {
                 return NotFound();
             }
 
-            await _projectService.Delete(id);
+            await _projectService.DeleteAsync(id);
             return Ok();
         }
 
         [HttpGet("newstatus/{status}")]
         [AllowAnonymous]
-        public IActionResult GetProjectsByStatus(int status)
+        public async Task<IActionResult> GetProjectsByStatus(int status)
         {
-            var projects = _projectService.GetProjectsByStatus(status);
+            var projects = await _projectService.GetProjectsByStatusAsync(status);
             return Ok(projects);
         }
     }

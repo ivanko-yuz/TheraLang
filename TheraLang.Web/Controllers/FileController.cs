@@ -27,7 +27,7 @@ namespace TheraLang.Web.Controllers
             {
                 return BadRequest(validationRes.Errors);
             }
-            var uri = await _fileManager.SaveFile(file.File);
+            var uri = await _fileManager.SaveFileAsync(file.File);
             return Ok(new { FileUri = uri});
         }
     }

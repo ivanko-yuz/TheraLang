@@ -32,7 +32,9 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LoginModel, LoginModelDto>()).CreateMapper();
             var loginDto = mapper.Map<LoginModel, LoginModelDto>(login);
 
-            if (_authService.IsAuthenticated(loginDto, out var token))
+            var token = await _authService.AuthenticateAsync(loginDto);
+
+            if (!string.IsNullOrEmpty(token))
             {
                 return Ok(new LoginResponse()
                 {

@@ -19,7 +19,7 @@ namespace Common.Helpers.PasswordHelper
             if (password == null)
                 throw new ArgumentNullException(nameof(password));
 
-            byte[] salt;
+            byte[] salt; 
             byte[] bytes;
             using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, SaltSize, Pbkdf2IterCount, HashAlgorithmName))
             {

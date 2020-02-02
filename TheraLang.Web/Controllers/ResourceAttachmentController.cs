@@ -6,6 +6,7 @@ using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace TheraLang.Web.Controllers
 {
@@ -22,7 +23,7 @@ namespace TheraLang.Web.Controllers
 
        [HttpPost("attach")]
         [Authorize]
-        public IActionResult UploadFile([FromBody]ResourceAttachViewModel resourceModel)
+        public async Task<IActionResult> UploadFile([FromBody]ResourceAttachViewModel resourceModel)
        {
            if (resourceModel == null)
            {
@@ -32,14 +33,14 @@ namespace TheraLang.Web.Controllers
            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachViewModel, ResourceAttachDto>()).CreateMapper();
            var resourceDto = mapper.Map<ResourceAttachViewModel, ResourceAttachDto>(resourceModel);
 
-            _attachment.Add(resourceDto);
+            await _attachment.AddAsync(resourceDto);
            return Ok(resourceDto);
        }
        [HttpGet]
         [Authorize]
-        public IEnumerable<ResourceAttachDto> GetAllTypes()
+        public  async Task<IEnumerable<ResourceAttachDto>> GetAllTypes()
        {
-           return _attachment.Get();
+           return await _attachment.GetAsync();
        }
    }
 }

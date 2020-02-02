@@ -6,8 +6,8 @@ namespace TheraLang.BLL.Interfaces
 {
    public interface IResourceAttachmentService
    {
-       Task Add(ResourceAttachDto file);
+       Task AddAsync(ResourceAttachDto file);
 
-       IEnumerable<ResourceAttachDto> Get();
+       Task<IEnumerable<ResourceAttachDto>> GetAsync();
    }
 }

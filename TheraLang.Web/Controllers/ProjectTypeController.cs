@@ -42,7 +42,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
             var projectDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
 
-            await _service.Add(projectDto);
+            await _service.AddAsync(projectDto);
             return Ok();
         }
 
@@ -55,14 +55,11 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(projectTypeModel)} can not be null");
             }
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
             var projectTypeDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
 
-            await _service.Update(projectTypeDto);
+            await _service.UpdateAsync(projectTypeDto);
             return Ok();
         }
 
@@ -75,7 +72,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            await _service.Remove(id);
+            await _service.RemoveAsync(id);
             return Ok();
         }
 
@@ -85,9 +82,9 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of ProjectsTypes</returns>
         [HttpGet]
         [AllowAnonymous]
-        public IEnumerable<ProjectTypeDto> GetAllTypes()
+        public async Task<IActionResult> GetAllTypes()
         {
-            return _service.GetAllProjectsType();
+            return Ok(await _service.GetAllProjectsTypeAsync());
         }
 
         /// <summary>
@@ -103,7 +100,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            var type = _service.GetProjectTypeById(id);
+            var type = _service.GetProjectTypeByIdAsync(id);
             return Ok(type);
         }
     }

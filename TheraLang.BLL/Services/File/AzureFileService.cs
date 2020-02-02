@@ -17,7 +17,7 @@ namespace TheraLang.BLL.Services.File
             _azureConnection = azureConnection;
         }
 
-        public async Task<Uri> SaveFile(IFormFile file)
+        public async Task<Uri> SaveFileAsync(IFormFile file)
         {
             var container = _azureConnection.GetClient().GetContainerReference("files");
             var extension = Path.GetExtension(file.FileName);

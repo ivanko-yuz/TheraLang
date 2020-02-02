@@ -22,11 +22,11 @@ namespace TheraLang.BLL.Services
             _fileService = fileService;
         }
 
-        public ResourceDto GetResourceById(int id)
+        public async Task<ResourceDto> GetResourceByIdAsync(int id)
         {
             try
             {
-                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == id);
+                Resource resource = await _unitOfWork.Repository<Resource>().GetAsync(i => i.Id == id);
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
                 var resourceDto = mapper.Map<Resource, ResourceDto>(resource);
@@ -39,15 +39,16 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task AddResource(ResourceDto resourceDto, Guid userId)
+        public async Task AddResourceAsync(ResourceDto resourceDto, Guid userId)
         {
             try
             {
                 if (resourceDto.File != null)
                 {
-                    var fileUri = await _fileService.SaveFile(resourceDto.File);
+                    var fileUri = await _fileService.SaveFileAsync(resourceDto.File);
                     resourceDto.Url = fileUri.ToString();
                 }
+
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
                     .ForMember(r => r.File, opt => opt.Ignore())
                     .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId))
@@ -55,7 +56,7 @@ namespace TheraLang.BLL.Services
 
                 var resource = mapper.Map<ResourceDto, Resource>(resourceDto);
 
-                await _unitOfWork.Repository<Resource>().Add(resource);
+                await _unitOfWork.Repository<Resource>().AddAsync(resource);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -64,7 +65,7 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task UpdateResource(int id, ResourceDto resourceDto, Guid updatedById)
+        public async Task UpdateResourceAsync(int id, ResourceDto resourceDto, Guid updatedById)
         {
             try
             {
@@ -74,12 +75,12 @@ namespace TheraLang.BLL.Services
                 {
                     using (BinaryReader binaryReader = new BinaryReader(resourceDto.File.OpenReadStream()))
                     {
-                        byte[] byteFile = binaryReader.ReadBytes((int)resourceDto.File.Length);
+                        byte[] byteFile = binaryReader.ReadBytes((int) resourceDto.File.Length);
                         resourceFileString = BitConverter.ToString(byteFile);
                     }
                 }
 
-                Resource resource = _unitOfWork.Repository<Resource>().Get().FirstOrDefault(i => i.Id == id);
+                Resource resource = await _unitOfWork.Repository<Resource>().GetAsync(i => i.Id == id);
 
                 if (resource != null)
                 {
@@ -88,7 +89,7 @@ namespace TheraLang.BLL.Services
                     resource.Url = resourceDto.Url;
                     resource.FileName = resourceDto.FileName;
 
-                    _unitOfWork.Repository<Resource>().Update(resource);
+                    await _unitOfWork.Repository<Resource>().UpdateAsync(resource);
                     await _unitOfWork.SaveChangesAsync();
                 }
             }
@@ -98,12 +99,12 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task RemoveResource(int id)
+        public async Task RemoveResourceAsync(int id)
         {
             try
             {
-                Resource resource = _unitOfWork.Repository<Resource>().Get().SingleOrDefault(i => i.Id == id);
-                _unitOfWork.Repository<Resource>().Remove(resource);
+                Resource resource = await _unitOfWork.Repository<Resource>().GetAsync(i => i.Id == id);
+                await _unitOfWork.Repository<Resource>().RemoveAsync(resource);
 
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -113,12 +114,12 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public IEnumerable<ResourceDto> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage)
+        public async Task<IEnumerable<ResourceDto>> GetResourcesByCategoryIdAsync(int categoryId, int pageNumber,
+            int recordsPerPage)
         {
             try
             {
-                var resources = _unitOfWork.Repository<Resource>().Get()
-                    .Where(x => x.CategoryId == categoryId)
+                var resources = (await _unitOfWork.Repository<Resource>().GetListAsync(x => x.CategoryId == categoryId))
                     .Skip((pageNumber - 1) * recordsPerPage)
                     .Take(recordsPerPage).ToList();
 
@@ -138,11 +139,12 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public int GetResourcesCount(int categoryId)
+        public async Task<int> GetResourcesCountAsync(int categoryId)
         {
             try
             {
-                var resourcesCount = _unitOfWork.Repository<Resource>().Get().Count(x => x.CategoryId == categoryId);
+                var resourcesCount =
+                    (await _unitOfWork.Repository<Resource>().GetListAsync()).Count(x => x.CategoryId == categoryId);
                 return resourcesCount;
             }
             catch (Exception ex)
@@ -151,11 +153,11 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public IEnumerable<ResourceCategoryDto> GetResourcesCategories(bool withAssignedResources)
+        public async Task<IEnumerable<ResourceCategoryDto>> GetResourcesCategoriesAsync(bool withAssignedResources)
         {
             try
             {
-                var query = _unitOfWork.Repository<ResourceCategory>().Get();
+                var query = await _unitOfWork.Repository<ResourceCategory>().GetListAsync();
                 if (withAssignedResources)
                 {
                     query = query.Where(cat => cat.Resources.Any());
@@ -169,7 +171,8 @@ namespace TheraLang.BLL.Services
                             .ForMember(r => r.File, opt => opt.Ignore());
                     })
                     .CreateMapper();
-                var resourceCategoriesDto = mapper.Map<IEnumerable<ResourceCategory>, IEnumerable<ResourceCategoryDto>>(resourceEntities);
+                var resourceCategoriesDto =
+                    mapper.Map<IEnumerable<ResourceCategory>, IEnumerable<ResourceCategoryDto>>(resourceEntities);
 
                 return resourceCategoriesDto;
             }
@@ -179,27 +182,28 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public IEnumerable<ResourceDto> GetAllResourcesByProjectId(int projectId)
+        public async Task<IEnumerable<ResourceDto>> GetAllResourcesByProjectIdAsync(int projectId)
         {
             try
             {
-                var resources = _unitOfWork.Repository<Resource>().Get().Where(x => x.ResourceProjects.Any(c => c.ProjectId == projectId));
+                var resources = await _unitOfWork.Repository<Resource>()
+                    .GetListAsync(x => x.ResourceProjects.Any(c => c.ProjectId == projectId));
                 var joinedResources = (from res in resources
-                                       select new Resource
-                                       {
-                                           Id = res.Id,
-                                           User = res.User,
-                                           Name = res.Name,
-                                           Description = res.Description,
-                                           Url = res.Url,
-                                           File = res.File,
-                                           CategoryId = res.CategoryId,
-                                           ResourceCategory = res.ResourceCategory,
-                                           ResourceProjects = res.ResourceProjects,
-                                           UpdatedById = res.UpdatedById,
-                                           CreatedDateUtc = res.CreatedDateUtc,
-                                           UpdatedDateUtc = res.UpdatedDateUtc,
-                                       }).ToList();
+                    select new Resource
+                    {
+                        Id = res.Id,
+                        User = res.User,
+                        Name = res.Name,
+                        Description = res.Description,
+                        Url = res.Url,
+                        File = res.File,
+                        CategoryId = res.CategoryId,
+                        ResourceCategory = res.ResourceCategory,
+                        ResourceProjects = res.ResourceProjects,
+                        UpdatedById = res.UpdatedById,
+                        CreatedDateUtc = res.CreatedDateUtc,
+                        UpdatedDateUtc = res.UpdatedDateUtc,
+                    }).ToList();
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
                 var joinedResourcesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(joinedResources);
@@ -212,9 +216,9 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public IEnumerable<ResourceDto> GetAllResources()
+        public async Task<IEnumerable<ResourceDto>> GetAllResourcesAsync()
         {
-            var resources = _unitOfWork.Repository<Resource>().Get().ToList();
+            var resources = await _unitOfWork.Repository<Resource>().GetListAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
             var resourceDtos = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resources);

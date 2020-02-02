@@ -17,13 +17,14 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IHostingEnvironment _appEnvironment;
+
         public ResourceAttachmentService(IUnitOfWork unitOfWork, IHostingEnvironment appEnvironment)
         {
             _unitOfWork = unitOfWork;
             _appEnvironment = appEnvironment;
         }
 
-        public async Task Add(ResourceAttachDto file)
+        public async Task AddAsync(ResourceAttachDto file)
         {
             try
             {
@@ -35,10 +36,11 @@ namespace TheraLang.BLL.Services
                         await file.File.CopyToAsync(fileStream);
                     }
 
-                    var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachDto, ResourceAttachment>()).CreateMapper();
+                    var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachDto, ResourceAttachment>())
+                        .CreateMapper();
                     var resource = mapper.Map<ResourceAttachDto, ResourceAttachment>(file);
 
-                    await _unitOfWork.Repository<ResourceAttachment>().Add(resource);
+                    await _unitOfWork.Repository<ResourceAttachment>().AddAsync(resource);
                     await _unitOfWork.SaveChangesAsync();
                 }
             }
@@ -49,11 +51,12 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public IEnumerable<ResourceAttachDto> Get()
+        public async Task<IEnumerable<ResourceAttachDto>> GetAsync()
         {
-            var resources = _unitOfWork.Repository<ResourceAttachment>().Get().AsNoTracking().ToList();
+            var resources = (await _unitOfWork.Repository<ResourceAttachment>().GetListAsync()).AsNoTracking().ToList();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachment, ResourceAttachDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachment, ResourceAttachDto>())
+                .CreateMapper();
             var resourceDto = mapper.Map<IEnumerable<ResourceAttachment>, IEnumerable<ResourceAttachDto>>(resources);
 
             return resourceDto;
