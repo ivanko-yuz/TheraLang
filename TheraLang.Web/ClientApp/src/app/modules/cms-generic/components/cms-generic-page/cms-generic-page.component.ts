@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { CmsRouteHelperService } from "../../../../core/services/cms/cms-route-helper.service";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
-import { CmsRoute } from "src/app/core/toolbar/toolbar-item/cms-route";
+import { CmsRoute } from "src/app/modules/main/toolbar/toolbar-item/cms-route";
 
 @Component({
   selector: "app-cms-generic-page",

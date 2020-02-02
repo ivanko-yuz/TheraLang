@@ -1,10 +1,10 @@
-<button mat-stroked-button (click)="onCreate()">
+<button mat-raised-button class="create-button" color = "primary" (click)="onCreate()">
   <mat-icon>add</mat-icon>{{ "components.projects.create" | translate }}
 </button>
 
 <div *ngFor="let project of projects">
   <mat-card class="home-card mat-elevation-z5">
-    <mat-card-content class="home-card-content" fxLayout="row">
+    <mat-card-content class="home-card-content" fxLayout="row" fxLayout.md="column" fxLayout.sm="column" >
       <div class="image-container">
         <img
           class="project-image"
@@ -14,15 +14,15 @@
       </div>
 
       <div class="main-container" fxLayout="column">
-        <div class="content-container" fxLayout="row" fxFlex="85">
-          <div class="text-conteiner" fxLayout="column" fxFlex="95">
+        <div class="content-container" fxLayout="row" fxFlex="85" >
+          <div class="text-conteiner" fxLayout="column" fxFlex="95" fxFlex.md="85" fxFlex.sm="80">
             <mat-card-title>
               <a class="detailes" [routerLink]="['/projects', project.id]">
                 {{ project?.name }}</a
               >
             </mat-card-title>
             <div class="project-description" fxFlex="100">
-              {{ project?.description.substring(0, 550) }}
+              {{ project?.description.substring(0, 350) }}
             </div>
           </div>
           <div class="buttons-container" fxLayout="row" fxFlex>
@@ -38,7 +38,7 @@
         <div class="actions-conteiner" fxLayout="row">
           <div class="progress-bar-block" fxFlex="33">
             <div class="text-content">
-              <span class="donation-sum">₴{{ project.donationsSum }} </span>
+              <span class="donation-sum color-accent">₴{{ project.donationsSum }} </span>
               <span class="rised-sum">
                 {{ "components.projects.rised-of" | translate }}
                 {{ project.donationTargetSum }}</span
@@ -46,6 +46,7 @@
             </div>
             <section class="progress-bar-section">
               <mat-progress-bar
+                color="accent"
                 class="example-margin"
                 mode="determinate"
                 [value]="getProjectProgress(project) * 100"
@@ -63,11 +64,14 @@
             class="donate-button"
             fxFlexAlign="end end"
             fxFlex="70"
-            fxLayoutAlign="end end"
+            fxFlex.md="45" 
+            fxFlex.sm="40"
+
           >
             <button
+              class="donate"
               mat-raised-button
-              color="primary"
+              color="accent"
               [routerLink]="['/donations', project.id]"
             >
               {{ "components.projects.donate" | translate }}

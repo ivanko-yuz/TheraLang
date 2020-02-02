@@ -25,7 +25,7 @@
             "aot": false,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/assets/themes/purple-white.css",
+              "src/assets/themes/purple-white-green.css",
               "src/styles.less",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
@@ -88,7 +88,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/assets/themes/purple-white.css", "src/styles.less"],
+            "styles": ["src/assets/themes/purple-white-green.css", "src/styles.less"],
             "scripts": []
           }
         },
