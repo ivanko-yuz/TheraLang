@@ -19,7 +19,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private subscription = new Subscription();
   isAuthinticated: boolean;
-
+isAdmin:boolean;
   constructor(
     private participantService: ProjectParticipationService,
     private eventService: EventService,
@@ -42,6 +42,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     this.subscription.add(subscription);
     this.isAuthinticated = this.userService.isAuthenticated();
+    this.isAdmin=this.userService.isAdmin();
   }
 
   ngAfterViewInit(): void {

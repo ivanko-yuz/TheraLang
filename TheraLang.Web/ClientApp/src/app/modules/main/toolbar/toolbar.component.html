@@ -17,9 +17,9 @@
           <mat-icon *ngIf="hasNotification">notifications</mat-icon>
         </span>
       </a>
-      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+      <a mat-button class="menu-item" *ngIf="isAdmin"
         routerLink="/projectRequest">{{'components.projects.new-projects'|translate}}</a>
-      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+      <a mat-button class="menu-item"  *ngIf="isAdmin"
         routerLink="/projectTypes">{{'components.projectTypes.title'|translate}}</a>
     </div>
 

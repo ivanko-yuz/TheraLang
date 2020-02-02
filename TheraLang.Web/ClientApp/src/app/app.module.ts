@@ -101,6 +101,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { AdminGuard } from './shared/guards/admin-guard.service';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -240,7 +241,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserService,
     ResourceCreateService,
     ProjectTypeHttp,
-    AuthGuard
+    AuthGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })
