@@ -9,7 +9,7 @@ namespace TheraLang.DAL.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private DbSet<TEntity> DbSet { get; }
+        private readonly DbSet<TEntity> DbSet;
         public Repository(DbSet<TEntity> dbSet)
         {
             DbSet = dbSet;
