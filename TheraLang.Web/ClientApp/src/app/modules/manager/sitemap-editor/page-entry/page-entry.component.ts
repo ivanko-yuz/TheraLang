@@ -16,8 +16,9 @@ export class PageEntryComponent implements OnInit {
     handle: ".handle",
     animation: 600,
     swapThreshold: 0.2,
+    invertSwap: true,
     fallbackOnBody: true,
-    easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+    // easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
     ghostClass: "sortable-ghost", // Class name for the drop placeholder
     chosenClass: "sortable-chosen", // Class name for the chosen item
     dragClass: "sortable-drag" // Class name for the dragging item
