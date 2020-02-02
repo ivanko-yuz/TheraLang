@@ -91,7 +91,7 @@ namespace TheraLang.Web
             services.AddOpenApiDocument();
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
-
+            services.AddTransient<INewsService, NewsService>();
             #endregion
         }
 
