@@ -9,6 +9,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { AsyncScheduler } from "rxjs/internal/scheduler/AsyncScheduler";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { PercentPipe } from '@angular/common';
+import { UserService } from 'src/app/core/auth/user.service';
 
 @Component({
   selector: "app-project",
@@ -18,19 +19,23 @@ import { PercentPipe } from '@angular/common';
 })
 export class ProjectComponent implements OnInit {
   projects: Project[];
-
+  isAdmin:boolean;
+  isAuthinticated: boolean;
   constructor(
     private httpService: HttpService,
     private dialogService: DialogService,
     public service: ProjectService,
     private notificationService: NotificationService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.httpService
       .getAllProjects()
       .subscribe((projects: Project[]) => (this.projects = projects));
+      this.isAdmin = this.userService.isAdmin();
+      this.isAuthinticated = this.userService.isAuthenticated();
   }
 
   onCreate() {
@@ -67,4 +72,5 @@ export class ProjectComponent implements OnInit {
   getProjectProgress(project: Project) {
     return (project.donationsSum / project.donationTargetSum);
   }
+
 }

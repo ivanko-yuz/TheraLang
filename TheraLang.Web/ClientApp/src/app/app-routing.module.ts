@@ -14,8 +14,8 @@ import { LoginComponent } from "./modules/login/login.component";
 import { ErrorComponent } from "./shared/components/error/error.component";
 import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
-import { AuthGuard } from "./shared/guards/auth-guard.service";
-import{AdminGuard} from "./shared/guards/admin-guard.service"
+import { AuthGuard } from "./core/services/guards/auth-guard.service";
+import{AdminGuard} from "./core/services/guards/admin-guard.service";
 const routes: Routes = [
   {
     path: "",

@@ -1,4 +1,4 @@
-<button mat-raised-button class="create-button" color = "primary" (click)="onCreate()">
+<button  mat-raised-button class="create-button"  (click)="onCreate()" *ngIf="isAuthinticated">
   <mat-icon>add</mat-icon>{{ "components.projects.create" | translate }}
 </button>
 
@@ -26,10 +26,10 @@
             </div>
           </div>
           <div class="buttons-container" fxLayout="row" fxFlex>
-            <button mat-icon-button (click)="onEdit(project)">
+            <button mat-icon-button (click)="onEdit(project)"  *ngIf="isAdmin">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button (click)="onDelete(project.id)">
+            <button mat-icon-button (click)="onDelete(project.id)"  *ngIf="isAdmin">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
