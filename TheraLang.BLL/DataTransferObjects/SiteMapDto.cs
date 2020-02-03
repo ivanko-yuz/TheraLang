@@ -10,6 +10,10 @@ namespace TheraLang.BLL.DataTransferObjects
         
         public string Route { get; set; }
         
+        public int? ParentPageId { get; set; }
+        
+        public bool Changed { get; set; }
+        
         public virtual IEnumerable<SiteMapDto> SubPages { get; set; }
     }
 }

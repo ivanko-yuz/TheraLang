@@ -9,7 +9,7 @@ namespace TheraLang.Web.ViewModels
         public string MenuTitle { get; set; }
         
         public string Route { get; set; }
-        
-        public IEnumerable<SiteMapViewModel> Subpages { get; set; }
+
+        public IEnumerable<SiteMapViewModel> SubPages { get; set; }
     }
 }

@@ -14,7 +14,6 @@ namespace TheraLang.DAL.Configuration
             builder.Property(p => p.MenuName).HasMaxLength(32);
             builder.Property(p => p.Route).IsRequired().HasMaxLength(32);
             builder.HasIndex(p => p.Route).IsUnique();
-
             builder.HasMany(p => p.SubPages)
                 .WithOne(p => p.ParentPage)
                 .HasForeignKey(p => p.ParentPageId);
