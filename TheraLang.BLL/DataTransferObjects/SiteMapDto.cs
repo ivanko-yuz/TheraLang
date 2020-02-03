@@ -8,6 +8,8 @@ namespace TheraLang.BLL.DataTransferObjects
         
         public string MenuName { get; set; }
         
+        public string Route { get; set; }
+        
         public virtual IEnumerable<SiteMapDto> SubPages { get; set; }
     }
 }

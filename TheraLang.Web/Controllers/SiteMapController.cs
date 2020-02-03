@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.Web.Controllers
@@ -13,8 +14,12 @@ namespace TheraLang.Web.Controllers
         {
             _siteMapService = siteMapService;
         }
-        
-        
-        
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+           return Ok(await _siteMapService.GetAll());
+        }
     }
 }
