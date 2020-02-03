@@ -1,0 +1,58 @@
+{
+  "pages": [
+    {
+      "id": "someid",
+      "title": "Page1",
+      "items": [
+        {
+          "id": "someid",
+          "title": "Page2",
+          "items": []
+        },
+        {
+          "id": "someid",
+          "title": "Page3",
+          "items": []
+        },
+        {
+          "id": "someid",
+          "title": "Page4",
+          "items": [
+            {
+              "id": "someid",
+              "title": "Page5",
+              "items": []
+            },
+            {
+              "id": "someid",
+              "title": "Page6",
+              "items": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "someid",
+      "title": "Page7",
+      "items": []
+    },
+    {
+      "id": "someid",
+      "title": "Page8",
+      "items": [
+        {
+          "id": "someid",
+          "title": "Page9",
+          "items": [
+            {
+              "id": "someid",
+              "title": "Page10",
+              "items": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

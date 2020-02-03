@@ -28,6 +28,7 @@ namespace TheraLang.DAL
         public virtual DbSet<ResourceAttachment> ResourceAttachments { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Page> Pages { get; set; }
 
         #endregion
 
@@ -99,6 +100,7 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new PageConfiguration());
             var AdminRoleID = Guid.NewGuid();
             var MemberRoleId = Guid.NewGuid();
             modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
