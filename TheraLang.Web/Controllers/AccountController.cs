@@ -15,9 +15,11 @@ namespace TheraLang.Web.Controllers
     {
 
         private readonly IAuthenticateService _authService;
-        public AccountController(IAuthenticateService authService)
+        private readonly IUserManagementService _userManagementService;
+        public AccountController(IAuthenticateService authService, IUserManagementService userManagementService)
         {
             _authService = authService;
+            _userManagementService = userManagementService;
         }
 
         [AllowAnonymous]
@@ -31,8 +33,9 @@ namespace TheraLang.Web.Controllers
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LoginModel, LoginModelDto>()).CreateMapper();
             var loginDto = mapper.Map<LoginModel, LoginModelDto>(login);
-
-            if (_authService.IsAuthenticated(loginDto, out var token))
+            var user = _userManagementService.GetUser(loginDto);
+            if (user == null) return BadRequest();
+            if (_authService.IsAuthenticated(out var token, user))
             {
                 return Ok(new LoginResponse()
                 {

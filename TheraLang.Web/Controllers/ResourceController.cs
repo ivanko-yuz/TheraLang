@@ -8,7 +8,6 @@ using FluentValidation;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
@@ -17,16 +16,18 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service, IUserManagementService userManager, IValidator<ResourceViewModel> validator)
+        public ResourceController(IResourceService service, IUserManagementService userManager, IValidator<ResourceViewModel> validator, IAuthenticateService authenticateService)
         {
             _service = service;
             _userManager = userManager;
             _validator = validator;
+            _authenticateService = authenticateService;
         }
 
         private readonly IResourceService _service;
         private readonly IUserManagementService _userManager;
         private readonly IValidator<ResourceViewModel> _validator;
+        private readonly IAuthenticateService _authenticateService;
 
         /// <summary>
         /// create resource
@@ -44,14 +45,14 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            var AuthUser = await _authenticateService.GetAuthUserAsync();
+            if (AuthUser == null) return BadRequest();
+            var user = _userManager.GetUserById(AuthUser.Id);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, UserId.Value);
+            await _service.AddResource(resourceDto, user.Id);
             return Ok();
         }
 
@@ -81,14 +82,14 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
 
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            var AuthUser = await _authenticateService.GetAuthUserAsync();
+            if (AuthUser == null) return BadRequest();
+            var user = _userManager.GetUserById(AuthUser.Id);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, UserId.Value);
+            await _service.AddResource(resourceDto, user.Id);
             return Ok();
         }
 

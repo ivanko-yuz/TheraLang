@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using Piranha.AspNetCore.Identity.Data;
 using System.Linq;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using TheraLang.Web.Extensions;
 
 namespace TheraLang.Web.Controllers
 {
@@ -18,16 +15,18 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ParticipationController : ControllerBase
     {
-        public ParticipationController(IProjectParticipationService projectParticipationServiceservice, IUserManagementService userManager, IProjectService projectService)
+        public ParticipationController(IProjectParticipationService projectParticipationServiceservice, IUserManagementService userManager, IProjectService projectService, IAuthenticateService authenticateService)
         {
             _projectParticipationServiceservice = projectParticipationServiceservice;
             _userManager = userManager;
-            _projectService = projectService;
+            _authenticateService = authenticateService;
+
         }
 
         private readonly IProjectParticipationService _projectParticipationServiceservice;
         private readonly IUserManagementService _userManager;
         private readonly IProjectService _projectService;
+        private readonly IAuthenticateService _authenticateService;
 
         /// <summary>
         /// Change status of participant
@@ -90,9 +89,9 @@ namespace TheraLang.Web.Controllers
                 return NotFound();
             }
 
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            var AuthUser = await _authenticateService.GetAuthUserAsync();
+            if (AuthUser == null) return BadRequest();
+            var user = _userManager.GetUserById(AuthUser.Id);
 
             await _projectParticipationServiceservice.CreateRequest(user.Id, projectId);
             return Ok();

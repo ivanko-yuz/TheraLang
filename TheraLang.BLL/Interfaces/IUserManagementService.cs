@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.Interfaces
 {
     public interface IUserManagementService
     {
-        User GetUser(string username, string password);
+        User GetUser(LoginModelDto loginModel);
         User GetUserById (Guid id);
     }
     

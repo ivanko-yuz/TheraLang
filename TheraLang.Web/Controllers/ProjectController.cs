@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.Extensions;
 using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -18,11 +17,13 @@ namespace TheraLang.Web.Controllers
     {
         private readonly IProjectService _projectService;
         private readonly IUserManagementService _userManager;
+        private readonly IAuthenticateService _authenticateService;
 
-        public ProjectController(IProjectService projectService, IUserManagementService userManager)
+        public ProjectController(IProjectService projectService, IUserManagementService userManager, IAuthenticateService authenticateService)
         {
             _projectService = projectService;
             _userManager = userManager;
+            _authenticateService = authenticateService;
         }
 
         /// <summary>
@@ -39,9 +40,9 @@ namespace TheraLang.Web.Controllers
                 return BadRequest();
             }
 
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            var AuthUser = await _authenticateService.GetAuthUserAsync();
+            if (AuthUser == null) return BadRequest();
+            var user = _userManager.GetUserById(AuthUser.Id);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
             var projectDto = mapper.Map<ProjectViewModel, ProjectDto>(projectModel);

@@ -17,7 +17,7 @@ using TheraLang.BLL.Services.File;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
-
+using Microsoft.AspNetCore.Http;
 
 namespace TheraLang.Web
 {
@@ -51,7 +51,7 @@ namespace TheraLang.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
+            services.AddScoped<IAuthenticateService, AuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
 
             #region Piranha setup
@@ -79,6 +79,7 @@ namespace TheraLang.Web
             services.AddTransient<IFileService, LocalFileService>();
             services.AddAuthentication(Configuration);
 
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
             services.AddCors(options =>

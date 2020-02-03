@@ -6,7 +6,6 @@ using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
-using TheraLang.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
@@ -16,14 +15,16 @@ namespace TheraLang.Web.Controllers
  
     public class ProjectTypeController : ControllerBase
     {
-        public ProjectTypeController(IProjectTypeService service, IUserManagementService userManager)
+        public ProjectTypeController(IProjectTypeService service, IUserManagementService userManager, IAuthenticateService authenticateService)
         {
             _service = service;
             _userManager = userManager;
+            _authenticateService = authenticateService;
         }
 
         private readonly IProjectTypeService _service;
         private readonly IUserManagementService _userManager;
+        private readonly IAuthenticateService _authenticateService;
 
         /// <summary>
         /// create project type
@@ -55,9 +56,9 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(projectTypeModel)} can not be null");
             }
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            var AuthUser = await _authenticateService.GetAuthUserAsync();
+            if (AuthUser == null) return BadRequest();
+            var user = _userManager.GetUserById(AuthUser.Id);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
             var projectTypeDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
