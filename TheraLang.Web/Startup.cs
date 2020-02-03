@@ -92,6 +92,7 @@ namespace TheraLang.Web
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
             services.AddTransient<INewsService, NewsService>();
+            services.AddTransient<IValidator<NewsToServerViewModel>, NewsViewModelValidator>();
             #endregion
         }
 

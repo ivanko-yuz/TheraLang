@@ -8,14 +8,14 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface INewsService
     {
-        Task AddNews(NewsDto newsDto);
+        Task AddNews(NewsToServerDto newsDto);
 
-        Task UpdateNews(int id, NewsDto project);
+        Task UpdateNews(int id, NewsToServerDto newsDto);
         
         Task RemoveNews(int id);
 
-        IEnumerable<NewsDto> GetAllNews();
+        IEnumerable<NewsFromServerDto> GetAllNews();
 
-        NewsDto GetNewsById(int id);
+        NewsFromServerDto GetNewsById(int id);
     }
 }

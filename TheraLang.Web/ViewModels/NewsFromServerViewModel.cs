@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace TheraLang.Web.ViewModels
 {
-    public class NewsViewModel
+    public class NewsFromServerViewModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
+        public ICollection<string> UploadedImageUrls { get; set; }
     }
 }
