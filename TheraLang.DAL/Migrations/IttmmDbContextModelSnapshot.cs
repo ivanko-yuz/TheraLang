@@ -56,6 +56,39 @@ namespace TheraLang.DAL.Migrations
                     b.ToTable("Donations");
                 });
 
+            modelBuilder.Entity("TheraLang.DAL.Entities.Page", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(5000);
+
+                    b.Property<Guid>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(32);
+
+                    b.Property<int?>("ParentPageId");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
+                    b.Property<Guid?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentPageId");
+
+                    b.ToTable("Pages");
+                });
+
             modelBuilder.Entity("TheraLang.DAL.Entities.Project", b =>
                 {
                     b.Property<int>("Id")
@@ -272,19 +305,19 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ff896ab5-138e-4475-b8b1-f21bd255f4ff"),
+                            Id = new Guid("7c2f80d4-b8e1-4044-b706-d7665ae29082"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("747d9ef8-404f-4999-86d7-0d6bcea10ebc"),
+                            Id = new Guid("9ed65b05-5745-4148-9275-7bf69383f426"),
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = new Guid("596a647c-935d-4cb5-8058-74597153e17e"),
+                            Id = new Guid("facd9031-db49-4324-bc7a-548f4f344681"),
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -343,16 +376,16 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("71b94b87-6adc-4d65-8a3b-0fda35832570"),
-                            PasswordHash = "ASWPUmOxP5OI7TreLwuaCctZa1gYGA+nHml6hvmh5/ic1g2JqhZlWK7OazjupFSUWw==",
-                            RoleId = new Guid("ff896ab5-138e-4475-b8b1-f21bd255f4ff"),
+                            Id = new Guid("74b96bb6-cfea-45b1-b747-cf101a9e6a2b"),
+                            PasswordHash = "AW9K70aEALhBzAiT7vsbzrA7k+Cb2qXiTHlbZGjaY4PrMAJgkH5tG2lqa5i6JDzVcw==",
+                            RoleId = new Guid("7c2f80d4-b8e1-4044-b706-d7665ae29082"),
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("af79903b-146c-4a66-8f71-c6d836099b2c"),
-                            PasswordHash = "AQ9SW1m/2P3cBunWEb2S13ma46Owo2vvHnJgIZM+2tE7+DZG5Wp0JCQZqAIGEU3A7Q==",
-                            RoleId = new Guid("747d9ef8-404f-4999-86d7-0d6bcea10ebc"),
+                            Id = new Guid("7651e071-5774-4f80-86ce-8a7866f69d45"),
+                            PasswordHash = "AQsa3AFnZIZlfQ5xRdR1qeB0oq8YztyXiZ9GJ5VrK4RCNtuz6NTKuM2sQCgRRR54Kg==",
+                            RoleId = new Guid("9ed65b05-5745-4148-9275-7bf69383f426"),
                             UserName = "Member"
                         });
                 });
@@ -1001,6 +1034,13 @@ namespace TheraLang.DAL.Migrations
                     b.HasOne("TheraLang.DAL.Entities.Society", "Society")
                         .WithMany("Donations")
                         .HasForeignKey("SocietyId");
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.Page", b =>
+                {
+                    b.HasOne("TheraLang.DAL.Entities.Page", "ParentPage")
+                        .WithMany("SubPages")
+                        .HasForeignKey("ParentPageId");
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.Project", b =>

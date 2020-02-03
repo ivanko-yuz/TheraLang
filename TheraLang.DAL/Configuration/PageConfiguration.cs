@@ -12,6 +12,11 @@ namespace TheraLang.DAL.Configuration
             builder.Property(p => p.Title).IsRequired().HasMaxLength(256);
             builder.Property(p => p.Content).HasMaxLength(5000);
             builder.Property(p => p.MenuName).HasMaxLength(32);
+
+            builder.HasMany(p => p.SubPages)
+                .WithOne(p => p.ParentPage)
+                .HasForeignKey(p => p.ParentPageId);
+       
         }
     }
 }

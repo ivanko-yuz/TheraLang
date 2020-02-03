@@ -377,3 +377,4 @@ TheraLang.Web/wwwroot/fileuploads/
 
 # Rider 
 .idea/
+/TheraLang.DAL/Migrations/
