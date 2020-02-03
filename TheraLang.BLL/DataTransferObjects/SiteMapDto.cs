@@ -1,0 +1,13 @@
+﻿using System.Collections.Generic;
+
+namespace TheraLang.BLL.DataTransferObjects
+{
+    public class SiteMapDto
+    {
+        public int Id { get; set; }
+        
+        public string MenuName { get; set; }
+        
+        public virtual IEnumerable<SiteMapDto> SubPages { get; set; }
+    }
+}
