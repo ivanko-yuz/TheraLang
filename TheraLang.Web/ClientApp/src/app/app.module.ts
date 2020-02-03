@@ -101,6 +101,8 @@ import { JwtModule } from "@auth0/angular-jwt";
 
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
+import { NewsCardComponent } from './modules/main/pages/news/news-card/news-card.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -139,7 +141,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageComponent,
     MainComponent,
     CmsPagesToolbarItemComponent,
-    DaysLeftPipe
+    DaysLeftPipe,
+    NewsPageComponent,
+    NewsCardComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,

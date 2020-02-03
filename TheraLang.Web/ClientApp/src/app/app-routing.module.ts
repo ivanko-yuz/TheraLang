@@ -15,6 +15,7 @@ import { ErrorComponent } from "./shared/components/error/error.component";
 import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
 
 const routes: Routes = [
   {
@@ -45,7 +46,8 @@ const routes: Routes = [
         component: TransactionResultComponent
       },
       { path: "projectTypes", component: ProjectTypeComponent },
-      { path: "projectRequest", component: ProjectRequestComponent }
+      { path: "projectRequest", component: ProjectRequestComponent },
+      { path: "news", component: NewsPageComponent}
     ]
   },
   { path: "login", component: LoginComponent },

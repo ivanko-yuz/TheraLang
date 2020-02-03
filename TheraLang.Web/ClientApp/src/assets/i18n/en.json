@@ -50,6 +50,9 @@
     "cms-pages": {
       "title": "CMS Pages"
     },
+    "news" : {
+      "title" : "News"
+    },
     "projects": {
       "title": "Projects",
       "create": "Create project",
