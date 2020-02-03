@@ -19,8 +19,7 @@ import { UserService } from 'src/app/core/auth/user.service';
 })
 export class ProjectComponent implements OnInit {
   projects: Project[];
-  isAdmin:boolean;
-  isAuthinticated: boolean;
+
   constructor(
     private httpService: HttpService,
     private dialogService: DialogService,
@@ -34,8 +33,6 @@ export class ProjectComponent implements OnInit {
     this.httpService
       .getAllProjects()
       .subscribe((projects: Project[]) => (this.projects = projects));
-      this.isAdmin = this.userService.isAdmin();
-      this.isAuthinticated = this.userService.isAuthenticated();
   }
 
   onCreate() {
@@ -71,6 +68,14 @@ export class ProjectComponent implements OnInit {
 
   getProjectProgress(project: Project) {
     return (project.donationsSum / project.donationTargetSum);
+  }
+  isAuthinticated()
+  {
+       return this.userService.isAuthenticated();
+  }
+  isAdmin()
+  {
+    return this.userService.isAdmin();
   }
 
 }

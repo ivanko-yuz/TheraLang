@@ -5,21 +5,21 @@
         <img src="assets/img/uttmm.png" alt="Home" class="img-wrapper">
       </a>
 
-      <app-cms-pages-toolbar-item *ngIf="isAuthinticated"></app-cms-pages-toolbar-item>
+      <app-cms-pages-toolbar-item *ngIf="isAuthinticated()"></app-cms-pages-toolbar-item>
       
       <a mat-button class="menu-item" routerLink="/projects">{{'components.projects.title'|translate}}</a>
       <a mat-button class="menu-item" routerLink="/donations">{{'components.donation.title'|translate}}</a>
-      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+      <a mat-button class="menu-item" *ngIf="isAuthinticated()"
         routerLink="/resources">{{'components.resources.title'|translate}}</a>
-      <a mat-button class="menu-item" *ngIf="isAuthinticated"
+      <a mat-button class="menu-item" *ngIf="isAuthinticated()"
         routerLink="/participants">{{'components.participation.title'|translate}}
         <span>
           <mat-icon *ngIf="hasNotification">notifications</mat-icon>
         </span>
       </a>
-      <a mat-button class="menu-item" *ngIf="isAdmin"
+      <a mat-button class="menu-item" *ngIf="isAdmin()"
         routerLink="/projectRequest">{{'components.projects.new-projects'|translate}}</a>
-      <a mat-button class="menu-item"  *ngIf="isAdmin"
+      <a mat-button class="menu-item"  *ngIf="isAdmin()"
         routerLink="/projectTypes">{{'components.projectTypes.title'|translate}}</a>
     </div>
 
@@ -29,11 +29,11 @@
       <span class="language">
         <app-language></app-language>
       </span>
-      <button mat-flat-button color="primary" *ngIf="!isAuthinticated" class="toolbar-button"
+      <button mat-flat-button color="primary" *ngIf="!isAuthinticated()" class="toolbar-button"
       routerLink="/login">{{'components.account.signIn'|translate}}</button>
     </div>
 
-    <span *ngIf="isAuthinticated">
+    <span *ngIf="isAuthinticated()">
       <app-profile-menu></app-profile-menu>
     </span>
 
