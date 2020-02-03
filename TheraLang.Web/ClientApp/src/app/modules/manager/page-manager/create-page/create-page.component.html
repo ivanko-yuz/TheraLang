@@ -1,14 +1,20 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="form-control">
-        <label for="title">Title</label>
-        <input id="title" type="text" formControlName="title">
+<form [formGroup]="form" autocomplete="off" novalidate (ngSubmit)="submit()" fxLayout="column wrap"
+    fxLayoutAlign="center center" fxLayoutGap="10px">
+
+    <mat-form-field>
+        <input matInput type="text" placeholder="Title" formControlName="title" id="title">
+        <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+        <mat-error *ngIf="hasError('title', 'maxlength')">Title should be less than 60 characters</mat-error>
+    </mat-form-field>
+
+    <div class="content">
+        <app-quill formControlName="text"></app-quill>
+        <mat-error *ngIf="hasError('text', 'required')">Text is required</mat-error>
+        <mat-error *ngIf="hasError('title', 'maxlength')">Text should be less than 5000 characters</mat-error>
     </div>
 
-    <div class="form-control">
-        <label>Text</label>
-        <div class="content">
-            <quill-editor formControlName="text"></quill-editor>
-            <button type="submit" class="btn btn-block btn-dark">Create page</button>
-        </div>
+    <div class="button-container">
+        <button mat-raised-button type="submit" [disabled]="!form.valid">Create</button>
+        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
     </div>
 </form>
