@@ -18,7 +18,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   projectParticipation: ProjectParticipationRequest[];
 
   private subscription = new Subscription();
-  isAuthinticated: boolean;
 
   constructor(
     private participantService: ProjectParticipationService,
@@ -41,7 +40,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     this.subscription.add(subscription);
-    this.isAuthinticated = this.userService.isAuthenticated();
   }
 
   ngAfterViewInit(): void {
@@ -56,5 +54,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onLogin() {
     this.dialog.openFormDialog(LoginComponent);
+  }
+  isAuthenticated()
+  {
+       return this.userService.isAuthenticated();
+  }
+  isAdmin()
+  {
+    return this.userService.isAdmin();
   }
 }

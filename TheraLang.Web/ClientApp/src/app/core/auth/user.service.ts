@@ -34,6 +34,20 @@ export class UserService {
         return false;
       }
   }
+  isAdmin() {
+    let token: string = localStorage.getItem("jwt");
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      let role = this.jwtHelper.decodeToken(token)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      console.log(role);
+      if(role==="ADMIN")
+      {
+      return true;
+      }
+    }
+    else {
+      return false;
+    }
+}
   getUserName() {
     return this.http.get(this.baseUrl + "/getUserName", {
       responseType: "text"
