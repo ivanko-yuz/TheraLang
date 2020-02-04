@@ -3,6 +3,7 @@ import { MatDialogRef, DateAdapter } from "@angular/material";
 import { ProjectService } from "../../../../../core/http/project/project.service";
 import { ProjectType } from "../../../../../shared/models/project-type/project-type.model";
 import { TranslateService } from "@ngx-translate/core";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-create-project",
@@ -13,11 +14,12 @@ import { TranslateService } from "@ngx-translate/core";
 export class ProjectFormComponent implements OnInit {
   projectTypes: ProjectType[];
 
+
   constructor(
-    private dialog: MatDialogRef<ProjectFormComponent>,
     public service: ProjectService,
     public dateAdapter: DateAdapter<Date>,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -31,11 +33,7 @@ export class ProjectFormComponent implements OnInit {
           (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes)
         );
   }
-  onClose() {
-    this.service.form.reset();
-    this.service.initializeFormGroup();
-    this.dialog.close();
-  }
+ 
 
   onSubmit() {
     if (this.service.form.invalid) {
@@ -46,10 +44,11 @@ export class ProjectFormComponent implements OnInit {
       return;
     } else if (!this.service.form.get("id").value) {
       this.service.addProject(this.service.form.value);
-      this.onClose();
+      this.router.navigate(["/"]);
+      
     } else {
       this.service.editProject(this.service.form.value);
-      this.onClose();
+      
     }
   }
 }
