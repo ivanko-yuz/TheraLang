@@ -20,7 +20,7 @@ namespace TheraLang.BLL.Services
         }
         public async Task Add(PageDto pageDto)
         {
-            var route = "/" + string.Join('-', pageDto.MenuName.Split(" "));
+            var route = "/" + string.Join('-', pageDto.MenuName.Trim().ToLower().Split(" "));
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, Page>()
             .ForMember(m => m.Route, opt => opt.MapFrom(n => route)))

@@ -18,7 +18,6 @@ namespace TheraLang.DAL.Configuration
             builder.HasMany(p => p.SubPages)
                 .WithOne(p => p.ParentPage)
                 .HasForeignKey(p => p.ParentPageId);
-       
         }
     }
 }
