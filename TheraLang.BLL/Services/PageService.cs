@@ -20,7 +20,7 @@ namespace TheraLang.BLL.Services
         }
         public async Task Add(PageDto pageDto)
         {
-            var route = "/" + string.Join('-', pageDto.MenuName.Split(" "));
+            var route = string.Join('-', pageDto.MenuName.Trim().ToLower().Split(" "));
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, Page>()
             .ForMember(m => m.Route, opt => opt.MapFrom(n => route)))
@@ -49,7 +49,21 @@ namespace TheraLang.BLL.Services
             return pagesDto;
         }
 
-        public async Task<PageDto> GetPage(int pageId)
+        public async Task<PageDto> GetPageByRoute(string route)
+        {
+            var page = await _unitOfWork.Repository<Page>()
+                .Get()
+                .FirstOrDefaultAsync(p => p.Route == route);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Page, PageDto>())
+                .CreateMapper();
+
+            var pageDto = mapper.Map<Page, PageDto>(page);
+
+            return pageDto;
+        }
+
+        public async Task<PageDto> GetPageById(int pageId)
         {
             var page = await _unitOfWork.Repository<Page>()
                 .Get()
