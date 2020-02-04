@@ -24,7 +24,7 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> GetAll()
         { 
             var res = await _siteMapService.GetAll(); 
-            return Ok(res);
+            return Ok(new {pages = res});
         }
 
         [HttpPut]

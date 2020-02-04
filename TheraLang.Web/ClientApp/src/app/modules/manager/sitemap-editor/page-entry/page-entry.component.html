@@ -1,5 +1,5 @@
 <div [class.item]="!isRoot" class="entry">
-  <mat-card class="page-row" *ngIf="!isRoot">
+  <mat-card id="{{ page.id }}" class="page-row" *ngIf="!isRoot">
     <div class="page-info">
       <mat-icon class="handle drag-icon">more_vert</mat-icon>
       <mat-card-title class="title">{{ page.route }}</mat-card-title>
@@ -29,6 +29,7 @@
     class="item-child"
     [sortablejs]="page.subPages"
     [sortablejsOptions]="options"
+    id="{{ page.id }}"
   >
     <div *ngFor="let subpage of page.subPages">
       <app-page-entry [page]="subpage"></app-page-entry>

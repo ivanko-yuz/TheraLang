@@ -21,7 +21,11 @@ export class PageEntryComponent implements OnInit {
     // easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
     ghostClass: "sortable-ghost", // Class name for the drop placeholder
     chosenClass: "sortable-chosen", // Class name for the chosen item
-    dragClass: "sortable-drag" // Class name for the dragging item
+    dragClass: "sortable-drag", // Class name for the dragging item
+    onMove: function(event, event2) {
+      console.log("from", event.from.id);
+      console.log("to", event.to.id);
+    }
   };
   constructor() {}
 

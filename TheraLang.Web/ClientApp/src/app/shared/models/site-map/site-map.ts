@@ -6,4 +6,5 @@ export class SiteMap {
   id: string;
   level: number;
   subPages: SiteMap[];
+  parentId: number;
 }
