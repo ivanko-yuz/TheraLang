@@ -33,10 +33,7 @@ export class EditorComponent implements AfterViewInit, OnInit, ControlValueAcces
           [{ 'font': ['sans-serif'] }],
           [{ 'align': [] }],
           ['clean']
-        ],
-        handlers: {
-          image: this.imageHandler
-        }
+        ]
       }
     },
     theme: 'snow'
@@ -51,15 +48,6 @@ export class EditorComponent implements AfterViewInit, OnInit, ControlValueAcces
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit() { }
-
-
-  public imageHandler() {
-    var range = this.quill.getSelection();
-    var value = prompt('Insert image URL');
-    if (value) {
-      this.quill.insertEmbed(range.index, 'image', value, Quill.sources.USER);
-    }
-  }
 
   ngAfterViewInit() {
     this.quill = new Quill(this.elementRef.nativeElement, this.quillOptions)
