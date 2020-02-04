@@ -11,7 +11,5 @@ namespace TheraLang.Web.ViewModels
         public string Content { get; set; }
         public string Header { get; set; }
         public string MenuName { get; set; }
-        public int? ParentPageId { get; set; }
-
     }
 }
