@@ -38,35 +38,14 @@ namespace TheraLang.BLL.Services
 
         public async Task UpdateStructure(IEnumerable<SiteMapDto> siteMap)
         {
-            var mapper = new MapperConfiguration(opts => opts.CreateMap<SiteMapDto,Page>())
+            var mapper = new MapperConfiguration(opts => opts.CreateMap<SiteMapDto, Page>())
                 .CreateMapper();
-            var flattened = Traverse(siteMap, sm => sm.SubPages);
-            foreach (var siteMapDto in flattened)
+            var siteMapEntities = mapper.Map<IEnumerable<SiteMapDto>, IEnumerable<Page>>(siteMap);
+            foreach (var entity in siteMapEntities)
             {
-                if (siteMapDto.Changed)
-                {
-                    var entity = await _unitOfWork.Repository<Page>().Get()
-                        .FirstOrDefaultAsync(sm => sm.Id == siteMapDto.Id);
-                    
-                    entity.SubPages
-                }
+                _unitOfWork.Repository<Page>().Attach(entity,EntityState.Modified);
             }
-            return;
-        }
-        private static IEnumerable<T> Traverse<T>(IEnumerable<T> items, Func<T, IEnumerable<T>> childSelector)
-        {
-            var stack = new Stack<T>();
-            foreach (var item in items)
-            {
-                stack.Push(item);
-            }
-            while (stack.Any())
-            {
-                var next = stack.Pop();
-                yield return next;
-                foreach (var child in childSelector(next))
-                    stack.Push(child);
-            }
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

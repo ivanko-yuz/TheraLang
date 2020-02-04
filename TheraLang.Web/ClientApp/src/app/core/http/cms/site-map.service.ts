@@ -62,7 +62,7 @@ export class SiteMapService {
         item.permalink,
         route,
         item.menuTitle,
-        this.mapToolbarItems(item.items)
+        this.mapToolbarItems(item.subPages)
       );
     });
   }

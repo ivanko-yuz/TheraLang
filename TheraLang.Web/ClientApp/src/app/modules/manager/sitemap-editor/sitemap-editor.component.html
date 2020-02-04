@@ -1,4 +1,7 @@
 <div class="content">
-  <app-page-entry [page]="{ items: siteMap }" [isRoot]="true"></app-page-entry>
+  <app-page-entry
+    [page]="{ subPages: siteMap }"
+    [isRoot]="true"
+  ></app-page-entry>
 </div>
 <button (click)="logInfo()">Log</button>

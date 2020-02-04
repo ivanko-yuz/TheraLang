@@ -1,56 +1,27 @@
 {
   "pages": [
     {
-      "id": "1",
-      "title": "Page1",
-      "items": [
+      "id": 1,
+      "menuName": null,
+      "route": "page1",
+      "parentPageId": null,
+      "changed": false,
+      "subPages": [
         {
-          "id": "2",
-          "title": "Page2",
-          "items": []
+          "id": 2,
+          "menuName": null,
+          "route": "page2",
+          "parentPageId": 1,
+          "changed": false,
+          "subPages": []
         },
         {
-          "id": "3",
-          "title": "Page3",
-          "items": []
-        },
-        {
-          "id": "4",
-          "title": "Page4",
-          "items": [
-            {
-              "id": "5",
-              "title": "Page5",
-              "items": []
-            },
-            {
-              "id": "6",
-              "title": "Page6",
-              "items": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "7",
-      "title": "Page7",
-      "items": []
-    },
-    {
-      "id": "8",
-      "title": "Page8",
-      "items": [
-        {
-          "id": "9",
-          "title": "Page9",
-          "items": [
-            {
-              "id": "10",
-              "title": "Page10",
-              "items": []
-            }
-          ]
+          "id": 3,
+          "menuName": null,
+          "route": "page3",
+          "parentPageId": 1,
+          "changed": false,
+          "subPages": []
         }
       ]
     }

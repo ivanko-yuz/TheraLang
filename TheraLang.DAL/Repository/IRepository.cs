@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheraLang.DAL.Repository
 {
@@ -18,6 +19,6 @@ namespace TheraLang.DAL.Repository
        
         void Update(TEntity entity);
       
-        void Attach(TEntity entity);
+        void Attach(TEntity entity,EntityState state = EntityState.Unchanged);
     }
 }
