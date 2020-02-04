@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { SiteMapService } from "src/app/core/http/cms/site-map.service";
 import { SiteMap } from "src/app/shared/models/site-map/site-map";
+import { ChangedSiteMap } from "src/app/shared/models/site-map/changed-site-map";
 
 @Component({
   selector: "app-sitemap-editor",
@@ -20,7 +21,11 @@ export class SitemapEditorComponent implements OnInit {
     });
   }
 
+  onMove(event: ChangedSiteMap) {
+    this.siteMapService.addSiteMapChange(event);
+  }
+
   logInfo() {
-    console.log(this.siteMap);
+    console.log(this.siteMapService.siteMapChanges);
   }
 }

@@ -5,6 +5,7 @@ import { Observable, Subject } from "rxjs";
 import { ToolbarItem } from "../../toolbar/cms-pages-toolbar-item/toolbar-item";
 import { CmsRoute } from "../../toolbar/toolbar-item/cms-route";
 import { cmsSitemapUrl } from "src/app/configs/api-endpoint.constants";
+import { ChangedSiteMap } from "src/app/shared/models/site-map/changed-site-map";
 
 @Injectable({
   providedIn: "root"
@@ -13,10 +14,16 @@ export class SiteMapService {
   siteMap = new Subject<SiteMap[]>();
   toolbarItems = new Subject<ToolbarItem[]>();
   siteMapUpdating = false;
+  siteMapChanges: ChangedSiteMap[];
 
   constructor(private http: HttpClient) {
     this.updateToolbarItemsOnSubscription();
     this.updateSiteMap();
+    this.siteMapChanges = [];
+  }
+
+  public addSiteMapChange(changed: ChangedSiteMap) {
+    this.siteMapChanges.push(changed);
   }
 
   public getSiteMap(): Observable<SiteMap[]> {
@@ -57,7 +64,7 @@ export class SiteMapService {
 
   private mapToolbarItems(siteMap: SiteMap[]): ToolbarItem[] {
     return siteMap.map(item => {
-      const route = new CmsRoute(item.pageTypeName, item.id);
+      const route = new CmsRoute(item.pageTypeName, item.id.toString());
       return new ToolbarItem(
         item.permalink,
         route,

@@ -1,5 +1,5 @@
 <div [class.item]="!isRoot" class="entry">
-  <mat-card id="{{ page.id }}" class="page-row" *ngIf="!isRoot">
+  <mat-card [attr.page-id]="page.id" class="page-row" *ngIf="!isRoot">
     <div class="page-info">
       <mat-icon class="handle drag-icon">more_vert</mat-icon>
       <mat-card-title class="title">{{ page.route }}</mat-card-title>
@@ -12,7 +12,7 @@
       <a mat-icon-button color="warn"><mat-icon>delete</mat-icon></a>
     </div>
   </mat-card>
-  <mat-card class="page-row" *ngIf="isRoot">
+  <mat-card [attr.page-id]="page.id" class="page-row" *ngIf="isRoot">
     <mat-card-title class="root">{{
       "common.mainpage" | translate
     }}</mat-card-title>
@@ -29,10 +29,13 @@
     class="item-child"
     [sortablejs]="page.subPages"
     [sortablejsOptions]="options"
-    id="{{ page.id }}"
+    [attr.page-id]="page.id"
   >
-    <div *ngFor="let subpage of page.subPages">
-      <app-page-entry [page]="subpage"></app-page-entry>
+    <div [attr.page-id]="subpage.id" *ngFor="let subpage of page.subPages">
+      <app-page-entry
+        (onChange)="emitToParent($event)"
+        [page]="subpage"
+      ></app-page-entry>
     </div>
   </div>
 </div>

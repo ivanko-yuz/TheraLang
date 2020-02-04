@@ -2,6 +2,7 @@
   <app-page-entry
     [page]="{ id: 0, subPages: siteMap }"
     [isRoot]="true"
+    (onChange)="onMove($event)"
   ></app-page-entry>
 </div>
 <button (click)="logInfo()">Log</button>

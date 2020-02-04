@@ -3,7 +3,7 @@ export class SiteMap {
   permalink: string;
   header: string;
   menuTitle: string;
-  id: string;
+  id: number;
   level: number;
   subPages: SiteMap[];
   parentId: number;
