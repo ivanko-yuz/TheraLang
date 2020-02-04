@@ -69,7 +69,7 @@ export class ProjectComponent implements OnInit {
   getProjectProgress(project: Project) {
     return (project.donationsSum / project.donationTargetSum);
   }
-  isAuthinticated()
+  isAuthenticated()
   {
        return this.userService.isAuthenticated();
   }

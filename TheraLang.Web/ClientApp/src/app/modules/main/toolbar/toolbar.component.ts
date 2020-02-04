@@ -55,7 +55,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   onLogin() {
     this.dialog.openFormDialog(LoginComponent);
   }
-  isAuthinticated()
+  isAuthenticated()
   {
        return this.userService.isAuthenticated();
   }
