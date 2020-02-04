@@ -24,7 +24,9 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<ProjectDto>> GetAllProjectsAsync()
         {
-            var projects = await _unitOfWork.Repository<Project>().GetListWithIncludeAsync("Donations");
+            var projects = await _unitOfWork.Repository<Project>().GetAll()
+                .Include(x => x.Donations)
+                .ToListAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
                     .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
@@ -36,7 +38,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<ProjectDto>> GetAllNewProjectsAsync()
         {
-            var projects = await _unitOfWork.Repository<Project>().GetListAsync(i => i.StatusId == 0);
+            var projects = await _unitOfWork.Repository<Project>().GetAllAsync(i => i.StatusId == 0);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
                     .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
@@ -49,7 +51,7 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<ProjectDto>> GetProjectsByStatusAsync(int status)
         {
             var projects =
-                (await _unitOfWork.Repository<Project>().GetListAsync(i => i.StatusId == (ProjectStatus) status))
+                (await _unitOfWork.Repository<Project>().GetAllAsync(i => i.StatusId == (ProjectStatus) status))
                 .ToArray();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
@@ -62,7 +64,7 @@ namespace TheraLang.BLL.Services
 
         public async Task AddAsync(ProjectDto projectDto, Guid userId)
         {
-            var user = await _unitOfWork.Repository<User>().GetAsync(u => u.Id == userId);
+            var user = await _unitOfWork.Repository<User>().Get(u => u.Id == userId);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, Project>()
                     .ForMember(p => p.DonationTarget, opt => opt.MapFrom(src => src.DonationTargetSum))
@@ -80,8 +82,8 @@ namespace TheraLang.BLL.Services
             };
             try
             {
-                await _unitOfWork.Repository<Project>().AddAsync(project);
-                await _unitOfWork.Repository<ProjectParticipation>().AddAsync(newParticipant);
+                _unitOfWork.Repository<Project>().Add(project);
+                _unitOfWork.Repository<ProjectParticipation>().Add(newParticipant);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
@@ -95,14 +97,14 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var project = await _unitOfWork.Repository<Project>().GetAsync(p => p.Id == id);
+                var project = await _unitOfWork.Repository<Project>().Get(p => p.Id == id);
                 if (project == null)
                 {
                     throw new ArgumentNullException(
                         $"Error while deleting project. Project with id {nameof(id)}={id} not found");
                 }
 
-                await _unitOfWork.Repository<Project>().RemoveAsync(project);
+                _unitOfWork.Repository<Project>().Remove(project);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
@@ -117,7 +119,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var projects = (await _unitOfWork.Repository<Project>().GetListAsync()).AsNoTracking();
+                var projects = await _unitOfWork.Repository<Project>().GetAll().AsNoTracking().ToListAsync();
                 var projectsPerPage = projects.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
@@ -136,7 +138,7 @@ namespace TheraLang.BLL.Services
 
         public async Task ChangeStatusAsync(int projectId, ProjectStatusDto status)
         {
-            var project = await _unitOfWork.Repository<Project>().GetAsync(p => p.Id == projectId);
+            var project = await _unitOfWork.Repository<Project>().Get(p => p.Id == projectId);
             if (project == null)
             {
                 throw new ArgumentNullException(
@@ -148,7 +150,7 @@ namespace TheraLang.BLL.Services
             var projectStatus = mapper.Map<ProjectStatusDto, ProjectStatus>(status);
 
             project.StatusId = projectStatus;
-            await _unitOfWork.Repository<Project>().UpdateAsync(project);
+            _unitOfWork.Repository<Project>().Update(project);
 
             await _unitOfWork.SaveChangesAsync();
         }
@@ -157,7 +159,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var proj = await _unitOfWork.Repository<Project>().GetAsync(p => p.Id == id);
+                var proj = await _unitOfWork.Repository<Project>().Get(p => p.Id == id);
                 if (proj == null)
                 {
                     throw new ArgumentNullException(
@@ -171,7 +173,7 @@ namespace TheraLang.BLL.Services
                 proj.ProjectEnd = projectDto.ProjectEnd;
                 proj.DonationTarget = projectDto.DonationTargetSum;
 
-                await _unitOfWork.Repository<Project>().UpdateAsync(proj);
+                _unitOfWork.Repository<Project>().Update(proj);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
@@ -185,7 +187,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var project = await _unitOfWork.Repository<Project>().GetAsync(i => i.Id == id);
+                var project = await _unitOfWork.Repository<Project>().Get(i => i.Id == id);
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
                         .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(src => src.DonationTarget)))

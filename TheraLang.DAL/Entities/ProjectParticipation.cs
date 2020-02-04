@@ -1,5 +1,4 @@
 using TheraLang.DAL.Enums;
-using TheraLang.DAL.Piranha.Entities;
 
 namespace TheraLang.DAL.Entities
 {

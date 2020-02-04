@@ -19,15 +19,15 @@ namespace TheraLang.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task ChangeTypeNameAsync(int categoryId, string newTypeName)
+        public async Task ChangeTypeName(int categoryId, string newTypeName)
         {
             try
             {
                 ResourceCategory category =
-                    await _unitOfWork.Repository<ResourceCategory>().GetAsync(i => i.Id == categoryId);
+                    await _unitOfWork.Repository<ResourceCategory>().Get(i => i.Id == categoryId);
                 category.Type = newTypeName;
 
-                await _unitOfWork.Repository<ResourceCategory>().UpdateAsync(category);
+                _unitOfWork.Repository<ResourceCategory>().Update(category);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -37,9 +37,9 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task<IEnumerable<ResourceCategoryDto>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<ResourceCategoryDto>> GetAllCategories()
         {
-            var categories = await _unitOfWork.Repository<ResourceCategory>().GetListAsync();
+            var categories = await _unitOfWork.Repository<ResourceCategory>().GetAllAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceCategory, ResourceCategoryDto>())
                 .CreateMapper();

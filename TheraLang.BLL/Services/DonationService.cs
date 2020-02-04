@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -27,7 +26,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var liqPayCheckoutDto = LiqPayHelper.GetLiqPayCheckoutModel(donationAmount, projectId, context);
+                var liqPayCheckoutDto = await Task.Run(() => LiqPayHelper.GetLiqPayCheckoutModel(donationAmount, projectId, context));
 
                 return liqPayCheckoutDto;
             }
@@ -41,10 +40,9 @@ namespace TheraLang.BLL.Services
 
         public async Task<DonationDto> GetDonationAsync(string donationId)
         {
+            var donation = await _unitOfWork.Repository<Donation>().Get(x => x.DonationId == donationId);
             try
             {
-                Donation donation = await _unitOfWork.Repository<Donation>().GetAsync(x => x.DonationId == donationId);
-
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Donation, DonationDto>()).CreateMapper();
                 var projectsDto = mapper.Map<Donation, DonationDto>(donation);
 
@@ -60,23 +58,25 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                byte[] responseData = Convert.FromBase64String(data);
-                string decodedString = Encoding.UTF8.GetString(responseData);
+                var responseData = Convert.FromBase64String(data);
+                var decodedString = Encoding.UTF8.GetString(responseData);
                 var commissionModel = JsonConvert.DeserializeObject<LiqPayCommissionModel>(decodedString);
-                Donation donation = JsonConvert.DeserializeObject<Donation>(decodedString);
+                var donation = JsonConvert.DeserializeObject<Donation>(decodedString);
+                
                 donation.Amount -= commissionModel.ReceiverCommission;
                 donation.ProjectId = projectId;
                 donation.DonationId = donationId;
+                
                 if (projectId == null)
                 {
-                    var society = await _unitOfWork.Repository<Society>().GetAsync();
+                    var society = await _unitOfWork.Repository<Society>().Get();
                     if (society == null)
                         throw new ArgumentNullException($"Society with {nameof(society.Id)} not found");
 
                     donation.SocietyId = society.Id;
                 }
 
-                await _unitOfWork.Repository<Donation>().AddAsync(donation);
+                _unitOfWork.Repository<Donation>().Add(donation);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)

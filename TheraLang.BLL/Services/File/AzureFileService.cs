@@ -8,16 +8,16 @@ using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.BLL.Services.File
 {
-    public class AzureFileService: IFileService
+    public class AzureFileService : IFileService
     {
         private readonly IAzureConnectionFactory _azureConnection;
-        
+
         public AzureFileService(IAzureConnectionFactory azureConnection)
         {
             _azureConnection = azureConnection;
         }
 
-        public async Task<Uri> SaveFileAsync(IFormFile file)
+        public async Task<Uri> SaveFile(IFormFile file)
         {
             var container = _azureConnection.GetClient().GetContainerReference("files");
             var extension = Path.GetExtension(file.FileName);
@@ -31,6 +31,7 @@ namespace TheraLang.BLL.Services.File
                     PublicAccess = BlobContainerPublicAccessType.Blob
                 });
             }
+
             var blockBlob = container.GetBlockBlobReference(filename);
 
             await blockBlob.UploadFromStreamAsync(file.OpenReadStream());

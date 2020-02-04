@@ -39,9 +39,13 @@ namespace TheraLang.Web.Controllers
                 return BadRequest();
             }
 
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = await _userManager.GetUserByIdAsync(UserId.Value);
+            var userId = User.Claims.GetUserId();
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
+            var user = await _userManager.GetUserById(userId.Value);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
             var projectDto = mapper.Map<ProjectViewModel, ProjectDto>(projectModel);
@@ -72,7 +76,7 @@ namespace TheraLang.Web.Controllers
                     ProjectStart = p.ProjectStart,
                     ProjectEnd = p.ProjectEnd
                 }).ToList();
-                
+
 
             return projectModels;
         }

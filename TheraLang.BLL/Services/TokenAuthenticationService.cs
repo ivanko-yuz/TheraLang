@@ -25,7 +25,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<string> AuthenticateAsync(LoginModelDto request)
         {
-            var user = await _userManagementService.GetUserAsync(request.UserName, request.Password);
+            var user = await _userManagementService.GetUser(request.UserName, request.Password);
             if (user == null) return null;
 
             var claim = new[]

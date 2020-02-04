@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
-using TheraLang.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
 {
     [Route("api/projectTypes")]
     [ApiController]
- 
     public class ProjectTypeController : ControllerBase
     {
         public ProjectTypeController(IProjectTypeService service, IUserManagementService userManager)
@@ -32,7 +29,7 @@ namespace TheraLang.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> PostProjectType([FromBody]ProjectTypeViewModel projectTypeModel)
+        public async Task<IActionResult> PostProjectType([FromBody] ProjectTypeViewModel projectTypeModel)
         {
             if (projectTypeModel == null)
             {
@@ -42,12 +39,12 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
             var projectDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
 
-            await _service.AddAsync(projectDto);
+            await _service.Add(projectDto);
             return Ok();
         }
 
 
-        [HttpPut]       
+        [HttpPut]
         [Authorize]
         public async Task<IActionResult> PutProjectType([FromBody] ProjectTypeViewModel projectTypeModel)
         {
@@ -59,11 +56,11 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
             var projectTypeDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
 
-            await _service.UpdateAsync(projectTypeDto);
+            await _service.Update(projectTypeDto);
             return Ok();
         }
 
-        
+
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> DeleteProjectType(int id)
@@ -72,7 +69,8 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            await _service.RemoveAsync(id);
+
+            await _service.Remove(id);
             return Ok();
         }
 
@@ -84,7 +82,7 @@ namespace TheraLang.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAllTypes()
         {
-            return Ok(await _service.GetAllProjectsTypeAsync());
+            return Ok(await _service.GetAllProjectsType());
         }
 
         /// <summary>
@@ -100,7 +98,8 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            var type = _service.GetProjectTypeByIdAsync(id);
+
+            var type = _service.GetProjectTypeById(id);
             return Ok(type);
         }
     }

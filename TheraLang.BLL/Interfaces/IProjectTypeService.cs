@@ -1,20 +1,19 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using System;
 using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.BLL.Interfaces
 {
     public interface IProjectTypeService
     {
-        Task AddAsync(ProjectTypeDto projectType);
+        Task Add(ProjectTypeDto projectType);
 
-        Task RemoveAsync(int id);
+        Task Remove(int id);
 
-        Task UpdateAsync(ProjectTypeDto projectType);
+        Task Update(ProjectTypeDto projectType);
 
-        Task<IEnumerable<ProjectTypeDto>> GetAllProjectsTypeAsync();
+        Task<IEnumerable<ProjectTypeDto>> GetAllProjectsType();
 
-        Task<ProjectTypeDto> GetProjectTypeByIdAsync(int id);
+        Task<ProjectTypeDto> GetProjectTypeById(int id);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TheraLang.DAL.Piranha.Entities;
 
 namespace TheraLang.DAL.Entities
 {
@@ -25,8 +24,8 @@ namespace TheraLang.DAL.Entities
         public virtual ICollection<ResourceAttachment> ResourceAttach { get; set; }
         public Resource()
         {
-            this.ResourceAttach = new List<ResourceAttachment>();
-            this.ResourceProjects = new List<ResourceProject>();
+            ResourceAttach = new List<ResourceAttachment>();
+            ResourceProjects = new List<ResourceProject>();
         }
     }
 }

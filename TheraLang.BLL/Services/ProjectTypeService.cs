@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +19,7 @@ namespace TheraLang.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task AddAsync(ProjectTypeDto projectTypeDto)
+        public async Task Add(ProjectTypeDto projectTypeDto)
         {
             try
             {
@@ -28,34 +27,33 @@ namespace TheraLang.BLL.Services
                     .CreateMapper();
                 var projectType = mapper.Map<ProjectTypeDto, ProjectType>(projectTypeDto);
 
-                await _unitOfWork.Repository<ProjectType>().AddAsync(projectType);
+                _unitOfWork.Repository<ProjectType>().Add(projectType);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 ex.Data[nameof(ProjectType)] = projectTypeDto;
-                throw new Exception($"Error when trying to add new {nameof(ProjectType)}", ex);
+                throw new Exception($"Cannot add new {nameof(ProjectType)}.", ex);
             }
         }
 
-        public async Task RemoveAsync(int projectTypeId)
+        public async Task Remove(int projectTypeId)
         {
             try
             {
-                ProjectType projectType =
-                    await _unitOfWork.Repository<ProjectType>().GetAsync(i => i.Id == projectTypeId);
-                await _unitOfWork.Repository<ProjectType>().RemoveAsync(projectType);
+                var projectType =
+                    await _unitOfWork.Repository<ProjectType>().Get(i => i.Id == projectTypeId);
+                _unitOfWork.Repository<ProjectType>().Remove(projectType);
 
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when remove ProjectType by {nameof(ProjectType.Id)}: {projectTypeId}: ",
-                    ex);
+                throw new Exception($"Cannot remove ProjectType with {nameof(ProjectType.Id)}: {projectTypeId}.", ex);
             }
         }
 
-        public async Task UpdateAsync(ProjectTypeDto projectTypeDto)
+        public async Task Update(ProjectTypeDto projectTypeDto)
         {
             try
             {
@@ -63,18 +61,20 @@ namespace TheraLang.BLL.Services
                     .CreateMapper();
                 var projectType = mapper.Map<ProjectTypeDto, ProjectType>(projectTypeDto);
 
-                await _unitOfWork.Repository<ProjectType>().UpdateAsync(projectType);
+                _unitOfWork.Repository<ProjectType>().Update(projectType);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when updating the {nameof(ProjectType)}: {projectTypeDto.Id}: ", ex);
+                throw new Exception($"Cannot update the {nameof(ProjectType)} with {nameof(projectTypeDto.Id)}: {projectTypeDto.Id}.", ex);
             }
         }
 
-        public async Task<IEnumerable<ProjectTypeDto>> GetAllProjectsTypeAsync()
+        public async Task<IEnumerable<ProjectTypeDto>> GetAllProjectsType()
         {
-            var projectTypes = (await _unitOfWork.Repository<ProjectType>().GetListAsync()).AsNoTracking().ToList();
+            var projectTypes = await _unitOfWork.Repository<ProjectType>().GetAll()
+                .AsNoTracking()
+                .ToListAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectType, ProjectTypeDto>()).CreateMapper();
             var projectTypesDto = mapper.Map<IEnumerable<ProjectType>, IEnumerable<ProjectTypeDto>>(projectTypes);
@@ -82,12 +82,11 @@ namespace TheraLang.BLL.Services
             return projectTypesDto;
         }
 
-        public async Task<ProjectTypeDto> GetProjectTypeByIdAsync(int id)
+        public async Task<ProjectTypeDto> GetProjectTypeById(int id)
         {
+            var projectType = await _unitOfWork.Repository<ProjectType>().Get(p => p.Id == id);
             try
             {
-                ProjectType projectType = await _unitOfWork.Repository<ProjectType>().GetAsync(p => p.Id == id);
-
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectType, ProjectTypeDto>())
                     .CreateMapper();
                 var projectTypeDto = mapper.Map<ProjectType, ProjectTypeDto>(projectType);
@@ -96,7 +95,7 @@ namespace TheraLang.BLL.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when getting project by {nameof(id)} = {id}: ", ex);
+                throw new Exception($"Cannot get project with {nameof(id)}: {id}.", ex);
             }
         }
     }

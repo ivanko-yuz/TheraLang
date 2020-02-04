@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
@@ -24,13 +23,13 @@ namespace TheraLang.BLL.Services
             _appEnvironment = appEnvironment;
         }
 
-        public async Task AddAsync(ResourceAttachDto file)
+        public async Task Add(ResourceAttachDto file)
         {
             try
             {
                 if (file.File != null)
                 {
-                    string path = "/Files/" + file.FileName;
+                    var path = "/Files/" + file.FileName;
                     using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                     {
                         await file.File.CopyToAsync(fileStream);
@@ -40,7 +39,7 @@ namespace TheraLang.BLL.Services
                         .CreateMapper();
                     var resource = mapper.Map<ResourceAttachDto, ResourceAttachment>(file);
 
-                    await _unitOfWork.Repository<ResourceAttachment>().AddAsync(resource);
+                    _unitOfWork.Repository<ResourceAttachment>().Add(resource);
                     await _unitOfWork.SaveChangesAsync();
                 }
             }
@@ -51,9 +50,9 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task<IEnumerable<ResourceAttachDto>> GetAsync()
+        public async Task<IEnumerable<ResourceAttachDto>> Get()
         {
-            var resources = (await _unitOfWork.Repository<ResourceAttachment>().GetListAsync()).AsNoTracking().ToList();
+            var resources = await _unitOfWork.Repository<ResourceAttachment>().GetAll().AsNoTracking().ToListAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachment, ResourceAttachDto>())
                 .CreateMapper();

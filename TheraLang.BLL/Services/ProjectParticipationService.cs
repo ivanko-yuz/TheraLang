@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -21,12 +20,12 @@ namespace TheraLang.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task ChangeStatusAsync(int participantId, ProjectParticipationStatusDto statusDto)
+        public async Task ChangeStatus(int participantId, ProjectParticipationStatusDto statusDto)
         {
             try
             {
-                ProjectParticipation participant = await _unitOfWork.Repository<ProjectParticipation>()
-                    .GetAsync(x => x.Id == participantId);
+                var participant = await _unitOfWork.Repository<ProjectParticipation>()
+                    .Get(x => x.Id == participantId);
 
                 if (participant == null)
                 {
@@ -40,7 +39,7 @@ namespace TheraLang.BLL.Services
 
                 participant.Status = status;
 
-                await _unitOfWork.Repository<ProjectParticipation>().UpdateAsync(participant);
+                _unitOfWork.Repository<ProjectParticipation>().Update(participant);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -49,11 +48,12 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task<IEnumerable<ProjectParticipationDto>> GetAllAsync()
+        public async Task<IEnumerable<ProjectParticipationDto>> GetAll()
         {
-            var projectParticipations = await _unitOfWork.Repository<ProjectParticipation>()
-                .GetListWithIncludeAsync("User", "Project");
-
+            var projectParticipations =  await _unitOfWork.Repository<ProjectParticipation>().GetAll()
+                .Include(p => p.User)
+                .Include(p => p.Project)
+                .ToListAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()
                 .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))
@@ -70,13 +70,13 @@ namespace TheraLang.BLL.Services
         }
 
 
-        public async Task CreateRequestAsync(Guid userId, int projectId)
+        public async Task CreateRequest(Guid userId, int projectId)
         {
             try
             {
-                var user = await _unitOfWork.Repository<User>().GetAsync(u => u.Id == userId);
+                var user = await _unitOfWork.Repository<User>().Get(u => u.Id == userId);
                 var isRequested = await _unitOfWork.Repository<ProjectParticipation>()
-                    .GetAsync(p => p.ProjectId == projectId && p.User.Id == userId);
+                    .Get(p => p.ProjectId == projectId && p.User.Id == userId);
 
 
                 if (isRequested == null)
@@ -88,7 +88,7 @@ namespace TheraLang.BLL.Services
                         Status = ProjectParticipationStatus.New,
                     };
 
-                    await _unitOfWork.Repository<ProjectParticipation>().AddAsync(member);
+                    _unitOfWork.Repository<ProjectParticipation>().Add(member);
                     await _unitOfWork.SaveChangesAsync();
                 }
                 else

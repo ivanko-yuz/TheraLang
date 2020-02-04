@@ -11,7 +11,7 @@ namespace TheraLang.DAL.Entities
         public virtual ICollection<Resource> Resources { get; set; }
         public ResourceCategory()
         {
-            this.Resources = new List<Resource>();
+            Resources = new List<Resource>();
         }
     }
 }

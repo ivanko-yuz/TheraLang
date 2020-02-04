@@ -7,16 +7,16 @@ using TheraLang.BLL.Interfaces;
 
 namespace TheraLang.BLL.Services.File
 {
-    public class LocalFileService:IFileService
+    public class LocalFileService : IFileService
     {
         private readonly IHostingEnvironment _env;
-        
+
         public LocalFileService(IHostingEnvironment env)
         {
             _env = env;
         }
-        
-        public async Task<Uri> SaveFileAsync(IFormFile file)
+
+        public async Task<Uri> SaveFile(IFormFile file)
         {
             var extension = Path.GetExtension(file.FileName);
             var uniqueName = Guid.NewGuid().ToString();
@@ -26,10 +26,13 @@ namespace TheraLang.BLL.Services.File
             {
                 Directory.CreateDirectory(folder);
             }
-            using (var fileStream = new FileStream(Path.Combine(folder,filename),FileMode.Create)){
+
+            using (var fileStream = new FileStream(Path.Combine(folder, filename), FileMode.Create))
+            {
                 await file.CopyToAsync(fileStream);
             }
-            return new Uri($"/fileuploads/{filename}",UriKind.Relative);
+
+            return new Uri($"/fileuploads/{filename}", UriKind.Relative);
         }
     }
 }
