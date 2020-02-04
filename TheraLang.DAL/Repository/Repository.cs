@@ -18,7 +18,7 @@ namespace TheraLang.DAL.Repository
 
         public async Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate = null)
         {
-            var entity = await _dbSet.FirstOrDefaultAsync(predicate);
+            var entity = await GetAll().Where(predicate).FirstOrDefaultAsync();
             return entity;
         }
 
