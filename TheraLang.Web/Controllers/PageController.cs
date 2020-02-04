@@ -50,7 +50,7 @@ namespace TheraLang.Web.Controllers
             var UserId = User.Claims.GetUserId();
             if (UserId == null) return BadRequest();
 
-            var page = await _pageService.GetPage(id);
+            var page = await _pageService.GetPageById(id);
             if (page == null) return NotFound();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>())
@@ -61,11 +61,11 @@ namespace TheraLang.Web.Controllers
             return Ok(pageDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{route}")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetPage(int id)
+        public async Task<IActionResult> GetPage(string route)
         {
-            var page = await _pageService.GetPage(id);
+            var page = await _pageService.GetPageByRoute(route);
             if (page == null) return NotFound();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>())
@@ -96,7 +96,7 @@ namespace TheraLang.Web.Controllers
             var UserId = User.Claims.GetUserId();
             if (UserId == null) return BadRequest();
 
-            var page = await _pageService.GetPage(id);
+            var page = await _pageService.GetPageById(id);
             if (page == null) return NotFound();
 
             await _pageService.Remove(id);

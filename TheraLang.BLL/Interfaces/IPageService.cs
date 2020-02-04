@@ -11,7 +11,8 @@ namespace TheraLang.BLL.Interfaces
         Task Add(PageDto page);
         Task Update(PageDto page, int pageId);
         Task Remove(int pageId);
-        Task<PageDto> GetPage(int pageId);
+        Task<PageDto> GetPageByRoute(string route);
+        Task<PageDto> GetPageById(int id);
         Task<IEnumerable<PageDto>> GetAllPages();
     }
 }
