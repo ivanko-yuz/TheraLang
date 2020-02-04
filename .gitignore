@@ -377,9 +377,6 @@ TheraLang.Web/wwwroot/fileuploads/
 
 # Rider 
 .idea/
-<<<<<<< HEAD
-=======
 
 # EF Core Migrations
->>>>>>> 28c945359dc9b99d80b4208a91a1a68c10a825c3
 /TheraLang.DAL/Migrations/
