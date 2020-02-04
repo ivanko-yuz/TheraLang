@@ -13,7 +13,7 @@ using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/pages")]
     [ApiController]
     public class PageController : ControllerBase
     {
@@ -45,27 +45,27 @@ namespace TheraLang.Web.Controllers
 
         [HttpPut("{id}")]
         [Authorize]
-        public async Task<IActionResult> EditPage(int pageId, [FromBody] PageViewModel pageModel)
+        public async Task<IActionResult> EditPage(int id, [FromBody] PageViewModel pageModel)
         {
             var UserId = User.Claims.GetUserId();
             if (UserId == null) return BadRequest();
 
-            var page = await _pageService.GetPage(pageId);
+            var page = await _pageService.GetPage(id);
             if (page == null) return NotFound();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>())
                 .CreateMapper();
             var pageDto = mapper.Map<PageViewModel, PageDto>(pageModel);
 
-            await _pageService.Update(pageDto, pageId);
+            await _pageService.Update(pageDto, id);
             return Ok(pageDto);
         }
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetPage(int pageId)
+        public async Task<IActionResult> GetPage(int id)
         {
-            var page = await _pageService.GetPage(pageId);
+            var page = await _pageService.GetPage(id);
             if (page == null) return NotFound();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>())
@@ -89,17 +89,17 @@ namespace TheraLang.Web.Controllers
             return Ok(pageModel);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         [Authorize]
-        public async Task<IActionResult> RemovePage(int pageId)
+        public async Task<IActionResult> DeletePage(int id)
         {
             var UserId = User.Claims.GetUserId();
             if (UserId == null) return BadRequest();
 
-            var page = await _pageService.GetPage(pageId);
+            var page = await _pageService.GetPage(id);
             if (page == null) return NotFound();
 
-            await _pageService.Remove(pageId);
+            await _pageService.Remove(id);
 
             return Ok();
         }

@@ -31,7 +31,7 @@ namespace TheraLang.DAL
         public virtual DbSet<Page> Pages { get; set; }
 
         #endregion
-
+        /*
         #region Piranha_Entities
         public virtual DbSet<PiranhaAlias> PiranhaAliases { get; set; }
         public virtual DbSet<PiranhaBlockField> PiranhaBlockFields { get; set; }
@@ -57,11 +57,11 @@ namespace TheraLang.DAL
         public virtual DbSet<PiranhaSite> PiranhaSites { get; set; }
         public virtual DbSet<PiranhaTag> PiranhaTags { get; set; }
 
-        #endregion
+        #endregion*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+           /*
             #region Piranha_Entities_Cfg
             modelBuilder.ApplyConfiguration(new PiranhaAliasConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaBlockFieldConfiguration());
@@ -88,7 +88,7 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new PiranhaSiteConfiguration());
             modelBuilder.ApplyConfiguration(new PiranhaTagConfiguration());
             #endregion
-
+            */
             #region UTTMM_Entities_Cfg
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectTypeConfigurationcs());
