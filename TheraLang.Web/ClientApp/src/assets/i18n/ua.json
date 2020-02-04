@@ -41,7 +41,8 @@
     "create": "Створити",
     "description": "Опис",
     "date-of-creation": "Дата створення",
-    "type": "Тип"
+    "type": "Тип",
+    "mainpage": "Головна сторінка"
   },
   "components": {
     "home": {
@@ -119,5 +120,8 @@
       "email": "Електронна пошта",
       "user-name": "Ім'я користувача"
     }
+  },
+  "manager": {
+    "add-new-page": "Add new page"
   }
 }

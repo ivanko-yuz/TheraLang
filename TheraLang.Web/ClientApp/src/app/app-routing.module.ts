@@ -14,9 +14,6 @@ import { LoginComponent } from "./modules/login/login.component";
 import { ErrorComponent } from "./shared/components/error/error.component";
 import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
-import { ManagerComponent } from "./modules/manager/manager.component";
-import { PageManagerComponent } from "./modules/manager/page-manager/page-manager.component";
-import { CreatePageComponent } from "./modules/manager/page-manager/create-page/create-page.component";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { ManagerModule } from "./modules/manager/manager.module";
 
