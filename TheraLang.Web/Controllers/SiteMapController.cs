@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.ViewModels;
+using TheraLang.Web.ViewModels.SiteMap;
 
 namespace TheraLang.Web.Controllers
 {
@@ -28,16 +29,22 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] SiteMapStructureViewModel siteMapStructure)
+        public async Task<IActionResult> Update([FromBody] ChangedSiteMapStructureViewModel siteMapStructure)
         {
-            var mapper = new MapperConfiguration(opts => 
-                opts.CreateMap<SiteMapViewModel,SiteMapDto>()
-                    .ForMember(sm => sm.Changed,
-                        opt => 
-                            opt.MapFrom(val=> false ))
-                ).CreateMapper();
+            if (!siteMapStructure.SiteMaps.Any())
+            {
+                return NoContent();
+            }
+            
+            var mapper = new MapperConfiguration(mapOpts => 
+                mapOpts.CreateMap<ChangedSiteMapViewModel,SiteMapDto>()
+                    .ForMember(dto => dto.SortOrder,opts => 
+                        opts.MapFrom(vm => vm.NewIndex))
+                    .ForMember(dto=>dto.ParentPageId,opts => 
+                        opts.MapFrom(vm => vm.NewParentId))
+            ).CreateMapper();
             var structure = 
-                mapper.Map<IEnumerable<SiteMapViewModel>,IEnumerable<SiteMapDto>>(siteMapStructure.SiteMap);
+                mapper.Map<IEnumerable<ChangedSiteMapViewModel>,IEnumerable<SiteMapDto>>(siteMapStructure.SiteMaps);
             await _siteMapService.UpdateStructure(structure);
             return Ok(await _siteMapService.GetAll());
         }

@@ -15,7 +15,9 @@ export class PiranhaPageComponent implements OnInit {
   constructor(private cmsPageService: CmsPageService) {}
 
   async ngOnInit() {
-    this.page = await this.cmsPageService.getPiranhaPageById(this.cmsRoute.id);
+    this.page = await this.cmsPageService.getPiranhaPageById(
+      parseInt(this.cmsRoute.id)
+    );
     this.ifGenerate = true;
   }
 }

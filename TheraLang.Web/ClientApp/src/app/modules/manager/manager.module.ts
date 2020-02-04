@@ -15,6 +15,7 @@ import { HttpClient } from "@angular/common/http";
 import { MatCardModule } from "@angular/material/card";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PageManagerComponent } from "./page-manager/page-manager.component";
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

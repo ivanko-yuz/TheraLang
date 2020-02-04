@@ -122,6 +122,7 @@
     }
   },
   "manager": {
-    "add-new-page": "Add new page"
+    "add-new-page": "Add new page",
+    "save-changes": "Save changes"
   }
 }

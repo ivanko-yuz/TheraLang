@@ -3,6 +3,8 @@
     [page]="{ id: 0, subPages: siteMap }"
     [isRoot]="true"
     (onChange)="onMove($event)"
+    (onSave)="onSave()"
+    (onDelete)="onDelete($event)"
   ></app-page-entry>
 </div>
 <button (click)="logInfo()">Log</button>

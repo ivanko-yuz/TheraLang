@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TheraLang.Web.ViewModels
+namespace TheraLang.Web.ViewModels.SiteMap
 {
     public class SiteMapStructureViewModel
     {

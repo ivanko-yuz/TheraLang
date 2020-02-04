@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TheraLang.Web.ViewModels
+namespace TheraLang.Web.ViewModels.SiteMap
 {
     public class SiteMapViewModel
     {
@@ -9,8 +9,8 @@ namespace TheraLang.Web.ViewModels
         public string MenuTitle { get; set; }
         
         public string Route { get; set; }
-        
-        public string Header { get; set; }
+
+        public int? ParentId { get; set; }
 
         public IEnumerable<SiteMapViewModel> SubPages { get; set; }
     }

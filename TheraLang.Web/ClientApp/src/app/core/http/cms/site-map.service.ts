@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { SiteMap } from "../../../shared/models/site-map/site-map";
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject, EMPTY } from "rxjs";
 import { ToolbarItem } from "../../toolbar/cms-pages-toolbar-item/toolbar-item";
 import { CmsRoute } from "../../toolbar/toolbar-item/cms-route";
 import { cmsSitemapUrl } from "src/app/configs/api-endpoint.constants";
@@ -14,20 +14,40 @@ export class SiteMapService {
   siteMap = new Subject<SiteMap[]>();
   toolbarItems = new Subject<ToolbarItem[]>();
   siteMapUpdating = false;
-  siteMapChanges: ChangedSiteMap[];
+  changesToMake: Map<number, ChangedSiteMap>;
 
   constructor(private http: HttpClient) {
     this.updateToolbarItemsOnSubscription();
     this.updateSiteMap();
-    this.siteMapChanges = [];
+    this.changesToMake = new Map<number, ChangedSiteMap>();
   }
 
-  public addSiteMapChange(changed: ChangedSiteMap) {
-    this.siteMapChanges.push(changed);
+  public addSiteMapChange(changed: ChangedSiteMap[]) {
+    changed.forEach(val => {
+      if (this.changesToMake.has(val.id)) {
+        this.combineChanges(this.changesToMake.get(val.id), val);
+      } else {
+        this.changesToMake.set(val.id, val);
+      }
+    });
   }
 
   public getSiteMap(): Observable<SiteMap[]> {
     return this.http.get<SiteMap[]>(cmsSitemapUrl);
+  }
+
+  public updateSiteMapStructure(): Observable<any> {
+    if (this.changesToMake.size > 0) {
+      const data = [...this.changesToMake.values()];
+      return this.http.put(cmsSitemapUrl, { siteMaps: data });
+    }
+    return EMPTY;
+  }
+
+  public tryRemoveFromChanges(pageId: number) {
+    if (this.changesToMake.has(pageId)) {
+      this.changesToMake.delete(pageId);
+    }
   }
 
   updateSiteMap(): void {
@@ -72,5 +92,11 @@ export class SiteMapService {
         this.mapToolbarItems(item.subPages)
       );
     });
+  }
+
+  private combineChanges(oldEntry: ChangedSiteMap, newEntry: ChangedSiteMap) {
+    oldEntry.newIndex = newEntry.newIndex;
+    oldEntry.newParentId = newEntry.newParentId;
+    oldEntry.prevParentId = newEntry.prevParentId;
   }
 }
