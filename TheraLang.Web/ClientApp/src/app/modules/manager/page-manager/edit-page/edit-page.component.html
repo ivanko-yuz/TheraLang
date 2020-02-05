@@ -22,7 +22,7 @@
         </div>
 
         <div class="button-container">
-            <button mat-raised-button type="submit" color="accent" [disabled]="form.invalid">Create</button>
+            <button mat-raised-button type="submit" color="accent" [disabled]="form.invalid || !form.dirty">Update</button>
             <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
         </div>
     </form>

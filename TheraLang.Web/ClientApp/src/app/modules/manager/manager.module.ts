@@ -6,16 +6,19 @@ import { CreatePageComponent } from "./page-manager/create-page/create-page.comp
 import { ManagerComponent } from "./manager.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { QuillModule } from "ngx-quill";
+import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule } from '@angular/material';
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { SortablejsModule } from "ngx-sortablejs";
 import { PageEntryComponent } from "./sitemap-editor/page-entry/page-entry.component";
-import { MatIconModule, MatButtonModule } from "@angular/material";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateModule, TranslateLoader, TranslateService } from "@ngx-translate/core";
 import { HttpClient } from "@angular/common/http";
-import { MatCardModule } from "@angular/material/card";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { NotificationService } from 'src/app/core/services/notification/notification.service';
+import { PageService } from './shared/services/page.service';
+import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
+import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +27,19 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     ManagerComponent,
     SitemapEditorComponent,
     PageEntryComponent,
-    PageManagerComponent
+    PageManagerComponent,
+    QuillMaterialComponent,
+    EditPageComponent
   ],
   imports: [
     CommonModule,
     ManagerRoutingModule,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatCardModule,
     QuillModule.forRoot(),
     SortablejsModule,
     MatIconModule,
@@ -43,6 +53,15 @@ import { MatTooltipModule } from "@angular/material/tooltip";
         deps: [HttpClient]
       }
     })
+  ],
+  exports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule
+  ],
+  providers: [
+    PageService
   ]
 })
 export class ManagerModule {}

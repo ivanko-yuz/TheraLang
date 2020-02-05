@@ -103,7 +103,7 @@ namespace TheraLang.BLL.Services
             {
                 page.Header = pageDto.Header;
                 page.MenuName = pageDto.MenuName;
-                page.Content = page.Content;
+                page.Content = pageDto.Content;
 
                 _unitOfWork.Repository<Page>().Update(page);
                 await _unitOfWork.SaveChangesAsync();
