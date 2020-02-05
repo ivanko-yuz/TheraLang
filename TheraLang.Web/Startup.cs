@@ -89,9 +89,11 @@ namespace TheraLang.Web
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddTransient<IPageService, PageService>();
+            services.AddTransient<IPictureService, PictureService>();
             services.AddOpenApiDocument();
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
+            
 
             #endregion
         }
