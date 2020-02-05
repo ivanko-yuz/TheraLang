@@ -7,14 +7,16 @@ import { ManagerComponent } from "./manager.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { QuillModule } from "ngx-quill";
 import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule } from '@angular/material';
-import { EditorComponent } from './shared/components/editor/editor.component';
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { SortablejsModule } from "ngx-sortablejs";
 import { PageEntryComponent } from "./sitemap-editor/page-entry/page-entry.component";
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateModule, TranslateLoader, TranslateService } from "@ngx-translate/core";
 import { HttpClient } from "@angular/common/http";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
+import { NotificationService } from 'src/app/core/services/notification/notification.service';
+import { PageService } from './shared/services/page.service';
+import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { PageManagerComponent } from "./page-manager/page-manager.component";
     SitemapEditorComponent,
     PageEntryComponent,
     PageManagerComponent,
-    EditorComponent
+    QuillMaterialComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,9 @@ import { PageManagerComponent } from "./page-manager/page-manager.component";
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule
+  ],
+  providers: [
+    PageService
   ]
 })
 export class ManagerModule {}

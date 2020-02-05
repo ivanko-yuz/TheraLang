@@ -1,5 +1,6 @@
 export class Newpage {
     id?: number;
-    title: string;
-    text: string;
+    header: string;
+    content: string;
+    menuName: string;
 }
