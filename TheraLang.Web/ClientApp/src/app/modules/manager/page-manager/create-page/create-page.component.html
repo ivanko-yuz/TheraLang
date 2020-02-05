@@ -19,12 +19,10 @@
             <quill-material formControlName="content"></quill-material>
             <mat-error *ngIf="hasError('content', 'required') && form.get('content').touched">Text is required
             </mat-error>
-            <mat-error *ngIf="hasError('content', 'maxlength')">Text should be less than
-                {{form.get('body').errors.maxlength.requiredLength}} characters</mat-error>
         </div>
 
         <div class="button-container">
-            <button mat-raised-button type="submit" color="accent" [disabled]="!form.valid">Create</button>
+            <button mat-raised-button type="submit" color="accent" [disabled]="form.invalid">Create</button>
             <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
         </div>
     </form>

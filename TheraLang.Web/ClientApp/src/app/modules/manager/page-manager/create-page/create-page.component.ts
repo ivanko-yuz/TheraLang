@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PageService } from 'src/app/modules/manager/shared/services/page.service';
 import { Newpage } from 'src/app/shared/models/new_page/newpage';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-page',
@@ -12,23 +12,24 @@ import { Location } from '@angular/common';
 export class CreatePageComponent implements OnInit {
 
   form: FormGroup;
+  page: Newpage;
 
-  constructor(private pageService: PageService, private location: Location) {
+  constructor(private pageService: PageService, private router: Router) {
   }
 
   ngOnInit() {
     this.form = new FormGroup({
       header: new FormControl(null, [Validators.required, Validators.maxLength(60)]),
-      content: new FormControl(null, [Validators.required, Validators.maxLength(5000)]),
+      content: new FormControl(null, Validators.required),
       menuName: new FormControl(null, [Validators.required, Validators.maxLength(60)])
     })
   }
 
-  public onCancel = () => {
-    this.location.back();
+  onCancel() {
+    this.router.navigate(['admin', 'sitemap']);
   }
 
-  public hasError = (controlName: string, errorName: string) => {
+  hasError(controlName: string, errorName: string) {
     return this.form.controls[controlName].hasError(errorName);
   }
 
@@ -37,12 +38,12 @@ export class CreatePageComponent implements OnInit {
       return;
     }
 
-    const page: Newpage = {
+    this.page = {
       header: this.form.value.header,
       content: this.form.value.content,
       menuName: this.form.value.menuName
     }
-
-    this.pageService.addPage(page);
+    
+    this.pageService.addPage(this.page);
   }
 }
