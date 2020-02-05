@@ -14,6 +14,7 @@ import { TranslateModule, TranslateLoader, TranslateService } from "@ngx-transla
 import { HttpClient } from "@angular/common/http";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
+import { MatTooltipModule } from "@angular/material/tooltip";
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { PageService } from './shared/services/page.service';
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
@@ -44,6 +45,7 @@ import { EditPageComponent } from './page-manager/edit-page/edit-page.component'
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

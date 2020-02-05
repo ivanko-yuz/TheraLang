@@ -46,9 +46,9 @@ namespace TheraLang.DAL.Repository
             DbSet.Update(entity);
         }
 
-        public void Attach(TEntity entity)
+        public void Attach(TEntity entity,EntityState state = EntityState.Unchanged)
         {
-            DbSet.Attach(entity);
+            DbSet.Attach(entity).State = state;
         }
     }
 }
