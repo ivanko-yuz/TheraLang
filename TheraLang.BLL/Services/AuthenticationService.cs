@@ -52,23 +52,26 @@ namespace TheraLang.BLL.Services
 
         }
 
-        public async Task<AuthUser> GetAuthUserAsync()
+        public Task<AuthUser> GetAuthUserAsync()
         {
-            var claims = _context.HttpContext.User.Claims;
-            var userId = claims.FirstOrDefault(x => x.Type == "Id")?.Value;
-            if (userId == null)
+            return Task.Run(() =>
             {
-                return null;
-            }
-            var userName = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
-            var userRole = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
+                var claims = _context.HttpContext.User.Claims;
+                var userId = claims.FirstOrDefault(x => x.Type == "Id")?.Value;
+                if (userId == null)
+                {
+                    return null;
+                }
+                var userName = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
+                var userRole = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
 
-            return new AuthUser()
-            {
-                Id = new Guid(userId),
-                UserName = userName,
-                Role = userRole
-            };
+                return new AuthUser()
+                {
+                    Id = new Guid(userId),
+                    UserName = userName,
+                    Role = userRole
+                };
+            });
 
         }
     }

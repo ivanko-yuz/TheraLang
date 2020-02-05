@@ -20,6 +20,7 @@ namespace TheraLang.Web.Controllers
             _projectParticipationServiceservice = projectParticipationServiceservice;
             _userManager = userManager;
             _authenticateService = authenticateService;
+            _projectService = projectService;
 
         }
 
