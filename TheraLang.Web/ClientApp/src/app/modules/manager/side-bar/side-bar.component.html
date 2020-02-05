@@ -1,0 +1,18 @@
+<mat-sidenav-container>
+    <mat-sidenav [opened]="true" disableClose="true" #sidenav mode="side" opened [attr.color]="themeColor">
+        <mat-nav-list>
+
+            <a class="menu-item" mat-list-item [routerLink]="['/admin', 'sitemap']"> Pages creator </a>
+            <a class="menu-item" mat-list-item> Settings </a>
+
+            <a class="menu-item" mat-list-item [routerLink]="'/'"> Close</a>
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div style="height:100vh;">
+            <ng-content></ng-content>
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
