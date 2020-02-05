@@ -74,6 +74,12 @@ namespace TheraLang.BLL.Services
         public async Task RemoveNews(int id)
         {
             var news = _unitOfWork.Repository<News>().Get().SingleOrDefault(i => i.Id == id);
+
+            if(news == default)
+            {
+                throw new ArgumentException($"News with id {id} not found!");
+            }
+
             _unitOfWork.Repository<News>().Remove(news);
 
             await _unitOfWork.SaveChangesAsync();
@@ -82,6 +88,11 @@ namespace TheraLang.BLL.Services
         public async Task UpdateNews(int id, NewsToServerDto newsDto)
         {
             var newsToUpdate = await _unitOfWork.Repository<News>().Get().FirstOrDefaultAsync(n => n.Id == id);
+
+            if (newsToUpdate == default)
+            {
+                throw new ArgumentException($"News with id {id} not found!");
+            }
 
             newsToUpdate.Title = newsDto.Title;
             newsToUpdate.Text = newsDto.Text;

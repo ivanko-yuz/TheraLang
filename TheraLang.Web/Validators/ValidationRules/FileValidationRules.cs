@@ -29,7 +29,7 @@ namespace TheraLang.Web.Validators.ValidationRules
                 if (file == null) return;
                 var extension = Path.GetExtension(file.FileName);
                 var regex = new Regex(@"(.*\.png)|(.*\.jpg)|(.*\.jpeg)|(.*\.bmp)");
-                if (regex.IsMatch(extension))
+                if (!regex.IsMatch(extension))
                 {
                     context.AddFailure($"{extension} not allowed");
                 }

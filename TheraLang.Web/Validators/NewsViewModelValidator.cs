@@ -14,7 +14,7 @@ namespace TheraLang.Web.Validators
         {
             RuleFor(x => x.Title).NotNull().NotEmpty().MinimumLength(3).MaximumLength(250);
             RuleFor(x => x.Text).NotNull().NotEmpty().MinimumLength(5).MaximumLength(10000);
-            //RuleFor(x => x.NewImages).ForEach(img => img.IsImage());
+            RuleFor(x => x.NewImages).ForEach(img => img.IsImage());
         }
     }
 }

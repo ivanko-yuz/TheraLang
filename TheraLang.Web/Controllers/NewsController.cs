@@ -33,8 +33,13 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsDetailsDto, NewsPreviewViewModel>()).CreateMapper();
 
             var newsDtos = await _newsService.GetAllNews();
-            var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
 
+            if(!newsDtos.Any())
+            {
+                return NotFound();
+            }
+
+            var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
             return Ok(newsModels);
         }
 
@@ -45,6 +50,11 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsDetailsDto, NewsDetailsViewModel>()).CreateMapper();
 
             var newsDto = await _newsService.GetNewsById(id);
+            if(newsDto == null)
+            {
+                return NotFound();
+            }
+
             var newsModel = mapper.Map<NewsDetailsViewModel>(newsDto);
 
             return Ok(newsModel);
@@ -75,9 +85,24 @@ namespace TheraLang.Web.Controllers
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsToServerViewModel, NewsToServerDto>()).CreateMapper();
 
+            var validationResult = _validator.Validate(newsModel);
+
+            if (!validationResult.IsValid)
+            {
+                throw new ArgumentException($"{nameof(newsModel)} is not valid");
+            }
+
             var newsDto = mapper.Map<NewsToServerDto>(newsModel);
 
-            await _newsService.UpdateNews(id, newsDto);
+            try
+            {
+                await _newsService.UpdateNews(id, newsDto);
+            }
+            catch(ArgumentException)
+            {
+                return NotFound();
+            }
+
             return Ok();
         }
 
@@ -85,7 +110,15 @@ namespace TheraLang.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            await _newsService.RemoveNews(id);
+            try
+            {
+                await _newsService.RemoveNews(id);
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
+            }
+
             return Ok();
         }
     }
