@@ -61,19 +61,47 @@ namespace TheraLang.Web.Controllers
             return Ok(pageDto);
         }
 
+        [HttpGet("id{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPageById(int id)
+        {
+            var page = await _pageService.GetPageById(id);
+            if (page == null) return NotFound();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>())
+                .CreateMapper();
+            var pageModel = mapper.Map<PageDto, PageViewModel>(page);
+
+            return Ok(pageModel);
+        }
+
         [HttpGet("{route}")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetPage(string route)
+        public async Task<IActionResult> GetPageByRoute(string route)
         {
             var page = await _pageService.GetPageByRoute(route);
             if (page == null) return NotFound();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>())
-               .CreateMapper();
+                .CreateMapper();
             var pageModel = mapper.Map<PageDto, PageViewModel>(page);
 
             return Ok(pageModel);
         }
+
+        //[HttpGet("{route}")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> GetPageByRoute(string route)
+        //{
+        //    var page = await _pageService.GetPageByRoute(route);
+        //    if (page == null) return NotFound();
+
+        //    var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>())
+        //       .CreateMapper();
+        //    var pageModel = mapper.Map<PageDto, PageViewModel>(page);
+
+        //    return Ok(pageModel);
+        //}
 
         [HttpGet]
         [AllowAnonymous]
