@@ -17,6 +17,7 @@ import { PageManagerComponent } from "./page-manager/page-manager.component";
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { PageService } from './shared/services/page.service';
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
+import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { QuillMaterialComponent } from './shared/components/quill-material/quill
     SitemapEditorComponent,
     PageEntryComponent,
     PageManagerComponent,
-    QuillMaterialComponent
+    QuillMaterialComponent,
+    EditPageComponent
   ],
   imports: [
     CommonModule,

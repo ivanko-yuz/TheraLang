@@ -4,12 +4,16 @@ import { CreatePageComponent } from "./page-manager/create-page/create-page.comp
 import { ManagerComponent } from "./manager.component";
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
+import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 
 const routes: Routes = [
   {
     path: "pages",
     component: PageManagerComponent,
-    children: [{ path: "create", component: CreatePageComponent }]
+    children: [
+      { path: "create", component: CreatePageComponent },
+      { path: 'edit/:id', component: EditPageComponent }
+    ]
   },
   {
     path: "sitemap",
