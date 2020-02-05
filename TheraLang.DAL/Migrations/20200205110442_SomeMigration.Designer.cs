@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DAL;
 
 namespace TheraLang.DAL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200205110442_SomeMigration")]
+    partial class SomeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,19 +294,19 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cdbbe497-131f-48a4-be4b-563b2427bd45"),
+                            Id = new Guid("9e3de11b-23ac-4036-b038-d68ff9366169"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("f61cb741-580a-48a0-90b9-80101fc12b4c"),
+                            Id = new Guid("9157e0d4-0cbd-469a-b375-018e993645af"),
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = new Guid("e21e329d-d718-434b-8eee-cb2f8bccb023"),
+                            Id = new Guid("8bd10943-9f5a-4ac4-81f2-100b828b7cff"),
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -340,14 +342,13 @@ namespace TheraLang.DAL.Migrations
 
                     b.Property<DateTime?>("UpdatedDateUtc");
 
-                    b.Property<string>("Url")
-                        .IsRequired();
+                    b.Property<string>("Url");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NewsId");
 
-                    b.ToTable("UploadedFiles");
+                    b.ToTable("UploadedFile");
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.User", b =>
@@ -389,16 +390,16 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2ccdde82-b6ca-45fd-9dac-421d5def38c7"),
-                            PasswordHash = "AVAN9CUtyFp6Y88EOkplbDcimOkojwIP9vK6F1veb79zM4w3ce1IBxCdMT7Lve0x3g==",
-                            RoleId = new Guid("cdbbe497-131f-48a4-be4b-563b2427bd45"),
+                            Id = new Guid("34043254-2eac-4ace-8594-99804f537c8b"),
+                            PasswordHash = "AQ7TDd6XVVOOiXODA+x2H2jmF7A6auoK94Xn7nvoV4UuPBKyQW6VYWLVZ2x8aYJ3HQ==",
+                            RoleId = new Guid("9e3de11b-23ac-4036-b038-d68ff9366169"),
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("4f14f4be-91c7-4ffe-a86d-86928f702bb3"),
-                            PasswordHash = "AUo8yVKmnBxjw9H4GgZg4Ue745ffWD+rIXGsIO7R7tp+4FNfDGZn74BFzR9Vn8B2Uw==",
-                            RoleId = new Guid("f61cb741-580a-48a0-90b9-80101fc12b4c"),
+                            Id = new Guid("b6ce2988-861f-4fe8-abf2-c6c0e8006d34"),
+                            PasswordHash = "AfzMllahcIIIwY+RhhyBWwQ+j1wP9vMCeddWSGwRPRtBdq3Y9pQxBVqBOdOLAfpRVA==",
+                            RoleId = new Guid("9157e0d4-0cbd-469a-b375-018e993645af"),
                             UserName = "Member"
                         });
                 });
@@ -470,9 +471,10 @@ namespace TheraLang.DAL.Migrations
 
             modelBuilder.Entity("TheraLang.DAL.Entities.UploadedFile", b =>
                 {
-                    b.HasOne("TheraLang.DAL.Entities.News")
+                    b.HasOne("TheraLang.DAL.Entities.News", "News")
                         .WithMany("UploadedImages")
-                        .HasForeignKey("NewsId");
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.User", b =>

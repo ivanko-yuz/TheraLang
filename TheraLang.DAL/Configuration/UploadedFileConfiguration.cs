@@ -7,18 +7,16 @@ using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Configuration
 {
-    class NewsConfiguration : IEntityTypeConfiguration<News>
+    class UploadedFileConfiguration : IEntityTypeConfiguration<UploadedFile>
     {
-        public void Configure(EntityTypeBuilder<News> builder)
+        public void Configure(EntityTypeBuilder<UploadedFile> builder)
         {
-            builder.ToTable("News");
+            builder.ToTable("UploadedFiles");
 
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
-            builder.Property(e => e.Title).HasMaxLength(250).IsRequired();
-            builder.Property(e => e.Text).IsRequired();
-            builder.HasMany(e => e.UploadedImages);
+            builder.Property(e => e.Url).IsRequired();
         }
     }
 }

@@ -9,6 +9,8 @@ using TheraLang.DAL.Entities;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using TheraLang.BLL.DataTransferObjects.NewsDtos;
 
 namespace TheraLang.BLL.Services
 {
@@ -23,32 +25,47 @@ namespace TheraLang.BLL.Services
             _fileService = fileService;
         }
 
-        public IEnumerable<NewsFromServerDto> GetAllNews()
+        public async Task<IEnumerable<NewsPreviewDto>> GetAllNews()
         {
-            var news = _unitOfWork.Repository<News>().Get().ToList();
-            
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<News, NewsFromServerDto>()).CreateMapper();
-            var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsFromServerDto>>(news);
+            var news = await _unitOfWork.Repository<News>().Get().Include(e => e.UploadedImages).ToListAsync();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<News, NewsPreviewDto>()
+                .ForMember(m => m.PreviewImageUrl,
+                        opt => opt.MapFrom(sm => sm.UploadedImages.Select(i => i.Url).FirstOrDefault()))
+            ).CreateMapper();
+
+            var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
 
             return newsDtos;
         }
 
-        public NewsFromServerDto GetNewsById(int id)
+        public async Task<NewsDetailsDto> GetNewsById(int id)
         {
-            var news = _unitOfWork.Repository<News>().Get().SingleOrDefault(n => n.Id == id);
+            var news = await _unitOfWork.Repository<News>().Get().
+                    Include(e => e.UploadedImages).SingleOrDefaultAsync(n => n.Id == id);
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<News, NewsFromServerDto>()).CreateMapper();
-            var newsDto = mapper.Map<News, NewsFromServerDto>(news);
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<News, NewsDetailsDto>()
+                    .ForMember(m => m.UploadedImageUrls, opt => opt.MapFrom(sm => sm.UploadedImages.Select(i => i.Url)));
+            }).CreateMapper();
+
+            var newsDto = mapper.Map<News, NewsDetailsDto>(news);
 
             return newsDto;
         }
 
         public async Task AddNews(NewsToServerDto newsDto)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsToServerDto, News>()).CreateMapper();
-            
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<string, UploadedFile>().ForMember(f => f.Url, opt => opt.MapFrom(s => s));
+                cfg.CreateMap<NewsToServerDto, News>()
+                    .ForMember(m => m.UploadedImages, opt => opt.MapFrom(sm => sm.UploadedImageUrls));
+            }).CreateMapper();
+
             var news = mapper.Map<NewsToServerDto, News>(newsDto);
-            news.UploadedImageUrls = await UploadImages(newsDto.NewImages);
+            news.UploadedImages = await UploadImages(newsDto.NewImages);
 
             await _unitOfWork.Repository<News>().Add(news);
             await _unitOfWork.SaveChangesAsync();
@@ -64,35 +81,34 @@ namespace TheraLang.BLL.Services
 
         public async Task UpdateNews(int id, NewsToServerDto newsDto)
         {
-            var newsToUpdate = _unitOfWork.Repository<News>().Get().FirstOrDefault(n => n.Id == id);
+            var newsToUpdate = await _unitOfWork.Repository<News>().Get().FirstOrDefaultAsync(n => n.Id == id);
 
             newsToUpdate.Title = newsDto.Title;
             newsToUpdate.Text = newsDto.Text;
-            
-            foreach(var imageUrl in newsDto.UploadedImageUrls)
-            {
-                if(!newsToUpdate.UploadedImageUrls.Contains(imageUrl))
-                {
-                    //_fileService.DeleteFile(imageUrl); //TODO
-                }
-            }
+
             var newImageUrls = await UploadImages(newsDto.NewImages);
-            newsToUpdate.UploadedImageUrls.Union(newImageUrls);
-            
+
+            if (newsToUpdate.UploadedImages == null) newsToUpdate.UploadedImages = new List<UploadedFile>();
+            newsToUpdate.UploadedImages = newsToUpdate.UploadedImages.Union(newImageUrls).ToList();
+
             _unitOfWork.Repository<News>().Update(newsToUpdate);
             await _unitOfWork.SaveChangesAsync();
         }
 
-        private async Task<ICollection<string>> UploadImages(ICollection<IFormFile> images)
+        private async Task<ICollection<UploadedFile>> UploadImages(ICollection<IFormFile> images)
         {
-            var imageUrls = new List<string>();
+            var uploadedImages = new List<UploadedFile>();
             foreach (var image in images)
             {
-                var imageUri = await _fileService.SaveFile(image);
-                imageUrls.Add(imageUri.ToString());
+                var imageUrl = await _fileService.SaveFile(image);
+                var uploadedImage = new UploadedFile() { Url = imageUrl.ToString() };
+                //await _unitOfWork.Repository<UploadedFile>().Add(uploadedImage);
+                //await _unitOfWork.SaveChangesAsync();
+                uploadedImages.Add(uploadedImage);
+                //TODO: Service that will save file to server and add record to UploadedFiles table
             }
 
-            return imageUrls;
+            return uploadedImages;
         }
     }
 }

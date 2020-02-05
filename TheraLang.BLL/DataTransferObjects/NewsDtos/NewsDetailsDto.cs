@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TheraLang.DAL.Entities;
 
-namespace TheraLang.BLL.DataTransferObjects
+namespace TheraLang.BLL.DataTransferObjects.NewsDtos
 {
-    public class NewsFromServerDto
+    public class NewsDetailsDto
     {
         public int Id { get; set; }
         public string Title { get; set; }

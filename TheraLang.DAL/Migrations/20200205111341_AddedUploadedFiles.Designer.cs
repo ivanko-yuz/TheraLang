@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DAL;
 
 namespace TheraLang.DAL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200205111341_AddedUploadedFiles")]
+    partial class AddedUploadedFiles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,19 +294,19 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cdbbe497-131f-48a4-be4b-563b2427bd45"),
+                            Id = new Guid("b4dd1e09-1c4e-4708-b42c-3762e19fe5b5"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("f61cb741-580a-48a0-90b9-80101fc12b4c"),
+                            Id = new Guid("321f7920-529e-4071-9218-c9cb00eb8186"),
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = new Guid("e21e329d-d718-434b-8eee-cb2f8bccb023"),
+                            Id = new Guid("dfb7c800-7da2-47c4-8721-eca17ba93ae8"),
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -389,16 +391,16 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2ccdde82-b6ca-45fd-9dac-421d5def38c7"),
-                            PasswordHash = "AVAN9CUtyFp6Y88EOkplbDcimOkojwIP9vK6F1veb79zM4w3ce1IBxCdMT7Lve0x3g==",
-                            RoleId = new Guid("cdbbe497-131f-48a4-be4b-563b2427bd45"),
+                            Id = new Guid("51946971-129d-4875-b952-b05339d7e1a9"),
+                            PasswordHash = "Aan3hRIbng3X5/PqcRAFM6vHFNeIIxAdGH6q4PmZ6R/G0w1fNDPVVMRZ8Myn2Ze5bA==",
+                            RoleId = new Guid("b4dd1e09-1c4e-4708-b42c-3762e19fe5b5"),
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("4f14f4be-91c7-4ffe-a86d-86928f702bb3"),
-                            PasswordHash = "AUo8yVKmnBxjw9H4GgZg4Ue745ffWD+rIXGsIO7R7tp+4FNfDGZn74BFzR9Vn8B2Uw==",
-                            RoleId = new Guid("f61cb741-580a-48a0-90b9-80101fc12b4c"),
+                            Id = new Guid("18375a95-e1a3-4250-9d8c-be33ba7b34d0"),
+                            PasswordHash = "AfTi2L5K/awzRI0angTcr7iMInC1erhh8YZ7O56oSP7KTLPMV34c/9q6nugcTRXgUQ==",
+                            RoleId = new Guid("321f7920-529e-4071-9218-c9cb00eb8186"),
                             UserName = "Member"
                         });
                 });
@@ -470,9 +472,10 @@ namespace TheraLang.DAL.Migrations
 
             modelBuilder.Entity("TheraLang.DAL.Entities.UploadedFile", b =>
                 {
-                    b.HasOne("TheraLang.DAL.Entities.News")
+                    b.HasOne("TheraLang.DAL.Entities.News", "News")
                         .WithMany("UploadedImages")
-                        .HasForeignKey("NewsId");
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.User", b =>

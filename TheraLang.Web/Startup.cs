@@ -17,7 +17,8 @@ using TheraLang.BLL.Services.File;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
-
+using Newtonsoft.Json;
+using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web
 {
@@ -53,6 +54,10 @@ namespace TheraLang.Web
 
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
+
+            //services.AddMvc().AddJsonOptions(options => {
+            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            //});
 
             #region Piranha setup
             services.AddPiranha();

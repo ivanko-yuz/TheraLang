@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TheraLang.Web.ViewModels
+namespace TheraLang.Web.ViewModels.NewsViewModels
 {
-    public class NewsFromServerViewModel
+    public class NewsDetailsViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

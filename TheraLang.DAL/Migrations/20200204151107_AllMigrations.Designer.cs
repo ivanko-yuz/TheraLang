@@ -10,8 +10,8 @@ using TheraLang.DAL;
 namespace TheraLang.DAL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    [Migration("20191219141059_addedSomeNewFields")]
-    partial class AddedSomeNewFields
+    [Migration("20200204151107_AllMigrations")]
+    partial class AllMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,6 +56,32 @@ namespace TheraLang.DAL.Migrations
                     b.HasIndex("SocietyId");
 
                     b.ToTable("Donations");
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.News", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
+                    b.Property<string>("Text")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<Guid?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.Project", b =>
@@ -122,11 +148,13 @@ namespace TheraLang.DAL.Migrations
 
                     b.Property<DateTime?>("UpdatedDateUtc");
 
+                    b.Property<Guid?>("UserId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedById");
-
                     b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ProjectParticipations");
                 });
@@ -250,6 +278,46 @@ namespace TheraLang.DAL.Migrations
                     b.ToTable("ResourceToProject");
                 });
 
+            modelBuilder.Entity("TheraLang.DAL.Entities.Role", b =>
+                {
+                    b.Property<Guid>("Id");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("([NormalizedName] IS NOT NULL)");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0c186cd2-3ea3-4be3-bf22-91999eedf7fd"),
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("0e8b3fda-74cf-4c46-a21b-08a29c66aaf1"),
+                            Name = "Member",
+                            NormalizedName = "MEMBER"
+                        },
+                        new
+                        {
+                            Id = new Guid("6d60bcdd-c677-4298-a582-7eff3f51156b"),
+                            Name = "Guest",
+                            NormalizedName = "GUEST"
+                        });
+                });
+
             modelBuilder.Entity("TheraLang.DAL.Entities.Society", b =>
                 {
                     b.Property<int>("Id")
@@ -262,6 +330,84 @@ namespace TheraLang.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Society");
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.UploadedFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
+                    b.Property<int?>("NewsId");
+
+                    b.Property<Guid?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NewsId");
+
+                    b.ToTable("UploadedFile");
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<Guid>("RoleId");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8338bb32-32d6-459f-8354-efce289346b2"),
+                            PasswordHash = "ATGm5z/PTsyiYB6Xvy6bOD+sAADNyhgKA4XGVI12OyStnHYiwONmPwxS83xNn90AHg==",
+                            RoleId = new Guid("0c186cd2-3ea3-4be3-bf22-91999eedf7fd"),
+                            UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("05e7702e-8b66-4915-8108-fd3c8afd9497"),
+                            PasswordHash = "AeZhgmE11aks9P3CKm5/hgK3d9KWV0ectKJzAO5La4I5DBfuFsJ++RaGTSwoShqCAw==",
+                            RoleId = new Guid("0e8b3fda-74cf-4c46-a21b-08a29c66aaf1"),
+                            UserName = "Member"
+                        });
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaAlias", b =>
@@ -783,47 +929,6 @@ namespace TheraLang.DAL.Migrations
                     b.ToTable("Piranha_PostTypes");
                 });
 
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaRole", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<string>("ConcurrencyStamp");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("([NormalizedName] IS NOT NULL)");
-
-                    b.ToTable("Piranha_Roles");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaRoleClaim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<Guid>("RoleId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("Piranha_RoleClaims");
-                });
-
             modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaSite", b =>
                 {
                     b.Property<Guid>("Id");
@@ -940,119 +1045,6 @@ namespace TheraLang.DAL.Migrations
                     b.ToTable("Piranha_Tags");
                 });
 
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaUser", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("([NormalizedUserName] IS NOT NULL)");
-
-                    b.ToTable("Piranha_Users");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaUserClaim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Piranha_UserClaims");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaUserLogin", b =>
-                {
-                    b.Property<string>("LoginProvider");
-
-                    b.Property<string>("ProviderKey");
-
-                    b.Property<string>("ProviderDisplayName");
-
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Piranha_UserLogins");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaUserRole", b =>
-                {
-                    b.Property<Guid>("UserId");
-
-                    b.Property<Guid>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("Piranha_UserRoles");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaUserToken", b =>
-                {
-                    b.Property<Guid>("UserId");
-
-                    b.Property<string>("LoginProvider");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("Piranha_UserTokens");
-                });
-
             modelBuilder.Entity("TheraLang.DAL.Entities.Donation", b =>
                 {
                     b.HasOne("TheraLang.DAL.Entities.Project", "Project")
@@ -1074,15 +1066,14 @@ namespace TheraLang.DAL.Migrations
 
             modelBuilder.Entity("TheraLang.DAL.Entities.ProjectParticipation", b =>
                 {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaUser", "PiranhaUser")
-                        .WithMany("ProjectParticipations")
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("TheraLang.DAL.Entities.Project", "Project")
                         .WithMany("ProjectParticipations")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TheraLang.DAL.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.Resource", b =>
@@ -1092,7 +1083,7 @@ namespace TheraLang.DAL.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaUser", "PiranhaUser")
+                    b.HasOne("TheraLang.DAL.Entities.User", "User")
                         .WithMany("Resources")
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -1117,6 +1108,22 @@ namespace TheraLang.DAL.Migrations
                         .WithMany("ResourceProjects")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.UploadedFile", b =>
+                {
+                    b.HasOne("TheraLang.DAL.Entities.News", "News")
+                        .WithMany("UploadedImages")
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.User", b =>
+                {
+                    b.HasOne("TheraLang.DAL.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaAlias", b =>
@@ -1262,14 +1269,6 @@ namespace TheraLang.DAL.Migrations
                         .HasForeignKey("TagId");
                 });
 
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaRoleClaim", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaRole", "Role")
-                        .WithMany("PiranhaRoleClaims")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaSiteField", b =>
                 {
                     b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaSite", "Site")
@@ -1283,43 +1282,6 @@ namespace TheraLang.DAL.Migrations
                     b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPage", "Blog")
                         .WithMany("PiranhaTags")
                         .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaUserClaim", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaUser", "User")
-                        .WithMany("PiranhaUserClaims")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaUserLogin", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaUser", "User")
-                        .WithMany("PiranhaUserLogins")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaUserRole", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaRole", "Role")
-                        .WithMany("PiranhaUserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaUser", "User")
-                        .WithMany("PiranhaUserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaUserToken", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaUser", "User")
-                        .WithMany("PiranhaUserTokens")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

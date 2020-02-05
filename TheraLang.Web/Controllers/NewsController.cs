@@ -7,8 +7,9 @@ using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.ViewModels;
+using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -27,31 +28,31 @@ namespace TheraLang.Web.Controllers
 
         // GET: api/news
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsFromServerDto, NewsFromServerViewModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsDetailsDto, NewsPreviewViewModel>()).CreateMapper();
 
-            var newsDtos = _newsService.GetAllNews();
-            var newsModels = mapper.Map<List<NewsFromServerViewModel>>(newsDtos);
+            var newsDtos = await _newsService.GetAllNews();
+            var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
 
             return Ok(newsModels);
         }
 
         // GET: api/news/5
         [HttpGet("{id}", Name = "Get")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsFromServerDto, NewsFromServerViewModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsDetailsDto, NewsDetailsViewModel>()).CreateMapper();
 
-            var newsDto = _newsService.GetNewsById(id);
-            var newsModel = mapper.Map<NewsFromServerViewModel>(newsDto);
+            var newsDto = await _newsService.GetNewsById(id);
+            var newsModel = mapper.Map<NewsDetailsViewModel>(newsDto);
 
             return Ok(newsModel);
         }
 
         // POST: api/news
         [HttpPost]
-        public IActionResult Post([FromBody] NewsToServerViewModel newsModel)
+        public async Task<IActionResult> Post([FromForm] NewsToServerViewModel newsModel)
         {
             var validationResult = _validator.Validate(newsModel);
 
@@ -64,27 +65,27 @@ namespace TheraLang.Web.Controllers
 
             var newsDto = mapper.Map<NewsToServerDto>(newsModel);
             
-            _newsService.AddNews(newsDto);
+            await _newsService.AddNews(newsDto);
             return Ok();
         }
 
         // PUT: api/news/5
         [HttpPut("{id}")]
-        public IActionResult Edit(int id, [FromBody] NewsToServerViewModel newsModel)
+        public async Task<IActionResult> Edit(int id, [FromForm] NewsToServerViewModel newsModel)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsToServerViewModel, NewsToServerDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsToServerDto>(newsModel);
 
-            _newsService.UpdateNews(id, newsDto);
+            await _newsService.UpdateNews(id, newsDto);
             return Ok();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Remove(int id)
+        public async Task<IActionResult> Remove(int id)
         {
-            _newsService.RemoveNews(id);
+            await _newsService.RemoveNews(id);
             return Ok();
         }
     }
