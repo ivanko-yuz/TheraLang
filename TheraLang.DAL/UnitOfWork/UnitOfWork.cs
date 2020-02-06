@@ -21,7 +21,7 @@ namespace TheraLang.DAL.UnitOfWork
             return new Repository<TEntity>(Context.Set<TEntity>());
         }
 
-        public Task<int> SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
             var entries = Context.ChangeTracker
             .Entries()
@@ -40,7 +40,7 @@ namespace TheraLang.DAL.UnitOfWork
                     ((BaseEntity)entityEntry.Entity).UpdatedDateUtc = DateTime.Now;
                 }
             }
-            return Context.SaveChangesAsync();
+            return await Context.SaveChangesAsync();
         }
 
         public void Dispose()

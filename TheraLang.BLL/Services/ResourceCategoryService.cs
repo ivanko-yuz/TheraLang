@@ -23,8 +23,8 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                ResourceCategory category = _unitOfWork.Repository<ResourceCategory>().
-                                            Get().SingleOrDefault(i => i.Id == categoryId);
+                ResourceCategory category =
+                    await _unitOfWork.Repository<ResourceCategory>().Get(i => i.Id == categoryId);
                 category.Type = newTypeName;
 
                 _unitOfWork.Repository<ResourceCategory>().Update(category);
@@ -33,16 +33,16 @@ namespace TheraLang.BLL.Services
             catch (Exception ex)
             {
                 throw new Exception($"Error when changing resource category for {nameof(categoryId)}:{categoryId} " +
-                    $"and {nameof(newTypeName)}:{newTypeName}: ", ex);
+                                    $"and {nameof(newTypeName)}:{newTypeName}: ", ex);
             }
         }
 
-        public IEnumerable<ResourceCategoryDto> GetAllCategories()
+        public async Task<IEnumerable<ResourceCategoryDto>> GetAllCategories()
         {
+            var categories = await _unitOfWork.Repository<ResourceCategory>().GetAllAsync();
 
-            var categories = _unitOfWork.Repository<ResourceCategory>().Get();
-
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceCategory, ResourceCategoryDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceCategory, ResourceCategoryDto>())
+                .CreateMapper();
             var categoriesDto = mapper.Map<IEnumerable<ResourceCategory>, IEnumerable<ResourceCategoryDto>>(categories);
 
             return categoriesDto;

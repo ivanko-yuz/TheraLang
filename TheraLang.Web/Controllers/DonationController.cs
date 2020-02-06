@@ -28,24 +28,24 @@ namespace TheraLang.Web.Controllers
         /// <returns>LiqPayCheckoutModel</returns>
         [HttpGet("{donationAmount}/{projectId?}")]
         [AllowAnonymous]
-        public ActionResult<LiqPayCheckoutModel> Get(string donationAmount, int? projectId)
+        public async Task<IActionResult> Get(string donationAmount, int? projectId)
         {
             if (projectId == default(int))
             {
                 throw new ArgumentException($"{nameof(projectId)} can not be 0");
             }
-       
+
             if (string.IsNullOrEmpty(donationAmount))
             {
                 throw new ArgumentException($"{nameof(donationAmount)} can not be null");
             }
 
-            var  liqPayCheckoutDto = _donationService.GetLiqPayCheckoutModel(donationAmount, projectId, HttpContext);
+            var liqPayCheckoutDto = await _donationService.GetLiqPayCheckoutModelAsync(donationAmount, projectId, HttpContext);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LiqPayCheckoutDto, LiqPayCheckoutModel>()).CreateMapper();
             var liqPayCheckoutModel = mapper.Map<LiqPayCheckoutDto, LiqPayCheckoutModel>(liqPayCheckoutDto);
 
-            return liqPayCheckoutModel;
+            return Ok(liqPayCheckoutModel);
         }
 
         /// <summary>
@@ -55,14 +55,14 @@ namespace TheraLang.Web.Controllers
         /// <returns>Donation record</returns>
         [HttpGet("transaction/{donationId}")]
         [AllowAnonymous]
-        public ActionResult<DonationViewModel> Get(string donationId)
+        public async Task<IActionResult> Get(string donationId)
         {
             if (String.IsNullOrEmpty(donationId))
             {
                 throw new ArgumentException($"{nameof(donationId)} can not be null");
             }
-            
-            var donationDto = _donationService.GetDonation(donationId);
+
+            var donationDto = await _donationService.GetDonationAsync(donationId);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DonationDto, DonationViewModel>()).CreateMapper();
             var donationModel = mapper.Map<DonationDto, DonationViewModel>(donationDto);
@@ -80,7 +80,7 @@ namespace TheraLang.Web.Controllers
         /// <returns>status code</returns>
         [HttpPost("{donationId}/{projectId?}")]
         [AllowAnonymous]
-        public async Task<ActionResult> Post(string donationId, int? projectId, [FromForm]string data, [FromForm]string signature)
+        public async Task<IActionResult> Post(string donationId, int? projectId, [FromForm]string data, [FromForm]string signature)
         {
             if (string.IsNullOrEmpty(data))
             {
@@ -97,12 +97,12 @@ namespace TheraLang.Web.Controllers
                 throw new Exception($"Error, while checking LiqPay response signature, the {nameof(signature)} was not authenticated ");
             }
 
-            await _donationService.AddDonation(projectId, donationId, data, signature);
+            await _donationService.AddDonationAsync(projectId, donationId, data, signature);
             return Ok();
         }
 
-            
+
     }
 
-    
+
 }

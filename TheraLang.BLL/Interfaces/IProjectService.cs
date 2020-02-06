@@ -7,20 +7,20 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IProjectService
     {
-        Task ChangeStatus(int id, ProjectStatusDto status);
+        Task ChangeStatusAsync(int id, ProjectStatusDto status);
 
-        Task Add(ProjectDto projectModel, Guid userId);
+        Task AddAsync(ProjectDto projectModel, Guid userId);
 
-        Task Delete(int id);
+        Task DeleteAsync(int id);
 
         Task UpdateAsync(int id, ProjectDto project);
 
-        IEnumerable<ProjectDto> GetAllProjects();
+        Task<IEnumerable<ProjectDto>> GetAllProjectsAsync();
 
-        ProjectDto GetById(int id);
+        Task<ProjectDto> GetByIdAsync(int id);
 
-        IEnumerable<ProjectDto> GetProjects(int pageNumber, int pageSize);
-        IEnumerable<ProjectDto> GetAllNewProjects();
-        IEnumerable<ProjectDto> GetProjectsByStatus(int status);
+        Task<IEnumerable<ProjectDto>> GetProjectsAsync(int pageNumber, int pageSize);
+        Task<IEnumerable<ProjectDto>> GetAllNewProjectsAsync();
+        Task<IEnumerable<ProjectDto>> GetProjectsByStatusAsync(int status);
     }
 }
