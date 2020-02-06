@@ -102,6 +102,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { QuillModule } from "ngx-quill";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { ManagerComponent } from './modules/manager/manager.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
