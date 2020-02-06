@@ -3,6 +3,8 @@ import { SiteMapService } from "src/app/core/http/cms/site-map.service";
 import { SiteMap } from "src/app/shared/models/site-map/site-map";
 import { ChangedSiteMap } from "src/app/shared/models/site-map/changed-site-map";
 import { CmsPageService } from "src/app/core/http/cms/cms-page.service";
+import { NotificationService } from "src/app/core/services/notification/notification.service";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-sitemap-editor",
@@ -13,7 +15,9 @@ export class SitemapEditorComponent implements OnInit {
   public siteMap: SiteMap[];
   constructor(
     private siteMapService: SiteMapService,
-    private pageService: CmsPageService
+    private pageService: CmsPageService,
+    private notificationService: NotificationService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit() {
@@ -35,16 +39,22 @@ export class SitemapEditorComponent implements OnInit {
     console.log(this.siteMapService.changesToMake);
   }
   onSave() {
-    this.siteMapService
-      .updateSiteMapStructure()
-      .subscribe(resp => console.log(resp));
+    this.siteMapService.updateSiteMapStructure().subscribe(async resp => {
+      const msg = await this.translateService
+        .get("common.saved-successfully")
+        .toPromise();
+      this.notificationService.success(msg);
+    });
   }
-
   onDelete(pageId: number) {
     this.pageService.deletePage(pageId).subscribe({
-      next: res => {
+      next: async res => {
+        const msg = await this.translateService
+          .get("common.deleted-successfully")
+          .toPromise();
         this.siteMapService.tryRemoveFromChanges(pageId);
         this.fetchData();
+        this.notificationService.success(msg);
       },
       error: err => {
         console.log(err);
