@@ -10,6 +10,7 @@ using TheraLang.Web.ViewModels;
 using TheraLang.Web.Extensions;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.CustomTypes;
 
 namespace TheraLang.Web.Controllers
 {
@@ -35,7 +36,8 @@ namespace TheraLang.Web.Controllers
 
             if (pageModel == null) return BadRequest();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>()
+            .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
                 .CreateMapper();
             var pageDto = mapper.Map<PageViewModel, PageDto>(pageModel);
 
@@ -53,7 +55,8 @@ namespace TheraLang.Web.Controllers
             var page = await _pageService.GetPageById(id);
             if (page == null) return NotFound();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>()
+            .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
                 .CreateMapper();
             var pageDto = mapper.Map<PageViewModel, PageDto>(pageModel);
 
@@ -89,20 +92,6 @@ namespace TheraLang.Web.Controllers
             return Ok(pageModel);
         }
 
-        //[HttpGet("{route}")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> GetPageByRoute(string route)
-        //{
-        //    var page = await _pageService.GetPageByRoute(route);
-        //    if (page == null) return NotFound();
-
-        //    var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>())
-        //       .CreateMapper();
-        //    var pageModel = mapper.Map<PageDto, PageViewModel>(page);
-
-        //    return Ok(pageModel);
-        //}
-
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetAllPages()
@@ -110,7 +99,8 @@ namespace TheraLang.Web.Controllers
             var pages = await _pageService.GetAllPages();
             if (!pages.Any()) return NotFound();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>()
+            .ForMember(c => c.Content, opt => opt.MapFrom(n => n.Content.ToString())))
                .CreateMapper();
             var pageModel = mapper.Map<IEnumerable<PageDto>, IEnumerable<PageViewModel>>(pages);
 
