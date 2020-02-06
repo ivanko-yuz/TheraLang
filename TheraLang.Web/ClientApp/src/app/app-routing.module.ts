@@ -14,8 +14,10 @@ import { LoginComponent } from "./modules/login/login.component";
 import { ErrorComponent } from "./shared/components/error/error.component";
 import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
-import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { ManagerModule } from "./modules/manager/manager.module";
+import { AuthGuard } from "./core/services/guards/auth-guard.service";
+import { AdminGuard } from "./core/services/guards/admin-guard.service";
+import { ProjectFormComponent } from './modules/main/pages/project/project-form/project-form.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,11 @@ const routes: Routes = [
       {
         path: "participants",
         component: ProjectParticipantsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "projects/create",
+        component: ProjectFormComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -45,8 +52,8 @@ const routes: Routes = [
         path: "transaction/:donationId",
         component: TransactionResultComponent
       },
-      { path: "projectTypes", component: ProjectTypeComponent },
-      { path: "projectRequest", component: ProjectRequestComponent }
+      { path: "projectTypes", component: ProjectTypeComponent, canActivate: [AdminGuard] },
+      { path: "projectRequest", component: ProjectRequestComponent, canActivate: [AdminGuard] }
     ]
   },
   { path: "login", component: LoginComponent },
@@ -66,9 +73,10 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 
 export const routingComponents = [
+  ProjectFormComponent,
   ProjectParticipantsComponent,
   ProjectComponent,
   HomeComponent,

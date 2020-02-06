@@ -56,9 +56,9 @@ import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confi
 import { ErrorComponent } from "./shared/components/error/error.component";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { ToolbarComponent } from "./core/toolbar/toolbar.component";
+import { ToolbarComponent } from "./modules/main/toolbar/toolbar.component";
 
-import { LanguageComponent } from "./core/toolbar/language/language.component";
+import { LanguageComponent } from "./modules/main/toolbar/language/language.component";
 import { ResourceService } from "./core/http/resource/resource.service";
 import { HttpService } from "./core/http/http/http.service";
 import { EventService } from "./core/services/event/event-service";
@@ -73,11 +73,11 @@ import { UserService } from "./core/auth/user.service";
 import { ResourceCreateService } from "./core/http/resource/resource-create.service";
 import { ProjectTypeHttp } from "./core/http/project-type/project-type-Http.service";
 import { CmsModule } from "./modules/cms-generic/cms.module";
-import { CmsPagesToolbarItemComponent } from "./core/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component";
+import { CmsPagesToolbarItemComponent } from "./modules/main/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component";
 import { ProjectComponent } from "./modules/main/pages/project/project.component";
 import { HomeComponent } from "./modules/main/pages/home/home.component";
 import { ProjectInfoComponent } from "./modules/main/pages/project/project-info/project-info.component";
-import { FooterComponent } from "./core/footer/footer.component";
+import { FooterComponent } from "./modules/main/footer/footer.component";
 import { ProjectParticipantsComponent } from "./modules/main/pages/project/project-participants/project-participants.component";
 import { CustomDatePipe } from "./shared/pipes/custom.datepipe";
 import { ResourcesTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-table/resources-table.component";
@@ -85,24 +85,22 @@ import { ProjectFormComponent } from "./modules/main/pages/project/project-form/
 import { ResourcesInternalTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component";
 import { GeneralResourcesTableComponent } from "./modules/main/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
 import { GeneralResourcesInnerTableComponent } from "./modules/main/pages/resource/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component";
-import { ToolbarItemComponent } from "./core/toolbar/toolbar-item/toolbar-item.component";
+import { ToolbarItemComponent } from "./modules/main/toolbar/toolbar-item/toolbar-item.component";
 import { DonationComponent } from "./modules/main/pages/donation/donation.component";
 import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
 import { ProjectRequestComponent } from "./modules/main/pages/project/project-request/project-request.component";
 import { LoginComponent } from "./modules/login/login.component";
-import { ProfileMenuComponent } from "./core/toolbar/profile-menu/profile-menu.component";
+import { ProfileMenuComponent } from "./modules/main/toolbar/profile-menu/profile-menu.component";
 import { ResourceCreateComponent } from "./modules/main/pages/resource/resource-create/resource-create.component";
 import { ProjectTypeFormComponent } from "./modules/main/pages/project/project-type-form/project-type-form.component";
 import { ProjectTypeCreateFormComponent } from "./modules/main/pages/project/project-type-create-form/project-type-create-form.component";
 import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
 import { SortablejsModule } from "ngx-sortablejs";
-
 import { JwtModule } from "@auth0/angular-jwt";
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
-import { QuillModule } from "ngx-quill";
-import { AuthGuard } from "./shared/guards/auth-guard.service";
-import { ManagerComponent } from './modules/manager/manager.component';
+import { AuthGuard } from "./core/services/guards/auth-guard.service";
+import { AdminGuard } from './core/services/guards/admin-guard.service';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -227,7 +225,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     SortablejsModule.forRoot({ animation: 400 })
   ],
-  exports: [ResourcesInternalTableComponent, QuillModule],
+  exports: [ResourcesInternalTableComponent],
   providers: [
     ResourceService,
     HttpService,
@@ -243,7 +241,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserService,
     ResourceCreateService,
     ProjectTypeHttp,
-    AuthGuard
+    AuthGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

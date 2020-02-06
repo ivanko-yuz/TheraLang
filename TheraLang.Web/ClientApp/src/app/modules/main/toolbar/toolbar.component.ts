@@ -1,10 +1,10 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from "@angular/core";
 import { ProjectParticipationRequest } from "src/app/shared/models/project-participation/project-participation-request";
 import { Subscription } from "rxjs";
-import { ProjectParticipationService } from "../http/project-participants/project-participation.service";
-import { EventService } from "../services/event/event-service";
-import { DialogService } from "../services/dialog/dialog.service";
-import { UserService } from "../auth/user.service";
+import { ProjectParticipationService } from "../../../core/http/project-participants/project-participation.service";
+import { EventService } from "../../../core/services/event/event-service";
+import { DialogService } from "../../../core/services/dialog/dialog.service";
+import { UserService } from "../../../core/auth/user.service";
 import { ProjectParticipationRequestStatus } from "src/app/configs/project-participation-request-status";
 import { LoginComponent } from 'src/app/modules/login/login.component';
 
@@ -18,7 +18,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   projectParticipation: ProjectParticipationRequest[];
 
   private subscription = new Subscription();
-  isAuthinticated: boolean;
 
   constructor(
     private participantService: ProjectParticipationService,
@@ -41,7 +40,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     this.subscription.add(subscription);
-    this.isAuthinticated = this.userService.isAuthenticated();
   }
 
   ngAfterViewInit(): void {
@@ -56,5 +54,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onLogin() {
     this.dialog.openFormDialog(LoginComponent);
+  }
+  isAuthenticated()
+  {
+       return this.userService.isAuthenticated();
+  }
+  isAdmin()
+  {
+    return this.userService.isAdmin();
   }
 }

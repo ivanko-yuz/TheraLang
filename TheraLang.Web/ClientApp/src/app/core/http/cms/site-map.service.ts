@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { SiteMap } from "../../../shared/models/site-map/site-map";
 import { Observable, Subject, EMPTY } from "rxjs";
-import { ToolbarItem } from "../../toolbar/cms-pages-toolbar-item/toolbar-item";
-import { CmsRoute } from "../../toolbar/toolbar-item/cms-route";
+import { ToolbarItem } from "../../../modules/main/toolbar/cms-pages-toolbar-item/toolbar-item";
+import { CmsRoute } from "../../../modules/main/toolbar/toolbar-item/cms-route";
 import { cmsSitemapUrl } from "src/app/configs/api-endpoint.constants";
 import { ChangedSiteMap } from "src/app/shared/models/site-map/changed-site-map";
 

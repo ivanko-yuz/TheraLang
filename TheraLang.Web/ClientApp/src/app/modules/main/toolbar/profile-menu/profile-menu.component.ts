@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { UserService } from "../../auth/user.service";
-import { NotificationService } from "../../services/notification/notification.service";
+import { UserService } from "../../../../core/auth/user.service";
+import { NotificationService } from "../../../../core/services/notification/notification.service";
 import {Router} from '@angular/router';
 
 @Component({
@@ -23,6 +23,6 @@ export class ProfileMenuComponent implements OnInit {
 
   onLogout() {
     this.userService.logout();
-    window.location.reload();
+    this.router.navigate(["/"]);
   }
 }
