@@ -8,9 +8,9 @@ using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web.Validators
 {
-    public class NewsViewModelValidator : AbstractValidator<NewsToServerViewModel>
+    public class NewsCreateViewModelValidator : AbstractValidator<NewsCreateViewModel>
     {
-        public NewsViewModelValidator()
+        public NewsCreateViewModelValidator()
         {
             RuleFor(x => x.Title).NotNull().NotEmpty().MinimumLength(3).MaximumLength(250);
             RuleFor(x => x.Text).NotNull().NotEmpty().MinimumLength(5).MaximumLength(10000);

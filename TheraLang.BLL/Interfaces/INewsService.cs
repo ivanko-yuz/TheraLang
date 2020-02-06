@@ -8,9 +8,9 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface INewsService
     {
-        Task AddNews(NewsToServerDto newsDto);
+        Task AddNews(NewsCreateDto newsDto);
 
-        Task UpdateNews(int id, NewsToServerDto newsDto);
+        Task UpdateNews(int id, NewsEditDto newsDto);
         
         Task RemoveNews(int id);
 

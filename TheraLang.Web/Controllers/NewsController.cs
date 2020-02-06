@@ -19,12 +19,15 @@ namespace TheraLang.Web.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
-        private readonly IValidator<NewsToServerViewModel> _validator;
+        private readonly IValidator<NewsCreateViewModel> _newsCreateValidator;
+        private readonly IValidator<NewsEditViewModel> _newsEditValidator;
 
-        public NewsController(INewsService newsService, IValidator<NewsToServerViewModel> validator)
+        public NewsController(INewsService newsService, IValidator<NewsCreateViewModel> newsCreateValidator,
+                IValidator<NewsEditViewModel> newsEditValidator)
         {
             _newsService = newsService;
-            _validator = validator;
+            _newsCreateValidator = newsCreateValidator;
+            _newsEditValidator = newsEditValidator;
         }
 
         // GET: api/news
@@ -66,9 +69,9 @@ namespace TheraLang.Web.Controllers
         // POST: api/news
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] NewsToServerViewModel newsModel)
+        public async Task<IActionResult> Post([FromForm] NewsCreateViewModel newsModel)
         {
-            var validationResult = _validator.Validate(newsModel);
+            var validationResult = _newsCreateValidator.Validate(newsModel);
 
             if (!validationResult.IsValid)
             {
@@ -76,9 +79,9 @@ namespace TheraLang.Web.Controllers
                 return BadRequest();
             }
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsToServerViewModel, NewsToServerDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateViewModel, NewsCreateDto>()).CreateMapper();
 
-            var newsDto = mapper.Map<NewsToServerDto>(newsModel);
+            var newsDto = mapper.Map<NewsCreateDto>(newsModel);
             
             await _newsService.AddNews(newsDto);
             return Ok();
@@ -87,11 +90,11 @@ namespace TheraLang.Web.Controllers
         // PUT: api/news/5
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, [FromForm] NewsToServerViewModel newsModel)
+        public async Task<IActionResult> Edit(int id, [FromForm] NewsEditViewModel newsModel)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsToServerViewModel, NewsToServerDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsEditViewModel, NewsEditDto>()).CreateMapper();
 
-            var validationResult = _validator.Validate(newsModel);
+            var validationResult = _newsEditValidator.Validate(newsModel);
 
             if (!validationResult.IsValid)
             {
@@ -99,7 +102,7 @@ namespace TheraLang.Web.Controllers
                 return BadRequest();
             }
 
-            var newsDto = mapper.Map<NewsToServerDto>(newsModel);
+            var newsDto = mapper.Map<NewsEditDto>(newsModel);
 
             try
             {

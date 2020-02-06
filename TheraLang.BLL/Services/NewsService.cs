@@ -55,16 +55,11 @@ namespace TheraLang.BLL.Services
             return newsDto;
         }
 
-        public async Task AddNews(NewsToServerDto newsDto)
+        public async Task AddNews(NewsCreateDto newsDto)
         {
-            var mapper = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<string, UploadedNewsImage>().ForMember(f => f.Url, opt => opt.MapFrom(s => s));
-                cfg.CreateMap<NewsToServerDto, News>()
-                    .ForMember(m => m.UploadedImages, opt => opt.MapFrom(sm => sm.UploadedImageUrls));
-            }).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()).CreateMapper();
 
-            var news = mapper.Map<NewsToServerDto, News>(newsDto);
+            var news = mapper.Map<NewsCreateDto, News>(newsDto);
             news.UploadedImages = await UploadImages(newsDto.NewImages);
 
             await _unitOfWork.Repository<News>().Add(news);
@@ -85,7 +80,7 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateNews(int id, NewsToServerDto newsDto)
+        public async Task UpdateNews(int id, NewsEditDto newsDto)
         {
             var newsToUpdate = await _unitOfWork.Repository<News>().Get().FirstOrDefaultAsync(n => n.Id == id);
 
@@ -113,10 +108,7 @@ namespace TheraLang.BLL.Services
             {
                 var imageUrl = await _fileService.SaveFile(image);
                 var uploadedImage = new UploadedNewsImage() { Url = imageUrl.ToString() };
-                //await _unitOfWork.Repository<UploadedFile>().Add(uploadedImage);
-                //await _unitOfWork.SaveChangesAsync();
                 uploadedImages.Add(uploadedImage);
-                //TODO: Service that will save file to server and add record to UploadedFiles table
             }
 
             return uploadedImages;
