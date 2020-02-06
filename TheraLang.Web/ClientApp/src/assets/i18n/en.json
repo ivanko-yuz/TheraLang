@@ -16,6 +16,7 @@
     "added-successfully": "Added successfully!",
     "created-successfully": "Created successfully!",
     "updated-successfully": "Updated successfully!",
+    "saved-successfully": "Successfully saved!",
     "r-u-sure": "Are you sure?",
     "error": "Error",
     "yes": "Yes",
@@ -122,6 +123,7 @@
     }
   },
   "manager": {
-    "add-new-page": "Add new page"
+    "add-new-page": "Add new page",
+    "save-changes": "Save changes"
   }
 }

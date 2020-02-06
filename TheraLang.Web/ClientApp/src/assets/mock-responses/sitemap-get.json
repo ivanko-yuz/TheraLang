@@ -1,56 +1,52 @@
 {
   "pages": [
     {
-      "id": "someid",
-      "title": "Page1",
-      "items": [
+      "id": 1,
+      "menuName": null,
+      "route": "page1",
+      "parentPageId": null,
+      "changed": false,
+      "subPages": [
         {
-          "id": "someid",
-          "title": "Page2",
-          "items": []
+          "id": 2,
+          "menuName": null,
+          "route": "page2",
+          "parentPageId": 1,
+          "changed": false,
+          "subPages": []
         },
         {
-          "id": "someid",
-          "title": "Page3",
-          "items": []
-        },
-        {
-          "id": "someid",
-          "title": "Page4",
-          "items": [
-            {
-              "id": "someid",
-              "title": "Page5",
-              "items": []
-            },
-            {
-              "id": "someid",
-              "title": "Page6",
-              "items": []
-            }
-          ]
+          "id": 3,
+          "menuName": null,
+          "route": "page3",
+          "parentPageId": 1,
+          "changed": false,
+          "subPages": []
         }
       ]
     },
     {
-      "id": "someid",
-      "title": "Page7",
-      "items": []
+      "id": 4,
+      "menuName": null,
+      "route": "page4",
+      "parentPageId": 1,
+      "changed": false,
+      "subPages": []
     },
     {
-      "id": "someid",
-      "title": "Page8",
-      "items": [
+      "id": 5,
+      "menuName": null,
+      "route": "page5",
+      "parentPageId": 1,
+      "changed": false,
+      "subPages": [
         {
-          "id": "someid",
-          "title": "Page9",
-          "items": [
-            {
-              "id": "someid",
-              "title": "Page10",
-              "items": []
-            }
-          ]
+          "id": 6,
+          "menuName": null,
+          "route": "page6",
+          "parentPageId": 1,
+          "changed": false,
+          "subPages": []
         }
       ]
     }
