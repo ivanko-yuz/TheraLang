@@ -35,7 +35,6 @@ namespace TheraLang.Web.Controllers
             {
                 return NoContent();
             }
-            
             var mapper = new MapperConfiguration(mapOpts => 
                 mapOpts.CreateMap<ChangedSiteMapViewModel,SiteMapDto>()
                     .ForMember(dto => dto.SortOrder,opts => 
@@ -46,7 +45,7 @@ namespace TheraLang.Web.Controllers
             var structure = 
                 mapper.Map<IEnumerable<ChangedSiteMapViewModel>,IEnumerable<SiteMapDto>>(siteMapStructure.SiteMaps);
             await _siteMapService.UpdateStructure(structure);
-            return Ok(await _siteMapService.GetAll());
+            return NoContent();
         }
     }
 }
