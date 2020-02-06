@@ -4,7 +4,7 @@ import { CreatePageComponent } from "./page-manager/create-page/create-page.comp
 import { ManagerComponent } from "./manager.component";
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
-import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
+import { EditPageComponent } from "./page-manager/edit-page/edit-page.component";
 
 const routes: Routes = [
   {
@@ -12,19 +12,33 @@ const routes: Routes = [
     component: PageManagerComponent,
     children: [
       { path: "create", component: CreatePageComponent },
-      { path: 'edit/:id', component: EditPageComponent }
+      { path: "edit/:id", component: EditPageComponent },
+      {
+        path: "",
+        pathMatch: "full",
+        redirectTo: "/admin/sitemap"
+      }
     ]
   },
   {
     path: "sitemap",
     component: SitemapEditorComponent
+  },
+  {
+    path: "",
+    pathMatch: "full",
+    redirectTo: "sitemap"
   }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: "", component: ManagerComponent, children: routes }
+      {
+        path: "",
+        component: ManagerComponent,
+        children: routes
+      }
     ])
   ],
   exports: [RouterModule]

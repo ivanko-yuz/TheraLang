@@ -36,9 +36,6 @@ export class PageEntryComponent implements OnInit {
       const siblings = event.to.childNodes;
 
       const entriesToChange = this.formEvent(from, to, target, siblings);
-
-      // console.log(event);
-
       this.onChange.emit(entriesToChange);
     }
   };
@@ -61,8 +58,6 @@ export class PageEntryComponent implements OnInit {
     siblings: any
   ): ChangedSiteMap[] {
     const entriesToChange: ChangedSiteMap[] = [];
-    console.log(siblings);
-
     siblings.forEach((sibling, index) => {
       if (sibling.classList && sibling.classList.contains("child-item")) {
         const siblingId = parseInt(sibling.attributes["page-id"].value);
