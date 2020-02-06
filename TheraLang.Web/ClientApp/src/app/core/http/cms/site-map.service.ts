@@ -95,8 +95,8 @@ export class SiteMapService {
   }
 
   private combineChanges(oldEntry: ChangedSiteMap, newEntry: ChangedSiteMap) {
-    oldEntry.newIndex = newEntry.newIndex;
-    oldEntry.newParentId = newEntry.newParentId;
-    oldEntry.prevParentId = newEntry.prevParentId;
+    oldEntry.newIndex = newEntry.newIndex || oldEntry.newIndex;
+    oldEntry.newParentId = newEntry.newParentId || oldEntry.newParentId;
+    oldEntry.prevParentId = newEntry.prevParentId || oldEntry.prevParentId;
   }
 }

@@ -68,8 +68,9 @@ const routes: Routes = [
   { path: "error", component: ErrorComponent },
   {
     path: "admin",
-    loadChildren: () => ManagerModule
-  }, // TODO: Rename to manager after piranha removed
+    loadChildren: () => ManagerModule,
+    canActivate: [AdminGuard]
+  },
   { path: "**", loadChildren: () => CmsModule }
 ];
 

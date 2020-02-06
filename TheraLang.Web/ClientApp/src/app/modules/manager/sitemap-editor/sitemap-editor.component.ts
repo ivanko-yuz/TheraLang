@@ -35,9 +35,6 @@ export class SitemapEditorComponent implements OnInit {
     this.siteMapService.addSiteMapChange(event);
   }
 
-  logInfo() {
-    console.log(this.siteMapService.changesToMake);
-  }
   onSave() {
     this.siteMapService.updateSiteMapStructure().subscribe(async resp => {
       const msg = await this.translateService
@@ -46,6 +43,7 @@ export class SitemapEditorComponent implements OnInit {
       this.notificationService.success(msg);
     });
   }
+
   onDelete(pageId: number) {
     this.pageService.deletePage(pageId).subscribe({
       next: async res => {
