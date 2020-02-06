@@ -34,10 +34,12 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(categoryId)} can not be 0");
             }
+
             if (newTypeName == null)
             {
                 throw new ArgumentException($"{nameof(newTypeName)} can not be null");
             }
+
             await _service.ChangeTypeName(categoryId, newTypeName);
             return Ok();
         }
@@ -49,9 +51,9 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         [Authorize]
         [Route("get")]
-        public IEnumerable<ResourceCategoryDto> GetAll()
+        public async Task<IEnumerable<ResourceCategoryDto>> GetAll()
         {
-            var categories = _service.GetAllCategories();
+            var categories = await _service.GetAllCategories();
             return categories;
         }
     }

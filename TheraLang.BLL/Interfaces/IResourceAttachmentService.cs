@@ -8,6 +8,6 @@ namespace TheraLang.BLL.Interfaces
    {
        Task Add(ResourceAttachDto file);
 
-       IEnumerable<ResourceAttachDto> Get();
+       Task<IEnumerable<ResourceAttachDto>> Get();
    }
 }

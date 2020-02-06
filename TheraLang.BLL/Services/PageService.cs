@@ -26,7 +26,7 @@ namespace TheraLang.BLL.Services
             var route = string.Join('-', pageDto.MenuName.Trim().ToLower().Split(" "));
             pageDto.Content = pageDto.Content.TrimScript();
             pageDto.Content = await _htmlContentService.SavePictures(pageDto.Content);
-            
+
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, Page>()
             .ForMember(m => m.Route, opt => opt.MapFrom(n => route))
             .ForMember(c => c.Content, opt => opt.MapFrom(n => n.Content.ToString())))
@@ -35,7 +35,7 @@ namespace TheraLang.BLL.Services
 
             try
             {
-                await _unitOfWork.Repository<Page>().Add(page);
+                _unitOfWork.Repository<Page>().Add(page);
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
@@ -47,7 +47,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<PageDto>> GetAllPages()
         {
-            var pages = await _unitOfWork.Repository<Page>().Get().Include(p => p.SubPages).ToListAsync();
+            var pages = await _unitOfWork.Repository<Page>().GetAll().Include(p => p.SubPages).ToListAsync();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Page, PageDto>()
             .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
                 .CreateMapper();
@@ -59,8 +59,7 @@ namespace TheraLang.BLL.Services
         public async Task<PageDto> GetPageByRoute(string route)
         {
             var page = await _unitOfWork.Repository<Page>()
-                .Get()
-                .FirstOrDefaultAsync(p => p.Route == route);
+                .Get(p => p.Route == route);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Page, PageDto>()
             .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
@@ -74,8 +73,7 @@ namespace TheraLang.BLL.Services
         public async Task<PageDto> GetPageById(int pageId)
         {
             var page = await _unitOfWork.Repository<Page>()
-                .Get()
-                .FirstOrDefaultAsync(p => p.Id == pageId);
+                .Get(p => p.Id == pageId);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Page, PageDto>()
             .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
@@ -89,8 +87,7 @@ namespace TheraLang.BLL.Services
         public async Task Remove(int pageId)
         {
             var page = await _unitOfWork.Repository<Page>()
-                 .Get()
-                 .FirstOrDefaultAsync(p => p.Id == pageId);
+                 .Get(p => p.Id == pageId);
             try
             {
                 _unitOfWork.Repository<Page>().Remove(page);
@@ -108,8 +105,7 @@ namespace TheraLang.BLL.Services
             pageDto.Content = pageDto.Content.TrimScript();
 
             var page = await _unitOfWork.Repository<Page>()
-                .Get()
-                .FirstOrDefaultAsync(p => p.Id == pageId);
+                .Get(p => p.Id == pageId);
             try
             {
                 pageDto.Content = pageDto.Content.TrimScript();
@@ -117,7 +113,7 @@ namespace TheraLang.BLL.Services
 
                 page.Header = pageDto.Header;
                 page.MenuName = pageDto.MenuName;
-                page.Content = pageDto.Content.ToString();   
+                page.Content = pageDto.Content.ToString();
 
 
                 _unitOfWork.Repository<Page>().Update(page);

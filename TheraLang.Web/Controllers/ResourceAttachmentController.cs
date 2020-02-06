@@ -6,40 +6,42 @@ using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace TheraLang.Web.Controllers
 {
+    [Route("api/files")]
+    [ApiController]
+    public class ResourceAttachmentController : ControllerBase
+    {
+        public ResourceAttachmentController(IResourceAttachmentService attachment)
+        {
+            _attachment = attachment;
+        }
 
-   [Route("api/files")]
-   [ApiController]
-   public class ResourceAttachmentController : ControllerBase
-   {
-       public ResourceAttachmentController(IResourceAttachmentService attachment)
-       {
-           _attachment = attachment;
-       }
-       private readonly IResourceAttachmentService _attachment;
+        private readonly IResourceAttachmentService _attachment;
 
-       [HttpPost("attach")]
+        [HttpPost("attach")]
         [Authorize]
-        public IActionResult UploadFile([FromBody]ResourceAttachViewModel resourceModel)
-       {
-           if (resourceModel == null)
-           {
-               throw new ArgumentException($"{nameof(resourceModel)} cannot be null");
-           }
+        public async Task<IActionResult> UploadFile([FromBody] ResourceAttachViewModel resourceModel)
+        {
+            if (resourceModel == null)
+            {
+                throw new ArgumentNullException($"{nameof(resourceModel)} cannot be null");
+            }
 
-           var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachViewModel, ResourceAttachDto>()).CreateMapper();
-           var resourceDto = mapper.Map<ResourceAttachViewModel, ResourceAttachDto>(resourceModel);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachViewModel, ResourceAttachDto>()).CreateMapper();
+            var resourceDto = mapper.Map<ResourceAttachViewModel, ResourceAttachDto>(resourceModel);
 
-            _attachment.Add(resourceDto);
-           return Ok(resourceDto);
-       }
-       [HttpGet]
+            await _attachment.Add(resourceDto);
+            return Ok(resourceDto);
+        }
+
+        [HttpGet]
         [Authorize]
-        public IEnumerable<ResourceAttachDto> GetAllTypes()
-       {
-           return _attachment.Get();
-       }
-   }
+        public async Task<IEnumerable<ResourceAttachDto>> GetAllTypes()
+        {
+            return await _attachment.Get();
+        }
+    }
 }
