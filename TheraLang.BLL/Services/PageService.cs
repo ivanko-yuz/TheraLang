@@ -14,18 +14,18 @@ namespace TheraLang.BLL.Services
     public class PageService : IPageService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IHtmlContentService _pictureService;
+        private readonly IHtmlContentService _htmlContentService;
 
-        public PageService(IUnitOfWork unitOfWork, IHtmlContentService pictureService)
+        public PageService(IUnitOfWork unitOfWork, IHtmlContentService htmlContentService)
         {
             _unitOfWork = unitOfWork;
-            _pictureService = pictureService;
+            _htmlContentService = htmlContentService;
         }
         public async Task Add(PageDto pageDto)
         {
             var route = string.Join('-', pageDto.MenuName.Trim().ToLower().Split(" "));
             pageDto.Content = pageDto.Content.TrimScript();
-            _pictureService.SavePictures(pageDto.Content.ToString());
+            pageDto.Content = await _htmlContentService.SavePictures(pageDto.Content);
             
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, Page>()
             .ForMember(m => m.Route, opt => opt.MapFrom(n => route))
@@ -112,8 +112,8 @@ namespace TheraLang.BLL.Services
                 .FirstOrDefaultAsync(p => p.Id == pageId);
             try
             {
-                _pictureService.SavePictures(page.Content);
                 pageDto.Content = pageDto.Content.TrimScript();
+                pageDto.Content = await _htmlContentService.SavePictures(pageDto.Content);
 
                 page.Header = pageDto.Header;
                 page.MenuName = pageDto.MenuName;

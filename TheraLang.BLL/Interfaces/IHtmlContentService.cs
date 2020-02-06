@@ -9,6 +9,6 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IHtmlContentService
     {
-        HtmlContent SavePictures(HtmlContent htmlContent);
+        Task<HtmlContent> SavePictures(HtmlContent htmlContent);
     }
 }

@@ -58,4 +58,8 @@ export class EditPageComponent implements OnInit {
       content: this.form.value.content
     });
   }
+
+  action() {
+    console.log(this.form.value);
+  }
 }

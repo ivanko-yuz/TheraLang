@@ -13,7 +13,13 @@ namespace TheraLang.BLL.Services.File
 {
     public class HtmlContentService : IHtmlContentService
     {
-        public HtmlContent SavePictures(HtmlContent htmlContent)
+        private readonly IFileService _fileService;
+
+        public HtmlContentService(IFileService fileService)
+        {
+            _fileService = fileService;
+        }
+        public async Task<HtmlContent> SavePictures(HtmlContent htmlContent)
         {
             var regex = new Regex("data:image/(?<exteniton>\\w*);base64.(?<data>\\S*)\"/>", RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
             var matches = regex.Matches(htmlContent.ToString());
@@ -25,14 +31,14 @@ namespace TheraLang.BLL.Services.File
                 var exteniton = "." + match.Groups["exteniton"].Value;
                 var base64Data = match.Groups["data"].Value;
                 byte[] rawData = Convert.FromBase64String(base64Data);
-                
-                var ms = new MemoryStream(rawData);
 
-               /// html.Replace(match, urI);    
+                var ms = new MemoryStream(rawData);
+                var uri = await _fileService.SaveFile(ms, exteniton);
+
+                html = html.Replace(match.Value, uri.ToString() + "\"/>");
             }
 
             return new HtmlContent(html);
-
         }
     }
 }
