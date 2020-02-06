@@ -18,7 +18,7 @@ namespace TheraLang.DAL.Configuration
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
             builder.Property(e => e.Title).HasMaxLength(250).IsRequired();
             builder.Property(e => e.Text).IsRequired();
-            builder.HasMany(e => e.UploadedImages);
+            builder.HasMany(e => e.UploadedImages).WithOne(i => i.News).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

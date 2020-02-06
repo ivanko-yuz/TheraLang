@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
@@ -27,6 +28,7 @@ namespace TheraLang.Web.Controllers
         }
 
         // GET: api/news
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -34,7 +36,7 @@ namespace TheraLang.Web.Controllers
 
             var newsDtos = await _newsService.GetAllNews();
 
-            if(!newsDtos.Any())
+            if (!newsDtos.Any())
             {
                 return NotFound();
             }
@@ -44,13 +46,14 @@ namespace TheraLang.Web.Controllers
         }
 
         // GET: api/news/5
+        [AllowAnonymous]
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> GetById(int id)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsDetailsDto, NewsDetailsViewModel>()).CreateMapper();
 
             var newsDto = await _newsService.GetNewsById(id);
-            if(newsDto == null)
+            if (newsDto == null)
             {
                 return NotFound();
             }
@@ -61,6 +64,7 @@ namespace TheraLang.Web.Controllers
         }
 
         // POST: api/news
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] NewsToServerViewModel newsModel)
         {
@@ -68,7 +72,8 @@ namespace TheraLang.Web.Controllers
 
             if (!validationResult.IsValid)
             {
-                throw new ArgumentException($"{nameof(newsModel)} is not valid");
+                //throw new ArgumentException($"{nameof(newsModel)} is not valid");
+                return BadRequest();
             }
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsToServerViewModel, NewsToServerDto>()).CreateMapper();
@@ -80,6 +85,7 @@ namespace TheraLang.Web.Controllers
         }
 
         // PUT: api/news/5
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit(int id, [FromForm] NewsToServerViewModel newsModel)
         {
@@ -89,7 +95,8 @@ namespace TheraLang.Web.Controllers
 
             if (!validationResult.IsValid)
             {
-                throw new ArgumentException($"{nameof(newsModel)} is not valid");
+                //throw new ArgumentException($"{nameof(newsModel)} is not valid");
+                return BadRequest();
             }
 
             var newsDto = mapper.Map<NewsToServerDto>(newsModel);
@@ -107,6 +114,7 @@ namespace TheraLang.Web.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {

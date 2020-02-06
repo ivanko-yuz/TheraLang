@@ -7,11 +7,11 @@ using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Configuration
 {
-    class UploadedFileConfiguration : IEntityTypeConfiguration<UploadedFile>
+    class UploadedFileConfiguration : IEntityTypeConfiguration<UploadedNewsImage>
     {
-        public void Configure(EntityTypeBuilder<UploadedFile> builder)
+        public void Configure(EntityTypeBuilder<UploadedNewsImage> builder)
         {
-            builder.ToTable("UploadedFiles");
+            builder.ToTable("UploadedNewsImages");
 
             builder.HasKey(e => e.Id);
 

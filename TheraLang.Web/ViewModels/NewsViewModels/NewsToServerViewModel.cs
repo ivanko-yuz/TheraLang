@@ -12,6 +12,6 @@ namespace TheraLang.Web.ViewModels.NewsViewModels
         public string Title { get; set; }
         public string Text { get; set; }
         public ICollection<IFormFile> NewImages { get; set; }
-        public ICollection<UploadedFile> UploadedImages { get; set; }
+        public ICollection<UploadedNewsImage> UploadedImages { get; set; }
     }
 }

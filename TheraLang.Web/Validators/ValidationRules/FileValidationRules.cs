@@ -31,7 +31,7 @@ namespace TheraLang.Web.Validators.ValidationRules
                 var regex = new Regex(@"(.*\.png)|(.*\.jpg)|(.*\.jpeg)|(.*\.bmp)");
                 if (!regex.IsMatch(extension))
                 {
-                    context.AddFailure($"{extension} not allowed");
+                    context.AddFailure($"{extension} is not image!");
                 }
             });
         }
