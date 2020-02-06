@@ -10,7 +10,7 @@ import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, M
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { SortablejsModule } from "ngx-sortablejs";
 import { PageEntryComponent } from "./sitemap-editor/page-entry/page-entry.component";
-import { MatIconModule, MatButtonModule, MatSidenav, MatSidenavModule } from "@angular/material";
+import { MatSidenav, MatSidenavModule } from "@angular/material";
 import { TranslateModule, TranslateLoader, TranslateService } from "@ngx-translate/core";
 import { HttpClient } from "@angular/common/http";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
