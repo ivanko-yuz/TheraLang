@@ -10,10 +10,14 @@ import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, M
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { SortablejsModule } from "ngx-sortablejs";
 import { PageEntryComponent } from "./sitemap-editor/page-entry/page-entry.component";
+import { MatSidenav, MatSidenavModule } from "@angular/material";
 import { TranslateModule, TranslateLoader, TranslateService } from "@ngx-translate/core";
 import { HttpClient } from "@angular/common/http";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { PageService } from './shared/services/page.service';
@@ -27,6 +31,7 @@ import { EditPageComponent } from './page-manager/edit-page/edit-page.component'
     ManagerComponent,
     SitemapEditorComponent,
     PageEntryComponent,
+    SideBarComponent,
     PageManagerComponent,
     QuillMaterialComponent,
     EditPageComponent
@@ -45,6 +50,9 @@ import { EditPageComponent } from './page-manager/edit-page/edit-page.component'
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
     MatTooltipModule,
     TranslateModule.forRoot({
       loader: {
