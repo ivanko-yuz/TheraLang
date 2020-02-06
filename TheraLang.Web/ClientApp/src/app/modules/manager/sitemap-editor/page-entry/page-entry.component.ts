@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { SiteMap } from "src/app/shared/models/site-map/site-map";
 import { Options } from "sortablejs";
 import { ChangedSiteMap } from "src/app/shared/models/site-map/changed-site-map";
-import { CmsPageService } from "src/app/core/http/cms/cms-page.service";
 
 @Component({
   selector: "app-page-entry",
@@ -38,6 +37,8 @@ export class PageEntryComponent implements OnInit {
 
       const entriesToChange = this.formEvent(from, to, target, siblings);
 
+      // console.log(event);
+
       this.onChange.emit(entriesToChange);
     }
   };
@@ -60,8 +61,10 @@ export class PageEntryComponent implements OnInit {
     siblings: any
   ): ChangedSiteMap[] {
     const entriesToChange: ChangedSiteMap[] = [];
+    console.log(siblings);
+
     siblings.forEach((sibling, index) => {
-      if (sibling.className == "child-item") {
+      if (sibling.classList && sibling.classList.contains("child-item")) {
         const siblingId = parseInt(sibling.attributes["page-id"].value);
         if (siblingId == target) {
           entriesToChange.push({
