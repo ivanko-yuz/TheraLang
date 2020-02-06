@@ -45,10 +45,12 @@ namespace TheraLang.BLL.Services
             {
                 if (resourceDto.File != null)
                 {
-                    var fileStream = resourceDto.File.OpenReadStream();
-                    var fileExtension = Path.GetExtension(resourceDto.File.FileName);
-                    var fileUri = await _fileService.SaveFile(fileStream, fileExtension);
-                    resourceDto.Url = fileUri.ToString();
+                    using (var fileStream = resourceDto.File.OpenReadStream())
+                    {
+                        var fileExtension = Path.GetExtension(resourceDto.File.FileName);
+                        var fileUri = await _fileService.SaveFile(fileStream, fileExtension);
+                        resourceDto.Url = fileUri.ToString();
+                    }
                 }
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()

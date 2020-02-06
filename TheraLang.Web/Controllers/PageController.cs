@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -19,20 +17,18 @@ namespace TheraLang.Web.Controllers
     public class PageController : ControllerBase
     {
         private readonly IPageService _pageService;
-        private readonly IUserManagementService _userManagementService;
 
-        public PageController(IPageService pageService, IUserManagementService userManagementService)
+        public PageController(IPageService pageService)
         {
             _pageService = pageService;
-            _userManagementService = userManagementService;
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreatePage([FromBody] PageViewModel pageModel)
         {
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
+            var userId = User.Claims.GetUserId();
+            if (userId == null) return BadRequest();
 
             if (pageModel == null) return BadRequest();
 
@@ -49,8 +45,8 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> EditPage(int id, [FromBody] PageViewModel pageModel)
         {
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
+            var userId = User.Claims.GetUserId();
+            if (userId == null) return BadRequest();
 
             var page = await _pageService.GetPageById(id);
             if (page == null) return NotFound();
@@ -111,8 +107,8 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> DeletePage(int id)
         {
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
+            var userId = User.Claims.GetUserId();
+            if (userId == null) return BadRequest();
 
             var page = await _pageService.GetPageById(id);
             if (page == null) return NotFound();

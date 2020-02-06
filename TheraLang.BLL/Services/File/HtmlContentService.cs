@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TheraLang.BLL.CustomTypes;
@@ -19,9 +15,11 @@ namespace TheraLang.BLL.Services.File
         {
             _fileService = fileService;
         }
+
         public async Task<HtmlContent> SavePictures(HtmlContent htmlContent)
         {
-            var regex = new Regex("data:image/(?<exteniton>\\w*);base64.(?<data>\\S*)\"/>", RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
+            var regex = new Regex("data:image/(?<exteniton>\\w*);base64.(?<data>\\S*)\"/>",
+                RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
             var matches = regex.Matches(htmlContent.ToString());
             string html = htmlContent.ToString();
 
@@ -35,7 +33,7 @@ namespace TheraLang.BLL.Services.File
                 var ms = new MemoryStream(rawData);
                 var uri = await _fileService.SaveFile(ms, exteniton);
 
-                html = html.Replace(match.Value, uri.ToString() + "\"/>");
+                html = html.Replace(match.Value, $"{uri}\"/>");
             }
 
             return new HtmlContent(html);
