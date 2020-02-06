@@ -51,7 +51,10 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent },
   { path: "error", component: ErrorComponent },
-  { path: "admin", loadChildren: () => ManagerModule }, // TODO: Rename to manager after piranha removed
+  {
+    path: "admin",
+    loadChildren: () => ManagerModule
+  }, // TODO: Rename to manager after piranha removed
   { path: "**", loadChildren: () => CmsModule }
 ];
 
