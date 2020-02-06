@@ -14,9 +14,9 @@ namespace TheraLang.BLL.Services
     public class PageService : IPageService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPictureService _pictureService;
+        private readonly IHtmlContentService _pictureService;
 
-        public PageService(IUnitOfWork unitOfWork, IPictureService pictureService)
+        public PageService(IUnitOfWork unitOfWork, IHtmlContentService pictureService)
         {
             _unitOfWork = unitOfWork;
             _pictureService = pictureService;

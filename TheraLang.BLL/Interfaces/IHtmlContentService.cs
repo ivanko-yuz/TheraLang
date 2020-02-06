@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using TheraLang.BLL.CustomTypes;
 
 namespace TheraLang.BLL.Interfaces
 {
-    public interface IPictureService
+    public interface IHtmlContentService
     {
-        void SavePictures(string htmlContent);
+        HtmlContent SavePictures(HtmlContent htmlContent);
     }
 }
