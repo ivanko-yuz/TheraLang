@@ -119,5 +119,13 @@
       "email": "Email",
       "user-name": "Username"
     }
+  },
+  "manager": {
+    "add-new-page": "Add new page",
+    "save-changes": "Save changes"
+  },
+  "not-found-page": {
+    "title": "Page not found",
+    "message": "The page you are looking for might have been removed, had its name changed or is temporarily unavailable."
   }
 }

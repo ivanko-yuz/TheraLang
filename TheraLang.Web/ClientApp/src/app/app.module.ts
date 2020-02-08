@@ -53,7 +53,6 @@ import { CdkTreeModule } from "@angular/cdk/tree";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confirm-dialog.component";
-import { ErrorComponent } from "./shared/components/error/error.component";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ToolbarComponent } from "./modules/main/toolbar/toolbar.component";
@@ -98,9 +97,9 @@ import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
 
 import { JwtModule } from "@auth0/angular-jwt";
-
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
-import { AuthGuard } from "./core/services/guards/auth-guard.service";
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { AuthGuard } from './core/services/guards/auth-guard.service';
 import { AdminGuard } from './core/services/guards/admin-guard.service';
 
 export function tokenGetter() {
@@ -123,7 +122,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomDatePipe,
     ResourcesTableComponent,
     ConfirmDialogComponent,
-    ErrorComponent,
     ProjectFormComponent,
     ResourcesInternalTableComponent,
     GeneralResourcesTableComponent,
@@ -140,7 +138,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageComponent,
     MainComponent,
     CmsPagesToolbarItemComponent,
-    DaysLeftPipe
+    DaysLeftPipe,
+    NotFoundComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
