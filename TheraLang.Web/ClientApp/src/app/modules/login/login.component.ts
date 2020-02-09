@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  invalidLogin: boolean;
   
   constructor(
     private notificationService: NotificationService,
