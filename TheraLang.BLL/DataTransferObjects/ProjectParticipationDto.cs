@@ -1,6 +1,5 @@
 ﻿using System;
-using TheraLang.DAL.Piranha.Entities;
-﻿using TheraLang.DAL.Entities;
+using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects
 {

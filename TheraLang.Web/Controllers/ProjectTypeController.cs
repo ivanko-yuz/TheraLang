@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -12,7 +11,6 @@ namespace TheraLang.Web.Controllers
 {
     [Route("api/projectTypes")]
     [ApiController]
- 
     public class ProjectTypeController : ControllerBase
     {
         public ProjectTypeController(IProjectTypeService service, IUserManagementService userManager, IAuthenticateService authenticateService)
@@ -33,7 +31,7 @@ namespace TheraLang.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> PostProjectType([FromBody]ProjectTypeViewModel projectTypeModel)
+        public async Task<IActionResult> PostProjectType([FromBody] ProjectTypeViewModel projectTypeModel)
         {
             if (projectTypeModel == null)
             {
@@ -48,7 +46,7 @@ namespace TheraLang.Web.Controllers
         }
 
 
-        [HttpPut]       
+        [HttpPut]
         [Authorize]
         public async Task<IActionResult> PutProjectType([FromBody] ProjectTypeViewModel projectTypeModel)
         {
@@ -67,7 +65,7 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
-        
+
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> DeleteProjectType(int id)
@@ -76,6 +74,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
+
             await _service.Remove(id);
             return Ok();
         }
@@ -86,9 +85,9 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of ProjectsTypes</returns>
         [HttpGet]
         [AllowAnonymous]
-        public IEnumerable<ProjectTypeDto> GetAllTypes()
+        public async Task<IActionResult> GetAllTypes()
         {
-            return _service.GetAllProjectsType();
+            return Ok(await _service.GetAllProjectsType());
         }
 
         /// <summary>
@@ -104,6 +103,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
+
             var type = _service.GetProjectTypeById(id);
             return Ok(type);
         }

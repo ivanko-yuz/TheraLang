@@ -9,6 +9,8 @@ import { TranslateService } from "@ngx-translate/core";
 import { AsyncScheduler } from "rxjs/internal/scheduler/AsyncScheduler";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { PercentPipe } from '@angular/common';
+import { UserService } from 'src/app/core/auth/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-project",
@@ -24,7 +26,9 @@ export class ProjectComponent implements OnInit {
     private dialogService: DialogService,
     public service: ProjectService,
     private notificationService: NotificationService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private userService: UserService, 
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -34,8 +38,7 @@ export class ProjectComponent implements OnInit {
   }
 
   onCreate() {
-    this.service.initializeFormGroup();
-    this.dialogService.openFormDialog(ProjectFormComponent);
+    this.router.navigate(["projects/create"]);
   }
 
   onEdit(project) {
@@ -67,4 +70,13 @@ export class ProjectComponent implements OnInit {
   getProjectProgress(project: Project) {
     return (project.donationsSum / project.donationTargetSum);
   }
+  isAuthenticated()
+  {
+       return this.userService.isAuthenticated();
+  }
+  isAdmin()
+  {
+    return this.userService.isAdmin();
+  }
+
 }

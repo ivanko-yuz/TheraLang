@@ -7,11 +7,10 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IProjectParticipationService
     {
-        IEnumerable<ProjectParticipationDto> GetAll();
+        Task<IEnumerable<ProjectParticipationDto>> GetAll();
 
         Task CreateRequest(Guid userId, int projectId);
 
-        Task ChangeStatusAsync(int participantId, ProjectParticipationStatusDto status);
-
+        Task ChangeStatus(int participantId, ProjectParticipationStatusDto status);
     }
 }
