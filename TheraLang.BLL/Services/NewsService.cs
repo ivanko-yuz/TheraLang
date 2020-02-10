@@ -27,7 +27,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<NewsPreviewDto>> GetAllNews()
         {
-            var news = await _unitOfWork.Repository<News>().Get()
+            var news = await _unitOfWork.Repository<News>().GetAll()
                 .Include(e => e.Author).Include(e => e.UploadedContentImages).ToListAsync();
 
             var mapper = new MapperConfiguration(cfg =>
@@ -44,7 +44,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<NewsDetailsDto> GetNewsById(int id)
         {
-            var news = await _unitOfWork.Repository<News>().Get().Include(e => e.Author)
+            var news = await _unitOfWork.Repository<News>().GetAll().Include(e => e.Author)
                     .Include(e => e.UploadedContentImages).SingleOrDefaultAsync(n => n.Id == id);
 
             var mapper = new MapperConfiguration(cfg =>
@@ -72,13 +72,13 @@ namespace TheraLang.BLL.Services
                 news.UploadedContentImages.Add(await UploadImage(image));
             }
 
-            await _unitOfWork.Repository<News>().Add(news);
+           _unitOfWork.Repository<News>().Add(news);
             await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task RemoveNews(int id)
         {
-            var news = _unitOfWork.Repository<News>().Get().SingleOrDefault(i => i.Id == id);
+            var news = await _unitOfWork.Repository<News>().Get(i => i.Id == id);
 
             if (news == default)
             {
@@ -92,8 +92,8 @@ namespace TheraLang.BLL.Services
 
         public async Task UpdateNews(int id, NewsEditDto newsDto)
         {
-            var newsToUpdate = await _unitOfWork.Repository<News>().Get().Include(e => e.UploadedContentImages)
-                    .FirstOrDefaultAsync(n => n.Id == id);
+            var newsToUpdate = await _unitOfWork.Repository<News>().GetAll().Include(e => e.UploadedContentImages)
+                    .SingleOrDefaultAsync(n => n.Id == id);
 
             if (newsToUpdate == default)
             {

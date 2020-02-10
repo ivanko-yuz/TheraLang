@@ -78,7 +78,7 @@ namespace TheraLang.Web.Controllers
 
             var newsDto = mapper.Map<NewsCreateDto>(newsModel);
             var userId = User.Claims.GetUserId();
-            newsDto.Author = _userManagementService.GetUserById(userId.Value);
+            newsDto.Author = await _userManagementService.GetUserById(userId.Value);
             
             await _newsService.AddNews(newsDto);
             return Ok();
