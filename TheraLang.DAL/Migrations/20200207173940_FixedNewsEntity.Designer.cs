@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DAL;
 
 namespace TheraLang.DAL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200207173940_FixedNewsEntity")]
+    partial class FixedNewsEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,19 +299,19 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4983909f-1d61-4fcd-8942-12de5b8ecac2"),
+                            Id = new Guid("bd1f5a76-fbad-43f8-a023-468b0e792fa5"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("59754db9-96ef-4bad-b635-01febfa74305"),
+                            Id = new Guid("6ca32fd4-4739-44e3-a423-819930401a2a"),
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = new Guid("614df049-c120-4a28-ac9a-263579a022a7"),
+                            Id = new Guid("40ab11ac-b962-4293-a080-faf308bba3e7"),
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -394,16 +396,16 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a20409a7-a1d0-44da-b75d-d4ad823d824e"),
-                            PasswordHash = "Ae8y7WJGRLzJugqwoIfs3Qv0yhkW6B0sAhPNzQyGUWyH4ouVE7hs3zBUObWvunRL3w==",
-                            RoleId = new Guid("4983909f-1d61-4fcd-8942-12de5b8ecac2"),
+                            Id = new Guid("8e2c9c8d-0386-4dd3-ba92-c4ae0b4aaab9"),
+                            PasswordHash = "AQU5HEZ0E/ho4sJ+V/sybzl1aH4PpDT/k2+EptCoecLOu7O4eHL5uy1RQQYgL/tP9w==",
+                            RoleId = new Guid("bd1f5a76-fbad-43f8-a023-468b0e792fa5"),
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("66e587b3-a509-450c-94a5-ce768bbf69c0"),
-                            PasswordHash = "AfC/uoIdAj/nDMBjTT/8NKdxr0WcdI1/TJl6lkRnTaIr2Ls5MmzYGRsL9WMXDcFIOQ==",
-                            RoleId = new Guid("59754db9-96ef-4bad-b635-01febfa74305"),
+                            Id = new Guid("81377f78-beaa-41a7-926b-ea4a6022055f"),
+                            PasswordHash = "AfHQh/I/xILRi+tXvhgPs9LfGsb/mNiLUrN93aW42pv5Ts5D/qWruORU3b0ZIen1ug==",
+                            RoleId = new Guid("6ca32fd4-4739-44e3-a423-819930401a2a"),
                             UserName = "Member"
                         });
                 });
@@ -424,7 +426,7 @@ namespace TheraLang.DAL.Migrations
                     b.HasOne("TheraLang.DAL.Entities.User", "Author")
                         .WithMany("News")
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.Project", b =>

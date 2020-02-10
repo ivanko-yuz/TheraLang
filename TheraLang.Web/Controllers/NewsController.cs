@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
+using TheraLang.Web.Extensions;
 using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -21,13 +22,15 @@ namespace TheraLang.Web.Controllers
         private readonly INewsService _newsService;
         private readonly IValidator<NewsCreateViewModel> _newsCreateValidator;
         private readonly IValidator<NewsEditViewModel> _newsEditValidator;
+        private readonly IUserManagementService _userManagementService;
 
         public NewsController(INewsService newsService, IValidator<NewsCreateViewModel> newsCreateValidator,
-                IValidator<NewsEditViewModel> newsEditValidator)
+                IValidator<NewsEditViewModel> newsEditValidator, IUserManagementService userManagementService)
         {
             _newsService = newsService;
             _newsCreateValidator = newsCreateValidator;
             _newsEditValidator = newsEditValidator;
+            _userManagementService = userManagementService;
         }
 
         // GET: api/news
@@ -71,17 +74,11 @@ namespace TheraLang.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] NewsCreateViewModel newsModel)
         {
-            var validationResult = _newsCreateValidator.Validate(newsModel);
-
-            if (!validationResult.IsValid)
-            {
-                //throw new ArgumentException($"{nameof(newsModel)} is not valid");
-                return BadRequest();
-            }
-
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateViewModel, NewsCreateDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsCreateDto>(newsModel);
+            var userId = User.Claims.GetUserId();
+            newsDto.Author = _userManagementService.GetUserById(userId.Value);
             
             await _newsService.AddNews(newsDto);
             return Ok();
@@ -93,14 +90,6 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> Edit(int id, [FromForm] NewsEditViewModel newsModel)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsEditViewModel, NewsEditDto>()).CreateMapper();
-
-            var validationResult = _newsEditValidator.Validate(newsModel);
-
-            if (!validationResult.IsValid)
-            {
-                //throw new ArgumentException($"{nameof(newsModel)} is not valid");
-                return BadRequest();
-            }
 
             var newsDto = mapper.Map<NewsEditDto>(newsModel);
 

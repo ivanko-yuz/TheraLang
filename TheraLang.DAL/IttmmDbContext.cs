@@ -29,7 +29,7 @@ namespace TheraLang.DAL
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<News> News { get; set; }
-        public virtual DbSet<UploadedNewsImage> UploadedFiles { get; set; }
+        public virtual DbSet<UploadedNewsContentImage> UploadedFiles { get; set; }
 
         #endregion
 
@@ -101,7 +101,7 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             modelBuilder.ApplyConfiguration(new NewsConfiguration());
-            modelBuilder.ApplyConfiguration(new UploadedFileConfiguration());
+            modelBuilder.ApplyConfiguration(new UploadedNewsContentImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             var AdminRoleID = Guid.NewGuid();
             var MemberRoleId = Guid.NewGuid();

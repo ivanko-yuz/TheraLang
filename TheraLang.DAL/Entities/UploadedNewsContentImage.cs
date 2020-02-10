@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TheraLang.DAL.Entities
 {
-    public class UploadedNewsImage : BaseEntity
+    public class UploadedNewsContentImage : BaseEntity
     {
         public string Url { get; set; }
 

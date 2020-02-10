@@ -10,6 +10,9 @@ namespace TheraLang.BLL.DataTransferObjects.NewsDtos
         public int Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
-        public ICollection<string> UploadedImageUrls { get; set; }
+        public string MainImageUrl { get; set; }
+        public ICollection<string> ContentImageUrls { get; set; }
+        public string AuthorName { get; set; }
+        public DateTime CreatedDateUtc { get; set; }
     }
 }
