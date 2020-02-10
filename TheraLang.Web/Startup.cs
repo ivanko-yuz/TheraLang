@@ -135,7 +135,7 @@ namespace TheraLang.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseAuthentication();
-            app.UsePiranhaManager();
+           // app.UsePiranhaManager();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",
