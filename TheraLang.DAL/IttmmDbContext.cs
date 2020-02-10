@@ -99,16 +99,21 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-            var AdminRoleID = (new System.Guid("936DA01F-9ABD-4d9d-80C7-02AF85C822A8"));
-            var MemberRoleId =(new System.Guid("936DA01F-9ABD-4d9d-80C7-02AF85C823B6"));
-            var GuestRoleId = (new System.Guid("936DA01F-9ABD-4d9d-80C7-02AF85C822A7"));
-            modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
-            modelBuilder.Entity<Role>().HasData(new Role { Id = MemberRoleId, Name = "Member", NormalizedName = "MEMBER" });
-            modelBuilder.Entity<Role>().HasData(new Role { Id = GuestRoleId, Name = "Guest", NormalizedName = "GUEST" });
-            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), UserName = "Admin", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = AdminRoleID });
-            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), UserName = "Member", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = MemberRoleId });
             #endregion
 
+            Seed(modelBuilder);
+        }
+
+        protected void Seed(ModelBuilder modelBuilder)
+        {
+            var AdminRoleId = new Guid("936DA01F-9ABD-4d9d-80C7-02AF85C822A8");
+            var MemberRoleId = new Guid("936DA01F-9ABD-4d9d-80C7-02AF85C823B6");
+            var GuestRoleId = new Guid("936DA01F-9ABD-4d9d-80C7-02AF8C822A7");
+            modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleId, Name = "Admin", NormalizedName = "ADMIN" });
+            modelBuilder.Entity<Role>().HasData(new Role { Id = MemberRoleId, Name = "Member", NormalizedName = "MEMBER" });
+            modelBuilder.Entity<Role>().HasData(new Role { Id = GuestRoleId, Name = "Guest", NormalizedName = "GUEST" });
+            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "Admin", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = AdminRoleId });
+            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "Member", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = MemberRoleId });
         }
     }
 }

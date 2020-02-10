@@ -43,27 +43,13 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
-            var AuthUser = await _authenticateService.GetAuthUserAsync();
-            if (AuthUser == null) return BadRequest();
-            var user = _userManager.GetUserById(AuthUser.Id);
-
-            var userId = User.Claims.GetUserId();
-            if (userId == null)
-            {
-                return BadRequest();
-            }
-
-            var user = _userManager.GetUserById(userId.Value);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            if (authUser == null) return BadRequest();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, UserId.Value);
+            await _service.AddResource(resourceDto, authUser.Id);
             return Ok();
         }
 
@@ -92,14 +78,13 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
 
-            var AuthUser = await _authenticateService.GetAuthUserAsync();
-            if (AuthUser == null) return BadRequest();
-            var user = _userManager.GetUserById(AuthUser.Id);
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            if (authUser == null) return BadRequest();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, user.Id);
+            await _service.AddResource(resourceDto, authUser.Id);
             return Ok();
         }
 

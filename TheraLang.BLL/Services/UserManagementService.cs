@@ -23,7 +23,7 @@ namespace TheraLang.BLL.Services
 
         public Task<User> GetUser(LoginModelDto loginModel)
         {
-            var user = _unitOfWork.Repository<User>().Get(u => u.UserName == loginModel.UserName && PasswordHasher.VerifyHashedPassword(u.PasswordHash, loginModel.Password));
+            var user = _unitOfWork.Repository<User>().Get(u => u.Email == loginModel.Email && PasswordHasher.VerifyHashedPassword(u.PasswordHash, loginModel.Password));
             return user;
         }
 

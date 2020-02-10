@@ -16,6 +16,8 @@ using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Piranha.Repositories;
+using Piranha.Services;
 
 namespace TheraLang.Web
 {
@@ -32,15 +34,6 @@ namespace TheraLang.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddLocalization(options =>
-            //    options.ResourcesPath = "Resources"
-            //);
-
-            //services.AddMvc()
-            //    //.AddPiranhaManagerOptions()
-            //    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-            //    .AddFluentValidation(fv => { fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; });
-
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -61,10 +54,7 @@ namespace TheraLang.Web
             services.AddPiranhaSummernote();
             //services.AddPiranhaTinyMCE();
             services.AddPiranhaApi();
-
-            services.AddPiranhaEF(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
             #endregion
@@ -95,7 +85,7 @@ namespace TheraLang.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApi api, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
@@ -107,7 +97,6 @@ namespace TheraLang.Web
             }
 
 
-            App.Init(api);
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.None;
 
@@ -131,7 +120,7 @@ namespace TheraLang.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseAuthentication();
-            app.UsePiranhaManager();
+            // app.UsePiranhaManager();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",

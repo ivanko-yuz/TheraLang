@@ -54,9 +54,6 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(projectTypeModel)} can not be null");
             }
-            var AuthUser = await _authenticateService.GetAuthUserAsync();
-            if (AuthUser == null) return BadRequest();
-            var user = _userManager.GetUserById(AuthUser.Id);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
             var projectTypeDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);

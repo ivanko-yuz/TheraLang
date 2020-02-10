@@ -8,7 +8,7 @@ namespace TheraLang.BLL.Interfaces
     public interface IUserManagementService
     {
         Task<User> GetUserById(Guid id);
-        User GetUser(LoginModelDto loginModel);
+        Task<User> GetUser(LoginModelDto loginModel);
     }
     
    

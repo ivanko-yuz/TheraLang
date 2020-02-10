@@ -83,23 +83,16 @@ namespace TheraLang.Web.Controllers
         [Route("create")]
         public async Task<IActionResult> CreateParticipant([FromBody] int projectId)
         {
-            var userId = User.Claims.GetUserId();
-            if (userId == null)
-            {
-                return BadRequest();
-            }
-
             var project = await _projectService.GetByIdAsync(projectId);
             if (project == null)
             {
                 return NotFound();
             }
 
-            var AuthUser = await _authenticateService.GetAuthUserAsync();
-            if (AuthUser == null) return BadRequest();
-            var user = _userManager.GetUserById(AuthUser.Id);
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            if (authUser == null) return BadRequest();
 
-            await _projectParticipationServiceservice.CreateRequest(user.Id, projectId);
+            await _projectParticipationServiceservice.CreateRequest(authUser.Id, projectId);
             return Ok();
         }
     }

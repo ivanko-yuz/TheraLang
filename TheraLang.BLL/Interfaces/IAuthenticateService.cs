@@ -6,7 +6,7 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IAuthenticateService
     {
-        Task<string> AuthenticateAsync(LoginModelDto request);
+        Task<string> Authenticate(User user);
         Task<AuthUser> GetAuthUserAsync();
     }
 }

@@ -32,18 +32,18 @@ namespace TheraLang.Web.Controllers
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LoginModel, LoginModelDto>()).CreateMapper();
             var loginDto = mapper.Map<LoginModel, LoginModelDto>(login);
-            var user = _userManagementService.GetUser(loginDto);
+            var user = await _userManagementService.GetUser(loginDto);
             if (user == null) return BadRequest();
-            if (_authService.IsAuthenticated(out var token, user))
+            var token = await _authService.Authenticate(user);
+            if (token == "")
             {
-                return Ok(new LoginResponse()
-                {
-                    Token = token,
-                });
+                return BadRequest("Invalid Request");
             }
 
-            return BadRequest("Invalid Request");
+            return Ok(new LoginResponse()
+            {
+                Token = token,
+            });
         }
-
     }
 }

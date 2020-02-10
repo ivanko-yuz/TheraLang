@@ -40,16 +40,13 @@ namespace TheraLang.Web.Controllers
                 return BadRequest();
             }
 
-            var AuthUser = await _authenticateService.GetAuthUserAsync();
-            if (AuthUser == null) return BadRequest();
-            var user = _userManager.GetUserById(AuthUser.Id);
-
-            var user = await _userManager.GetUserById(userId.Value);
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            if (authUser == null) return BadRequest();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
             var projectDto = mapper.Map<ProjectViewModel, ProjectDto>(projectModel);
 
-            await _projectService.AddAsync(projectDto, user.Id);
+            await _projectService.AddAsync(projectDto, authUser.Id);
             return Ok(projectDto);
         }
 
