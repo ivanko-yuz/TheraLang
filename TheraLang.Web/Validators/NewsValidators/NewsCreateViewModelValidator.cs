@@ -1,12 +1,9 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TheraLang.Web.Validators.ValidationRules;
 using TheraLang.Web.ViewModels.NewsViewModels;
 
-namespace TheraLang.Web.Validators
+namespace TheraLang.Web.NewsValidators.Validators
 {
     public class NewsCreateViewModelValidator : AbstractValidator<NewsCreateViewModel>
     {

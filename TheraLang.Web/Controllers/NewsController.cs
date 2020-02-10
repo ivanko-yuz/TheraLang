@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.Extensions;
@@ -79,7 +77,7 @@ namespace TheraLang.Web.Controllers
             var newsDto = mapper.Map<NewsCreateDto>(newsModel);
             var userId = User.Claims.GetUserId();
             newsDto.Author = await _userManagementService.GetUserById(userId.Value);
-            
+
             await _newsService.AddNews(newsDto);
             return Ok();
         }
@@ -97,7 +95,7 @@ namespace TheraLang.Web.Controllers
             {
                 await _newsService.UpdateNews(id, newsDto);
             }
-            catch(ArgumentException)
+            catch (ArgumentException)
             {
                 return NotFound();
             }

@@ -30,7 +30,6 @@ namespace TheraLang.DAL.Piranha.Configuration
 
             builder.HasMany(x => x.Resources).WithOne(i => i.User).
                 HasForeignKey(e => e.CreatedById).OnDelete(DeleteBehavior.Restrict);
-
         }
     }
 }

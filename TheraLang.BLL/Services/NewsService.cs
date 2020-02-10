@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.UnitOfWork;
 using TheraLang.DAL.Entities;
@@ -72,7 +70,7 @@ namespace TheraLang.BLL.Services
                 news.UploadedContentImages.Add(await UploadImage(image));
             }
 
-           _unitOfWork.Repository<News>().Add(news);
+            _unitOfWork.Repository<News>().Add(news);
             await _unitOfWork.SaveChangesAsync();
         }
 
@@ -145,7 +143,6 @@ namespace TheraLang.BLL.Services
             _unitOfWork.Repository<UploadedNewsContentImage>().Remove(image);
         }
 
-        //TODO: NewsContentImage service
         private async Task DeleteImageFile(string url)
         {
             //delete file from storage something like that 

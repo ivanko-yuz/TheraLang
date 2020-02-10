@@ -13,9 +13,9 @@ using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
 using TheraLang.Web.Helpers;
+using TheraLang.Web.NewsValidators.Validators;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
-using Newtonsoft.Json;
 using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web
@@ -116,22 +116,6 @@ namespace TheraLang.Web
             App.Init(api);
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.None;
-
-            // Build content types
-            //new Piranha.AttributeBuilder.PageTypeBuilder(api)
-            //    .AddType(typeof(Models.BlogArchive))
-            //    .AddType(typeof(Models.StandardPage))
-            //    .AddType(typeof(Models.TeaserPage))
-            //    .Build()
-            //    .DeleteOrphans();
-            //new Piranha.AttributeBuilder.PostTypeBuilder(api)
-            //    .AddType(typeof(Models.BlogPost))
-            //    .Build()
-            //    .DeleteOrphans();
-            //new Piranha.AttributeBuilder.SiteTypeBuilder(api)
-            //    .AddType(typeof(Models.StandardSite))
-            //    .Build()
-            //    .DeleteOrphans();
 
             // Register middleware
             app.UseStaticFiles();

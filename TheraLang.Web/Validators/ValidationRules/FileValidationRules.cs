@@ -7,7 +7,8 @@ namespace TheraLang.Web.Validators.ValidationRules
 {
     public static class FileValidationRules
     {
-        public static IRuleBuilderInitial<T,IFormFile> IsSafe<T>(this IRuleBuilder<T, IFormFile> ruleBuilder) {
+        public static IRuleBuilderInitial<T, IFormFile> IsSafe<T>(this IRuleBuilder<T, IFormFile> ruleBuilder)
+        {
 
             return ruleBuilder.Custom((file, context) =>
             {

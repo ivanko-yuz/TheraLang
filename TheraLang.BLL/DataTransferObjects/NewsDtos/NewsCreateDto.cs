@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects.NewsDtos
@@ -12,6 +10,6 @@ namespace TheraLang.BLL.DataTransferObjects.NewsDtos
         public string Text { get; set; }
         public IFormFile MainImage { get; set; }
         public ICollection<IFormFile> ContentImages { get; set; }
-        public User Author { get; set; } 
+        public User Author { get; set; }
     }
 }
