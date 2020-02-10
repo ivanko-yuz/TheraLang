@@ -1,25 +1,23 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Common.Helpers.PasswordHelper
 {
     public static class PasswordHasher
     {
-        public static byte Version => 1;
-        public static int Pbkdf2IterCount { get; } = 50000;
-        public static int Pbkdf2SubkeyLength { get; } = 256 / 8; // 256 bits
-        public static int SaltSize { get; } = 128 / 8; // 128 bits
-        public static HashAlgorithmName HashAlgorithmName { get; } = HashAlgorithmName.SHA256;
+        private static byte Version => 1;
+        private static int Pbkdf2IterCount { get; } = 50000;
+        private static int Pbkdf2SubkeyLength { get; } = 256 / 8; // 256 bits
+        private static int SaltSize { get; } = 128 / 8; // 128 bits
+        private static HashAlgorithmName HashAlgorithmName { get; } = HashAlgorithmName.SHA256;
 
         public static string HashPassword(string password)
         {
             if (password == null)
                 throw new ArgumentNullException(nameof(password));
 
-            byte[] salt;
+            byte[] salt; 
             byte[] bytes;
             using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, SaltSize, Pbkdf2IterCount, HashAlgorithmName))
             {

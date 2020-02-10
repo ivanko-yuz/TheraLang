@@ -13,16 +13,16 @@ namespace TheraLang.BLL.Interfaces
 
         Task RemoveResource(int id);
 
-        ResourceDto GetResourceById(int id);
+        Task<ResourceDto> GetResourceById(int id);
 
-        IEnumerable<ResourceCategoryDto> GetResourcesCategories(bool withAssignedResources);
+        Task<IEnumerable<ResourceCategoryDto>> GetResourcesCategories(bool withAssignedResources);
 
-        int GetResourcesCount(int categoryId);
+        Task<int> GetResourcesCount(int categoryId);
 
-        IEnumerable<ResourceDto> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
+        Task<IEnumerable<ResourceDto>> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
 
-        IEnumerable<ResourceDto> GetAllResourcesByProjectId(int projectId);
+        Task<IEnumerable<ResourceDto>> GetAllResourcesByProjectId(int projectId);
 
-        IEnumerable<ResourceDto> GetAllResources();
+        Task<IEnumerable<ResourceDto>> GetAllResources();
     }
 }

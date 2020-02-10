@@ -35,9 +35,9 @@ namespace TheraLang.DAL.Entities
 
         public Project()
         {
-            this.ProjectResources = new List<ResourceProject>();
-            this.ProjectParticipations = new List<ProjectParticipation>();
-            this.Donations = new List<Donation>();
+            ProjectResources = new List<ResourceProject>();
+            ProjectParticipations = new List<ProjectParticipation>();
+            Donations = new List<Donation>();
         }
     }
 }

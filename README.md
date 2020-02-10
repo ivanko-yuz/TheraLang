@@ -1,6 +1,6 @@
 # TheraLang
 Platform for social lang therapy projects
-
+[Website](https://theralang.azurewebsites.net/)
 
 ## Git Flow
 We are using simpliest github flow to organize our work:

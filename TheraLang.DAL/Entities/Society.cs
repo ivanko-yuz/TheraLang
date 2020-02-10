@@ -9,7 +9,7 @@ namespace TheraLang.DAL.Entities
         public virtual ICollection<Donation> Donations { get; set; }
         public Society()
         {
-            this.Donations = new List<Donation>();
+            Donations = new List<Donation>();
         }
     }
     

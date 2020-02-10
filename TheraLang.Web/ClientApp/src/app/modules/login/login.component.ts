@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  invalidLogin: boolean;
   
   constructor(
     private notificationService: NotificationService,
@@ -30,15 +29,15 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.userService.loginForm.value).subscribe(response => {
       let token = (<any>response).token;
       localStorage.setItem("jwt", token);
-      this.invalidLogin = false;
+      this.notificationService.success(this.translate
+        .instant("components.account.logged-in-successfully"));
       this.router.navigate(["/"]);
   
     }, err => {
       console.log(err);
-      this.invalidLogin = true;
+      this.notificationService.warn(this.translate
+        .instant("components.account.incorrect-login-or-password"));
     });
-      
-    
   }
 
   onClose() {

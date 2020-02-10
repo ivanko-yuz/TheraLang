@@ -9,46 +9,57 @@ namespace TheraLang.DAL.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
+        private readonly DbSet<TEntity> _dbSet;
+
         public Repository(DbSet<TEntity> dbSet)
         {
-            DbSet = dbSet;
+            _dbSet = dbSet;
         }
 
-        private DbSet<TEntity> DbSet { get; }
-
-        public IQueryable<TEntity> Get()
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> predicate = null)
         {
-            return DbSet;
+            var entity = await GetAll().Where(predicate).FirstOrDefaultAsync();
+            return entity;
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return await GetAll().Where(predicate).ToListAsync();
+        }
+
+        public IQueryable<TEntity> GetAll()
+        {
+            return _dbSet.AsQueryable();
         }
 
         public void Remove(TEntity entity)
         {
-            DbSet.Remove(entity);
+            _dbSet.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            DbSet.RemoveRange(entities);
+            _dbSet.RemoveRange(entities);
         }
 
-        public Task Add(TEntity entity)
+        public void Add(TEntity entity)
         {
-            return DbSet.AddAsync(entity);
+            _dbSet.Add(entity);
         }
 
-        public Task AddRange(IEnumerable<TEntity> entities)
+        public void AddRange(IEnumerable<TEntity> entities)
         {
-            return DbSet.AddRangeAsync(entities);
+            _dbSet.AddRange(entities);
         }
 
         public void Update(TEntity entity)
         {
-            DbSet.Update(entity);
+            _dbSet.Update(entity);
         }
 
         public void Attach(TEntity entity)
         {
-            DbSet.Attach(entity);
+            _dbSet.Attach(entity);
         }
     }
 }

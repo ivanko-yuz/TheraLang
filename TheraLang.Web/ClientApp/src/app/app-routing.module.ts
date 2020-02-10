@@ -14,8 +14,9 @@ import { LoginComponent } from "./modules/login/login.component";
 import { ErrorComponent } from "./shared/components/error/error.component";
 import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
-import { AuthGuard } from "./shared/guards/auth-guard.service";
-
+import { AuthGuard } from "./core/services/guards/auth-guard.service";
+import{AdminGuard} from "./core/services/guards/admin-guard.service";
+import { ProjectFormComponent } from './modules/main/pages/project/project-form/project-form.component';
 const routes: Routes = [
   {
     path: "",
@@ -28,11 +29,16 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: "projects/create",
+        component: ProjectFormComponent,
+        canActivate: [AuthGuard]
+      },
+      {
         path: "projects/:id",
         component: ProjectInfoComponent,
         canActivate: [AuthGuard]
       },
-      { path: "projects", component: ProjectComponent },
+      { path: "projects", component: ProjectComponent},
       { path: "donations/:projectId", component: DonationComponent },
       { path: "donations", component: DonationComponent },
       {
@@ -44,8 +50,8 @@ const routes: Routes = [
         path: "transaction/:donationId",
         component: TransactionResultComponent
       },
-      { path: "projectTypes", component: ProjectTypeComponent },
-      { path: "projectRequest", component: ProjectRequestComponent }
+      { path: "projectTypes", component: ProjectTypeComponent,canActivate: [AdminGuard] },
+      { path: "projectRequest", component: ProjectRequestComponent,canActivate: [AdminGuard] }
     ]
   },
   { path: "login", component: LoginComponent },
@@ -64,6 +70,7 @@ const routes: Routes = [
 export class AppRoutingModule {}
 
 export const routingComponents = [
+  ProjectFormComponent,
   ProjectParticipantsComponent,
   ProjectComponent,
   HomeComponent,
