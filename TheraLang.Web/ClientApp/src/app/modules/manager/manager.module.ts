@@ -19,10 +19,9 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { NotificationService } from 'src/app/core/services/notification/notification.service';
-import { PageService } from './shared/services/page.service';
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
 import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
+import { PageService } from 'src/app/core/http/manager/page.service';
 
 @NgModule({
   declarations: [

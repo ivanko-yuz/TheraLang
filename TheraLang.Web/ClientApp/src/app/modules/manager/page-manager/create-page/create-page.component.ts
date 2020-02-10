@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PageService } from 'src/app/modules/manager/shared/services/page.service';
-import { Newpage } from 'src/app/shared/models/new_page/newpage';
 import { Router } from '@angular/router';
+import { Page } from 'src/app/shared/models/page/page.model';
+import { PageService } from 'src/app/core/http/manager/page.service';
+import { NotificationService } from 'src/app/core/services/notification/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-page',
@@ -12,9 +14,13 @@ import { Router } from '@angular/router';
 export class CreatePageComponent implements OnInit {
 
   form: FormGroup;
-  page: Newpage;
+  page: Page;
 
-  constructor(private pageService: PageService, private router: Router) {
+  constructor(
+    private pageService: PageService,
+    private router: Router,
+    private notificationService: NotificationService,
+    private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -44,6 +50,20 @@ export class CreatePageComponent implements OnInit {
       menuName: this.form.value.menuName
     }
     
-    this.pageService.addPage(this.page);
+    this.pageService.addPage(this.page).subscribe(
+      async (msg: string) => {
+        msg = await this.translate
+          .get("common.created-successfully")
+          .toPromise();
+        this.notificationService.success(msg);
+        this.router.navigate(['admin', 'sitemap']);
+      },
+      async error => {
+        console.log(error);
+        this.notificationService.warn(
+          await this.translate.get("common.wth").toPromise()
+        );
+      }
+    );
   }
 }
