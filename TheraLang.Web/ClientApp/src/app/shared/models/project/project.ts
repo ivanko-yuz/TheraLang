@@ -3,6 +3,7 @@ export class Project {
   constructor(
     public id?: number,
     public name?: string,
+    public createdbyid?:any,
     public description?: string,
     public details?: string,
     public projectStart?: Date,
@@ -12,6 +13,6 @@ export class Project {
     public donationsSum?: number,
     public donationTargetSum?: number,
     public sumLeftToCollect?: number,
-    public statusId?: ProjectStatusRequest
+    public statusId?: ProjectStatusRequest,
   ) {}
 }

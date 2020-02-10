@@ -4,6 +4,7 @@ import { Project } from "../../../shared/models/project/project";
 import { HttpService } from "../http/http.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "../../services/notification/notification.service";
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: "root"
@@ -13,7 +14,8 @@ export class ProjectService {
     private fb: FormBuilder,
     private httpService: HttpService,
     private notificationService: NotificationService,
-    private translate: TranslateService
+    private translate: TranslateService, 
+    private jwtHelper: JwtHelperService
   ) {}
 
   form: FormGroup = this.fb.group({
@@ -34,7 +36,7 @@ export class ProjectService {
     projectStart: ["", Validators.required],
     projectEnd: [""],
     typeId: ["", Validators.required],
-    donationTargetSum: [""]
+    donationTargetSum: [""],
   });
 
   initializeFormGroup() {
@@ -46,7 +48,7 @@ export class ProjectService {
       projectStart: "",
       projectEnd: "",
       typeId: "",
-      donationTargetSum: ""
+      donationTargetSum: "",
     });
   }
 
@@ -64,6 +66,13 @@ export class ProjectService {
   }
 
   addProject(project: Project) {
+    let token: string = localStorage.getItem("jwt");
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      let jwtData = this.jwtHelper.decodeToken(token);
+      let userId = jwtData['Id']
+        project.createdbyid=userId;
+    }
+
     this.httpService.createProject(project).subscribe(
       async (msg: string) => {
         msg = await this.translate

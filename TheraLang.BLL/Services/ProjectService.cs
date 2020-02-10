@@ -41,10 +41,9 @@ namespace TheraLang.BLL.Services
             var projects = await _unitOfWork.Repository<Project>().GetAllAsync(i => i.StatusId == 0);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
-                    .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
+                    .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p)))
                 .CreateMapper();
             var projectsDto = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectDto>>(projects);
-
             return projectsDto;
         }
 

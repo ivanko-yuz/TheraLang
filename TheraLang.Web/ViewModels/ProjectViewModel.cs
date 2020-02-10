@@ -8,6 +8,8 @@ namespace TheraLang.Web.ViewModels
 
         public string Name { get; set; }
 
+        public Guid CreatedById { get; set; }
+
         public int TypeId { get; set; }
 
         public string Description { get; set; }

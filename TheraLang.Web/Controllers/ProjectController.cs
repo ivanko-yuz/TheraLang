@@ -34,6 +34,7 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> CreateProject([FromBody] ProjectViewModel projectModel)
         {
+          
             if (projectModel == null)
             {
                 return BadRequest();
