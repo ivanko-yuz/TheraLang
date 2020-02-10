@@ -155,7 +155,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var query = await _unitOfWork.Repository<ResourceCategory>().GetAllAsync();
+                var query = _unitOfWork.Repository<ResourceCategory>().GetAll();
                 if (withAssignedResources)
                 {
                     query = query.Where(cat => cat.Resources.Any());
