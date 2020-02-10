@@ -6,9 +6,11 @@ using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.Extensions;
+using TheraLang.Web.ViewModels;
 using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -33,10 +35,10 @@ namespace TheraLang.Web.Controllers
 
         // GET: api/news
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsDetailsDto, NewsPreviewViewModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsPreviewDto, NewsPreviewViewModel>()).CreateMapper();
 
             var newsDtos = await _newsService.GetAllNews();
 
@@ -48,6 +50,31 @@ namespace TheraLang.Web.Controllers
             var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
             return Ok(newsModels);
         }
+
+        // GET: api/news?pageNumber=2&pageSize=10
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetPage([FromQuery] PageParametersViewModel pageParametersModel)
+        {
+            var mapper = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<NewsDetailsDto, NewsPreviewViewModel>();
+                    cfg.CreateMap<PageParametersViewModel, PageParametersDto>();
+                }
+            ).CreateMapper();
+
+            var pageParametersDto = mapper.Map<PageParametersDto>(pageParametersModel);
+            var newsDtos = await _newsService.GetNewsPage(pageParametersDto);
+
+            if (!newsDtos.Any())
+            {
+                return NotFound();
+            }
+
+            var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
+            return Ok(newsModels);
+        }
+
 
         // GET: api/news/5
         [AllowAnonymous]

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 
 namespace TheraLang.BLL.Interfaces
@@ -13,6 +14,8 @@ namespace TheraLang.BLL.Interfaces
         Task RemoveNews(int id);
 
         Task<IEnumerable<NewsPreviewDto>> GetAllNews();
+
+        Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PageParametersDto pageParameters);
 
         Task<NewsDetailsDto> GetNewsById(int id);
     }

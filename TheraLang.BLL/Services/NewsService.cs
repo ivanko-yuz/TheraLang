@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
+using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.BLL.Services
 {
@@ -40,10 +41,33 @@ namespace TheraLang.BLL.Services
             return newsDtos;
         }
 
+        public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PageParametersDto pageParameters)
+        {
+            var news = await _unitOfWork.Repository<News>().GetAll()
+                    .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
+                    .Take(pageParameters.PageSize)
+                    .Include(e => e.Author)
+                    .Include(e => e.UploadedContentImages)
+                    .ToListAsync();
+
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<News, NewsPreviewDto>()
+                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => sm.Author.UserName));
+            }
+            ).CreateMapper();
+
+            var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
+
+            return newsDtos;
+        }
+
         public async Task<NewsDetailsDto> GetNewsById(int id)
         {
-            var news = await _unitOfWork.Repository<News>().GetAll().Include(e => e.Author)
-                    .Include(e => e.UploadedContentImages).SingleOrDefaultAsync(n => n.Id == id);
+            var news = await _unitOfWork.Repository<News>().GetAll()
+                    .Include(e => e.Author)
+                    .Include(e => e.UploadedContentImages)
+                    .SingleOrDefaultAsync(n => n.Id == id);
 
             var mapper = new MapperConfiguration(cfg =>
             {
@@ -90,7 +114,8 @@ namespace TheraLang.BLL.Services
 
         public async Task UpdateNews(int id, NewsEditDto newsDto)
         {
-            var newsToUpdate = await _unitOfWork.Repository<News>().GetAll().Include(e => e.UploadedContentImages)
+            var newsToUpdate = await _unitOfWork.Repository<News>().GetAll()
+                    .Include(e => e.UploadedContentImages)
                     .SingleOrDefaultAsync(n => n.Id == id);
 
             if (newsToUpdate == default)
