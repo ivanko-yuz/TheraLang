@@ -16,7 +16,8 @@ import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
 import { AuthGuard } from "./core/services/guards/auth-guard.service";
 import{AdminGuard} from "./core/services/guards/admin-guard.service";
-import { ProjectFormComponent } from './modules/main/pages/project/project-form/project-form.component';
+import { ProjectCreationComponent } from './modules/main/pages/project/project-creation/project-creation.component';
+import { ProjectEditingComponent } from './modules/main/pages/project/project-editing/project-editing.component';
 const routes: Routes = [
   {
     path: "",
@@ -30,9 +31,14 @@ const routes: Routes = [
       },
       {
         path: "projects/create",
-        component: ProjectFormComponent,
+        component: ProjectCreationComponent,
         canActivate: [AuthGuard]
       },
+      {
+      path: "projects/edit/:id",
+      component: ProjectEditingComponent,
+      canActivate: [AuthGuard]
+    },
       {
         path: "projects/:id",
         component: ProjectInfoComponent,
@@ -70,7 +76,7 @@ const routes: Routes = [
 export class AppRoutingModule {}
 
 export const routingComponents = [
-  ProjectFormComponent,
+  ProjectCreationComponent,
   ProjectParticipantsComponent,
   ProjectComponent,
   HomeComponent,

@@ -81,7 +81,6 @@ import { FooterComponent } from "./modules/main/footer/footer.component";
 import { ProjectParticipantsComponent } from "./modules/main/pages/project/project-participants/project-participants.component";
 import { CustomDatePipe } from "./shared/pipes/custom.datepipe";
 import { ResourcesTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-table/resources-table.component";
-import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
 import { ResourcesInternalTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component";
 import { GeneralResourcesTableComponent } from "./modules/main/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
 import { GeneralResourcesInnerTableComponent } from "./modules/main/pages/resource/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component";
@@ -102,6 +101,8 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { AuthGuard } from "./core/services/guards/auth-guard.service";
 import { AdminGuard } from './core/services/guards/admin-guard.service';
+import { ProjectCreationComponent } from './modules/main/pages/project/project-creation/project-creation.component';
+import { ProjectEditingComponent } from './modules/main/pages/project/project-editing/project-editing.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -124,7 +125,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResourcesTableComponent,
     ConfirmDialogComponent,
     ErrorComponent,
-    ProjectFormComponent,
+    ProjectCreationComponent,
     ResourcesInternalTableComponent,
     GeneralResourcesTableComponent,
     GeneralResourcesInnerTableComponent,
@@ -140,11 +141,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageComponent,
     MainComponent,
     CmsPagesToolbarItemComponent,
-    DaysLeftPipe
+    DaysLeftPipe,
+    ProjectEditingComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
-    ProjectFormComponent,
+    ProjectCreationComponent,
     ConfirmDialogComponent,
     LoginComponent,
     ResourceCreateComponent,

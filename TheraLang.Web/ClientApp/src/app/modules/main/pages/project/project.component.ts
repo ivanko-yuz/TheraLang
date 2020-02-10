@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpService } from "../../../../core/http/http/http.service";
 import { Project } from "../../../../shared/models/project/project";
-import { ProjectFormComponent } from "./project-form/project-form.component";
 import { ProjectService } from "../../../../core/http/project/project.service";
 import { DialogService } from "../../../../core/services/dialog/dialog.service";
 import { MatDialog, MatDialogConfig } from "@angular/material";
@@ -11,6 +10,7 @@ import { NotificationService } from "src/app/core/services/notification/notifica
 import { PercentPipe } from '@angular/common';
 import { UserService } from 'src/app/core/auth/user.service';
 import { Router } from '@angular/router';
+import { ProjectCreationComponent } from './project-creation/project-creation.component';
 
 @Component({
   selector: "app-project",
@@ -42,9 +42,8 @@ export class ProjectComponent implements OnInit {
   }
 
   onEdit(project) {
-    this.service.initializeFormGroup();
-    this.service.populateForm(project);
-    this.dialogService.openFormDialog(ProjectFormComponent);
+
+       this.router.navigate(["projects/edit/" + project.id]);
   }
 
   async onDelete(id) {
