@@ -4,11 +4,8 @@ import { Project } from "../../../../shared/models/project/project";
 import { ProjectFormComponent } from "./project-form/project-form.component";
 import { ProjectService } from "../../../../core/http/project/project.service";
 import { DialogService } from "../../../../core/services/dialog/dialog.service";
-import { MatDialog, MatDialogConfig } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
-import { AsyncScheduler } from "rxjs/internal/scheduler/AsyncScheduler";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
-import { PercentPipe } from '@angular/common';
 import { UserService } from 'src/app/core/auth/user.service';
 import { Router } from '@angular/router';
 

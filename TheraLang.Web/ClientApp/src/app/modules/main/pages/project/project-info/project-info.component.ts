@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Project } from "../../../../../shared/models/project/project";
 import { Resource } from "../../../../../shared/models/resource/resource";
 import { trigger, state, style } from "@angular/animations";
@@ -8,6 +8,9 @@ import { ProjectParticipationService } from "../../../../../core/http/project-pa
 import { ResourceService } from "../../../../../core/http/resource/resource.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
+import { DialogService } from 'src/app/core/services/dialog/dialog.service';
+import { ProjectService } from 'src/app/core/http/project/project.service';
+import { UserService } from 'src/app/core/auth/user.service';
 
 @Component({
   selector: "app-project-info",
@@ -32,6 +35,7 @@ import { NotificationService } from "src/app/core/services/notification/notifica
   ],
   providers: [HttpService, ProjectParticipationService]
 })
+
 export class ProjectInfoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
@@ -39,14 +43,19 @@ export class ProjectInfoComponent implements OnInit {
     private resourceService: ResourceService,
     private participService: ProjectParticipationService,
     private notificationService: NotificationService,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    private dialogService: DialogService,
+    private router: Router,
+    private userService: UserService,
+    public service: ProjectService
+  ) { }
 
   projectInfo: Project;
   projectId: number;
   generateOnceResourcesTable = false;
   sortedResourcesByCategory: Resource[][] = [];
   isOpen = false;
+  private arrowStyle: string;
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -66,7 +75,6 @@ export class ProjectInfoComponent implements OnInit {
         allResources
       );
     }
-    this.isOpen = !this.isOpen;
     this.generateOnceResourcesTable = true;
   }
 
@@ -87,5 +95,60 @@ export class ProjectInfoComponent implements OnInit {
         );
       }
     );
+  }
+
+  isAuthenticated() {
+    return this.userService.isAuthenticated();
+  }
+
+  isAdmin() {
+    return this.userService.isAdmin();
+  }
+
+  isOwner(){
+    return this.userService.isAuthenticated();
+  }
+  
+  getProjectProgress(project: Project) {
+    return (project.donationsSum / project.donationTargetSum);
+  }
+
+  onEdit(project) {
+    this.service.initializeFormGroup();
+    this.service.populateForm(project);
+    this.dialogService.openFormDialog(ProjectInfoComponent);
+  }
+
+  async onDelete(id) {
+    this.dialogService
+      .openConfirmDialog(
+        await this.translate.get("common.r-u-sure").toPromise()
+      )
+      .afterClosed()
+      .subscribe(async res => {
+        if (res) {
+          this.http.deleteProject(id).subscribe(result => {
+            this.router.navigate(["/projects"]);
+          });
+          this.notificationService.warn(
+            await this.translate.get("common.deleted-successfully").toPromise()
+          );
+        }
+      });
+  }
+
+  arrowOpener(){
+    if(this.arrowStyle == "rotator"){
+      this.arrowStyle = "";
+    }
+    else{
+      this.arrowStyle = "rotator";
+    }
+    this.isOpen = !this.isOpen;
+  }
+  getDetails(){
+    this.getResourcesData();
+    this.arrowOpener();
+
   }
 }
