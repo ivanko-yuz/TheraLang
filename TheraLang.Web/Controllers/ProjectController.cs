@@ -115,7 +115,7 @@ namespace TheraLang.Web.Controllers
         /// <param name="id"></param>
         /// <param name="projectModel">new version</param>
         /// <returns>edited project</returns>
-        [HttpPost("update/{id}")]
+        [HttpPut("update/{id}")]
         [Authorize]
         public async Task<IActionResult> EditProject(int id, [FromBody] ProjectViewModel projectModel)
         {

@@ -52,7 +52,7 @@ export class HttpService {
   }
 
   updateProject(project: Project) {
-    return this.http.post(this.url + "projects" +"/" +"update" +"/" + project.id, project);
+    return this.http.put(this.url + "projects" +"/" +"update" +"/" + project.id, project);
   }
 
   getAllProjectTypes() {

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace TheraLang.DAL.Entities
 {
-    public class Project :BaseEntity
+    public class Project : BaseEntity
     {
-
         public string Name { get; set; }
 
         public ProjectStatus StatusId { get; set; }
