@@ -46,13 +46,15 @@ namespace TheraLang.BLL.Services
             var news = await _unitOfWork.Repository<News>().GetAll()
                     .Include(e => e.Author)
                     .Include(e => e.UploadedContentImages)
+                    .Include(e => e.UsersThatLiked)
                     .SingleOrDefaultAsync(n => n.Id == id);
 
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsDetailsDto>()
                     .ForMember(m => m.ContentImageUrls, opt => opt.MapFrom(sm => sm.UploadedContentImages.Select(i => i.Url)))
-                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => sm.Author.UserName));
+                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => sm.Author.UserName))
+                    .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.UsersThatLiked.Count));
             }).CreateMapper();
 
             var newsDto = mapper.Map<News, NewsDetailsDto>(news);
@@ -72,6 +74,7 @@ namespace TheraLang.BLL.Services
             {
                 news.UploadedContentImages.Add(await UploadImage(image));
             }
+            //news.UsersThatLiked = new List<User>();
 
             _unitOfWork.Repository<News>().Add(news);
             await _unitOfWork.SaveChangesAsync();
@@ -129,6 +132,25 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
+        public async Task Like(int id, User user)
+        {
+            var newsToLike = await _unitOfWork.Repository<News>().GetAll()
+                .Include(e=>e.UsersThatLiked)
+                .SingleOrDefaultAsync(n => n.Id == id);
+            
+            //remove like if user already liked
+            if(newsToLike.UsersThatLiked.Contains(user))
+            {
+                newsToLike.UsersThatLiked.Remove(user);
+            }
+            else
+            {
+                newsToLike.UsersThatLiked.Add(user);
+            }
+
+            _unitOfWork.Repository<News>().Update(newsToLike);
+            await _unitOfWork.SaveChangesAsync();
+        }
 
         private async Task<UploadedNewsContentImage> UploadImage(IFormFile image)
         {

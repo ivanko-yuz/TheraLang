@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
+using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.Interfaces
 {
@@ -15,5 +16,7 @@ namespace TheraLang.BLL.Interfaces
         Task<IEnumerable<NewsPreviewDto>> GetAllNews();
 
         Task<NewsDetailsDto> GetNewsById(int id);
+
+        Task Like(int id, User user);
     }
 }
