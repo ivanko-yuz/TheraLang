@@ -12,7 +12,6 @@ using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
-using TheraLang.DAL.Entities;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
@@ -137,7 +136,7 @@ namespace TheraLang.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseAuthentication();
-           // app.UsePiranhaManager();
+            app.UsePiranhaManager();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "areaRoute",

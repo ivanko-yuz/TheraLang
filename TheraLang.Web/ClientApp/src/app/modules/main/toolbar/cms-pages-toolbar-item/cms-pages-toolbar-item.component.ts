@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SiteMapService } from '../../../../core/http/cms/site-map.service';
+import { SiteMapService } from '../../../../core/http/manager/site-map.service';
 import { ToolbarItem } from './toolbar-item';
 import { Subscription } from 'rxjs';
 
