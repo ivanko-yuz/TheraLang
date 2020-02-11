@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { SiteMapService } from "../../http/cms/site-map.service";
+import { SiteMapService } from "../../http/manager/site-map.service";
 import { Subject, Subscription } from "rxjs";
 import { CmsRoute } from "../../../modules/main/toolbar/toolbar-item/cms-route";
 import { ToolbarItem } from "../../../modules/main/toolbar/cms-pages-toolbar-item/toolbar-item";

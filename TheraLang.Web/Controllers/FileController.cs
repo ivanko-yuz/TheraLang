@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.Interfaces;
@@ -27,7 +28,10 @@ namespace TheraLang.Web.Controllers
             {
                 return BadRequest(validationRes.Errors);
             }
-            var uri = await _fileManager.SaveFile(file.File);
+
+            var extension = Path.GetExtension(file.File.FileName);
+            var fileStream = file.File.OpenReadStream();
+            var uri = await _fileManager.SaveFile(fileStream,extension);
             return Ok(new { FileUri = uri});
         }
     }
