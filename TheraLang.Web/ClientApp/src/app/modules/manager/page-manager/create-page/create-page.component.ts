@@ -29,7 +29,7 @@ export class CreatePageComponent implements OnInit {
       header: new FormControl(null, [Validators.required, Validators.maxLength(60)]),
       content: new FormControl(null, Validators.required),
       menuName: new FormControl(null, [Validators.required, Validators.maxLength(60)]),
-      slug: new FormControl(null, [Validators.required, Validators.maxLength(50)])
+      slug: new FormControl(null, [Validators.maxLength(50), Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')])
     })
   }
 

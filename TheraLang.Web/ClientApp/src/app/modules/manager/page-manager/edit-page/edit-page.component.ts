@@ -17,7 +17,8 @@ export class EditPageComponent implements OnInit {
   form = new FormGroup({
     header: new FormControl('', [Validators.required, Validators.maxLength(60)]),
     menuName: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-    content: new FormControl('', Validators.required)
+    content: new FormControl('', Validators.required),
+    slug: new FormControl(null, [Validators.maxLength(50), Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')])
   });
 
   constructor(
