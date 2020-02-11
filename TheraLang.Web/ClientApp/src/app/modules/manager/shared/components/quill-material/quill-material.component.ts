@@ -17,6 +17,11 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import Quill from 'quill';
 import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
+import ImageResize from 'quill-image-resize';
+import { ImageDrop } from 'quill-image-drop-module';
+ 
+Quill.register('modules/imageDrop', ImageDrop);
+Quill.register('modules/imageResize', ImageResize);
 
 @Component({
   selector: 'quill-material',
@@ -70,7 +75,9 @@ export class QuillMaterialComponent implements OnInit, DoCheck, OnDestroy, Contr
           [{ 'align': [] }],
           ['clean']
         ]
-      }
+      },
+      imageResize: { },
+      imageDrop: true
     },
     theme: 'snow'
   };

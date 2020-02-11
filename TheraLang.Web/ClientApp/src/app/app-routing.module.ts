@@ -68,8 +68,8 @@ const routes: Routes = [
   { path: "error", component: ErrorComponent },
   {
     path: "admin",
-    loadChildren: () => ManagerModule,
-    canActivate: [AdminGuard]
+    loadChildren: () => ManagerModule//,
+    //canActivate: [AdminGuard]
   },
   { path: "**", loadChildren: () => CmsModule }
 ];
