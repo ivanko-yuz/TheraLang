@@ -4,7 +4,9 @@ using System.Text;
 
 namespace TheraLang.DAL.Entities
 {
-    class MemberFee
+    public class MemberFee : BaseEntity
     {
+        public DateTime FeeDate { get; set; }
+        public decimal FeeAmount { get; set; }
     }
 }
