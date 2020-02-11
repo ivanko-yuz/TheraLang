@@ -92,8 +92,9 @@ export class ProjectService {
   editProject(project: Project) {
     this.httpService.updateProject(project).subscribe(
       async (msg: string) => {
-        msg = await this.translate.get("updated-successfully").toPromise();
+        msg = await this.translate.get("common.updated-successfully").toPromise();
         this.notificationService.success(msg);
+      
       },
       async error => {
         console.log(error);
