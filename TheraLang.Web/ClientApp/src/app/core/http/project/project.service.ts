@@ -36,7 +36,7 @@ export class ProjectService {
     projectStart: ["", Validators.required],
     projectEnd: [""],
     typeId: ["", Validators.required],
-    donationTargetSum: [""],
+    donationTargetSum: [""]
   });
 
   initializeFormGroup() {
@@ -48,7 +48,7 @@ export class ProjectService {
       projectStart: "",
       projectEnd: "",
       typeId: "",
-      donationTargetSum: "",
+      donationTargetSum: ""
     });
   }
 

@@ -13,6 +13,6 @@ export class Project {
     public donationsSum?: number,
     public donationTargetSum?: number,
     public sumLeftToCollect?: number,
-    public statusId?: ProjectStatusRequest,
+    public statusId?: ProjectStatusRequest
   ) {}
 }
