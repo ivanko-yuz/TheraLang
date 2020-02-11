@@ -105,6 +105,10 @@ export class ProjectInfoComponent implements OnInit {
     return this.userService.isAdmin();
   }
 
+  isMember() {
+    return this.userService.isMember();
+  }
+
   isOwner(){
     return this.userService.isAuthenticated();
   }

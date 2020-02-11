@@ -19,7 +19,7 @@
           mat-raised-button 
           class="join-button"
           color="primary"
-          *ngIf="isAdmin() || !isOwner()">
+          *ngIf="isAdmin() || isOwner()">
           {{'components.projects.join'|translate}}
         </button>
         <button mat-icon-button (click)="onEdit(projectInfo.id)"  *ngIf="isAdmin() || isOwner()">
@@ -73,7 +73,7 @@
       </button>
     </div>
  </div>
- 
+ <div *ngIf="isAdmin() || isMember()">
   <div class="details-button" (click)="getDetails()">
     <mat-icon [ngClass] = "arrowStyle" fxFlex = "1.7">keyboard_arrow_down</mat-icon>
     <span class="separator" fxFlex>{{'components.projects.details'|translate}}</span>
@@ -82,5 +82,6 @@
     <p>{{projectInfo.description}}</p>
     <app-resources-table *ngIf="generateOnceResourcesTable"[sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>
   </div>
+</div>
   </div>
 </div>

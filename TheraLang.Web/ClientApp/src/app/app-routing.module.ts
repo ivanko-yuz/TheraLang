@@ -33,11 +33,7 @@ const routes: Routes = [
         component: ProjectFormComponent,
         canActivate: [AuthGuard]
       },
-      {
-        path: "projects/:id",
-        component: ProjectInfoComponent,
-        canActivate: [AuthGuard]
-      },
+      { path: "projects/:id", component: ProjectInfoComponent},
       { path: "projects", component: ProjectComponent},
       { path: "donations/:projectId", component: DonationComponent },
       { path: "donations", component: DonationComponent },
