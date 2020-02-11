@@ -11,6 +11,7 @@ using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
+using TheraLang.DAL.Entities;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
@@ -73,6 +74,7 @@ namespace TheraLang.Web
             services.AddOpenApiDocument();
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
+            services.AddTransient<IMemberFeeService, MemberFeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -14,7 +13,6 @@ namespace TheraLang.BLL.Services
    public class MemberFeeService: IMemberFeeService
     {
         private readonly IUnitOfWork _unitOfWork;
-
         public MemberFeeService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -29,7 +27,6 @@ namespace TheraLang.BLL.Services
 
             return memberFeesDto;
         }
-
         public async Task DeleteAsync(int id)
         {
             try
@@ -61,10 +58,10 @@ namespace TheraLang.BLL.Services
                 _unitOfWork.Repository<MemberFee>().Add(memberFee);
                 await _unitOfWork.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                ex.Data[nameof(MemberFee)] = memberFeeDto;
-                throw new Exception($"Cannot add new {nameof(MemberFee)}.", ex);
+                e.Data[nameof(MemberFee)] = memberFeeDto;
+                throw new Exception($"Cannot add new {nameof(MemberFee)}.", e);
             }
         }
     }
