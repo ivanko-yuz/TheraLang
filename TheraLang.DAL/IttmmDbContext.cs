@@ -26,6 +26,7 @@ namespace TheraLang.DAL
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
+        public virtual DbSet<MemberFee> MemberFees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,6 +41,7 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new PageConfiguration());
+            modelBuilder.ApplyConfiguration(new MemberFeeConfiguratoin());
             var AdminRoleID = Guid.NewGuid();
             var MemberRoleId = Guid.NewGuid();
             modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
