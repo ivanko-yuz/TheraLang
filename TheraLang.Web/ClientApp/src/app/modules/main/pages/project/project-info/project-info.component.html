@@ -1,13 +1,3 @@
-<!-- <mat-card-title class="headerUpText">{{projectInfo.name}}</mat-card-title>
-<p class="description">{{projectInfo.description}}</p>
-<div class="bottom-buttons">
-  <button mat-raised-button class="resButton" (click)="onJoin()">{{'components.projects.join'|translate}}</button>
-  <button mat-raised-button class="resButton" (click)="getResourcesData()">{{'components.resources.title'|translate}}</button>
-</div>
-  <div>
-    <app-resources-table [@openClose]="isOpen ? 'open' : 'closed'" id="resTabId" *ngIf="generateOnceResourcesTable"
-    [sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>
-</div> -->
 <div class = "home">
   <div class = "main" fxLayout="column"> 
     <div class="main-conteiner">
@@ -28,60 +18,63 @@
         <button mat-icon-button (click)="onDelete(projectInfo.id)"  *ngIf="isAdmin() || isOwner()">
           <mat-icon>delete</mat-icon>
         </button>
+        </div>
+      </div>
+      <div class="project-text">
+        <p>{{projectInfo.description}}</p>
       </div>
     </div>
-    <div class="project-text">
-      <p>{{projectInfo.description}}</p>
-    </div>
-  </div>
 
-  <div class="actions-conteiner" fxLayout="row">
-    <div class="progress-bar-block" fxFlex="33">
-      <div class="text-content">
-        <span class="donation-sum color-accent">₴ {{ projectInfo.donationsSum }} </span>
-        <span class="rised-sum">
-          {{ "components.projects.rised-of" | translate }}
-          {{ projectInfo.donationTargetSum }}</span>
+    <div class="actions-conteiner" fxLayout="row">
+      <div class="progress-bar-block" fxFlex="33">
+        <div class="text-content">
+          <span class="donation-sum color-accent">₴ {{ projectInfo.donationsSum }} </span>
+          <span class="rised-sum">
+            {{ "components.projects.rised-of" | translate }}
+            {{ projectInfo.donationTargetSum }}</span>
+        </div>
+        <section class="progress-bar-section">
+          <mat-progress-bar
+            color="accent"
+            class="example-margin"
+            mode="determinate"
+            [value]="getProjectProgress(projectInfo) * 100">
+          </mat-progress-bar>
+        </section>
       </div>
-      <section class="progress-bar-section">
-        <mat-progress-bar
+      <div class="days-left-block" fxLayout="column" fxFlex="none">
+        <span class="days">{{ projectInfo | daysLeft }}</span>
+        <span *ngIf="(projectInfo | daysLeft) >= 0">
+          {{ "components.projects.days-left" | translate}}
+        </span>
+      </div>
+      <div
+        class="donate-button"
+        fxFlexAlign="end end"
+        fxFlex="70"
+        fxFlex.md="45" 
+        fxFlex.sm="40">
+        <button
+          class="donate"
+          mat-raised-button
           color="accent"
-          class="example-margin"
-          mode="determinate"
-          [value]="getProjectProgress(projectInfo) * 100">
-        </mat-progress-bar>
-      </section>
+          [routerLink]="['/donations', projectInfo.id]">
+          {{ "components.projects.donate" | translate }}
+        </button>
+      </div>
     </div>
-    <div class="days-left-block" fxLayout="column" fxFlex="none">
-      <span class="days">{{ projectInfo | daysLeft }}</span>
-      <span *ngIf="(projectInfo | daysLeft) >= 0">
-        {{ "components.projects.days-left" | translate}}
-      </span>
+    <div class="member-container" *ngIf="isAdmin() || isMember()">
+      <div class="details-button" (click)="getDetails()">
+        <mat-icon 
+        fxFlex = "2" 
+        [@openCloseArrow]="isOpen ? 'open' : 'closed'">keyboard_arrow_down
+      </mat-icon>
+        <span class="separator" fxFlex>{{'components.projects.details'|translate}}</span>
+      </div>
+      <div class="hiden-details" [@openCloseContent]="isOpen ? 'open' : 'closed'">
+        <p>{{projectInfo.description}}</p>
+        <app-resources-table *ngIf="generateOnceResourcesTable"[sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>
+      </div>
     </div>
-    <div
-      class="donate-button"
-      fxFlexAlign="end end"
-      fxFlex="70"
-      fxFlex.md="45" 
-      fxFlex.sm="40">
-      <button
-        class="donate"
-        mat-raised-button
-        color="accent"
-        [routerLink]="['/donations', projectInfo.id]">
-        {{ "components.projects.donate" | translate }}
-      </button>
-    </div>
- </div>
- <div *ngIf="isAdmin() || isMember()">
-  <div class="details-button" (click)="getDetails()">
-    <mat-icon [ngClass] = "arrowStyle" fxFlex = "1.7">keyboard_arrow_down</mat-icon>
-    <span class="separator" fxFlex>{{'components.projects.details'|translate}}</span>
-  </div>
-  <div class="hiden-details" [@openClose]="isOpen ? 'open' : 'closed'">
-    <p>{{projectInfo.description}}</p>
-    <app-resources-table *ngIf="generateOnceResourcesTable"[sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>
-  </div>
-</div>
   </div>
 </div>

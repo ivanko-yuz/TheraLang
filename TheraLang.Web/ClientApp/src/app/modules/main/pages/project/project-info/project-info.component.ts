@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Project } from "../../../../../shared/models/project/project";
 import { Resource } from "../../../../../shared/models/resource/resource";
-import { trigger, state, style } from "@angular/animations";
+import { trigger, state, style, transition, animate } from "@angular/animations";
 import { HttpService } from "../../../../../core/http/http/http.service";
 import { ProjectParticipationService } from "../../../../../core/http/project-participants/project-participation.service";
 import { ResourceService } from "../../../../../core/http/resource/resource.service";
@@ -18,19 +18,37 @@ import { UserService } from 'src/app/core/auth/user.service';
   styleUrls: ["./project-info.component.less"],
   encapsulation: ViewEncapsulation.None,
   animations: [
-    trigger("openClose", [
+    trigger("openCloseContent", [
       state(
         "open",
         style({
-          display: "initial"
+          opacity: 1
         })
       ),
       state(
         "closed",
         style({
-          display: "none"
+          opacity: 0
         })
-      )
+      ),
+      transition('open => closed', animate('.5s')),
+      transition('closed => open', animate('.9s'))
+    ]),
+    trigger("openCloseArrow", [
+      state(
+        "open",
+        style({
+          transform: 'rotate(-180deg)'
+        })
+      ),
+      state(
+        "closed",
+        style({
+          transform: 'rotate(0)'
+        })
+      ),
+      transition('open => closed', animate('.5s')),
+      transition('closed => open', animate('.5s'))
     ])
   ],
   providers: [HttpService, ProjectParticipationService]
