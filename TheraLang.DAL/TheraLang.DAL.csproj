@@ -11,15 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200125191024_UserMigration.cs" />
-    <Compile Remove="Migrations\20200125191024_UserMigration.Designer.cs" />
-    <Compile Remove="Migrations\20200202150231_AddNewsEntityMigration.cs" />
-    <Compile Remove="Migrations\20200202150231_AddNewsEntityMigration.Designer.cs" />
-    <Compile Remove="Migrations\20200202155337_AddNewsEntityMigration.cs" />
-    <Compile Remove="Migrations\20200202155337_AddNewsEntityMigration.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FineUploader.AspNet.Mvc" Version="1.0.0-beta2" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />

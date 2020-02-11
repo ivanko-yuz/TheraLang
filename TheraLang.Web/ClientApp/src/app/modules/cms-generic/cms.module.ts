@@ -6,9 +6,9 @@ import { PiranhaPageComponent } from "./components/piranha-page/piranha-page.com
 import { BlockComponent } from "./components/block/block.component";
 import { GalleryBlockComponent } from "./components/gallery-block/gallery-block.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { SiteMapService } from "../../core/http/cms/site-map.service";
+import { SiteMapService } from "../../core/http/manager/site-map.service";
 import { CmsRouteHelperService } from "../../core/services/cms/cms-route-helper.service";
-import { CmsPageService } from "../../core/http/cms/cms-page.service";
+import { PageService } from "../../core/http/manager/page.service";
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { CmsPageService } from "../../core/http/cms/cms-page.service";
   ],
   imports: [CommonModule, CmsRoutingModule, NgbModule],
   exports: [GalleryBlockComponent],
-  providers: [SiteMapService, CmsRouteHelperService, CmsPageService],
+  providers: [SiteMapService, CmsRouteHelperService, PageService],
   bootstrap: [GalleryBlockComponent]
 })
 export class CmsModule {}
