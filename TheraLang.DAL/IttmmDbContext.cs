@@ -106,14 +106,15 @@ namespace TheraLang.DAL
 
         protected void Seed(ModelBuilder modelBuilder)
         {
-            var AdminRoleId = new Guid("936DA01F-9ABD-4d9d-80C7-02AF85C822A8");
-            var MemberRoleId = new Guid("936DA01F-9ABD-4d9d-80C7-02AF85C823B6");
-            var GuestRoleId = new Guid("936DA01F-9ABD-4d9d-80C7-02AF8C822A7");
+            var AdminRoleId = Guid.NewGuid();
+            var MemberRoleId = Guid.NewGuid();
+            var GuestRoleId = Guid.NewGuid();
             modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleId, Name = "Admin", NormalizedName = "ADMIN" });
             modelBuilder.Entity<Role>().HasData(new Role { Id = MemberRoleId, Name = "Member", NormalizedName = "MEMBER" });
             modelBuilder.Entity<Role>().HasData(new Role { Id = GuestRoleId, Name = "Guest", NormalizedName = "GUEST" });
-            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "Admin", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = AdminRoleId });
-            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "Member", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = MemberRoleId });
+            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "admin@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = AdminRoleId });
+            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "member@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = MemberRoleId });
+            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "guest@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = GuestRoleId });
         }
     }
 }
