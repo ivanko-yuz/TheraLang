@@ -19,7 +19,6 @@ import { ProjectEditingComponent } from './modules/main/pages/project/project-ed
 import { ManagerModule } from "./modules/manager/manager.module";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
-import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
 
 const routes: Routes = [
   {
@@ -92,6 +91,7 @@ const routes: Routes = [
 export class AppRoutingModule {}
 
 export const routingComponents = [
+  ProjectEditingComponent,
   ProjectCreationComponent,
   ProjectParticipantsComponent,
   ProjectComponent,
