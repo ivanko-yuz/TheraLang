@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
+using TheraLang.Web.ExceptionHandling;
 using TheraLang.Web.Extensions;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
@@ -48,7 +50,9 @@ namespace TheraLang.Web
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(opts => opts.Filters.Add(typeof(ExceptionFilter)))
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddExceptionHandler();
 
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
@@ -104,9 +108,8 @@ namespace TheraLang.Web
                 // app.UseDeveloperExceptionPage();
                 app.UseOpenApi();
                 app.UseSwaggerUi3();
+                
             }
-            app.AddGlobalExceptionHandling();
-
             App.Init(api);
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.None;

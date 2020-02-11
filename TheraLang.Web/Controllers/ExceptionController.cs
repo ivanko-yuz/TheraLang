@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TheraLang.Web.Controllers
@@ -10,7 +11,19 @@ namespace TheraLang.Web.Controllers
         [HttpGet("nullref")]
         public IActionResult NullRef()
         {
-            throw new NullReferenceException("asdadsadsdsa");
+            throw new NullReferenceException("Useful message");
+        }
+
+        [HttpGet("argnull")]
+        public IActionResult ArgNull()
+        {
+            throw new ArgumentNullException("param","Useful message");
+        }
+
+        [HttpGet("managed")]
+        public IActionResult Managed()
+        {
+            throw new ApiException("Useful message");
         }
     }
 }
