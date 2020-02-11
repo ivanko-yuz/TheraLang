@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TheraLang.BLL.DataTransferObjects
 {
-    class MemberFeeDto
+    public class MemberFeeDto
     {
+        public int Id { get; set; }
+        public DateTime FeeDate { get; set; }
+        public decimal FeeAmount { get; set; }
     }
 }
