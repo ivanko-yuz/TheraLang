@@ -45,9 +45,9 @@ namespace TheraLang.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMemberFee([FromForm] MemberFeeViewModel memberFeeModel)
         {
-            if (memberFeeModel == null) 
+            if (memberFeeModel == null)
             {
-                throw new ArgumentException($"{nameof(memberFeeModel)} can not be null");
+                throw new ArgumentNullException($"{nameof(memberFeeModel)} can not be null");
             }
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeViewModel, MemberFeeDto>()).CreateMapper();
@@ -65,6 +65,7 @@ namespace TheraLang.Web.Controllers
             {
                 await _memberFeeService.DeleteAsync(id);
             }
+
             catch (ArgumentException)
             {
                 return NotFound();
