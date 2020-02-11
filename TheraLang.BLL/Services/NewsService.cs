@@ -24,6 +24,11 @@ namespace TheraLang.BLL.Services
             _fileService = fileService;
         }
 
+        public async Task<int> GetNewsCount()
+        {
+            return await _unitOfWork.Repository<News>().GetAll().CountAsync();
+        }
+
         public async Task<IEnumerable<NewsPreviewDto>> GetAllNews()
         {
             var news = await _unitOfWork.Repository<News>().GetAll()

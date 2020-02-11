@@ -15,6 +15,8 @@ namespace TheraLang.BLL.Interfaces
 
         Task<IEnumerable<NewsPreviewDto>> GetAllNews();
 
+        Task<int> GetNewsCount();
+
         Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PageParametersDto pageParameters);
 
         Task<NewsDetailsDto> GetNewsById(int id);

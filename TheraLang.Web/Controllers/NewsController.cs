@@ -75,6 +75,14 @@ namespace TheraLang.Web.Controllers
             return Ok(newsModels);
         }
 
+        [AllowAnonymous]
+        [HttpGet("count")]
+        public async Task<IActionResult> GetNewsCount()
+        {
+            int pageCount = await _newsService.GetNewsCount();
+            return Ok(pageCount);
+        }
+
 
         // GET: api/news/5
         [AllowAnonymous]
