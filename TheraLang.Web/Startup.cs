@@ -53,10 +53,6 @@ namespace TheraLang.Web
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
 
-            //services.AddMvc().AddJsonOptions(options => {
-            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            //});
-
             #region Piranha setup
             services.AddPiranha();
             services.AddPiranhaApplication();
@@ -95,8 +91,6 @@ namespace TheraLang.Web
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
             services.AddTransient<INewsService, NewsService>();
-            services.AddTransient<IValidator<NewsCreateViewModel>, NewsCreateViewModelValidator>();
-            services.AddTransient<IValidator<NewsEditViewModel>, NewsEditViewModelValidator>();
             #endregion
         }
 

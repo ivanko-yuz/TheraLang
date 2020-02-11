@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using TheraLang.BLL.Interfaces;
-using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.Services.File
 {
