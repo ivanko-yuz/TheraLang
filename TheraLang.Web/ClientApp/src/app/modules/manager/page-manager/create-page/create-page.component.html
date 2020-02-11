@@ -18,6 +18,19 @@
                         {{form.get('menuName').errors.maxlength.requiredLength}} characters</mat-error>
                 </mat-form-field>
             </div>
+
+            <div class="item item-3">
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Slug" formControlName="slug" id="slug" [pattern]="slugPattern">
+                    <mat-error *ngIf="hasError('slug', 'required')">Slug is required</mat-error>
+                    <mat-error *ngIf="hasError('slug', 'maxlength')">Slug should be less than
+                        {{form.get('menuName').errors.maxlength.requiredLength}} characters</mat-error>
+                </mat-form-field>
+                <div *ngIf="slug.errors.pattern">
+                    Password not valid.
+                </div> 
+            </mat-form-field>
+            </div>
         </div>
 
         <div class="editorContainer">

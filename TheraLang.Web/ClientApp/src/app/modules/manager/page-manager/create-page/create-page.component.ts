@@ -15,6 +15,7 @@ export class CreatePageComponent implements OnInit {
 
   form: FormGroup;
   page: Page;
+  slugPattern = "^[a-z0-9]+(?:-[a-z0-9]+)*$";
 
   constructor(
     private pageService: PageService,
@@ -27,7 +28,8 @@ export class CreatePageComponent implements OnInit {
     this.form = new FormGroup({
       header: new FormControl(null, [Validators.required, Validators.maxLength(60)]),
       content: new FormControl(null, Validators.required),
-      menuName: new FormControl(null, [Validators.required, Validators.maxLength(60)])
+      menuName: new FormControl(null, [Validators.required, Validators.maxLength(60)]),
+      slug: new FormControl(null, [Validators.required, Validators.maxLength(50)])
     })
   }
 
