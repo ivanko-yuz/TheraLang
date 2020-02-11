@@ -1,0 +1,54 @@
+{
+  "pages": [
+    {
+      "id": 1,
+      "menuName": null,
+      "route": "page1",
+      "parentPageId": null,
+      "changed": false,
+      "subPages": [
+        {
+          "id": 2,
+          "menuName": null,
+          "route": "page2",
+          "parentPageId": 1,
+          "changed": false,
+          "subPages": []
+        },
+        {
+          "id": 3,
+          "menuName": null,
+          "route": "page3",
+          "parentPageId": 1,
+          "changed": false,
+          "subPages": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "menuName": null,
+      "route": "page4",
+      "parentPageId": 1,
+      "changed": false,
+      "subPages": []
+    },
+    {
+      "id": 5,
+      "menuName": null,
+      "route": "page5",
+      "parentPageId": 1,
+      "changed": false,
+      "subPages": [
+        {
+          "id": 6,
+          "menuName": null,
+          "route": "page6",
+          "parentPageId": 1,
+          "changed": false,
+          "subPages": []
+        }
+      ]
+    }
+  ]
+}
