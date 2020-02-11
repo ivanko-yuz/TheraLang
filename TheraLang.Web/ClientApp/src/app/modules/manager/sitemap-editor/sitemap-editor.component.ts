@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { SiteMapService } from "src/app/core/http/cms/site-map.service";
+import { SiteMapService } from "src/app/core/http/manager/site-map.service";
 import { SiteMap } from "src/app/shared/models/site-map/site-map";
 import { ChangedSiteMap } from "src/app/shared/models/site-map/changed-site-map";
-import { CmsPageService } from "src/app/core/http/cms/cms-page.service";
+import { PageService } from "src/app/core/http/manager/page.service";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -15,7 +15,7 @@ export class SitemapEditorComponent implements OnInit {
   public siteMap: SiteMap[];
   constructor(
     private siteMapService: SiteMapService,
-    private pageService: CmsPageService,
+    private pageService: PageService,
     private notificationService: NotificationService,
     private translateService: TranslateService
   ) {}
