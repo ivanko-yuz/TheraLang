@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
+using System.IO;
 
 namespace TheraLang.BLL.Services
 {
@@ -133,10 +134,14 @@ namespace TheraLang.BLL.Services
         private async Task<UploadedNewsContentImage> UploadImage(IFormFile image)
         {
             if (image == null) throw new ArgumentNullException();
-
-            var imageUrl = await _fileService.SaveFile(image);
-            var uploadedImage = new UploadedNewsContentImage() { Url = imageUrl.ToString() };
-            return uploadedImage;
+            
+            using (var fileStream = image.OpenReadStream())
+            {
+                var imageExtension = Path.GetExtension(image.FileName);
+                var imageUrl = await _fileService.SaveFile(fileStream, imageExtension);
+                var uploadedImage = new UploadedNewsContentImage() { Url = imageUrl.ToString() };
+                return uploadedImage;
+            }
         }
 
         private void DeleteImage(UploadedNewsContentImage image)
