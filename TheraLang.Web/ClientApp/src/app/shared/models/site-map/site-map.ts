@@ -1,9 +1,10 @@
 export class SiteMap {
   pageTypeName: string;
   permalink: string;
-  title: string;
+  header: string;
   menuTitle: string;
-  id: string;
+  id: number;
   level: number;
-  items: SiteMap[];
+  subPages: SiteMap[];
+  parentId: number;
 }

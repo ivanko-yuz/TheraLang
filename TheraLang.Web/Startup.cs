@@ -13,10 +13,9 @@ using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
 using TheraLang.Web.Helpers;
-using TheraLang.Web.NewsValidators.Validators;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
-using TheraLang.Web.ViewModels.NewsViewModels;
+
 
 namespace TheraLang.Web
 {
@@ -53,10 +52,6 @@ namespace TheraLang.Web
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
 
-            //services.AddMvc().AddJsonOptions(options => {
-            //    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            //});
-
             #region Piranha setup
             services.AddPiranha();
             services.AddPiranhaApplication();
@@ -68,7 +63,7 @@ namespace TheraLang.Web
             services.AddPiranhaApi();
 
             services.AddPiranhaEF(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("piranhaDb")));
 
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
@@ -91,12 +86,15 @@ namespace TheraLang.Web
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
+            services.AddTransient<IPageService, PageService>();
+            services.AddTransient<IHtmlContentService, HtmlContentService>();
+            services.AddTransient<ISiteMapService, SiteMapService>();
+            services.AddTransient<INewsService, NewsService>();
             services.AddOpenApiDocument();
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
-            services.AddTransient<INewsService, NewsService>();
-            services.AddTransient<IValidator<NewsCreateViewModel>, NewsCreateViewModelValidator>();
-            services.AddTransient<IValidator<NewsEditViewModel>, NewsEditViewModelValidator>();
+
+
             #endregion
         }
 
@@ -116,6 +114,22 @@ namespace TheraLang.Web
             App.Init(api);
             // Configure cache level
             App.CacheLevel = Piranha.Cache.CacheLevel.None;
+
+            // Build content types
+            //new Piranha.AttributeBuilder.PageTypeBuilder(api)
+            //    .AddType(typeof(Models.BlogArchive))
+            //    .AddType(typeof(Models.StandardPage))
+            //    .AddType(typeof(Models.TeaserPage))
+            //    .Build()
+            //    .DeleteOrphans();
+            //new Piranha.AttributeBuilder.PostTypeBuilder(api)
+            //    .AddType(typeof(Models.BlogPost))
+            //    .Build()
+            //    .DeleteOrphans();
+            //new Piranha.AttributeBuilder.SiteTypeBuilder(api)
+            //    .AddType(typeof(Models.StandardSite))
+            //    .Build()
+            //    .DeleteOrphans();
 
             // Register middleware
             app.UseStaticFiles();

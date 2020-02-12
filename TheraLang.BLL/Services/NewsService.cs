@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.DataTransferObjects;
+using System.IO;
 
 namespace TheraLang.BLL.Services
 {
@@ -59,8 +60,7 @@ namespace TheraLang.BLL.Services
             {
                 cfg.CreateMap<News, NewsPreviewDto>()
                     .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => sm.Author.UserName));
-            }
-            ).CreateMapper();
+            }).CreateMapper();
 
             var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
 
@@ -106,14 +106,12 @@ namespace TheraLang.BLL.Services
         public async Task RemoveNews(int id)
         {
             var news = await _unitOfWork.Repository<News>().Get(i => i.Id == id);
-
-            if (news == default)
+            if (news == null)
             {
-                throw new ArgumentException($"News with id {id} not found!");
+                throw new ArgumentNullException($"News with id {id} not found!");
             }
 
             _unitOfWork.Repository<News>().Remove(news);
-
             await _unitOfWork.SaveChangesAsync();
         }
 
@@ -123,9 +121,9 @@ namespace TheraLang.BLL.Services
                     .Include(e => e.UploadedContentImages)
                     .SingleOrDefaultAsync(n => n.Id == id);
 
-            if (newsToUpdate == default)
+            if (newsToUpdate == null)
             {
-                throw new ArgumentException($"News with id {id} not found!");
+                throw new ArgumentNullException($"News with id {id} not found!");
             }
 
             newsToUpdate.Title = newsDto.Title;
@@ -134,7 +132,7 @@ namespace TheraLang.BLL.Services
             //update main image if need
             if (newsDto.NewMainImage != null)
             {
-                await DeleteImageFile(newsToUpdate.MainImageUrl);
+                //await DeleteImageFile(newsToUpdate.MainImageUrl);
                 newsToUpdate.MainImageUrl = (await UploadImage(newsDto.NewMainImage)).Url;
             }
 
@@ -143,7 +141,7 @@ namespace TheraLang.BLL.Services
             {
                 if (!newsDto.NotDeletedContentImageUrls.Contains(uploadedImage.Url))
                 {
-                    await DeleteImage(uploadedImage);
+                    DeleteImage(uploadedImage);
                 }
             }
 
@@ -161,22 +159,27 @@ namespace TheraLang.BLL.Services
         private async Task<UploadedNewsContentImage> UploadImage(IFormFile image)
         {
             if (image == null) throw new ArgumentNullException();
-
-            var imageUrl = await _fileService.SaveFile(image);
-            var uploadedImage = new UploadedNewsContentImage() { Url = imageUrl.ToString() };
-            return uploadedImage;
+            
+            using (var fileStream = image.OpenReadStream())
+            {
+                var imageExtension = Path.GetExtension(image.FileName);
+                var imageUrl = await _fileService.SaveFile(fileStream, imageExtension);
+                var uploadedImage = new UploadedNewsContentImage() { Url = imageUrl.ToString() };
+                return uploadedImage;
+            }
         }
 
-        private async Task DeleteImage(UploadedNewsContentImage image)
+        private void DeleteImage(UploadedNewsContentImage image)
         {
-            DeleteImageFile(image.Url);
+            //await DeleteImageFile(image.Url);
             _unitOfWork.Repository<UploadedNewsContentImage>().Remove(image);
         }
 
-        private async Task DeleteImageFile(string url)
-        {
-            //delete file from storage something like that 
-            //_fileService.DeleteFile(url);
-        }
+        //TODO
+        //private async Task DeleteImageFile(string url)
+        //{
+        //    //delete file from storage something like that 
+        //    //_fileService.DeleteFile(url);
+        //}
     }
 }

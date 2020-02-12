@@ -20,16 +20,11 @@ namespace TheraLang.Web.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
-        private readonly IValidator<NewsCreateViewModel> _newsCreateValidator;
-        private readonly IValidator<NewsEditViewModel> _newsEditValidator;
         private readonly IUserManagementService _userManagementService;
 
-        public NewsController(INewsService newsService, IValidator<NewsCreateViewModel> newsCreateValidator,
-                IValidator<NewsEditViewModel> newsEditValidator, IUserManagementService userManagementService)
+        public NewsController(INewsService newsService, IUserManagementService userManagementService)
         {
             _newsService = newsService;
-            _newsCreateValidator = newsCreateValidator;
-            _newsEditValidator = newsEditValidator;
             _userManagementService = userManagementService;
         }
 
@@ -83,7 +78,6 @@ namespace TheraLang.Web.Controllers
             return Ok(pageCount);
         }
 
-
         // GET: api/news/5
         [AllowAnonymous]
         [HttpGet("{id}", Name = "Get")]
@@ -130,7 +124,7 @@ namespace TheraLang.Web.Controllers
             {
                 await _newsService.UpdateNews(id, newsDto);
             }
-            catch (ArgumentException)
+            catch (ArgumentNullException)
             {
                 return NotFound();
             }
@@ -147,7 +141,7 @@ namespace TheraLang.Web.Controllers
             {
                 await _newsService.RemoveNews(id);
             }
-            catch (ArgumentException)
+            catch (ArgumentNullException)
             {
                 return NotFound();
             }

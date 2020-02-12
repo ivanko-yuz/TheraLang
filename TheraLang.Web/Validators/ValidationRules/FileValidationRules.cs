@@ -9,7 +9,6 @@ namespace TheraLang.Web.Validators.ValidationRules
     {
         public static IRuleBuilderInitial<T, IFormFile> IsSafe<T>(this IRuleBuilder<T, IFormFile> ruleBuilder)
         {
-
             return ruleBuilder.Custom((file, context) =>
             {
                 if (file == null) return;
@@ -24,7 +23,6 @@ namespace TheraLang.Web.Validators.ValidationRules
 
         public static IRuleBuilderInitial<T, IFormFile> IsImage<T>(this IRuleBuilder<T, IFormFile> ruleBuilder)
         {
-
             return ruleBuilder.Custom((file, context) =>
             {
                 if (file == null) return;

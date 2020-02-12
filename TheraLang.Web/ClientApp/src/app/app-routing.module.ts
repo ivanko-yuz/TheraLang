@@ -14,9 +14,11 @@ import { LoginComponent } from "./modules/login/login.component";
 import { ErrorComponent } from "./shared/components/error/error.component";
 import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
-import { AuthGuard } from "./core/services/guards/auth-guard.service";
-import{AdminGuard} from "./core/services/guards/admin-guard.service";
-import { ProjectFormComponent } from './modules/main/pages/project/project-form/project-form.component';
+import { ManagerModule } from "./modules/manager/manager.module";
+import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { AdminGuard } from "./shared/guards/admin-guard.service";
+import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
+
 const routes: Routes = [
   {
     path: "",
@@ -38,7 +40,7 @@ const routes: Routes = [
         component: ProjectInfoComponent,
         canActivate: [AuthGuard]
       },
-      { path: "projects", component: ProjectComponent},
+      { path: "projects", component: ProjectComponent },
       { path: "donations/:projectId", component: DonationComponent },
       { path: "donations", component: DonationComponent },
       {
@@ -50,12 +52,25 @@ const routes: Routes = [
         path: "transaction/:donationId",
         component: TransactionResultComponent
       },
-      { path: "projectTypes", component: ProjectTypeComponent,canActivate: [AdminGuard] },
-      { path: "projectRequest", component: ProjectRequestComponent,canActivate: [AdminGuard] }
+      {
+        path: "projectTypes",
+        component: ProjectTypeComponent,
+        canActivate: [AdminGuard]
+      },
+      {
+        path: "projectRequest",
+        component: ProjectRequestComponent,
+        canActivate: [AdminGuard]
+      }
     ]
   },
   { path: "login", component: LoginComponent },
   { path: "error", component: ErrorComponent },
+  {
+    path: "admin",
+    loadChildren: () => ManagerModule,
+    canActivate: [AdminGuard]
+  },
   { path: "**", loadChildren: () => CmsModule }
 ];
 

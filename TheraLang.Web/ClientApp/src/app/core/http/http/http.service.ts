@@ -47,10 +47,6 @@ export class HttpService {
     return this.http.get(this.url + "resources/all/" + projectId);
   }
 
-  getPiranhaPageById(pageId: string) {
-    return this.http.get(this.url + "page/" + pageId);
-  }
-
   createProject(project: Project) {
     return this.http.post(this.url + "projects" + "/" + "create", project);
   }
