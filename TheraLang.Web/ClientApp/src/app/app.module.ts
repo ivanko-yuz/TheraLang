@@ -96,12 +96,11 @@ import { ProjectTypeFormComponent } from "./modules/main/pages/project/project-t
 import { ProjectTypeCreateFormComponent } from "./modules/main/pages/project/project-type-create-form/project-type-create-form.component";
 import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
-
+import { SortablejsModule } from "ngx-sortablejs";
 import { JwtModule } from "@auth0/angular-jwt";
-
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
-import { AuthGuard } from "./core/services/guards/auth-guard.service";
-import { AdminGuard } from './core/services/guards/admin-guard.service';
+import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { AdminGuard } from "./shared/guards/admin-guard.service";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -223,7 +222,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         whitelistedDomains: ["localhost:5000"],
         blacklistedRoutes: []
       }
-    })
+    }),
+    SortablejsModule.forRoot({ animation: 400 })
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [

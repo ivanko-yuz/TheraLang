@@ -1,11 +1,9 @@
 using Common.Helpers.PasswordHelper;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
 using TheraLang.DAL.Configuration;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Piranha.Configuration;
-using TheraLang.DAL.Piranha.Entities;
 
 namespace TheraLang.DAL
 {
@@ -16,7 +14,6 @@ namespace TheraLang.DAL
             //Database.Migrate();
         }
         
-        #region UTTMM_Entities
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectType> Types { get; set; }
         public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
@@ -30,12 +27,10 @@ namespace TheraLang.DAL
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<UploadedNewsContentImage> UploadedFiles { get; set; }
-
-        #endregion
+        public virtual DbSet<Page> Pages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region UTTMM_Entities_Cfg
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectTypeConfigurationcs());
             modelBuilder.ApplyConfiguration(new ResourceCategoriesConfiguration());
@@ -48,6 +43,7 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new NewsConfiguration());
             modelBuilder.ApplyConfiguration(new UploadedNewsContentImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new PageConfiguration());
             var AdminRoleID = Guid.NewGuid();
             var MemberRoleId = Guid.NewGuid();
             modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
@@ -55,7 +51,6 @@ namespace TheraLang.DAL
             modelBuilder.Entity<Role>().HasData(new Role { Id = Guid.NewGuid(), Name = "Guest", NormalizedName = "GUEST" });
             modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), UserName = "Admin", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = AdminRoleID });
             modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), UserName = "Member", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = MemberRoleId });
-            #endregion
         }
     }
 }
