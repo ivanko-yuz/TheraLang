@@ -1,4 +1,3 @@
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,8 +14,6 @@ using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
 using TheraLang.Web.ActionFilters;
 using TheraLang.Web.Helpers;
-using TheraLang.Web.Validators;
-using TheraLang.Web.ViewModels;
 
 
 namespace TheraLang.Web
