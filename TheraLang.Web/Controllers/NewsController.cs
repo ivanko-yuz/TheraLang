@@ -49,16 +49,16 @@ namespace TheraLang.Web.Controllers
         // GET: api/news?pageNumber=2&pageSize=10
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery] PageParametersViewModel pageParametersModel)
+        public async Task<IActionResult> GetPage([FromQuery] PagingParametersViewModel pageParametersModel)
         {
             var mapper = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<NewsDetailsDto, NewsPreviewViewModel>();
-                    cfg.CreateMap<PageParametersViewModel, PageParametersDto>();
+                    cfg.CreateMap<PagingParametersViewModel, PagingParametersDto>();
                 }
             ).CreateMapper();
 
-            var pageParametersDto = mapper.Map<PageParametersDto>(pageParametersModel);
+            var pageParametersDto = mapper.Map<PagingParametersDto>(pageParametersModel);
             var newsDtos = await _newsService.GetNewsPage(pageParametersDto);
 
             if (!newsDtos.Any())

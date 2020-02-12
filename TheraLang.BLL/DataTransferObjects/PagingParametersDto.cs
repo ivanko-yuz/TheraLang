@@ -1,6 +1,6 @@
-﻿namespace TheraLang.Web.ViewModels
+﻿namespace TheraLang.BLL.DataTransferObjects
 {
-    public class PageParametersViewModel
+    public class PagingParametersDto
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }

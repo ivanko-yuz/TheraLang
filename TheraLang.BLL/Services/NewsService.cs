@@ -47,7 +47,7 @@ namespace TheraLang.BLL.Services
             return newsDtos;
         }
 
-        public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PageParametersDto pageParameters)
+        public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PagingParametersDto pageParameters)
         {
             var news = await _unitOfWork.Repository<News>().GetAll()
                     .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
