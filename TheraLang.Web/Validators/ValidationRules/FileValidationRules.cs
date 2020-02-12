@@ -7,8 +7,8 @@ namespace TheraLang.Web.Validators.ValidationRules
 {
     public static class FileValidationRules
     {
-        public static IRuleBuilderInitial<T,IFormFile> IsSafe<T>(this IRuleBuilder<T, IFormFile> ruleBuilder) {
-
+        public static IRuleBuilderInitial<T, IFormFile> IsSafe<T>(this IRuleBuilder<T, IFormFile> ruleBuilder)
+        {
             return ruleBuilder.Custom((file, context) =>
             {
                 if (file == null) return;
@@ -17,6 +17,20 @@ namespace TheraLang.Web.Validators.ValidationRules
                 if (regex.IsMatch(extension))
                 {
                     context.AddFailure($"{extension} not allowed");
+                }
+            });
+        }
+
+        public static IRuleBuilderInitial<T, IFormFile> IsImage<T>(this IRuleBuilder<T, IFormFile> ruleBuilder)
+        {
+            return ruleBuilder.Custom((file, context) =>
+            {
+                if (file == null) return;
+                var extension = Path.GetExtension(file.FileName);
+                var regex = new Regex(@"(.*\.png)|(.*\.jpg)|(.*\.jpeg)|(.*\.bmp)");
+                if (!regex.IsMatch(extension))
+                {
+                    context.AddFailure($"{extension} is not image!");
                 }
             });
         }

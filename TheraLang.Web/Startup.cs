@@ -89,7 +89,7 @@ namespace TheraLang.Web
             services.AddTransient<IPageService, PageService>();
             services.AddTransient<IHtmlContentService, HtmlContentService>();
             services.AddTransient<ISiteMapService, SiteMapService>();
-            services.AddTransient<IPageService, PageService>();
+            services.AddTransient<INewsService, NewsService>();
             services.AddOpenApiDocument();
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
