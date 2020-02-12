@@ -63,7 +63,7 @@ namespace TheraLang.Web
             services.AddPiranhaApi();
 
             services.AddPiranhaEF(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("piranhaDb")));
 
             services.AddMemoryCache();
             services.AddPiranhaMemoryCache();
@@ -86,9 +86,14 @@ namespace TheraLang.Web
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
+            services.AddTransient<IPageService, PageService>();
+            services.AddTransient<IHtmlContentService, HtmlContentService>();
+            services.AddTransient<ISiteMapService, SiteMapService>();
+            services.AddTransient<INewsService, NewsService>();
             services.AddOpenApiDocument();
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
+
 
             #endregion
         }

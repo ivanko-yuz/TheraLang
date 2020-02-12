@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,8 +45,12 @@ namespace TheraLang.BLL.Services
             {
                 if (resourceDto.File != null)
                 {
-                    var fileUri = await _fileService.SaveFile(resourceDto.File);
-                    resourceDto.Url = fileUri.ToString();
+                    using (var fileStream = resourceDto.File.OpenReadStream())
+                    {
+                        var fileExtension = Path.GetExtension(resourceDto.File.FileName);
+                        var fileUri = await _fileService.SaveFile(fileStream, fileExtension);
+                        resourceDto.Url = fileUri.ToString();
+                    }
                 }
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
@@ -73,7 +77,7 @@ namespace TheraLang.BLL.Services
                 {
                     using (var binaryReader = new BinaryReader(resourceDto.File.OpenReadStream()))
                     {
-                        var byteFile = binaryReader.ReadBytes((int) resourceDto.File.Length);
+                        var byteFile = binaryReader.ReadBytes((int)resourceDto.File.Length);
                         BitConverter.ToString(byteFile);
                     }
                 }
