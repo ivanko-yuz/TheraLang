@@ -22,6 +22,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
 import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 import { PageService } from 'src/app/core/http/manager/page.service';
+import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { PageService } from 'src/app/core/http/manager/page.service';
     MatRippleModule
   ],
   providers: [
-    PageService
+    PageService,
+    SlugifyPipe
   ]
 })
 export class ManagerModule {}
