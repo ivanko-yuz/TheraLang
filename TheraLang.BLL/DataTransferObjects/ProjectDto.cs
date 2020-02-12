@@ -10,8 +10,6 @@ namespace TheraLang.BLL.DataTransferObjects
 
         public string Name { get; set; }
 
-        public Guid CreatedById { get; set; }
-
         public ProjectStatusDto StatusId { get; set; }
 
         public string Description { get; set; }

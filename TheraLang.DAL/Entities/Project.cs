@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace TheraLang.DAL.Entities
 {
-    public class Project : BaseEntity
+    public class Project
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public ProjectStatus StatusId { get; set; }
@@ -21,8 +22,8 @@ namespace TheraLang.DAL.Entities
 
         public virtual ProjectType Type { get; set; }
 
-        public int TypeId { get; set; }   
-        
+        public int TypeId { get; set; }
+
         public decimal DonationTarget { get; set; }
 
         public virtual ICollection<ResourceProject> ProjectResources { get; set; }

@@ -3,7 +3,6 @@ export class Project {
   constructor(
     public id?: number,
     public name?: string,
-    public createdbyid?:any,
     public description?: string,
     public details?: string,
     public projectStart?: Date,
