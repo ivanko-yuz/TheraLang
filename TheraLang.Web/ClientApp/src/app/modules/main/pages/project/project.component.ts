@@ -8,6 +8,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { UserService } from 'src/app/core/auth/user.service';
 import { Router } from '@angular/router';
+import { Roles } from 'src/app/shared/models/roles/roles';
 
 @Component({
   selector: "app-project",
@@ -73,7 +74,7 @@ export class ProjectComponent implements OnInit {
   }
   isAdmin()
   {
-    return this.userService.isAdmin();
+    return this.userService.isRole(Roles.Admin);
   }
 
 }

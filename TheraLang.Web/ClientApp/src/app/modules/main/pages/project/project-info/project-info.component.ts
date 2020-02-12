@@ -12,6 +12,7 @@ import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 import { ProjectService } from 'src/app/core/http/project/project.service';
 import { UserService } from 'src/app/core/auth/user.service';
 import { ProjectFormComponent } from '../project-form/project-form.component';
+import { Roles } from 'src/app/shared/models/roles/roles';
 
 @Component({
   selector: "app-project-info",
@@ -137,11 +138,11 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   isAdmin() {
-    return this.userService.isAdmin();
+    return this.userService.isRole(Roles.Admin);
   }
 
   isMember() {
-    return this.userService.isMember();
+    return this.userService.isRole(Roles.Member);
   }
 
   isOwner(){
@@ -182,6 +183,10 @@ export class ProjectInfoComponent implements OnInit {
   getDetails(){
     this.getResourcesData();
     this.arrowOpener();
+    this.getLog();
 
+  }
+  getLog(){
+    this.userService.isRole(Roles.Admin);
   }
 }
