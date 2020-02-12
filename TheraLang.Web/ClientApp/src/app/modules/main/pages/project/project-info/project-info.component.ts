@@ -11,6 +11,7 @@ import { NotificationService } from "src/app/core/services/notification/notifica
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 import { ProjectService } from 'src/app/core/http/project/project.service';
 import { UserService } from 'src/app/core/auth/user.service';
+import { ProjectFormComponent } from '../project-form/project-form.component';
 
 @Component({
   selector: "app-project-info",
@@ -31,8 +32,24 @@ import { UserService } from 'src/app/core/auth/user.service';
           opacity: 0
         })
       ),
+      transition('open <=> closed', animate('.5s'))
+    ]),
+    trigger("openCloseDisplay", [
+      state(
+        "open",
+        style({
+          display: "initial"
+        })
+      ),
+      state(
+        "closed",
+        style({
+          display: "none"
+          
+        })
+      ),
       transition('open => closed', animate('.5s')),
-      transition('closed => open', animate('.9s'))
+      transition('closed => open', animate('.5s'))
     ]),
     trigger("openCloseArrow", [
       state(
@@ -138,7 +155,7 @@ export class ProjectInfoComponent implements OnInit {
   onEdit(project) {
     this.service.initializeFormGroup();
     this.service.populateForm(project);
-    this.dialogService.openFormDialog(ProjectInfoComponent);
+    this.dialogService.openFormDialog(ProjectFormComponent);
   }
 
   async onDelete(id) {
@@ -160,12 +177,6 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   arrowOpener(){
-    if(this.arrowStyle == "rotator"){
-      this.arrowStyle = "";
-    }
-    else{
-      this.arrowStyle = "rotator";
-    }
     this.isOpen = !this.isOpen;
   }
   getDetails(){

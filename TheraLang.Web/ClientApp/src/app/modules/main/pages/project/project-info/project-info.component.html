@@ -12,7 +12,7 @@
           *ngIf="isAdmin() || isOwner()">
           {{'components.projects.join'|translate}}
         </button>
-        <button mat-icon-button (click)="onEdit(projectInfo.id)"  *ngIf="isAdmin() || isOwner()">
+        <button mat-icon-button (click)="onEdit(projectInfo)"  *ngIf="isAdmin() || isOwner()">
           <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button (click)="onDelete(projectInfo.id)"  *ngIf="isAdmin() || isOwner()">
@@ -66,14 +66,19 @@
     <div class="member-container" *ngIf="isAdmin() || isMember()">
       <div class="details-button" (click)="getDetails()">
         <mat-icon 
+        class="animated-arrow"
         fxFlex = "2" 
         [@openCloseArrow]="isOpen ? 'open' : 'closed'">keyboard_arrow_down
       </mat-icon>
         <span class="separator" fxFlex>{{'components.projects.details'|translate}}</span>
       </div>
-      <div class="hiden-details" [@openCloseContent]="isOpen ? 'open' : 'closed'">
-        <p>{{projectInfo.description}}</p>
-        <app-resources-table *ngIf="generateOnceResourcesTable"[sortedResourcesByCategory]="sortedResourcesByCategory"></app-resources-table>
+      <div class="hiden-details"  [@openCloseContent]="isOpen ? 'open' : 'closed'" >
+        <p [@openCloseDisplay]="isOpen ? 'open' : 'closed'">{{projectInfo.details}}</p>
+        <app-resources-table 
+        *ngIf="generateOnceResourcesTable"
+        [sortedResourcesByCategory]="sortedResourcesByCategory"
+        [@openCloseDisplay]="isOpen ? 'open' : 'closed'">
+      </app-resources-table>
       </div>
     </div>
   </div>
