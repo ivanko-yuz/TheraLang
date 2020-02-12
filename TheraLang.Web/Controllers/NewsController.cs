@@ -69,8 +69,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateViewModel, NewsCreateDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsCreateDto>(newsModel);
-            var userId = User.Claims.GetUserId();
-            newsDto.Author = await _userManagementService.GetUserById(userId.Value);
+            newsDto.AuthorId = (Guid)User.Claims.GetUserId();
 
             await _newsService.AddNews(newsDto);
             return Ok();

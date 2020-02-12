@@ -17,11 +17,13 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
+        private readonly IUserManagementService _userManagementService;
 
-        public NewsService(IUnitOfWork unitOfWork, IFileService fileService)
+        public NewsService(IUnitOfWork unitOfWork, IFileService fileService, IUserManagementService userManagementService)
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
+            _userManagementService = userManagementService;
         }
 
         public async Task<IEnumerable<NewsPreviewDto>> GetAllNews()
@@ -63,7 +65,9 @@ namespace TheraLang.BLL.Services
 
         public async Task AddNews(NewsCreateDto newsDto)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()
+                    .ForMember(m=>m.CreatedById, opt=>opt.MapFrom(sm=>sm.AuthorId)))
+                    .CreateMapper();
 
             var news = mapper.Map<NewsCreateDto, News>(newsDto);
 
