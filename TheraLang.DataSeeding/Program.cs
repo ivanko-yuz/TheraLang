@@ -42,15 +42,15 @@ namespace TheraLang.DataSeeding
         private static DbContext CreateDbContext()
         {
 
-            var configurationBuilder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: true);
+            var configurationBuilder = new ConfigurationBuilder();
+                // .AddJsonFile("appsettings.json", optional: true);
 
             var configuration = configurationBuilder.Build();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            var dbContextOptionsBuilder = new DbContextOptionsBuilder()
-                .UseSqlServer(connectionString);
+            var dbContextOptionsBuilder = new DbContextOptionsBuilder();
+                // .UseSqlServer(connectionString);
             var dbContextOptions = dbContextOptionsBuilder.Options;
 
             return new IttmmDbContext(dbContextOptions);

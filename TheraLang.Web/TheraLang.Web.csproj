@@ -58,6 +58,7 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
@@ -67,21 +68,42 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.1.6" />
-    <PackageReference Include="Piranha" Version="7.1.0" />
-    <PackageReference Include="Piranha.AspNetCore" Version="7.1.0" />
-    <PackageReference Include="Piranha.AspNetCore.Identity.SQLServer" Version="7.1.0" />
-    <PackageReference Include="Piranha.AttributeBuilder" Version="7.1.0" />
-    <PackageReference Include="Piranha.Data.EF" Version="7.1.0" />
-    <PackageReference Include="Piranha.ImageSharp" Version="7.1.0-rc1" />
-    <PackageReference Include="Piranha.Local.FileStorage" Version="7.1.0" />
-    <PackageReference Include="Piranha.Manager" Version="7.1.0" />
-    <PackageReference Include="Piranha.Manager.Summernote" Version="7.1.0" />
-    <PackageReference Include="Piranha.Manager.TinyMCE" Version="7.1.0" />
-    <PackageReference Include="Piranha.WebApi" Version="7.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TheraLang.BLL\TheraLang.BLL.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\bootstrap.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-deps-dev.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-deps-dev.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-deps.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-deps.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-dev.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-dev.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.alias.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.alias.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.config.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.config.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.contentedit.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.contentedit.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.media.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.media.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.module.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.module.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.pageedit.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.pageedit.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.pagelist.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.pagelist.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.postedit.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.postedit.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.siteedit.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.siteedit.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\signalr.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\signalr.min.min.js" />
   </ItemGroup>
 </Project>

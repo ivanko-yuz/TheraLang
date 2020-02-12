@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Piranha;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
@@ -52,25 +51,6 @@ namespace TheraLang.Web
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
 
-            #region Piranha setup
-            services.AddPiranha();
-            services.AddPiranhaApplication();
-            services.AddPiranhaFileStorage();
-            services.AddPiranhaImageSharp();
-            services.AddPiranhaManager();
-            services.AddPiranhaSummernote();
-            //services.AddPiranhaTinyMCE();
-            services.AddPiranhaApi();
-
-            services.AddPiranhaEF(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("piranhaDb")));
-
-            services.AddMemoryCache();
-            services.AddPiranhaMemoryCache();
-            #endregion
-
-            #region register services via IServiceCollection
-
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
             services.AddAzureStorageClientFactory(Configuration.GetConnectionString("AzureConnection"));
@@ -93,13 +73,10 @@ namespace TheraLang.Web
             services.AddOpenApiDocument();
             services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
             services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
-
-
-            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApi api, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
@@ -109,39 +86,13 @@ namespace TheraLang.Web
                 app.UseOpenApi();
                 app.UseSwaggerUi3();
             }
-
-
-            App.Init(api);
-            // Configure cache level
-            App.CacheLevel = Piranha.Cache.CacheLevel.None;
-
-            // Build content types
-            //new Piranha.AttributeBuilder.PageTypeBuilder(api)
-            //    .AddType(typeof(Models.BlogArchive))
-            //    .AddType(typeof(Models.StandardPage))
-            //    .AddType(typeof(Models.TeaserPage))
-            //    .Build()
-            //    .DeleteOrphans();
-            //new Piranha.AttributeBuilder.PostTypeBuilder(api)
-            //    .AddType(typeof(Models.BlogPost))
-            //    .Build()
-            //    .DeleteOrphans();
-            //new Piranha.AttributeBuilder.SiteTypeBuilder(api)
-            //    .AddType(typeof(Models.StandardSite))
-            //    .Build()
-            //    .DeleteOrphans();
-
+            
             // Register middleware
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseAuthentication();
-            app.UsePiranhaManager();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(name: "areaRoute",
-                    template: "{area:exists}/{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" });
-
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");
