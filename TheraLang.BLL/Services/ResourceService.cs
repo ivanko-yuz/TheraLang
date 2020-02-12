@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using System.IO;
+using System.Linq.Expressions;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -155,13 +156,12 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var query = _unitOfWork.Repository<ResourceCategory>().GetAll();
-                if (withAssignedResources)
-                {
-                    query = query.Where(cat => cat.Resources.Any());
-                }
-
-                var resourceEntities = query.ToList();
+                var resourceEntities = await _unitOfWork.Repository<ResourceCategory>()
+                    .GetAllAsync(
+                        withAssignedResources
+                            ? cat => cat.Resources.Any()
+                            : (Expression<Func<ResourceCategory, bool>>) null
+                    );
                 var mapper = new MapperConfiguration(cfg =>
                     {
                         cfg.CreateMap<ResourceCategory, ResourceCategoryDto>(MemberList.None);
