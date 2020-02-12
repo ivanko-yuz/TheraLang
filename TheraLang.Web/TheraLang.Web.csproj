@@ -75,35 +75,4 @@
   <ItemGroup>
     <ProjectReference Include="..\TheraLang.BLL\TheraLang.BLL.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\bootstrap.js.map" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-deps-dev.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-deps-dev.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-deps.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-deps.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-dev.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha-dev.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.alias.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.alias.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.config.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.config.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.contentedit.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.contentedit.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.media.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.media.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.module.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.module.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.pageedit.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.pageedit.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.pagelist.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.pagelist.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.postedit.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.postedit.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.siteedit.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\piranha.siteedit.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\signalr.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\manager\assets\dist\js\signalr.min.min.js" />
-  </ItemGroup>
 </Project>
