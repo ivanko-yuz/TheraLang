@@ -43,7 +43,7 @@ namespace TheraLang.DataSeeding
         {
 
             var configurationBuilder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: true);
+                .AddJsonFile("appsettings.json");
 
             var configuration = configurationBuilder.Build();
 

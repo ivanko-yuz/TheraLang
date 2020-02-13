@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using Piranha.AspNetCore.Identity.Data;
 using System.Linq;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;

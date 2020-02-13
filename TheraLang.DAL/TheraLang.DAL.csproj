@@ -21,8 +21,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Piranha" Version="7.1.0" />
-    <PackageReference Include="Piranha.AspNetCore.Identity" Version="7.1.0" />
   </ItemGroup>
 
   <ItemGroup>
