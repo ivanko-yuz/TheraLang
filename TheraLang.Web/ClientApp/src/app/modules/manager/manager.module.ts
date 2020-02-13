@@ -22,6 +22,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
 import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 import { PageService } from 'src/app/core/http/manager/page.service';
+import { MemberFeeComponent } from './member-fee/member-fee.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PageService } from 'src/app/core/http/manager/page.service';
     SideBarComponent,
     PageManagerComponent,
     QuillMaterialComponent,
-    EditPageComponent
+    EditPageComponent,
+    MemberFeeComponent
   ],
   imports: [
     CommonModule,
