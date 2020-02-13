@@ -43,7 +43,7 @@ namespace TheraLang.Web.Controllers
 
         // POST: api/memberFee
         [HttpPost]
-        public async Task<IActionResult> CreateMemberFee([FromForm] MemberFeeViewModel memberFeeModel)
+        public async Task<IActionResult> CreateMemberFee([FromBody] MemberFeeViewModel memberFeeModel)
         {
             if (memberFeeModel == null)
             {
