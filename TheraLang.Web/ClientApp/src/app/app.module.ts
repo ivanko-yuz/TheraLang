@@ -100,6 +100,10 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
+import { PageComponent } from "./modules/main/pages/page/page.component";
+import { PageViewComponent } from "./shared/components/page-view/page-view.component";
+import { QuillModule } from "ngx-quill";
+import { PageService } from "./core/http/manager/page.service";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -138,6 +142,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageComponent,
     MainComponent,
     CmsPagesToolbarItemComponent,
+    PageComponent,
+    PageViewComponent,
     DaysLeftPipe
   ],
   entryComponents: [
@@ -206,6 +212,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    QuillModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -239,6 +246,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserService,
     ResourceCreateService,
     ProjectTypeHttp,
+    PageService,
     AuthGuard,
     AdminGuard
   ],

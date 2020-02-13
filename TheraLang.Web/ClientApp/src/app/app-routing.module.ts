@@ -16,6 +16,7 @@ import { GeneralResourcesComponent } from "./modules/main/pages/resource/general
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
+import { PageComponent } from "./modules/main/pages/page/page.component";
 
 const routes: Routes = [
   {
@@ -59,6 +60,10 @@ const routes: Routes = [
         path: "projectRequest",
         component: ProjectRequestComponent,
         canActivate: [AdminGuard]
+      },
+      {
+        path: "pages/:pageRoute",
+        component: PageComponent
       }
     ]
   },
