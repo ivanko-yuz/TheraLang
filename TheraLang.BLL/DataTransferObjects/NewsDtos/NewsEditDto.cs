@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 
 namespace TheraLang.BLL.DataTransferObjects.NewsDtos
@@ -11,5 +12,6 @@ namespace TheraLang.BLL.DataTransferObjects.NewsDtos
         public string UploadedMainImageUrl { get; set; }
         public ICollection<IFormFile> AddedContentImages { get; set; }
         public ICollection<string> NotDeletedContentImageUrls { get; set; }
+        public Guid EditorId { get; set; }
     }
 }

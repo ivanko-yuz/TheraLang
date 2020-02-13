@@ -11,13 +11,11 @@ import { TransactionResultComponent } from "./shared/components/transaction-resu
 import { ProjectTypeComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
 import { ProjectRequestComponent } from "./modules/main/pages/project/project-request/project-request.component";
 import { LoginComponent } from "./modules/login/login.component";
-import { ErrorComponent } from "./shared/components/error/error.component";
-import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
-import { ManagerModule } from "./modules/manager/manager.module";
+import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
-import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
 
 const routes: Routes = [
   {
@@ -65,13 +63,24 @@ const routes: Routes = [
     ]
   },
   { path: "login", component: LoginComponent },
-  { path: "error", component: ErrorComponent },
   {
     path: "admin",
-    loadChildren: () => ManagerModule,
+    loadChildren: () =>
+      import("src/app/modules/manager/manager.module").then(
+        m => m.ManagerModule
+      ),
     canActivate: [AdminGuard]
   },
-  { path: "**", loadChildren: () => CmsModule }
+  {
+    path: 'page-not-found',
+    component: NotFoundComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'page-not-found',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
@@ -91,7 +100,6 @@ export const routingComponents = [
   HomeComponent,
   ProjectInfoComponent,
   GeneralResourcesComponent,
-  ErrorComponent,
   ProjectTypeComponent,
   TransactionResultComponent,
   DonationComponent,

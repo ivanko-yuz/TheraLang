@@ -12,5 +12,6 @@ namespace TheraLang.BLL.DataTransferObjects.NewsDtos
         public ICollection<string> ContentImageUrls { get; set; }
         public string AuthorName { get; set; }
         public DateTime CreatedDateUtc { get; set; }
+        public int LikesCount { get; set; }
     }
 }
