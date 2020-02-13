@@ -17,13 +17,11 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
-        private readonly IUserManagementService _userManagementService;
 
-        public NewsService(IUnitOfWork unitOfWork, IFileService fileService, IUserManagementService userManagementService)
+        public NewsService(IUnitOfWork unitOfWork, IFileService fileService)
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
-            _userManagementService = userManagementService;
         }
 
         public async Task<IEnumerable<NewsPreviewDto>> GetAllNews()
@@ -105,6 +103,7 @@ namespace TheraLang.BLL.Services
                 throw new ArgumentNullException($"News with id {id} not found!");
             }
 
+            newsToUpdate.UpdatedById = newsDto.EditorId;
             newsToUpdate.Title = newsDto.Title;
             newsToUpdate.Text = newsDto.Text;
 

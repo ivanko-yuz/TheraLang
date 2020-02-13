@@ -83,6 +83,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsEditViewModel, NewsEditDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsEditDto>(newsModel);
+            newsDto.EditorId = (Guid)User.Claims.GetUserId();
 
             try
             {
