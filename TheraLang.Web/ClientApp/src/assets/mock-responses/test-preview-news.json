@@ -1,0 +1,26 @@
+[
+        {
+        "id": "1",
+        "title" : "Test",
+        "text" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis quo facere officia, illum illo ducimus non facilis! Harum nulla voluptatum eos libero magni animi beatae assumenda ex debitis! Quas, eos quo mollitia reprehenderit ducimus, natus officiis odit corrupti facilis voluptatibus culpa dolorem reiciendis incidunt, rerum optio ab explicabo harum porro.UHGDJHGDJHGDJHGDHJGDHJDG dgjfs sdkjf sdkf hjkdsf hjfsd hjkdfs hkjdsf hd fskjdsfhkdf",
+        "mainImageUrl" : "http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg",
+        "authorName" : "Andriy",
+        "createdDateUtc" : "2019-05-05"
+        },
+        {
+        "id": "2",
+        "title" : "Test 2",
+        "text" : "Text 2",
+        "mainImageUrl" : null,
+        "authorName" : "Robert",
+        "createdDateUtc" : "2019-05-07"
+        },
+        {
+            "id": "3",
+            "title" : "Test 3",
+            "text" : "Text 3",
+            "mainImageUrl" : null,
+            "authorName" : "Bodya",
+            "createdDateUtc" : "2019-05-08"
+        }
+    ]
