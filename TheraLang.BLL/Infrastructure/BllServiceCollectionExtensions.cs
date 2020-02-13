@@ -8,7 +8,6 @@ using TheraLang.BLL.DataTransferObjects;
 using TheraLang.DAL;
 using TheraLang.DAL.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 
 namespace TheraLang.BLL.Infrastructure
@@ -33,67 +32,6 @@ namespace TheraLang.BLL.Infrastructure
         public static IServiceCollection AddAuthentication(this IServiceCollection services,
             IConfiguration Configuration)
         {
-            services.AddAuthorization((Action<AuthorizationOptions>)(o =>
-           {
-               o.AddPolicy("PiranhaRoles", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaRoles", "PiranhaRoles");
-               }));
-               o.AddPolicy("PiranhaRolesAdd", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaRoles", "PiranhaRoles");
-                   policy.RequireClaim("PiranhaRolesAdd", "PiranhaRolesAdd");
-               }));
-               o.AddPolicy("PiranhaRolesDelete", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaRoles", "PiranhaRoles");
-                   policy.RequireClaim("PiranhaRolesDelete", "PiranhaRolesDelete");
-               }));
-               o.AddPolicy("PiranhaRolesEdit", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaRoles", "PiranhaRoles");
-                   policy.RequireClaim("PiranhaRolesEdit", "PiranhaRolesEdit");
-               }));
-               o.AddPolicy("PiranhaRolesSave", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaRoles", "PiranhaRoles");
-                   policy.RequireClaim("PiranhaRolesSave", "PiranhaRolesSave");
-               }));
-               o.AddPolicy("PiranhaUsers", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaUsers", "PiranhaUsers");
-               }));
-               o.AddPolicy("PiranhaUsersAdd", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaUsers", "PiranhaUsers");
-                   policy.RequireClaim("PiranhaUsersAdd", "PiranhaUsersAdd");
-               }));
-               o.AddPolicy("PiranhaUsersDelete", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaUsers", "PiranhaUsers");
-                   policy.RequireClaim("PiranhaUsersDelete", "PiranhaUsersDelete");
-               }));
-               o.AddPolicy("PiranhaUsersEdit", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaUsers", "PiranhaUsers");
-                   policy.RequireClaim("PiranhaUsersEdit", "PiranhaUsersEdit");
-               }));
-               o.AddPolicy("PiranhaUsersSave", (Action<AuthorizationPolicyBuilder>)(policy =>
-               {
-                   policy.RequireClaim("PiranhaAdmin", "PiranhaAdmin");
-                   policy.RequireClaim("PiranhaUsers", "PiranhaUsers");
-                   policy.RequireClaim("PiranhaUsersSave", "PiranhaUsersSave");
-               }));
-           }));
             services.Configure<TokenManagement>(Configuration.GetSection("tokenManagement"));
             var token = Configuration.GetSection("tokenManagement").Get<TokenManagement>();
             var secret = Encoding.ASCII.GetBytes(token.Secret);
