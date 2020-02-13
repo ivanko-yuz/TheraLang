@@ -31,7 +31,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsDetailsDto, NewsPreviewViewModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsPreviewDto, NewsPreviewViewModel>()).CreateMapper();
 
             var newsDtos = await _newsService.GetAllNews();
             if (!newsDtos.Any())
@@ -94,6 +94,17 @@ namespace TheraLang.Web.Controllers
                 return NotFound();
             }
 
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPut("like/{id}")]
+        public async Task<IActionResult> Like(int id)
+        {
+            var userId = User.Claims.GetUserId();
+            var user = await _userManagementService.GetUserById(userId.Value);
+           
+            await _newsService.Like(id, user);
             return Ok();
         }
 
