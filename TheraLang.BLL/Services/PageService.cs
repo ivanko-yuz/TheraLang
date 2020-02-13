@@ -112,6 +112,7 @@ namespace TheraLang.BLL.Services
                 page.Header = pageDto.Header;
                 page.MenuName = pageDto.MenuName;
                 page.Content = pageDto.Content.ToString();
+                page.Route = pageDto.Route;
                 
                 _unitOfWork.Repository<Page>().Update(page);
                 await _unitOfWork.SaveChangesAsync();
