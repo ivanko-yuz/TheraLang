@@ -6,4 +6,5 @@ export class NewsDetails {
     contentImageUrls: string[]
     authorName: string
     createdDateUtc : Date
+    likesCount: number
 }

@@ -12,11 +12,11 @@ export class NewsService {
   private url = baseUrl;
 
   getAllNews(){
-    return this.http.get(/*this.url+"news"*/'assets/mock-responses/test-preview-news.json');
+    return this.http.get(this.url+"news/all");
   }
 
   getNewsById(id: number){
-    return this.http.get(/*this.url+"news/"+id*/'assets/mock-responses/test-news-details.json')
+    return this.http.get(this.url+"news/"+id);
   }
 
   

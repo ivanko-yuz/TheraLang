@@ -62,7 +62,7 @@ const routes: Routes = [
         path: "projectRequest",
         component: ProjectRequestComponent,
         canActivate: [AdminGuard]
-      }
+      },
       { path: "news", component: NewsPageComponent},
       { path: "news/create", component: NewsCreateComponent},
       { path: "news/details/:newsId", component: NewsDetailsComponent} //bind to id

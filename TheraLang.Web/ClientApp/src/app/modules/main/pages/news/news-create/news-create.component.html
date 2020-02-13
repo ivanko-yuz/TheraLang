@@ -1,0 +1,50 @@
+<mat-card class="form mat-elevation-z5" appCardStyle>
+    <h2 mat-dialog-title>
+        <span>{{'components.news.NEWS-CREATION' |translate}}</span>
+    </h2>
+
+    <form> 
+        <mat-dialog-content>
+            <div fxLayout="column">
+                <mat-form-field>
+                    <input formControlName="title" autofocus required matInput
+                        [placeholder]="'components.news.news-title'|translate">
+                    <!-- <mat-error *ngIf="service.form.controls['title'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+            <mat-error *ngIf="service.form.controls['title'].errors?.minlength">{{'common.validation.line-too-short'|translate}}</mat-error>
+            <mat-error *ngIf="service.form.controls['title'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error> -->
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea formControlName="text" matTextareaAutosize matInput autofocus required
+                        [placeholder]="'components.news.news-text'|translate"></textarea>
+                    <!-- <mat-error *ngIf="service.form.controls['text'].errors?.maxlength">
+                        {{'common.validation.line-too-long'|translate}}</mat-error> -->
+                </mat-form-field>
+                <mat-form-field>
+                    <ngx-mat-file-input formControlName="file"
+                        [valuePlaceholder]="'components.resources.add' | translate" multiple="true">
+                    </ngx-mat-file-input>
+                    <mat-icon matSuffix>folder</mat-icon>
+                </mat-form-field>
+            
+        <!-- <mat-dialog-actions>
+          <button mat-raised-button color="primary" type="submit" [disabled]="this.service.form.invalid"
+            (click)='onSubmit()'>{{'common.validation.confirm'|translate}}</button>
+          <button mat-raised-button color="warn" type="reset" (click)="onClose()">{{'common.validation.cancel'|translate}}</button>
+        </mat-dialog-actions> -->
+        <mat-dialog-actions fxLayout="row" fxFlexAlign="end"> 
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              (click)="onSubmit()"
+            >
+              {{ "common.confirm" | translate }}
+            </button>
+                <button mat-raised-button color="warn" type="reset" [routerLink]="['/news']">
+                {{ "common.cancel" | translate }}
+                </button>
+        </mat-dialog-actions>
+        </div>
+    </mat-dialog-content>
+    </form>
+</mat-card>
