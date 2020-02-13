@@ -13,7 +13,6 @@ using TheraLang.BLL.Services.File;
 using TheraLang.Web.ActionFilters;
 using TheraLang.Web.Helpers;
 
-
 namespace TheraLang.Web
 {
     public class Startup
@@ -61,6 +60,11 @@ namespace TheraLang.Web
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
+            services.AddTransient<IPageService, PageService>();
+            services.AddTransient<IHtmlContentService, HtmlContentService>();
+            services.AddTransient<ISiteMapService, SiteMapService>();
+            services.AddTransient<INewsService, NewsService>();
+
             services.AddOpenApiDocument();
         }
 
