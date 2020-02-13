@@ -13,7 +13,6 @@ import { ProjectRequestComponent } from "./modules/main/pages/project/project-re
 import { LoginComponent } from "./modules/login/login.component";
 import { ErrorComponent } from "./shared/components/error/error.component";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
-import { ManagerModule } from "./modules/manager/manager.module";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
@@ -67,7 +66,10 @@ const routes: Routes = [
   { path: "error", component: ErrorComponent },
   {
     path: "admin",
-    loadChildren: () => ManagerModule,
+    loadChildren: () =>
+      import("src/app/modules/manager/manager.module").then(
+        m => m.ManagerModule
+      ),
     canActivate: [AdminGuard]
   }
 ];
