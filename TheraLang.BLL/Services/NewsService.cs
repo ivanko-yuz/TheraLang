@@ -90,7 +90,9 @@ namespace TheraLang.BLL.Services
 
         public async Task AddNews(NewsCreateDto newsDto)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()
+                    .ForMember(m=>m.CreatedById, opt=>opt.MapFrom(sm=>sm.AuthorId)))
+                    .CreateMapper();
 
             var news = mapper.Map<NewsCreateDto, News>(newsDto);
 
@@ -128,6 +130,7 @@ namespace TheraLang.BLL.Services
                 throw new ArgumentNullException($"News with id {id} not found!");
             }
 
+            newsToUpdate.UpdatedById = newsDto.EditorId;
             newsToUpdate.Title = newsDto.Title;
             newsToUpdate.Text = newsDto.Text;
 
