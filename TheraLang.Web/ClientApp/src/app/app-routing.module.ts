@@ -66,6 +66,11 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent },
   {
+    path: "admin",
+    loadChildren: () => ManagerModule,
+    canActivate: [AdminGuard]
+  },
+  {
     path: 'page-not-found',
     component: NotFoundComponent,
     pathMatch: 'full'
@@ -75,12 +80,6 @@ const routes: Routes = [
     redirectTo: 'page-not-found',
     pathMatch: 'full'
   },
-  {
-    path: "admin",
-    loadChildren: () => ManagerModule,
-    canActivate: [AdminGuard]
-  },
-  { path: "**", loadChildren: () => CmsModule }
 ];
 
 @NgModule({
