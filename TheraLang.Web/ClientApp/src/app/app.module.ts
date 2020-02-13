@@ -103,6 +103,9 @@ import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
 import { NewsCardComponent } from './modules/main/pages/news/news-card/news-card.component';
+import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-create.component';
+import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -143,7 +146,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CmsPagesToolbarItemComponent,
     DaysLeftPipe,
     NewsPageComponent,
-    NewsCardComponent
+    NewsCardComponent,
+    NewsCreateComponent,
+    NewsDetailsComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -226,7 +231,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         whitelistedDomains: ["localhost:5000"],
         blacklistedRoutes: []
       }
-    })
+    }),
+    NgImageSliderModule
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [

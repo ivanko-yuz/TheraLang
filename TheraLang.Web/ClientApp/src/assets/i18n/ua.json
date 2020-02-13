@@ -51,7 +51,13 @@
       "title": "CMS Pages"
     },
     "news" : {
-      "title" : "Новини"
+      "title" : "Новини",
+      "create": "Створити новину",
+      "news-title": "Заголовок",
+      "news-text": "Текст",
+      "NEWS-CREATION": "СТВОРЕННЯ НОВИНИ",
+      "NEWS-EDITING": "РЕДАГУВАННЯ НОВИНИ",
+      "read-more": "більше..."
     },
     "projects": {
       "title": "Проекти",

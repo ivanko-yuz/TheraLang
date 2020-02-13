@@ -1,0 +1,53 @@
+<!-- <mat-card class="home-card mat-elevation-z5" appCardStyle>
+    <mat-card-content class="home-card-content" fxLayout="column" fxLayout.md="column" fxLayout.sm="column">
+        <div class="main-container" fxLayout="column">
+            <div class="content-container" fxLayout="column" fxFlex="85">
+                <div class="text-container" fxLayout="column" fxFlex="95" fxFlex.md="85" fxFlex.sm="80">
+                    <mat-card-title>
+                        {{this.newsDetails.title}}
+                    </mat-card-title>
+                    <div class="news-description" fxFlex="100">
+                        {{this.newsDetails.text}}                   
+                    </div>
+                </div>
+                <div class="immage-container" fxLayout="column" fxFlex="85">
+                    <img mat-card-image 
+                    src="{{this.newsDetails.mainImageUrl}}"                
+                    alt="" />
+                </div>
+            </div> 
+        </div>
+    </mat-card-content>
+</mat-card> -->
+
+<mat-card class="home-card  mat-elevation-z5">
+    <mat-card-content fxLayout="column">
+        <div fxLayout="row">
+            <div fxFlex>
+                <h1>{{this.newsDetails.title}}</h1>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end">
+                <button mat-icon-button (click)="onEdit(project)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onDelete(project.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="author-container">
+            <h6 fxLayoutAlign="start">{{this.newsDetails.authorName}}  {{this.newsDetails.createdDateUtc}}</h6>
+        </div>
+        <div fxLayout="column" fxLayoutAlign=" center">
+            <img mat-card-image class="prewiew-image"
+            src="{{this.newsDetails.mainImageUrl}}"                
+            alt="" />
+        </div>
+        <div class="text-container">
+            <span class="text-content">{{this.newsDetails.text}}</span>
+        </div>
+        <div *ngIf="contentImages.length > 0" class="slider">
+            <ng-image-slider [images]="contentImages" #nav></ng-image-slider>
+        </div>
+    </mat-card-content>
+</mat-card>

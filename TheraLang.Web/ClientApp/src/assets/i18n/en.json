@@ -51,7 +51,13 @@
       "title": "CMS Pages"
     },
     "news" : {
-      "title" : "News"
+      "title" : "News",
+      "create": "Create news",
+      "news-title": "Title",
+      "news-text": "Text",
+      "NEWS-CREATION": "NEWS-CREATION",
+      "NEWS-EDITING": "NEWS-EDITING",
+      "read-more": "read more..."
     },
     "projects": {
       "title": "Projects",

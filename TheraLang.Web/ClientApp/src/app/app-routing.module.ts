@@ -16,6 +16,8 @@ import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
+import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-create.component';
+import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
 
 const routes: Routes = [
   {
@@ -47,7 +49,9 @@ const routes: Routes = [
       },
       { path: "projectTypes", component: ProjectTypeComponent },
       { path: "projectRequest", component: ProjectRequestComponent },
-      { path: "news", component: NewsPageComponent}
+      { path: "news", component: NewsPageComponent},
+      { path: "news/create", component: NewsCreateComponent},
+      { path: "news/details/:newsId", component: NewsDetailsComponent} //bind to id
     ]
   },
   { path: "login", component: LoginComponent },
