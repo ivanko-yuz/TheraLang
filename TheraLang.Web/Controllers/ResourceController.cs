@@ -3,7 +3,6 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using TheraLang.Web.ViewModels;
-using Piranha.AspNetCore.Identity.Data;
 using FluentValidation;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.Constants;
@@ -39,19 +38,28 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> PostResource([FromForm] ResourceViewModel resourceModel)
         {
             var validationResult = _validator.Validate(resourceModel);
-
             if (!validationResult.IsValid)
             {
                 throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+
+            var userId = User.Claims.GetUserId();
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
+            var user = _userManager.GetUserById(userId.Value);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, UserId.Value);
+            await _service.AddResource(resourceDto, userId.Value);
             return Ok();
         }
 
@@ -66,7 +74,6 @@ namespace TheraLang.Web.Controllers
         [Route("update/{id}")]
         public async Task<IActionResult> PutResource(int id, [FromBody] ResourceViewModel resourceModel)
         {
-
             var resource = _service.GetResourceById(id);
 
             if (resource == null)
@@ -100,13 +107,14 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         [Route("get/{Id}")]
         [Authorize]
-        public IActionResult GetResource(int id)
+        public async Task<IActionResult> GetResource(int id)
         {
             if (id == default)
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-            var resource = _service.GetResourceById(id);
+
+            var resource = await _service.GetResourceById(id);
             return Ok(resource);
         }
 
@@ -124,6 +132,7 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
+
             await _service.RemoveResource(id);
             return Ok();
         }
@@ -136,9 +145,9 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         [Route("categories/{withAssignedResources}")]
         [Authorize]
-        public IActionResult GetResourcesCategories(bool withAssignedResources)
+        public async Task<IActionResult> GetResourcesCategories(bool withAssignedResources)
         {
-            var categories = _service.GetResourcesCategories(withAssignedResources);
+            var categories = await _service.GetResourcesCategories(withAssignedResources);
             return Ok(categories);
         }
 
@@ -147,9 +156,9 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <returns>array of resources</returns>
         [HttpGet]
-        public IActionResult GetAllResources()
+        public async Task<IActionResult> GetAllResources()
         {
-            var resources = _service.GetAllResources();
+            var resources = await _service.GetAllResources();
             return Ok(resources);
         }
 
@@ -161,13 +170,14 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         [Route("count/{categoryId}")]
         [Authorize]
-        public IActionResult CountResourcesByCategoryId(int categoryId)
+        public async Task<IActionResult> CountResourcesByCategoryId(int categoryId)
         {
             if (categoryId == default)
             {
                 throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
             }
-            int count = _service.GetResourcesCount(categoryId);
+
+            var count = await _service.GetResourcesCount(categoryId);
             return Ok(count);
         }
 
@@ -181,7 +191,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         [Route("all/{categoryId}/{pageNumber}/{recordsPerPage?}")]
         [Authorize]
-        public IActionResult GetAllResourcesByCategoryId(int categoryId, int pageNumber,
+        public async Task<IActionResult> GetAllResourcesByCategoryId(int categoryId, int pageNumber,
             int recordsPerPage = PaginationConstants.RecordsPerPage)
         {
             if (pageNumber == default)
@@ -194,7 +204,7 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
             }
 
-            var resources = _service.GetResourcesByCategoryId(categoryId, pageNumber, recordsPerPage);
+            var resources = await _service.GetResourcesByCategoryId(categoryId, pageNumber, recordsPerPage);
             return Ok(resources);
         }
 
@@ -206,14 +216,14 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         [Route("all/{projectId}")]
         [Authorize]
-        public IActionResult GetAllResourcesByProjectId(int projectId)
+        public async Task<IActionResult> GetAllResourcesByProjectId(int projectId)
         {
             if (projectId == default)
             {
                 throw new ArgumentException($"{nameof(projectId)} cannot be 0");
             }
 
-            var resources = _service.GetAllResourcesByProjectId(projectId);
+            var resources = await _service.GetAllResourcesByProjectId(projectId);
             return Ok(resources);
         }
     }

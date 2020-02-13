@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using Piranha.AspNetCore.Identity.Data;
 using System.Linq;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
@@ -18,7 +16,8 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ParticipationController : ControllerBase
     {
-        public ParticipationController(IProjectParticipationService projectParticipationServiceservice, IUserManagementService userManager, IProjectService projectService)
+        public ParticipationController(IProjectParticipationService projectParticipationServiceservice, IUserManagementService userManager,
+            IProjectService projectService)
         {
             _projectParticipationServiceservice = projectParticipationServiceservice;
             _userManager = userManager;
@@ -38,7 +37,7 @@ namespace TheraLang.Web.Controllers
         [HttpPut]
         [Route("{participantId}")]
         [Authorize]
-        public async Task<IActionResult> ChangeStatus(int participantId, [FromBody]ProjectParticipationStatusViewModel status)
+        public async Task<IActionResult> ChangeStatus(int participantId, [FromBody] ProjectParticipationStatusViewModel status)
         {
             if (participantId == default)
             {
@@ -48,7 +47,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationStatusViewModel, ProjectParticipationStatusDto>()).CreateMapper();
             var statusDto = mapper.Map<ProjectParticipationStatusViewModel, ProjectParticipationStatusDto>(status);
 
-            await _projectParticipationServiceservice.ChangeStatusAsync(participantId, statusDto);
+            await _projectParticipationServiceservice.ChangeStatus(participantId, statusDto);
             return Ok();
         }
 
@@ -58,9 +57,9 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of ProjectParticipants</returns>
         [HttpGet]
         [Authorize]
-        public ActionResult<IEnumerable<ParticipantViewModel>> Get()
+        public async Task<ActionResult<IEnumerable<ParticipantViewModel>>> Get()
         {
-            var members = _projectParticipationServiceservice.GetAll().ToList();
+            var members = (await _projectParticipationServiceservice.GetAll()).ToList();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationDto, ParticipantViewModel>()
                 .ForMember(m => m.Id, opt => opt.MapFrom(m => m.User.Id))
@@ -81,18 +80,21 @@ namespace TheraLang.Web.Controllers
         [HttpPost]
         [Authorize]
         [Route("create")]
-        public async Task<IActionResult> CreateParticipant([FromBody]int projectId)
+        public async Task<IActionResult> CreateParticipant([FromBody] int projectId)
         {
-            var project = _projectService.GetById(projectId);
+            var userId = User.Claims.GetUserId();
+            if (userId == null)
+            {
+                return BadRequest();
+            }
 
+            var project = await _projectService.GetByIdAsync(projectId);
             if (project == null)
             {
                 return NotFound();
             }
 
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            var user = await _userManager.GetUserById(userId.Value);
 
             await _projectParticipationServiceservice.CreateRequest(user.Id, projectId);
             return Ok();

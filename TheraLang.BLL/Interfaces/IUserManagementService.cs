@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.Interfaces
 {
     public interface IUserManagementService
     {
-        User GetUser(string username, string password);
-        User GetUserById (Guid id);
+        Task<User> GetUser(string userName, string password);
+        Task<User> GetUserById(Guid id);
     }
     
    

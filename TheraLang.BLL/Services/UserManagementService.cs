@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using Common.Helpers.PasswordHelper;
+﻿using Common.Helpers.PasswordHelper;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
@@ -19,23 +16,26 @@ namespace TheraLang.BLL.Services
         {
             _unitOfWork = unitOfWork;
         }
-        public User GetUser(string userName, string password)
-        {
 
-            var user = _unitOfWork.Repository<User>().Get().Include(x => x.Role).FirstOrDefault(u => u.UserName == userName && PasswordHasher.VerifyHashedPassword(u.PasswordHash, password));
+        public async Task<User> GetUser(string userName, string password)
+        {
+            var user = await _unitOfWork.Repository<User>().GetAll()
+                    .Include(x => x.Role)
+                .FirstOrDefaultAsync(u => u.UserName == userName && PasswordHasher.VerifyHashedPassword(u.PasswordHash, password));
+            
             return user;
         }
 
-        public User GetUserById(Guid id)
+        public async Task<User> GetUserById(Guid id)
         {
             try
             {
-                User user = _unitOfWork.Repository<User>().Get().FirstOrDefault(u => u.Id == id);
+                var user = await _unitOfWork.Repository<User>().Get(u => u.Id == id);
                 return user;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error when getting project by {nameof(id)} = {id}: ", ex);
+                throw new Exception($"Cannot get project with {nameof(id)}: {id}.", ex);
             }
         }
     }

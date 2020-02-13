@@ -12,12 +12,13 @@ import { ProjectTypeComponent } from "./modules/main/pages/project/project-info/
 import { ProjectRequestComponent } from "./modules/main/pages/project/project-request/project-request.component";
 import { LoginComponent } from "./modules/login/login.component";
 import { ErrorComponent } from "./shared/components/error/error.component";
-import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
 import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-create.component';
 import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
+import { AdminGuard } from "./shared/guards/admin-guard.service";
+import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
       {
         path: "participants",
         component: ProjectParticipantsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "projects/create",
+        component: ProjectFormComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -47,8 +53,16 @@ const routes: Routes = [
         path: "transaction/:donationId",
         component: TransactionResultComponent
       },
-      { path: "projectTypes", component: ProjectTypeComponent },
-      { path: "projectRequest", component: ProjectRequestComponent },
+      {
+        path: "projectTypes",
+        component: ProjectTypeComponent,
+        canActivate: [AdminGuard]
+      },
+      {
+        path: "projectRequest",
+        component: ProjectRequestComponent,
+        canActivate: [AdminGuard]
+      }
       { path: "news", component: NewsPageComponent},
       { path: "news/create", component: NewsCreateComponent},
       { path: "news/details/:newsId", component: NewsDetailsComponent} //bind to id
@@ -56,7 +70,14 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent },
   { path: "error", component: ErrorComponent },
-  { path: "**", loadChildren: () => CmsModule }
+  {
+    path: "admin",
+    loadChildren: () =>
+      import("src/app/modules/manager/manager.module").then(
+        m => m.ManagerModule
+      ),
+    canActivate: [AdminGuard]
+  }
 ];
 
 @NgModule({
@@ -70,6 +91,7 @@ const routes: Routes = [
 export class AppRoutingModule {}
 
 export const routingComponents = [
+  ProjectFormComponent,
   ProjectParticipantsComponent,
   ProjectComponent,
   HomeComponent,

@@ -23,6 +23,6 @@ export class ProfileMenuComponent implements OnInit {
 
   onLogout() {
     this.userService.logout();
-    window.location.reload();
+    this.router.navigate(["/"]);
   }
 }

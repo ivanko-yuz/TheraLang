@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using System;
 using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.BLL.Interfaces
@@ -13,8 +12,8 @@ namespace TheraLang.BLL.Interfaces
 
         Task Update(ProjectTypeDto projectType);
 
-        IEnumerable<ProjectTypeDto> GetAllProjectsType();
+        Task<IEnumerable<ProjectTypeDto>> GetAllProjectsType();
 
-        ProjectTypeDto GetProjectTypeById(int id);
+        Task<ProjectTypeDto> GetProjectTypeById(int id);
     }
 }

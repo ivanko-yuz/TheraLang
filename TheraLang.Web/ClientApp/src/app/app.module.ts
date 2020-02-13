@@ -72,7 +72,6 @@ import { HttpProjectService } from "./core/http/project/http-project.service";
 import { UserService } from "./core/auth/user.service";
 import { ResourceCreateService } from "./core/http/resource/resource-create.service";
 import { ProjectTypeHttp } from "./core/http/project-type/project-type-Http.service";
-import { CmsModule } from "./modules/cms-generic/cms.module";
 import { CmsPagesToolbarItemComponent } from "./modules/main/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component";
 import { ProjectComponent } from "./modules/main/pages/project/project.component";
 import { HomeComponent } from "./modules/main/pages/home/home.component";
@@ -96,9 +95,8 @@ import { ProjectTypeFormComponent } from "./modules/main/pages/project/project-t
 import { ProjectTypeCreateFormComponent } from "./modules/main/pages/project/project-type-create-form/project-type-create-form.component";
 import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
-
+import { SortablejsModule } from "ngx-sortablejs";
 import { JwtModule } from "@auth0/angular-jwt";
-
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
@@ -106,6 +104,7 @@ import { NewsCardComponent } from './modules/main/pages/news/news-card/news-card
 import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-create.component';
 import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { AdminGuard } from "./shared/guards/admin-guard.service";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -216,7 +215,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
-    CmsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -232,7 +230,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         blacklistedRoutes: []
       }
     }),
-    NgImageSliderModule
+    NgImageSliderModule,
+    SortablejsModule.forRoot({ animation: 400 })
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [
@@ -250,7 +249,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserService,
     ResourceCreateService,
     ProjectTypeHttp,
-    AuthGuard
+    AuthGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

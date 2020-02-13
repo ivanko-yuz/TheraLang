@@ -8,6 +8,6 @@ namespace TheraLang.BLL.Interfaces
     {
         Task ChangeTypeName(int categoryId, string newTypeName);
 
-        IEnumerable<ResourceCategoryDto> GetAllCategories();
+        Task<IEnumerable<ResourceCategoryDto>> GetAllCategories();
     }
 }

@@ -7,15 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="appsettings.json">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-      </Content>
+      <ProjectReference Include="..\TheraLang.Web\TheraLang.Web.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\TheraLang.Web\TheraLang.Web.csproj" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="2.0.0-preview1-final" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\TheraLang.Web\appsettings.json">
+        <Link>appsettings.json</Link>
+      </Content>
     </ItemGroup>
 
 </Project>
