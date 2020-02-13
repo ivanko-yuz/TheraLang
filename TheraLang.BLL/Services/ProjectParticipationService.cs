@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -58,7 +59,7 @@ namespace TheraLang.BLL.Services
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()
                 .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))
                 .ForMember(m => m.ProjectName, opt => opt.MapFrom(m => m.Project.Name))
-                .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.CreatedById))
+                .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.User.Id))
                 .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.User.UserName))
                 .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.User.Email))
             ).CreateMapper();
@@ -69,6 +70,28 @@ namespace TheraLang.BLL.Services
             return projectParticipationDtos;
         }
 
+        public async Task<IEnumerable<ProjectParticipationDto>> GetProjectParticipations(int projectId)
+        {
+            var projectParticipations = await _unitOfWork.Repository<ProjectParticipation>()
+                .GetAll()
+                .Where(p=>p.ProjectId == projectId && p.Status == ProjectParticipationStatus.Approved)
+                .Include(p => p.User)
+                .Include(p => p.Project)
+                .ToListAsync();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()
+                .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))
+                .ForMember(m => m.ProjectName, opt => opt.MapFrom(m => m.Project.Name))
+                .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.User.Id))
+                .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.User.UserName))
+                .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.User.Email))
+            ).CreateMapper();
+            var projectParticipationDtos =
+                mapper.Map<IEnumerable<ProjectParticipation>, IEnumerable<ProjectParticipationDto>>(
+                    projectParticipations);
+
+            return projectParticipationDtos;
+        }
 
         public async Task CreateRequest(Guid userId, int projectId)
         {
@@ -103,5 +126,7 @@ namespace TheraLang.BLL.Services
                                     $"and {nameof(projectId)}:{projectId}: ", ex);
             }
         }
+
+
     }
 }

@@ -9,6 +9,7 @@
           mat-raised-button 
           class="join-button"
           color="primary"
+          (click)="onJoin()"
           *ngIf="isAdmin() || isOwner()">
           {{'components.projects.join'|translate}}
         </button>
@@ -21,7 +22,7 @@
         </div>
       </div>
       <div class="project-text">
-        <p>{{projectInfo.description}}</p>
+        <p class="project-description">{{projectInfo.description}}</p>
       </div>
     </div>
 
@@ -44,7 +45,7 @@
       </div>
       <div class="days-left-block" fxLayout="column" fxFlex="none">
         <span class="days">{{ projectInfo | daysLeft }}</span>
-        <span *ngIf="(projectInfo | daysLeft) >= 0">
+        <span *ngIf="(projectInfo | daysLeft) >= 0" class="texter">
           {{ "components.projects.days-left" | translate}}
         </span>
       </div>
@@ -74,10 +75,18 @@
       </div>
       <div class="hiden-details"  [@openCloseContent]="isOpen ? 'open' : 'closed'" >
         <p [@openCloseDisplay]="isOpen ? 'open' : 'closed'">{{projectInfo.details}}</p>
+        <mat-chip-list class="participants">
+          <mat-chip 
+           *ngFor="let participant of projectParticipants"
+           color="primary"
+           selected>
+           {{participant.userName}}
+          </mat-chip>
+        </mat-chip-list>
+        <b class="color-primary">{{'components.resources.title'|translate}}:</b>
         <app-resources-table 
         *ngIf="generateOnceResourcesTable"
-        [sortedResourcesByCategory]="sortedResourcesByCategory"
-        [@openCloseDisplay]="isOpen ? 'open' : 'closed'">
+        [sortedResourcesByCategory]="sortedResourcesByCategory">
       </app-resources-table>
       </div>
     </div>

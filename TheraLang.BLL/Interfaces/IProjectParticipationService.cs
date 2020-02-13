@@ -12,5 +12,7 @@ namespace TheraLang.BLL.Interfaces
         Task CreateRequest(Guid userId, int projectId);
 
         Task ChangeStatus(int participantId, ProjectParticipationStatusDto status);
+
+        Task<IEnumerable<ProjectParticipationDto>> GetProjectParticipations(int projectId);
     }
 }

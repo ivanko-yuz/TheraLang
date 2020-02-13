@@ -13,6 +13,7 @@ import { ProjectService } from 'src/app/core/http/project/project.service';
 import { UserService } from 'src/app/core/auth/user.service';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { Roles } from 'src/app/shared/models/roles/roles';
+import { ProjectParticipationRequest } from 'src/app/shared/models/project-participation/project-participation-request';
 
 @Component({
   selector: "app-project-info",
@@ -39,7 +40,7 @@ import { Roles } from 'src/app/shared/models/roles/roles';
       state(
         "open",
         style({
-          display: "initial"
+          display: "initial",
         })
       ),
       state(
@@ -88,6 +89,7 @@ export class ProjectInfoComponent implements OnInit {
 
   projectInfo: Project;
   projectId: number;
+  projectParticipants;
   generateOnceResourcesTable = false;
   sortedResourcesByCategory: Resource[][] = [];
   isOpen = false;
@@ -100,6 +102,7 @@ export class ProjectInfoComponent implements OnInit {
         .getProjectInfo(this.projectId)
         .subscribe((data: Project) => (this.projectInfo = data));
     });
+    this.getParticipants();
   }
 
   async getResourcesData() {
@@ -180,13 +183,16 @@ export class ProjectInfoComponent implements OnInit {
   arrowOpener(){
     this.isOpen = !this.isOpen;
   }
+
   getDetails(){
     this.getResourcesData();
     this.arrowOpener();
-    this.getLog();
-
   }
-  getLog(){
-    this.userService.isRole(Roles.Admin);
+
+  getParticipants(){ 
+    this.participService.getProjectParticipants(this.projectId)
+      .subscribe(response => {
+        this.projectParticipants = response
+      });
   }
 }
