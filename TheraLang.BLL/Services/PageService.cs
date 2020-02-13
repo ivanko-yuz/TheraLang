@@ -58,7 +58,7 @@ namespace TheraLang.BLL.Services
         public async Task<PageDto> GetPageByRoute(string route)
         {
             var page = await _unitOfWork.Repository<Page>()
-                .Get(p => p.Route == route);
+                .Get(p => p.Route.Route == route);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Page, PageDto>()
                     .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
