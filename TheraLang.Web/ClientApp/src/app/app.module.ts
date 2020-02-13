@@ -72,7 +72,6 @@ import { HttpProjectService } from "./core/http/project/http-project.service";
 import { UserService } from "./core/auth/user.service";
 import { ResourceCreateService } from "./core/http/resource/resource-create.service";
 import { ProjectTypeHttp } from "./core/http/project-type/project-type-Http.service";
-import { CmsModule } from "./modules/cms-generic/cms.module";
 import { CmsPagesToolbarItemComponent } from "./modules/main/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component";
 import { ProjectComponent } from "./modules/main/pages/project/project.component";
 import { HomeComponent } from "./modules/main/pages/home/home.component";
@@ -207,7 +206,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
-    CmsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -25,6 +25,8 @@ namespace TheraLang.DAL
         public virtual DbSet<ResourceAttachment> ResourceAttachments { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<UploadedNewsContentImage> UploadedFiles { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<MemberFee> MemberFees { get; set; }
 
@@ -39,6 +41,8 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new DonationConfiguration());
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
+            modelBuilder.ApplyConfiguration(new NewsConfiguration());
+            modelBuilder.ApplyConfiguration(new UploadedNewsContentImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new PageConfiguration());
             modelBuilder.ApplyConfiguration(new MemberFeeConfiguratoin());
