@@ -71,6 +71,7 @@
         </mat-form-field>
         <mat-form-field>
           <input
+          (focus)="picker.open()"
             formControlName="projectStart"
             type="[valueAsDate]"
             matInput
@@ -79,8 +80,8 @@
             [placeholder]="'components.projects.project-starts' | translate"
             readonly
           />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker-toggle class ="mat-icon" matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker (closed)="input.blur()"></mat-datepicker>
           <mat-error
             *ngIf="service.form.controls['projectStart'].errors?.required"
             >{{ "common.validation.field-is-required" | translate }}</mat-error
@@ -88,22 +89,23 @@
         </mat-form-field>
         <mat-form-field>
           <input
+          (focus)="picker1.open()"
             formControlName="projectEnd"
+            type="[valueAsDate]"
             matInput
             [matDatepicker]="picker1"
+            required
             [placeholder]="'components.projects.project-ends' | translate"
             readonly
           />
-          <mat-datepicker-toggle
+          <mat-datepicker-toggle class ="mat-icon"
             matSuffix
             [for]="picker1"
           ></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-          <mat-error
-            *ngIf="
-              service.form.controls['projectEnd'].hasError('matDatepickerFilter')
-            "
-            >{{ "common.wth" | translate }}</mat-error
+          <mat-datepicker #picker1 (closed)="input.blur()"></mat-datepicker>
+           <mat-error
+            *ngIf="service.form.controls['projectEnd'].errors?.required"
+            >{{ "common.validation.field-is-required" | translate }}</mat-error
           >
         </mat-form-field>
         <mat-form-field>
