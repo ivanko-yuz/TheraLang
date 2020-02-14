@@ -5,6 +5,7 @@ import { ManagerComponent } from "./manager.component";
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
 import { EditPageComponent } from "./page-manager/edit-page/edit-page.component";
+import { MemberFeeComponent } from './member-fee/member-fee.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
     path: "",
     pathMatch: "full",
     redirectTo: "sitemap"
+  },
+  {
+    path: "fee",
+    component: MemberFeeComponent
   }
 ];
 

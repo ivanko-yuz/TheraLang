@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { ManagerRoutingModule } from "./manager-routing.module";
 import { CreatePageComponent } from "./page-manager/create-page/create-page.component";
 import { ManagerComponent } from "./manager.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { QuillModule } from "ngx-quill";
 import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule } from '@angular/material';
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
@@ -22,6 +22,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
 import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 import { PageService } from 'src/app/core/http/manager/page.service';
+import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
 import { MemberFeeComponent } from './member-fee/member-fee.component';
 
 @NgModule({
@@ -55,6 +56,7 @@ import { MemberFeeComponent } from './member-fee/member-fee.component';
     MatSidenavModule,
     MatListModule,
     MatTooltipModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -70,7 +72,8 @@ import { MemberFeeComponent } from './member-fee/member-fee.component';
     MatRippleModule
   ],
   providers: [
-    PageService
+    PageService,
+    MemberFeeService
   ]
 })
 export class ManagerModule {}
