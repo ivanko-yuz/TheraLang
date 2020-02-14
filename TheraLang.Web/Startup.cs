@@ -1,9 +1,8 @@
-using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -12,10 +11,8 @@ using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
 using TheraLang.DAL.Entities;
+using TheraLang.Web.ActionFilters;
 using TheraLang.Web.Helpers;
-using TheraLang.Web.Validators;
-using TheraLang.Web.ViewModels;
-
 
 namespace TheraLang.Web
 {
@@ -32,22 +29,19 @@ namespace TheraLang.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddLocalization(options =>
-            //    options.ResourcesPath = "Resources"
-            //);
-
-            //services.AddMvc()
-            //    //.AddPiranhaManagerOptions()
-            //    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-            //    .AddFluentValidation(fv => { fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false; });
-
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => options.Filters.Add(new ModelValidationFilter()))
+                .AddFluentValidation(options =>
+                {
+                    options.RegisterValidatorsFromAssemblyContaining<Startup>();
+                    options.ImplicitlyValidateChildProperties = true;
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
@@ -71,10 +65,9 @@ namespace TheraLang.Web
             services.AddTransient<IHtmlContentService, HtmlContentService>();
             services.AddTransient<ISiteMapService, SiteMapService>();
             services.AddTransient<INewsService, NewsService>();
-            services.AddOpenApiDocument();
-            services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
-            services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
             services.AddTransient<IMemberFeeService, MemberFeeService>();
+
+            services.AddOpenApiDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,7 +81,7 @@ namespace TheraLang.Web
                 app.UseOpenApi();
                 app.UseSwaggerUi3();
             }
-            
+
             // Register middleware
             app.UseStaticFiles();
             app.UseSpaStaticFiles();

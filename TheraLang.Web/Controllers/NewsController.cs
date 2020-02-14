@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.Extensions;
+using TheraLang.Web.ViewModels;
 using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -28,12 +29,13 @@ namespace TheraLang.Web.Controllers
 
         // GET: api/news
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsPreviewDto, NewsPreviewViewModel>()).CreateMapper();
 
             var newsDtos = await _newsService.GetAllNews();
+
             if (!newsDtos.Any())
             {
                 return NotFound();
@@ -41,6 +43,38 @@ namespace TheraLang.Web.Controllers
 
             var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
             return Ok(newsModels);
+        }
+
+        // GET: api/news?pageNumber=2&pageSize=10
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetPage([FromQuery] PagingParametersViewModel pageParametersModel)
+        {
+            var mapper = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<NewsDetailsDto, NewsPreviewViewModel>();
+                    cfg.CreateMap<PagingParametersViewModel, PagingParametersDto>();
+                }
+            ).CreateMapper();
+
+            var pageParametersDto = mapper.Map<PagingParametersDto>(pageParametersModel);
+            var newsDtos = await _newsService.GetNewsPage(pageParametersDto);
+
+            if (!newsDtos.Any())
+            {
+                return NotFound();
+            }
+
+            var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
+            return Ok(newsModels);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("count")]
+        public async Task<IActionResult> GetNewsCount()
+        {
+            int pageCount = await _newsService.GetNewsCount();
+            return Ok(pageCount);
         }
 
         // GET: api/news/5
@@ -69,8 +103,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateViewModel, NewsCreateDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsCreateDto>(newsModel);
-            var userId = User.Claims.GetUserId();
-            newsDto.Author = await _userManagementService.GetUserById(userId.Value);
+            newsDto.AuthorId = (Guid)User.Claims.GetUserId();
 
             await _newsService.AddNews(newsDto);
             return Ok();
@@ -84,6 +117,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsEditViewModel, NewsEditDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsEditDto>(newsModel);
+            newsDto.EditorId = (Guid)User.Claims.GetUserId();
 
             try
             {

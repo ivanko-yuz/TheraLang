@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
+using TheraLang.BLL.DataTransferObjects;
 using System.IO;
 
 namespace TheraLang.BLL.Services
@@ -24,9 +25,33 @@ namespace TheraLang.BLL.Services
             _fileService = fileService;
         }
 
+        public async Task<int> GetNewsCount()
+        {
+            return await _unitOfWork.Repository<News>().GetAll().CountAsync();
+        }
+
         public async Task<IEnumerable<NewsPreviewDto>> GetAllNews()
         {
             var news = await _unitOfWork.Repository<News>().GetAll()
+                .Include(e => e.Author).Include(e => e.UploadedContentImages).ToListAsync();
+
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<News, NewsPreviewDto>()
+                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => sm.Author.UserName));
+            }
+            ).CreateMapper();
+
+            var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
+
+            return newsDtos;
+        }
+
+        public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PagingParametersDto pageParameters)
+        {
+            var news = await _unitOfWork.Repository<News>().GetAll()
+                    .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
+                    .Take(pageParameters.PageSize)
                     .Include(e => e.Author)
                     .Include(e => e.UploadedContentImages)
                     .ToListAsync();
@@ -65,7 +90,9 @@ namespace TheraLang.BLL.Services
 
         public async Task AddNews(NewsCreateDto newsDto)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()
+                    .ForMember(m=>m.CreatedById, opt=>opt.MapFrom(sm=>sm.AuthorId)))
+                    .CreateMapper();
 
             var news = mapper.Map<NewsCreateDto, News>(newsDto);
 
@@ -103,6 +130,7 @@ namespace TheraLang.BLL.Services
                 throw new ArgumentNullException($"News with id {id} not found!");
             }
 
+            newsToUpdate.UpdatedById = newsDto.EditorId;
             newsToUpdate.Title = newsDto.Title;
             newsToUpdate.Text = newsDto.Text;
 
