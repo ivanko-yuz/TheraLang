@@ -47,7 +47,6 @@ import { ProjectParticipationRequest } from 'src/app/shared/models/project-parti
         "closed",
         style({
           display: "none"
-          
         })
       ),
       transition('open => closed', animate('.5s')),

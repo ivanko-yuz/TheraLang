@@ -57,8 +57,6 @@ namespace TheraLang.BLL.Services
                 .ToListAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()
-                .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))
-                .ForMember(m => m.ProjectName, opt => opt.MapFrom(m => m.Project.Name))
                 .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.User.Id))
                 .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.User.UserName))
                 .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.User.Email))
@@ -80,8 +78,6 @@ namespace TheraLang.BLL.Services
                 .ToListAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()
-                .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))
-                .ForMember(m => m.ProjectName, opt => opt.MapFrom(m => m.Project.Name))
                 .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.User.Id))
                 .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.User.UserName))
                 .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.User.Email))
@@ -126,7 +122,5 @@ namespace TheraLang.BLL.Services
                                     $"and {nameof(projectId)}:{projectId}: ", ex);
             }
         }
-
-
     }
 }
