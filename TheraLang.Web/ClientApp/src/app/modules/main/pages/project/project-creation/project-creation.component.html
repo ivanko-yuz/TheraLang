@@ -40,7 +40,9 @@
         <textarea
           formControlName="description"
           required
-          matTextareaAutosize
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="5"
           matInput
           [placeholder]="'components.projects.description' | translate"
         ></textarea>
@@ -60,7 +62,9 @@
       <mat-form-field>
         <textarea
           formControlName="details"
-          matTextareaAutosize
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="5"
           matInput
           [placeholder]="'components.projects.details' | translate"
         ></textarea>
