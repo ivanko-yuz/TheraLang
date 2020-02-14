@@ -61,13 +61,13 @@ namespace TheraLang.BLL.Services
                 {
                     return null;
                 }
-                var userName = claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
+                var userEmail = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
                 var userRole = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
 
                 return new AuthUser()
                 {
                     Id = new Guid(userId),
-                    UserName = userName,
+                    UserEmail = userEmail,
                     Role = userRole
                 };
             });

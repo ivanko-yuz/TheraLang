@@ -17,6 +17,7 @@ import { GeneralResourcesComponent } from "./modules/main/pages/resource/general
 import { AuthGuard } from "./core/services/guards/auth-guard.service";
 import{AdminGuard} from "./core/services/guards/admin-guard.service";
 import { ProjectFormComponent } from './modules/main/pages/project/project-form/project-form.component';
+import {RegistrationComponent} from './modules/registration/registration.component';
 const routes: Routes = [
   {
     path: "",
@@ -50,11 +51,18 @@ const routes: Routes = [
         path: "transaction/:donationId",
         component: TransactionResultComponent
       },
-      { path: "projectTypes", component: ProjectTypeComponent,canActivate: [AdminGuard] },
-      { path: "projectRequest", component: ProjectRequestComponent,canActivate: [AdminGuard] }
+      { path: "projectTypes",
+        component: ProjectTypeComponent,
+        canActivate: [AdminGuard],
+      },
+      { path: "projectRequest",
+        component: ProjectRequestComponent,
+        canActivate: [AdminGuard],
+      }
     ]
   },
   { path: "login", component: LoginComponent },
+  { path: "registration", component: RegistrationComponent },
   { path: "error", component: ErrorComponent },
   { path: "**", loadChildren: () => CmsModule }
 ];

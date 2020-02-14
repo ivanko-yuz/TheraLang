@@ -20,15 +20,15 @@ namespace TheraLang.Web.Controllers
         }
 
         private readonly IResourceAttachmentService _attachment;
-
-        [HttpPost("attach")]
-        [Authorize]
+     
+       [HttpPost("attach")]
+        [Authorize()]
         public async Task<IActionResult> UploadFile([FromBody] ResourceAttachViewModel resourceModel)
         {
-            if (resourceModel == null)
-            {
-                throw new ArgumentNullException($"{nameof(resourceModel)} cannot be null");
-            }
+           if (resourceModel == null)
+           {
+               throw new ArgumentException($"{nameof(resourceModel)} cannot be null");
+           }
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceAttachViewModel, ResourceAttachDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceAttachViewModel, ResourceAttachDto>(resourceModel);

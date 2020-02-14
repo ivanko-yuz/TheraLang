@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -16,8 +15,6 @@ using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
 using Microsoft.AspNetCore.Http;
-using Piranha.Repositories;
-using Piranha.Services;
 
 namespace TheraLang.Web
 {
@@ -44,6 +41,7 @@ namespace TheraLang.Web
 
             services.AddScoped<IAuthenticateService, AuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
+            services.AddScoped<IUserService, UserService>();
 
             #region Piranha setup
             services.AddPiranha();
@@ -94,6 +92,7 @@ namespace TheraLang.Web
                 app.UseDeveloperExceptionPage();
                 app.UseOpenApi();
                 app.UseSwaggerUi3();
+                //DbInitializer.Seed(app);
             }
 
 

@@ -23,9 +23,45 @@ export class UserService {
     ]
   });
   readonly baseUrl = accountUrl;
+  registrationForm = this.fb.group({
+    email: [
+      "",
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+    ],
+    password: [
+      "",
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+    ],
+    confirm_password: [
+      "",
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+    ],
+    first_name: [
+      "",
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+    ],
+    last_name: [
+      "",
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+    ],
+    phone_number: [
+      "",
+    ],
+    short_information: [
+      "",
+    ],
+    age: [
+      "",
+    ]
+  });
   login(loginData) {
     return this.http.post(this.baseUrl + "/login", loginData);
   }
+
+  registration(req) {
+    return this.http.post(this.baseUrl + "/registration", req);
+  }
+
   logout() {
     localStorage.removeItem("jwt");
   }

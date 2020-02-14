@@ -10,8 +10,8 @@ using TheraLang.DAL;
 namespace TheraLang.DAL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    [Migration("20200211125530_AddGuestUserAsSeed")]
-    partial class AddGuestUserAsSeed
+    [Migration("20200211083415_UserUpdateMigration")]
+    partial class UserUpdateMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -185,14 +185,20 @@ namespace TheraLang.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(null);
 
+                    b.Property<Guid?>("UserDetailsId");
+
+                    b.Property<Guid?>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CreatedById");
-
                     b.HasIndex("Name")
                         .IsUnique();
+
+                    b.HasIndex("UserDetailsId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Resources");
                 });
@@ -274,19 +280,19 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9bd021a0-1ea1-4ca6-9ffb-f322fb4adbca"),
+                            Id = new Guid("e549dfbb-3814-4626-b69c-7d183298948d"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("9e4cd935-fa8d-445d-ab1d-d95f51228c5e"),
+                            Id = new Guid("04b0b356-b31f-4df7-9779-60b0ba44088f"),
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = new Guid("6d5e494b-11c8-4157-9f07-db0d6163a7cc"),
+                            Id = new Guid("256ab49d-65e8-4690-acac-4b504aaa85f5"),
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -313,57 +319,57 @@ namespace TheraLang.DAL.Migrations
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
                     b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
 
                     b.Property<Guid>("RoleId");
 
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
+                    b.Property<Guid?>("detailsId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("([NormalizedUserName] IS NOT NULL)");
-
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("detailsId");
 
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5271c9d4-7972-40b4-a20c-d2a819286db6"),
+                            Id = new Guid("5868c1b6-63d4-4800-9701-69b8548d01e4"),
                             Email = "admin@utmm.com",
-                            PasswordHash = "AUuvMmdpiB8Db4+MU7PIGhXQTxYVuFgvEtEdkeCfFWC0tM5MLb2x3A1MzuYI2MTMlA==",
-                            RoleId = new Guid("9bd021a0-1ea1-4ca6-9ffb-f322fb4adbca")
+                            PasswordHash = "AcBxtua1oJEO80wcbykTbK2dMdfjzbygxClOzuUnJf0ckGfpHPYny29O/I6pmDbA3A==",
+                            RoleId = new Guid("e549dfbb-3814-4626-b69c-7d183298948d")
                         },
                         new
                         {
-                            Id = new Guid("eed41e36-1a35-4aea-8a7f-fe1566286a02"),
-                            Email = "member@utmm.com",
-                            PasswordHash = "AdlkuDR0yhe573bDxEfTVTaRvcF2vFCO+A3dAr5SZjbB0fas0NWyw18kHkM3P8nIaw==",
-                            RoleId = new Guid("9e4cd935-fa8d-445d-ab1d-d95f51228c5e")
-                        },
-                        new
-                        {
-                            Id = new Guid("675d347e-8f40-40d8-8f6c-0dabce4a43ad"),
-                            Email = "guest@utmm.com",
-                            PasswordHash = "AedtQuBC1U9j2udunZ9W+ta40lPA+ZFm6E/bN1fOpxLjXDMUxuY4ONtDVqdOyQw2Cw==",
-                            RoleId = new Guid("6d5e494b-11c8-4157-9f07-db0d6163a7cc")
+                            Id = new Guid("4aafd7a6-efe3-4608-ae5e-4540a85bce76"),
+                            Email = "member.@utmm.com",
+                            PasswordHash = "ARMyoyQwBgildBlkYEaaAAouIL1mlxBX8ZBe4C0dbQHVDwb5lJkwkwb9OJuAzEB8Og==",
+                            RoleId = new Guid("04b0b356-b31f-4df7-9779-60b0ba44088f")
                         });
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.UserDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Age");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("ImageURl");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("ShortInformation");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserDetails");
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaAlias", b =>
@@ -1039,10 +1045,13 @@ namespace TheraLang.DAL.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("TheraLang.DAL.Entities.User", "User")
+                    b.HasOne("TheraLang.DAL.Entities.UserDetails")
                         .WithMany("Resources")
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("UserDetailsId");
+
+                    b.HasOne("TheraLang.DAL.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.ResourceAttachment", b =>
@@ -1072,6 +1081,10 @@ namespace TheraLang.DAL.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TheraLang.DAL.Entities.UserDetails", "details")
+                        .WithMany()
+                        .HasForeignKey("detailsId");
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaAlias", b =>

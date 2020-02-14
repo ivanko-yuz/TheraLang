@@ -28,7 +28,7 @@ namespace TheraLang.DAL
         public virtual DbSet<ResourceAttachment> ResourceAttachments { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-
+        public virtual DbSet<UserDetails> UsersDetails { get; set; }
         #endregion
 
         #region Piranha_Entities
@@ -99,22 +99,8 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new UserDetailsConfiguration());
             #endregion
-
-            Seed(modelBuilder);
-        }
-
-        protected void Seed(ModelBuilder modelBuilder)
-        {
-            var AdminRoleId = Guid.NewGuid();
-            var MemberRoleId = Guid.NewGuid();
-            var GuestRoleId = Guid.NewGuid();
-            modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleId, Name = "Admin", NormalizedName = "ADMIN" });
-            modelBuilder.Entity<Role>().HasData(new Role { Id = MemberRoleId, Name = "Member", NormalizedName = "MEMBER" });
-            modelBuilder.Entity<Role>().HasData(new Role { Id = GuestRoleId, Name = "Guest", NormalizedName = "GUEST" });
-            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "admin@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = AdminRoleId });
-            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "member@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = MemberRoleId });
-            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), Email = "guest@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = GuestRoleId });
         }
     }
 }

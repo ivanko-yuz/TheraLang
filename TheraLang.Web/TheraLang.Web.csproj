@@ -82,6 +82,7 @@
     <PackageReference Include="Piranha.WebApi" Version="7.1.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataSeeding\DataSeeding.csproj" />
     <ProjectReference Include="..\TheraLang.BLL\TheraLang.BLL.csproj" />
   </ItemGroup>
 </Project>

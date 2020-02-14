@@ -102,6 +102,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { AuthGuard } from "./core/services/guards/auth-guard.service";
 import { AdminGuard } from './core/services/guards/admin-guard.service';
+import {RegistrationComponent} from './modules/registration/registration.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -133,6 +134,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TransactionResultComponent,
     ProjectRequestComponent,
     LoginComponent,
+    RegistrationComponent,
     ProfileMenuComponent,
     ResourceCreateComponent,
     ProjectTypeFormComponent,

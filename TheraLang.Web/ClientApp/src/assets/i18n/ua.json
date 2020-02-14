@@ -98,7 +98,16 @@
       "error-input-required": "Це поле не може бути пустим",
       "error-input-login-length": "Логін повинен містити 3-50 символів",
       "error-input-password-length": "Пароль повинен містити 3-50 символів",
-      "role": "Роль користувача"
+      "role": "Роль користувача",
+      "email": "Email",
+      "phone_number": "Номер телефону",
+      "first_name": "Ім'я",
+      "last_name": "Призвіще",
+      "confirm_password": "Пароль підтвердження",
+      "short_information": "Коротко про себе",
+      "age": "Вік",
+      "successfully-registration": "Дякуємо за реєстрацію!",
+      "error": "Помилка"
     },
     "projectTypes": {
       "title": "Типи Проектів",

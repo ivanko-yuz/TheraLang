@@ -59,7 +59,7 @@ namespace TheraLang.BLL.Services
                 .ForMember(m => m.ProjectId, opt => opt.MapFrom(m => m.ProjectId))
                 .ForMember(m => m.ProjectName, opt => opt.MapFrom(m => m.Project.Name))
                 .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.CreatedById))
-                .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.User.UserName))
+                .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.User.Email))
                 .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.User.Email))
             ).CreateMapper();
             var projectParticipationDtos =

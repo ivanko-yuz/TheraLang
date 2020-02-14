@@ -98,7 +98,16 @@
       "error-input-required": "This field can’t be empty",
       "error-input-login-length": "Login length must be 3-50 characters",
       "error-input-password-length": "Password length must be 3-50 characters",
-      "role": "User role"
+      "role": "User role",
+      "email": "Email",
+      "phone_number": "Phone number",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "confirm_password": "Confirm password",
+      "short_information": "Short information",
+      "age": "Age",
+      "successfully-registration": "Successfully registration",
+      "error": "Error"
     },
     "projectTypes": {
       "title": "Types Of Project",
