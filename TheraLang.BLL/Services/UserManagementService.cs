@@ -2,6 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
@@ -17,12 +21,9 @@ namespace TheraLang.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<User> GetUser(string userName, string password)
+        public Task<User> GetUser(LoginModelDto loginModel)
         {
-            var user = await _unitOfWork.Repository<User>().GetAll()
-                    .Include(x => x.Role)
-                .FirstOrDefaultAsync(u => u.UserName == userName && PasswordHasher.VerifyHashedPassword(u.PasswordHash, password));
-            
+            var user = _unitOfWork.Repository<User>().Get(u => u.Email == loginModel.Email && PasswordHasher.VerifyHashedPassword(u.PasswordHash, loginModel.Password));
             return user;
         }
 

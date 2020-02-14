@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DAL;
 
 namespace TheraLang.DAL.Migrations
 {
     [DbContext(typeof(IttmmDbContext))]
-    partial class IttmmDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200204161909_UserRoleMigration")]
+    partial class UserRoleMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,19 +274,19 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9bd021a0-1ea1-4ca6-9ffb-f322fb4adbca"),
+                            Id = new Guid("936da01f-9abd-4d9d-80c7-02af85c822a8"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("9e4cd935-fa8d-445d-ab1d-d95f51228c5e"),
+                            Id = new Guid("936da01f-9abd-4d9d-80c7-02af85c823b6"),
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
-                            Id = new Guid("6d5e494b-11c8-4157-9f07-db0d6163a7cc"),
+                            Id = new Guid("936da01f-9abd-4d9d-80c7-02af85c822a7"),
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -343,24 +345,17 @@ namespace TheraLang.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5271c9d4-7972-40b4-a20c-d2a819286db6"),
-                            Email = "admin@utmm.com",
-                            PasswordHash = "AUuvMmdpiB8Db4+MU7PIGhXQTxYVuFgvEtEdkeCfFWC0tM5MLb2x3A1MzuYI2MTMlA==",
-                            RoleId = new Guid("9bd021a0-1ea1-4ca6-9ffb-f322fb4adbca")
+                            Id = new Guid("f7ad0e22-ac23-4d1e-b62e-f46f3b5d3557"),
+                            PasswordHash = "AY7fV6SefchBqHN8Aynh1+Gn3QqRltu2gn52nTaZ29VgLF7+KAe51isAktuS1/NGKw==",
+                            RoleId = new Guid("936da01f-9abd-4d9d-80c7-02af85c822a8"),
+                            UserName = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("eed41e36-1a35-4aea-8a7f-fe1566286a02"),
-                            Email = "member@utmm.com",
-                            PasswordHash = "AdlkuDR0yhe573bDxEfTVTaRvcF2vFCO+A3dAr5SZjbB0fas0NWyw18kHkM3P8nIaw==",
-                            RoleId = new Guid("9e4cd935-fa8d-445d-ab1d-d95f51228c5e")
-                        },
-                        new
-                        {
-                            Id = new Guid("675d347e-8f40-40d8-8f6c-0dabce4a43ad"),
-                            Email = "guest@utmm.com",
-                            PasswordHash = "AedtQuBC1U9j2udunZ9W+ta40lPA+ZFm6E/bN1fOpxLjXDMUxuY4ONtDVqdOyQw2Cw==",
-                            RoleId = new Guid("6d5e494b-11c8-4157-9f07-db0d6163a7cc")
+                            Id = new Guid("92d3da29-1a95-459a-841a-d40acc4e8682"),
+                            PasswordHash = "AWM317kCDp031PAaPQaGvghupvdvViqI/FjZAXXEy+SiRELmiLkMvjDoMGsFLVIqQQ==",
+                            RoleId = new Guid("936da01f-9abd-4d9d-80c7-02af85c823b6"),
+                            UserName = "Member"
                         });
                 });
 

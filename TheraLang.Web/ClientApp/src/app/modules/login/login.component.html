@@ -6,10 +6,10 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>{{'components.account.login'|translate}}</mat-label>
-          <input formControlName="username" autofocus matInput>
-          <mat-error *ngIf="this.userService.loginForm.get('username').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
+          <input formControlName="email" autofocus matInput>
+          <mat-error *ngIf="this.userService.loginForm.get('email').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
           <mat-error
-            *ngIf="this.userService.loginForm.get('username').errors?.minlength || this.userService.loginForm.get('username').errors?.maxlength">
+            *ngIf="this.userService.loginForm.get('email').errors?.minlength || this.userService.loginForm.get('email').errors?.maxlength">
             {{'components.account.error-input-login-length'|translate}}</mat-error>
         </mat-form-field>
       </p>

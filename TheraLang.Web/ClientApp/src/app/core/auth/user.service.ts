@@ -13,7 +13,7 @@ export class UserService {
     private jwtHelper: JwtHelperService
   ) {}
   loginForm = this.fb.group({
-    username: [
+    email: [
       "",
       [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
     ],
