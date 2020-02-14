@@ -53,7 +53,6 @@ import { CdkTreeModule } from "@angular/cdk/tree";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confirm-dialog.component";
-import { ErrorComponent } from "./shared/components/error/error.component";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ToolbarComponent } from "./modules/main/toolbar/toolbar.component";
@@ -72,7 +71,6 @@ import { HttpProjectService } from "./core/http/project/http-project.service";
 import { UserService } from "./core/auth/user.service";
 import { ResourceCreateService } from "./core/http/resource/resource-create.service";
 import { ProjectTypeHttp } from "./core/http/project-type/project-type-Http.service";
-import { CmsModule } from "./modules/cms-generic/cms.module";
 import { CmsPagesToolbarItemComponent } from "./modules/main/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component";
 import { ProjectComponent } from "./modules/main/pages/project/project.component";
 import { HomeComponent } from "./modules/main/pages/home/home.component";
@@ -96,12 +94,12 @@ import { ProjectTypeFormComponent } from "./modules/main/pages/project/project-t
 import { ProjectTypeCreateFormComponent } from "./modules/main/pages/project/project-type-create-form/project-type-create-form.component";
 import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
-
+import { SortablejsModule } from "ngx-sortablejs";
 import { JwtModule } from "@auth0/angular-jwt";
-
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
-import { AuthGuard } from "./core/services/guards/auth-guard.service";
-import { AdminGuard } from './core/services/guards/admin-guard.service';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { AdminGuard } from "./shared/guards/admin-guard.service";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -123,7 +121,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomDatePipe,
     ResourcesTableComponent,
     ConfirmDialogComponent,
-    ErrorComponent,
     ProjectFormComponent,
     ResourcesInternalTableComponent,
     GeneralResourcesTableComponent,
@@ -140,7 +137,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageComponent,
     MainComponent,
     CmsPagesToolbarItemComponent,
-    DaysLeftPipe
+    DaysLeftPipe,
+    NotFoundComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -208,7 +206,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
-    CmsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -223,7 +220,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         whitelistedDomains: ["localhost:5000"],
         blacklistedRoutes: []
       }
-    })
+    }),
+    SortablejsModule.forRoot({ animation: 400 })
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [

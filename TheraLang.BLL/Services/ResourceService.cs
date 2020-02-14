@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using System.IO;
+using System.Linq.Expressions;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -45,8 +46,12 @@ namespace TheraLang.BLL.Services
             {
                 if (resourceDto.File != null)
                 {
-                    var fileUri = await _fileService.SaveFile(resourceDto.File);
-                    resourceDto.Url = fileUri.ToString();
+                    using (var fileStream = resourceDto.File.OpenReadStream())
+                    {
+                        var fileExtension = Path.GetExtension(resourceDto.File.FileName);
+                        var fileUri = await _fileService.SaveFile(fileStream, fileExtension);
+                        resourceDto.Url = fileUri.ToString();
+                    }
                 }
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
@@ -73,7 +78,7 @@ namespace TheraLang.BLL.Services
                 {
                     using (var binaryReader = new BinaryReader(resourceDto.File.OpenReadStream()))
                     {
-                        var byteFile = binaryReader.ReadBytes((int) resourceDto.File.Length);
+                        var byteFile = binaryReader.ReadBytes((int)resourceDto.File.Length);
                         BitConverter.ToString(byteFile);
                     }
                 }
@@ -155,13 +160,12 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var query = await _unitOfWork.Repository<ResourceCategory>().GetAllAsync();
-                if (withAssignedResources)
-                {
-                    query = query.Where(cat => cat.Resources.Any());
-                }
-
-                var resourceEntities = query.ToList();
+                var resourceEntities = await _unitOfWork.Repository<ResourceCategory>()
+                    .GetAllAsync(
+                        withAssignedResources
+                            ? cat => cat.Resources.Any()
+                            : (Expression<Func<ResourceCategory, bool>>) null
+                    );
                 var mapper = new MapperConfiguration(cfg =>
                     {
                         cfg.CreateMap<ResourceCategory, ResourceCategoryDto>(MemberList.None);
