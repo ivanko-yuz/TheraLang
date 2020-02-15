@@ -1,17 +1,18 @@
 import { Component, OnInit } from "@angular/core";
-import { MatDialogRef, DateAdapter } from "@angular/material";
+import { DateAdapter } from "@angular/material";
 import { ProjectService } from "../../../../../core/http/project/project.service";
 import { ProjectType } from "../../../../../shared/models/project-type/project-type.model";
 import { TranslateService } from "@ngx-translate/core";
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/core/services/notification/notification.service';
 
 @Component({
   selector: "app-create-project",
-  templateUrl: "./project-form.component.html",
-  styleUrls: ["./project-form.component.less"],
+  templateUrl: "./project-creation.component.html",
+  styleUrls: ["./project-creation.component.less"],
   providers: [ProjectService]
 })
-export class ProjectFormComponent implements OnInit {
+export class ProjectCreationComponent implements OnInit {
   projectTypes: ProjectType[];
 
 
@@ -19,8 +20,9 @@ export class ProjectFormComponent implements OnInit {
     public service: ProjectService,
     public dateAdapter: DateAdapter<Date>,
     private translate: TranslateService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit() {
     this.dateAdapter.setLocale(this.translate.currentLang),
@@ -33,7 +35,7 @@ export class ProjectFormComponent implements OnInit {
           (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes)
         );
   }
- 
+
 
   onSubmit() {
     if (this.service.form.invalid) {
@@ -43,12 +45,25 @@ export class ProjectFormComponent implements OnInit {
       );
       return;
     } else if (!this.service.form.get("id").value) {
-      this.service.addProject(this.service.form.value);
-      this.router.navigate(["/"]);
-      
+
+      this.service.createProject(this.service.form.value).subscribe(
+        async (msg: string) => {
+          msg = await this.translate
+            .get("common.created-successfully")
+            .toPromise();
+          this.notificationService.success(msg);
+          this.router.navigate(["/"]);
+        },
+        async error => {
+          console.log(error);
+          this.notificationService.warn(
+            await this.translate.get("common.wth").toPromise()
+          );
+        }
+      );;
     } else {
-      this.service.editProject(this.service.form.value);
-      
+      // TODO: Is it needed here?
+      // this.service.updateProject(this.service.form.value);
     }
   }
 }

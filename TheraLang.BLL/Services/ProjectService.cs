@@ -44,7 +44,6 @@ namespace TheraLang.BLL.Services
                     .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
                 .CreateMapper();
             var projectsDto = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectDto>>(projects);
-
             return projectsDto;
         }
 
