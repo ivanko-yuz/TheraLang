@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TheraLang.DAL.Enums;
 
 namespace TheraLang.DAL.Entities
 {
@@ -8,13 +9,13 @@ namespace TheraLang.DAL.Entities
         
         public string Header { get; set; }
         
-        public string MenuName { get; set; }
+        public string MenuTitle { get; set; }
         
         public int? ParentPageId { get; set; }
 
         public int SortOrder { get; set; }
 
-        public string Language { get; set; }
+        public Language Language { get; set; }
 
         public int RouteId { get; set; }
 
@@ -22,6 +23,6 @@ namespace TheraLang.DAL.Entities
         
         public virtual ICollection<Page> SubPages { get; set; }
 
-        public virtual PageRoute Route { get; set; }
+        public virtual PageRoute PageRoute { get; set; }
     }
 }
