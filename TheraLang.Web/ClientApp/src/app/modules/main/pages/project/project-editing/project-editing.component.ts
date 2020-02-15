@@ -6,6 +6,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Project } from 'src/app/shared/models/project/project';
 import { HttpService } from 'src/app/core/http/http/http.service';
+import { NotificationService } from 'src/app/core/services/notification/notification.service';
 
 @Component({
   selector: 'app-project-editing',
@@ -14,7 +15,7 @@ import { HttpService } from 'src/app/core/http/http/http.service';
 })
 export class ProjectEditingComponent implements OnInit {
   projectTypes: ProjectType[];
-  projectId:number;
+  projectId: number;
   constructor(
     public service: ProjectService,
     public dateAdapter: DateAdapter<Date>,
@@ -22,20 +23,21 @@ export class ProjectEditingComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private httpService: HttpService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
     this.dateAdapter.setLocale(this.translate.currentLang),
-    (this.dateAdapter.getFirstDayOfWeek = () => {
-      return 1;
-    }),
-    this.service
-      .getProjectTypes()
-      .subscribe(
-        (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes)
-      );
-      this.route.params.subscribe(params => {this.projectId= +params['id'];})
-      this.httpService.getProjectInfo(this.projectId)
+      (this.dateAdapter.getFirstDayOfWeek = () => {
+        return 1;
+      }),
+      this.service
+        .getProjectTypes()
+        .subscribe(
+          (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes)
+        );
+    this.route.params.subscribe(params => { this.projectId = +params['id']; })
+    this.httpService.getProjectInfo(this.projectId)
       .subscribe((data: Project) => (this.populateForm(data)));
   }
 
@@ -59,10 +61,21 @@ export class ProjectEditingComponent implements OnInit {
         controls[controlName].markAsTouched()
       );
       return;
-    }  else {
-      this.service.editProject(this.service.form.value);
-      this.router.navigate(["/projects"]);
-      
+    } else {
+      this.service.updateProject(this.service.form.value).subscribe(
+        async (msg: string) => {
+          msg = await this.translate.get("common.updated-successfully").toPromise();
+          this.notificationService.success(msg);
+          this.router.navigate(["/projects"]);
+
+        },
+        async error => {
+          console.log(error);
+          this.notificationService.warn(
+            await this.translate.get("common.wth").toPromise()
+          );
+        }
+      );
     }
   }
 
