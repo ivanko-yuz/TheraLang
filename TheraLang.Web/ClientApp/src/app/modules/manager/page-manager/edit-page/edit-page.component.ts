@@ -17,10 +17,10 @@ import { transliterate } from 'transliteration';
 export class EditPageComponent implements OnInit {
   page: Page;
   form = new FormGroup({
-    header: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-    menuName: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+    header: new FormControl('', [Validators.required, Validators.maxLength(120)]),
+    menuTitle: new FormControl('', [Validators.required, Validators.maxLength(40)]),
     content: new FormControl('', Validators.required),
-    route: new FormControl(null, [Validators.maxLength(50), Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')])
+    route: new FormControl(null, [Validators.maxLength(140), Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')])
   });
 
   constructor(
@@ -41,7 +41,7 @@ export class EditPageComponent implements OnInit {
     ).subscribe((page: Page) => {
       this.page = page
       this.form.controls.header.setValue(page.header);
-      this.form.controls.menuName.setValue(page.menuName);
+      this.form.controls.menuTitle.setValue(page.menuTitle);
       this.form.controls.route.setValue(page.route);
       this.form.controls.content.setValue(page.content);
     });
@@ -63,7 +63,7 @@ export class EditPageComponent implements OnInit {
     this.pageService.updatePage({
       ...this.page,
       header: this.form.value.header,
-      menuName: this.form.value.menuName,
+      menuTitle: this.form.value.menuTitle,
       content: this.form.value.content,
       route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
     }).subscribe(
