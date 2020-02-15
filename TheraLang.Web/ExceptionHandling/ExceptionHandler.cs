@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Common.Exceptions;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using TheraLang.Web.ExceptionHandling.ExceptionHandlingOptions;
@@ -34,9 +32,8 @@ namespace TheraLang.Web.ExceptionHandling
                 filterContext.Exception.StackTrace
             };
             
-            logger.LogError(
-                $"{details.Exception} at {details.Route} by {details.UserId} Message: {details.Message}\n"
-                + $"\tStackTrace: {details.StackTrace}");
+            var message = $"{details.Exception} at {details.Route} by {details.UserId}";
+            logger.LogError(filterContext.Exception, message);
 
             var responseOptions = GetOptions(filterContext.Exception.GetType());
 
