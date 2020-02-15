@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SiteMapService } from '../../../../core/http/manager/site-map.service';
 import {SiteMap} from "../../../../shared/models/site-map/site-map";
-import {log} from "util";
 
 @Component({
   selector: 'app-cms-pages-toolbar-item',

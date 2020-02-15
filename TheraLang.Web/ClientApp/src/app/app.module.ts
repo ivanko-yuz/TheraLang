@@ -141,6 +141,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LanguageComponent,
     MainComponent,
     CmsPagesToolbarItemComponent,
+    DaysLeftPipe,
     PageComponent,
     PageViewComponent,
     NotFoundComponent
