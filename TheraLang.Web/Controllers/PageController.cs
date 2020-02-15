@@ -74,11 +74,14 @@ namespace TheraLang.Web.Controllers
             return Ok(pageModel);
         }
 
-        [HttpGet("{route}")]
+        [HttpGet("{lang}/{route}")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetPageByRoute(string route)
+        public async Task<IActionResult> GetPageByRoute(LanguageViewModel lang, string route)
         {
-            var page = await _pageService.GetPageByRoute(route);
+            var langMapper = new MapperConfiguration(cfg => cfg.CreateMap<LanguageViewModel, LanguageDto>()).CreateMapper();
+            var langDto = langMapper.Map<LanguageViewModel, LanguageDto>(lang);
+
+            var page = await _pageService.GetPageByRoute(route, langDto);
             if (page == null) return NotFound();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>())
