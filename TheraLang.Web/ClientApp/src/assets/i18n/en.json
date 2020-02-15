@@ -16,12 +16,15 @@
     "added-successfully": "Added successfully!",
     "created-successfully": "Created successfully!",
     "updated-successfully": "Updated successfully!",
+    "saved-successfully": "Successfully saved!",
     "r-u-sure": "Are you sure?",
     "error": "Error",
     "yes": "Yes",
     "no": "No",
     "error-so-sorry": "Oops, an error occurred while processing your request = (",
     "return-home": "Back to homepage",
+    "title": "Page not found",
+    "message": "The page you are looking for might have been removed, had its name changed or is temporarily unavailable.",
     "money-amount": "Amount of money:",
     "confirm": "Confirm",
     "cancel": "Cancel",
@@ -41,7 +44,8 @@
     "create": "Create",
     "description": "Description",
     "date-of-creation": "Date of creation",
-    "type": "Type"
+    "type": "Type",
+    "mainpage": "Main page"
   },
   "components": {
     "home": {
@@ -119,5 +123,13 @@
       "email": "Email",
       "user-name": "Username"
     }
+  },
+  "manager": {
+    "add-new-page": "Add new page",
+    "save-changes": "Save changes"
+  },
+  "notFoundPage": {
+    "title": "Page not found",
+    "message": "The page you are looking for might have been removed, had its name changed or is temporarily unavailable."
   }
 }

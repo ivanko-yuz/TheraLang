@@ -11,12 +11,12 @@ import { TransactionResultComponent } from "./shared/components/transaction-resu
 import { ProjectTypeComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
 import { ProjectRequestComponent } from "./modules/main/pages/project/project-request/project-request.component";
 import { LoginComponent } from "./modules/login/login.component";
-import { ErrorComponent } from "./shared/components/error/error.component";
-import { CmsModule } from "./modules/cms-generic/cms.module";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
-import { AuthGuard } from "./core/services/guards/auth-guard.service";
-import{AdminGuard} from "./core/services/guards/admin-guard.service";
-import { ProjectFormComponent } from './modules/main/pages/project/project-form/project-form.component';
+import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { AdminGuard } from "./shared/guards/admin-guard.service";
+
 const routes: Routes = [
   {
     path: "",
@@ -38,7 +38,7 @@ const routes: Routes = [
         component: ProjectInfoComponent,
         canActivate: [AuthGuard]
       },
-      { path: "projects", component: ProjectComponent},
+      { path: "projects", component: ProjectComponent },
       { path: "donations/:projectId", component: DonationComponent },
       { path: "donations", component: DonationComponent },
       {
@@ -50,13 +50,37 @@ const routes: Routes = [
         path: "transaction/:donationId",
         component: TransactionResultComponent
       },
-      { path: "projectTypes", component: ProjectTypeComponent,canActivate: [AdminGuard] },
-      { path: "projectRequest", component: ProjectRequestComponent,canActivate: [AdminGuard] }
+      {
+        path: "projectTypes",
+        component: ProjectTypeComponent,
+        canActivate: [AdminGuard]
+      },
+      {
+        path: "projectRequest",
+        component: ProjectRequestComponent,
+        canActivate: [AdminGuard]
+      }
     ]
   },
   { path: "login", component: LoginComponent },
-  { path: "error", component: ErrorComponent },
-  { path: "**", loadChildren: () => CmsModule }
+  {
+    path: "admin",
+    loadChildren: () =>
+      import("src/app/modules/manager/manager.module").then(
+        m => m.ManagerModule
+      ),
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'page-not-found',
+    component: NotFoundComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'page-not-found',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
@@ -76,7 +100,6 @@ export const routingComponents = [
   HomeComponent,
   ProjectInfoComponent,
   GeneralResourcesComponent,
-  ErrorComponent,
   ProjectTypeComponent,
   TransactionResultComponent,
   DonationComponent,

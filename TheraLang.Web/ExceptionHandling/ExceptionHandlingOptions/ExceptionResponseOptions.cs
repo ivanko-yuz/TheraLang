@@ -52,7 +52,6 @@ namespace TheraLang.Web.ExceptionHandling.ExceptionHandlingOptions
 
         private static IActionResult ProductionFormatter(ExceptionContext exceptionContext)
         {
-            var exception = exceptionContext.Exception;
             return new JsonResult(new
             {
                 Message = "Internal Server Error"

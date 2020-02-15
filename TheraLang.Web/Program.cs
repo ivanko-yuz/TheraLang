@@ -28,7 +28,6 @@ namespace TheraLang.Web
             catch (Exception e)
             {
                 Log.Fatal(e, "Host terminated unexpectedly");
-                return;
             }
             finally
             {

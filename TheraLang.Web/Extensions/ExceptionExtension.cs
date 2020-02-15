@@ -2,7 +2,6 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Piranha.Data;
 using TheraLang.Web.ExceptionHandling;
 using TheraLang.Web.ExceptionHandling.ExceptionHandlingOptions;
 

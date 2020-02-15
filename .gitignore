@@ -380,3 +380,6 @@ TheraLang.Web/wwwroot/fileuploads/
 
 # Logs
 /TheraLang.Web/Logs/
+
+# EF Core Migrations
+/TheraLang.DAL/Migrations/
