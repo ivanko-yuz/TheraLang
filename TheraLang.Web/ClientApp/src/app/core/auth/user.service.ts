@@ -64,7 +64,6 @@ export class UserService {
       return userId;
     }
     else
-    return console.error("method: getCurrentUserId(), error: user is not authorized ");
-    ;
+    return undefined;
   }
 }
