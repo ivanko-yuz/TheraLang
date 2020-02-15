@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace TheraLang.Web.ViewModels.SiteMap
 {
@@ -9,8 +10,6 @@ namespace TheraLang.Web.ViewModels.SiteMap
         public string MenuTitle { get; set; }
         
         public string Route { get; set; }
-
-        public int? ParentId { get; set; }
 
         public IEnumerable<SiteMapViewModel> SubPages { get; set; }
     }

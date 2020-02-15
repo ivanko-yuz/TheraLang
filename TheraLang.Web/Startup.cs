@@ -62,10 +62,6 @@ namespace TheraLang.Web
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddOpenApiDocument();
-            services.AddTransient<IPageService, PageService>(); // TODO: REMOVE Conflicts
-            services.AddTransient<IHtmlContentService, HtmlContentService>();
-            services.AddTransient<ISiteMapService, SiteMapService>();
-            services.AddTransient<INewsService, NewsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

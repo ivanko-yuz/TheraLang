@@ -24,8 +24,15 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         { 
-            var res = await _siteMapService.GetAll(); 
-            return Ok(new {pages = res});
+            var siteMapDtos = await _siteMapService.GetAll();
+            var mapper = new MapperConfiguration(mapOpts =>
+            {
+                mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>()
+                    .ForMember(vm => vm.MenuTitle,
+                        opts => opts.MapFrom(dto => dto.MenuName));
+            }).CreateMapper();
+            var siteMapVMs = mapper.Map<IEnumerable<SiteMapDto>,IEnumerable<SiteMapViewModel>>(siteMapDtos);
+            return Ok(new {pages = siteMapVMs});
         }
 
         [HttpPut]

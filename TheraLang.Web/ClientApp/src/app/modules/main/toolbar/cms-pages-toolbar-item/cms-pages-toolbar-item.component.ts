@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SiteMapService } from '../../../../core/http/manager/site-map.service';
-import { ToolbarItem } from './toolbar-item';
-import { Subscription } from 'rxjs';
+import {SiteMap} from "../../../../shared/models/site-map/site-map";
+import {log} from "util";
 
 @Component({
   selector: 'app-cms-pages-toolbar-item',
@@ -10,26 +10,19 @@ import { Subscription } from 'rxjs';
 })
 export class CmsPagesToolbarItemComponent implements OnInit {
 
-  toolbarItems: ToolbarItem[] = [];
-  private subscription = new Subscription();
+  toolbarItems: SiteMap[] = [];
 
   constructor(
     private siteMapService: SiteMapService
   ) { }
 
   ngOnInit() {
-    this.subscribeOnSiteMapService();
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  subscribeOnSiteMapService(): void {
-    const toolbarItemsSubscription = this.siteMapService.toolbarItems.subscribe(
-      next => (this.toolbarItems = next),
-      error => "do nothing for now"
-    );
-    this.subscription.add(toolbarItemsSubscription);
+    this.siteMapService.getSiteMap().subscribe(
+      {
+        next: value => {
+          this.toolbarItems = value["pages"] as SiteMap[];
+        }
+      }
+    )
   }
 }
