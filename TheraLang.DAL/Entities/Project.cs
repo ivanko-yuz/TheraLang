@@ -25,6 +25,7 @@ namespace TheraLang.DAL.Entities
         public int TypeId { get; set; }
 
         public decimal DonationTarget { get; set; }
+        public string ImgUrl { get; set; }
 
         public virtual ICollection<ResourceProject> ProjectResources { get; set; }
 

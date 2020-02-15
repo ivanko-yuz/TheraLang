@@ -10,16 +10,20 @@ using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Enums;
 using TheraLang.DAL.UnitOfWork;
+using System.IO;
 
 namespace TheraLang.BLL.Services
 {
     public class ProjectService : IProjectService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IFileService _fileService;
 
-        public ProjectService(IUnitOfWork unitOfWork)
+        public ProjectService(IUnitOfWork unitOfWork, IFileService fileService)
         {
             _unitOfWork = unitOfWork;
+            _fileService = fileService;
+
         }
 
         public async Task<IEnumerable<ProjectDto>> GetAllProjectsAsync()
@@ -65,6 +69,15 @@ namespace TheraLang.BLL.Services
         {
             var user = await _unitOfWork.Repository<User>().Get(u => u.Id == userId);
 
+            if (projectDto.ImgFile != null)
+            {
+                using (var fileStream = projectDto.ImgFile.OpenReadStream())
+                {
+                    var fileExtension = Path.GetExtension(projectDto.ImgFile.FileName);
+                    var fileUri = await _fileService.SaveFile(fileStream, fileExtension);
+                    projectDto.ImgUrl = fileUri.ToString();
+                }
+            }
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, Project>()
                     .ForMember(p => p.DonationTarget, opt => opt.MapFrom(src => src.DonationTargetSum))
                     .ForMember(p => p.IsActive, opt => opt.MapFrom(src => true)))
@@ -201,5 +214,6 @@ namespace TheraLang.BLL.Services
                 throw new Exception($"Error when getting project by {nameof(id)} = {id} ", ex);
             }
         }
+
     }
 }
