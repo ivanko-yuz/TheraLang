@@ -69,7 +69,7 @@ const routes: Routes = [
       import("src/app/modules/manager/manager.module").then(
         m => m.ManagerModule
       ),
-    canActivate: [AdminGuard]
+      canActivate: [AdminGuard]
   },
   {
     path: 'page-not-found',
