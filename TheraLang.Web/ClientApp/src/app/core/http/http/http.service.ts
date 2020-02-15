@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Project } from "../../../shared/models/project/project";
 import { baseUrl } from "src/app/configs/api-endpoint.constants";
 
 @Injectable()
@@ -45,14 +44,6 @@ export class HttpService {
 
   getAllResourcesById(projectId: number) {
     return this.http.get(this.url + "resources/all/" + projectId);
-  }
-
-  createProject(project: Project) {
-    return this.http.post(this.url + "projects" + "/" + "create", project);
-  }
-
-  updateProject(project: Project) {
-    return this.http.put(this.url + "/" + project.id, project);
   }
 
   getAllProjectTypes() {
