@@ -12,10 +12,10 @@
 
             <div class="item item-2">
                 <mat-form-field>
-                    <input matInput type="text" placeholder="Menu name" formControlName="menuName" id="menuName">
-                    <mat-error *ngIf="hasError('menuName', 'required')">Menu name is required</mat-error>
-                    <mat-error *ngIf="hasError('menuName', 'maxlength')">Menu name should be less than
-                        {{form.get('menuName').errors.maxlength.requiredLength}} characters</mat-error>
+                    <input matInput type="text" placeholder="Menu title" formControlName="menuTitle" id="menuTitle">
+                    <mat-error *ngIf="hasError('menuTitle', 'required')">Menu name is required</mat-error>
+                    <mat-error *ngIf="hasError('menuTitle', 'maxlength')">Menu name should be less than
+                        {{form.get('menuTitle').errors.maxlength.requiredLength}} characters</mat-error>
                 </mat-form-field>
             </div>
 
