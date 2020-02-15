@@ -53,7 +53,6 @@ import { CdkTreeModule } from "@angular/cdk/tree";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confirm-dialog.component";
-import { ErrorComponent } from "./shared/components/error/error.component";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ToolbarComponent } from "./modules/main/toolbar/toolbar.component";
@@ -98,6 +97,7 @@ import { MaterialFileInputModule } from "ngx-material-file-input";
 import { SortablejsModule } from "ngx-sortablejs";
 import { JwtModule } from "@auth0/angular-jwt";
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { PageComponent } from "./modules/main/pages/page/page.component";
@@ -125,7 +125,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomDatePipe,
     ResourcesTableComponent,
     ConfirmDialogComponent,
-    ErrorComponent,
     ProjectFormComponent,
     ResourcesInternalTableComponent,
     GeneralResourcesTableComponent,
@@ -144,7 +143,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CmsPagesToolbarItemComponent,
     PageComponent,
     PageViewComponent,
-    DaysLeftPipe
+    NotFoundComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -252,4 +251,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
