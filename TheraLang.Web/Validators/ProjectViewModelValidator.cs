@@ -5,7 +5,7 @@ using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Validators
 {
-    public class ProjectModelValidator: AbstractValidator<ProjectViewModel>
+    public class ProjectModelValidator : AbstractValidator<ProjectViewModel>
     {
         private static string ValidateStringLengthMessage =>
         "The field {PropertyName} has to be less than {MinLength} and more than {MaxLength}. Current length is {TotalLength}";
@@ -13,8 +13,8 @@ namespace TheraLang.Web.Validators
         public ProjectModelValidator()
         {
             ValidateStringLength(p => p.Name, 3, 30);
-            RuleFor(p => p.TypeId).GreaterThan(-1)
-                .WithMessage("No empty message");
+            RuleFor(p => p.TypeId).NotEqual(0)
+                .WithMessage("Project type must be specified");
         }
 
         private void ValidateStringLength(Expression<Func<ProjectViewModel, string>> expression, int minLength, int maxLength)

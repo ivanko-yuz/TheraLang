@@ -34,6 +34,7 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> CreateProject([FromBody] ProjectViewModel projectModel)
         {
+
             var userId = User.Claims.GetUserId();
             if (userId == null)
             {

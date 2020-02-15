@@ -4,17 +4,25 @@ import { Project } from "../../../shared/models/project/project";
 import { HttpService } from "../http/http.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "../../services/notification/notification.service";
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { HttpClient } from '@angular/common/http';
+import { baseUrl } from 'src/app/configs/api-endpoint.constants';
 
 @Injectable({
   providedIn: "root"
 })
 export class ProjectService {
+
+  private url = baseUrl + "projects/";
+
   constructor(
     private fb: FormBuilder,
     private httpService: HttpService,
+    private http: HttpClient,
     private notificationService: NotificationService,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    private jwtHelper: JwtHelperService,
+  ) { }
 
   form: FormGroup = this.fb.group({
     id: [""],
@@ -63,36 +71,12 @@ export class ProjectService {
     });
   }
 
-  addProject(project: Project) {
-    this.httpService.createProject(project).subscribe(
-      async (msg: string) => {
-        msg = await this.translate
-          .get("common.created-successfully")
-          .toPromise();
-        this.notificationService.success(msg);
-      },
-      async error => {
-        console.log(error);
-        this.notificationService.warn(
-          await this.translate.get("common.wth").toPromise()
-        );
-      }
-    );
+  createProject(project: Project) {
+    return this.http.post(this.url + "create", project);
   }
 
-  editProject(project: Project) {
-    this.httpService.updateProject(project).subscribe(
-      async (msg: string) => {
-        msg = await this.translate.get("common.updated-successfully").toPromise();
-        this.notificationService.success(msg);
-      },
-      async error => {
-        console.log(error);
-        this.notificationService.warn(
-          await this.translate.get("common.wth").toPromise()
-        );
-      }
-    );
+  updateProject(project: Project) {
+    return this.http.put(this.url + "update" + "/" + project.id, project);
   }
 
   getProjectTypes() {

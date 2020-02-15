@@ -59,4 +59,15 @@ export class UserService {
       responseType: "text"
     });
   }
+  getCurrentUserId()
+  {
+    let token: string = localStorage.getItem("jwt");
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      let jwtData = this.jwtHelper.decodeToken(token);
+      let userId = jwtData['Id']
+      return userId;
+    }
+    else
+    return undefined;
+  }
 }
