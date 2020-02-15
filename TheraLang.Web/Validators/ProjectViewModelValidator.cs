@@ -14,7 +14,7 @@ namespace TheraLang.Web.Validators
         {
             ValidateStringLength(p => p.Name, 3, 30);
             RuleFor(p => p.TypeId).GreaterThan(-1)
-                .WithMessage("");
+                .WithMessage("No empty message");
         }
 
         private void ValidateStringLength(Expression<Func<ProjectViewModel, string>> expression, int minLength, int maxLength)

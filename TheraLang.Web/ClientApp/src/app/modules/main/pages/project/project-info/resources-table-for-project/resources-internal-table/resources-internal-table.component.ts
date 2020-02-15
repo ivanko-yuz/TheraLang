@@ -11,7 +11,7 @@ import * as Constants from "../../../../../../../configs/resources-table";
 })
 export class ResourcesInternalTableComponent implements AfterViewInit {
   @Input() dataSource: MatTableDataSource<Resource>;
-  displayedColumns: string[] = ["id", "name", "date", "description"];
+  displayedColumns: string[] = ["id", "name", "date", "description", "url"];
   @Input() lengthDataArrForDataSource;
   pageSize: number;
   pageSizeOptions: number[];

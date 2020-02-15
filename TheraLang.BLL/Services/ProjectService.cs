@@ -51,7 +51,7 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<ProjectDto>> GetProjectsByStatusAsync(int status)
         {
             var projects =
-                (await _unitOfWork.Repository<Project>().GetAllAsync(i => i.StatusId == (ProjectStatus) status))
+                (await _unitOfWork.Repository<Project>().GetAllAsync(i => i.StatusId == (ProjectStatus)status))
                 .ToArray();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
