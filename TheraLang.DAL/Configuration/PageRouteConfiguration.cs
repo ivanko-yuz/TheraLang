@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TheraLang.DAL.Entities;
 
@@ -13,11 +10,11 @@ namespace TheraLang.DAL.Configuration
         {
             builder.ToTable("PageRoutes");
 
-            builder.Property(x => x.Id).IsRequired();
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Route).IsRequired().HasMaxLength(140); ;
             builder.HasIndex(p => p.Route).IsUnique();
             builder.HasMany(x => x.Pages)
-                .WithOne(x => x.Route)
+                .WithOne(x => x.PageRoute)
                 .HasForeignKey(x => x.RouteId);
         }
     }
