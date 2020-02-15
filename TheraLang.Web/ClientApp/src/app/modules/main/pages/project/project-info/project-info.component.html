@@ -10,7 +10,7 @@
           class="join-button"
           color="primary"
           (click)="onJoin()"
-          *ngIf="isAdmin() || isOwner()">
+          *ngIf="((isAdmin()||isMember()) && !isOwner())&& !isParticipant()">
           {{'components.projects.join'|translate}}
         </button>
         <button mat-icon-button (click)="onEdit(projectInfo)"  *ngIf="isAdmin() || isOwner()">

@@ -11,9 +11,7 @@ import { NotificationService } from "src/app/core/services/notification/notifica
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 import { ProjectService } from 'src/app/core/http/project/project.service';
 import { UserService } from 'src/app/core/auth/user.service';
-import { ProjectFormComponent } from '../project-form/project-form.component';
 import { Roles } from 'src/app/shared/models/roles/roles';
-import { ProjectParticipationRequest } from 'src/app/shared/models/project-participation/project-participation-request';
 
 @Component({
   selector: "app-project-info",
@@ -92,7 +90,6 @@ export class ProjectInfoComponent implements OnInit {
   generateOnceResourcesTable = false;
   sortedResourcesByCategory: Resource[][] = [];
   isOpen = false;
-  private arrowStyle: string;
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -147,18 +144,22 @@ export class ProjectInfoComponent implements OnInit {
     return this.userService.isRole(Roles.Member);
   }
 
-  isOwner(){
-    return this.userService.isAuthenticated();
+  isParticipant(){
+    return this.projectParticipants.some(p=>p.requstedGuidUserId === this.userService.getCurrentUserId());
   }
-  
+
+  isOwner(){
+    let ownerId = this.projectParticipants.find(p=>p.role===1).requstedGuidUserId;
+    return ownerId === this.userService.getCurrentUserId();
+  }
+
   getProjectProgress(project: Project) {
     return (project.donationsSum / project.donationTargetSum);
   }
 
   onEdit(project) {
-    this.service.initializeFormGroup();
-    this.service.populateForm(project);
-    this.dialogService.openFormDialog(ProjectFormComponent);
+    this.router.navigate(["projects/edit/" + project.id]);
+
   }
 
   async onDelete(id) {
@@ -192,6 +193,6 @@ export class ProjectInfoComponent implements OnInit {
     this.participService.getProjectParticipants(this.projectId)
       .subscribe(response => {
         this.projectParticipants = response
-      });
+      }); 
   }
 }
