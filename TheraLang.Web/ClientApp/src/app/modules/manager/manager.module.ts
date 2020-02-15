@@ -22,6 +22,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
 import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 import { PageService } from 'src/app/core/http/manager/page.service';
+import { CmsGenericModule } from '../cms-generic/cms-generic.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,6 @@ import { PageService } from 'src/app/core/http/manager/page.service';
     MatInputModule,
     MatRippleModule,
     MatCardModule,
-    QuillModule.forRoot(),
     SortablejsModule,
     MatIconModule,
     MatCardModule,
@@ -59,7 +59,8 @@ import { PageService } from 'src/app/core/http/manager/page.service';
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
         deps: [HttpClient]
       }
-    })
+    }),
+    CmsGenericModule
   ],
   exports: [
     MatButtonModule,
@@ -71,4 +72,4 @@ import { PageService } from 'src/app/core/http/manager/page.service';
     PageService
   ]
 })
-export class ManagerModule {}
+export class ManagerModule { }

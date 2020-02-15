@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Page } from "../../models/page/page.model";
+import { Page } from 'src/app/shared/models/page/page.model';
 
 @Component({
   selector: "app-page-view",
@@ -9,7 +9,7 @@ import { Page } from "../../models/page/page.model";
 export class PageViewComponent implements OnInit {
   @Input() page: Page;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
