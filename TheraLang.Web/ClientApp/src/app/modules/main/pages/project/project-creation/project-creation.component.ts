@@ -49,11 +49,8 @@ export class ProjectCreationComponent implements OnInit {
       const project: Project = this.service.form.value;
       console.log(project.name);
       if(project.ImgFile != null){
-        console.log("Not Null");
         project.ImgFile  = this.service.form.value.ImgFile.files[0] as File;
-        console.log(project.ImgFile);
       }
-      console.log(project);
       this.service.createProject(project).subscribe(
         async (msg: string) => {
           msg = await this.translate
