@@ -9,6 +9,7 @@ using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace TheraLang.Web.Controllers
 {
@@ -208,8 +209,13 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(projectId)} cannot be 0");
             }
 
-            var resources = await _service.GetAllResourcesByProjectId(projectId);
-            return Ok(resources);
+            var resourcesDto = await _service.GetAllResourcesByProjectId(projectId);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, ResourceViewModel>())
+                .CreateMapper();
+            var resourceViewModel = mapper.Map<IEnumerable<ResourceViewModel>>(resourcesDto);
+
+            return Ok(resourceViewModel);
         }
     }
 }

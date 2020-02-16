@@ -23,6 +23,7 @@ import { QuillMaterialComponent } from './shared/components/quill-material/quill
 import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 import { PageService } from 'src/app/core/http/manager/page.service';
 import { CmsGenericModule } from '../cms-generic/cms-generic.module';
+import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { CmsGenericModule } from '../cms-generic/cms-generic.module';
     MatRippleModule
   ],
   providers: [
-    PageService
+    PageService,
+    SlugifyPipe
   ]
 })
 export class ManagerModule { }

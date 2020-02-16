@@ -13,7 +13,7 @@ namespace TheraLang.DAL.Entities
         public int? ParentPageId { get; set; }
         
         public string Route { get; set; }
-        
+
         public int SortOrder { get; set; }
         
         public virtual Page ParentPage { get; set; }
