@@ -59,7 +59,9 @@
       "news-text": "Text",
       "NEWS-CREATION": "NEWS-CREATION",
       "NEWS-EDITING": "NEWS-EDITING",
-      "read-more": "read more..."
+      "read-more": "read more...",
+      "preview-image":"Preview image",
+      "content-images":"Content images"
     },
     "projects": {
       "title": "Projects",
