@@ -37,7 +37,7 @@
     "status": "Status",
     "messages": {
       "request-sent": "The application has been sent",
-      "cant-send-request": "Can't send request"
+      "cant-send-request": "Request has been sent alredy"
     },
     "added-by": "Added by:",
     "name": "Name",
