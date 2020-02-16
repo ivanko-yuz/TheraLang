@@ -1,6 +1,6 @@
 import { ResourceProjects } from "./resource-projects";
 import { ResourceCategory } from "./resource-category";
-import { User } from "../user/User";
+import { User } from "../user/user";
 
 export class Resource {
   toLowerCase() {
