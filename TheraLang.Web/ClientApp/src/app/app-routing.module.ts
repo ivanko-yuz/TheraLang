@@ -17,6 +17,7 @@ import { ProjectEditingComponent } from './modules/main/pages/project/project-ed
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
+import { PageComponent } from "./modules/main/pages/page/page.component";
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
         path: "projectRequest",
         component: ProjectRequestComponent,
         canActivate: [AdminGuard]
+      },
+      {
+        path: "pages/:pageRoute",
+        component: PageComponent
       }
     ]
   },
@@ -93,7 +98,7 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 
 export const routingComponents = [
   ProjectEditingComponent,

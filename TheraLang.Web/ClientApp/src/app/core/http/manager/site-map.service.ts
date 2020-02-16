@@ -84,9 +84,9 @@ export class SiteMapService {
 
   private mapToolbarItems(siteMap: SiteMap[]): ToolbarItem[] {
     return siteMap.map(item => {
-      const route = new CmsRoute(item.pageTypeName, item.id.toString());
+      const route = new CmsRoute(item.route, item.id.toString());
       return new ToolbarItem(
-        item.permalink,
+        item.route,
         route,
         item.menuTitle,
         this.mapToolbarItems(item.subPages)
