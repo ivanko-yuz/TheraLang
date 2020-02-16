@@ -16,7 +16,9 @@ import { transliterate } from 'transliteration';
 })
 export class EditPageComponent implements OnInit {
   page: Page;
+  page_eng: Page;
   pages: Page[];
+  routeUrl: string;
   form = new FormGroup({
     header: new FormControl('', [Validators.required, Validators.maxLength(120)]),
     menuTitle: new FormControl('', [Validators.required, Validators.maxLength(40)]),
@@ -41,6 +43,7 @@ export class EditPageComponent implements OnInit {
 
   ngOnInit() {
     this.fetchData();
+    this.routeUrl = this.route.snapshot.paramMap.get('route');
   }
 
   fetchData() {
@@ -61,7 +64,7 @@ export class EditPageComponent implements OnInit {
       this.form.controls.route.setValue(pages[0].route);
     });
   }
-  
+
   onCancel() {
     this.router.navigate(['admin', 'sitemap']);
   }
@@ -70,26 +73,8 @@ export class EditPageComponent implements OnInit {
     return this.form.controls[controlName].hasError(errorName);
   }
 
-  submit() {
-    if (this.form.invalid) {
-      return;
-    }
-
-    this.pageService.updatePages([{
-      ...this.page,
-      header: this.form.value.header,
-      menuTitle: this.form.value.menuTitle,
-      content: this.form.value.content,
-      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
-    },
-    {
-      ...this.page,
-      header: this.form.value.header_eng,
-      menuTitle: this.form.value.menuTitle_eng,
-      content: this.form.value.content_eng,
-      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
-    }
-  ]).subscribe(
+  updatePages(pages: Page[]) {
+    this.pageService.updatePages(pages, this.routeUrl).subscribe(
       async (msg: string) => {
         msg = await this.translate.get("common.updated-successfully").toPromise();
         this.notificationService.success(msg);
@@ -102,5 +87,33 @@ export class EditPageComponent implements OnInit {
         );
       }
     );
+  }
+
+  submit() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.page = {
+      ...this.page,
+      header: this.form.value.header,
+      content: this.form.value.content,
+      menuTitle: this.form.value.menuTitle,
+      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
+    }
+
+    this.page_eng = {
+      ...this.page_eng,
+      header: this.form.value.header_eng,
+      content: this.form.value.content_eng,
+      menuTitle: this.form.value.menuTitle_eng,
+      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
+    }
+
+    if (this.page_eng.header && this.page_eng.menuTitle && this.page_eng.content) {
+      this.updatePages([this.page, this.page_eng]);
+    } else {
+      this.updatePages([this.page]);
+    }
   }
 }

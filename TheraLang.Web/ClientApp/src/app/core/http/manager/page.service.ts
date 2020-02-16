@@ -23,8 +23,8 @@ export class PageService {
     return this.http.put(`${managerPageUrl}${page.id}`, page);
   }
 
-  updatePages(pages: Page[]) {
-    return this.http.put(`${managerPageUrl}route=${pages[0].route}`, pages);
+  updatePages(pages: Page[], route: string) {
+    return this.http.put(`${managerPageUrl}route=${route}`, pages);
   }
 
   getPagesByRoute(route: string) {
