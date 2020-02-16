@@ -1,7 +1,8 @@
 <div class = "home">
   <div class = "main" fxLayout="column"> 
     <div class="main-conteiner">
-      <img class="project-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQBGmxERhjnnPbAL0u9csBJ37RClXIVzwW7UgO2hK8NFFwkauuY" alt="">
+      <img *ngIf="projectInfo.imgUrl" class="project-image" [src]="projectInfo.imgUrl" alt="">
+      <img *ngIf="!projectInfo.imgUrl"  class="project-image" src="../../assets/img/trashcat.jpg" alt="">
       <div class = "header-panel" fxLayout = "raw">
         <h2 fxFlex="90">{{projectInfo.name}}</h2>
         <div class="buttons-container" fxLayout="row" fxFlex>

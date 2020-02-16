@@ -23,6 +23,9 @@ namespace TheraLang.Web.ViewModels
         public decimal DonationTargetSum { get; set; }
 
         public decimal SumLeftToCollect { get; set; }
+
+        public string ImgUrl { get; set; }
+
     }
 }
 
