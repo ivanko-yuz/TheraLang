@@ -6,10 +6,14 @@ import { Observable } from "rxjs";
 import { NotificationService } from "../../services/notification/notification.service";
 import { TranslateService } from "@ngx-translate/core";
 import { Router } from "@angular/router";
+import {Language} from "../../../shared/models/language/languages.enum";
 
 @Injectable()
 export class PageService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private translateService: TranslateService,
+    ) {}
 
   addPage(page: Page[]) {
     return this.http.post(`${managerPageUrl}`, page);
@@ -24,7 +28,8 @@ export class PageService {
   }
 
   getPageByRoute(route: string) {
-    return this.http.get(`${managerPageUrl}${route}`);
+    const lang = Language[this.translateService.currentLang];
+    return this.http.get(`${managerPageUrl}${lang}/${route}`);
   }
 
   deletePage(pageId: number): Observable<any> {

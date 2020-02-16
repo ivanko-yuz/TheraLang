@@ -20,13 +20,18 @@ namespace TheraLang.BLL.Services
             {
                 query = query.Where(p => p.Language == lang);
             }
-            var entities = await query.Include(sm => sm.SubPages)
+            var entities = await query
+                .Include(sm => sm.SubPages)
+                .Include(sm => sm.PageRoute)
                 .OrderBy(sm => sm.SortOrder)
                 .ToListAsync();
-                
+
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Page, SiteMapDto>()
-                .ForMember(dto => dto.SubPages, opts =>
-                    opts.MapFrom(entity => entity.SubPages.OrderBy(subpage => subpage.SortOrder)))
+                .ForMember(dto => dto.SubPages,
+                    opts =>
+                        opts.MapFrom(entity => entity.SubPages.OrderBy(subpage => subpage.SortOrder)))
+                .ForMember(dto => dto.Route,
+                    opts => opts.MapFrom(entity => entity.PageRoute.Route))
             ).CreateMapper();
 
             var onlyRoots = mapper.Map<IEnumerable<Page>, IEnumerable<SiteMapDto>>(entities)
