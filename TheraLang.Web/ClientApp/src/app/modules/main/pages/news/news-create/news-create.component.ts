@@ -20,10 +20,10 @@ export class NewsCreateComponent implements OnInit {
   constructor(
     private service:NewsService,
     private router: Router,
-    private translate: TranslateService, 
+    private translate: TranslateService,
     private notificationService: NotificationService
-    ) 
-    { 
+    )
+    {
     this.newsForm = new FormGroup({
       "title":new FormControl("",[Validators.required,Validators.maxLength(250), Validators.minLength(3)]),
       "text":new FormControl("", [Validators.required,Validators.maxLength(10000), Validators.minLength(5)]),
@@ -51,27 +51,31 @@ export class NewsCreateComponent implements OnInit {
         controls[controlName].markAsTouched()
       );
       return;
-    } 
+    }
     else {
       const formData = new FormData();
       const prev_img: FileInput = this.newsForm.get('previewImage').value;
       const cont_imgs: FileInput = this.newsForm.get('contentImages').value;
       const file = prev_img.files[0]; // in case user didn't selected multiple files
       const files = cont_imgs.files;
-      const news = this.newsForm.value as NewsCreate
-        formData.append("title",news.title);
-        formData.append("text", news.text);
-        formData.append("mainImage", file);
-        //formData.append("contentImages",JSON.stringify(files));
-        for (var i = 0; i < files.length; i++) {
-            formData.append('contentImages', files[i]);
+
+      const news = this.newsForm.value as NewsCreate;
+      formData.append("title", news.title);
+      formData.append("text", news.text);
+      formData.append("mainImage", file);
+      //formData.append("contentImages",JSON.stringify(files));
+      if (files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+          formData.append('contentImages', files[i]);
         }
+      }
       this.service.createNews(formData).subscribe(
         async (msg: string) => {
           msg = await this.translate
             .get("common.created-successfully")
             .toPromise();
           this.notificationService.success(msg);
+          this.router.navigateByUrl("/news");
         },
         async error => {
           console.log(error);
@@ -79,7 +83,7 @@ export class NewsCreateComponent implements OnInit {
             await this.translate.get("common.wth").toPromise()
           );
         })
-      this.router.navigate(["/news/create"]); 
+      this.router.navigate(["/news/create"]);
     }
   }
 
