@@ -47,7 +47,6 @@ export class ProjectCreationComponent implements OnInit {
       return;
     } else if (!this.service.form.get("id").value) {
       const project: Project = this.service.form.value;
-      console.log(project.name);
       if(project.ImgFile != null){
         project.ImgFile  = this.service.form.value.ImgFile.files[0] as File;
       }

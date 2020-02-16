@@ -23,7 +23,6 @@ namespace TheraLang.BLL.Services
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
-
         }
 
         public async Task<IEnumerable<ProjectDto>> GetAllProjectsAsync()

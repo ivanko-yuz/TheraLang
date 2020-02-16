@@ -20,7 +20,9 @@ namespace TheraLang.Web.ViewModels
         public DateTime ProjectEnd { get; set; }
 
         public decimal DonationTargetSum { get; set; }
+
         public string ImgUrl { get; set; }
+
         public IFormFile ImgFile { get; set; }
 
     }
