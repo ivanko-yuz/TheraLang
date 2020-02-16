@@ -17,6 +17,7 @@ namespace TheraLang.BLL.Services
         {
             _unitOfWork = unitOfWork;
         }
+
         public async Task<IEnumerable<MemberFeeDto>> GetMemberFeesAsync()
         {
             var memberFees = await _unitOfWork.Repository<MemberFee>().GetAll()
