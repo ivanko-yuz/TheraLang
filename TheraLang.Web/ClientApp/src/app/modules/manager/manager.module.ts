@@ -24,6 +24,9 @@ import { EditPageComponent } from "./page-manager/edit-page/edit-page.component"
 import { PageService } from "src/app/core/http/manager/page.service";
 import { CmsGenericModule } from "../cms-generic/cms-generic.module";
 import { SlugifyPipe } from "src/app/shared/pipes/slugify";
+import {MemberFeeComponent} from "./member-fee/member-fee.component";
+import {CreateFeeComponent} from "./member-fee/create-fee/create-fee.component";
+import {GetFeeComponent} from "./member-fee/get-fee/get-fee.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { SlugifyPipe } from "src/app/shared/pipes/slugify";
     SideBarComponent,
     PageManagerComponent,
     QuillMaterialComponent,
-    EditPageComponent
+    EditPageComponent,
+    MemberFeeComponent,
+    CreateFeeComponent,
+    GetFeeComponent
   ],
   imports: [
     CommonModule,
