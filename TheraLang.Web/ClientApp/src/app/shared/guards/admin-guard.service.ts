@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Roles } from 'src/app/shared/models/roles/roles';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
@@ -14,7 +15,7 @@ export class AdminGuard implements CanActivate {
       let jwtData = this.jwtHelper.decodeToken(token);
       let role = jwtData['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
 
-      if (role === "ADMIN") {
+      if (role === Roles.Admin) {
         return true;
       }
     }

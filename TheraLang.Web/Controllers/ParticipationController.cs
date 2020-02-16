@@ -62,7 +62,6 @@ namespace TheraLang.Web.Controllers
             var members = (await _projectParticipationServiceservice.GetAll()).ToList();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationDto, ParticipantViewModel>()
-                .ForMember(m => m.Id, opt => opt.MapFrom(m => m.User.Id))
                 .ForMember(m => m.UserName, opt => opt.MapFrom(m => m.User.UserName))
                 .ForMember(m => m.UserEmail, opt => opt.MapFrom(m => m.User.Email))
             ).CreateMapper();
@@ -99,5 +98,21 @@ namespace TheraLang.Web.Controllers
             await _projectParticipationServiceservice.CreateRequest(user.Id, projectId);
             return Ok();
         }
+
+        [HttpGet("{projectId}")]
+        public async Task<ActionResult<IEnumerable<ParticipantViewModel>>> GetProjectParticipants(int projectId)
+        {
+            var members = await _projectParticipationServiceservice.GetProjectParticipations(projectId);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationDto, ParticipantViewModel>()
+                .ForMember(m => m.UserName, opt => opt.MapFrom(m => m.User.UserName))
+                .ForMember(m => m.UserEmail, opt => opt.MapFrom(m => m.User.Email))
+            ).CreateMapper();
+
+            var membersModel = mapper.Map<IEnumerable<ProjectParticipationDto>, IEnumerable<ParticipantViewModel>>(members);
+
+            return Ok(membersModel);
+        }
+            
     }
 }

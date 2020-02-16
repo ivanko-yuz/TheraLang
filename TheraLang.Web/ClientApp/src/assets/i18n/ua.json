@@ -35,7 +35,7 @@
     "status": "Статус",
     "messages": {
       "request-sent": "Заявку надіслано",
-      "cant-send-request": "Неможливо надіслати запит"
+      "cant-send-request": "Запит вже надіслано"
     },
     "added-by": "Доданий:",
     "name": "Назва",

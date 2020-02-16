@@ -3,4 +3,5 @@ export class Page {
   header: string;
   content: string;
   menuName: string;
+  route: string;
 }
