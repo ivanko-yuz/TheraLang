@@ -1,39 +1,4 @@
-<h1>Member Fee</h1>
-<input type="button" value="Добавить" class="btn btn-default" (click)="add()" />
-<table *ngIf="tableMode; else create" class="table table-striped">
-    <thead>
-        <tr>
-            <td>FeeDate</td>
-            <td>FeeAmount</td>
-            <td></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let f of memberFees">
-            <ng-template >
-                <td>{{f.feeDate}}</td>
-                <td>{{f.feeAmount}}</td>
-                <td>
-                    <button class="btn btn-sm btn-danger" (click)="delete(f)">Удалить</button>
-                </td>
-            </ng-template>
-        </tr>
-    </tbody>
-</table>
- 
- 
-<!--шаблон для добавления-->
-<ng-template #create>
-    <div class="form-group">
-        <label>FeeDate</label>
-        <input type="date" [(ngModel)]="memberFee.feeDate" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>FeeAmount</label>
-        <input type="number" [(ngModel)]="memberFee.feeAmount" class="form-control" />
-    </div>
-    <div>
-        <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
-        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
-    </div>
-</ng-template>
+<div class="f">
+    <h1>Member Fee</h1>
+</div>
+<router-outlet></router-outlet>
