@@ -80,11 +80,11 @@ const routes: Routes = [
         component: UsersListComponent,
         canActivate: [AdminGuard],
       },
+      {
+        component: PageComponent,
+        path: "pages/:pageRoute",
+      },
     ],
-  },
-  {
-    component: PageComponent,
-    path: "pages/:pageRoute",
   },
   { path: "login", component: LoginComponent },
   { path: "registration", component: RegistrationComponent },

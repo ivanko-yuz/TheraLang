@@ -14,7 +14,6 @@ export class AdminGuard implements CanActivate {
     if (token && !this.jwtHelper.isTokenExpired(token)) {
       const jwtData = this.jwtHelper.decodeToken(token);
       const role = jwtData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
       if (role === Roles.Admin) {
         return true;
       }
