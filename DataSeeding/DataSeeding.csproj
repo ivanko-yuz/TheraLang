@@ -13,4 +13,10 @@
     <ProjectReference Include="..\TheraLang.DAL\TheraLang.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="..\TheraLang.Web\appsettings.json">
+      <Link>appsettings.json</Link>
+    </Content>
+  </ItemGroup>
+
 </Project>

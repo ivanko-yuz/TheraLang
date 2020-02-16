@@ -16,12 +16,8 @@ namespace DataSeeding
             {
                 try
                 {
-                    Task.Run(async () =>
-                    {
-                        var dataseed = new DbInitializer();
-                        dataseed.Seed(scope);
-                    });
-
+                    var dataseed = new DbInitializer();
+                    dataseed.Seed(scope);
                 }
                 catch (Exception ex)
                 {
