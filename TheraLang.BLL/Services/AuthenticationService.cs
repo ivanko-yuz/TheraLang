@@ -31,23 +31,23 @@ namespace TheraLang.BLL.Services
             return await Task.Run(() =>
             {
                 var claim = new[]
-            {
-                new Claim("Id", user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role.Name)
-            };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenManagement.Secret));
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                {
+                    new Claim("Id", user.Id.ToString()),
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Role, user.Role.Name)
+                };
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenManagement.Secret));
+                var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var jwtToken = new JwtSecurityToken(
-                _tokenManagement.Issuer,
-                _tokenManagement.Audience,
-                claim,
-                expires: DateTime.Now.AddMinutes(_tokenManagement.AccessExpiration),
-                signingCredentials: credentials
-            );
-            var token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
-            return token;
+                var jwtToken = new JwtSecurityToken(
+                    _tokenManagement.Issuer,
+                    _tokenManagement.Audience,
+                    claim,
+                    expires: DateTime.Now.AddMinutes(_tokenManagement.AccessExpiration),
+                    signingCredentials: credentials
+                );
+                var token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+                return token;
             });
         }
 

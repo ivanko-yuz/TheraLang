@@ -29,7 +29,6 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LoginModel, LoginModelDto>()).CreateMapper();
             var loginDto = mapper.Map<LoginModel, LoginModelDto>(login);
             var user = await _userManagement.GetUser(loginDto.Email, loginDto.Password);
-            if (user == null) return BadRequest();
             var token = await _authService.Authenticate(user);
             if (token == "")
             {

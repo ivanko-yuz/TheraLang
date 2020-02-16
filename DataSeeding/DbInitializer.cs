@@ -17,9 +17,9 @@ namespace DataSeeding
             try
             {
                 var context = service.ServiceProvider.GetRequiredService<IttmmDbContext>();
-                var adminRoleId = Guid.NewGuid();
-                var memberRoleId = Guid.NewGuid();
-                var guestRoleId = Guid.NewGuid();
+                var adminRoleId = new Guid("f4cbff0f-4bc0-42a4-9738-8d9f9bb734ba");
+                var memberRoleId = new Guid("50245ab3-6770-4269-ac26-30a942116a70");
+                var guestRoleId = new Guid("7e9b3674-e720-4d50-939b-93ce8e8b1c44");
                 if (!context.Roles.Any())
                 {
                     context.Roles.Add(new Role() { Id = adminRoleId, Name = "Admin" });

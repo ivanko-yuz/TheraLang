@@ -38,10 +38,7 @@ namespace TheraLang.BLL.Services
             {
                 return user;
             }
-            else
-            {
-                throw new Exception($"Cannot get user with {nameof(email)}: {email}.");
-            }
+            throw new Exception($"Cannot get user with {nameof(email)}: {email}.");
 
         }
 
@@ -64,20 +61,27 @@ namespace TheraLang.BLL.Services
             {
                 if (NewUser != null)
                 {
-                    var mappertwo = new MapperConfiguration(cfg => cfg.CreateMap<UserAllDto, UserDetails>()).CreateMapper();
-                    var userDetails = mappertwo.Map<UserAllDto, UserDetails>(NewUser);
+                    var mapper = new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<UserAllDto, UserDetails>();
+                        cfg.CreateMap<UserAllDto, User>();
+                    }).CreateMapper();
+                    
+                    var userDetails = mapper.Map<UserAllDto, UserDetails>(NewUser);
+                    
                     if (NewUser.Image != null)
                     {
-                        var imageUri = await _fileService.SaveFile(NewUser.Image.OpenReadStream(), Path.GetExtension(NewUser.Image.Name));
+                        var imageUri = await _fileService.SaveFile(NewUser.Image.OpenReadStream(), Path.GetExtension(NewUser.Image.FileName));
                         userDetails.ImageURl = imageUri.ToString();
                     }
-                    _unitOfWork.Repository<UserDetails>().Add(userDetails);
-
-                    var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserAllDto, User>()).CreateMapper();
+                    
                     var user = mapper.Map<UserAllDto, User>(NewUser);
+                    
                     user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
                     user.PasswordHash = PasswordHasher.HashPassword(NewUser.Password);
                     user.Details = userDetails;
+                    
+                    _unitOfWork.Repository<UserDetails>().Add(userDetails);
                     _unitOfWork.Repository<User>().Add(user);
 
                     await _unitOfWork.SaveChangesAsync();
