@@ -22,6 +22,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
 import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 import { PageService } from 'src/app/core/http/manager/page.service';
+import { CmsGenericModule } from '../cms-generic/cms-generic.module';
 import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
 
 @NgModule({
@@ -46,7 +47,6 @@ import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
     MatInputModule,
     MatRippleModule,
     MatCardModule,
-    QuillModule.forRoot(),
     SortablejsModule,
     MatIconModule,
     MatCardModule,
@@ -62,7 +62,8 @@ import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
         deps: [HttpClient]
       }
-    })
+    }),
+    CmsGenericModule
   ],
   exports: [
     MatButtonModule,
@@ -75,4 +76,4 @@ import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
     SlugifyPipe
   ]
 })
-export class ManagerModule {}
+export class ManagerModule { }

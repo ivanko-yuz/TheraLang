@@ -11,6 +11,8 @@ using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
 using TheraLang.Web.ActionFilters;
+using TheraLang.Web.ExceptionHandling;
+using TheraLang.Web.Extensions;
 using TheraLang.Web.Helpers;
 
 namespace TheraLang.Web
@@ -34,14 +36,19 @@ namespace TheraLang.Web
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddMvc(options => options.Filters.Add(new ModelValidationFilter()))
+            services.AddMvc(options =>
+                {
+                    options.Filters.Add(new ModelValidationFilter());
+                    options.Filters.Add(typeof(ExceptionFilter));
+                })
                 .AddFluentValidation(options =>
                 {
                     options.RegisterValidatorsFromAssemblyContaining<Startup>();
                     options.ImplicitlyValidateChildProperties = true;
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddExceptionHandler();
+            
             services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
 
@@ -71,11 +78,9 @@ namespace TheraLang.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
                 app.UseCors("development mode");
-                app.UseDeveloperExceptionPage();
                 app.UseOpenApi();
                 app.UseSwaggerUi3();
             }
