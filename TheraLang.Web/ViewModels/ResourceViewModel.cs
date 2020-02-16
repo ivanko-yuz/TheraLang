@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace TheraLang.Web.ViewModels
 {
@@ -13,9 +14,11 @@ namespace TheraLang.Web.ViewModels
         public string Url { get; set; }
 
         public string FileName { get; set; }
-        
+
         public IFormFile File { get; set; }
 
         public int CategoryId { get; set; }
+        public DateTime CreatedDateUtc { get; set; }
+        public ResourceCategoryViewModel ResourceCategory { get; set; }
     }
 }
