@@ -1,11 +1,13 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { SiteMap } from "../../../shared/models/site-map/site-map";
-import { Observable, Subject, EMPTY } from "rxjs";
-import { ToolbarItem } from "../../../modules/main/toolbar/cms-pages-toolbar-item/toolbar-item";
-import { CmsRoute } from "../../../modules/main/toolbar/toolbar-item/cms-route";
-import { cmsSitemapUrl } from "src/app/configs/api-endpoint.constants";
-import { ChangedSiteMap } from "src/app/shared/models/site-map/changed-site-map";
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {SiteMap} from "../../../shared/models/site-map/site-map";
+import {EMPTY, Observable, Subject} from "rxjs";
+import {ToolbarItem} from "../../../modules/main/toolbar/cms-pages-toolbar-item/toolbar-item";
+import {CmsRoute} from "../../../modules/main/toolbar/toolbar-item/cms-route";
+import {cmsSitemapUrl} from "src/app/configs/api-endpoint.constants";
+import {ChangedSiteMap} from "src/app/shared/models/site-map/changed-site-map";
+import {TranslateService} from "@ngx-translate/core";
+import {Language} from "../../../shared/models/language/languages.enum";
 
 @Injectable({
   providedIn: "root"
@@ -16,7 +18,9 @@ export class SiteMapService {
   siteMapUpdating = false;
   changesToMake: Map<number, ChangedSiteMap>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private translateService: TranslateService
+  ) {
     this.updateToolbarItemsOnSubscription();
     this.updateSiteMap();
     this.changesToMake = new Map<number, ChangedSiteMap>();
@@ -32,8 +36,8 @@ export class SiteMapService {
     });
   }
 
-  public getSiteMap(): Observable<SiteMap[]> {
-    return this.http.get<SiteMap[]>(cmsSitemapUrl);
+  public getSiteMap(language:Language): Observable<SiteMap[]> {
+    return this.http.get<SiteMap[]>(cmsSitemapUrl + "/" + language);
   }
 
   public updateSiteMapStructure(): Observable<any> {
@@ -57,7 +61,7 @@ export class SiteMapService {
       this.siteMapUpdating = true;
     }
 
-    const subscription = this.getSiteMap().subscribe(
+    const subscription = this.getSiteMap(Language.ua).subscribe(
       next => {
         this.siteMap.next(next["pages"]);
         this.siteMapUpdating = false;

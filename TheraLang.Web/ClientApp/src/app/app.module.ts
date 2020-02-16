@@ -102,9 +102,8 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { PageComponent } from "./modules/main/pages/page/page.component";
-import { QuillModule } from "ngx-quill";
 import { PageService } from "./core/http/manager/page.service";
-import { CmsGenericModule } from './modules/cms-generic/cms-generic.module';
+import {SharedModule} from "./modules/shared/shared.module";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -229,7 +228,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     SortablejsModule.forRoot({ animation: 400 }),
-    CmsGenericModule
+    SharedModule
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [

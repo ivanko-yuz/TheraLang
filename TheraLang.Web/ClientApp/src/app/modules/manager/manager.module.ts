@@ -5,7 +5,6 @@ import { ManagerRoutingModule } from "./manager-routing.module";
 import { CreatePageComponent } from "./page-manager/create-page/create-page.component";
 import { ManagerComponent } from "./manager.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { QuillModule } from "ngx-quill";
 import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule } from '@angular/material';
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { SortablejsModule } from "ngx-sortablejs";
@@ -22,8 +21,9 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
 import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 import { PageService } from 'src/app/core/http/manager/page.service';
-import { CmsGenericModule } from '../cms-generic/cms-generic.module';
 import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
+import {SharedModule} from "../shared/shared.module";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -38,33 +38,34 @@ import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
     EditPageComponent,
     SlugifyPipe
   ],
-  imports: [
-    CommonModule,
-    ManagerRoutingModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRippleModule,
-    MatCardModule,
-    SortablejsModule,
-    MatIconModule,
-    MatCardModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatTabsModule,
-    MatListModule,
-    MatTooltipModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
-        deps: [HttpClient]
-      }
-    }),
-    CmsGenericModule
-  ],
+    imports: [
+        CommonModule,
+        ManagerRoutingModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatRippleModule,
+        MatCardModule,
+        SortablejsModule,
+        MatIconModule,
+        MatCardModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatTabsModule,
+        MatListModule,
+        MatTooltipModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
+                deps: [HttpClient]
+            }
+        }),
+        SharedModule,
+        MatMenuModule
+    ],
   exports: [
     MatButtonModule,
     MatFormFieldModule,

@@ -6,35 +6,40 @@ using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
+using TheraLang.DAL.Enums;
 using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
     public class SiteMapService : ISiteMapService
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public SiteMapService(IUnitOfWork unitOfWork)
+        public async Task<IEnumerable<SiteMapDto>> GetAll(Language lang = default)
         {
-            _unitOfWork = unitOfWork;
-        }
-
-        public async Task<IEnumerable<SiteMapDto>> GetAll()
-        {
-            var entities = await _unitOfWork.Repository<Page>().GetAll()
-                .Include(sm => sm.SubPages)
+            var query = _unitOfWork.Repository<Page>().GetAll();
+            if (lang != default)
+            {
+                query = query.Where(p => p.Language == lang);
+            }
+            var entities = await query.Include(sm => sm.SubPages)
                 .OrderBy(sm => sm.SortOrder)
                 .ToListAsync();
-
+                
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Page, SiteMapDto>()
                 .ForMember(dto => dto.SubPages, opts =>
-                     opts.MapFrom(entity => entity.SubPages.OrderBy(subpage => subpage.SortOrder)))
+                    opts.MapFrom(entity => entity.SubPages.OrderBy(subpage => subpage.SortOrder)))
             ).CreateMapper();
 
             var onlyRoots = mapper.Map<IEnumerable<Page>, IEnumerable<SiteMapDto>>(entities)
                 .Where(sm => sm.ParentPageId == null).ToList();
 
             return onlyRoots;
+        }
+
+        private readonly IUnitOfWork _unitOfWork;
+
+        public SiteMapService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
         }
 
         public async Task UpdateStructure(IEnumerable<SiteMapDto> siteMap)
