@@ -60,7 +60,7 @@ namespace TheraLang.BLL.Services
                     var user = mapper.Map<UserAllDto, User>(NewUser);
                     user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
                     user.Id = Guid.NewGuid();
-                    user.PasswordHash = PasswordHasher.HashPassword(NewUser.PasswordHash);
+                    user.PasswordHash = PasswordHasher.HashPassword(NewUser.Password);
                     _unitOfWork.Repository<User>().Add(user);
 
                     var mappertwo = new MapperConfiguration(cfg => cfg.CreateMap<UserAllDto, UserDetails>()).CreateMapper();

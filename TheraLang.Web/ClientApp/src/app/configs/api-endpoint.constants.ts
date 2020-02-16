@@ -12,3 +12,4 @@ export const cmsSitemapUrl = baseUrl + "sitemap";
 export const statusApproveUrl = projectUrl + "approve";
 export const statusRejectUrl = projectUrl + "reject";
 export const accountUrl = baseUrl + "account";
+export const userUrl = baseUrl + "user";

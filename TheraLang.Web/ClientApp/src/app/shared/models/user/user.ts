@@ -2,10 +2,10 @@ export class User {
     id: number;
     firstName: string;
     lastName: string;
+    shortInformation: string;
+    imageURl: string;
     email: string;
-    isEmailConfirmed: boolean;
-    phooneNumber: string;
-    isPhoneNumberConfirmed: boolean;
-    registrationDate: string;
     resources: any[];
 }
+
+export class UserPageViewModel {}

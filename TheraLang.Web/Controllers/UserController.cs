@@ -17,14 +17,14 @@ namespace TheraLang.Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAuthenticateService _authenticateService;
-        public UserController (IUserService userService, IAuthenticateService authenticateService)
+        public UserController(IUserService userService, IAuthenticateService authenticateService)
         {
             _userService = userService;
             _authenticateService = authenticateService;
         }
 
         [HttpGet]
-        [Route("my/profile")]
+        [Route("me")]
         [Authorize]
         public async Task<IActionResult> GetMyProfile()
         {
@@ -35,16 +35,15 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpGet]
-        [Route("profile/{Id}")]
+        [Route("{Id}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetUser(Guid id)
         {
-
             var user = await _userService.GetUserById(id);
             return Ok(user);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Authorize]
         public async Task<IActionResult> UpdateUserDetails([FromForm]UserDetailsViewModel userUpdate)
         {
@@ -57,14 +56,14 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllUsers()
         {
             return Ok(await _userService.GetAllUsers());
         }
 
         [HttpPost("{id}/role")]
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ChangeRole(Guid id, [FromBody]ChangeRoleViewModel newRole)
         {
             var authUser = await _authenticateService.GetAuthUserAsync();
@@ -85,5 +84,24 @@ namespace TheraLang.Web.Controllers
             if (user == null) return BadRequest();
             return Ok(user);
         }
+
+        [HttpGet("roles")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetRoles()
+        {
+            var roles = await _userService.GetAllRols();
+            return Ok(roles);
+        }
+
+        [HttpGet("{id}/role")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetUserRole(Guid id)
+        {
+            var userRole = await _userService.GetUserRole(id);
+            return Ok(new UserRoleViewModel() { 
+                Id = userRole,
+            });
+        }
+
     }
 }

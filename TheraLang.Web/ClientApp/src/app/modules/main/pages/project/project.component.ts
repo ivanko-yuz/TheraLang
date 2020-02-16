@@ -9,7 +9,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { AsyncScheduler } from "rxjs/internal/scheduler/AsyncScheduler";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { PercentPipe } from '@angular/common';
-import { UserService } from 'src/app/core/auth/user.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,7 +27,7 @@ export class ProjectComponent implements OnInit {
     public service: ProjectService,
     private notificationService: NotificationService,
     private translate: TranslateService,
-    private userService: UserService, 
+    private userService: AuthService,
     private router: Router
   ) {}
 

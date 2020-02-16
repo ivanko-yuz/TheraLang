@@ -35,7 +35,6 @@ namespace TheraLang.BLL.Services
                 var userInf = mapper.Map<User, UserAllDto>(user);
                 userAll.Email = userInf.Email;
 
-
                 return userAll;
             }
             catch (Exception ex)
@@ -64,11 +63,9 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<UsersDto>> GetAllUsers()
         {
             var users = await _unitOfWork.Repository<UserDetails>().GetAllAsync();
-
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>())
                 .CreateMapper();
             var usersDto = mapper.Map<IEnumerable<UserDetails>, IEnumerable<UsersDto>>(users);
-
             return usersDto;
         }
 
@@ -112,6 +109,20 @@ namespace TheraLang.BLL.Services
             var userDto = mapper.Map<UserDetails, AdminUserViewDto>(userDetails);
             userDto.RoleName = (await _unitOfWork.Repository<Role>().Get(r => r.Id == user.RoleId)).Name;
             return userDto;
+        }
+
+        public async Task<IEnumerable<RolesListDto>> GetAllRols()
+        {
+            var Roles = await _unitOfWork.Repository<Role>().GetAllAsync();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Role, RolesListDto>()).CreateMapper();
+            var rolessDto = mapper.Map<IEnumerable<Role>, IEnumerable<RolesListDto>>(Roles);
+            return rolessDto;
+        }
+
+        public async Task<Guid> GetUserRole(Guid userId)
+        {
+            var user = await _unitOfWork.Repository<User>().Get(u => u.Id == userId);
+            return user.RoleId;
         }
     }
 }

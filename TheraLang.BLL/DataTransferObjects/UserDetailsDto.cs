@@ -12,5 +12,6 @@ namespace TheraLang.BLL.DataTransferObjects
         public IFormFile Image { get; set; }
         public string PhoneNumber { get; set; }
         public string ShortInformation { get; set; }
+        public string ImageURl { get; set; }
     }
 }

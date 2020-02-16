@@ -15,8 +15,8 @@ namespace TheraLang.Web.ViewModels
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
         [Required]
-        public string PasswordHash { get; set; }
-        [Compare("PasswordHash")]
+        public string Password { get; set; }
+        [Compare("Password")]
         [Required]
         public string ConfirmPassword { get; set; }
         [Required]

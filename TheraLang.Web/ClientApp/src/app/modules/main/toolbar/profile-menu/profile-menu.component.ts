@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { UserService } from "../../../../core/auth/user.service";
+import { AuthService } from "../../../../core/auth/auth.service";
 import { NotificationService } from "../../../../core/services/notification/notification.service";
 import {Router} from '@angular/router';
 
@@ -13,7 +13,7 @@ export class ProfileMenuComponent implements OnInit {
   @ViewChild("menu", { static: true }) menu;
 
   constructor(
-    private userService: UserService,
+    private userService: AuthService,
     private notification: NotificationService,
     private translate: TranslateService,
     private router: Router

@@ -41,7 +41,13 @@
     "create": "Створити",
     "description": "Опис",
     "date-of-creation": "Дата створення",
-    "type": "Тип"
+    "type": "Тип",
+    "change_role": "Змінити роль",
+    "roles_list": "Список ролей",
+    "no_thanks": "Ні, дякую",
+    "ok": "ОК",
+    "general_information": "Про користувача",
+    "short_information": "Коротка інформація"
   },
   "components": {
     "home": {
@@ -49,6 +55,9 @@
     },
     "cms-pages": {
       "title": "CMS Pages"
+    },
+    "users": {
+      "title": "Користувачі"
     },
     "projects": {
       "title": "Проекти",
@@ -90,6 +99,7 @@
       "signUp": "Реєстрація",
       "signIn": "Вхід",
       "logout": "Вийти",
+      "profile": "Сторінка юзера",
       "logged-out-successfully": "Ви вийшли з облікового запису",
       "logged-in-successfully": "Вхід успішний",
       "incorrect-login-or-password": "Неправильний логін або пароль",

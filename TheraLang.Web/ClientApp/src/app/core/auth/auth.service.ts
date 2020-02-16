@@ -6,7 +6,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 @Injectable({
   providedIn: "root"
 })
-export class UserService {
+export class AuthService {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
@@ -24,34 +24,28 @@ export class UserService {
   });
   readonly baseUrl = accountUrl;
   registrationForm = this.fb.group({
-    email: [
+    Email: [
+      "",
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.email]
+    ],
+    Password: [
       "",
       [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
     ],
-    password: [
+    ConfirmPassword: [
       "",
       [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
     ],
-    confirm_password: [
+    FirstName: [
       "",
       [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
     ],
-    first_name: [
+    LastName: [
       "",
       [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
     ],
-    last_name: [
-      "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
-    ],
-    phone_number: [
-      "",
-    ],
-    short_information: [
-      "",
-    ],
-    age: [
-      "",
+    Image: [
+      null,
     ]
   });
   login(loginData) {
@@ -59,33 +53,39 @@ export class UserService {
   }
 
   registration(req) {
-    return this.http.post(this.baseUrl + "/registration", req);
+    const formData = new FormData();
+    formData.append("Email", req.Email);
+    formData.append("FirstName", req.FirstName);
+    formData.append("LastName", req.LastName);
+    formData.append("Password", req.Password);
+    formData.append("ConfirmPassword", req.ConfirmPassword);
+    formData.append("Image", req.Image);
+    return this.http.post(this.baseUrl + "/registration", formData);
   }
 
   logout() {
     localStorage.removeItem("jwt");
   }
+
   isAuthenticated() {
-    let token: string = localStorage.getItem("jwt");
-    if (token && !this.jwtHelper.isTokenExpired(token)) {
-      return true;
-    } else {
-      return false;
-    }
+    const token: string = localStorage.getItem("jwt");
+    return token && !this.jwtHelper.isTokenExpired(token);
   }
+
   isAdmin() {
-    let token: string = localStorage.getItem("jwt");
+    const token: string = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
-      let role = this.jwtHelper.decodeToken(token)[
+      const role = this.jwtHelper.decodeToken(token)[
         "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
       ];
-      if (role === "ADMIN") {
+      if (role === "Admin") {
         return true;
       }
     } else {
       return false;
     }
   }
+
   getUserName() {
     return this.http.get(this.baseUrl + "/getUserName", {
       responseType: "text"

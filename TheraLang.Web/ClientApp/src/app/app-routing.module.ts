@@ -18,6 +18,9 @@ import { AuthGuard } from "./core/services/guards/auth-guard.service";
 import{AdminGuard} from "./core/services/guards/admin-guard.service";
 import { ProjectFormComponent } from './modules/main/pages/project/project-form/project-form.component';
 import {RegistrationComponent} from './modules/registration/registration.component';
+import {UserPageComponent} from './modules/user-page/user-page.component';
+import {UsersListComponent} from './modules/users_list/users-list.component';
+import {ProfileComponent} from './modules/profile/profile.component';
 const routes: Routes = [
   {
     path: "",
@@ -58,7 +61,22 @@ const routes: Routes = [
       { path: "projectRequest",
         component: ProjectRequestComponent,
         canActivate: [AdminGuard],
-      }
+      },
+      {
+        path: "users/:userID",
+        component: UserPageComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: "profile",
+        component: ProfileComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: "users",
+        component: UsersListComponent,
+        canActivate: [AdminGuard],
+      },
     ]
   },
   { path: "login", component: LoginComponent },

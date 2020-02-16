@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { UserService } from "../../core/auth/user.service";
+import { AuthService } from "../../core/auth/auth.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { DialogService } from "src/app/core/services/dialog/dialog.service";
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from "@angular/router";
 
 
 
@@ -19,19 +19,18 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private notificationService: NotificationService,
     private dialog: DialogService,
-    private userService: UserService,
+    private authService: AuthService,
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || "/";
   }
 
   onSubmit() {
-    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.userService.registration(this.userService.registrationForm.value).subscribe(value => {
+    this.authService.registration(this.authService.registrationForm.value).subscribe(value => {
       this.router.navigateByUrl("/login");
       this.notificationService.success(this.translate
         .instant("components.account.successfully-registration"));
@@ -42,7 +41,18 @@ export class RegistrationComponent implements OnInit {
   }
 
   onClose() {
-    this.userService.loginForm.reset();
+    this.authService.loginForm.reset();
     this.dialog.closeDialogs();
+  }
+
+  onFileChange(event) {
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      console.log(file);
+
+      this.authService.registrationForm.patchValue({
+        Image: file,
+      });
+    }
   }
 }

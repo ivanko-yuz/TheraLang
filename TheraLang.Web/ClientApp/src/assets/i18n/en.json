@@ -41,7 +41,13 @@
     "create": "Create",
     "description": "Description",
     "date-of-creation": "Date of creation",
-    "type": "Type"
+    "type": "Type",
+    "change_role": "Change role",
+    "roles_list": "Roles list",
+    "no_thanks": "No, thanks",
+    "ok": "Ok",
+    "general_information": "General information",
+    "short_information": "Short information"
   },
   "components": {
     "home": {
@@ -49,6 +55,9 @@
     },
     "cms-pages": {
       "title": "CMS Pages"
+    },
+    "users": {
+      "title": "Users"
     },
     "projects": {
       "title": "Projects",
@@ -89,6 +98,7 @@
     "account": {
       "signUp": "Sign Up",
       "signIn": "Sign In",
+      "profile": "Your profile",
       "logout": "Logout",
       "logged-out-successfully": "You are successfully logged out",
       "logged-in-successfully": "You are logged in",

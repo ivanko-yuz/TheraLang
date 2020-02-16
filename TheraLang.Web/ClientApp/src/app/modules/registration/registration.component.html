@@ -2,48 +2,48 @@
   <a [routerLink] = "['/']"><img class="back-img" type="image" src="/assets/img/back.png"></a>
   <mat-card-title><img src="/assets/img/login.png" alt=""></mat-card-title>
   <mat-card-content>
-    <form [formGroup]="this.userService.registrationForm" autocomplete="off">
+    <form [formGroup]="this.authService.registrationForm" autocomplete="off">
       <p>
         <mat-form-field appearance="outline">
           <mat-label>{{'components.account.first_name'|translate}}</mat-label>
-          <input formControlName="first_name" autofocus matInput>
-          <mat-error *ngIf="this.userService.registrationForm.get('first_name').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
+          <input formControlName="FirstName" autofocus matInput>
+          <mat-error *ngIf="this.authService.registrationForm.get('FirstName').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
           <mat-error
-            *ngIf="this.userService.registrationForm.get('first_name').errors?.minlength || this.userService.registrationForm.get('first_name').errors?.maxlength">
+            *ngIf="this.authService.registrationForm.get('FirstName').errors?.minlength || this.authService.registrationForm.get('FirstName').errors?.maxlength">
             {{'components.account.error-input-login-length'|translate}}</mat-error>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>{{'components.account.last_name'|translate}}</mat-label>
-          <input formControlName="last_name" autofocus matInput>
-          <mat-error *ngIf="this.userService.registrationForm.get('last_name').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
+          <input formControlName="LastName" autofocus matInput>
+          <mat-error *ngIf="this.authService.registrationForm.get('LastName').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
           <mat-error
-            *ngIf="this.userService.registrationForm.get('last_name').errors?.minlength || this.userService.registrationForm.get('last_name').errors?.maxlength">
+            *ngIf="this.authService.registrationForm.get('LastName').errors?.minlength || this.authService.registrationForm.get('LastName').errors?.maxlength">
             {{'components.account.error-input-login-length'|translate}}</mat-error>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>{{'components.account.email'|translate}}</mat-label>
-          <input formControlName="email" autofocus matInput>
-          <mat-error *ngIf="this.userService.registrationForm.get('email').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
+          <input formControlName="Email" autofocus matInput>
+          <mat-error *ngIf="this.authService.registrationForm.get('Email').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
           <mat-error
-            *ngIf="this.userService.registrationForm.get('email').errors?.minlength || this.userService.registrationForm.get('email').errors?.maxlength">
+            *ngIf="this.authService.registrationForm.get('Email').errors?.minlength || this.authService.registrationForm.get('Email').errors?.maxlength">
             {{'components.account.error-input-login-length'|translate}}</mat-error>
         </mat-form-field>
       </p>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>{{'components.account.password'|translate}}</mat-label>
-          <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+          <input formControlName="Password" matInput [type]="hide ? 'password' : 'text'">
 
-          <mat-error *ngIf="this.userService.registrationForm.get('password').errors?.required">{{'components.account.error-input-required'|translate}} </mat-error>
+          <mat-error *ngIf="this.authService.registrationForm.get('Password').errors?.required">{{'components.account.error-input-required'|translate}} </mat-error>
           <mat-error
-            *ngIf="this.userService.registrationForm.get('password').errors?.minlength || this.userService.registrationForm.get('password').errors?.maxlength">
-            {{'components.account.error-input-password-length'|translate}}</mat-error>
+            *ngIf="this.authService.registrationForm.get('Password').errors?.minlength || this.authService.registrationForm.get('Password').errors?.maxlength">
+            {{'components.account.error-input-Password-length'|translate}}</mat-error>
 
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
             [attr.aria-pressed]="'hide'">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
@@ -53,21 +53,23 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>{{'components.account.confirm_password'|translate}}</mat-label>
-          <input formControlName="confirm_password" matInput [type]="hide ? 'password' : 'text'">
+          <input formControlName="ConfirmPassword" matInput [type]="hide ? 'password' : 'text'">
 
-          <mat-error *ngIf="this.userService.registrationForm.get('confirm_password').errors?.required">{{'components.account.error-input-required'|translate}} </mat-error>
+          <mat-error *ngIf="this.authService.registrationForm.get('ConfirmPassword').errors?.required">{{'components.account.error-input-required'|translate}} </mat-error>
           <mat-error
-            *ngIf="this.userService.registrationForm.get('confirm_password').errors?.minlength || this.userService.registrationForm.get('confirm_password').errors?.maxlength">
-            {{'components.account.error-input-password-length'|translate}}</mat-error>
+            *ngIf="this.authService.registrationForm.get('ConfirmPassword').errors?.minlength || this.authService.registrationForm.get('ConfirmPassword').errors?.maxlength">
+            {{'components.account.error-input-Password-length'|translate}}</mat-error>
 
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
                   [attr.aria-pressed]="'hide'">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
 
         </mat-form-field>
       </p>
-
+      <p>
+        <input class="ng-hide" id="input-file-id" type="file" autofocus (change)="onFileChange($event)">
+      </p>
 
       <div class="button">
         <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">{{'common.confirm'|translate}}</button>

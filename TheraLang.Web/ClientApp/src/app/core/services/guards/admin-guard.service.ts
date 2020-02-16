@@ -8,13 +8,13 @@ export class AdminGuard implements CanActivate {
   constructor(private jwtHelper: JwtHelperService, private router: Router) {
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    var token = localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
 
     if (token && !this.jwtHelper.isTokenExpired(token)) {
-      let jwtData = this.jwtHelper.decodeToken(token);
-      let role = jwtData['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      const jwtData = this.jwtHelper.decodeToken(token);
+      const role = jwtData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-      if (role === "ADMIN") {
+      if (role === "Admin") {
         return true;
       }
     }

@@ -69,7 +69,7 @@ import { ProjectParticipationService } from "./core/http/project-participants/pr
 import { ProjectTypeService } from "./core/services/project-type/project-type.service";
 import { DonationService } from "./core/http/donations/donation.service";
 import { HttpProjectService } from "./core/http/project/http-project.service";
-import { UserService } from "./core/auth/user.service";
+import { AuthService } from "./core/auth/auth.service";
 import { ResourceCreateService } from "./core/http/resource/resource-create.service";
 import { ProjectTypeHttp } from "./core/http/project-type/project-type-Http.service";
 import { CmsModule } from "./modules/cms-generic/cms.module";
@@ -103,6 +103,11 @@ import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
 import { AuthGuard } from "./core/services/guards/auth-guard.service";
 import { AdminGuard } from './core/services/guards/admin-guard.service';
 import {RegistrationComponent} from './modules/registration/registration.component';
+import {UserPageComponent} from './modules/user-page/user-page.component';
+import {UsersListComponent} from './modules/users_list/users-list.component';
+import {UserService} from './core/services/user/user.service';
+import {ChangeRoleComponent} from './modules/users_list/change-role/change-role.component';
+import {ProfileComponent} from './modules/profile/profile.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -135,6 +140,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectRequestComponent,
     LoginComponent,
     RegistrationComponent,
+    UserPageComponent,
+    UsersListComponent,
+    ChangeRoleComponent,
+    ProfileComponent,
     ProfileMenuComponent,
     ResourceCreateComponent,
     ProjectTypeFormComponent,
@@ -148,6 +157,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResourcesInternalTableComponent,
     ProjectFormComponent,
     ConfirmDialogComponent,
+    ChangeRoleComponent,
     LoginComponent,
     ResourceCreateComponent,
     ProjectTypeFormComponent,
@@ -240,6 +250,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectTypeService,
     DonationService,
     HttpProjectService,
+    AuthService,
     UserService,
     ResourceCreateService,
     ProjectTypeHttp,

@@ -14,6 +14,8 @@ namespace TheraLang.BLL.Interfaces
         Task<IEnumerable<UsersDto>> GetAllUsers();
         Task<bool> ChangeRole(Guid userId, Guid newRole);
         Task<AdminUserViewDto> AdminUserView(Guid userId);
+        Task<IEnumerable<RolesListDto>> GetAllRols();
+        Task<Guid> GetUserRole(Guid userId);
     }
 
 }
