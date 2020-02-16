@@ -16,14 +16,11 @@ namespace TheraLang.Web.Controllers
     public class MemberFeeController : ControllerBase
     {
         private readonly IMemberFeeService _memberFeeService;
-
-
         public MemberFeeController(IMemberFeeService memberFeeService)
         {
             _memberFeeService = memberFeeService;
-
         }
-
+      
         // GET: api/memberFee
         [HttpGet]
         public async Task<IActionResult> GetAll()

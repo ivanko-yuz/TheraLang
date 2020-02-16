@@ -7,7 +7,7 @@ using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Configuration
 {
-    class MemberFeeConfiguratoin: IEntityTypeConfiguration<MemberFee>
+    class MemberFeeConfiguration: IEntityTypeConfiguration<MemberFee>
     {
         public void Configure(EntityTypeBuilder<MemberFee> builder)
         {

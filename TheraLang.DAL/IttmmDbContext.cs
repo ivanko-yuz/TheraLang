@@ -45,7 +45,7 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new UploadedNewsContentImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new PageConfiguration());
-            modelBuilder.ApplyConfiguration(new MemberFeeConfiguratoin());
+            modelBuilder.ApplyConfiguration(new MemberFeeConfiguration());
             var AdminRoleID = Guid.NewGuid();
             var MemberRoleId = Guid.NewGuid();
             modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
