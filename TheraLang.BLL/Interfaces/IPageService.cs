@@ -6,7 +6,7 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IPageService
     {
-        Task Add(PageDto page);
+        Task Add(IEnumerable<PageDto> pages);
         Task Update(PageDto page, int pageId);
         Task Remove(int pageId);
         Task<PageDto> GetPageByRoute(string route, LanguageDto lang);

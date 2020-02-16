@@ -25,20 +25,20 @@ namespace TheraLang.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> CreatePage([FromBody] PageViewModel pageModel)
+        public async Task<IActionResult> CreatePages([FromBody] IEnumerable<PageViewModel> pageModels)
         {
             var userId = User.Claims.GetUserId();
             if (userId == null) return BadRequest();
 
-            if (pageModel == null) return BadRequest();
+            if (pageModels == null) return BadRequest();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>()
             .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
                 .CreateMapper();
-            var pageDto = mapper.Map<PageViewModel, PageDto>(pageModel);
+            var pagesDto = mapper.Map<IEnumerable<PageViewModel>, IEnumerable<PageDto>>(pageModels);
 
-            await _pageService.Add(pageDto);
-            return Ok(pageDto);
+            await _pageService.Add(pagesDto);
+            return Ok();
         }
 
         [HttpPut("{id}")]
@@ -57,7 +57,7 @@ namespace TheraLang.Web.Controllers
             var pageDto = mapper.Map<PageViewModel, PageDto>(pageModel);
 
             await _pageService.Update(pageDto, id);
-            return Ok(pageDto);
+            return Ok();
         }
 
         [HttpGet("id{id}")]

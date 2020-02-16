@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class PageService {
   constructor(private http: HttpClient) { }
 
-  addPage(page: Page) {
+  addPage(page: Page[]) {
     return this.http.post(`${managerPageUrl}`, page);
   }
 

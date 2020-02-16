@@ -8,6 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
 import { transliterate } from 'transliteration';
 import { Language } from 'src/app/shared/models/language/languages.enum';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-page',
@@ -50,8 +51,8 @@ export class CreatePageComponent implements OnInit {
     return this.form.controls[controlName].hasError(errorName);
   }
 
-  async createPage(page: Page) {
-    this.pageService.addPage(page).subscribe(async (msg: string) => {
+  async createPage(pages: Page[]) {
+    this.pageService.addPage(pages).subscribe(async (msg: string) => {
       msg = await this.translate
         .get("common.created-successfully")
         .toPromise();
@@ -84,11 +85,10 @@ export class CreatePageComponent implements OnInit {
       language: Language.English
     }
 
-    await this.createPage(this.page);
     if (this.page_eng.header && this.page_eng.menuTitle && this.page_eng.content) {
-      console.log(this.page);
-      console.log(this.page_eng);
-      await this.createPage(this.page_eng);
+      await this.createPage([this.page, this.page_eng]);
+    } else {
+      await this.createPage([this.page]);
     }
   }
 }

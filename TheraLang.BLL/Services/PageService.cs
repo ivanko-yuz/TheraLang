@@ -24,27 +24,37 @@ namespace TheraLang.BLL.Services
             _htmlContentService = htmlContentService;
         }
 
-        public async Task Add(PageDto pageDto)
+        public async Task Add(IEnumerable<PageDto> pagesDto)
         {
-            pageDto.Content = pageDto.Content.TrimScript();
-            pageDto.Content = await _htmlContentService.SavePictures(pageDto.Content);
+            foreach (var pageDto in pagesDto)
+            {
+                pageDto.Content = pageDto.Content.TrimScript();
+                pageDto.Content = await _htmlContentService.SavePictures(pageDto.Content);
+            }
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, Page>()
                     .ForMember(c => c.Content, opt => opt.MapFrom(n => n.Content.ToString())))
                 .CreateMapper();
-            var page = mapper.Map<PageDto, Page>(pageDto);
+            var pages = mapper.Map<IEnumerable<PageDto>, IEnumerable<Page>>(pagesDto);
 
-            var route = await _unitOfWork.Repository<PageRoute>().Get(r => r.Route == pageDto.Route);
-            page.PageRoute = route ?? new PageRoute() { Route = pageDto.Route };
+            var route = new PageRoute() { Route = pagesDto.FirstOrDefault().Route };
+            foreach (var page in pages)
+            {
+                page.PageRoute = route;
+            }
+
 
             try
             {
-                _unitOfWork.Repository<Page>().Add(page);
+                foreach (var page in pages)
+                {
+                    _unitOfWork.Repository<Page>().Add(page);
+                }
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
             {
-                e.Data["page"] = pageDto;
+                e.Data["page"] = pagesDto;
                 throw;
             }
         }
