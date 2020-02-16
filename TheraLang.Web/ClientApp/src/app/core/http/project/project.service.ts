@@ -42,7 +42,9 @@ export class ProjectService {
     projectStart: ["", Validators.required],
     projectEnd: [""],
     typeId: ["", Validators.required],
-    donationTargetSum: [""]
+    donationTargetSum: [""], 
+    ImgFile:[null],
+    imgUrl:[""]
   });
 
   initializeFormGroup() {
@@ -54,7 +56,9 @@ export class ProjectService {
       projectStart: "",
       projectEnd: "",
       typeId: "",
-      donationTargetSum: ""
+      donationTargetSum: "",
+      ImgFile:null,
+      imgUrl:""
     });
   }
 
@@ -67,12 +71,26 @@ export class ProjectService {
       projectStart: project.projectStart,
       projectEnd: project.projectEnd,
       typeId: project.typeId,
-      donationTargetSum: project.donationTargetSum
+      donationTargetSum: project.donationTargetSum,
+      ImgFile: project.ImgFile,
+      imgUrl:project.imgUrl
     });
   }
 
   createProject(project: Project) {
-    return this.http.post(this.url + "create", project);
+    const formData = new FormData();
+    formData.append("id", project.id.toString());
+    formData.append("name", project.name);
+    formData.append("description", project.description);
+    formData.append("details", project.details);
+    formData.append("projectStart", project.projectStart.toDateString());
+    formData.append("projectEnd", project.projectEnd.toDateString());
+    formData.append("typeId", project.typeId.toString());
+    formData.append("donationTargetSum", project.donationTargetSum.toString());
+    formData.append("ImgFile", project.ImgFile as File);
+    formData.append("imgUrl", project.imgUrl);
+    
+    return this.http.post(this.url + "create", formData);
   }
 
   updateProject(project: Project) {

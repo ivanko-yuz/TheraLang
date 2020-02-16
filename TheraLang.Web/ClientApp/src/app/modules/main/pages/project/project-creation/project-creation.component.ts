@@ -5,6 +5,7 @@ import { ProjectType } from "../../../../../shared/models/project-type/project-t
 import { TranslateService } from "@ngx-translate/core";
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
+import { Project } from 'src/app/shared/models/project/project';
 
 @Component({
   selector: "app-create-project",
@@ -45,8 +46,15 @@ export class ProjectCreationComponent implements OnInit {
       );
       return;
     } else if (!this.service.form.get("id").value) {
-
-      this.service.createProject(this.service.form.value).subscribe(
+      const project: Project = this.service.form.value;
+      console.log(project.name);
+      if(project.ImgFile != null){
+        console.log("Not Null");
+        project.ImgFile  = this.service.form.value.ImgFile.files[0] as File;
+        console.log(project.ImgFile);
+      }
+      console.log(project);
+      this.service.createProject(project).subscribe(
         async (msg: string) => {
           msg = await this.translate
             .get("common.created-successfully")
@@ -60,7 +68,7 @@ export class ProjectCreationComponent implements OnInit {
             await this.translate.get("common.wth").toPromise()
           );
         }
-      );;
+      );
     } else {
       // TODO: Is it needed here?
       // this.service.updateProject(this.service.form.value);
