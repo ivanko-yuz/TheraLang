@@ -26,11 +26,6 @@ export class NewsPageComponent implements OnInit {
         .subscribe((data:NewsPreview[])=>this.newsList=data);
   }
 
-  isAuthenticated()
-  {
-       return this.userService.isAuthenticated();
-  }
-
   isAdmin()
   {
       return this.userService.isAdmin();
