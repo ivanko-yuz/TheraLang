@@ -6,7 +6,7 @@ import { CreatePageComponent } from "./page-manager/create-page/create-page.comp
 import { ManagerComponent } from "./manager.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { QuillModule } from "ngx-quill";
-import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule, MatDatepickerModule } from '@angular/material';
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { SortablejsModule } from "ngx-sortablejs";
 import { PageEntryComponent } from "./sitemap-editor/page-entry/page-entry.component";
@@ -24,6 +24,8 @@ import { EditPageComponent } from './page-manager/edit-page/edit-page.component'
 import { PageService } from 'src/app/core/http/manager/page.service';
 import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
 import { MemberFeeComponent } from './member-fee/member-fee.component';
+import { CreateFeeComponent } from './member-fee/create-fee/create-fee.component';
+import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { MemberFeeComponent } from './member-fee/member-fee.component';
     PageManagerComponent,
     QuillMaterialComponent,
     EditPageComponent,
-    MemberFeeComponent
+    MemberFeeComponent,
+    CreateFeeComponent,
+    GetFeeComponent
   ],
   imports: [
     CommonModule,
@@ -57,6 +61,7 @@ import { MemberFeeComponent } from './member-fee/member-fee.component';
     MatListModule,
     MatTooltipModule,
     FormsModule,
+    MatDatepickerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
