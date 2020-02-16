@@ -32,7 +32,7 @@ namespace TheraLang.Web.Controllers
 
             var memberFeeDtos = await _memberFeeService.GetMemberFeesAsync();
 
-            if (!memberFeeDtos.Any())
+            if (memberFeeDtos == null)
             {
                 return NotFound();
             }
