@@ -38,18 +38,11 @@ namespace TheraLang.BLL.Services
             var pages = mapper.Map<IEnumerable<PageDto>, IEnumerable<Page>>(pagesDto);
 
             var route = new PageRoute() { Route = pagesDto.FirstOrDefault().Route };
-            foreach (var page in pages)
-            {
-                page.PageRoute = route;
-            }
-
+            (pages as List<Page>).ForEach(p => p.PageRoute = route);
 
             try
             {
-                foreach (var page in pages)
-                {
-                    _unitOfWork.Repository<Page>().Add(page);
-                }
+                (pages as List<Page>).ForEach(p => _unitOfWork.Repository<Page>().Add(p));
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
@@ -110,6 +103,43 @@ namespace TheraLang.BLL.Services
             return pageDto;
         }
 
+        public async Task UpdatePages(IEnumerable<PageDto> pagesDto, string route)
+        {
+            foreach (var pageDto in pagesDto)
+            {
+                pageDto.Content = pageDto.Content.TrimScript();
+                pageDto.Content = await _htmlContentService.SavePictures(pageDto.Content);
+            }
+
+            var pages = await _unitOfWork.Repository<Page>().GetAll()
+                .Include(p => p.PageRoute)
+                .Where(p => p.PageRoute.Route == route)
+                .ToListAsync();
+
+            var _route = await _unitOfWork.Repository<PageRoute>()
+                .Get((r => r.Route == pages.FirstOrDefault().PageRoute.Route));
+
+            try
+            {
+                for (int i = 0; i < pagesDto.Count(); i++)
+                {
+                    pages.ElementAt(i).Header = pagesDto.ElementAt(i).Header;
+                    pages.ElementAt(i).MenuTitle = pagesDto.ElementAt(i).MenuTitle;
+                    pages.ElementAt(i).Content = pagesDto.ElementAt(i).Content.ToString();
+                }
+                _route.Route = pagesDto.FirstOrDefault().Route;
+
+                pages.ForEach(p => _unitOfWork.Repository<Page>().Update(p));
+                _unitOfWork.Repository<PageRoute>().Update(_route);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                e.Data["page"] = pages;
+                throw;
+            }
+        }
+
         public async Task Remove(int pageId)
         {
             var page = await _unitOfWork.Repository<Page>()
@@ -128,7 +158,6 @@ namespace TheraLang.BLL.Services
 
         public async Task Update(PageDto pageDto, int pageId)
         {
-            pageDto.Content = pageDto.Content.TrimScript();
             var page = await _unitOfWork.Repository<Page>().Get(p => p.Id == pageId);
             var route = await _unitOfWork.Repository<PageRoute>().Get((r => r.Route == page.PageRoute.Route));
 
@@ -150,6 +179,23 @@ namespace TheraLang.BLL.Services
                 e.Data["page"] = page;
                 throw;
             }
+        }
+
+        public async Task<IEnumerable<PageDto>> GetPagesByRoute(string route)
+        {
+            var pages = await _unitOfWork.Repository<Page>().GetAll()
+                .Include(p => p.PageRoute)
+                .Where(p => p.PageRoute.Route == route)
+                .ToListAsync();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Page, PageDto>()
+                    .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content)))
+                    .ForMember(c => c.Route, opt => opt.MapFrom(n => n.PageRoute.Route)))
+                .CreateMapper();
+
+            var pagesDto = mapper.Map<IEnumerable<Page>, IEnumerable<PageDto>>(pages);
+
+            return pagesDto;
         }
     }
 }
