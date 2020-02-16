@@ -24,4 +24,7 @@ export class NewsService {
     return this.http.post(this.url + "news",news);
   }
 
+  deleteNews(newsId:number){
+    return this.http.delete(this.url + "news/"+newsId);
+  }
 }

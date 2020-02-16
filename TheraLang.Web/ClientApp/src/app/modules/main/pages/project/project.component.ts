@@ -74,9 +74,10 @@ export class ProjectComponent implements OnInit {
   {
        return this.userService.isAuthenticated();
   }
+
   isAdmin()
   {
-    return this.userService.isAdmin();
+      return this.userService.isAdmin();
   }
 
 }

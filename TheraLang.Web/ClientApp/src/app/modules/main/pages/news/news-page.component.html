@@ -1,4 +1,4 @@
-<button mat-raised-button class="create-button" color = "primary" [routerLink]="['/news/create']">
+<button mat-raised-button class="create-button" color = "primary" [routerLink]="['/news/create']" *ngIf="isAuthenticated()">
     <mat-icon>add</mat-icon>{{ "components.news.create" | translate }}
 </button>
 <app-news-card [news]="news" *ngFor="let news of newsList"></app-news-card>
