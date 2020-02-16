@@ -34,7 +34,8 @@ import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
     SideBarComponent,
     PageManagerComponent,
     QuillMaterialComponent,
-    EditPageComponent
+    EditPageComponent,
+    SlugifyPipe
   ],
   imports: [
     CommonModule,
