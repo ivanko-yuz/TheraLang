@@ -68,7 +68,7 @@ const routes: Routes = [
       },
       { path: "news", component: NewsPageComponent},
       { path: "news/create", component: NewsCreateComponent},
-      { path: "news/details/:newsId", component: NewsDetailsComponent}
+      { path: "news/details/:newsId", component: NewsDetailsComponent},
       {
         path: "pages/:pageRoute",
         component: PageComponent

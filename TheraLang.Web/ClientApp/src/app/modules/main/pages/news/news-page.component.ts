@@ -25,9 +25,4 @@ export class NewsPageComponent implements OnInit {
     this.service.getAllNews()
         .subscribe((data:NewsPreview[])=>this.newsList=data);
   }
-
-  isAdmin()
-  {
-      return this.userService.isAdmin();
-  }
 }

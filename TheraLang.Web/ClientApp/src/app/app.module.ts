@@ -151,7 +151,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewsPageComponent,
     NewsCardComponent,
     NewsCreateComponent,
-    NewsDetailsComponent
+    NewsDetailsComponent,
     PageComponent,
     ProjectEditingComponent,
     NotFoundComponent
