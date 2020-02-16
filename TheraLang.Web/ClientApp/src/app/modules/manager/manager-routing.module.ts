@@ -5,9 +5,6 @@ import { ManagerComponent } from "./manager.component";
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
 import { EditPageComponent } from "./page-manager/edit-page/edit-page.component";
-import { MemberFeeComponent } from './member-fee/member-fee.component';
-import { CreateFeeComponent } from './member-fee/create-fee/create-fee.component';
-import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
 
 const routes: Routes = [
   {
@@ -31,20 +28,7 @@ const routes: Routes = [
     path: "",
     pathMatch: "full",
     redirectTo: "sitemap"
-  },
-  {
-    path: "fee", component: MemberFeeComponent,
-    children: [
-      { path: "create", component: CreateFeeComponent },
-      { path: "get", component: GetFeeComponent },
-      {
-        path: "",
-        pathMatch: "full",
-        redirectTo: "/admin/fee/get"
-      }
-    ]
-  },
-  
+  }
 ];
 
 @NgModule({

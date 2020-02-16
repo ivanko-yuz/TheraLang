@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using DataSeeding;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -15,15 +16,15 @@ namespace TheraLang.Web
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
-                .Build(); 
-            
+                .Build();
+
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
             try
             {
-                BuildWebHost(args).Run();
+                BuildWebHost(args).Seed().Run();
             }
             catch (Exception e)
             {
@@ -33,7 +34,6 @@ namespace TheraLang.Web
             {
                 Log.CloseAndFlush();
             }
-            
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
@@ -41,6 +41,5 @@ namespace TheraLang.Web
                 .UseStartup<Startup>()
                 .UseSerilog()
                 .Build();
-       
     }
 }

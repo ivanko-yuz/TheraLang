@@ -2,14 +2,14 @@
   <a [routerLink] = "['/']"><img class="back-img" type="image" src="/assets/img/back.png"></a>
   <mat-card-title><img src="/assets/img/login.png" alt=""></mat-card-title>
   <mat-card-content>
-    <form [formGroup]="this.userService.loginForm" autocomplete="off">
+    <form [formGroup]="this.authService.loginForm" autocomplete="off">
       <p>
         <mat-form-field appearance="outline">
           <mat-label>{{'components.account.login'|translate}}</mat-label>
-          <input formControlName="username" autofocus matInput>
-          <mat-error *ngIf="this.userService.loginForm.get('username').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
+          <input formControlName="email" autofocus matInput>
+          <mat-error *ngIf="this.authService.loginForm.get('email').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
           <mat-error
-            *ngIf="this.userService.loginForm.get('username').errors?.minlength || this.userService.loginForm.get('username').errors?.maxlength">
+            *ngIf="this.authService.loginForm.get('email').errors?.minlength || this.authService.loginForm.get('email').errors?.maxlength">
             {{'components.account.error-input-login-length'|translate}}</mat-error>
         </mat-form-field>
       </p>
@@ -19,9 +19,9 @@
           <mat-label>{{'components.account.password'|translate}}</mat-label>
           <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
 
-          <mat-error *ngIf="this.userService.loginForm.get('password').errors?.required">{{'components.account.error-input-required'|translate}} </mat-error>
+          <mat-error *ngIf="this.authService.loginForm.get('password').errors?.required">{{'components.account.error-input-required'|translate}} </mat-error>
           <mat-error
-            *ngIf="this.userService.loginForm.get('password').errors?.minlength || this.userService.loginForm.get('password').errors?.maxlength">
+            *ngIf="this.authService.loginForm.get('password').errors?.minlength || this.authService.loginForm.get('password').errors?.maxlength">
             {{'components.account.error-input-password-length'|translate}}</mat-error>
 
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -31,14 +31,16 @@
 
         </mat-form-field>
       </p>
-
-
       <div class="button">
-        <button mat-raised-button color="primary" type="submit" [disabled]="this.userService.loginForm.invalid"
+        <button mat-raised-button color="primary" type="submit" [disabled]="this.authService.loginForm.invalid"
           (click)="onSubmit()">{{'common.confirm'|translate}}</button>
       </div>
-
-
     </form>
   </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-footer fxLayoutAlign="center">
+    <div class="button">
+      <button mat-raised-button color="primary" class="m-3" (click)="registration()">{{'components.account.signUp'|translate}}</button>
+    </div>
+  </mat-card-footer>
 </mat-card>

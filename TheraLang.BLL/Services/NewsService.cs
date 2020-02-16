@@ -38,7 +38,7 @@ namespace TheraLang.BLL.Services
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsPreviewDto>()
-                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => sm.Author.UserName));
+                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
             }
             ).CreateMapper();
 
@@ -59,7 +59,7 @@ namespace TheraLang.BLL.Services
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsPreviewDto>()
-                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => sm.Author.UserName));
+                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
             }).CreateMapper();
 
             var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
@@ -79,7 +79,7 @@ namespace TheraLang.BLL.Services
             {
                 cfg.CreateMap<News, NewsDetailsDto>()
                     .ForMember(m => m.ContentImageUrls, opt => opt.MapFrom(sm => sm.UploadedContentImages.Select(i => i.Url)))
-                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => sm.Author.UserName))
+                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
                     .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.UsersThatLiked.Count));
             }).CreateMapper();
 

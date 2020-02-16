@@ -5,7 +5,8 @@ import { ProjectService } from "../../../../core/http/project/project.service";
 import { DialogService } from "../../../../core/services/dialog/dialog.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
-import { UserService } from 'src/app/core/auth/user.service';
+import { PercentPipe } from '@angular/common';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { Router } from '@angular/router';
 import { Roles } from 'src/app/shared/models/roles/roles';
 import { ProjectCreationComponent } from './project-creation/project-creation.component';
@@ -25,7 +26,7 @@ export class ProjectComponent implements OnInit {
     public service: ProjectService,
     private notificationService: NotificationService,
     private translate: TranslateService,
-    private userService: UserService, 
+    private userService: AuthService,
     private router: Router
   ) {}
 
@@ -73,7 +74,7 @@ export class ProjectComponent implements OnInit {
   }
   isAdmin()
   {
-    return this.userService.isRole(Roles.Admin);
+    return this.userService.isAdmin();
   }
 
 }

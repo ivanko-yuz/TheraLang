@@ -1,0 +1,81 @@
+<mat-card>
+  <a [routerLink] = "['/']"><img class="back-img" type="image" src="/assets/img/back.png"></a>
+  <mat-card-title><img src="/assets/img/login.png" alt=""></mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="this.authService.registrationForm" autocomplete="off">
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'components.account.first_name'|translate}}</mat-label>
+          <input formControlName="FirstName" autofocus matInput>
+          <mat-error *ngIf="this.authService.registrationForm.get('FirstName').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
+          <mat-error
+            *ngIf="this.authService.registrationForm.get('FirstName').errors?.minlength || this.authService.registrationForm.get('FirstName').errors?.maxlength">
+            {{'components.account.error-input-login-length'|translate}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'components.account.last_name'|translate}}</mat-label>
+          <input formControlName="LastName" autofocus matInput>
+          <mat-error *ngIf="this.authService.registrationForm.get('LastName').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
+          <mat-error
+            *ngIf="this.authService.registrationForm.get('LastName').errors?.minlength || this.authService.registrationForm.get('LastName').errors?.maxlength">
+            {{'components.account.error-input-login-length'|translate}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'components.account.email'|translate}}</mat-label>
+          <input formControlName="Email" autofocus matInput>
+          <mat-error *ngIf="this.authService.registrationForm.get('Email').errors?.required">{{'components.account.error-input-required'|translate}}</mat-error>
+          <mat-error
+            *ngIf="this.authService.registrationForm.get('Email').errors?.minlength || this.authService.registrationForm.get('Email').errors?.maxlength">
+            {{'components.account.error-input-login-length'|translate}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'components.account.password'|translate}}</mat-label>
+          <input formControlName="Password" matInput [type]="hide ? 'password' : 'text'">
+
+          <mat-error *ngIf="this.authService.registrationForm.get('Password').errors?.required">{{'components.account.error-input-required'|translate}} </mat-error>
+          <mat-error
+            *ngIf="this.authService.registrationForm.get('Password').errors?.minlength || this.authService.registrationForm.get('Password').errors?.maxlength">
+            {{'components.account.error-input-Password-length'|translate}}</mat-error>
+
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+            [attr.aria-pressed]="'hide'">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'components.account.confirm_password'|translate}}</mat-label>
+          <input formControlName="ConfirmPassword" matInput [type]="hide ? 'password' : 'text'">
+
+          <mat-error *ngIf="this.authService.registrationForm.get('ConfirmPassword').errors?.required">{{'components.account.error-input-required'|translate}} </mat-error>
+          <mat-error
+            *ngIf="this.authService.registrationForm.get('ConfirmPassword').errors?.minlength || this.authService.registrationForm.get('ConfirmPassword').errors?.maxlength">
+            {{'components.account.error-input-Password-length'|translate}}</mat-error>
+
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+                  [attr.aria-pressed]="'hide'">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+
+        </mat-form-field>
+      </p>
+      <p>
+        <input class="ng-hide" id="input-file-id" type="file" autofocus (change)="onFileChange($event)">
+      </p>
+
+      <div class="button">
+        <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">{{'common.confirm'|translate}}</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+
