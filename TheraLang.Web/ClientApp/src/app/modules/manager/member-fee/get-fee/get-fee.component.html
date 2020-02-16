@@ -1,0 +1,29 @@
+<div class="f">
+    <form>
+
+        <a mat-raised-button color="primary" style="margin-bottom: 1px;" [routerLink]="'/admin/fee/create'" class="btn btn-default">Add Fee</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td><b>FeeDate</b></td>
+                    <td><b>FeeAmount</b></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let f of memberFees,let i = index">
+                    <td>{{f.feeDate | date: 'MM/yyyy'}}</td>
+                    <td>{{f.feeAmount}}</td>
+                    <td *ngIf="memberFees[memberFees.length-1] == f " else #exp>
+                        <mat-icon color="warn" (click)="delete(f)">delete</mat-icon>
+                    </td>
+                    <ng-template #exp>
+                        <td></td>
+                    </ng-template>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </form>
+</div>
