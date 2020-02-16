@@ -25,4 +25,8 @@ export class ProjectParticipationService {
   createParticipRequest(projectId) {
     return this.http.post(this.url + "/create", projectId);
   }
+
+  getProjectParticipants(projectId){
+    return this.http.get(this.url + "/" + projectId);
+  }
 }

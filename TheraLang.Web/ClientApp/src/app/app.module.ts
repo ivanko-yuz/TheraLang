@@ -79,7 +79,6 @@ import { FooterComponent } from "./modules/main/footer/footer.component";
 import { ProjectParticipantsComponent } from "./modules/main/pages/project/project-participants/project-participants.component";
 import { CustomDatePipe } from "./shared/pipes/custom.datepipe";
 import { ResourcesTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-table/resources-table.component";
-import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
 import { ResourcesInternalTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component";
 import { GeneralResourcesTableComponent } from "./modules/main/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
 import { GeneralResourcesInnerTableComponent } from "./modules/main/pages/resource/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component";
@@ -97,9 +96,15 @@ import { MaterialFileInputModule } from "ngx-material-file-input";
 import { SortablejsModule } from "ngx-sortablejs";
 import { JwtModule } from "@auth0/angular-jwt";
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
+import { ProjectCreationComponent } from './modules/main/pages/project/project-creation/project-creation.component';
+import { ProjectEditingComponent } from './modules/main/pages/project/project-editing/project-editing.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
+import { PageComponent } from "./modules/main/pages/page/page.component";
+import { QuillModule } from "ngx-quill";
+import { PageService } from "./core/http/manager/page.service";
+import { CmsGenericModule } from './modules/cms-generic/cms-generic.module';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -121,7 +126,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomDatePipe,
     ResourcesTableComponent,
     ConfirmDialogComponent,
-    ProjectFormComponent,
+    ProjectCreationComponent,
     ResourcesInternalTableComponent,
     GeneralResourcesTableComponent,
     GeneralResourcesInnerTableComponent,
@@ -138,11 +143,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     MainComponent,
     CmsPagesToolbarItemComponent,
     DaysLeftPipe,
+    PageComponent,
+    ProjectEditingComponent,
     NotFoundComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
-    ProjectFormComponent,
+    ProjectCreationComponent,
     ConfirmDialogComponent,
     LoginComponent,
     ResourceCreateComponent,
@@ -221,7 +228,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         blacklistedRoutes: []
       }
     }),
-    SortablejsModule.forRoot({ animation: 400 })
+    SortablejsModule.forRoot({ animation: 400 }),
+    CmsGenericModule
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [
@@ -239,9 +247,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserService,
     ResourceCreateService,
     ProjectTypeHttp,
+    PageService,
     AuthGuard,
     AdminGuard
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

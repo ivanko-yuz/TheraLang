@@ -26,6 +26,8 @@ import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
 import { MemberFeeComponent } from './member-fee/member-fee.component';
 import { CreateFeeComponent } from './member-fee/create-fee/create-fee.component';
 import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
+import { CmsGenericModule } from '../cms-generic/cms-generic.module';
+import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,6 @@ import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
     MatInputModule,
     MatRippleModule,
     MatCardModule,
-    QuillModule.forRoot(),
     SortablejsModule,
     MatIconModule,
     MatCardModule,
@@ -68,7 +69,8 @@ import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
         deps: [HttpClient]
       }
-    })
+    }),
+    CmsGenericModule
   ],
   exports: [
     MatButtonModule,
@@ -78,7 +80,8 @@ import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
   ],
   providers: [
     PageService,
-    MemberFeeService
+    MemberFeeService,
+    SlugifyPipe
   ]
 })
-export class ManagerModule {}
+export class ManagerModule { }

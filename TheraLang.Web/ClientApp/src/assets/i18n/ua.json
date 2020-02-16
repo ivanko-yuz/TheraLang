@@ -35,7 +35,7 @@
     "status": "Статус",
     "messages": {
       "request-sent": "Заявку надіслано",
-      "cant-send-request": "Неможливо надіслати запит"
+      "cant-send-request": "Запит вже надіслано"
     },
     "added-by": "Доданий:",
     "name": "Назва",
@@ -61,7 +61,7 @@
       "project-starts": "Дата початку",
       "project-ends": "Дата завершення",
       "PROJECT-CREATION": "СТВОРЕННЯ ПРОЕКТУ",
-      "PROJECT EDITING": "РЕДАГУВАННЯ ПРОЕКТУ",
+      "PROJECT-EDITING": "РЕДАГУВАННЯ ПРОЕКТУ",
       "name-of-project": "Назва проекту",
       "need": "Потрібно зібрати",
       "description": "Опис",

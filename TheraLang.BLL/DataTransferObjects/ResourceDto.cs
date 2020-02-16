@@ -20,5 +20,7 @@ namespace TheraLang.BLL.DataTransferObjects
         public int CategoryId { get; set; }
 
         public DateTime CreatedDateUtc { get; set; }
+
+        public ResourceCategoryDto ResourceCategory { get; set; }
     }
 }

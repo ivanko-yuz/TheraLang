@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { ToolbarItem } from "../cms-pages-toolbar-item/toolbar-item";
-import { CmsRouteHelperService } from "../../../../core/services/cms/cms-route-helper.service";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
+import {SiteMap} from "../../../../shared/models/site-map/site-map";
 
 @Component({
   selector: "app-toolbar-item",
@@ -8,24 +7,21 @@ import { CmsRouteHelperService } from "../../../../core/services/cms/cms-route-h
   styleUrls: ["./toolbar-item.component.less"]
 })
 export class ToolbarItemComponent implements OnInit {
-  @Input() toolbarItem: ToolbarItem;
+  @Input() toolbarItem: SiteMap;
 
   @ViewChild("menu", { static: false }) menu: any;
 
-  constructor(private cmsRouteHelperService: CmsRouteHelperService) {}
+  constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   isFinalMenu(): boolean {
     return !this.needSubMenus();
   }
 
   needSubMenus(): boolean {
-    return this.toolbarItem.subItems.length > 0; // && this.toolbarItem.cmsRoute.pageTypeName !== 'Blog archive';
+    return this.toolbarItem.subPages.length > 0; // && this.toolbarItem.cmsRoute.pageTypeName !== 'Blog archive';
     // TODO: adjust if you need exclude
-  }
-
-  onClick() {
-    this.cmsRouteHelperService.updateRoute(this.toolbarItem.cmsRoute);
   }
 }

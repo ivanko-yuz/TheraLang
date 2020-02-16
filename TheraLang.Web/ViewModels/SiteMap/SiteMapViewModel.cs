@@ -10,8 +10,6 @@ namespace TheraLang.Web.ViewModels.SiteMap
         
         public string Route { get; set; }
 
-        public int? ParentId { get; set; }
-
         public IEnumerable<SiteMapViewModel> SubPages { get; set; }
     }
 }

@@ -34,6 +34,7 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> CreateProject([FromBody] ProjectViewModel projectModel)
         {
+
             var userId = User.Claims.GetUserId();
             if (userId == null)
             {
@@ -93,14 +94,20 @@ namespace TheraLang.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetProject(int id)
         {
-            var project = await _projectService.GetByIdAsync(id);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, ProjectDonationViewModel>()
+            .ForMember(m => m.DonationsSum, opt => opt.MapFrom(sm => sm.Donations.Sum(y => y.Amount)))
+            .ForMember(m=>m.SumLeftToCollect, opt=>opt.MapFrom(sm=>sm.DonationTargetSum - sm.Donations.Sum(y=>y.Amount))))
+                .CreateMapper();
 
-            if (project == null)
+            var projectDto = await _projectService.GetByIdAsync(id);
+            if (projectDto == null)
             {
                 return NotFound();
             }
 
-            return Ok(project);
+            var projectModel = mapper.Map<ProjectDonationViewModel>(projectDto);
+
+            return Ok(projectModel);
         }
 
         /// <summary>

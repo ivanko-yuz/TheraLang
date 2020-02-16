@@ -12,10 +12,12 @@ import { ProjectTypeComponent } from "./modules/main/pages/project/project-info/
 import { ProjectRequestComponent } from "./modules/main/pages/project/project-request/project-request.component";
 import { LoginComponent } from "./modules/login/login.component";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
-import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
+import { ProjectCreationComponent } from './modules/main/pages/project/project-creation/project-creation.component';
+import { ProjectEditingComponent } from './modules/main/pages/project/project-editing/project-editing.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
+import { PageComponent } from "./modules/main/pages/page/page.component";
 
 const routes: Routes = [
   {
@@ -30,14 +32,15 @@ const routes: Routes = [
       },
       {
         path: "projects/create",
-        component: ProjectFormComponent,
+        component: ProjectCreationComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: "projects/:id",
-        component: ProjectInfoComponent,
-        canActivate: [AuthGuard]
-      },
+      path: "projects/edit/:id",
+      component: ProjectEditingComponent,
+      canActivate: [AuthGuard]
+    },
+      { path: "projects/:id", component: ProjectInfoComponent },
       { path: "projects", component: ProjectComponent },
       { path: "donations/:projectId", component: DonationComponent },
       { path: "donations", component: DonationComponent },
@@ -59,6 +62,10 @@ const routes: Routes = [
         path: "projectRequest",
         component: ProjectRequestComponent,
         canActivate: [AdminGuard]
+      },
+      {
+        path: "pages/:pageRoute",
+        component: PageComponent
       }
     ]
   },
@@ -94,7 +101,8 @@ const routes: Routes = [
 export class AppRoutingModule { }
 
 export const routingComponents = [
-  ProjectFormComponent,
+  ProjectEditingComponent,
+  ProjectCreationComponent,
   ProjectParticipantsComponent,
   ProjectComponent,
   HomeComponent,
