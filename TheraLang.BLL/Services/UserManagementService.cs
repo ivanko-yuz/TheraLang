@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using TheraLang.BLL.DataTransferObjects;
@@ -67,7 +68,7 @@ namespace TheraLang.BLL.Services
                     var userDetails = mappertwo.Map<UserAllDto, UserDetails>(NewUser);
                     if (NewUser.Image != null)
                     {
-                        var imageUri = await _fileService.SaveFile(NewUser.Image);
+                        var imageUri = await _fileService.SaveFile(NewUser.Image.OpenReadStream(), Path.GetExtension(NewUser.Image.Name));
                         userDetails.ImageURl = imageUri.ToString();
                     }
                     _unitOfWork.Repository<UserDetails>().Add(userDetails);

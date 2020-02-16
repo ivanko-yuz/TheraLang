@@ -16,12 +16,13 @@
     "added-successfully": "Успішно додано!",
     "created-successfully": "Успішно створено!",
     "updated-successfully": "Успішно оновлено!",
+    "saved-successfully": "Успішно збережено!",
     "r-u-sure": "Ви впевнені?",
     "error": "Помилка",
     "yes": "ТАК",
     "no": "НІ",
     "error-so-sorry": "Упс, трапилася помилка при обробці Вашого запиту =(",
-    "return-home": "Повернутися на головну сторінку",
+    "return-home": "Повернутися на головну",
     "money-amount": "Сума:",
     "confirm": "Підтвердити",
     "cancel": "Відмінити",
@@ -34,13 +35,14 @@
     "status": "Статус",
     "messages": {
       "request-sent": "Заявку надіслано",
-      "cant-send-request": "Неможливо надіслати запит"
+      "cant-send-request": "Запит вже надіслано"
     },
     "added-by": "Доданий:",
     "name": "Назва",
     "create": "Створити",
     "description": "Опис",
     "date-of-creation": "Дата створення",
+    "mainpage": "Головна сторінка",
     "type": "Тип",
     "change_role": "Змінити роль",
     "roles_list": "Список ролей",
@@ -68,7 +70,7 @@
       "project-starts": "Дата початку",
       "project-ends": "Дата завершення",
       "PROJECT-CREATION": "СТВОРЕННЯ ПРОЕКТУ",
-      "PROJECT EDITING": "РЕДАГУВАННЯ ПРОЕКТУ",
+      "PROJECT-EDITING": "РЕДАГУВАННЯ ПРОЕКТУ",
       "name-of-project": "Назва проекту",
       "need": "Потрібно зібрати",
       "description": "Опис",
@@ -138,5 +140,13 @@
       "email": "Електронна пошта",
       "user-name": "Ім'я користувача"
     }
+  },
+  "manager": {
+    "add-new-page": "Добавити сторінку",
+    "save-changes": "Зберегти зміни"
+  },
+  "notFoundPage": {
+    "title": "Сторінку не знайдено",
+    "message": "Сторінку, яку ви шукаєте, можливо, було видалено, змінено ім'я або вона тимчасова недоступна."
   }
 }

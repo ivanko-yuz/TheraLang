@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects;
@@ -82,7 +83,7 @@ namespace TheraLang.BLL.Services
                 _unitOfWork.Repository<UserDetails>().Update(updateUser);
                 if (user.Image != null)
                 {
-                    var imageUri = await _fileService.SaveFile(user.Image);
+                    var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(), Path.GetExtension(user.Image.Name));
                     updateUser.ImageURl = imageUri.ToString();
                 }
                 await _unitOfWork.SaveChangesAsync();

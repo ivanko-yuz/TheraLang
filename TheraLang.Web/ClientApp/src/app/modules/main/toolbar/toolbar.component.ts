@@ -7,6 +7,7 @@ import { DialogService } from "../../../core/services/dialog/dialog.service";
 import { AuthService } from "../../../core/auth/auth.service";
 import { ProjectParticipationRequestStatus } from "src/app/configs/project-participation-request-status";
 import { LoginComponent } from 'src/app/modules/login/login.component';
+import { Roles } from 'src/app/shared/models/roles/roles';
 
 @Component({
   selector: "app-toolbar",
@@ -59,6 +60,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   {
        return this.userService.isAuthenticated();
   }
+
   isAdmin()
   {
     return this.userService.isAdmin();

@@ -14,14 +14,12 @@ namespace DataSeeding
         {
             using (var scope = host.Services.CreateScope())
             {
-                var serviceProvider = scope.ServiceProvider;
-
                 try
                 {
                     Task.Run(async () =>
                     {
                         var dataseed = new DbInitializer();
-                        dataseed.Seed(serviceProvider);
+                        dataseed.Seed(scope);
                     });
 
                 }

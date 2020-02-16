@@ -9,6 +9,7 @@ export const participationUrl = baseUrl + "participants";
 export const donationUrl = baseUrl + "donations";
 export const projectTypeUrl = baseUrl + "projectTypes";
 export const cmsSitemapUrl = baseUrl + "sitemap";
+export const managerPageUrl = baseUrl + "pages/";
 export const statusApproveUrl = projectUrl + "approve";
 export const statusRejectUrl = projectUrl + "reject";
 export const accountUrl = baseUrl + "account";

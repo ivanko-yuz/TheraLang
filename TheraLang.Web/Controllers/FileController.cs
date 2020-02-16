@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+using System.IO;
+using System.Threading.Tasks;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.Interfaces;
@@ -12,7 +13,7 @@ namespace TheraLang.Web.Controllers
     {
         private readonly IFileService _fileManager;
         private readonly IValidator<FileViewModel> _validator;
-        
+
         public FileController(IFileService fileManager, IValidator<FileViewModel> validator)
         {
             _fileManager = fileManager;
@@ -22,13 +23,10 @@ namespace TheraLang.Web.Controllers
         [HttpPost("upload")]
         public async Task<IActionResult> Upload([FromForm]FileViewModel file)
         {
-            var validationRes = _validator.Validate(file);
-            if (!validationRes.IsValid)
-            {
-                return BadRequest(validationRes.Errors);
-            }
-            var uri = await _fileManager.SaveFile(file.File);
-            return Ok(new { FileUri = uri});
+            var extension = Path.GetExtension(file.File.FileName);
+            var fileStream = file.File.OpenReadStream();
+            var uri = await _fileManager.SaveFile(fileStream, extension);
+            return Ok(new { FileUri = uri });
         }
     }
 }

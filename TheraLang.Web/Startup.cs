@@ -1,4 +1,4 @@
-using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Piranha;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
+using TheraLang.Web.ActionFilters;
+using TheraLang.Web.ExceptionHandling;
+using TheraLang.Web.Extensions;
 using TheraLang.Web.Helpers;
 using TheraLang.Web.Validators;
 using TheraLang.Web.ViewModels;
@@ -37,27 +39,22 @@ namespace TheraLang.Web
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+                {
+                    options.Filters.Add(new ModelValidationFilter());
+                    options.Filters.Add(typeof(ExceptionFilter));
+                })
+                .AddFluentValidation(options =>
+                {
+                    options.RegisterValidatorsFromAssemblyContaining<Startup>();
+                    options.ImplicitlyValidateChildProperties = true;
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddExceptionHandler();
 
             services.AddScoped<IAuthenticateService, AuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
             services.AddScoped<IUserService, UserService>();
-
-            #region Piranha setup
-            services.AddPiranha();
-            services.AddPiranhaApplication();
-            services.AddPiranhaFileStorage();
-            services.AddPiranhaImageSharp();
-            services.AddPiranhaManager();
-            services.AddPiranhaSummernote();
-            //services.AddPiranhaTinyMCE();
-            services.AddPiranhaApi();
-            
-            services.AddMemoryCache();
-            services.AddPiranhaMemoryCache();
-            #endregion
-
-            #region register services via IServiceCollection
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
@@ -75,57 +72,31 @@ namespace TheraLang.Web
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
-            services.AddOpenApiDocument();
-            services.AddTransient<IValidator<ResourceViewModel>, ResourceViewModelValidator>();
-            services.AddTransient<IValidator<FileViewModel>, FileViewModelValidator>();
+            services.AddTransient<IPageService, PageService>();
+            services.AddTransient<IHtmlContentService, HtmlContentService>();
+            services.AddTransient<ISiteMapService, SiteMapService>();
+            services.AddTransient<INewsService, NewsService>();
 
-            #endregion
+            services.AddOpenApiDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.ConfigureExceptionHandler(loggerFactory, env.IsDevelopment());
             if (env.IsDevelopment())
             {
                 app.UseCors("development mode");
-                app.UseDeveloperExceptionPage();
                 app.UseOpenApi();
                 app.UseSwaggerUi3();
                 //DbInitializer.Seed(app);
             }
 
-
-            // Configure cache level
-            App.CacheLevel = Piranha.Cache.CacheLevel.None;
-
-            // Build content types
-            //new Piranha.AttributeBuilder.PageTypeBuilder(api)
-            //    .AddType(typeof(Models.BlogArchive))
-            //    .AddType(typeof(Models.StandardPage))
-            //    .AddType(typeof(Models.TeaserPage))
-            //    .Build()
-            //    .DeleteOrphans();
-            //new Piranha.AttributeBuilder.PostTypeBuilder(api)
-            //    .AddType(typeof(Models.BlogPost))
-            //    .Build()
-            //    .DeleteOrphans();
-            //new Piranha.AttributeBuilder.SiteTypeBuilder(api)
-            //    .AddType(typeof(Models.StandardSite))
-            //    .Build()
-            //    .DeleteOrphans();
-
             // Register middleware
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseAuthentication();
-            // app.UsePiranhaManager();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(name: "areaRoute",
-                    template: "{area:exists}/{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" });
-
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");
@@ -148,8 +119,6 @@ namespace TheraLang.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-            //Seed.RunAsync(api).GetAwaiter().GetResult(); //TODO: fix seeding
         }
     }
 }

@@ -8,6 +8,7 @@ using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace TheraLang.Web.Controllers
 {
@@ -15,17 +16,15 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service, IUserManagementService userManager, IValidator<ResourceViewModel> validator, IAuthenticateService authenticateService)
+        public ResourceController(IResourceService service, IUserManagementService userManager, IAuthenticateService authenticateService)
         {
             _service = service;
             _userManager = userManager;
-            _validator = validator;
             _authenticateService = authenticateService;
         }
 
         private readonly IResourceService _service;
         private readonly IUserManagementService _userManager;
-        private readonly IValidator<ResourceViewModel> _validator;
         private readonly IAuthenticateService _authenticateService;
 
         /// <summary>
@@ -38,14 +37,8 @@ namespace TheraLang.Web.Controllers
         [Route("create")]
         public async Task<IActionResult> PostResource([FromForm] ResourceViewModel resourceModel)
         {
-            var validationResult = _validator.Validate(resourceModel);
-            if (!validationResult.IsValid)
-            {
-                throw new ArgumentException($"{nameof(resourceModel)} is not valid");
-            }
             var authUser = await _authenticateService.GetAuthUserAsync();
             if (authUser == null) return BadRequest();
-
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
@@ -69,13 +62,6 @@ namespace TheraLang.Web.Controllers
             if (resource == null)
             {
                 return NotFound();
-            }
-
-            var validationResult = _validator.Validate(resourceModel);
-
-            if (!validationResult.IsValid)
-            {
-                throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
 
             var authUser = await _authenticateService.GetAuthUserAsync();
@@ -212,8 +198,13 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(projectId)} cannot be 0");
             }
 
-            var resources = await _service.GetAllResourcesByProjectId(projectId);
-            return Ok(resources);
+            var resourcesDto = await _service.GetAllResourcesByProjectId(projectId);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, ResourceViewModel>())
+                .CreateMapper();
+            var resourceViewModel = mapper.Map<IEnumerable<ResourceViewModel>>(resourcesDto);
+
+            return Ok(resourceViewModel);
         }
     }
 }

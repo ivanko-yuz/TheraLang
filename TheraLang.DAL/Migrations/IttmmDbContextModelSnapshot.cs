@@ -56,6 +56,79 @@ namespace TheraLang.DAL.Migrations
                     b.ToTable("Donations");
                 });
 
+            modelBuilder.Entity("TheraLang.DAL.Entities.News", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
+                    b.Property<string>("MainImageUrl")
+                        .IsRequired();
+
+                    b.Property<string>("Text")
+                        .IsRequired();
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<Guid?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.ToTable("News");
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.Page", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(8000);
+
+                    b.Property<Guid>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
+                    b.Property<string>("Header")
+                        .IsRequired()
+                        .HasMaxLength(60);
+
+                    b.Property<string>("MenuName")
+                        .HasMaxLength(60);
+
+                    b.Property<int?>("ParentPageId");
+
+                    b.Property<string>("Route")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<int>("SortOrder");
+
+                    b.Property<Guid?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentPageId");
+
+                    b.HasIndex("Route")
+                        .IsUnique();
+
+                    b.ToTable("Pages");
+                });
+
             modelBuilder.Entity("TheraLang.DAL.Entities.Project", b =>
                 {
                     b.Property<int>("Id")
@@ -185,18 +258,16 @@ namespace TheraLang.DAL.Migrations
 
                     b.Property<Guid?>("UserDetailsId");
 
-                    b.Property<Guid?>("UserId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
                     b.HasIndex("UserDetailsId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Resources");
                 });
@@ -258,10 +329,10 @@ namespace TheraLang.DAL.Migrations
 
             modelBuilder.Entity("TheraLang.DAL.Entities.Role", b =>
                 {
-                    b.Property<Guid>("Id");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -282,12 +353,41 @@ namespace TheraLang.DAL.Migrations
                     b.ToTable("Society");
                 });
 
+            modelBuilder.Entity("TheraLang.DAL.Entities.UploadedNewsContentImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("CreatedById");
+
+                    b.Property<DateTime>("CreatedDateUtc");
+
+                    b.Property<int?>("NewsId");
+
+                    b.Property<Guid?>("UpdatedById");
+
+                    b.Property<DateTime?>("UpdatedDateUtc");
+
+                    b.Property<string>("Url")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NewsId");
+
+                    b.ToTable("UploadedNewsContentImages");
+                });
+
             modelBuilder.Entity("TheraLang.DAL.Entities.User", b =>
                 {
-                    b.Property<Guid>("Id");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
+
+                    b.Property<int?>("NewsId");
 
                     b.Property<string>("PasswordHash");
 
@@ -298,6 +398,8 @@ namespace TheraLang.DAL.Migrations
                     b.HasIndex("Email")
                         .IsUnique()
                         .HasFilter("[Email] IS NOT NULL");
+
+                    b.HasIndex("NewsId");
 
                     b.HasIndex("RoleId");
 
@@ -327,641 +429,6 @@ namespace TheraLang.DAL.Migrations
                     b.ToTable("UsersDetails");
                 });
 
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaAlias", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<string>("AliasUrl")
-                        .IsRequired()
-                        .HasMaxLength(256);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("RedirectUrl")
-                        .IsRequired()
-                        .HasMaxLength(256);
-
-                    b.Property<Guid>("SiteId");
-
-                    b.Property<int>("Type");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SiteId", "AliasUrl")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_Aliases");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaBlock", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<string>("ClrType")
-                        .IsRequired()
-                        .HasColumnName("CLRType")
-                        .HasMaxLength(256);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<bool>("IsReusable");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<Guid?>("ParentId");
-
-                    b.Property<string>("Title")
-                        .HasMaxLength(128);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Piranha_Blocks");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaBlockField", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<Guid>("BlockId");
-
-                    b.Property<string>("ClrType")
-                        .IsRequired()
-                        .HasColumnName("CLRType")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("FieldId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<int>("SortOrder");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlockId", "FieldId", "SortOrder")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_BlockFields");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaCategory", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<Guid>("BlogId");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId", "Slug")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_Categories");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaMedia", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<string>("ContentType")
-                        .IsRequired()
-                        .HasMaxLength(256);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<string>("Filename")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.Property<Guid?>("FolderId");
-
-                    b.Property<int?>("Height");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("PublicUrl");
-
-                    b.Property<long>("Size");
-
-                    b.Property<int>("Type");
-
-                    b.Property<int?>("Width");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FolderId");
-
-                    b.ToTable("Piranha_Media");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaMediaFolder", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.Property<Guid?>("ParentId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Piranha_MediaFolders");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaMediaVersion", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<string>("FileExtension")
-                        .HasMaxLength(8);
-
-                    b.Property<int?>("Height");
-
-                    b.Property<Guid>("MediaId");
-
-                    b.Property<long>("Size");
-
-                    b.Property<int>("Width");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MediaId", "Width", "Height")
-                        .IsUnique()
-                        .HasFilter("[Height] IS NOT NULL");
-
-                    b.ToTable("Piranha_MediaVersions");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPage", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<string>("ContentType")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("(N'Page')")
-                        .HasMaxLength(255);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<bool>("IsHidden");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("MetaDescription")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("MetaKeywords")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("NavigationTitle")
-                        .HasMaxLength(128);
-
-                    b.Property<Guid?>("OriginalPageId");
-
-                    b.Property<string>("PageTypeId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<Guid?>("ParentId");
-
-                    b.Property<DateTime?>("Published");
-
-                    b.Property<int>("RedirectType");
-
-                    b.Property<string>("RedirectUrl")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("Route")
-                        .HasMaxLength(256);
-
-                    b.Property<Guid>("SiteId");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.Property<int>("SortOrder");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PageTypeId");
-
-                    b.HasIndex("ParentId");
-
-                    b.HasIndex("SiteId", "Slug")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_Pages");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPageBlock", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<Guid>("BlockId");
-
-                    b.Property<Guid>("PageId");
-
-                    b.Property<Guid?>("ParentId");
-
-                    b.Property<int>("SortOrder");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlockId");
-
-                    b.HasIndex("PageId", "SortOrder")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_PageBlocks");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPageField", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<string>("ClrType")
-                        .IsRequired()
-                        .HasColumnName("CLRType")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("FieldId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<Guid>("PageId");
-
-                    b.Property<string>("RegionId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<int>("SortOrder");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PageId", "RegionId", "FieldId", "SortOrder");
-
-                    b.ToTable("Piranha_PageFields");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPageRevision", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<string>("Data");
-
-                    b.Property<Guid>("PageId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PageId");
-
-                    b.ToTable("Piranha_PageRevisions");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPageType", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(64);
-
-                    b.Property<string>("Body");
-
-                    b.Property<string>("ClrType")
-                        .HasColumnName("CLRType")
-                        .HasMaxLength(256);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Piranha_PageTypes");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaParam", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Key")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_Params");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPost", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<Guid>("BlogId");
-
-                    b.Property<Guid>("CategoryId");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("MetaDescription")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("MetaKeywords")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("PostTypeId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<DateTime?>("Published");
-
-                    b.Property<int>("RedirectType");
-
-                    b.Property<string>("RedirectUrl")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("Route")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(128);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("PostTypeId");
-
-                    b.HasIndex("BlogId", "Slug")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_Posts");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPostBlock", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<Guid>("BlockId");
-
-                    b.Property<Guid?>("ParentId");
-
-                    b.Property<Guid>("PostId");
-
-                    b.Property<int>("SortOrder");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlockId");
-
-                    b.HasIndex("PostId", "SortOrder")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_PostBlocks");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPostField", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<string>("ClrType")
-                        .IsRequired()
-                        .HasColumnName("CLRType")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("FieldId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<Guid>("PostId");
-
-                    b.Property<string>("RegionId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<int>("SortOrder");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId", "RegionId", "FieldId", "SortOrder");
-
-                    b.ToTable("Piranha_PostFields");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPostRevision", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<string>("Data");
-
-                    b.Property<Guid>("PostId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("Piranha_PostRevisions");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPostTag", b =>
-                {
-                    b.Property<Guid>("PostId");
-
-                    b.Property<Guid>("TagId");
-
-                    b.HasKey("PostId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("Piranha_PostTags");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPostType", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(64);
-
-                    b.Property<string>("Body");
-
-                    b.Property<string>("ClrType")
-                        .HasColumnName("CLRType")
-                        .HasMaxLength(256);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Piranha_PostTypes");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaSite", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<DateTime?>("ContentLastModified");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<string>("Culture")
-                        .HasMaxLength(6);
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("Hostnames")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("InternalId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<bool>("IsDefault");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("SiteTypeId")
-                        .HasMaxLength(64);
-
-                    b.Property<string>("Title")
-                        .HasMaxLength(128);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InternalId")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_Sites");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaSiteField", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<string>("ClrType")
-                        .IsRequired()
-                        .HasColumnName("CLRType")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("FieldId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<string>("RegionId")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<Guid>("SiteId");
-
-                    b.Property<int>("SortOrder");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SiteId", "RegionId", "FieldId", "SortOrder");
-
-                    b.ToTable("Piranha_SiteFields");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaSiteType", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(64);
-
-                    b.Property<string>("Body");
-
-                    b.Property<string>("ClrType")
-                        .HasColumnName("CLRType")
-                        .HasMaxLength(256);
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Piranha_SiteTypes");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaTag", b =>
-                {
-                    b.Property<Guid>("Id");
-
-                    b.Property<Guid>("BlogId");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(64);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId", "Slug")
-                        .IsUnique();
-
-                    b.ToTable("Piranha_Tags");
-                });
-
             modelBuilder.Entity("TheraLang.DAL.Entities.Donation", b =>
                 {
                     b.HasOne("TheraLang.DAL.Entities.Project", "Project")
@@ -971,6 +438,21 @@ namespace TheraLang.DAL.Migrations
                     b.HasOne("TheraLang.DAL.Entities.Society", "Society")
                         .WithMany("Donations")
                         .HasForeignKey("SocietyId");
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.News", b =>
+                {
+                    b.HasOne("TheraLang.DAL.Entities.User", "Author")
+                        .WithMany("News")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("TheraLang.DAL.Entities.Page", b =>
+                {
+                    b.HasOne("TheraLang.DAL.Entities.Page", "ParentPage")
+                        .WithMany("SubPages")
+                        .HasForeignKey("ParentPageId");
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.Project", b =>
@@ -1000,13 +482,14 @@ namespace TheraLang.DAL.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("TheraLang.DAL.Entities.User", "User")
+                        .WithMany("Resources")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("TheraLang.DAL.Entities.UserDetails")
                         .WithMany("Resources")
                         .HasForeignKey("UserDetailsId");
-
-                    b.HasOne("TheraLang.DAL.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TheraLang.DAL.Entities.ResourceAttachment", b =>
@@ -1030,8 +513,20 @@ namespace TheraLang.DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("TheraLang.DAL.Entities.UploadedNewsContentImage", b =>
+                {
+                    b.HasOne("TheraLang.DAL.Entities.News", "News")
+                        .WithMany("UploadedContentImages")
+                        .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("TheraLang.DAL.Entities.User", b =>
                 {
+                    b.HasOne("TheraLang.DAL.Entities.News")
+                        .WithMany("UsersThatLiked")
+                        .HasForeignKey("NewsId");
+
                     b.HasOne("TheraLang.DAL.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -1043,165 +538,6 @@ namespace TheraLang.DAL.Migrations
                     b.HasOne("TheraLang.DAL.Entities.User", "User")
                         .WithOne("Details")
                         .HasForeignKey("TheraLang.DAL.Entities.UserDetails", "UserDetailsId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaAlias", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaSite", "Site")
-                        .WithMany("PiranhaAliases")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaBlockField", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaBlock", "Block")
-                        .WithMany("PiranhaBlockFields")
-                        .HasForeignKey("BlockId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaCategory", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPage", "Blog")
-                        .WithMany("PiranhaCategories")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaMedia", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaMediaFolder", "Folder")
-                        .WithMany("PiranhaMedia")
-                        .HasForeignKey("FolderId");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaMediaVersion", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaMedia", "Media")
-                        .WithMany("PiranhaMediaVersions")
-                        .HasForeignKey("MediaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPage", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPageType", "PageType")
-                        .WithMany("PiranhaPages")
-                        .HasForeignKey("PageTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPage", "Parent")
-                        .WithMany("InverseParent")
-                        .HasForeignKey("ParentId");
-
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaSite", "Site")
-                        .WithMany("PiranhaPages")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPageBlock", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaBlock", "Block")
-                        .WithMany("PiranhaPageBlocks")
-                        .HasForeignKey("BlockId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPage", "Page")
-                        .WithMany("PiranhaPageBlocks")
-                        .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPageField", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPage", "Page")
-                        .WithMany("PiranhaPageFields")
-                        .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPageRevision", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPage", "Page")
-                        .WithMany("PiranhaPageRevisions")
-                        .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPost", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPage", "Blog")
-                        .WithMany("PiranhaPosts")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaCategory", "Category")
-                        .WithMany("PiranhaPosts")
-                        .HasForeignKey("CategoryId");
-
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPostType", "PostType")
-                        .WithMany("PiranhaPosts")
-                        .HasForeignKey("PostTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPostBlock", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaBlock", "Block")
-                        .WithMany("PiranhaPostBlocks")
-                        .HasForeignKey("BlockId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPost", "Post")
-                        .WithMany("PiranhaPostBlocks")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPostField", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPost", "Post")
-                        .WithMany("PiranhaPostFields")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPostRevision", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPost", "Post")
-                        .WithMany("PiranhaPostRevisions")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaPostTag", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPost", "Post")
-                        .WithMany("PiranhaPostTags")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaTag", "Tag")
-                        .WithMany("PiranhaPostTags")
-                        .HasForeignKey("TagId");
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaSiteField", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaSite", "Site")
-                        .WithMany("PiranhaSiteFields")
-                        .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("TheraLang.DAL.Piranha.Entities.PiranhaTag", b =>
-                {
-                    b.HasOne("TheraLang.DAL.Piranha.Entities.PiranhaPage", "Blog")
-                        .WithMany("PiranhaTags")
-                        .HasForeignKey("BlogId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

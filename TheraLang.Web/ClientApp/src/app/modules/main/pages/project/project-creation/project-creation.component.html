@@ -1,0 +1,139 @@
+<mat-card class="mat-elevation-z6">
+  <h2 mat-dialog-title>
+    <span>{{
+      "components.projects.PROJECT-CREATION" | translate
+    }}</span>
+  </h2>
+  <mat-card-content>
+    <form [formGroup]="this.service.form">
+      <mat-form-field>
+        <input type="hidden" formControlName="id" />
+        <input
+          formControlName="name"
+          autofocus
+          required
+          matInput
+          [placeholder]="'components.projects.name-of-project' | translate"
+        />
+        <mat-error *ngIf="service.form.controls['name'].errors?.required">{{
+          "common.validation.field-is-required" | translate
+        }}</mat-error>
+        <mat-error *ngIf="service.form.controls['name'].errors?.minlength">{{
+          "common.validation.line-too-short" | translate
+        }}</mat-error>
+        <mat-error *ngIf="service.form.controls['name'].errors?.maxlength">{{
+          "common.validation.line-too-long" | translate
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ "common.type" | translate }}</mat-label>
+        <mat-select formControlName="typeId" required>
+          <mat-option *ngFor="let type of projectTypes" [value]="type.id">
+            {{ type.typeName }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="service.form.controls['typeId'].errors?.required">{{
+          "common.validation.field-is-required" | translate
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          formControlName="description"
+          required
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="5"
+          matInput
+          [placeholder]="'components.projects.description' | translate"
+        ></textarea>
+        <mat-error
+          *ngIf="service.form.controls['description'].errors?.required"
+          >{{ "common.validation.field-is-required" | translate }}</mat-error
+        >
+        <mat-error
+          *ngIf="service.form.controls['description'].errors?.minlength"
+          >{{ "common.validation.line-too-short" | translate }}</mat-error
+        >
+        <mat-error
+          *ngIf="service.form.controls['description'].errors?.maxlength"
+          >{{ "common.validation.line-too-long" | translate }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          formControlName="details"
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="5"
+          matInput
+          [placeholder]="'components.projects.details' | translate"
+        ></textarea>
+        <mat-error *ngIf="service.form.controls['details'].errors?.maxlength">{{
+          "common.validation.line-too-long" | translate
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+        (focus)="picker.open()"
+          formControlName="projectStart"
+          type="[valueAsDate]"
+          matInput
+          [matDatepicker]="picker"
+          required
+          [placeholder]="'components.projects.project-starts' | translate"
+          readonly
+        />
+        <mat-datepicker-toggle class ="mat-icon" matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker  #picker></mat-datepicker>
+        <mat-error
+          *ngIf="service.form.controls['projectStart'].errors?.required"
+          >{{ "common.validation.field-is-required" | translate }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+        (focus)="picker1.open()"
+          formControlName="projectEnd"
+          type="[valueAsDate]"
+          matInput
+          [matDatepicker]="picker1"
+          required
+          [placeholder]="'components.projects.project-ends' | translate"
+          readonly
+        />
+        <mat-datepicker-toggle class ="mat-icon"
+          matSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1 ></mat-datepicker>
+         <mat-error
+          *ngIf="service.form.controls['projectEnd'].errors?.required"
+          >{{ "common.validation.field-is-required" | translate }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          formControlName="donationTargetSum"
+          matInput
+          [placeholder]="'components.projects.need' | translate"
+          type="number"
+        />
+        <span matPrefix>₴&nbsp;</span>
+      </mat-form-field>
+      <mat-dialog-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="this.service.form.invalid"
+          (click)="onSubmit()"
+        >
+          {{ "common.validation.confirm" | translate }}
+        </button>
+        <a mat-raised-button color="warn" type="reset" routerLink="/projects">{{
+          "common.validation.cancel" | translate
+        }}</a>
+      </mat-dialog-actions>
+    </form>
+  </mat-card-content>
+</mat-card>

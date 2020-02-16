@@ -12,26 +12,32 @@ namespace DataSeeding
 {
     public class DbInitializer
     {
-        public void Seed(IServiceProvider service)
+        public void Seed(IServiceScope service)
         {
-            var context = service.GetRequiredService<IttmmDbContext>();
-            var adminRoleId = Guid.NewGuid();
-            var memberRoleId = Guid.NewGuid();
-            var guestRoleId = Guid.NewGuid();
-            if (!context.Roles.Any())
+            try
             {
-                context.Roles.Add(new Role() { Id = adminRoleId, Name = "Admin" });
-                context.Roles.Add(new Role() { Id = memberRoleId, Name = "Member" });
-                context.Roles.Add(new Role() { Id = guestRoleId, Name = "Guest" });
-            }
+                var context = service.ServiceProvider.GetRequiredService<IttmmDbContext>();
+                var adminRoleId = Guid.NewGuid();
+                var memberRoleId = Guid.NewGuid();
+                var guestRoleId = Guid.NewGuid();
+                if (!context.Roles.Any())
+                {
+                    context.Roles.Add(new Role() { Id = adminRoleId, Name = "Admin" });
+                    context.Roles.Add(new Role() { Id = memberRoleId, Name = "Member" });
+                    context.Roles.Add(new Role() { Id = guestRoleId, Name = "Guest" });
+                }
 
-            if (!context.Users.Any())
+                if (!context.Users.Any())
+                {
+                    context.Users.Add(new User { Id = Guid.NewGuid(), Email = "admin@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = adminRoleId });
+                    context.Users.Add(new User { Id = Guid.NewGuid(), Email = "member@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = memberRoleId });
+                }
+
+                context.SaveChanges();
+            } catch (Exception ex)
             {
-                context.Users.Add(new User { Id = Guid.NewGuid(), Email = "admin@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = adminRoleId });
-                context.Users.Add(new User { Id = Guid.NewGuid(), Email = "member@utmm.com", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = memberRoleId });
+                var i = 0;
             }
-
-            context.SaveChanges();
         }
     }
 }

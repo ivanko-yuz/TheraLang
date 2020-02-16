@@ -1,10 +1,10 @@
 <ng-template [ngIf]="isFinalMenu()">
-  <button mat-menu-item [routerLink]="toolbarItem.permalink" [innerText]="toolbarItem.title" (click)="onClick()"></button>
+  <button mat-menu-item routerLink="/pages/{{ toolbarItem.route }}" [innerText]="toolbarItem.menuTitle"></button>
 </ng-template>
 
 <ng-template [ngIf]="needSubMenus()">
-  <button mat-menu-item [innerText]="toolbarItem.title" [matMenuTriggerFor]="menu"></button>
+  <button mat-menu-item [innerText]="toolbarItem.menuTitle" [matMenuTriggerFor]="menu"></button>
   <mat-menu #menu="matMenu">
-    <app-toolbar-item *ngFor="let subItem of toolbarItem.subItems" [toolbarItem]="subItem"></app-toolbar-item>
+    <app-toolbar-item *ngFor="let subPage of toolbarItem.subPages" [toolbarItem]="subPage"></app-toolbar-item>
   </mat-menu>
 </ng-template>
