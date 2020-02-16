@@ -12,7 +12,7 @@ const routes: Routes = [
     component: PageManagerComponent,
     children: [
       { path: "create", component: CreatePageComponent },
-      { path: "edit/:id", component: EditPageComponent },
+      { path: "edit/:route", component: EditPageComponent },
       {
         path: "",
         pathMatch: "full",
