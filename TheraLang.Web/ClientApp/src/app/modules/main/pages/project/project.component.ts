@@ -20,7 +20,6 @@ import { ProjectCreationComponent } from './project-creation/project-creation.co
 })
 export class ProjectComponent implements OnInit {
   projects: Project[];
-  imgPath:string
 
   constructor(
     private httpService: HttpService,

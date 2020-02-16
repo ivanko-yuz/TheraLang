@@ -71,10 +71,7 @@ namespace TheraLang.Web.Controllers
                     Details = p.Details,
                     ProjectStart = p.ProjectStart,
                     ProjectEnd = p.ProjectEnd,
-                    ImgUrl=p.ImgUrl
-                    
-                    
-
+                    ImgUrl=p.ImgUrl                             
                 }).ToList();
 
 
