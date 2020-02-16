@@ -10,6 +10,5 @@ namespace TheraLang.Web.ViewModels
         public int Id { get; set; }
         public DateTime FeeDate { get; set; }
         public decimal FeeAmount { get; set; }
-
     }
 }

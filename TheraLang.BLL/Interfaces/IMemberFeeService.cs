@@ -12,5 +12,4 @@ namespace TheraLang.BLL.Interfaces
         Task AddAsync(MemberFeeDto memberFeeModel);
         Task DeleteAsync(int id);
     }
-
 }

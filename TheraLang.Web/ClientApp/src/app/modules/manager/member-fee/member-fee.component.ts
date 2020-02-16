@@ -13,7 +13,5 @@ export class MemberFeeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    
   }
-
 }

@@ -3,7 +3,6 @@ import { MemberFee } from 'src/app/shared/models/member-fee/member-fee';
 import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-create-fee',
   templateUrl: './create-fee.component.html',
@@ -17,7 +16,6 @@ export class CreateFeeComponent implements OnInit {
     private memberFeeService: MemberFeeService) { }
 
   ngOnInit() {
-
   }
 
   save() {
@@ -30,7 +28,6 @@ export class CreateFeeComponent implements OnInit {
     }
     this.cancel();
   }
-
   cancel() {
     this.memberFee = new MemberFee();
     this.router.navigate(['admin', 'fee']);
@@ -38,6 +35,4 @@ export class CreateFeeComponent implements OnInit {
   add() {
     this.cancel();
   }
-  
-
 }
