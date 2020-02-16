@@ -4,9 +4,9 @@ import { CommonModule } from "@angular/common";
 import { ManagerRoutingModule } from "./manager-routing.module";
 import { CreatePageComponent } from "./page-manager/create-page/create-page.component";
 import { ManagerComponent } from "./manager.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { QuillModule } from "ngx-quill";
-import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule, MatDatepickerModule } from '@angular/material';
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { SortablejsModule } from "ngx-sortablejs";
 import { PageEntryComponent } from "./sitemap-editor/page-entry/page-entry.component";
@@ -22,6 +22,10 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
 import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
 import { PageService } from 'src/app/core/http/manager/page.service';
+import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
+import { MemberFeeComponent } from './member-fee/member-fee.component';
+import { CreateFeeComponent } from './member-fee/create-fee/create-fee.component';
+import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
 import { CmsGenericModule } from '../cms-generic/cms-generic.module';
 import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
 
@@ -35,7 +39,10 @@ import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
     SideBarComponent,
     PageManagerComponent,
     QuillMaterialComponent,
-    EditPageComponent
+    EditPageComponent,
+    MemberFeeComponent,
+    CreateFeeComponent,
+    GetFeeComponent
   ],
   imports: [
     CommonModule,
@@ -54,6 +61,8 @@ import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
     MatSidenavModule,
     MatListModule,
     MatTooltipModule,
+    FormsModule,
+    MatDatepickerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -71,6 +80,7 @@ import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
   ],
   providers: [
     PageService,
+    MemberFeeService,
     SlugifyPipe
   ]
 })
