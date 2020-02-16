@@ -12,6 +12,8 @@ export class Project {
     public donationsSum?: number,
     public donationTargetSum?: number,
     public sumLeftToCollect?: number,
-    public statusId?: ProjectStatusRequest
+    public statusId?: ProjectStatusRequest,
+    public imgUrl?: any,
+    public imgFile?: any
   ) {}
 }

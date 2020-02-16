@@ -50,7 +50,9 @@ export class ProjectEditingComponent implements OnInit {
       projectStart: data.projectStart,
       projectEnd: data.projectEnd,
       typeId: data.typeId,
-      donationTargetSum: data.donationTargetSum
+      donationTargetSum: data.donationTargetSum,
+      imgUrl:data.imgUrl,
+      imgFile:null
     })
   }
 

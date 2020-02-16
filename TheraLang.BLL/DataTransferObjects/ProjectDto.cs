@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using TheraLang.DAL.Entities;
 
@@ -21,6 +22,8 @@ namespace TheraLang.BLL.DataTransferObjects
         public DateTime ProjectEnd { get; set; }
 
         public int TypeId { get; set; }
+        public string ImgUrl { get; set; }
+        public IFormFile ImgFile { get; set; }
 
         public decimal DonationTargetSum { get; set; }
 

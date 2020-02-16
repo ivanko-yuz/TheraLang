@@ -33,7 +33,7 @@ namespace TheraLang.Web.Controllers
         /// <returns>status code</returns>
         [HttpPost("create")]
         [Authorize]
-        public async Task<IActionResult> CreateProject([FromBody] ProjectViewModel projectModel)
+        public async Task<IActionResult> CreateProject([FromForm] ProjectViewModel projectModel)
         {
 
             var authUser = await _authenticateService.GetAuthUserAsync();
@@ -66,9 +66,9 @@ namespace TheraLang.Web.Controllers
                     Description = p.Description,
                     Details = p.Details,
                     ProjectStart = p.ProjectStart,
-                    ProjectEnd = p.ProjectEnd
+                    ProjectEnd = p.ProjectEnd,
+                    ImgUrl= p.ImgUrl                             
                 }).ToList();
-
 
             return projectModels;
         }
