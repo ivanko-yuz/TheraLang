@@ -43,7 +43,7 @@ export class ProjectService {
     projectEnd: [""],
     typeId: ["", Validators.required],
     donationTargetSum: [""], 
-    ImgFile:[null],
+    imgFile:[null],
     imgUrl:[""]
   });
 
@@ -57,7 +57,7 @@ export class ProjectService {
       projectEnd: "",
       typeId: "",
       donationTargetSum: "",
-      ImgFile:null,
+      imgFile:null,
       imgUrl:""
     });
   }
@@ -72,7 +72,7 @@ export class ProjectService {
       projectEnd: project.projectEnd,
       typeId: project.typeId,
       donationTargetSum: project.donationTargetSum,
-      ImgFile: project.ImgFile,
+      imgFile: project.imgFile,
       imgUrl:project.imgUrl
     });
   }
@@ -87,7 +87,7 @@ export class ProjectService {
     formData.append("projectEnd", project.projectEnd.toDateString());
     formData.append("typeId", project.typeId.toString());
     formData.append("donationTargetSum", project.donationTargetSum.toString());
-    formData.append("ImgFile", project.ImgFile as File);
+    formData.append("imgFile", project.imgFile as File);
     formData.append("imgUrl", project.imgUrl);
     
     return this.http.post(this.url + "create", formData);

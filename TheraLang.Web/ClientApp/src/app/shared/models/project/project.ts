@@ -14,6 +14,6 @@ export class Project {
     public sumLeftToCollect?: number,
     public statusId?: ProjectStatusRequest,
     public imgUrl?: any,
-    public ImgFile?: any
+    public imgFile?: any
   ) {}
 }
