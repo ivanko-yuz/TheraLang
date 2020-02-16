@@ -24,7 +24,7 @@ export class PageService {
   }
 
   updatePages(pages: Page[]) {
-    return this.http.put(`${managerPageUrl}route=${pages[0].route}`, pages);
+    return this.http.put(`${managerPageUrl}route/${pages[0].route}`, pages);
   }
 
   getPagesByRoute(route: string) {

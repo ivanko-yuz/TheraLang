@@ -60,7 +60,7 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
-        [HttpPut("route={route}")]
+        [HttpPut("route/{route}")]
         [Authorize]
         public async Task<IActionResult> EditPages(string route, [FromBody] IEnumerable<PageViewModel> pageModels)
         {
