@@ -31,10 +31,17 @@ namespace TheraLang.BLL.Services
 
         public async Task<User> GetUser(string email, string password)
         {
-            var user = await _unitOfWork.Repository<User>().GetAll()
-                    .Include(x => x.Role)
-                .FirstOrDefaultAsync(u => u.Email == email && PasswordHasher.VerifyHashedPassword(u.PasswordHash, password));
-            return user;
+            var user = await _unitOfWork.Repository<User>().GetAll().Include(x => x.Role)
+                     .FirstOrDefaultAsync(u => u.Email == email);
+            if (PasswordHasher.VerifyHashedPassword(user.PasswordHash, password))
+            {
+                return user;
+            }
+            else
+            {
+                throw new Exception($"Cannot get user with {nameof(email)}: {email}.");
+            }
+
         }
 
         public async Task<User> GetUserById(Guid id)
@@ -56,22 +63,22 @@ namespace TheraLang.BLL.Services
             {
                 if (NewUser != null)
                 {
-                    var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserAllDto, User>()).CreateMapper();
-                    var user = mapper.Map<UserAllDto, User>(NewUser);
-                    user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
-                    user.Id = Guid.NewGuid();
-                    user.PasswordHash = PasswordHasher.HashPassword(NewUser.Password);
-                    _unitOfWork.Repository<User>().Add(user);
-
                     var mappertwo = new MapperConfiguration(cfg => cfg.CreateMap<UserAllDto, UserDetails>()).CreateMapper();
                     var userDetails = mappertwo.Map<UserAllDto, UserDetails>(NewUser);
-                    userDetails.UserDetailsId = user.Id;
                     if (NewUser.Image != null)
                     {
                         var imageUri = await _fileService.SaveFile(NewUser.Image);
                         userDetails.ImageURl = imageUri.ToString();
                     }
                     _unitOfWork.Repository<UserDetails>().Add(userDetails);
+
+                    var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserAllDto, User>()).CreateMapper();
+                    var user = mapper.Map<UserAllDto, User>(NewUser);
+                    user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
+                    user.PasswordHash = PasswordHasher.HashPassword(NewUser.Password);
+                    user.Details = userDetails;
+                    _unitOfWork.Repository<User>().Add(user);
+
                     await _unitOfWork.SaveChangesAsync();
                 }
             }

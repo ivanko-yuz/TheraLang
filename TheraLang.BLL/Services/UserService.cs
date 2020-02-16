@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,16 +27,17 @@ namespace TheraLang.BLL.Services
             try
             {
                 var user = await _unitOfWork.Repository<User>().Get(u => u.Id == id);
-                var userDetails = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var detailsMapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserAllDto>()).CreateMapper();
+                var userDetails = await _unitOfWork.Repository<UserDetails>().GetAll()
+                    .Include(ud => ud.User)
+                    .FirstOrDefaultAsync(ud => ud.UserDetailsId == id);
+                var detailsMapper = new MapperConfiguration(cfg =>
+                    cfg.CreateMap<UserDetails, UserAllDto>()
+                        .ForMember(userAllDto => userAllDto.Email,
+                            opts => opts.MapFrom(details => details.User.Email))).CreateMapper();
                 var userAll = detailsMapper.Map<UserDetails, UserAllDto>(userDetails);
-
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<User, UserAllDto>()).CreateMapper();
-                var userInf = mapper.Map<User, UserAllDto>(user);
-                userAll.Email = userInf.Email;
-
                 return userAll;
+
             }
             catch (Exception ex)
             {
@@ -43,7 +45,7 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task<UserDetailsDto> GetUserById(Guid id)
+        public async Task<UserDetailsDto> GetUserDetailsById(Guid id)
         {
             try
             {

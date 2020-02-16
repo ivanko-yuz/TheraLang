@@ -36,20 +36,20 @@ namespace TheraLang.BLL.Services
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role.Name)
             };
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenManagement.Secret));
-                var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenManagement.Secret));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                var jwtToken = new JwtSecurityToken(
-                    _tokenManagement.Issuer,
-                    _tokenManagement.Audience,
-                    claim,
-                    expires: DateTime.Now.AddMinutes(_tokenManagement.AccessExpiration),
-                    signingCredentials: credentials
-                );
-                var token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
-                return token;
+            var jwtToken = new JwtSecurityToken(
+                _tokenManagement.Issuer,
+                _tokenManagement.Audience,
+                claim,
+                expires: DateTime.Now.AddMinutes(_tokenManagement.AccessExpiration),
+                signingCredentials: credentials
+            );
+            var token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
+            return token;
             });
-            }
+        }
 
         public async Task<AuthUser> GetAuthUserAsync()
         {
@@ -59,7 +59,7 @@ namespace TheraLang.BLL.Services
                 var userId = claims.FirstOrDefault(x => x.Type == "Id")?.Value;
                 if (userId == null)
                 {
-                    return null;
+                    throw new Exception($"Error while getting user id from token");
                 }
                 var userEmail = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
                 var userRole = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;

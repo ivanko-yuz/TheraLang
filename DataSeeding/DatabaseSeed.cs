@@ -22,7 +22,7 @@ namespace DataSeeding
                     {
                         var dataseed = new DbInitializer();
                         dataseed.Seed(serviceProvider);
-                    }).Wait();
+                    });
 
                 }
                 catch (Exception ex)

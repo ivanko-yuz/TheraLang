@@ -9,7 +9,7 @@ namespace TheraLang.DAL.Piranha.Configuration
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("Users");
-            builder.Property(e => e.Id).ValueGeneratedNever();
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
             builder.Property(e => e.Email).HasMaxLength(256);
             builder.HasIndex(x => x.Email).IsUnique();
             builder.HasOne(d => d.Details).WithOne(u => u.User).HasForeignKey<UserDetails>(x => x.UserDetailsId);

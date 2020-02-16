@@ -9,7 +9,7 @@ namespace TheraLang.BLL.Interfaces
     public interface IUserService
     {
         Task<UserAllDto> GetMyProfile(Guid id);
-        Task<UserDetailsDto> GetUserById(Guid id);
+        Task<UserDetailsDto> GetUserDetailsById(Guid id);
         Task Update(UserDetailsDto user, Guid id);
         Task<IEnumerable<UsersDto>> GetAllUsers();
         Task<bool> ChangeRole(Guid userId, Guid newRole);

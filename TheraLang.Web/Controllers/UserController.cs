@@ -39,7 +39,7 @@ namespace TheraLang.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetUser(Guid id)
         {
-            var user = await _userService.GetUserById(id);
+            var user = await _userService.GetUserDetailsById(id);
             return Ok(user);
         }
 
