@@ -11,14 +11,16 @@ import { TransactionResultComponent } from "./shared/components/transaction-resu
 import { ProjectTypeComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
 import { ProjectRequestComponent } from "./modules/main/pages/project/project-request/project-request.component";
 import { LoginComponent } from "./modules/login/login.component";
-import { ErrorComponent } from "./shared/components/error/error.component";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
+import { ProjectCreationComponent } from './modules/main/pages/project/project-creation/project-creation.component';
+import { ProjectEditingComponent } from './modules/main/pages/project/project-editing/project-editing.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
 import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-create.component';
 import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
 import { AdminGuard } from "./shared/guards/admin-guard.service";
-import { ProjectFormComponent } from "./modules/main/pages/project/project-form/project-form.component";
+import { PageComponent } from "./modules/main/pages/page/page.component";
 
 const routes: Routes = [
   {
@@ -33,14 +35,15 @@ const routes: Routes = [
       },
       {
         path: "projects/create",
-        component: ProjectFormComponent,
+        component: ProjectCreationComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: "projects/:id",
-        component: ProjectInfoComponent,
-        canActivate: [AuthGuard]
-      },
+      path: "projects/edit/:id",
+      component: ProjectEditingComponent,
+      canActivate: [AuthGuard]
+    },
+      { path: "projects/:id", component: ProjectInfoComponent },
       { path: "projects", component: ProjectComponent },
       { path: "donations/:projectId", component: DonationComponent },
       { path: "donations", component: DonationComponent },
@@ -65,11 +68,14 @@ const routes: Routes = [
       },
       { path: "news", component: NewsPageComponent},
       { path: "news/create", component: NewsCreateComponent},
-      { path: "news/details/:newsId", component: NewsDetailsComponent} //bind to id
+      { path: "news/details/:newsId", component: NewsDetailsComponent}
+      {
+        path: "pages/:pageRoute",
+        component: PageComponent
+      }
     ]
   },
   { path: "login", component: LoginComponent },
-  { path: "error", component: ErrorComponent },
   {
     path: "admin",
     loadChildren: () =>
@@ -77,6 +83,16 @@ const routes: Routes = [
         m => m.ManagerModule
       ),
     canActivate: [AdminGuard]
+  },
+  {
+    path: 'page-not-found',
+    component: NotFoundComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'page-not-found',
+    pathMatch: 'full'
   }
 ];
 
@@ -88,16 +104,16 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 
 export const routingComponents = [
-  ProjectFormComponent,
+  ProjectEditingComponent,
+  ProjectCreationComponent,
   ProjectParticipantsComponent,
   ProjectComponent,
   HomeComponent,
   ProjectInfoComponent,
   GeneralResourcesComponent,
-  ErrorComponent,
   ProjectTypeComponent,
   TransactionResultComponent,
   DonationComponent,

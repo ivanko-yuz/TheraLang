@@ -9,6 +9,7 @@ using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace TheraLang.Web.Controllers
 {
@@ -16,16 +17,14 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service, IUserManagementService userManager, IValidator<ResourceViewModel> validator)
+        public ResourceController(IResourceService service, IUserManagementService userManager)
         {
             _service = service;
             _userManager = userManager;
-            _validator = validator;
         }
 
         private readonly IResourceService _service;
         private readonly IUserManagementService _userManager;
-        private readonly IValidator<ResourceViewModel> _validator;
 
         /// <summary>
         /// create resource
@@ -37,12 +36,6 @@ namespace TheraLang.Web.Controllers
         [Route("create")]
         public async Task<IActionResult> PostResource([FromForm] ResourceViewModel resourceModel)
         {
-            var validationResult = _validator.Validate(resourceModel);
-            if (!validationResult.IsValid)
-            {
-                throw new ArgumentException($"{nameof(resourceModel)} is not valid");
-            }
-
             var userId = User.Claims.GetUserId();
             if (userId == null)
             {
@@ -79,13 +72,6 @@ namespace TheraLang.Web.Controllers
             if (resource == null)
             {
                 return NotFound();
-            }
-
-            var validationResult = _validator.Validate(resourceModel);
-
-            if (!validationResult.IsValid)
-            {
-                throw new ArgumentException($"{nameof(resourceModel)} is not valid");
             }
 
             var UserId = User.Claims.GetUserId();
@@ -223,8 +209,13 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(projectId)} cannot be 0");
             }
 
-            var resources = await _service.GetAllResourcesByProjectId(projectId);
-            return Ok(resources);
+            var resourcesDto = await _service.GetAllResourcesByProjectId(projectId);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, ResourceViewModel>())
+                .CreateMapper();
+            var resourceViewModel = mapper.Map<IEnumerable<ResourceViewModel>>(resourcesDto);
+
+            return Ok(resourceViewModel);
         }
     }
 }

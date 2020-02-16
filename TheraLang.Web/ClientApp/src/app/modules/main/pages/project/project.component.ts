@@ -1,16 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpService } from "../../../../core/http/http/http.service";
 import { Project } from "../../../../shared/models/project/project";
-import { ProjectFormComponent } from "./project-form/project-form.component";
 import { ProjectService } from "../../../../core/http/project/project.service";
 import { DialogService } from "../../../../core/services/dialog/dialog.service";
-import { MatDialog, MatDialogConfig } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
-import { AsyncScheduler } from "rxjs/internal/scheduler/AsyncScheduler";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
-import { PercentPipe } from '@angular/common';
 import { UserService } from 'src/app/core/auth/user.service';
 import { Router } from '@angular/router';
+import { Roles } from 'src/app/shared/models/roles/roles';
+import { ProjectCreationComponent } from './project-creation/project-creation.component';
 
 @Component({
   selector: "app-project",
@@ -42,9 +40,8 @@ export class ProjectComponent implements OnInit {
   }
 
   onEdit(project) {
-    this.service.initializeFormGroup();
-    this.service.populateForm(project);
-    this.dialogService.openFormDialog(ProjectFormComponent);
+
+       this.router.navigate(["projects/edit/" + project.id]);
   }
 
   async onDelete(id) {
@@ -77,7 +74,7 @@ export class ProjectComponent implements OnInit {
 
   isAdmin()
   {
-      return this.userService.isAdmin();
+    return this.userService.isRole(Roles.Admin);
   }
 
 }

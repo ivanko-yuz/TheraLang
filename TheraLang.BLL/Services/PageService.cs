@@ -24,12 +24,10 @@ namespace TheraLang.BLL.Services
 
         public async Task Add(PageDto pageDto)
         {
-            var route = string.Join('-', pageDto.MenuName.Trim().ToLower().Split(" "));
             pageDto.Content = pageDto.Content.TrimScript();
             pageDto.Content = await _htmlContentService.SavePictures(pageDto.Content);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, Page>()
-                    .ForMember(m => m.Route, opt => opt.MapFrom(n => route))
                     .ForMember(c => c.Content, opt => opt.MapFrom(n => n.Content.ToString())))
                 .CreateMapper();
             var page = mapper.Map<PageDto, Page>(pageDto);
@@ -114,6 +112,7 @@ namespace TheraLang.BLL.Services
                 page.Header = pageDto.Header;
                 page.MenuName = pageDto.MenuName;
                 page.Content = pageDto.Content.ToString();
+                page.Route = pageDto.Route;
                 
                 _unitOfWork.Repository<Page>().Update(page);
                 await _unitOfWork.SaveChangesAsync();

@@ -23,6 +23,8 @@
     "no": "No",
     "error-so-sorry": "Oops, an error occurred while processing your request = (",
     "return-home": "Back to homepage",
+    "title": "Page not found",
+    "message": "The page you are looking for might have been removed, had its name changed or is temporarily unavailable.",
     "money-amount": "Amount of money:",
     "confirm": "Confirm",
     "cancel": "Cancel",
@@ -35,7 +37,7 @@
     "status": "Status",
     "messages": {
       "request-sent": "The application has been sent",
-      "cant-send-request": "Can't send request"
+      "cant-send-request": "Request has been sent alredy"
     },
     "added-by": "Added by:",
     "name": "Name",
@@ -136,5 +138,9 @@
   "manager": {
     "add-new-page": "Add new page",
     "save-changes": "Save changes"
+  },
+  "notFoundPage": {
+    "title": "Page not found",
+    "message": "The page you are looking for might have been removed, had its name changed or is temporarily unavailable."
   }
 }

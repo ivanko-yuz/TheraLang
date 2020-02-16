@@ -32,7 +32,7 @@ namespace TheraLang.BLL.Services
             ).CreateMapper();
 
             var onlyRoots = mapper.Map<IEnumerable<Page>, IEnumerable<SiteMapDto>>(entities)
-                .Where(sm => sm.ParentPageId == null);
+                .Where(sm => sm.ParentPageId == null).ToList();
 
             return onlyRoots;
         }

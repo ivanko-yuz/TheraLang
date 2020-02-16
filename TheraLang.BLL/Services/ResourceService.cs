@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using System.IO;
+using System.Linq.Expressions;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace TheraLang.BLL.Services
 {
@@ -55,8 +57,8 @@ namespace TheraLang.BLL.Services
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
                     .ForMember(r => r.File, opt => opt.Ignore())
-                    .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId))
-                ).CreateMapper();
+                    .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId)))
+                    .CreateMapper();
 
                 var resource = mapper.Map<ResourceDto, Resource>(resourceDto);
 
@@ -159,13 +161,12 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var query = await _unitOfWork.Repository<ResourceCategory>().GetAllAsync();
-                if (withAssignedResources)
-                {
-                    query = query.Where(cat => cat.Resources.Any());
-                }
-
-                var resourceEntities = query.ToList();
+                var resourceEntities = await _unitOfWork.Repository<ResourceCategory>()
+                    .GetAllAsync(
+                        withAssignedResources
+                            ? cat => cat.Resources.Any()
+                            : (Expression<Func<ResourceCategory, bool>>)null
+                    );
                 var mapper = new MapperConfiguration(cfg =>
                     {
                         cfg.CreateMap<ResourceCategory, ResourceCategoryDto>(MemberList.None);
@@ -189,28 +190,18 @@ namespace TheraLang.BLL.Services
             try
             {
                 var resources = await _unitOfWork.Repository<Resource>()
-                    .GetAllAsync(x => x.ResourceProjects.Any(c => c.ProjectId == projectId));
-                var joinedResources = resources.Select(res =>
-                    new Resource
-                    {
-                        Id = res.Id,
-                        User = res.User,
-                        Name = res.Name,
-                        Description = res.Description,
-                        Url = res.Url,
-                        File = res.File,
-                        CategoryId = res.CategoryId,
-                        ResourceCategory = res.ResourceCategory,
-                        ResourceProjects = res.ResourceProjects,
-                        UpdatedById = res.UpdatedById,
-                        CreatedDateUtc = res.CreatedDateUtc,
-                        UpdatedDateUtc = res.UpdatedDateUtc,
-                    }).ToList();
+                    .GetAll()
+                    .Where(x => x.ResourceProjects.Any(c => c.ProjectId == projectId))
+                    .Include(x => x.ResourceCategory)
+                    .ToListAsync();
+
+
+
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
-                var joinedResourcesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(joinedResources);
+                var resourcesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resources);
 
-                return joinedResourcesDto;
+                return resourcesDto;
             }
             catch (Exception ex)
             {
