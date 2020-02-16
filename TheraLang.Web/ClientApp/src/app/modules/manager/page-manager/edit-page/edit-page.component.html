@@ -63,7 +63,7 @@
 
         <div class="item item-3">
             <mat-form-field>
-                <input matInput type="text" placeholder="Custom route" formControlName="route" id="route">
+                <input disabled matInput type="text" placeholder="Custom route" formControlName="route" id="route">
                 <mat-error *ngIf="hasError('route', 'required')">Route is required</mat-error>
                 <mat-error *ngIf="hasError('route', 'maxlength')">Route should be less than
                     {{form.get('route').errors.maxlength.requiredLength}} characters
