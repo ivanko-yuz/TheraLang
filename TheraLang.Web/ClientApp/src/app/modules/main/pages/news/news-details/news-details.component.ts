@@ -34,7 +34,6 @@ export class NewsDetailsComponent implements OnInit {
   ngOnInit() {
     this.newsId= parseInt(this.route.snapshot.paramMap.get("newsId"));
     this.getNewsById(this.newsId);
-    
   }
 
   getNewsById(id : number){
@@ -67,7 +66,7 @@ export class NewsDetailsComponent implements OnInit {
           );
         }
       });
-      this.router.navigate(["news/all"]);
+      this.router.navigateByUrl("/news");
   }
 
   isAuthenticated()
