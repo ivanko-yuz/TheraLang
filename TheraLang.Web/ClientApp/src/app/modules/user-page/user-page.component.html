@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <div id="profile" class="page-layout simple tabbed">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center">
+
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center">
+        <img *ngIf="user.imageURl != null"
+             style="width: 250px"
+             src="{{ user.imageURl }}"
+             alt=""
+        />
+        <img *ngIf="user.imageURl == null"
+             style="width: 250px"
+             src="/assets/img/avatar-placeholder.gif"
+             alt=""
+        />
+      </div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center">
+      <h3 class="mt-2" fxLayout="column">{{ user.firstName }} {{ user.lastName }}</h3>
+    </div>
+
+    <div class="mt-5" fxLayout="column">
+      <mat-toolbar>
+        <div class="mat-toolbar toolbar">{{'common.general_information'|translate}}</div>
+      </mat-toolbar>
+      <div>
+        <div class="content md-padding m-3">
+          <div class="info-line">
+            <div class="title">{{'common.short_information'|translate}}</div>
+            <div class="info">{{ user.shortInformation }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -17,19 +17,18 @@ namespace TheraLang.Web.Controllers
     public class PageController : ControllerBase
     {
         private readonly IPageService _pageService;
+        private readonly IAuthenticateService _authenticateService;
 
-        public PageController(IPageService pageService)
+        public PageController(IPageService pageService, IAuthenticateService authenticateService)
         {
             _pageService = pageService;
+            _authenticateService = authenticateService;
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> CreatePage([FromBody] PageViewModel pageModel)
         {
-            var userId = User.Claims.GetUserId();
-            if (userId == null) return BadRequest();
-
             if (pageModel == null) return BadRequest();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>()
@@ -45,9 +44,6 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> EditPage(int id, [FromBody] PageViewModel pageModel)
         {
-            var userId = User.Claims.GetUserId();
-            if (userId == null) return BadRequest();
-
             var page = await _pageService.GetPageById(id);
             if (page == null) return NotFound();
 
@@ -107,9 +103,6 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> DeletePage(int id)
         {
-            var userId = User.Claims.GetUserId();
-            if (userId == null) return BadRequest();
-
             var page = await _pageService.GetPageById(id);
             if (page == null) return NotFound();
 

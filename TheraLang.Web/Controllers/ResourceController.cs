@@ -7,7 +7,6 @@ using FluentValidation;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 
@@ -17,14 +16,16 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service, IUserManagementService userManager)
+        public ResourceController(IResourceService service, IUserManagementService userManager, IAuthenticateService authenticateService)
         {
             _service = service;
             _userManager = userManager;
+            _authenticateService = authenticateService;
         }
 
         private readonly IResourceService _service;
         private readonly IUserManagementService _userManager;
+        private readonly IAuthenticateService _authenticateService;
 
         /// <summary>
         /// create resource
@@ -36,23 +37,12 @@ namespace TheraLang.Web.Controllers
         [Route("create")]
         public async Task<IActionResult> PostResource([FromForm] ResourceViewModel resourceModel)
         {
-            var userId = User.Claims.GetUserId();
-            if (userId == null)
-            {
-                return BadRequest();
-            }
-
-            var user = _userManager.GetUserById(userId.Value);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            if (authUser == null) return BadRequest();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, userId.Value);
+            await _service.AddResource(resourceDto, authUser.Id);
             return Ok();
         }
 
@@ -74,14 +64,13 @@ namespace TheraLang.Web.Controllers
                 return NotFound();
             }
 
-            var UserId = User.Claims.GetUserId();
-            if (UserId == null) return BadRequest();
-            var user = _userManager.GetUserById(UserId.Value);
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            if (authUser == null) return BadRequest();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
 
-            await _service.AddResource(resourceDto, UserId.Value);
+            await _service.AddResource(resourceDto, authUser.Id);
             return Ok();
         }
 

@@ -28,8 +28,7 @@ namespace TheraLang.DAL
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<UploadedNewsContentImage> UploadedFiles { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
-        public virtual DbSet<MemberFee> MemberFees { get; set; }
-
+        public virtual DbSet<UserDetails> UsersDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());
@@ -44,15 +43,8 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new NewsConfiguration());
             modelBuilder.ApplyConfiguration(new UploadedNewsContentImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new UserDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new PageConfiguration());
-            modelBuilder.ApplyConfiguration(new MemberFeeConfiguration());
-            var AdminRoleID = Guid.NewGuid();
-            var MemberRoleId = Guid.NewGuid();
-            modelBuilder.Entity<Role>().HasData(new Role { Id = AdminRoleID, Name = "Admin", NormalizedName = "ADMIN" });
-            modelBuilder.Entity<Role>().HasData(new Role { Id = MemberRoleId, Name = "Member", NormalizedName = "MEMBER" });
-            modelBuilder.Entity<Role>().HasData(new Role { Id = Guid.NewGuid(), Name = "Guest", NormalizedName = "GUEST" });
-            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), UserName = "Admin", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = AdminRoleID });
-            modelBuilder.Entity<User>().HasData(new User { Id = Guid.NewGuid(), UserName = "Member", PasswordHash = PasswordHasher.HashPassword("password"), RoleId = MemberRoleId });
         }
     }
 }

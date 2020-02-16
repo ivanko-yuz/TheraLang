@@ -20,11 +20,13 @@ namespace TheraLang.Web.Controllers
     {
         private readonly INewsService _newsService;
         private readonly IUserManagementService _userManagementService;
+        private readonly IAuthenticateService _authenticateService;
 
-        public NewsController(INewsService newsService, IUserManagementService userManagementService)
+        public NewsController(INewsService newsService, IUserManagementService userManagementService, IAuthenticateService authenticateService)
         {
             _newsService = newsService;
             _userManagementService = userManagementService;
+            _authenticateService = authenticateService;
         }
 
         // GET: api/news
@@ -103,7 +105,8 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateViewModel, NewsCreateDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsCreateDto>(newsModel);
-            newsDto.AuthorId = (Guid)User.Claims.GetUserId();
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            newsDto.AuthorId = authUser.Id;
 
             await _newsService.AddNews(newsDto);
             return Ok();
@@ -117,7 +120,8 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsEditViewModel, NewsEditDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsEditDto>(newsModel);
-            newsDto.EditorId = (Guid)User.Claims.GetUserId();
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            newsDto.EditorId = authUser.Id;
 
             try
             {
@@ -135,8 +139,8 @@ namespace TheraLang.Web.Controllers
         [HttpPut("like/{id}")]
         public async Task<IActionResult> Like(int id)
         {
-            var userId = User.Claims.GetUserId();
-            var user = await _userManagementService.GetUserById(userId.Value);
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            var user = await _userManagementService.GetUserById(authUser.Id);
            
             await _newsService.Like(id, user);
             return Ok();

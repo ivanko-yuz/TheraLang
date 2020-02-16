@@ -13,14 +13,16 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ProjectTypeController : ControllerBase
     {
-        public ProjectTypeController(IProjectTypeService service, IUserManagementService userManager)
+        public ProjectTypeController(IProjectTypeService service, IUserManagementService userManager, IAuthenticateService authenticateService)
         {
             _service = service;
             _userManager = userManager;
+            _authenticateService = authenticateService;
         }
 
         private readonly IProjectTypeService _service;
         private readonly IUserManagementService _userManager;
+        private readonly IAuthenticateService _authenticateService;
 
         /// <summary>
         /// create project type

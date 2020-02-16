@@ -1,5 +1,4 @@
-
-<button  mat-raised-button color="primary" class="create-button"  (click)="onCreate()" *ngIf="isAuthenticated()">
+<button mat-raised-button color="primary" class="create-button" (click)="onCreate()" *ngIf="isAuthenticated()">
 
   <mat-icon>add</mat-icon>{{ "components.projects.create" | translate }}
 </button>
@@ -16,9 +15,10 @@
         <div class="content-container" fxLayout="row" fxFlex="85">
           <div class="text-conteiner" fxLayout="column" fxFlex="95" fxFlex.md="85" fxFlex.sm="80">
             <mat-card-title>
-              <a class="detailes" [routerLink]="['/projects', project.id]">
-                {{ project?.name }}
-              </a>
+              <a class="details" [routerLink]="['/projects', project.id]">
+                {{ project?.name }}</a>
+                <a class="detailes" [routerLink]="['/projects', project.id]">
+                  {{ project?.name }}</a>
             </mat-card-title>
             <div class="project-description" fxFlex="100">
               {{ project?.description.substring(0, 350) }}

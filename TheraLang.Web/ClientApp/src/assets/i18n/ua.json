@@ -42,8 +42,14 @@
     "create": "Створити",
     "description": "Опис",
     "date-of-creation": "Дата створення",
+    "mainpage": "Головна сторінка",
     "type": "Тип",
-    "mainpage": "Головна сторінка"
+    "change_role": "Змінити роль",
+    "roles_list": "Список ролей",
+    "no_thanks": "Ні, дякую",
+    "ok": "ОК",
+    "general_information": "Про користувача",
+    "short_information": "Коротка інформація"
   },
   "components": {
     "home": {
@@ -62,6 +68,9 @@
       "read-more": "більше...",
       "preview-image":"Головне зображення",
       "content-images":"Зображення для наповнення"
+    },
+    "users": {
+      "title": "Користувачі"
     },
     "projects": {
       "title": "Проекти",
@@ -104,6 +113,7 @@
       "signUp": "Реєстрація",
       "signIn": "Вхід",
       "logout": "Вийти",
+      "profile": "Сторінка юзера",
       "logged-out-successfully": "Ви вийшли з облікового запису",
       "logged-in-successfully": "Вхід успішний",
       "incorrect-login-or-password": "Неправильний логін або пароль",
@@ -112,7 +122,16 @@
       "error-input-required": "Це поле не може бути пустим",
       "error-input-login-length": "Логін повинен містити 3-50 символів",
       "error-input-password-length": "Пароль повинен містити 3-50 символів",
-      "role": "Роль користувача"
+      "role": "Роль користувача",
+      "email": "Email",
+      "phone_number": "Номер телефону",
+      "first_name": "Ім'я",
+      "last_name": "Призвіще",
+      "confirm_password": "Пароль підтвердження",
+      "short_information": "Коротко про себе",
+      "age": "Вік",
+      "successfully-registration": "Дякуємо за реєстрацію!",
+      "error": "Помилка"
     },
     "projectTypes": {
       "title": "Типи Проектів",
