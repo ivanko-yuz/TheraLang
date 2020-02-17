@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{8805
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.Web", "TheraLang.Web\TheraLang.Web.csproj", "{14F9CA8A-6532-40CC-81D6-9763351AFD91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DataSeeding", "TheraLang.DataSeeding\TheraLang.DataSeeding.csproj", "{98EB6508-7993-431B-B6BA-4E9EF374F376}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DAL", "TheraLang.DAL\TheraLang.DAL.csproj", "{A04A0C70-F9CA-4344-B8D5-66FB0874347D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.Tests", "TheraLang.Tests\TheraLang.Tests.csproj", "{EDE1BDFC-40DE-426F-87D3-917C4370B9F6}"
@@ -20,6 +18,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.BLL", "TheraLang.BLL\TheraLang.BLL.csproj", "{689D7B65-077E-46DF-9551-B960826F3652}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{5A8EE289-AA54-4115-AF67-8F78F22FE37B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSeeding", "DataSeeding\DataSeeding.csproj", "{3B402725-2840-45F6-9BFE-EEE3729E5026}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +31,6 @@ Global
 		{14F9CA8A-6532-40CC-81D6-9763351AFD91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14F9CA8A-6532-40CC-81D6-9763351AFD91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14F9CA8A-6532-40CC-81D6-9763351AFD91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98EB6508-7993-431B-B6BA-4E9EF374F376}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A04A0C70-F9CA-4344-B8D5-66FB0874347D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A04A0C70-F9CA-4344-B8D5-66FB0874347D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A04A0C70-F9CA-4344-B8D5-66FB0874347D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{5A8EE289-AA54-4115-AF67-8F78F22FE37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A8EE289-AA54-4115-AF67-8F78F22FE37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A8EE289-AA54-4115-AF67-8F78F22FE37B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B402725-2840-45F6-9BFE-EEE3729E5026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B402725-2840-45F6-9BFE-EEE3729E5026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B402725-2840-45F6-9BFE-EEE3729E5026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B402725-2840-45F6-9BFE-EEE3729E5026}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -68,7 +68,7 @@ import { ProjectParticipationService } from "./core/http/project-participants/pr
 import { ProjectTypeService } from "./core/services/project-type/project-type.service";
 import { DonationService } from "./core/http/donations/donation.service";
 import { HttpProjectService } from "./core/http/project/http-project.service";
-import { UserService } from "./core/auth/user.service";
+import { AuthService } from "./core/auth/auth.service";
 import { ResourceCreateService } from "./core/http/resource/resource-create.service";
 import { ProjectTypeHttp } from "./core/http/project-type/project-type-Http.service";
 import { CmsPagesToolbarItemComponent } from "./modules/main/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component";
@@ -103,7 +103,14 @@ import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { PageComponent } from "./modules/main/pages/page/page.component";
 import { PageService } from "./core/http/manager/page.service";
-import {SharedModule} from "./modules/shared/shared.module";
+import { SharedModule} from "./modules/shared/shared.module";
+import { RegistrationComponent } from "./modules/registration/registration.component";
+import { UserPageComponent } from "./modules/user-page/user-page.component";
+import { UsersListComponent } from "./modules/users_list/users-list.component";
+import { UserService } from "./core/services/user/user.service";
+import { ChangeRoleComponent } from "./modules/users_list/change-role/change-role.component";
+import { ProfileComponent } from "./modules/profile/profile.component";
+import { QuillModule } from "ngx-quill";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -134,6 +141,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     TransactionResultComponent,
     ProjectRequestComponent,
     LoginComponent,
+    RegistrationComponent,
+    UserPageComponent,
+    UsersListComponent,
+    ChangeRoleComponent,
+    ProfileComponent,
     ProfileMenuComponent,
     ResourceCreateComponent,
     ProjectTypeFormComponent,
@@ -150,6 +162,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResourcesInternalTableComponent,
     ProjectCreationComponent,
     ConfirmDialogComponent,
+    ChangeRoleComponent,
     LoginComponent,
     ResourceCreateComponent,
     ProjectTypeFormComponent,
@@ -222,7 +235,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MaterialFileInputModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
+        tokenGetter,
         whitelistedDomains: ["localhost:5000"],
         blacklistedRoutes: []
       }
@@ -243,6 +256,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectTypeService,
     DonationService,
     HttpProjectService,
+    AuthService,
     UserService,
     ResourceCreateService,
     ProjectTypeHttp,

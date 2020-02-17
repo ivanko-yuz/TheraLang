@@ -39,7 +39,7 @@ export class UserService {
       return false;
     }
   }
-  
+
   isRole(userRole: Roles){
     let token: string = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
@@ -53,7 +53,7 @@ export class UserService {
       return false;
     }
   }
- 
+
   getUserName() {
     return this.http.get(this.baseUrl + "/getUserName", {
       responseType: "text"

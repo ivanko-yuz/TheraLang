@@ -4,7 +4,7 @@ import { Subscription } from "rxjs";
 import { ProjectParticipationService } from "../../../core/http/project-participants/project-participation.service";
 import { EventService } from "../../../core/services/event/event-service";
 import { DialogService } from "../../../core/services/dialog/dialog.service";
-import { UserService } from "../../../core/auth/user.service";
+import { AuthService } from "../../../core/auth/auth.service";
 import { ProjectParticipationRequestStatus } from "src/app/configs/project-participation-request-status";
 import { LoginComponent } from 'src/app/modules/login/login.component';
 import { Roles } from 'src/app/shared/models/roles/roles';
@@ -24,7 +24,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private participantService: ProjectParticipationService,
     private eventService: EventService,
     private dialog: DialogService,
-    private userService: UserService
+    private userService: AuthService
   ) {}
 
   ngOnInit() {
@@ -56,12 +56,14 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
   onLogin() {
     this.dialog.openFormDialog(LoginComponent);
   }
+
   isAuthenticated()
   {
        return this.userService.isAuthenticated();
   }
+
   isAdmin()
   {
-    return this.userService.isRole(Roles.Admin);
+    return this.userService.isAdmin();
   }
 }

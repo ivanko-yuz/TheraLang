@@ -1,18 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
 namespace TheraLang.DataSeeding
 {
     public static class SeedData
     {
-        public static void Seed<TEntity>(this DbContext dbContext, IEnumerable<TEntity> entities) where TEntity : class
+        public static void Seed(IApplicationBuilder builder)
         {
-            foreach (var project in entities)
-            {
-                dbContext.Set<TEntity>().Add(project);
-            }
-            dbContext.SaveChanges();
+            
         }
 
         public static void Clear<TEntity>(this DbContext dbContext) where TEntity : class
@@ -28,5 +25,7 @@ namespace TheraLang.DataSeeding
             dbContext.Clear<TEntity>();
             dbContext.Seed(entities);
         }
+
+
     }
 }

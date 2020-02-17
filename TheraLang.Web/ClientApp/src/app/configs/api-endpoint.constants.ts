@@ -13,3 +13,5 @@ export const managerPageUrl = baseUrl + "pages/";
 export const statusApproveUrl = projectUrl + "approve";
 export const statusRejectUrl = projectUrl + "reject";
 export const accountUrl = baseUrl + "account";
+export const memberFeeUrl = baseUrl + "memberFee";
+export const userUrl = baseUrl + "user";

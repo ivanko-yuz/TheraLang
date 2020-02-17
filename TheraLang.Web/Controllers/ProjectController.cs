@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.Extensions;
 using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -18,11 +17,13 @@ namespace TheraLang.Web.Controllers
     {
         private readonly IProjectService _projectService;
         private readonly IUserManagementService _userManager;
+        private readonly IAuthenticateService _authenticateService;
 
-        public ProjectController(IProjectService projectService, IUserManagementService userManager)
+        public ProjectController(IProjectService projectService, IUserManagementService userManager, IAuthenticateService authenticateService)
         {
             _projectService = projectService;
             _userManager = userManager;
+            _authenticateService = authenticateService;
         }
 
         /// <summary>
@@ -32,21 +33,16 @@ namespace TheraLang.Web.Controllers
         /// <returns>status code</returns>
         [HttpPost("create")]
         [Authorize]
-        public async Task<IActionResult> CreateProject([FromBody] ProjectViewModel projectModel)
+        public async Task<IActionResult> CreateProject([FromForm] ProjectViewModel projectModel)
         {
 
-            var userId = User.Claims.GetUserId();
-            if (userId == null)
-            {
-                return BadRequest();
-            }
-
-            var user = await _userManager.GetUserById(userId.Value);
+            var authUser = await _authenticateService.GetAuthUserAsync();
+            if (authUser == null) return BadRequest();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();
             var projectDto = mapper.Map<ProjectViewModel, ProjectDto>(projectModel);
 
-            await _projectService.AddAsync(projectDto, user.Id);
+            await _projectService.AddAsync(projectDto, authUser.Id);
             return Ok(projectDto);
         }
 
@@ -70,9 +66,9 @@ namespace TheraLang.Web.Controllers
                     Description = p.Description,
                     Details = p.Details,
                     ProjectStart = p.ProjectStart,
-                    ProjectEnd = p.ProjectEnd
+                    ProjectEnd = p.ProjectEnd,
+                    ImgUrl= p.ImgUrl                             
                 }).ToList();
-
 
             return projectModels;
         }

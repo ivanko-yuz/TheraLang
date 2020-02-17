@@ -14,9 +14,12 @@ namespace TheraLang.Web.Controllers
     {
 
         private readonly IAuthenticateService _authService;
-        public AccountController(IAuthenticateService authService)
+        private readonly IUserManagementService _userManagement;
+
+        public AccountController(IAuthenticateService authService, IUserManagementService userManagement)
         {
             _authService = authService;
+            _userManagement = userManagement;
         }
 
         [AllowAnonymous]
@@ -25,19 +28,27 @@ namespace TheraLang.Web.Controllers
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LoginModel, LoginModelDto>()).CreateMapper();
             var loginDto = mapper.Map<LoginModel, LoginModelDto>(login);
-
-            var token = await _authService.AuthenticateAsync(loginDto);
-
-            if (!string.IsNullOrEmpty(token))
+            var user = await _userManagement.GetUser(loginDto.Email, loginDto.Password);
+            var token = await _authService.Authenticate(user);
+            if (token == "")
             {
-                return Ok(new LoginResponse()
-                {
-                    Token = token,
-                });
+                return BadRequest("Invalid Request");
             }
 
-            return BadRequest("Invalid Request");
+            return Ok(new LoginResponse()
+            {
+                Token = token,
+            });
         }
 
+        [AllowAnonymous]
+        [HttpPost("registration")]
+        public async Task<IActionResult> Register([FromForm]UserAllViewModel newUser)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserAllViewModel, UserAllDto>()).CreateMapper();
+            var user = mapper.Map<UserAllViewModel, UserAllDto>(newUser);
+            await _userManagement.AddUser(user);
+            return Ok();
+        }
     }
 }

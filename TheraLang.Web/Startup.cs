@@ -14,6 +14,9 @@ using TheraLang.Web.ActionFilters;
 using TheraLang.Web.ExceptionHandling;
 using TheraLang.Web.Extensions;
 using TheraLang.Web.Helpers;
+using TheraLang.Web.Validators;
+using TheraLang.Web.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace TheraLang.Web
 {
@@ -48,9 +51,10 @@ namespace TheraLang.Web
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddExceptionHandler();
-            
-            services.AddScoped<IAuthenticateService, TokenAuthenticationService>();
+
+            services.AddScoped<IAuthenticateService, AuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
@@ -58,6 +62,7 @@ namespace TheraLang.Web
             services.AddTransient<IFileService, LocalFileService>();
             services.AddAuthentication(Configuration);
 
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
             services.AddCors(options =>
@@ -83,6 +88,7 @@ namespace TheraLang.Web
                 app.UseCors("development mode");
                 app.UseOpenApi();
                 app.UseSwaggerUi3();
+                //DbInitializer.Seed(app);
             }
 
             // Register middleware
@@ -113,8 +119,6 @@ namespace TheraLang.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-            //Seed.RunAsync(api).GetAwaiter().GetResult(); //TODO: fix seeding
         }
     }
 }

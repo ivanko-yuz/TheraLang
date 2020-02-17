@@ -58,7 +58,7 @@ namespace TheraLang.BLL.Services
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()
                 .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.User.Id))
-                .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.User.UserName))
+                .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => $"{m.User.Details.FirstName} {m.User.Details.LastName}"))
                 .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.User.Email))
             ).CreateMapper();
             var projectParticipationDtos =
@@ -79,7 +79,7 @@ namespace TheraLang.BLL.Services
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipation, ProjectParticipationDto>()
                 .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.User.Id))
-                .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => m.User.UserName))
+                .ForMember(m => m.RequestedUserName, opt => opt.MapFrom(m => $"{m.User.Details.FirstName} {m.User.Details.LastName}"))
                 .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.User.Email))
             ).CreateMapper();
             var projectParticipationDtos =
