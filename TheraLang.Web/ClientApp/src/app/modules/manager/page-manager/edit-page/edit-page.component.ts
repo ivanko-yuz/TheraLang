@@ -17,7 +17,6 @@ import { transliterate } from 'transliteration';
 export class EditPageComponent implements OnInit {
   page: Page;
   page_eng: Page;
-  pages: Page[];
   routeUrl: string;
   form = new FormGroup({
     header: new FormControl('', [Validators.required, Validators.maxLength(120)]),
@@ -42,8 +41,9 @@ export class EditPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchData();
     this.routeUrl = this.route.snapshot.paramMap.get('route');
+    this.fetchData();
+
   }
 
   fetchData() {
@@ -52,7 +52,6 @@ export class EditPageComponent implements OnInit {
         return this.pageService.getPagesByRoute(params['route']);
       })
     ).subscribe((pages: Page[]) => {
-      this.pages = pages
       this.form.controls.header.setValue(pages[0].header);
       this.form.controls.menuTitle.setValue(pages[0].menuTitle);
       this.form.controls.content.setValue(pages[0].content);
@@ -61,7 +60,7 @@ export class EditPageComponent implements OnInit {
       this.form.controls.menuTitle_eng.setValue(pages[1].menuTitle);
       this.form.controls.content_eng.setValue(pages[1].content);
 
-      this.form.controls.route.setValue(pages[0].route);
+      this.form.controls.route.setValue(this.routeUrl);
     });
   }
 
