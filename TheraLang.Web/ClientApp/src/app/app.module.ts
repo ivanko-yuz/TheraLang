@@ -101,13 +101,6 @@ import { NewsCardComponent } from './modules/main/pages/news/news-card/news-card
 import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-create.component';
 import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
 import { NgImageSliderModule } from 'ng-image-slider';
-import {RegistrationComponent} from "./modules/registration/registration.component";
-import {UserPageComponent} from "./modules/user-page/user-page.component";
-import {UsersListComponent} from "./modules/users_list/users-list.component";
-import {UserService} from "./core/services/user/user.service";
-import {ChangeRoleComponent} from "./modules/users_list/change-role/change-role.component";
-import {ProfileComponent} from "./modules/profile/profile.component";
-import { CmsGenericModule } from "./modules/cms-generic/cms-generic.module";
 import { ProjectCreationComponent } from './modules/main/pages/project/project-creation/project-creation.component';
 import { ProjectEditingComponent } from './modules/main/pages/project/project-editing/project-editing.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
