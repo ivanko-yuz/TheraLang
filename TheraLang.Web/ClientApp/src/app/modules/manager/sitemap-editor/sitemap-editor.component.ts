@@ -5,6 +5,7 @@ import { ChangedSiteMap } from "src/app/shared/models/site-map/changed-site-map"
 import { PageService } from "src/app/core/http/manager/page.service";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { TranslateService } from "@ngx-translate/core";
+import {Language} from "../../../shared/models/language/languages.enum";
 
 @Component({
   selector: "app-sitemap-editor",
@@ -13,6 +14,7 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class SitemapEditorComponent implements OnInit {
   public siteMap: SiteMap[];
+  private language: Language;
   constructor(
     private siteMapService: SiteMapService,
     private pageService: PageService,
@@ -21,10 +23,11 @@ export class SitemapEditorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.language = Language.ua;
     this.fetchData();
   }
   fetchData() {
-    this.siteMapService.getSiteMap().subscribe({
+    this.siteMapService.getSiteMap(this.language).subscribe({
       next: data => {
         this.siteMap = data["pages"] as SiteMap[];
       }
@@ -58,5 +61,10 @@ export class SitemapEditorComponent implements OnInit {
         console.log(err);
       }
     });
+  }
+
+  changeLanguage(lang:string){
+    this.language = Language[lang];
+    this.fetchData();
   }
 }

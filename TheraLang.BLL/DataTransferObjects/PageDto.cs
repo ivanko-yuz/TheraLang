@@ -8,9 +8,10 @@ namespace TheraLang.BLL.DataTransferObjects
         public int Id { get; set; }
         public HtmlContent Content { get; set; }
         public string Header { get; set; }
-        public string MenuName { get; set; }
+        public string MenuTitle { get; set; }
         public int? ParentPageId { get; set; }
         public string Route { get; set; }
+        public LanguageDto Language { get; set; }
         public virtual PageDto ParentPage { get; set; }
         public virtual ICollection<PageDto> SubPages { get; set; }
     }

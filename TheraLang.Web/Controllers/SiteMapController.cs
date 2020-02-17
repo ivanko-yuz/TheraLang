@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
+using TheraLang.DAL.Enums;
 using TheraLang.Web.ViewModels.SiteMap;
 
 namespace TheraLang.Web.Controllers
@@ -23,16 +24,20 @@ namespace TheraLang.Web.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
-        { 
+        {
             var siteMapDtos = await _siteMapService.GetAll();
-            var mapper = new MapperConfiguration(mapOpts =>
-            {
-                mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>()
-                    .ForMember(vm => vm.MenuTitle,
-                        opts => opts.MapFrom(dto => dto.MenuName));
-            }).CreateMapper();
-            var siteMapVMs = mapper.Map<IEnumerable<SiteMapDto>,IEnumerable<SiteMapViewModel>>(siteMapDtos);
-            return Ok(new {pages = siteMapVMs});
+            var mapper = new MapperConfiguration(mapOpts => mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>()).CreateMapper();
+            var siteMapVMs = mapper.Map<IEnumerable<SiteMapDto>, IEnumerable<SiteMapViewModel>>(siteMapDtos);
+            return Ok(new { pages = siteMapVMs });
+        }
+
+        [HttpGet("{lang}")]
+        public async Task<IActionResult> GetByLang(Language lang)
+        {
+            var siteMapDtos = await _siteMapService.GetAll(lang);
+            var mapper = new MapperConfiguration(mapOpts => mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>()).CreateMapper();
+            var siteMapVMs = mapper.Map<IEnumerable<SiteMapDto>, IEnumerable<SiteMapViewModel>>(siteMapDtos);
+            return Ok(new { pages = siteMapVMs });
         }
 
         [HttpPut]
@@ -42,15 +47,15 @@ namespace TheraLang.Web.Controllers
             {
                 return NoContent();
             }
-            var mapper = new MapperConfiguration(mapOpts => 
-                mapOpts.CreateMap<ChangedSiteMapViewModel,SiteMapDto>()
-                    .ForMember(dto => dto.SortOrder,opts => 
-                        opts.MapFrom(vm => vm.NewIndex))
-                    .ForMember(dto=>dto.ParentPageId,opts => 
-                        opts.MapFrom(vm => vm.NewParentId))
+            var mapper = new MapperConfiguration(mapOpts =>
+                mapOpts.CreateMap<ChangedSiteMapViewModel, SiteMapDto>()
+                    .ForMember(dto => dto.SortOrder, opts =>
+                         opts.MapFrom(vm => vm.NewIndex))
+                    .ForMember(dto => dto.ParentPageId, opts =>
+                           opts.MapFrom(vm => vm.NewParentId))
             ).CreateMapper();
-            var structure = 
-                mapper.Map<IEnumerable<ChangedSiteMapViewModel>,IEnumerable<SiteMapDto>>(siteMapStructure.SiteMaps);
+            var structure =
+                mapper.Map<IEnumerable<ChangedSiteMapViewModel>, IEnumerable<SiteMapDto>>(siteMapStructure.SiteMaps);
             await _siteMapService.UpdateStructure(structure);
             return NoContent();
         }

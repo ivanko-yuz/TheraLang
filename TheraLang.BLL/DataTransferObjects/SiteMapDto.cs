@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace TheraLang.BLL.DataTransferObjects
 {
@@ -6,7 +6,7 @@ namespace TheraLang.BLL.DataTransferObjects
     {
         public int Id { get; set; }
         
-        public string MenuName { get; set; }
+        public string MenuTitle { get; set; }
         
         public string Route { get; set; }
         

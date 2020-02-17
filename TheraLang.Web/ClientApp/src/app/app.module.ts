@@ -108,14 +108,21 @@ import {UserService} from "./core/services/user/user.service";
 import {ChangeRoleComponent} from "./modules/users_list/change-role/change-role.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
 import { CmsGenericModule } from "./modules/cms-generic/cms-generic.module";
-import { PageService } from "./core/http/manager/page.service";
-import { QuillModule } from "ngx-quill";
+import { ProjectCreationComponent } from './modules/main/pages/project/project-creation/project-creation.component';
+import { ProjectEditingComponent } from './modules/main/pages/project/project-editing/project-editing.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { PageComponent } from "./modules/main/pages/page/page.component";
-import { NotFoundComponent } from "./shared/components/not-found/not-found.component";
-import { ProjectEditingComponent } from "./modules/main/pages/project/project-editing/project-editing.component";
-import { ProjectCreationComponent } from "./modules/main/pages/project/project-creation/project-creation.component";
-import {AdminGuard} from './shared/guards/admin-guard.service';
-import {AuthGuard} from './shared/guards/auth-guard.service';
+import { PageService } from "./core/http/manager/page.service";
+import { SharedModule} from "./modules/shared/shared.module";
+import { RegistrationComponent } from "./modules/registration/registration.component";
+import { UserPageComponent } from "./modules/user-page/user-page.component";
+import { UsersListComponent } from "./modules/users_list/users-list.component";
+import { UserService } from "./core/services/user/user.service";
+import { ChangeRoleComponent } from "./modules/users_list/change-role/change-role.component";
+import { ProfileComponent } from "./modules/profile/profile.component";
+import { QuillModule } from "ngx-quill";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -251,7 +258,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     NgImageSliderModule,
     SortablejsModule.forRoot({ animation: 400 }),
-    CmsGenericModule
+    SharedModule
   ],
   exports: [ResourcesInternalTableComponent],
   providers: [

@@ -6,7 +6,7 @@
     </div>
     <div class="filler"></div>
     <div class="page-controls">
-      <a routerLink="/admin/pages/edit/{{ page.id }}" mat-icon-button
+      <a routerLink="/admin/pages/edit/{{ page.route }}" mat-icon-button
         ><mat-icon>create</mat-icon></a
       >
       <a
@@ -32,12 +32,16 @@
     }}</mat-card-title>
     <div class="filler"></div>
     <div class="page-controls">
-      <a mat-stroked-button (click)="onSave.emit()">{{
+      <a mat-raised-button (click)="onSave.emit()" class="control-item">{{
         "manager.save-changes" | translate
       }}</a>
-      <a mat-stroked-button routerLink="/admin/pages/create">{{
+      <a mat-raised-button routerLink="/admin/pages/create" class="control-item">{{
         "manager.add-new-page" | translate
       }}</a>
+      <button mat-raised-button [matMenuTriggerFor]="menu" class="control-item" ><mat-icon>language</mat-icon></button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let lang of languages" (click)="onLanguageChange.emit(lang)">{{ lang }}</button>
+      </mat-menu>
     </div>
   </mat-card>
 
