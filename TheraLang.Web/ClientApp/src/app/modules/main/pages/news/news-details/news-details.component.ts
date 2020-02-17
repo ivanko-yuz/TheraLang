@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NewsPreview } from 'src/app/shared/models/news/newsPreview';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { UserService } from 'src/app/core/auth/user.service';
+import {AuthService} from "../../../../../core/auth/auth.service";
 
 @Component({
   selector: 'app-news-details',
@@ -19,16 +20,17 @@ export class NewsDetailsComponent implements OnInit {
   contentImages: Array<object> = [];
   values: any;
   news: NewsPreview[];
-  
+
 
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private service:NewsService,
     private dialogService: DialogService,
     private translate: TranslateService,
     private notificationService: NotificationService,
     private userService: UserService,
-    private router: Router) { 
+    private authService: AuthService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -59,14 +61,16 @@ export class NewsDetailsComponent implements OnInit {
           this.service.deleteNews(newsId).subscribe(result => {
             this.service
               .getAllNews()
-              .subscribe((news: NewsPreview[]) => (this.news = news));
+              .subscribe(async (news: NewsPreview[]) => {
+                this.news = news;
+                this.notificationService.success(await this.translate.get("common.deleted-successfully").toPromise());
+                await this.router.navigateByUrl("/news");
+              });
           });
-          this.notificationService.warn(
-            await this.translate.get("common.deleted-successfully").toPromise()
-          );
+
         }
       });
-      this.router.navigateByUrl("/news");
+
   }
 
   isAuthenticated()

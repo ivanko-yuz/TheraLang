@@ -5,10 +5,10 @@
                 <h1>{{this.newsDetails?.title}}</h1>
             </div>
             <div fxLayout="row" fxLayoutAlign="end">
-                <button mat-icon-button *ngIf="isAdmin()"><!--(click)="onEdit(news)"-->
+                <button mat-icon-button *ngIf="authService.isAdmin()"><!--(click)="onEdit(news)"-->
                   <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button (click)="onDelete(this.newsId)" *ngIf="isAdmin()">
+                <button mat-icon-button (click)="onDelete(this.newsId)" *ngIf="authService.isAdmin()">
                   <mat-icon>delete</mat-icon>
                 </button>
             </div>
@@ -18,7 +18,7 @@
         </div>
         <div fxLayout="column" fxLayoutAlign=" center">
             <img mat-card-image class="prewiew-image"
-            src="{{this.newsDetails?.mainImageUrl}}"                
+            src="{{this.newsDetails?.mainImageUrl}}"
             alt="" />
         </div>
         <div class="text-container">
