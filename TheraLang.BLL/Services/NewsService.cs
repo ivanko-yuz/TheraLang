@@ -33,7 +33,9 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<NewsPreviewDto>> GetAllNews()
         {
             var news = await _unitOfWork.Repository<News>().GetAll()
-                .Include(e => e.Author).Include(e => e.UploadedContentImages).ToListAsync();
+                .Include(e => e.Author)
+                .ThenInclude(a => a.Details)
+                .Include(e => e.UploadedContentImages).ToListAsync();
 
             var mapper = new MapperConfiguration(cfg =>
             {
@@ -53,6 +55,7 @@ namespace TheraLang.BLL.Services
                     .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
                     .Take(pageParameters.PageSize)
                     .Include(e => e.Author)
+                    .ThenInclude(a => a.Details)
                     .Include(e => e.UploadedContentImages)
                     .ToListAsync();
 
@@ -71,6 +74,7 @@ namespace TheraLang.BLL.Services
         {
             var news = await _unitOfWork.Repository<News>().GetAll()
                     .Include(e => e.Author)
+                    .ThenInclude(a => a.Details)
                     .Include(e => e.UploadedContentImages)
                     .Include(e => e.UsersThatLiked)
                     .SingleOrDefaultAsync(n => n.Id == id);

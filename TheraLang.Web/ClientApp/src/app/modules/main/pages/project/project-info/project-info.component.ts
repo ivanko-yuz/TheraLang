@@ -12,6 +12,7 @@ import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 import { ProjectService } from 'src/app/core/http/project/project.service';
 import { UserService } from 'src/app/core/auth/user.service';
 import { Roles } from 'src/app/shared/models/roles/roles';
+import {log} from "util";
 
 @Component({
   selector: "app-project-info",
@@ -189,10 +190,10 @@ export class ProjectInfoComponent implements OnInit {
     this.arrowOpener();
   }
 
-  getParticipants(){ 
+  getParticipants(){
     this.participService.getProjectParticipants(this.projectId)
       .subscribe(response => {
-        this.projectParticipants = response
-      }); 
+        this.projectParticipants = response;
+      });
   }
 }
