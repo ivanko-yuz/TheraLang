@@ -20,4 +20,4 @@ import {MatCardModule} from '@angular/material/card';
     QuillModule
   ]
 })
-export class CmsGenericModule { }
+export class SharedModule { }

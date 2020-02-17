@@ -16,11 +16,18 @@ import { transliterate } from 'transliteration';
 })
 export class EditPageComponent implements OnInit {
   page: Page;
+  page_eng: Page;
+  routeUrl: string;
   form = new FormGroup({
-    header: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-    menuName: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+    header: new FormControl('', [Validators.required, Validators.maxLength(120)]),
+    menuTitle: new FormControl('', [Validators.required, Validators.maxLength(40)]),
     content: new FormControl('', Validators.required),
-    route: new FormControl(null, [Validators.maxLength(50), Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')])
+
+    header_eng: new FormControl('', [Validators.maxLength(120)]),
+    menuTitle_eng: new FormControl('', [Validators.maxLength(40)]),
+    content_eng: new FormControl(),
+
+    route: new FormControl(null, [Validators.maxLength(140), Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')])
   });
 
   constructor(
@@ -34,16 +41,26 @@ export class EditPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.routeUrl = this.route.snapshot.paramMap.get('route');
+    this.fetchData();
+
+  }
+
+  fetchData() {
     this.route.params.pipe(
       switchMap((params: Params) => {
-        return this.pageService.getPageById(params['id']);
+        return this.pageService.getPagesByRoute(params['route']);
       })
-    ).subscribe((page: Page) => {
-      this.page = page
-      this.form.controls.header.setValue(page.header);
-      this.form.controls.menuName.setValue(page.menuName);
-      this.form.controls.route.setValue(page.route);
-      this.form.controls.content.setValue(page.content);
+    ).subscribe((pages: Page[]) => {
+      this.form.controls.header.setValue(pages[0].header);
+      this.form.controls.menuTitle.setValue(pages[0].menuTitle);
+      this.form.controls.content.setValue(pages[0].content);
+
+      this.form.controls.header_eng.setValue(pages[1].header);
+      this.form.controls.menuTitle_eng.setValue(pages[1].menuTitle);
+      this.form.controls.content_eng.setValue(pages[1].content);
+
+      this.form.controls.route.setValue(this.routeUrl);
     });
   }
 
@@ -55,18 +72,8 @@ export class EditPageComponent implements OnInit {
     return this.form.controls[controlName].hasError(errorName);
   }
 
-  submit() {
-    if (this.form.invalid) {
-      return;
-    }
-
-    this.pageService.updatePage({
-      ...this.page,
-      header: this.form.value.header,
-      menuName: this.form.value.menuName,
-      content: this.form.value.content,
-      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
-    }).subscribe(
+  updatePages(pages: Page[]) {
+    this.pageService.updatePages(pages, this.routeUrl).subscribe(
       async (msg: string) => {
         msg = await this.translate.get("common.updated-successfully").toPromise();
         this.notificationService.success(msg);
@@ -79,5 +86,33 @@ export class EditPageComponent implements OnInit {
         );
       }
     );
+  }
+
+  submit() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.page = {
+      ...this.page,
+      header: this.form.value.header,
+      content: this.form.value.content,
+      menuTitle: this.form.value.menuTitle,
+      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
+    }
+
+    this.page_eng = {
+      ...this.page_eng,
+      header: this.form.value.header_eng,
+      content: this.form.value.content_eng,
+      menuTitle: this.form.value.menuTitle_eng,
+      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
+    }
+
+    if (this.page_eng.header && this.page_eng.menuTitle && this.page_eng.content) {
+      this.updatePages([this.page, this.page_eng]);
+    } else {
+      this.updatePages([this.page]);
+    }
   }
 }

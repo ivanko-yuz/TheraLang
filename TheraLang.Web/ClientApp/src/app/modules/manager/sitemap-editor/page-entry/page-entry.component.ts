@@ -18,6 +18,7 @@ export class PageEntryComponent implements OnInit {
     ChangedSiteMap[]
   >();
   @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onLanguageChange: EventEmitter<string> = new EventEmitter<string>();
 
   options: Options = {
     group: "nested",
@@ -39,6 +40,7 @@ export class PageEntryComponent implements OnInit {
       this.onChange.emit(entriesToChange);
     }
   };
+  languages = ["ua","en"];
   constructor() {}
 
   ngOnInit() {}
