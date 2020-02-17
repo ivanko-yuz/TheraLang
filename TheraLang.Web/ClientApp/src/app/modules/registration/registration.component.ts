@@ -19,7 +19,7 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private notificationService: NotificationService,
     private dialog: DialogService,
-    private authService: AuthService,
+    public authService: AuthService,
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute
