@@ -29,9 +29,6 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> CreatePages([FromBody] IEnumerable<PageViewModel> pageModels)
         {
-            if (pageModels == null) return BadRequest();
-            if (pageModel == null) return BadRequest();
-
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>()
             .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
                 .CreateMapper();
