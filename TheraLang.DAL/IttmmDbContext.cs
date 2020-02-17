@@ -30,6 +30,7 @@ namespace TheraLang.DAL
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<PageRoute> PageRoutes { get; set; }
         public virtual DbSet<UserDetails> UsersDetails { get; set; }
+        public virtual DbSet<MemberFee> MemberFees { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,6 +48,8 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new UserDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new PageConfiguration());
-            modelBuilder.ApplyConfiguration(new PageRouteConfiguration());}
+            modelBuilder.ApplyConfiguration(new PageRouteConfiguration());
+            modelBuilder.ApplyConfiguration(new MemberFeeConfiguration());
+        }
     }
 }
