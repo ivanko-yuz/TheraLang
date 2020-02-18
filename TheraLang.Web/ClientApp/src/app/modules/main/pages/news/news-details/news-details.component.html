@@ -25,7 +25,7 @@
             <span class="text-content">{{this.newsDetails?.text}}</span>
         </div>
         <div *ngIf="contentImages?.length > 0" class="slider">
-            <ng-image-slider [images]="contentImages" #nav></ng-image-slider>
+            <ng-image-slider [images]="contentImages" [infinite]="true" #nav></ng-image-slider>
         </div>
     </mat-card-content>
 </mat-card>

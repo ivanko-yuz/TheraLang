@@ -11,18 +11,18 @@ import { UserService } from 'src/app/core/auth/user.service';
 })
 export class NewsPageComponent implements OnInit {
 
-  newsList:NewsPreview[];
+  newsList: NewsPreview[];
 
   constructor(
-    private service:NewsService,
-    private userService: UserService) { }
+    private service: NewsService,
+    public userService: UserService) { }
 
   ngOnInit() {
     this.getAllNews();
   }
 
-  getAllNews(){
+  getAllNews() {
     this.service.getAllNews()
-        .subscribe((data:NewsPreview[])=>this.newsList=data);
+      .subscribe((data: NewsPreview[]) => this.newsList = data);
   }
 }
