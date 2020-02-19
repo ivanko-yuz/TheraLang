@@ -13,9 +13,6 @@ using TheraLang.BLL.Services.File;
 using TheraLang.Web.ActionFilters;
 using TheraLang.Web.ExceptionHandling;
 using TheraLang.Web.Extensions;
-using TheraLang.Web.Helpers;
-using TheraLang.Web.Validators;
-using TheraLang.Web.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace TheraLang.Web
@@ -58,8 +55,8 @@ namespace TheraLang.Web
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
-            services.AddAzureStorageClientFactory(Configuration.GetConnectionString("AzureConnection"));
-            services.AddTransient<IFileService, LocalFileService>();
+            services.AddFileStorage(Configuration.GetConnectionString("AzureConnection"));
+            
             services.AddAuthentication(Configuration);
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
