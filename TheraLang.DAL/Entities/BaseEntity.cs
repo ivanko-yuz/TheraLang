@@ -8,7 +8,7 @@ namespace TheraLang.DAL.Entities
 
         public Guid CreatedById { get; set; }
 
-        public Guid? UpdatedById { get; set; }   
+        public Guid? UpdatedById { get; set; }
 
         public DateTime CreatedDateUtc { get; set; }
 

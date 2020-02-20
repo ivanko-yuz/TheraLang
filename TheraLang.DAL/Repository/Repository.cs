@@ -23,6 +23,7 @@ namespace TheraLang.DAL.Repository
             {
                 query = query.Where(predicate);
             }
+
             return await query.FirstOrDefaultAsync();
         }
 
@@ -33,6 +34,7 @@ namespace TheraLang.DAL.Repository
             {
                 query = query.Where(predicate);
             }
+
             return await query.ToListAsync();
         }
 

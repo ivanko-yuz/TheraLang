@@ -1,10 +1,9 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
@@ -38,7 +37,6 @@ namespace TheraLang.BLL.Services
                             opts => opts.MapFrom(details => details.User.Email))).CreateMapper();
                 var userAll = detailsMapper.Map<UserDetails, UserAllDto>(userDetails);
                 return userAll;
-
             }
             catch (Exception ex)
             {
@@ -52,7 +50,8 @@ namespace TheraLang.BLL.Services
             {
                 var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>()).CreateMapper();
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>())
+                    .CreateMapper();
                 var userDto = mapper.Map<UserDetails, UserDetailsDto>(user);
 
                 return userDto;
@@ -78,14 +77,17 @@ namespace TheraLang.BLL.Services
             {
                 var updateUser = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailsDto, UserDetails>()).CreateMapper();
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailsDto, UserDetails>())
+                    .CreateMapper();
                 updateUser = mapper.Map<UserDetailsDto, UserDetails>(user);
                 _unitOfWork.Repository<UserDetails>().Update(updateUser);
                 if (user.Image != null)
                 {
-                    var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(), Path.GetExtension(user.Image.Name));
+                    var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(),
+                        Path.GetExtension(user.Image.Name));
                     updateUser.ImageURl = imageUri.ToString();
                 }
+
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -96,7 +98,6 @@ namespace TheraLang.BLL.Services
 
         public async Task<bool> ChangeRole(Guid userId, Guid newRole)
         {
-
             var user = await _unitOfWork.Repository<User>().Get(u => u.Id == userId);
             user.RoleId = newRole;
             _unitOfWork.Repository<User>().Update(user);

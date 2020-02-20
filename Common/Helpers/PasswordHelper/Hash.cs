@@ -17,9 +17,10 @@ namespace Common.Helpers.PasswordHelper
             if (password == null)
                 throw new ArgumentNullException(nameof(password));
 
-            byte[] salt; 
+            byte[] salt;
             byte[] bytes;
-            using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, SaltSize, Pbkdf2IterCount, HashAlgorithmName))
+            using (var rfc2898DeriveBytes =
+                new Rfc2898DeriveBytes(password, SaltSize, Pbkdf2IterCount, HashAlgorithmName))
             {
                 salt = rfc2898DeriveBytes.Salt;
                 bytes = rfc2898DeriveBytes.GetBytes(Pbkdf2SubkeyLength);
@@ -41,17 +42,17 @@ namespace Common.Helpers.PasswordHelper
             if (hashedPassword == null)
                 return false;
 
-            byte[] numArray = Convert.FromBase64String(hashedPassword);
+            var numArray = Convert.FromBase64String(hashedPassword);
             if (numArray.Length < 1)
                 return false;
 
-            byte version = numArray[0];
+            var version = numArray[0];
             if (version > Version)
                 return false;
 
-            byte[] salt = new byte[SaltSize];
+            var salt = new byte[SaltSize];
             Buffer.BlockCopy(numArray, 1, salt, 0, SaltSize);
-            byte[] a = new byte[Pbkdf2SubkeyLength];
+            var a = new byte[Pbkdf2SubkeyLength];
             Buffer.BlockCopy(numArray, 1 + SaltSize, a, 0, Pbkdf2SubkeyLength);
             byte[] bytes;
             using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, salt, Pbkdf2IterCount, HashAlgorithmName))
@@ -69,16 +70,15 @@ namespace Common.Helpers.PasswordHelper
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static bool FixedTimeEquals(byte[] left, byte[] right)
         {
-
             if (left.Length != right.Length)
             {
                 return false;
             }
 
-            int length = left.Length;
-            int accum = 0;
+            var length = left.Length;
+            var accum = 0;
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 accum |= left[i] - right[i];
             }
@@ -86,5 +86,4 @@ namespace Common.Helpers.PasswordHelper
             return accum == 0;
         }
     }
-
 }

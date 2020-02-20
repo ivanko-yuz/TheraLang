@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using TheraLang.BLL.Interfaces;
-using TheraLang.DAL.UnitOfWork;
-using TheraLang.DAL.Entities;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.DataTransferObjects;
-using System.IO;
+using TheraLang.BLL.DataTransferObjects.NewsDtos;
+using TheraLang.BLL.Interfaces;
+using TheraLang.DAL.Entities;
+using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
@@ -36,10 +36,11 @@ namespace TheraLang.BLL.Services
                 .Include(e => e.Author).Include(e => e.UploadedContentImages).ToListAsync();
 
             var mapper = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<News, NewsPreviewDto>()
-                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
-            }
+                {
+                    cfg.CreateMap<News, NewsPreviewDto>()
+                        .ForMember(m => m.AuthorName,
+                            opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
+                }
             ).CreateMapper();
 
             var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
@@ -50,16 +51,17 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PagingParametersDto pageParameters)
         {
             var news = await _unitOfWork.Repository<News>().GetAll()
-                    .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
-                    .Take(pageParameters.PageSize)
-                    .Include(e => e.Author)
-                    .Include(e => e.UploadedContentImages)
-                    .ToListAsync();
+                .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
+                .Take(pageParameters.PageSize)
+                .Include(e => e.Author)
+                .Include(e => e.UploadedContentImages)
+                .ToListAsync();
 
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsPreviewDto>()
-                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
+                    .ForMember(m => m.AuthorName,
+                        opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
             }).CreateMapper();
 
             var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
@@ -70,16 +72,18 @@ namespace TheraLang.BLL.Services
         public async Task<NewsDetailsDto> GetNewsById(int id)
         {
             var news = await _unitOfWork.Repository<News>().GetAll()
-                    .Include(e => e.Author)
-                    .Include(e => e.UploadedContentImages)
-                    .Include(e => e.UsersThatLiked)
-                    .SingleOrDefaultAsync(n => n.Id == id);
+                .Include(e => e.Author)
+                .Include(e => e.UploadedContentImages)
+                .Include(e => e.UsersThatLiked)
+                .SingleOrDefaultAsync(n => n.Id == id);
 
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsDetailsDto>()
-                    .ForMember(m => m.ContentImageUrls, opt => opt.MapFrom(sm => sm.UploadedContentImages.Select(i => i.Url)))
-                    .ForMember(m => m.AuthorName, opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
+                    .ForMember(m => m.ContentImageUrls,
+                        opt => opt.MapFrom(sm => sm.UploadedContentImages.Select(i => i.Url)))
+                    .ForMember(m => m.AuthorName,
+                        opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
                     .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.UsersThatLiked.Count));
             }).CreateMapper();
 
@@ -91,8 +95,8 @@ namespace TheraLang.BLL.Services
         public async Task AddNews(NewsCreateDto newsDto)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()
-                    .ForMember(m=>m.CreatedById, opt=>opt.MapFrom(sm=>sm.AuthorId)))
-                    .CreateMapper();
+                    .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => sm.AuthorId)))
+                .CreateMapper();
 
             var news = mapper.Map<NewsCreateDto, News>(newsDto);
 
@@ -122,8 +126,8 @@ namespace TheraLang.BLL.Services
         public async Task UpdateNews(int id, NewsEditDto newsDto)
         {
             var newsToUpdate = await _unitOfWork.Repository<News>().GetAll()
-                    .Include(e => e.UploadedContentImages)
-                    .SingleOrDefaultAsync(n => n.Id == id);
+                .Include(e => e.UploadedContentImages)
+                .SingleOrDefaultAsync(n => n.Id == id);
 
             if (newsToUpdate == null)
             {
@@ -163,11 +167,11 @@ namespace TheraLang.BLL.Services
         public async Task Like(int id, User user)
         {
             var newsToLike = await _unitOfWork.Repository<News>().GetAll()
-                .Include(e=>e.UsersThatLiked)
+                .Include(e => e.UsersThatLiked)
                 .SingleOrDefaultAsync(n => n.Id == id);
-            
+
             //remove like if user already liked
-            if(newsToLike.UsersThatLiked.Contains(user))
+            if (newsToLike.UsersThatLiked.Contains(user))
             {
                 newsToLike.UsersThatLiked.Remove(user);
             }
@@ -183,12 +187,12 @@ namespace TheraLang.BLL.Services
         private async Task<UploadedNewsContentImage> UploadImage(IFormFile image)
         {
             if (image == null) throw new ArgumentNullException();
-            
+
             using (var fileStream = image.OpenReadStream())
             {
                 var imageExtension = Path.GetExtension(image.FileName);
                 var imageUrl = await _fileService.SaveFile(fileStream, imageExtension);
-                var uploadedImage = new UploadedNewsContentImage() { Url = imageUrl.ToString() };
+                var uploadedImage = new UploadedNewsContentImage() {Url = imageUrl.ToString()};
                 return uploadedImage;
             }
         }

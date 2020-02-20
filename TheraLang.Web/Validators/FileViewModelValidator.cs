@@ -4,7 +4,7 @@ using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Validators
 {
-    public class FileViewModelValidator: AbstractValidator<FileViewModel>
+    public class FileViewModelValidator : AbstractValidator<FileViewModel>
     {
         public FileViewModelValidator()
         {

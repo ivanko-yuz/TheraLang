@@ -4,7 +4,7 @@ using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Configuration
 {
-    class ResourceAttachmentConfiguration : IEntityTypeConfiguration<ResourceAttachment>
+    internal class ResourceAttachmentConfiguration : IEntityTypeConfiguration<ResourceAttachment>
     {
         public void Configure(EntityTypeBuilder<ResourceAttachment> builder)
         {
@@ -16,7 +16,8 @@ namespace TheraLang.DAL.Configuration
 
             builder.Property(e => e.Path).HasMaxLength(1000);
 
-            builder.HasOne(e => e.Resource).WithMany(e => e.ResourceAttach).HasForeignKey("ResourceId").OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(e => e.Resource).WithMany(e => e.ResourceAttach).HasForeignKey("ResourceId")
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -4,10 +4,10 @@ using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.BLL.Interfaces
 {
-   public interface IResourceAttachmentService
-   {
-       Task Add(ResourceAttachDto file);
+    public interface IResourceAttachmentService
+    {
+        Task Add(ResourceAttachDto file);
 
-       Task<IEnumerable<ResourceAttachDto>> Get();
-   }
+        Task<IEnumerable<ResourceAttachDto>> Get();
+    }
 }

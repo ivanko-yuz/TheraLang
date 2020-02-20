@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects
 {

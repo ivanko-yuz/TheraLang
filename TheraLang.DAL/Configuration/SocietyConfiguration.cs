@@ -4,7 +4,7 @@ using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Configuration
 {
-    class SocietyConfiguration : IEntityTypeConfiguration<Society>
+    internal class SocietyConfiguration : IEntityTypeConfiguration<Society>
     {
         public void Configure(EntityTypeBuilder<Society> builder)
         {

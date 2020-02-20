@@ -22,7 +22,7 @@ namespace TheraLang.BLL.Services.File
         /// <param name="stream"></param>
         /// <param name="fileExtension"></param>
         /// <returns></returns>
-        public async Task<Uri> SaveFile(Stream stream,string fileExtension)
+        public async Task<Uri> SaveFile(Stream stream, string fileExtension)
         {
             var container = _azureConnection.GetClient().GetContainerReference("files");
             var uniqueName = Guid.NewGuid().ToString();

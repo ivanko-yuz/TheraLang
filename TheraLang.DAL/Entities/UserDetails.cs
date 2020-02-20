@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace TheraLang.DAL.Entities
 {
@@ -22,6 +20,5 @@ namespace TheraLang.DAL.Entities
         public int Age { get; set; }
 
         public virtual ICollection<Resource> Resources { get; set; }
-
     }
 }

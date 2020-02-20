@@ -22,6 +22,7 @@ namespace TheraLang.DAL.Entities
 
         public virtual ICollection<ResourceProject> ResourceProjects { get; set; }
         public virtual ICollection<ResourceAttachment> ResourceAttach { get; set; }
+
         public Resource()
         {
             ResourceAttach = new List<ResourceAttachment>();

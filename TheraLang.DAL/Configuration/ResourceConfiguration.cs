@@ -17,8 +17,8 @@ namespace TheraLang.DAL.Configuration
             builder.Property(x => x.Url).HasDefaultValue();
             builder.Property(x => x.FileName).HasDefaultValue();
 
-            builder.HasMany(x => x.ResourceProjects).WithOne(i => i.Resource).
-                HasForeignKey(e => e.ResourceId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.ResourceProjects).WithOne(i => i.Resource).HasForeignKey(e => e.ResourceId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

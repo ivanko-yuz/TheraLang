@@ -21,14 +21,14 @@ namespace TheraLang.BLL.Services.File
             var regex = new Regex("data:image/(?<exteniton>\\w*);base64.(?<data>\\S*)\"/>",
                 RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
             var matches = regex.Matches(htmlContent.ToString());
-            string html = htmlContent.ToString();
+            var html = htmlContent.ToString();
 
             foreach (var item in matches)
             {
                 var match = regex.Match(item.ToString());
                 var exteniton = "." + match.Groups["exteniton"].Value;
                 var base64Data = match.Groups["data"].Value;
-                byte[] rawData = Convert.FromBase64String(base64Data);
+                var rawData = Convert.FromBase64String(base64Data);
 
                 var ms = new MemoryStream(rawData);
                 var uri = await _fileService.SaveFile(ms, exteniton);

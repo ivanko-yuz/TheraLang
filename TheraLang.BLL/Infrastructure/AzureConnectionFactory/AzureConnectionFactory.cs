@@ -3,9 +3,10 @@ using Microsoft.Azure.Storage.Blob;
 
 namespace TheraLang.BLL.Infrastructure.AzureConnectionFactory
 {
-    public class AzureConnectionFactory: IAzureConnectionFactory
+    public class AzureConnectionFactory : IAzureConnectionFactory
     {
         private readonly string _connectionString;
+
         public AzureConnectionFactory(string connectionString)
         {
             _connectionString = connectionString;

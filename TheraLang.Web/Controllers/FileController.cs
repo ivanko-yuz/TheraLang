@@ -21,12 +21,12 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpPost("upload")]
-        public async Task<IActionResult> Upload([FromForm]FileViewModel file)
+        public async Task<IActionResult> Upload([FromForm] FileViewModel file)
         {
             var extension = Path.GetExtension(file.File.FileName);
             var fileStream = file.File.OpenReadStream();
             var uri = await _fileManager.SaveFile(fileStream, extension);
-            return Ok(new { FileUri = uri });
+            return Ok(new {FileUri = uri});
         }
     }
 }

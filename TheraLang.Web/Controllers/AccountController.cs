@@ -12,7 +12,6 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-
         private readonly IAuthenticateService _authService;
         private readonly IUserManagementService _userManagement;
 
@@ -24,7 +23,7 @@ namespace TheraLang.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> SignIn([FromBody]LoginModel login)
+        public async Task<IActionResult> SignIn([FromBody] LoginModel login)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LoginModel, LoginModelDto>()).CreateMapper();
             var loginDto = mapper.Map<LoginModel, LoginModelDto>(login);
@@ -43,7 +42,7 @@ namespace TheraLang.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost("registration")]
-        public async Task<IActionResult> Register([FromForm]UserAllViewModel newUser)
+        public async Task<IActionResult> Register([FromForm] UserAllViewModel newUser)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserAllViewModel, UserAllDto>()).CreateMapper();
             var user = mapper.Map<UserAllViewModel, UserAllDto>(newUser);

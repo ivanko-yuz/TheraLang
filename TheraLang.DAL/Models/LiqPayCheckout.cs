@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 
-
 namespace TheraLang.DAL.Models
 {
     public class LiqPayCheckout
@@ -31,7 +30,5 @@ namespace TheraLang.DAL.Models
 
         [JsonProperty("language")]
         public string Language { get; set; }
-
-
     }
 }

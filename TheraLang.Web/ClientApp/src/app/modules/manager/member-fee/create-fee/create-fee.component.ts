@@ -22,7 +22,6 @@ export class CreateFeeComponent implements OnInit {
     if (this.memberFee.id == null) {
       this.memberFeeService.createMemberFee(this.memberFee)
         .subscribe((data: MemberFee) => {
-          console.log(data)
           return this.memberFees.push(data);
         });
     }

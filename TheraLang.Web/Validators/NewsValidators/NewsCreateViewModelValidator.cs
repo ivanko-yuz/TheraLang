@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using System.Linq;
 using TheraLang.Web.Validators.ValidationRules;
 using TheraLang.Web.ViewModels.NewsViewModels;
 
