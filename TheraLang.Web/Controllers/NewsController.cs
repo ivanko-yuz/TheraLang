@@ -18,14 +18,11 @@ namespace TheraLang.Web.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
-        private readonly IUserManagementService _userManagementService;
         private readonly IAuthenticateService _authenticateService;
 
-        public NewsController(INewsService newsService, IUserManagementService userManagementService,
-            IAuthenticateService authenticateService)
+        public NewsController(INewsService newsService, IAuthenticateService authenticateService)
         {
             _newsService = newsService;
-            _userManagementService = userManagementService;
             _authenticateService = authenticateService;
         }
 
@@ -143,9 +140,8 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> Like(int id)
         {
             var authUser = await _authenticateService.GetAuthUserAsync();
-            var user = await _userManagementService.GetUserById(authUser.Id);
 
-            await _newsService.Like(id, user);
+            await _newsService.Like(id, authUser.Id);
             return Ok();
         }
 

@@ -18,11 +18,13 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
+        private readonly IUserManagementService _userManagementService;
 
-        public NewsService(IUnitOfWork unitOfWork, IFileService fileService)
+        public NewsService(IUnitOfWork unitOfWork, IFileService fileService, IUserManagementService userManagementService)
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
+            _userManagementService = userManagementService;
         }
 
         public async Task<int> GetNewsCount()
@@ -168,11 +170,13 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task Like(int id, User user)
+        public async Task Like(int id, Guid userId)
         {
             var newsToLike = await _unitOfWork.Repository<News>().GetAll()
                 .Include(e => e.UsersThatLiked)
                 .SingleOrDefaultAsync(n => n.Id == id);
+
+            var user = await _userManagementService.GetUserById(userId);
 
             //remove like if user already liked
             if (newsToLike.UsersThatLiked.Contains(user))
