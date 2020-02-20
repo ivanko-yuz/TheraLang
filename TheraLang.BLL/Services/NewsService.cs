@@ -56,6 +56,7 @@ namespace TheraLang.BLL.Services
                 .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
                 .Take(pageParameters.PageSize)
                 .Include(e => e.Author)
+                .ThenInclude(a => a.Details)
                 .Include(e => e.UploadedContentImages)
                 .ToListAsync();
 
@@ -75,6 +76,7 @@ namespace TheraLang.BLL.Services
         {
             var news = await _unitOfWork.Repository<News>().GetAll()
                 .Include(e => e.Author)
+                .ThenInclude(a => a.Details)
                 .Include(e => e.UploadedContentImages)
                 .Include(e => e.UsersThatLiked)
                 .SingleOrDefaultAsync(n => n.Id == id);
