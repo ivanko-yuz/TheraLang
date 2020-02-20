@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.Extensions;
 using TheraLang.Web.ViewModels;
 using TheraLang.Web.ViewModels.NewsViewModels;
 
@@ -22,7 +21,8 @@ namespace TheraLang.Web.Controllers
         private readonly IUserManagementService _userManagementService;
         private readonly IAuthenticateService _authenticateService;
 
-        public NewsController(INewsService newsService, IUserManagementService userManagementService, IAuthenticateService authenticateService)
+        public NewsController(INewsService newsService, IUserManagementService userManagementService,
+            IAuthenticateService authenticateService)
         {
             _newsService = newsService;
             _userManagementService = userManagementService;
@@ -34,7 +34,8 @@ namespace TheraLang.Web.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsPreviewDto, NewsPreviewViewModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsPreviewDto, NewsPreviewViewModel>())
+                .CreateMapper();
 
             var newsDtos = await _newsService.GetAllNews();
 
@@ -75,7 +76,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet("count")]
         public async Task<IActionResult> GetNewsCount()
         {
-            int pageCount = await _newsService.GetNewsCount();
+            var pageCount = await _newsService.GetNewsCount();
             return Ok(pageCount);
         }
 
@@ -84,7 +85,8 @@ namespace TheraLang.Web.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> GetById(int id)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsDetailsDto, NewsDetailsViewModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsDetailsDto, NewsDetailsViewModel>())
+                .CreateMapper();
 
             var newsDto = await _newsService.GetNewsById(id);
             if (newsDto == null)
@@ -102,7 +104,8 @@ namespace TheraLang.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] NewsCreateViewModel newsModel)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateViewModel, NewsCreateDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateViewModel, NewsCreateDto>())
+                .CreateMapper();
 
             var newsDto = mapper.Map<NewsCreateDto>(newsModel);
             var authUser = await _authenticateService.GetAuthUserAsync();
@@ -141,7 +144,7 @@ namespace TheraLang.Web.Controllers
         {
             var authUser = await _authenticateService.GetAuthUserAsync();
             var user = await _userManagementService.GetUserById(authUser.Id);
-           
+
             await _newsService.Like(id, user);
             return Ok();
         }

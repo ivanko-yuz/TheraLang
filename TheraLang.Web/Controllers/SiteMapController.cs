@@ -26,18 +26,20 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> GetAll()
         {
             var siteMapDtos = await _siteMapService.GetAll();
-            var mapper = new MapperConfiguration(mapOpts => mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(mapOpts => mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>())
+                .CreateMapper();
             var siteMapVMs = mapper.Map<IEnumerable<SiteMapDto>, IEnumerable<SiteMapViewModel>>(siteMapDtos);
-            return Ok(new { pages = siteMapVMs });
+            return Ok(new {pages = siteMapVMs});
         }
 
         [HttpGet("{lang}")]
         public async Task<IActionResult> GetByLang(Language lang)
         {
             var siteMapDtos = await _siteMapService.GetAll(lang);
-            var mapper = new MapperConfiguration(mapOpts => mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(mapOpts => mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>())
+                .CreateMapper();
             var siteMapVMs = mapper.Map<IEnumerable<SiteMapDto>, IEnumerable<SiteMapViewModel>>(siteMapDtos);
-            return Ok(new { pages = siteMapVMs });
+            return Ok(new {pages = siteMapVMs});
         }
 
         [HttpPut]
@@ -47,12 +49,13 @@ namespace TheraLang.Web.Controllers
             {
                 return NoContent();
             }
+
             var mapper = new MapperConfiguration(mapOpts =>
                 mapOpts.CreateMap<ChangedSiteMapViewModel, SiteMapDto>()
                     .ForMember(dto => dto.SortOrder, opts =>
-                         opts.MapFrom(vm => vm.NewIndex))
+                        opts.MapFrom(vm => vm.NewIndex))
                     .ForMember(dto => dto.ParentPageId, opts =>
-                           opts.MapFrom(vm => vm.NewParentId))
+                        opts.MapFrom(vm => vm.NewParentId))
             ).CreateMapper();
             var structure =
                 mapper.Map<IEnumerable<ChangedSiteMapViewModel>, IEnumerable<SiteMapDto>>(siteMapStructure.SiteMaps);

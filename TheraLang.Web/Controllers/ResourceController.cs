@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using TheraLang.Web.ViewModels;
-using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.BLL.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using System.Collections.Generic;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -16,7 +15,8 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ResourceController : ControllerBase
     {
-        public ResourceController(IResourceService service, IUserManagementService userManager, IAuthenticateService authenticateService)
+        public ResourceController(IResourceService service, IUserManagementService userManager,
+            IAuthenticateService authenticateService)
         {
             _service = service;
             _userManager = userManager;

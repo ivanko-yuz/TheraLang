@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 
-
 namespace TheraLang.DAL.Entities
 {
     public class Donation
@@ -10,15 +9,15 @@ namespace TheraLang.DAL.Entities
         public int? ProjectId { get; set; }
 
         public virtual Project Project { get; set; }
-        
-        public int? SocietyId { get; set;}
+
+        public int? SocietyId { get; set; }
 
         public virtual Society Society { get; set; }
 
         public string DonationId { get; set; }
 
         [JsonProperty("status")]
-        public string Status { get; set; }      
+        public string Status { get; set; }
 
         [JsonProperty("amount")]
         public decimal Amount { get; set; }

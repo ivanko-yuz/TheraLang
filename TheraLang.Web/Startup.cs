@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
@@ -11,9 +12,7 @@ using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
 using TheraLang.Web.ActionFilters;
-using TheraLang.Web.ExceptionHandling;
 using TheraLang.Web.Extensions;
-using Microsoft.AspNetCore.Http;
 
 namespace TheraLang.Web
 {
@@ -31,10 +30,7 @@ namespace TheraLang.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
 
             services.AddMvc(options =>
                 {
@@ -63,7 +59,9 @@ namespace TheraLang.Web
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
             services.AddCors(options =>
-                options.AddPolicy("development mode", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod())); //TODO: remove after app integrated
+                options.AddPolicy("development mode",
+                    builder => builder.AllowAnyOrigin().AllowAnyHeader()
+                        .AllowAnyMethod())); //TODO: remove after app integrated
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
@@ -96,13 +94,13 @@ namespace TheraLang.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=home}/{action=index}/{id?}");
+                    "default",
+                    "{controller=home}/{action=index}/{id?}");
 
                 routes.MapRoute(
-                   name: "angular",
-                   template: "{*template}",
-                   defaults: new { controller = "Home", action = "Index" });
+                    "angular",
+                    "{*template}",
+                    new {controller = "Home", action = "Index"});
             });
 
             app.UseSpa(spa =>
@@ -114,7 +112,7 @@ namespace TheraLang.Web
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseAngularCliServer("start");
                 }
             });
         }

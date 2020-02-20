@@ -75,7 +75,7 @@ export class CreatePageComponent implements OnInit {
       menuTitle: this.form.value.menuTitle,
       route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header)),
       language: Language.ua
-    }
+    };
 
     this.page_eng = {
       header: this.form.value.header_eng,
@@ -83,7 +83,7 @@ export class CreatePageComponent implements OnInit {
       menuTitle: this.form.value.menuTitle_eng,
       route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header)),
       language: Language.en
-    }
+    };
 
     if (this.page_eng.header && this.page_eng.menuTitle && this.page_eng.content) {
       await this.createPage([this.page, this.page_eng]);

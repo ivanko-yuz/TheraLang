@@ -20,6 +20,7 @@ namespace TheraLang.BLL.Services
             {
                 query = query.Where(p => p.Language == lang);
             }
+
             var entities = await query
                 .Include(sm => sm.SubPages)
                 .Include(sm => sm.PageRoute)
@@ -57,11 +58,11 @@ namespace TheraLang.BLL.Services
 
             var entityDtoPairs = entitiesToChange.Join(siteMapDtos,
                 etc => etc.Id, ce => ce.Id, (old, changed) =>
-                new
-                {
-                    Entity = old,
-                    NewValues = changed
-                });
+                    new
+                    {
+                        Entity = old,
+                        NewValues = changed
+                    });
             foreach (var pair in entityDtoPairs)
             {
                 pair.Entity.ParentPageId = pair.NewValues.ParentPageId ?? pair.Entity.ParentPageId;
@@ -69,8 +70,10 @@ namespace TheraLang.BLL.Services
                 {
                     pair.Entity.ParentPageId = null;
                 }
+
                 pair.Entity.SortOrder = pair.NewValues.SortOrder ?? pair.Entity.SortOrder;
             }
+
             await _unitOfWork.SaveChangesAsync();
         }
     }

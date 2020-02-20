@@ -1,0 +1,55 @@
+<mat-card class="form mat-elevation-z5" appCardStyle>
+    <h2 mat-dialog-title>
+        <span>{{'components.news.NEWS-CREATION' |translate}}</span>
+    </h2>
+
+    <form [formGroup]="this.newsForm"> 
+        <mat-dialog-content>
+            <div fxLayout="column">
+                <mat-form-field>
+                    <input formControlName="title" autofocus required matInput
+                        [placeholder]="'components.news.news-title'|translate">
+                        <mat-error *ngIf="this.newsForm.controls['title'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+                        <mat-error *ngIf="this.newsForm.controls['title'].errors?.minlength">{{'common.validation.line-too-short'|translate}}</mat-error>
+                        <mat-error *ngIf="this.newsForm.controls['title'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea formControlName="text" matTextareaAutosize matInput autofocus required
+                        [placeholder]="'components.news.news-text'|translate"></textarea>
+                        <mat-error *ngIf="this.newsForm.controls['text'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+                        <mat-error *ngIf="this.newsForm.controls['text'].errors?.minlength">{{'common.validation.line-too-short'|translate}}</mat-error>
+                        <mat-error *ngIf="this.newsForm.controls['text'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <ngx-mat-file-input formControlName="previewImage" 
+                        [valuePlaceholder]="'components.news.preview-image' | translate" multiple="false">
+                        <mat-error *ngIf="this.newsForm.controls['previewImage'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+                    </ngx-mat-file-input>
+                    <mat-icon matSuffix>folder</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                    <ngx-mat-file-input formControlName="contentImages" 
+                        [valuePlaceholder]="'components.news.content-images' | translate" multiple="true">
+                        <mat-error *ngIf="this.newsForm.controls['contentImages'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+                    </ngx-mat-file-input>
+                    <mat-icon matSuffix>folder</mat-icon>
+                </mat-form-field>
+              
+                <mat-dialog-actions fxLayout="row" fxFlexAlign="end"> 
+                    <button
+                    mat-raised-button
+                    color="primary"
+                    type="submit"
+                    [disabled]="this.newsForm.invalid"
+                    (click)="onSubmit()"
+                    >
+                    {{ "common.confirm" | translate }}
+                    </button>
+                        <button mat-raised-button color="warn" type="reset" [routerLink]="['/news']">
+                        {{ "common.cancel" | translate }}
+                    </button>
+                </mat-dialog-actions>
+        </div>
+    </mat-dialog-content>
+    </form>
+</mat-card>

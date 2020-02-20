@@ -1,6 +1,6 @@
 ﻿namespace TheraLang.DAL.Entities
 {
-    public class ResourceAttachment 
+    public class ResourceAttachment
     {
         public int Id { get; set; }
 
@@ -10,6 +10,6 @@
 
         public string Path { get; set; }
 
-        public virtual Resource  Resource {get; set;}
+        public virtual Resource Resource { get; set; }
     }
 }

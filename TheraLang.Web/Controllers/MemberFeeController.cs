@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -16,16 +14,18 @@ namespace TheraLang.Web.Controllers
     public class MemberFeeController : ControllerBase
     {
         private readonly IMemberFeeService _memberFeeService;
+
         public MemberFeeController(IMemberFeeService memberFeeService)
         {
             _memberFeeService = memberFeeService;
         }
-      
+
         // GET: api/memberFee
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeDto, MemberFeeViewModel>()).CreateMapper();
+            var mapper =
+                new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeDto, MemberFeeViewModel>()).CreateMapper();
 
             var memberFeeDtos = await _memberFeeService.GetMemberFeesAsync();
 
@@ -47,7 +47,8 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentNullException($"{nameof(memberFeeModel)} can not be null");
             }
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeViewModel, MemberFeeDto>()).CreateMapper();
+            var mapper =
+                new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeViewModel, MemberFeeDto>()).CreateMapper();
             var memberFeeDto = mapper.Map<MemberFeeViewModel, MemberFeeDto>(memberFeeModel);
 
             await _memberFeeService.AddAsync(memberFeeDto);

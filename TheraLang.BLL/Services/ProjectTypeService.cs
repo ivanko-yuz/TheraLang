@@ -66,7 +66,9 @@ namespace TheraLang.BLL.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"Cannot update the {nameof(ProjectType)} with {nameof(projectTypeDto.Id)}: {projectTypeDto.Id}.", ex);
+                throw new Exception(
+                    $"Cannot update the {nameof(ProjectType)} with {nameof(projectTypeDto.Id)}: {projectTypeDto.Id}.",
+                    ex);
             }
         }
 

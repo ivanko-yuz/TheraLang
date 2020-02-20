@@ -1,15 +1,15 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheraLang.BLL.DataTransferObjects;
-using TheraLang.BLL.Interfaces;
-using TheraLang.DAL.UnitOfWork;
-using TheraLang.DAL.Entities;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.CustomTypes;
+using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.Interfaces;
+using TheraLang.DAL.Entities;
 using TheraLang.DAL.Enums;
+using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
@@ -37,12 +37,13 @@ namespace TheraLang.BLL.Services
                 .CreateMapper();
             var pages = mapper.Map<IEnumerable<PageDto>, IEnumerable<Page>>(pagesDto);
 
-            var route = new PageRoute() { Route = pagesDto.FirstOrDefault().Route };
+            var route = new PageRoute() {Route = pagesDto.FirstOrDefault().Route};
             (pages as List<Page>).ForEach(p => p.PageRoute = route);
 
             try
             {
-                (pages as List<Page>).ForEach(p => _unitOfWork.Repository<Page>().Add(p));
+                _unitOfWork.Repository<Page>().AddRange(pages);
+                // (pages as List<Page>).ForEach(p => _unitOfWork.Repository<Page>().Add(p));
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
@@ -117,16 +118,17 @@ namespace TheraLang.BLL.Services
                 .ToListAsync();
 
             var _route = await _unitOfWork.Repository<PageRoute>()
-                .Get((r => r.Route == pages.FirstOrDefault().PageRoute.Route));
+                .Get(r => r.Route == pages.FirstOrDefault().PageRoute.Route);
 
             try
             {
-                for (int i = 0; i < pagesDto.Count(); i++)
+                for (var i = 0; i < pagesDto.Count(); i++)
                 {
                     pages.ElementAt(i).Header = pagesDto.ElementAt(i).Header;
                     pages.ElementAt(i).MenuTitle = pagesDto.ElementAt(i).MenuTitle;
                     pages.ElementAt(i).Content = pagesDto.ElementAt(i).Content.ToString();
                 }
+
                 _route.Route = pagesDto.FirstOrDefault().Route;
 
                 pages.ForEach(p => _unitOfWork.Repository<Page>().Update(p));
@@ -159,7 +161,7 @@ namespace TheraLang.BLL.Services
         public async Task Update(PageDto pageDto, int pageId)
         {
             var page = await _unitOfWork.Repository<Page>().Get(p => p.Id == pageId);
-            var route = await _unitOfWork.Repository<PageRoute>().Get((r => r.Route == page.PageRoute.Route));
+            var route = await _unitOfWork.Repository<PageRoute>().Get(r => r.Route == page.PageRoute.Route);
 
             try
             {

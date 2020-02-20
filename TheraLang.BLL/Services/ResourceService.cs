@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TheraLang.DAL.Entities;
-using TheraLang.DAL.UnitOfWork;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using TheraLang.DAL.Entities;
+using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
@@ -56,8 +56,8 @@ namespace TheraLang.BLL.Services
                 }
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
-                    .ForMember(r => r.File, opt => opt.Ignore())
-                    .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId)))
+                        .ForMember(r => r.File, opt => opt.Ignore())
+                        .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId)))
                     .CreateMapper();
 
                 var resource = mapper.Map<ResourceDto, Resource>(resourceDto);
@@ -79,7 +79,7 @@ namespace TheraLang.BLL.Services
                 {
                     using (var binaryReader = new BinaryReader(resourceDto.File.OpenReadStream()))
                     {
-                        var byteFile = binaryReader.ReadBytes((int)resourceDto.File.Length);
+                        var byteFile = binaryReader.ReadBytes((int) resourceDto.File.Length);
                         BitConverter.ToString(byteFile);
                     }
                 }
@@ -165,7 +165,7 @@ namespace TheraLang.BLL.Services
                     .GetAllAsync(
                         withAssignedResources
                             ? cat => cat.Resources.Any()
-                            : (Expression<Func<ResourceCategory, bool>>)null
+                            : (Expression<Func<ResourceCategory, bool>>) null
                     );
                 var mapper = new MapperConfiguration(cfg =>
                     {
@@ -194,8 +194,6 @@ namespace TheraLang.BLL.Services
                     .Where(x => x.ResourceProjects.Any(c => c.ProjectId == projectId))
                     .Include(x => x.ResourceCategory)
                     .ToListAsync();
-
-
 
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();

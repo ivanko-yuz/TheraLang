@@ -1,6 +1,4 @@
-using Common.Helpers.PasswordHelper;
 using Microsoft.EntityFrameworkCore;
-using System;
 using TheraLang.DAL.Configuration;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Piranha.Configuration;
@@ -13,7 +11,7 @@ namespace TheraLang.DAL
         {
             //Database.Migrate();
         }
-        
+
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ProjectType> Types { get; set; }
         public virtual DbSet<ResourceCategory> ResourceCategories { get; set; }
@@ -31,7 +29,7 @@ namespace TheraLang.DAL
         public virtual DbSet<PageRoute> PageRoutes { get; set; }
         public virtual DbSet<UserDetails> UsersDetails { get; set; }
         public virtual DbSet<MemberFee> MemberFees { get; set; }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());

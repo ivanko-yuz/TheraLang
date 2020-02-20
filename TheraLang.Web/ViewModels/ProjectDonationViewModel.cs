@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace TheraLang.Web.ViewModels
-{ 
+{
     public class ProjectDonationViewModel
     {
         public int? Id { get; set; }
@@ -25,7 +25,5 @@ namespace TheraLang.Web.ViewModels
         public decimal SumLeftToCollect { get; set; }
 
         public string ImgUrl { get; set; }
-
     }
 }
-

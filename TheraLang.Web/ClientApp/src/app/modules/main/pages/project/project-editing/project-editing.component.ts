@@ -36,7 +36,7 @@ export class ProjectEditingComponent implements OnInit {
         .subscribe(
           (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes)
         );
-    this.route.params.subscribe(params => { this.projectId = +params['id']; })
+    this.route.params.subscribe(params => { this.projectId = +params['id']; });
     this.httpService.getProjectInfo(this.projectId)
       .subscribe((data: Project) => (this.populateForm(data)));
   }

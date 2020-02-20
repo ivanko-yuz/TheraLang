@@ -18,8 +18,8 @@ namespace TheraLang.DAL.Configuration
 
             builder.HasIndex(e => e.TypeName).IsUnique();
 
-            builder.HasMany(e=>e.Projects).WithOne(x=>x.Type).
-                HasForeignKey(i=>i.TypeId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(e => e.Projects).WithOne(x => x.Type).HasForeignKey(i => i.TypeId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

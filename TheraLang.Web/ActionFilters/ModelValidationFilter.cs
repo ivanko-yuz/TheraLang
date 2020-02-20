@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace TheraLang.Web.ActionFilters
 {
-    public class ModelValidationFilter: IActionFilter
+    public class ModelValidationFilter : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {

@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from "@angular/core";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {DialogData} from "../../main/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
+import { Component, Inject, OnInit } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { DialogData } from "../../main/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
 
 @Component({
   selector: "app-change-role",
@@ -11,7 +11,7 @@ export class ChangeRoleComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ChangeRoleComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     console.log(data);
   }
 

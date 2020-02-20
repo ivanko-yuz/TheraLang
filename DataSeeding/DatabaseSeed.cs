@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataSeeding
 {
@@ -24,6 +20,7 @@ namespace DataSeeding
                     //logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
+
             return host;
         }
     }

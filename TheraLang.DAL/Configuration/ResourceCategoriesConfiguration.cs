@@ -14,8 +14,8 @@ namespace TheraLang.DAL.Configuration
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Type).HasMaxLength(50).IsRequired();
 
-            builder.HasMany(x => x.Resources).WithOne(i => i.ResourceCategory).
-                HasForeignKey(x => x.CategoryId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Resources).WithOne(i => i.ResourceCategory).HasForeignKey(x => x.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

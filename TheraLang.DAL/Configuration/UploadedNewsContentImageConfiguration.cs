@@ -4,7 +4,7 @@ using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Configuration
 {
-    class UploadedNewsContentImageConfiguration : IEntityTypeConfiguration<UploadedNewsContentImage>
+    internal class UploadedNewsContentImageConfiguration : IEntityTypeConfiguration<UploadedNewsContentImage>
     {
         public void Configure(EntityTypeBuilder<UploadedNewsContentImage> builder)
         {

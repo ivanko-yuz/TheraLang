@@ -1,13 +1,13 @@
 <div class = "home">
-  <div class = "main" fxLayout="column"> 
+  <div class = "main" fxLayout="column">
     <div class="main-conteiner">
       <img *ngIf="projectInfo.imgUrl" class="project-image" [src]="projectInfo.imgUrl" alt="">
       <img *ngIf="!projectInfo.imgUrl"  class="project-image" src="../../assets/img/trashcat.jpg" alt="">
       <div class = "header-panel" fxLayout = "raw">
         <h2 fxFlex="90">{{projectInfo.name}}</h2>
         <div class="buttons-container" fxLayout="row" fxFlex>
-        <button 
-          mat-raised-button 
+        <button
+          mat-raised-button
           class="join-button"
           color="primary"
           (click)="onJoin()"
@@ -54,7 +54,7 @@
         class="donate-button"
         fxFlexAlign="end end"
         fxFlex="70"
-        fxFlex.md="45" 
+        fxFlex.md="45"
         fxFlex.sm="40">
         <button
           class="donate"
@@ -67,9 +67,9 @@
     </div>
     <div class="member-container" *ngIf="isAdmin() || isMember()">
       <div class="details-button" (click)="getDetails()">
-        <mat-icon 
+        <mat-icon
         class="animated-arrow"
-        fxFlex = "2" 
+        fxFlex = "2"
         [@openCloseArrow]="isOpen ? 'open' : 'closed'">keyboard_arrow_down
       </mat-icon>
         <span class="separator" fxFlex>{{'components.projects.details'|translate}}</span>
@@ -77,15 +77,15 @@
       <div class="hiden-details"  [@openCloseContent]="isOpen ? 'open' : 'closed'" >
         <p [@openCloseDisplay]="isOpen ? 'open' : 'closed'">{{projectInfo.details}}</p>
         <mat-chip-list class="participants">
-          <mat-chip 
+          <mat-chip
            *ngFor="let participant of projectParticipants"
            color="primary"
            selected>
-           {{participant.userName}}
+           {{participant.userEmail}}
           </mat-chip>
         </mat-chip-list>
         <b class="color-primary">{{'components.resources.title'|translate}}:</b>
-        <app-resources-table 
+        <app-resources-table
         *ngIf="generateOnceResourcesTable"
         [sortedResourcesByCategory]="sortedResourcesByCategory">
       </app-resources-table>

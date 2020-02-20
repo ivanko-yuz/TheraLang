@@ -16,6 +16,9 @@ import { ProjectCreationComponent } from "./modules/main/pages/project/project-c
 import { ProjectEditingComponent } from "./modules/main/pages/project/project-editing/project-editing.component";
 import { NotFoundComponent } from "./shared/components/not-found/not-found.component";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
+import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-create.component';
+import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { PageComponent } from "./modules/main/pages/page/page.component";
 
@@ -80,6 +83,9 @@ const routes: Routes = [
         component: UsersListComponent,
         canActivate: [AdminGuard],
       },
+      {path: "news", component: NewsPageComponent},
+      {path: "news/create", component: NewsCreateComponent},
+      {path: "news/details/:newsId", component: NewsDetailsComponent},
       {
         component: PageComponent,
         path: "pages/:pageRoute",

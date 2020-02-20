@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
 {
@@ -13,7 +13,8 @@ namespace TheraLang.Web.Controllers
     [ApiController]
     public class ProjectTypeController : ControllerBase
     {
-        public ProjectTypeController(IProjectTypeService service, IUserManagementService userManager, IAuthenticateService authenticateService)
+        public ProjectTypeController(IProjectTypeService service, IUserManagementService userManager,
+            IAuthenticateService authenticateService)
         {
             _service = service;
             _userManager = userManager;
@@ -38,7 +39,8 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(projectTypeModel)} can not be null");
             }
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>())
+                .CreateMapper();
             var projectDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
 
             await _service.Add(projectDto);
@@ -55,7 +57,8 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(projectTypeModel)} can not be null");
             }
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectTypeViewModel, ProjectTypeDto>())
+                .CreateMapper();
             var projectTypeDto = mapper.Map<ProjectTypeViewModel, ProjectTypeDto>(projectTypeModel);
 
             await _service.Update(projectTypeDto);
