@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Common.Enums;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TheraLang.DAL.Entities;
-using TheraLang.DAL.Enums;
 
 namespace TheraLang.DAL.Configuration
 {

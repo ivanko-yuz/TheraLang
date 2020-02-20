@@ -1,4 +1,4 @@
-﻿namespace TheraLang.BLL.DataTransferObjects.Constants
+﻿namespace Common.Constants
 {
     public static class PaginationConstants
     {
