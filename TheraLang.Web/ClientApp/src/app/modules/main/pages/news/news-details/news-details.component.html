@@ -1,0 +1,31 @@
+<mat-card class="home-card  mat-elevation-z5">
+    <mat-card-content fxLayout="column">
+        <div fxLayout="row">
+            <div fxFlex>
+                <h1>{{this.newsDetails?.title}}</h1>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end">
+                <button mat-icon-button *ngIf="authService.isAdmin()"><!--(click)="onEdit(news)"-->
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onDelete(this.newsId)" *ngIf="authService.isAdmin()">
+                  <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="author-container">
+            <h6 fxLayoutAlign="start" >{{this.newsDetails?.authorName}}<span class="space">{{this.newsDetails?.createdDateUtc | date}}</span></h6>
+        </div>
+        <div fxLayout="column" fxLayoutAlign=" center">
+            <img mat-card-image class="prewiew-image"
+            src="{{this.newsDetails?.mainImageUrl}}"
+            alt="" />
+        </div>
+        <div class="text-container">
+            <span class="text-content">{{this.newsDetails?.text}}</span>
+        </div>
+        <div *ngIf="contentImages?.length > 0" class="slider">
+            <ng-image-slider [images]="contentImages" [infinite]="true" #nav></ng-image-slider>
+        </div>
+    </mat-card-content>
+</mat-card>

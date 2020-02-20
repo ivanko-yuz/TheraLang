@@ -58,6 +58,17 @@
     "cms-pages": {
       "title": "CMS Pages"
     },
+    "news" : {
+      "title" : "Новини",
+      "create": "Створити новину",
+      "news-title": "Заголовок",
+      "news-text": "Текст",
+      "NEWS-CREATION": "СТВОРЕННЯ НОВИНИ",
+      "NEWS-EDITING": "РЕДАГУВАННЯ НОВИНИ",
+      "read-more": "більше...",
+      "preview-image":"Головне зображення",
+      "content-images":"Зображення для наповнення"
+    },
     "users": {
       "title": "Користувачі"
     },

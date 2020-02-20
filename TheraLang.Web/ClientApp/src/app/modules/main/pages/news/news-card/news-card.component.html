@@ -1,0 +1,36 @@
+<mat-card class="home-card mat-elevation-z5" appCardStyle>
+    <mat-card-content class="home-card-content" fxLayout="row" fxLayout.md="column" fxLayout.sm="column">
+        <div class="image-container">
+            <img class="news-image"
+                src={{this.news.mainImageUrl}}>
+        </div>
+
+        <div class="main-container" fxLayout="column">
+            <div class="content-container" fxLayout="row" fxFlex="85">
+                <div class="text-container" fxLayout="column" fxFlex="95" fxFlex.md="85" fxFlex.sm="80">
+                    <mat-card-title>
+                       <a [routerLink]="['/news/details/', news.id]"  class="title-link">
+                           {{this.news.title}}
+                        </a>
+                    </mat-card-title>
+                    <div class="news-description" fxFlex="100">
+                        {{this.news?.text.substring(0, 420)}}
+                        <a [routerLink]="['/news/details/', news.id]">
+                            <!-- <b>...</b> -->
+                            {{'components.news.read-more'|translate}}
+                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+
+    <mat-card-footer class="card-footer" fxLayout="row" >
+        <p>
+            Author: {{this.news.authorName}}  
+        </p>
+        <p>
+            Date: {{this.news.createdDateUtc | date}}  
+        </p>
+    </mat-card-footer>
+</mat-card>

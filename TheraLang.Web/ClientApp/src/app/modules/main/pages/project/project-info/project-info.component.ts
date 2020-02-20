@@ -189,10 +189,10 @@ export class ProjectInfoComponent implements OnInit {
     this.arrowOpener();
   }
 
-  getParticipants(){ 
+  getParticipants(){
     this.participService.getProjectParticipants(this.projectId)
       .subscribe(response => {
-        this.projectParticipants = response
-      }); 
+        this.projectParticipants = response;
+      });
   }
 }
