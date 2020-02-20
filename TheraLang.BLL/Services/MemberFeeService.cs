@@ -1,18 +1,19 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.DAL.UnitOfWork;
 using TheraLang.DAL.Entities;
+using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
-   public class MemberFeeService: IMemberFeeService
+    public class MemberFeeService : IMemberFeeService
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public MemberFeeService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -28,6 +29,7 @@ namespace TheraLang.BLL.Services
 
             return memberFeesDto;
         }
+
         public async Task DeleteAsync(int id)
         {
             try
@@ -48,6 +50,7 @@ namespace TheraLang.BLL.Services
                 throw;
             }
         }
+
         public async Task AddAsync(MemberFeeDto memberFeeDto)
         {
             try
@@ -66,5 +69,4 @@ namespace TheraLang.BLL.Services
             }
         }
     }
-    
 }

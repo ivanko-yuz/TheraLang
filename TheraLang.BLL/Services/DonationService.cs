@@ -26,7 +26,8 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var liqPayCheckoutDto = await Task.Run(() => LiqPayHelper.GetLiqPayCheckoutModel(donationAmount, projectId, context));
+                var liqPayCheckoutDto = await Task.Run(() =>
+                    LiqPayHelper.GetLiqPayCheckoutModel(donationAmount, projectId, context));
 
                 return liqPayCheckoutDto;
             }
@@ -62,11 +63,11 @@ namespace TheraLang.BLL.Services
                 var decodedString = Encoding.UTF8.GetString(responseData);
                 var commissionModel = JsonConvert.DeserializeObject<LiqPayCommissionModel>(decodedString);
                 var donation = JsonConvert.DeserializeObject<Donation>(decodedString);
-                
+
                 donation.Amount -= commissionModel.ReceiverCommission;
                 donation.ProjectId = projectId;
                 donation.DonationId = donationId;
-                
+
                 if (projectId == null)
                 {
                     var society = await _unitOfWork.Repository<Society>().Get();

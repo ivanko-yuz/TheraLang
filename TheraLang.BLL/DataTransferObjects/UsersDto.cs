@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace TheraLang.BLL.DataTransferObjects
 {
@@ -9,6 +7,7 @@ namespace TheraLang.BLL.DataTransferObjects
     {
         [JsonProperty("id")]
         public Guid UserDetailsId { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ShortInformation { get; set; }

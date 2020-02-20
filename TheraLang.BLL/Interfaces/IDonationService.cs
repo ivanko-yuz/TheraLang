@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.BLL.Interfaces

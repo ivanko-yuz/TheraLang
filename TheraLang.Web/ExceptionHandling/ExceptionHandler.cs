@@ -22,7 +22,7 @@ namespace TheraLang.Web.ExceptionHandling
         public Task Handle(ExceptionContext filterContext)
         {
             var logger = _loggerFactory.CreateLogger(filterContext.ActionDescriptor.DisplayName);
-            
+
             var details = new
             {
                 Exception = filterContext.Exception.GetType().FullName,
@@ -31,7 +31,7 @@ namespace TheraLang.Web.ExceptionHandling
                 Route = filterContext.HttpContext.Request.Path.ToString(),
                 filterContext.Exception.StackTrace
             };
-            
+
             var message = $"{details.Exception} at {details.Route} by {details.UserId}";
             logger.LogError(filterContext.Exception, message);
 

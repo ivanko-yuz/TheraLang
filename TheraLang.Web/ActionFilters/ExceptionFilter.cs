@@ -12,7 +12,7 @@ namespace TheraLang.Web.ActionFilters
         {
             _errorHandler = errorHandler;
         }
-        
+
         public async Task OnExceptionAsync(ExceptionContext context)
         {
             await _errorHandler.Handle(context);

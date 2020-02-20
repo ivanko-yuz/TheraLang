@@ -99,7 +99,7 @@ export class EditPageComponent implements OnInit {
       content: this.form.value.content,
       menuTitle: this.form.value.menuTitle,
       route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
-    }
+    };
 
     this.page_eng = {
       ...this.page_eng,
@@ -107,7 +107,7 @@ export class EditPageComponent implements OnInit {
       content: this.form.value.content_eng,
       menuTitle: this.form.value.menuTitle_eng,
       route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
-    }
+    };
 
     if (this.page_eng.header && this.page_eng.menuTitle && this.page_eng.content) {
       this.updatePages([this.page, this.page_eng]);

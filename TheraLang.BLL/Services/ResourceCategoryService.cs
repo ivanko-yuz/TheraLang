@@ -1,12 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using TheraLang.DAL.Entities;
-using TheraLang.DAL.UnitOfWork;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
+using TheraLang.DAL.Entities;
+using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
@@ -23,7 +22,7 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                ResourceCategory category =
+                var category =
                     await _unitOfWork.Repository<ResourceCategory>().Get(i => i.Id == categoryId);
                 category.Type = newTypeName;
 

@@ -19,6 +19,5 @@ namespace TheraLang.BLL.DataTransferObjects
 
         [JsonProperty("refreshExpiration")]
         public int RefreshExpiration { get; set; }
-
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects;
 
@@ -17,5 +16,4 @@ namespace TheraLang.BLL.Interfaces
         Task<IEnumerable<RolesListDto>> GetAllRols();
         Task<Guid> GetUserRole(Guid userId);
     }
-
 }

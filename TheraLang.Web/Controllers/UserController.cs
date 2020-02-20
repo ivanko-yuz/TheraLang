@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL.Interfaces;
-using TheraLang.Web.ViewModels;
-using TheraLang.BLL.DataTransferObjects;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.Interfaces;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -17,6 +15,7 @@ namespace TheraLang.Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly IAuthenticateService _authenticateService;
+
         public UserController(IUserService userService, IAuthenticateService authenticateService)
         {
             _userService = userService;
@@ -45,11 +44,12 @@ namespace TheraLang.Web.Controllers
 
         [HttpPut]
         [Authorize]
-        public async Task<IActionResult> UpdateUserDetails([FromForm]UserDetailsViewModel userUpdate)
+        public async Task<IActionResult> UpdateUserDetails([FromForm] UserDetailsViewModel userUpdate)
         {
             var authUser = await _authenticateService.GetAuthUserAsync();
             if (authUser == null) return BadRequest();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailsViewModel, UserDetailsDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailsViewModel, UserDetailsDto>())
+                .CreateMapper();
             var user = mapper.Map<UserDetailsViewModel, UserDetailsDto>(userUpdate);
             await _userService.Update(user, authUser.Id);
             return Ok();
@@ -64,7 +64,7 @@ namespace TheraLang.Web.Controllers
 
         [HttpPost("{id}/role")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ChangeRole(Guid id, [FromBody]ChangeRoleViewModel newRole)
+        public async Task<IActionResult> ChangeRole(Guid id, [FromBody] ChangeRoleViewModel newRole)
         {
             var authUser = await _authenticateService.GetAuthUserAsync();
             if (authUser == null) return BadRequest();
@@ -98,10 +98,10 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> GetUserRole(Guid id)
         {
             var userRole = await _userService.GetUserRole(id);
-            return Ok(new UserRoleViewModel() { 
+            return Ok(new UserRoleViewModel()
+            {
                 Id = userRole,
             });
         }
-
     }
 }

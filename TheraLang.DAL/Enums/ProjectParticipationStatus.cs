@@ -1,6 +1,4 @@
-﻿
-
-namespace TheraLang.DAL.Enums
+﻿namespace TheraLang.DAL.Enums
 {
     public enum ProjectParticipationStatus
     {

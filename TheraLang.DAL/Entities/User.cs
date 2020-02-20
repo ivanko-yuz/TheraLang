@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Entities
 {
@@ -14,6 +13,6 @@ namespace TheraLang.DAL.Entities
 
         public virtual ICollection<Resource> Resources { get; set; }
         public virtual ICollection<News> News { get; set; }
-        public UserDetails Details {get; set;}
+        public UserDetails Details { get; set; }
     }
 }

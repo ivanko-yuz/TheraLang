@@ -19,7 +19,8 @@ namespace TheraLang.Web.Controllers
         private readonly IUserManagementService _userManager;
         private readonly IAuthenticateService _authenticateService;
 
-        public ProjectController(IProjectService projectService, IUserManagementService userManager, IAuthenticateService authenticateService)
+        public ProjectController(IProjectService projectService, IUserManagementService userManager,
+            IAuthenticateService authenticateService)
         {
             _projectService = projectService;
             _userManager = userManager;
@@ -35,7 +36,6 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> CreateProject([FromForm] ProjectViewModel projectModel)
         {
-
             var authUser = await _authenticateService.GetAuthUserAsync();
             if (authUser == null) return BadRequest();
 
@@ -67,7 +67,7 @@ namespace TheraLang.Web.Controllers
                     Details = p.Details,
                     ProjectStart = p.ProjectStart,
                     ProjectEnd = p.ProjectEnd,
-                    ImgUrl= p.ImgUrl                             
+                    ImgUrl = p.ImgUrl
                 }).ToList();
 
             return projectModels;
@@ -91,8 +91,9 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> GetProject(int id)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, ProjectDonationViewModel>()
-            .ForMember(m => m.DonationsSum, opt => opt.MapFrom(sm => sm.Donations.Sum(y => y.Amount)))
-            .ForMember(m=>m.SumLeftToCollect, opt=>opt.MapFrom(sm=>sm.DonationTargetSum - sm.Donations.Sum(y=>y.Amount))))
+                    .ForMember(m => m.DonationsSum, opt => opt.MapFrom(sm => sm.Donations.Sum(y => y.Amount)))
+                    .ForMember(m => m.SumLeftToCollect,
+                        opt => opt.MapFrom(sm => sm.DonationTargetSum - sm.Donations.Sum(y => y.Amount))))
                 .CreateMapper();
 
             var projectDto = await _projectService.GetByIdAsync(id);

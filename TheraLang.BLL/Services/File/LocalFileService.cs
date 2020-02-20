@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using TheraLang.BLL.Interfaces;
-using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.Services.File
 {
@@ -31,6 +30,7 @@ namespace TheraLang.BLL.Services.File
             {
                 Directory.CreateDirectory(folder);
             }
+
             using (var fileStream = new FileStream(Path.Combine(folder, filename), FileMode.Create))
             {
                 await stream.CopyToAsync(fileStream);

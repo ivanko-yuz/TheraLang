@@ -29,7 +29,7 @@ namespace TheraLang.Web.Extensions
                         Category = "Handled",
                         Exception = context.Exception.GetType().ToString()
                     }));
-                
+
                 handlerOptions.Map<ArgumentNullException>(responseOpts =>
                 {
                     responseOpts.WithCode(HttpStatusCode.BadRequest)

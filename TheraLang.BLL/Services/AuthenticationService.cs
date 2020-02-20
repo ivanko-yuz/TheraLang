@@ -1,17 +1,15 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
-using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
@@ -61,6 +59,7 @@ namespace TheraLang.BLL.Services
                 {
                     throw new Exception($"Error while getting user id from token");
                 }
+
                 var userEmail = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
                 var userRole = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
 
@@ -71,7 +70,6 @@ namespace TheraLang.BLL.Services
                     Role = userRole
                 };
             });
-
         }
     }
 }

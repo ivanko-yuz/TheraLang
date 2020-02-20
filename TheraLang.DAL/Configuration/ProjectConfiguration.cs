@@ -26,10 +26,10 @@ namespace TheraLang.DAL.Configuration
 
             builder.Property(e => e.IsActive);
 
-            builder.HasOne(e => e.Type).WithMany(p => p.Projects).
-                HasForeignKey(d => d.TypeId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(e => e.Type).WithMany(p => p.Projects).HasForeignKey(d => d.TypeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Property(e => e.DonationTarget).IsRequired().HasColumnType("decimal(18, 2)");     
+            builder.Property(e => e.DonationTarget).IsRequired().HasColumnType("decimal(18, 2)");
 
             builder.HasMany(x => x.ProjectResources).WithOne(i => i.Project).HasForeignKey("ProjectId");
 

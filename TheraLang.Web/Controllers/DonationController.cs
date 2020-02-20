@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TheraLang.Web.Controllers
 {
@@ -15,6 +15,7 @@ namespace TheraLang.Web.Controllers
     public class DonationController : ControllerBase
     {
         private readonly IDonationService _donationService;
+
         public DonationController(IDonationService donationService)
         {
             _donationService = donationService;
@@ -40,9 +41,11 @@ namespace TheraLang.Web.Controllers
                 throw new ArgumentException($"{nameof(donationAmount)} can not be null");
             }
 
-            var liqPayCheckoutDto = await _donationService.GetLiqPayCheckoutModelAsync(donationAmount, projectId, HttpContext);
+            var liqPayCheckoutDto =
+                await _donationService.GetLiqPayCheckoutModelAsync(donationAmount, projectId, HttpContext);
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LiqPayCheckoutDto, LiqPayCheckoutModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LiqPayCheckoutDto, LiqPayCheckoutModel>())
+                .CreateMapper();
             var liqPayCheckoutModel = mapper.Map<LiqPayCheckoutDto, LiqPayCheckoutModel>(liqPayCheckoutDto);
 
             return Ok(liqPayCheckoutModel);
@@ -57,7 +60,7 @@ namespace TheraLang.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Get(string donationId)
         {
-            if (String.IsNullOrEmpty(donationId))
+            if (string.IsNullOrEmpty(donationId))
             {
                 throw new ArgumentException($"{nameof(donationId)} can not be null");
             }
@@ -80,29 +83,28 @@ namespace TheraLang.Web.Controllers
         /// <returns>status code</returns>
         [HttpPost("{donationId}/{projectId?}")]
         [AllowAnonymous]
-        public async Task<IActionResult> Post(string donationId, int? projectId, [FromForm]string data, [FromForm]string signature)
+        public async Task<IActionResult> Post(string donationId, int? projectId, [FromForm] string data,
+            [FromForm] string signature)
         {
             if (string.IsNullOrEmpty(data))
             {
                 throw new ArgumentException($"{nameof(data)} can not be null");
             }
+
             if (string.IsNullOrEmpty(signature))
             {
                 throw new ArgumentException($"{nameof(signature)} can not be null");
             }
 
-            string mySignature = LiqPayHelper.GetLiqPaySignature(data);
+            var mySignature = LiqPayHelper.GetLiqPaySignature(data);
             if (mySignature != signature)
             {
-                throw new Exception($"Error, while checking LiqPay response signature, the {nameof(signature)} was not authenticated ");
+                throw new Exception(
+                    $"Error, while checking LiqPay response signature, the {nameof(signature)} was not authenticated ");
             }
 
             await _donationService.AddDonationAsync(projectId, donationId, data, signature);
             return Ok();
         }
-
-
     }
-
-
 }

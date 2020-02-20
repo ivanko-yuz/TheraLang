@@ -4,7 +4,7 @@ using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Configuration
 {
-    class NewsConfiguration : IEntityTypeConfiguration<News>
+    internal class NewsConfiguration : IEntityTypeConfiguration<News>
     {
         public void Configure(EntityTypeBuilder<News> builder)
         {

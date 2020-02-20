@@ -1,14 +1,13 @@
-﻿using System;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TheraLang.BLL.Infrastructure.AzureConnectionFactory;
-using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.Infrastructure.AzureConnectionFactory;
 using TheraLang.DAL;
 using TheraLang.DAL.UnitOfWork;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 
 namespace TheraLang.BLL.Infrastructure
 {

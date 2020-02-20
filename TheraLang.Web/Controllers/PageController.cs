@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using TheraLang.Web.ViewModels;
-using TheraLang.Web.Extensions;
 using AutoMapper;
-using TheraLang.BLL.DataTransferObjects;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.CustomTypes;
+using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.Interfaces;
+using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -30,7 +29,7 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> CreatePages([FromBody] IEnumerable<PageViewModel> pageModels)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>()
-            .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
+                    .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
                 .CreateMapper();
             var pagesDto = mapper.Map<IEnumerable<PageViewModel>, IEnumerable<PageDto>>(pageModels);
 
@@ -46,7 +45,7 @@ namespace TheraLang.Web.Controllers
             if (page == null) return NotFound();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageViewModel, PageDto>()
-            .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
+                    .ForMember(c => c.Content, opt => opt.MapFrom(n => new HtmlContent(n.Content))))
                 .CreateMapper();
             var pageDto = mapper.Map<PageViewModel, PageDto>(pageModel);
 
@@ -88,7 +87,8 @@ namespace TheraLang.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetPageByRoute(LanguageViewModel lang, string route)
         {
-            var langMapper = new MapperConfiguration(cfg => cfg.CreateMap<LanguageViewModel, LanguageDto>()).CreateMapper();
+            var langMapper = new MapperConfiguration(cfg => cfg.CreateMap<LanguageViewModel, LanguageDto>())
+                .CreateMapper();
             var langDto = langMapper.Map<LanguageViewModel, LanguageDto>(lang);
 
             var page = await _pageService.GetPageByRoute(route, langDto);
@@ -123,8 +123,8 @@ namespace TheraLang.Web.Controllers
             if (!pages.Any()) return NotFound();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>()
-            .ForMember(c => c.Content, opt => opt.MapFrom(n => n.Content.ToString())))
-               .CreateMapper();
+                    .ForMember(c => c.Content, opt => opt.MapFrom(n => n.Content.ToString())))
+                .CreateMapper();
             var pageModel = mapper.Map<IEnumerable<PageDto>, IEnumerable<PageViewModel>>(pages);
 
             return Ok(pageModel);

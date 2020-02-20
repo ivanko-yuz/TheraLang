@@ -83,9 +83,9 @@ const routes: Routes = [
         component: UsersListComponent,
         canActivate: [AdminGuard],
       },
-      { path: "news", component: NewsPageComponent},
-      { path: "news/create", component: NewsCreateComponent},
-      { path: "news/details/:newsId", component: NewsDetailsComponent},
+      {path: "news", component: NewsPageComponent},
+      {path: "news/create", component: NewsCreateComponent},
+      {path: "news/details/:newsId", component: NewsDetailsComponent},
       {
         component: PageComponent,
         path: "pages/:pageRoute",

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace TheraLang.Web.ViewModels
 {
@@ -24,6 +24,5 @@ namespace TheraLang.Web.ViewModels
         public string ImgUrl { get; set; }
 
         public IFormFile ImgFile { get; set; }
-
     }
 }
