@@ -10,5 +10,6 @@ namespace TheraLang.DAL.Entities
         public virtual User Author { get; set; }
         public virtual ICollection<UploadedNewsContentImage> UploadedContentImages { get; set; }
         public virtual ICollection<User> UsersThatLiked { get; set; }
+        public virtual ICollection<NewsComment> Comments { get; set; }
     }
 }

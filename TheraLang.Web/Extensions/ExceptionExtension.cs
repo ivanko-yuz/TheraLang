@@ -19,7 +19,8 @@ namespace TheraLang.Web.Extensions
                     .WithBody(context => new JsonResult(new
                     {
                         Category = "Unhandled",
-                        Exception = context.Exception.GetType().ToString()
+                        Exception = context.Exception.GetType().ToString(),
+                        context.Exception.StackTrace
                     }));
 
                 handlerOptions.DefaultOptionsForHandled = new ExceptionResponseOptions()

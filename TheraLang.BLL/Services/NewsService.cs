@@ -40,12 +40,11 @@ namespace TheraLang.BLL.Services
                 .Include(e => e.UploadedContentImages).ToListAsync();
 
             var mapper = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<News, NewsPreviewDto>()
-                        .ForMember(m => m.AuthorName,
-                            opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
-                }
-            ).CreateMapper();
+            {
+                cfg.CreateMap<News, NewsPreviewDto>()
+                    .ForMember(m => m.AuthorName,
+                    opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
+            }).CreateMapper();
 
             var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
 
