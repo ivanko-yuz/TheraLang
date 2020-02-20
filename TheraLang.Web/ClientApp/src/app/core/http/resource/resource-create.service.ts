@@ -12,6 +12,7 @@ import { ForbiddenExts } from "src/app/configs/resource.constants";
 import { forbiddenExtensionValidator } from "src/app/shared/directives/files/forbidden-extension.directive";
 import { FileInput } from "ngx-material-file-input";
 import { atLeastOne } from "src/app/shared/directives/files/atleastone-form.directive.";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -25,7 +26,8 @@ export class ResourceCreateService {
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
     private http: HttpClient,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private route: Router
   ) {
     this.resourceForm = this.formBuilder.group(
       {
@@ -132,6 +134,7 @@ export class ResourceCreateService {
         this.notificationService.success(
           await this.translate.get("common.created-successfully").toPromise()
         );
+        await this.route.navigateByUrl("/resources");
       },
       async error => {
         this.notificationService.warn(

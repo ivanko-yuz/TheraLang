@@ -42,7 +42,8 @@ namespace TheraLang.BLL.Services
 
             try
             {
-                (pages as List<Page>).ForEach(p => _unitOfWork.Repository<Page>().Add(p));
+                _unitOfWork.Repository<Page>().AddRange(pages);
+                // (pages as List<Page>).ForEach(p => _unitOfWork.Repository<Page>().Add(p));
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)

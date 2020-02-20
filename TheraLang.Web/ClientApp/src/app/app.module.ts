@@ -96,6 +96,11 @@ import { MaterialFileInputModule } from "ngx-material-file-input";
 import { SortablejsModule } from "ngx-sortablejs";
 import { JwtModule } from "@auth0/angular-jwt";
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
+import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
+import { NewsCardComponent } from './modules/main/pages/news/news-card/news-card.component';
+import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-create.component';
+import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 import { ProjectCreationComponent } from './modules/main/pages/project/project-creation/project-creation.component';
 import { ProjectEditingComponent } from './modules/main/pages/project/project-editing/project-editing.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
@@ -154,6 +159,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     MainComponent,
     CmsPagesToolbarItemComponent,
     DaysLeftPipe,
+    NewsPageComponent,
+    NewsCardComponent,
+    NewsCreateComponent,
+    NewsDetailsComponent,
     PageComponent,
     ProjectEditingComponent,
     NotFoundComponent
@@ -240,6 +249,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         blacklistedRoutes: []
       }
     }),
+    NgImageSliderModule,
     SortablejsModule.forRoot({ animation: 400 }),
     SharedModule
   ],
