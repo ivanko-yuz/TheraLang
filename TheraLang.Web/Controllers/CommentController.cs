@@ -6,8 +6,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.CommentDtos;
 using TheraLang.BLL.Interfaces;
+using TheraLang.Web.ViewModels;
 using TheraLang.Web.ViewModels.CommentViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -25,8 +27,16 @@ namespace TheraLang.Web.Controllers
             _authenticateService = authenticateService;
         }
 
+        [AllowAnonymous]
+        [HttpGet("count/{newsId}")]
+        public async Task<IActionResult> GetCommentsForNewsCount(int newsId)
+        {
+            var pageCount = await _newsCommentService.GetCommentsForNewsCount(newsId);
+            return Ok(pageCount);
+        }
+
         // GET: api/Comment/newsId
-        [HttpGet("{newsId}")]
+        [HttpGet("all/{newsId}")]
         public async Task<IActionResult> GetCommentsForNews(int newsId)
         {
             var commentDtos = await _newsCommentService.GetCommentsForNews(newsId);
@@ -40,6 +50,26 @@ namespace TheraLang.Web.Controllers
 
             var commentModels = mapper.Map<IEnumerable<CommentResponseViewModel>>(commentDtos);
 
+            return Ok(commentModels);
+        }
+
+        // GET: api/news?pageNumber=2&pageSize=10
+        [AllowAnonymous]
+        [HttpGet("{newsId}")]
+        public async Task<IActionResult> GetCommentsForNewsPage(int newsId, [FromQuery] PagingParametersViewModel pageParametersModel)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestViewModel, CommentRequestDto>())
+                .CreateMapper();
+
+            var pageParametersDto = mapper.Map<PagingParametersDto>(pageParametersModel);
+            var commentDtos = await _newsCommentService.GetCommentsForNewsPage(newsId, pageParametersDto);
+
+            if (!commentDtos.Any())
+            {
+                return NotFound();
+            }
+
+            var commentModels = mapper.Map<IEnumerable<CommentResponseViewModel>>(commentDtos);
             return Ok(commentModels);
         }
 
