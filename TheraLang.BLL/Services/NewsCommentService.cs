@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -51,12 +52,13 @@ namespace TheraLang.BLL.Services
             return commentDtos;
         }
 
-        public async Task<IEnumerable<CommentResponseDto>> GetCommentsForNewsPage(int newsId, PagingParametersDto pageParameters)
+        public async Task<IEnumerable<CommentResponseDto>> GetCommentsForNewsPage(int newsId,
+                PaginationParams paginationParams)
         {
             var comments = await _unitOfWork.Repository<NewsComment>().GetAll()
                 .Where(c => c.NewsId == newsId)
-                .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
-                .Take(pageParameters.PageSize)
+                .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
+                .Take(paginationParams.PageSize)
                 .Include(e => e.Author)
                 .ThenInclude(e => e.Details)
                 .ToListAsync();
@@ -97,7 +99,7 @@ namespace TheraLang.BLL.Services
             }
 
             var authUser = await _authenticateService.GetAuthUserAsync();
-            if(authUser.Id != comment.CreatedById || !authUser.Role.ToLower().Equals("admin"))
+            if (authUser.Id != comment.CreatedById || !authUser.Role.ToLower().Equals("admin"))
             {
                 //TODO: Throw exception
             }

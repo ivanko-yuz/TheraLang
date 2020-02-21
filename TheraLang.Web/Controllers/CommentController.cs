@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -56,13 +57,12 @@ namespace TheraLang.Web.Controllers
         // GET: api/news?pageNumber=2&pageSize=10
         [AllowAnonymous]
         [HttpGet("{newsId}")]
-        public async Task<IActionResult> GetCommentsForNewsPage(int newsId, [FromQuery] PagingParametersViewModel pageParametersModel)
+        public async Task<IActionResult> GetCommentsForNewsPage(int newsId, [FromQuery] PaginationParams paginationParams)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestViewModel, CommentRequestDto>())
                 .CreateMapper();
 
-            var pageParametersDto = mapper.Map<PagingParametersDto>(pageParametersModel);
-            var commentDtos = await _newsCommentService.GetCommentsForNewsPage(newsId, pageParametersDto);
+            var commentDtos = await _newsCommentService.GetCommentsForNewsPage(newsId, paginationParams);
 
             if (!commentDtos.Any())
             {

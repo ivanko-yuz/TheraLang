@@ -12,6 +12,7 @@ using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using TheraLang.DAL.Entities.ManyToMany;
+using Common;
 
 namespace TheraLang.BLL.Services
 {
@@ -52,11 +53,11 @@ namespace TheraLang.BLL.Services
             return newsDtos;
         }
 
-        public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PagingParametersDto pageParameters)
+        public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PaginationParams paginationParams)
         {
             var news = await _unitOfWork.Repository<News>().GetAll()
-                .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
-                .Take(pageParameters.PageSize)
+                .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
+                .Take(paginationParams.PageSize)
                 .Include(e => e.Author)
                 .ThenInclude(a => a.Details)
                 .Include(e => e.UploadedContentImages)

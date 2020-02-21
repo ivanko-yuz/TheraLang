@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects;
@@ -9,7 +10,7 @@ namespace TheraLang.BLL.Interfaces
     public interface INewsCommentService
     {
         Task<IEnumerable<CommentResponseDto>> GetCommentsForNews(int newsId);
-        Task<IEnumerable<CommentResponseDto>> GetCommentsForNewsPage(int newsId, PagingParametersDto pagingParameters);
+        Task<IEnumerable<CommentResponseDto>> GetCommentsForNewsPage(int newsId, PaginationParams pagingParameters);
         Task<int> GetCommentsForNewsCount(int newsId);
         Task AddComment(CommentRequestDto commentDto);
         Task UpdateComment(int id, CommentRequestDto commentDto);

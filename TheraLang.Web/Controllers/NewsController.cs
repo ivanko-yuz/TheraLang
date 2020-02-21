@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
@@ -48,17 +49,15 @@ namespace TheraLang.Web.Controllers
         // GET: api/news?pageNumber=2&pageSize=10
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery] PagingParametersViewModel pageParametersModel)
+        public async Task<IActionResult> GetPage([FromQuery] PaginationParams paginationParams)
         {
             var mapper = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<NewsDetailsDto, NewsPreviewViewModel>();
-                    cfg.CreateMap<PagingParametersViewModel, PagingParametersDto>();
                 }
             ).CreateMapper();
 
-            var pageParametersDto = mapper.Map<PagingParametersDto>(pageParametersModel);
-            var newsDtos = await _newsService.GetNewsPage(pageParametersDto);
+            var newsDtos = await _newsService.GetNewsPage(paginationParams);
 
             if (!newsDtos.Any())
             {
