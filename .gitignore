@@ -383,3 +383,5 @@ TheraLang.Web/wwwroot/fileuploads/
 
 # EF Core Migrations
 /TheraLang.DAL/Migrations/
+
+/*/Properties/
