@@ -11,6 +11,7 @@ using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
+using TheraLang.DAL.Entities.ManyToMany;
 
 namespace TheraLang.BLL.Services
 {
@@ -79,7 +80,7 @@ namespace TheraLang.BLL.Services
                 .Include(e => e.Author)
                 .ThenInclude(a => a.Details)
                 .Include(e => e.UploadedContentImages)
-                .Include(e => e.UsersThatLiked)
+                .Include(e => e.Likes)
                 .SingleOrDefaultAsync(n => n.Id == id);
 
             var mapper = new MapperConfiguration(cfg =>
@@ -89,7 +90,7 @@ namespace TheraLang.BLL.Services
                         opt => opt.MapFrom(sm => sm.UploadedContentImages.Select(i => i.Url)))
                     .ForMember(m => m.AuthorName,
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
-                    .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.UsersThatLiked.Count));
+                    .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.Likes.Count));
             }).CreateMapper();
 
             var newsDto = mapper.Map<News, NewsDetailsDto>(news);
@@ -171,23 +172,21 @@ namespace TheraLang.BLL.Services
 
         public async Task Like(int id, Guid userId)
         {
-            var newsToLike = await _unitOfWork.Repository<News>().GetAll()
-                .Include(e => e.UsersThatLiked)
-                .SingleOrDefaultAsync(n => n.Id == id);
-
-            var user = await _userManagementService.GetUserById(userId);
+            var existedLikeFromUser = (await _unitOfWork.Repository<NewsLike>()
+                .GetAllAsync(e => e.NewsId == id && e.UserThatLikedId == userId))
+                .SingleOrDefault();  
 
             //remove like if user already liked
-            if (newsToLike.UsersThatLiked.Contains(user))
+            if (existedLikeFromUser != null)
             {
-                newsToLike.UsersThatLiked.Remove(user);
+                _unitOfWork.Repository<NewsLike>().Remove(existedLikeFromUser);
             }
             else
             {
-                newsToLike.UsersThatLiked.Add(user);
+                var newLikeFromUser = new NewsLike() { NewsId = id, UserThatLikedId = userId };
+                _unitOfWork.Repository<NewsLike>().Add(newLikeFromUser);
             }
 
-            _unitOfWork.Repository<News>().Update(newsToLike);
             await _unitOfWork.SaveChangesAsync();
         }
 
@@ -199,7 +198,7 @@ namespace TheraLang.BLL.Services
             {
                 var imageExtension = Path.GetExtension(image.FileName);
                 var imageUrl = await _fileService.SaveFile(fileStream, imageExtension);
-                var uploadedImage = new UploadedNewsContentImage() {Url = imageUrl.ToString()};
+                var uploadedImage = new UploadedNewsContentImage() { Url = imageUrl.ToString() };
                 return uploadedImage;
             }
         }

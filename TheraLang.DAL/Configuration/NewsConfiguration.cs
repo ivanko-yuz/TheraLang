@@ -21,7 +21,6 @@ namespace TheraLang.DAL.Configuration
             builder.HasMany(e => e.UploadedContentImages).WithOne(i => i.News).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(e => e.Author).WithMany(a => a.News).HasForeignKey(n => n.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
-            builder.HasMany(e => e.UsersThatLiked);
         }
     }
 }

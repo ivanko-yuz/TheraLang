@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TheraLang.DAL.Entities.ManyToMany;
 
 namespace TheraLang.DAL.Entities
 {
@@ -9,7 +10,7 @@ namespace TheraLang.DAL.Entities
         public string MainImageUrl { get; set; }
         public virtual User Author { get; set; }
         public virtual ICollection<UploadedNewsContentImage> UploadedContentImages { get; set; }
-        public virtual ICollection<User> UsersThatLiked { get; set; }
+        public virtual ICollection<NewsLike> Likes { get; set; }
         public virtual ICollection<NewsComment> Comments { get; set; }
     }
 }
