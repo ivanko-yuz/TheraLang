@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace TheraLang.Web.ViewModels.CommentViewModels
 {
-    public class CommentRequestViewModel
+    public class CommentEditViewModel
     {
         public string Text { get; set; }
-        public int PostId { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Common;
+using Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,10 @@ namespace TheraLang.BLL.Services
     public class NewsCommentService : INewsCommentService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAuthenticateService _authenticateService;
 
-        public NewsCommentService(IUnitOfWork unitOfWork, IAuthenticateService authenticateService)
+        public NewsCommentService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _authenticateService = authenticateService;
         }
 
         public async Task<int> GetCommentsForNewsCount(int newsId)
@@ -46,6 +45,10 @@ namespace TheraLang.BLL.Services
                 .Where(c => c.NewsId == newsId)
                 .ProjectTo<CommentResponseDto>(mapper)
                 .ToListAsync();
+            if (!commentDtos.Any())
+            {
+                throw new NotFoundException($"Comments for news with id {newsId}");
+            }
 
             return commentDtos;
         }
@@ -68,18 +71,22 @@ namespace TheraLang.BLL.Services
                 .Take(paginationParams.PageSize)
                 .ProjectTo<CommentResponseDto>(mapper)
                 .ToListAsync();
+            if(!commentDtos.Any())
+            {
+                throw new NotFoundException($"Comments for news with id {newsId} page {paginationParams.PageNumber}");
+            }
 
             return commentDtos;
         }
 
-        public async Task AddComment(CommentRequestDto commentDto)
+        public async Task AddComment(CommentCreateDto commentDto)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestDto, NewsComment>()
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentCreateDto, NewsComment>()
                     .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => sm.AuthorId))
                     .ForMember(m => m.NewsId, opt => opt.MapFrom(sm => sm.PostId)))
                 .CreateMapper();
 
-            var comment = mapper.Map<CommentRequestDto, NewsComment>(commentDto);
+            var comment = mapper.Map<CommentCreateDto, NewsComment>(commentDto);
 
             _unitOfWork.Repository<NewsComment>().Add(comment);
             await _unitOfWork.SaveChangesAsync();
@@ -90,33 +97,23 @@ namespace TheraLang.BLL.Services
             var comment = await _unitOfWork.Repository<NewsComment>().Get(i => i.Id == id);
             if (comment == null)
             {
-                throw new ArgumentNullException($"Comment with id {id} not found!");
+                throw new NotFoundException($"Comment with id {id}");
             }
 
-            var authUser = await _authenticateService.GetAuthUserAsync();
-            if (authUser.Id != comment.CreatedById || !authUser.Role.ToLower().Equals("admin"))
-            {
-                //TODO: Throw exception
-            }
-
+            //TODO: Check permissions (only owner and admin)
             _unitOfWork.Repository<NewsComment>().Remove(comment);
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateComment(int id, CommentRequestDto commentDto)
+        public async Task UpdateComment(int id, CommentEditDto commentDto)
         {
             var commentToUpdate = await _unitOfWork.Repository<NewsComment>().Get(i => i.Id == id);
             if (commentToUpdate == null)
             {
-                throw new ArgumentNullException($"Comment with id {id} not found!");
+                throw new NotFoundException($"Comment with id {id}");
             }
 
-            var authUser = await _authenticateService.GetAuthUserAsync();
-            if (authUser.Id != commentToUpdate.CreatedById || !authUser.Role.ToLower().Equals("admin"))
-            {
-                //TODO: Throw exception
-            }
-
+            //TODO: Check permissions (only owner)
             commentToUpdate.Text = commentDto.Text;
 
             _unitOfWork.Repository<NewsComment>().Update(commentToUpdate);

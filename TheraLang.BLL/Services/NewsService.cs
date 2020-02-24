@@ -14,6 +14,7 @@ using TheraLang.DAL.UnitOfWork;
 using TheraLang.DAL.Entities.ManyToMany;
 using Common;
 using AutoMapper.QueryableExtensions;
+using Common.Exceptions;
 
 namespace TheraLang.BLL.Services
 {
@@ -47,6 +48,10 @@ namespace TheraLang.BLL.Services
             var newsDtos = await _unitOfWork.Repository<News>().GetAll()
                 .ProjectTo<NewsPreviewDto>(mapper)
                 .ToListAsync();
+            if (!newsDtos.Any())
+            {
+                throw new NotFoundException("News");
+            }
 
             return newsDtos;
         }
@@ -65,6 +70,10 @@ namespace TheraLang.BLL.Services
                 .Take(paginationParams.PageSize)
                 .ProjectTo<NewsPreviewDto>(mapper)
                 .ToListAsync();
+            if (!newsDtos.Any())
+            {
+                throw new NotFoundException($"News page {paginationParams.PageNumber}");
+            }
 
             return newsDtos;
         }
@@ -85,6 +94,10 @@ namespace TheraLang.BLL.Services
                 .Where(n => n.Id == id)
                 .ProjectTo<NewsDetailsDto>(mapper)
                 .SingleOrDefaultAsync();
+            if (newsDto == null)
+            {
+                throw new NotFoundException($"News with id {id}");
+            }
 
             return newsDto;
         }
@@ -113,7 +126,7 @@ namespace TheraLang.BLL.Services
             var news = await _unitOfWork.Repository<News>().Get(i => i.Id == id);
             if (news == null)
             {
-                throw new ArgumentNullException($"News with id {id} not found!");
+                throw new NotFoundException($"News with id {id}");
             }
 
             _unitOfWork.Repository<News>().Remove(news);
@@ -128,7 +141,7 @@ namespace TheraLang.BLL.Services
 
             if (newsToUpdate == null)
             {
-                throw new ArgumentNullException($"News with id {id} not found!");
+                throw new NotFoundException($"News with id {id} not found!");
             }
 
             newsToUpdate.UpdatedById = newsDto.EditorId;

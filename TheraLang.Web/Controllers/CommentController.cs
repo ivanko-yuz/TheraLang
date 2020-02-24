@@ -59,11 +59,10 @@ namespace TheraLang.Web.Controllers
         [HttpGet("{newsId}")]
         public async Task<IActionResult> GetCommentsForNewsPage(int newsId, [FromQuery] PaginationParams paginationParams)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestViewModel, CommentRequestDto>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentCreateViewModel, CommentCreateDto>())
                 .CreateMapper();
 
             var commentDtos = await _newsCommentService.GetCommentsForNewsPage(newsId, paginationParams);
-
             if (!commentDtos.Any())
             {
                 return NotFound();
@@ -76,12 +75,12 @@ namespace TheraLang.Web.Controllers
         // POST: api/Comment
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] CommentRequestViewModel commentModel)
+        public async Task<IActionResult> Post([FromForm] CommentCreateViewModel commentModel)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestViewModel, CommentRequestDto>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentCreateViewModel, CommentCreateDto>())
                 .CreateMapper();
 
-            var commentDto = mapper.Map<CommentRequestDto>(commentModel);
+            var commentDto = mapper.Map<CommentCreateDto>(commentModel);
             var authUser = await _authenticateService.GetAuthUserAsync();
             commentDto.AuthorId = authUser.Id;
 
@@ -92,23 +91,14 @@ namespace TheraLang.Web.Controllers
         // PUT: api/Comment/5
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, [FromForm] CommentRequestViewModel commentModel)
+        public async Task<IActionResult> Edit(int id, [FromForm] CommentEditViewModel commentModel)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestViewModel, CommentRequestDto>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentEditViewModel, CommentEditDto>())
                 .CreateMapper();
 
-            var commentDto = mapper.Map<CommentRequestDto>(commentModel);
-            var authUser = await _authenticateService.GetAuthUserAsync();
-            commentDto.AuthorId = authUser.Id;
+            var commentDto = mapper.Map<CommentEditDto>(commentModel);
 
-            try
-            {
-                await _newsCommentService.UpdateComment(id, commentDto);
-            }
-            catch (ArgumentNullException)
-            {
-                return NotFound();
-            }
+            await _newsCommentService.UpdateComment(id, commentDto);
 
             return Ok();
         }
@@ -118,14 +108,7 @@ namespace TheraLang.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            try
-            {
-                await _newsCommentService.RemoveComment(id);
-            }
-            catch (ArgumentNullException)
-            {
-                return NotFound();
-            }
+            await _newsCommentService.RemoveComment(id);
 
             return Ok();
         }

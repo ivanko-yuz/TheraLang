@@ -37,11 +37,6 @@ namespace TheraLang.Web.Controllers
 
             var newsDtos = await _newsService.GetAllNews();
 
-            if (!newsDtos.Any())
-            {
-                return NotFound();
-            }
-
             var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
             return Ok(newsModels);
         }
@@ -58,11 +53,6 @@ namespace TheraLang.Web.Controllers
             ).CreateMapper();
 
             var newsDtos = await _newsService.GetNewsPage(paginationParams);
-
-            if (!newsDtos.Any())
-            {
-                return NotFound();
-            }
 
             var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
             return Ok(newsModels);
@@ -85,10 +75,6 @@ namespace TheraLang.Web.Controllers
                 .CreateMapper();
 
             var newsDto = await _newsService.GetNewsById(id);
-            if (newsDto == null)
-            {
-                return NotFound();
-            }
 
             var newsModel = mapper.Map<NewsDetailsViewModel>(newsDto);
 
@@ -122,14 +108,7 @@ namespace TheraLang.Web.Controllers
             var authUser = await _authenticateService.GetAuthUserAsync();
             newsDto.EditorId = authUser.Id;
 
-            try
-            {
-                await _newsService.UpdateNews(id, newsDto);
-            }
-            catch (ArgumentNullException)
-            {
-                return NotFound();
-            }
+            await _newsService.UpdateNews(id, newsDto);
 
             return Ok();
         }
@@ -149,14 +128,7 @@ namespace TheraLang.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            try
-            {
-                await _newsService.RemoveNews(id);
-            }
-            catch (ArgumentNullException)
-            {
-                return NotFound();
-            }
+            await _newsService.RemoveNews(id);
 
             return Ok();
         }
