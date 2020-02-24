@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL;
-using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.Donations;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.ViewModels;
+using TheraLang.Web.ViewModels.Donations;
 
 namespace TheraLang.Web.Controllers
 {
@@ -15,38 +14,38 @@ namespace TheraLang.Web.Controllers
     public class DonationController : ControllerBase
     {
         private readonly IDonationService _donationService;
+        private readonly ILiqPayService _liqPayService;
 
-        public DonationController(IDonationService donationService)
+        public DonationController(IDonationService donationService, ILiqPayService liqPayService)
         {
             _donationService = donationService;
+            _liqPayService = liqPayService;
         }
 
         /// <summary>
-        /// donation request
+        /// Generates LiqPay request data to process checkout
         /// </summary>
-        /// <param name="donationAmount"></param>
-        /// <param name="projectId">a project that you want to donate to</param>
+        /// <param name="liqPayCheckoutRequest"></param>
         /// <returns>LiqPayCheckoutModel</returns>
-        [HttpGet("{donationAmount}/{projectId?}")]
+        [HttpGet("liqpay")]
         [AllowAnonymous]
-        public async Task<IActionResult> Get(string donationAmount, int? projectId)
+        public async Task<IActionResult> Get([FromQuery]LiqPayCheckoutModelRequest liqPayCheckoutRequest)
         {
-            if (projectId == default(int))
-            {
-                throw new ArgumentException($"{nameof(projectId)} can not be 0");
-            }
+            var hostUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}";
+            
+            var mapper = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<LiqPayCheckoutDto, LiqPayCheckoutViewModel>();
+                    cfg.CreateMap<LiqPayCheckoutModelRequest, LiqPayCheckoutModelRequestDto>();
+                })
+                .CreateMapper();
 
-            if (string.IsNullOrEmpty(donationAmount))
-            {
-                throw new ArgumentException($"{nameof(donationAmount)} can not be null");
-            }
+            var liqpayCheckoutModelDto = mapper.Map<LiqPayCheckoutModelRequestDto>(liqPayCheckoutRequest);
 
             var liqPayCheckoutDto =
-                await _donationService.GetLiqPayCheckoutModelAsync(donationAmount, projectId, HttpContext);
+                await _liqPayService.GetLiqPayCheckoutModelAsync(liqpayCheckoutModelDto, hostUrl);
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<LiqPayCheckoutDto, LiqPayCheckoutModel>())
-                .CreateMapper();
-            var liqPayCheckoutModel = mapper.Map<LiqPayCheckoutDto, LiqPayCheckoutModel>(liqPayCheckoutDto);
+            var liqPayCheckoutModel = mapper.Map<LiqPayCheckoutDto, LiqPayCheckoutViewModel>(liqPayCheckoutDto);
 
             return Ok(liqPayCheckoutModel);
         }
@@ -56,15 +55,10 @@ namespace TheraLang.Web.Controllers
         /// </summary>
         /// <param name="donationId"></param>
         /// <returns>Donation record</returns>
-        [HttpGet("transaction/{donationId}")]
+        [HttpGet("{donationId}")]
         [AllowAnonymous]
-        public async Task<IActionResult> Get(string donationId)
+        public async Task<IActionResult> Get(Guid donationId)
         {
-            if (string.IsNullOrEmpty(donationId))
-            {
-                throw new ArgumentException($"{nameof(donationId)} can not be null");
-            }
-
             var donationDto = await _donationService.GetDonationAsync(donationId);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DonationDto, DonationViewModel>()).CreateMapper();
@@ -77,33 +71,43 @@ namespace TheraLang.Web.Controllers
         /// API for LiqPay check in 
         /// </summary>
         /// <param name="projectId"></param>
-        /// <param name="donationId"></param>
-        /// <param name="data"></param>
-        /// <param name="signature"></param>
+        /// <param name="checkoutViewModel"></param>
         /// <returns>status code</returns>
-        [HttpPost("{donationId}/{projectId?}")]
+        [HttpPost("project/{projectId?}")]
         [AllowAnonymous]
-        public async Task<IActionResult> Post(string donationId, int? projectId, [FromForm] string data,
-            [FromForm] string signature)
+        public async Task<IActionResult> PostProjectDonation(int projectId, [FromForm] LiqPayCheckoutViewModel checkoutViewModel)
         {
-            if (string.IsNullOrEmpty(data))
-            {
-                throw new ArgumentException($"{nameof(data)} can not be null");
-            }
+            var mapper = new MapperConfiguration(mapOpts =>
+                mapOpts.CreateMap<LiqPayCheckoutViewModel, LiqPayCheckoutDto>()
+                    .ForMember(dto => dto.ProjectId,
+                        opts =>
+                            opts.MapFrom(vm => projectId))
+            ).CreateMapper();
+            
+            var liqPayDto = mapper.Map<LiqPayCheckoutDto>(checkoutViewModel);
 
-            if (string.IsNullOrEmpty(signature))
-            {
-                throw new ArgumentException($"{nameof(signature)} can not be null");
-            }
+            await _donationService.AddDonationAsync(liqPayDto);
+            return Ok();
+        }
+        
+        /// <summary>
+        /// API for LiqPay check in
+        /// </summary>
+        /// <param name="societyId"></param>
+        /// <param name="checkoutViewModel"></param>
+        /// <returns></returns>
+        [HttpPost("society/{societyId}")]
+        public async Task<IActionResult> PostSocietyDonation(int societyId, [FromForm] LiqPayCheckoutViewModel checkoutViewModel)
+        {
+            var mapper = new MapperConfiguration(mapOpts =>
+                mapOpts.CreateMap<LiqPayCheckoutViewModel, LiqPayCheckoutDto>()
+                    .ForMember(dto => dto.SocietyId,
+                        opts =>
+                            opts.MapFrom(vm => societyId))
+            ).CreateMapper();
+            var liqPayDto = mapper.Map<LiqPayCheckoutDto>(checkoutViewModel);
 
-            var mySignature = LiqPayHelper.GetLiqPaySignature(data);
-            if (mySignature != signature)
-            {
-                throw new Exception(
-                    $"Error, while checking LiqPay response signature, the {nameof(signature)} was not authenticated ");
-            }
-
-            await _donationService.AddDonationAsync(projectId, donationId, data, signature);
+            await _donationService.AddDonationAsync(liqPayDto);
             return Ok();
         }
     }

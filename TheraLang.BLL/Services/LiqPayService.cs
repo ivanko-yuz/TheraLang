@@ -13,11 +13,10 @@ namespace TheraLang.BLL.Services
     public class LiqPayService: ILiqPayService
     {
         public async Task<LiqPayCheckoutDto> GetLiqPayCheckoutModelAsync(
-            LiqPayCheckoutModelRequestDto liqPayCheckoutModelRequest, string returnUrl, string callbackServerUrl)
+            LiqPayCheckoutModelRequestDto liqPayCheckoutModelRequest, string returnUrl)
         {
             _ = returnUrl ?? throw new InvalidArgumentException(nameof(returnUrl), "cannot be null");
-            _ = callbackServerUrl ?? throw new InvalidArgumentException(nameof(callbackServerUrl), "cannot be null"); 
-            
+
             var mapper = new MapperConfiguration(mapOpts =>
             {
                 mapOpts.CreateMap<LiqPayCheckoutModelRequestDto, LiqPayCheckout>()
@@ -29,7 +28,7 @@ namespace TheraLang.BLL.Services
                             opts.MapFrom(dto => returnUrl))
                     .ForMember(c => c.ServerUrl,
                         opts =>
-                            opts.MapFrom(dto => callbackServerUrl));
+                            opts.MapFrom(dto => liqPayCheckoutModelRequest.GetCallbackUrl(returnUrl)));
             }).CreateMapper();
 
             var liqPayCheckout = mapper.Map<LiqPayCheckout>(liqPayCheckoutModelRequest);

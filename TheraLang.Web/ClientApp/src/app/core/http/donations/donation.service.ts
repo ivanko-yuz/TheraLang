@@ -7,14 +7,14 @@ export class DonationService {
   constructor(private http: HttpClient) {}
 
   getProjectCheckoutModel(donationAmount: string, projectId: number) {
-    return this.http.get(`${donationUrl}/${donationAmount}/${projectId}`);
+    return this.http.get(`${donationUrl}/liqpay/?donationAmount=${donationAmount}&projectId=${projectId}&action=paydonate&currency=uah&language=uk&description=blagodiynist`);
   }
 
   getSocietyCheckoutModel(donationAmount: string) {
-    return this.http.get(`${donationUrl}/${donationAmount}`);
+    return this.http.get(`${donationUrl}/liqpay/?donationAmount=${donationAmount}&societyId=1&action=paydonate&currency=uah&language=uk&description=blagodiynist`);
   }
 
   getDonationTransaction(donationId: string) {
-    return this.http.get(`${donationUrl}/transaction/${donationId}`);
+    return this.http.get(`${donationUrl}/${donationId}`);
   }
 }

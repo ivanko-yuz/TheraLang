@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using TheraLang.BLL.DataTransferObjects;
+using Common.Exceptions;
+using TheraLang.BLL.DataTransferObjects.Donations;
 using TheraLang.BLL.Interfaces;
+using TheraLang.BLL.LiqPay;
 using TheraLang.DAL.Entities;
-using TheraLang.DAL.Models;
 using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
@@ -21,69 +19,38 @@ namespace TheraLang.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<LiqPayCheckoutDto> GetLiqPayCheckoutModelAsync(string donationAmount, int? projectId,
-            HttpContext context)
+        public async Task<DonationDto> GetDonationAsync(Guid donationId)
         {
-            try
-            {
-                var liqPayCheckoutDto = await Task.Run(() =>
-                    LiqPayHelper.GetLiqPayCheckoutModel(donationAmount, projectId, context));
+            var donation = await _unitOfWork.Repository<Donation>().Get(d => d.Id == donationId) ??
+                           throw new EntityNotFoundException(nameof(Donation), donationId.ToString());
 
-                return liqPayCheckoutDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(
-                    $"Error while generation a request to LiqPay platform, {nameof(donationAmount)} or {nameof(projectId)} is invalid ",
-                    ex);
-            }
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Donation, DonationDto>()).CreateMapper();
+            var projectsDto = mapper.Map<Donation, DonationDto>(donation);
+
+            return projectsDto;
         }
 
-        public async Task<DonationDto> GetDonationAsync(string donationId)
+        public async Task AddDonationAsync(LiqPayCheckoutDto liqPayCheckoutDto)
         {
-            var donation = await _unitOfWork.Repository<Donation>().Get(x => x.DonationId == donationId);
-            try
+            var liqPayData = new LiqPayData(liqPayCheckoutDto.Data);
+            var liqPaySignature = new LiqPaySignature(liqPayData);
+
+            if (!await liqPaySignature.Validate(liqPayCheckoutDto.Signature))
             {
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Donation, DonationDto>()).CreateMapper();
-                var projectsDto = mapper.Map<Donation, DonationDto>(donation);
+                throw new InvalidArgumentException(nameof(liqPayCheckoutDto.Signature),
+                    "Invalid signature");
+            } 
+            
+            var donation = liqPayData.Donation;
+            
+            var commissionModel = liqPayData.Commission;
+            donation.Amount -= commissionModel.ReceiverCommission;
+            
+            donation.ProjectId = liqPayCheckoutDto.ProjectId;
+            donation.SocietyId = liqPayCheckoutDto.SocietyId;
 
-                return projectsDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error while receiving a donation by {nameof(donationId)}: {donationId} ", ex);
-            }
-        }
-
-        public async Task AddDonationAsync(int? projectId, string donationId, string data, string signature)
-        {
-            try
-            {
-                var responseData = Convert.FromBase64String(data);
-                var decodedString = Encoding.UTF8.GetString(responseData);
-                var commissionModel = JsonConvert.DeserializeObject<LiqPayCommissionModel>(decodedString);
-                var donation = JsonConvert.DeserializeObject<Donation>(decodedString);
-
-                donation.Amount -= commissionModel.ReceiverCommission;
-                donation.ProjectId = projectId;
-                donation.DonationId = donationId;
-
-                if (projectId == null)
-                {
-                    var society = await _unitOfWork.Repository<Society>().Get();
-                    if (society == null)
-                        throw new ArgumentNullException($"Society with {nameof(society.Id)} not found");
-
-                    donation.SocietyId = society.Id;
-                }
-
-                _unitOfWork.Repository<Donation>().Add(donation);
-                await _unitOfWork.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error, while adding the donation, {nameof(donationId)}: {donationId} ", ex);
-            }
+            _unitOfWork.Repository<Donation>().Add(donation);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

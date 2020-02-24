@@ -1,13 +1,12 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using TheraLang.BLL.DataTransferObjects;
+﻿using System;
+using System.Threading.Tasks;
+using TheraLang.BLL.DataTransferObjects.Donations;
 
 namespace TheraLang.BLL.Interfaces
 {
     public interface IDonationService
     {
-        Task<LiqPayCheckoutDto> GetLiqPayCheckoutModelAsync(string donationAmount, int? projectId, HttpContext context);
-        Task<DonationDto> GetDonationAsync(string donationId);
-        Task AddDonationAsync(int? projectId, string donationId, string data, string signature);
+        Task<DonationDto> GetDonationAsync(Guid donationId);
+        Task AddDonationAsync(LiqPayCheckoutDto liqPayCheckoutDto);
     }
 }
