@@ -13,6 +13,7 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using TheraLang.DAL.Entities.ManyToMany;
 using Common;
+using AutoMapper.QueryableExtensions;
 
 namespace TheraLang.BLL.Services
 {
@@ -36,54 +37,40 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<NewsPreviewDto>> GetAllNews()
         {
-            var news = await _unitOfWork.Repository<News>().GetAll()
-                .Include(e => e.Author)
-                .ThenInclude(a => a.Details)
-                .Include(e => e.UploadedContentImages).ToListAsync();
-
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsPreviewDto>()
                     .ForMember(m => m.AuthorName,
                     opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
-            }).CreateMapper();
+            });
 
-            var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
+            var newsDtos = await _unitOfWork.Repository<News>().GetAll()
+                .ProjectTo<NewsPreviewDto>(mapper)
+                .ToListAsync();
 
             return newsDtos;
         }
 
         public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PaginationParams paginationParams)
         {
-            var news = await _unitOfWork.Repository<News>().GetAll()
-                .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
-                .Take(paginationParams.PageSize)
-                .Include(e => e.Author)
-                .ThenInclude(a => a.Details)
-                .Include(e => e.UploadedContentImages)
-                .ToListAsync();
-
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsPreviewDto>()
                     .ForMember(m => m.AuthorName,
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
-            }).CreateMapper();
+            });
 
-            var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
+            var newsDtos = await _unitOfWork.Repository<News>().GetAll()
+                .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
+                .Take(paginationParams.PageSize)
+                .ProjectTo<NewsPreviewDto>(mapper)
+                .ToListAsync();
 
             return newsDtos;
         }
 
         public async Task<NewsDetailsDto> GetNewsById(int id)
         {
-            var news = await _unitOfWork.Repository<News>().GetAll()
-                .Include(e => e.Author)
-                .ThenInclude(a => a.Details)
-                .Include(e => e.UploadedContentImages)
-                .Include(e => e.Likes)
-                .SingleOrDefaultAsync(n => n.Id == id);
-
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsDetailsDto>()
@@ -92,9 +79,12 @@ namespace TheraLang.BLL.Services
                     .ForMember(m => m.AuthorName,
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
                     .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.Likes.Count));
-            }).CreateMapper();
+            });
 
-            var newsDto = mapper.Map<News, NewsDetailsDto>(news);
+            var newsDto = await _unitOfWork.Repository<News>().GetAll()
+                .Where(n => n.Id == id)
+                .ProjectTo<NewsDetailsDto>(mapper)
+                .SingleOrDefaultAsync();
 
             return newsDto;
         }

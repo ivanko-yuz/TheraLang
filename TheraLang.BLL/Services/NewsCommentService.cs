@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Common;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -32,12 +33,6 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<CommentResponseDto>> GetCommentsForNews(int newsId)
         {
-            var comments = await _unitOfWork.Repository<NewsComment>().GetAll()
-                .Where(c => c.NewsId == newsId)
-                .Include(e => e.Author)
-                .ThenInclude(e => e.Details)
-                .ToListAsync();
-
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<NewsComment, CommentResponseDto>()
@@ -45,9 +40,12 @@ namespace TheraLang.BLL.Services
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
                     .ForMember(m => m.AuthorImageUrl, opt => opt.MapFrom(sm => sm.Author.Details.ImageURl))
                     .ForMember(m => m.isEdited, opt => opt.MapFrom(sm => sm.UpdatedDateUtc != null));
-            }).CreateMapper();
+            });
 
-            var commentDtos = mapper.Map<IEnumerable<NewsComment>, IEnumerable<CommentResponseDto>>(comments);
+            var commentDtos = await _unitOfWork.Repository<NewsComment>().GetAll()
+                .Where(c => c.NewsId == newsId)
+                .ProjectTo<CommentResponseDto>(mapper)
+                .ToListAsync();
 
             return commentDtos;
         }
@@ -55,14 +53,6 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<CommentResponseDto>> GetCommentsForNewsPage(int newsId,
                 PaginationParams paginationParams)
         {
-            var comments = await _unitOfWork.Repository<NewsComment>().GetAll()
-                .Where(c => c.NewsId == newsId)
-                .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
-                .Take(paginationParams.PageSize)
-                .Include(e => e.Author)
-                .ThenInclude(e => e.Details)
-                .ToListAsync();
-
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<NewsComment, CommentResponseDto>()
@@ -70,9 +60,14 @@ namespace TheraLang.BLL.Services
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
                     .ForMember(m => m.AuthorImageUrl, opt => opt.MapFrom(sm => sm.Author.Details.ImageURl))
                     .ForMember(m => m.isEdited, opt => opt.MapFrom(sm => sm.UpdatedDateUtc != null));
-            }).CreateMapper();
+            });
 
-            var commentDtos = mapper.Map<IEnumerable<NewsComment>, IEnumerable<CommentResponseDto>>(comments);
+            var commentDtos = await _unitOfWork.Repository<NewsComment>().GetAll()
+                .Where(c => c.NewsId == newsId)
+                .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
+                .Take(paginationParams.PageSize)
+                .ProjectTo<CommentResponseDto>(mapper)
+                .ToListAsync();
 
             return commentDtos;
         }
