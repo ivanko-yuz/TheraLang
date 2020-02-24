@@ -8,6 +8,8 @@ import { NotificationService } from 'src/app/core/services/notification/notifica
 import { TranslateService } from '@ngx-translate/core';
 import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
 import { transliterate } from 'transliteration';
+import { MatDialog } from '@angular/material';
+import { PagePreviewComponent } from '../page-preview/page-preview.component';
 
 @Component({
   selector: 'app-edit-page',
@@ -36,6 +38,7 @@ export class EditPageComponent implements OnInit {
     private route: ActivatedRoute,
     private notificationService: NotificationService,
     private translate: TranslateService,
+    private dialog: MatDialog,
     private slugifyPipe: SlugifyPipe
   ) {
   }
@@ -93,26 +96,45 @@ export class EditPageComponent implements OnInit {
       return;
     }
 
-    this.page = {
-      ...this.page,
-      header: this.form.value.header,
-      content: this.form.value.content,
-      menuTitle: this.form.value.menuTitle,
-      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
-    };
-
-    this.page_eng = {
-      ...this.page_eng,
-      header: this.form.value.header_eng,
-      content: this.form.value.content_eng,
-      menuTitle: this.form.value.menuTitle_eng,
-      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
-    };
+    this.page = this.getFormDataUa();
+    this.page_eng = this.getFormDataEng();
 
     if (this.page_eng.header && this.page_eng.menuTitle && this.page_eng.content) {
       this.updatePages([this.page, this.page_eng]);
     } else {
       this.updatePages([this.page]);
     }
+  }
+
+  getFormDataUa(){
+    const page = {
+      ...this.page,
+      header: this.form.value.header,
+      content: this.form.value.content,
+      menuTitle: this.form.value.menuTitle,
+      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
+    }
+    return page;
+  }
+
+  getFormDataEng(){
+    const page = {
+      ...this.page_eng,
+      header: this.form.value.header_eng,
+      content: this.form.value.content_eng,
+      menuTitle: this.form.value.menuTitle_eng,
+      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header))
+    };
+    return page;
+  }
+
+  preview(){
+    const page = this.getFormDataUa()
+
+    const dialogRef = this.dialog.open(PagePreviewComponent, {
+      width: "60%",
+      height: "95%",
+      data: page
+    });
   }
 }
