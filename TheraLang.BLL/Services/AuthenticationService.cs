@@ -71,5 +71,28 @@ namespace TheraLang.BLL.Services
                 };
             });
         }
+
+        public async Task<AuthUser> TryGetAuthUserAsync()
+        {
+            return await Task.Run(() =>
+            {
+                var claims = _context.HttpContext.User.Claims;
+                var userId = claims.FirstOrDefault(x => x.Type == "Id")?.Value;
+                if (userId == null)
+                {
+                    return null;
+                }
+
+                var userEmail = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
+                var userRole = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
+
+                return new AuthUser()
+                {
+                    Id = new Guid(userId),
+                    UserEmail = userEmail,
+                    Role = userRole
+                };
+            });
+        }
     }
 }
