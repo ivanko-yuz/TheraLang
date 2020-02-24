@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.ViewModels;
 using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web.Controllers

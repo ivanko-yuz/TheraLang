@@ -3,12 +3,9 @@ using AutoMapper.QueryableExtensions;
 using Common;
 using Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.CommentDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
@@ -71,7 +68,7 @@ namespace TheraLang.BLL.Services
                 .Take(paginationParams.PageSize)
                 .ProjectTo<CommentResponseDto>(mapper)
                 .ToListAsync();
-            if(!commentDtos.Any())
+            if (!commentDtos.Any())
             {
                 throw new NotFoundException($"Comments for news with id {newsId} page {paginationParams.PageNumber}");
             }

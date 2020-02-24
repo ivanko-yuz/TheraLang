@@ -12,7 +12,6 @@ using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
 using TheraLang.Web.ActionFilters;
-using TheraLang.Web.ExceptionHandling;
 using TheraLang.Web.Extensions;
 
 namespace TheraLang.Web
@@ -102,7 +101,7 @@ namespace TheraLang.Web
                 routes.MapRoute(
                     "angular",
                     "{*template}",
-                    new {controller = "Home", action = "Index"});
+                    new { controller = "Home", action = "Index" });
             });
 
             app.UseSpa(spa =>

@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TheraLang.DAL.Entities.ManyToMany;
 
 namespace TheraLang.DAL.Configuration
@@ -15,7 +12,7 @@ namespace TheraLang.DAL.Configuration
 
             builder.HasKey(e => new { e.NewsId, e.UserThatLikedId });
 
-            builder.HasOne(e => e.News).WithMany(n => n.Likes).HasForeignKey(l=>l.NewsId);
+            builder.HasOne(e => e.News).WithMany(n => n.Likes).HasForeignKey(l => l.NewsId);
             builder.HasOne(e => e.UserThatLiked).WithMany(n => n.NewsLikes).HasForeignKey(l => l.UserThatLikedId);
         }
     }

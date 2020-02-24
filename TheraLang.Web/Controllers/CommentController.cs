@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Common;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.CommentDtos;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.ViewModels;
 using TheraLang.Web.ViewModels.CommentViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -41,10 +37,6 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> GetCommentsForNews(int newsId)
         {
             var commentDtos = await _newsCommentService.GetCommentsForNews(newsId);
-            if (!commentDtos.Any())
-            {
-                return NotFound();
-            }
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentResponseDto, CommentResponseViewModel>())
                 .CreateMapper();
@@ -63,10 +55,6 @@ namespace TheraLang.Web.Controllers
                 .CreateMapper();
 
             var commentDtos = await _newsCommentService.GetCommentsForNewsPage(newsId, paginationParams);
-            if (!commentDtos.Any())
-            {
-                return NotFound();
-            }
 
             var commentModels = mapper.Map<IEnumerable<CommentResponseViewModel>>(commentDtos);
             return Ok(commentModels);

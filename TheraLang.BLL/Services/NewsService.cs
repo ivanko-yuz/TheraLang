@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
@@ -178,7 +177,7 @@ namespace TheraLang.BLL.Services
         {
             var existedLikeFromUser = (await _unitOfWork.Repository<NewsLike>()
                 .GetAllAsync(e => e.NewsId == id && e.UserThatLikedId == userId))
-                .SingleOrDefault();  
+                .SingleOrDefault();
 
             //remove like if user already liked
             if (existedLikeFromUser != null)

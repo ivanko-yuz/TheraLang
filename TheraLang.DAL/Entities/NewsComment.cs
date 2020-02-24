@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TheraLang.DAL.Entities
+﻿namespace TheraLang.DAL.Entities
 {
     public class NewsComment : BaseEntity
     {
