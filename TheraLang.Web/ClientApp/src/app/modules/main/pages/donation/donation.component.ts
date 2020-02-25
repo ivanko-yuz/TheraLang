@@ -36,8 +36,9 @@ export class DonationComponent implements OnInit {
           );
         });
     } else {
+      const societyId = 1;
       this.donationService
-        .getSocietyCheckoutModel(this.donationAmount)
+        .getSocietyCheckoutModel(this.donationAmount,societyId)
         .subscribe((checkoutModel: LiqpayCheckout) => {
           this.donationModel = checkoutModel;
           window.location.replace(

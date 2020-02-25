@@ -5,7 +5,6 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface ILiqPayService
     {
-        Task<LiqPayCheckoutDto> GetLiqPayCheckoutModelAsync(LiqPayCheckoutModelRequestDto liqPayCheckoutModelRequest,
-            string resultUrl);
+        Task<LiqPayCheckoutDto> GetLiqPayCheckoutModelAsync(LiqPayCheckoutModelRequestDto liqPayCheckoutModelRequest);
     }
 }

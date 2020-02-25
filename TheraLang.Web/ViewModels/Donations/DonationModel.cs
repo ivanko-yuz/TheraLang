@@ -7,7 +7,7 @@ namespace TheraLang.Web.ViewModels.Donations
 {
     public class DonationViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public int? ProjectId { get; set; }
 
@@ -21,8 +21,15 @@ namespace TheraLang.Web.ViewModels.Donations
         [JsonConverter(typeof(StringEnumConverter))]
         public LiqPayCurrency Currency { get; set; }
 
-        public int PaymentId { get; set; }
+        public uint PaymentId { get; set; }
 
-        public Guid LiqpayOrderId { get; set; }
+        public string LiqpayOrderId { get; set; }
+                
+        public DateTime TimeStamp { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public LiqPayAction Action { get; set; }
+        
+        public Guid? DonatorId { get; set; }
     }
 }

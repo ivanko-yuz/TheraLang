@@ -19,5 +19,7 @@ namespace TheraLang.Web.ViewModels.Donations
         public LiqPayCurrency Currency { get; set; }
         
         public string Description { get; set; }
+        
+        public string ResultUrl { get; set; }
     }
 }

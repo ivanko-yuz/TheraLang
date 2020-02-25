@@ -36,6 +36,10 @@ namespace TheraLang.DAL.Configuration
                 .HasConversion(actionConverter)
                 .HasMaxLength(16);
             builder.Property(p => p.TimeStamp).HasDefaultValueSql("GETDATE()");
+
+            builder.HasOne(d => d.Donator)
+                .WithMany(u => u.Donations)
+                .HasForeignKey(d => d.DonatorId);
         }
     }
 }

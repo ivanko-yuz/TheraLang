@@ -48,6 +48,7 @@ namespace TheraLang.BLL.Services
             
             donation.ProjectId = liqPayCheckoutDto.ProjectId;
             donation.SocietyId = liqPayCheckoutDto.SocietyId;
+            donation.DonatorId = liqPayCheckoutDto.DonatorId;
 
             _unitOfWork.Repository<Donation>().Add(donation);
             await _unitOfWork.SaveChangesAsync();

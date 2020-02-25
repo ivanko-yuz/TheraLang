@@ -2,9 +2,11 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects.Donations;
 using TheraLang.BLL.Interfaces;
+using TheraLang.BLL.LiqPay;
 using TheraLang.Web.ViewModels.Donations;
 
 namespace TheraLang.Web.Controllers
@@ -15,13 +17,16 @@ namespace TheraLang.Web.Controllers
     {
         private readonly IDonationService _donationService;
         private readonly ILiqPayService _liqPayService;
+        private readonly IAuthenticateService _authenticateService;
 
-        public DonationController(IDonationService donationService, ILiqPayService liqPayService)
+        public DonationController(IDonationService donationService, ILiqPayService liqPayService,
+            IAuthenticateService authenticateService)
         {
             _donationService = donationService;
             _liqPayService = liqPayService;
+            _authenticateService = authenticateService;
         }
-
+        
         /// <summary>
         /// Generates LiqPay request data to process checkout
         /// </summary>
@@ -32,18 +37,30 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> Get([FromQuery]LiqPayCheckoutModelRequest liqPayCheckoutRequest)
         {
             var hostUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}";
-            
+            var userId = (await _authenticateService.TryGetAuthUser())?.Id;
+
             var mapper = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<LiqPayCheckoutDto, LiqPayCheckoutViewModel>();
                     cfg.CreateMap<LiqPayCheckoutModelRequest, LiqPayCheckoutModelRequestDto>();
                 })
                 .CreateMapper();
+            
+            
+            var resultQueryString = new
+            {
+                DonatorId = userId,
+                liqPayCheckoutRequest.ProjectId,
+                liqPayCheckoutRequest.SocietyId
+            }.ConvertToQueryString();
 
-            var liqpayCheckoutModelDto = mapper.Map<LiqPayCheckoutModelRequestDto>(liqPayCheckoutRequest);
+            var liqPayCheckoutModelDto = mapper.Map<LiqPayCheckoutModelRequestDto>(liqPayCheckoutRequest);
+            
+            liqPayCheckoutModelDto.ResultUrl = hostUrl;
+            liqPayCheckoutModelDto.ServerUrl = $"{hostUrl}/api/donations/checkout?{resultQueryString}";
 
             var liqPayCheckoutDto =
-                await _liqPayService.GetLiqPayCheckoutModelAsync(liqpayCheckoutModelDto, hostUrl);
+                await _liqPayService.GetLiqPayCheckoutModelAsync(liqPayCheckoutModelDto);
 
             var liqPayCheckoutModel = mapper.Map<LiqPayCheckoutDto, LiqPayCheckoutViewModel>(liqPayCheckoutDto);
 
@@ -70,41 +87,20 @@ namespace TheraLang.Web.Controllers
         /// <summary>
         /// API for LiqPay check in 
         /// </summary>
-        /// <param name="projectId"></param>
+        /// <param name="info"></param>
         /// <param name="checkoutViewModel"></param>
         /// <returns>status code</returns>
-        [HttpPost("project/{projectId?}")]
+        [HttpPost("checkout")]
         [AllowAnonymous]
-        public async Task<IActionResult> PostProjectDonation(int projectId, [FromForm] LiqPayCheckoutViewModel checkoutViewModel)
+        public async Task<IActionResult> PostProjectDonation([FromQuery] LiqPayCheckoutInfoViewModel info, [FromForm] LiqPayCheckoutViewModel checkoutViewModel)
         {
             var mapper = new MapperConfiguration(mapOpts =>
                 mapOpts.CreateMap<LiqPayCheckoutViewModel, LiqPayCheckoutDto>()
-                    .ForMember(dto => dto.ProjectId,
-                        opts =>
-                            opts.MapFrom(vm => projectId))
-            ).CreateMapper();
+                    .ForMember(dto => dto.ProjectId, opts => opts.MapFrom(vm => info.ProjectId))
+                    .ForMember(dto => dto.SocietyId, opts => opts.MapFrom(vm => info.SocietyId))
+                    .ForMember(dto => dto.DonatorId, opts => opts.MapFrom(vm => info.DonatorId))
+                ).CreateMapper();
             
-            var liqPayDto = mapper.Map<LiqPayCheckoutDto>(checkoutViewModel);
-
-            await _donationService.AddDonationAsync(liqPayDto);
-            return Ok();
-        }
-        
-        /// <summary>
-        /// API for LiqPay check in
-        /// </summary>
-        /// <param name="societyId"></param>
-        /// <param name="checkoutViewModel"></param>
-        /// <returns></returns>
-        [HttpPost("society/{societyId}")]
-        public async Task<IActionResult> PostSocietyDonation(int societyId, [FromForm] LiqPayCheckoutViewModel checkoutViewModel)
-        {
-            var mapper = new MapperConfiguration(mapOpts =>
-                mapOpts.CreateMap<LiqPayCheckoutViewModel, LiqPayCheckoutDto>()
-                    .ForMember(dto => dto.SocietyId,
-                        opts =>
-                            opts.MapFrom(vm => societyId))
-            ).CreateMapper();
             var liqPayDto = mapper.Map<LiqPayCheckoutDto>(checkoutViewModel);
 
             await _donationService.AddDonationAsync(liqPayDto);

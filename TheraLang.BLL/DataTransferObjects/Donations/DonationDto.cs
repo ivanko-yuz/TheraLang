@@ -17,10 +17,14 @@ namespace TheraLang.BLL.DataTransferObjects.Donations
 
         public LiqPayCurrency Currency { get; set; }
 
-        public int PaymentId { get; set; }
+        public uint PaymentId { get; set; }
 
         public string LiqpayOrderId { get; set; }
+        
+        public DateTime TimeStamp { get; set; }
 
         public LiqPayAction Action { get; set; }
+        
+        public Guid? DonatorId { get; set; }
     }
 }
