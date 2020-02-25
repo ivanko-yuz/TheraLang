@@ -9,7 +9,14 @@ namespace TheraLang.BLL.Services
 {
     public class LiqPayService: ILiqPayService
     {
-        public async Task<LiqPayCheckoutDto> GetLiqPayCheckoutModelAsync(
+        private readonly ILiqPayInfo _liqPayInfo;
+
+        public LiqPayService(ILiqPayInfo liqPayInfo)
+        {
+            _liqPayInfo = liqPayInfo;
+        }
+
+        public async Task<LiqPayCheckoutDto> GetLiqPayCheckoutModel(
             LiqPayCheckoutModelRequestDto liqPayCheckoutModelRequest)
         {
             var mapper = new MapperConfiguration(mapOpts =>
@@ -17,10 +24,12 @@ namespace TheraLang.BLL.Services
                 mapOpts.CreateMap<LiqPayCheckoutModelRequestDto, LiqPayCheckout>()
                     .ForMember(c => c.Amount, opts => opts.MapFrom(dto => dto.DonationAmount));
             }).CreateMapper();
-
+            
             var liqPayCheckout = mapper.Map<LiqPayCheckout>(liqPayCheckoutModelRequest);
+
+            liqPayCheckout.PublicKey = _liqPayInfo.PublicKey;
             var liqPayData = new LiqPayData(liqPayCheckout);
-            var liqPaySignature = new LiqPaySignature(liqPayData);
+            var liqPaySignature = new LiqPaySignature(liqPayData,_liqPayInfo.PrivateKey);
             
             return new LiqPayCheckoutDto()
             {

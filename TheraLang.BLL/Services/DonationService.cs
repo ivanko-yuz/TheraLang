@@ -13,10 +13,12 @@ namespace TheraLang.BLL.Services
     public class DonationService : IDonationService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILiqPayInfo _liqPayInfo;
 
-        public DonationService(IUnitOfWork unitOfWork)
+        public DonationService(IUnitOfWork unitOfWork, ILiqPayInfo liqPayInfo)
         {
             _unitOfWork = unitOfWork;
+            _liqPayInfo = liqPayInfo;
         }
 
         public async Task<DonationDto> GetDonationAsync(Guid donationId)
@@ -33,7 +35,7 @@ namespace TheraLang.BLL.Services
         public async Task AddDonationAsync(LiqPayCheckoutDto liqPayCheckoutDto)
         {
             var liqPayData = new LiqPayData(liqPayCheckoutDto.Data);
-            var liqPaySignature = new LiqPaySignature(liqPayData);
+            var liqPaySignature = new LiqPaySignature(liqPayData,_liqPayInfo.PrivateKey);
 
             if (!await liqPaySignature.Validate(liqPayCheckoutDto.Signature))
             {

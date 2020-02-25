@@ -13,17 +13,13 @@ namespace TheraLang.BLL.LiqPay
 
         private string _signature;
 
-        public LiqPaySignature()
-        {
-            _privateKey = Environment.GetEnvironmentVariable("LIQPAY_PRIVATE");
-        }
-        
-        public LiqPaySignature(LiqPayData liqPayData) : this()
+        public LiqPaySignature(LiqPayData liqPayData, string privateKey)
         {
             _liqPayData = liqPayData;
+            _privateKey = privateKey;
         }
         
-        public LiqPaySignature(string data): this(new LiqPayData(data))
+        public LiqPaySignature(string data, string privateKey) : this(new LiqPayData(data), privateKey)
         {}
 
         public async Task<bool> Validate(string otherSignature)

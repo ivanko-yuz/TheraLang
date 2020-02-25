@@ -60,7 +60,7 @@ namespace TheraLang.Web.Controllers
             liqPayCheckoutModelDto.ServerUrl = $"{hostUrl}/api/donations/checkout?{resultQueryString}";
 
             var liqPayCheckoutDto =
-                await _liqPayService.GetLiqPayCheckoutModelAsync(liqPayCheckoutModelDto);
+                await _liqPayService.GetLiqPayCheckoutModel(liqPayCheckoutModelDto);
 
             var liqPayCheckoutModel = mapper.Map<LiqPayCheckoutDto, LiqPayCheckoutViewModel>(liqPayCheckoutDto);
 

@@ -8,7 +8,7 @@ namespace TheraLang.BLL.LiqPay
 {
     public class LiqPayData
     {
-        private readonly string _publicKey;
+        public const int ApiVersion = 3;
         
         private string _jsonData;
         private string _base64Data;
@@ -16,19 +16,13 @@ namespace TheraLang.BLL.LiqPay
         private LiqPayCommission _liqPayCommission;
         private Donation _donationDto;
 
-        private LiqPayData()
-        {
-            _publicKey = LiqPayHelper.PublicKey;
-        }
-        
-        public LiqPayData(LiqPayCheckout checkoutData) : this()
+        public LiqPayData(LiqPayCheckout checkoutData)
         {
             _checkoutData = checkoutData;
-            _checkoutData.PublicKey = _publicKey;
-            _checkoutData.Version = LiqPayHelper.ApiVersion;
+            _checkoutData.Version = ApiVersion;
         }
 
-        public LiqPayData(string base64Data): this()
+        public LiqPayData(string base64Data)
         {
             _base64Data = base64Data;
             _jsonData = Encoding.UTF8.GetString(Convert.FromBase64String(_base64Data));
