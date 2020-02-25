@@ -30,6 +30,7 @@ namespace TheraLang.DAL.Configuration
                 .HasConversion(currencyConverter)
                 .HasMaxLength(8);
             builder.Property(p => p.PaymentId).IsRequired();
+            builder.HasIndex(p => p.LiqpayOrderId).IsUnique();
             builder.Property(p => p.LiqpayOrderId).IsRequired().HasMaxLength(24);
             builder.Property(p => p.Action)
                 .IsRequired()

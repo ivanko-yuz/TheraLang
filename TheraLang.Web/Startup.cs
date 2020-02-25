@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
+using TheraLang.BLL.LiqPay;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
 using TheraLang.Web.ActionFilters;
@@ -66,6 +67,7 @@ namespace TheraLang.Web
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             services.AddTransient<ILiqPayService, LiqPayService>();
+            services.AddTransient<ILiqPayInfo, LiqPayInfo>();
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddTransient<IPageService, PageService>();

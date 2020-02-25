@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects.Donations;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.LiqPay;
+using TheraLang.Web.ActionFilters;
 using TheraLang.Web.ViewModels.Donations;
 
 namespace TheraLang.Web.Controllers
@@ -76,7 +77,7 @@ namespace TheraLang.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Get(Guid donationId)
         {
-            var donationDto = await _donationService.GetDonationAsync(donationId);
+            var donationDto = await _donationService.GetDonation(donationId);
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DonationDto, DonationViewModel>()).CreateMapper();
             var donationModel = mapper.Map<DonationDto, DonationViewModel>(donationDto);
@@ -103,7 +104,7 @@ namespace TheraLang.Web.Controllers
             
             var liqPayDto = mapper.Map<LiqPayCheckoutDto>(checkoutViewModel);
 
-            await _donationService.AddDonationAsync(liqPayDto);
+            await _donationService.AddDonation(liqPayDto);
             return Ok();
         }
     }

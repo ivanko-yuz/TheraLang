@@ -21,7 +21,7 @@ namespace TheraLang.BLL.Services
             _liqPayInfo = liqPayInfo;
         }
 
-        public async Task<DonationDto> GetDonationAsync(Guid donationId)
+        public async Task<DonationDto> GetDonation(Guid donationId)
         {
             var donation = await _unitOfWork.Repository<Donation>().Get(d => d.Id == donationId) ??
                            throw new EntityNotFoundException(nameof(Donation), donationId.ToString());
@@ -32,7 +32,7 @@ namespace TheraLang.BLL.Services
             return projectsDto;
         }
 
-        public async Task AddDonationAsync(LiqPayCheckoutDto liqPayCheckoutDto)
+        public async Task<Guid> AddDonation(LiqPayCheckoutDto liqPayCheckoutDto)
         {
             var liqPayData = new LiqPayData(liqPayCheckoutDto.Data);
             var liqPaySignature = new LiqPaySignature(liqPayData,_liqPayInfo.PrivateKey);
@@ -54,6 +54,7 @@ namespace TheraLang.BLL.Services
 
             _unitOfWork.Repository<Donation>().Add(donation);
             await _unitOfWork.SaveChangesAsync();
+            return donation.Id;
         }
     }
 }

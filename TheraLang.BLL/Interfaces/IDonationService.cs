@@ -6,7 +6,7 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IDonationService
     {
-        Task<DonationDto> GetDonationAsync(Guid donationId);
-        Task AddDonationAsync(LiqPayCheckoutDto liqPayCheckoutDto);
+        Task<DonationDto> GetDonation(Guid donationId);
+        Task<Guid> AddDonation(LiqPayCheckoutDto liqPayCheckoutDto);
     }
 }
