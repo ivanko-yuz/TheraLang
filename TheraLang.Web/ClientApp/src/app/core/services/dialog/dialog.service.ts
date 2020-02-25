@@ -30,14 +30,6 @@ export class DialogService {
     this.dialog.open(formComponent, dialogConfig);
   }
 
-  openPagePreviewDialog(page: Page){
-    const dialogRef = this.dialog.open(PagePreviewComponent, {
-      width: "60%",
-      height: "98%",
-      data: page
-    });
-  }
-
   closeDialogs() {
     this.dialog.closeAll();
   }

@@ -4,16 +4,12 @@ import { Page } from 'src/app/shared/models/page/page.model';
 import { PageService } from 'src/app/core/http/manager/page.service';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { TranslateService } from '@ngx-translate/core';
-import { FormControl, FormGroup, Validators, Form } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
 import { transliterate } from 'transliteration';
 import { Language } from 'src/app/shared/models/language/languages.enum';
-import { delay } from 'rxjs/operators';
-import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 import { MatDialog } from '@angular/material';
 import { PagePreviewComponent } from '../page-preview/page-preview.component';
-import { GetFeeComponent } from '../../member-fee/get-fee/get-fee.component';
-
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
@@ -30,7 +26,6 @@ export class CreatePageComponent implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private translate: TranslateService,
-    private dialogService: DialogService,
     private dialog: MatDialog,
     private slugifyPipe: SlugifyPipe) {
   }
