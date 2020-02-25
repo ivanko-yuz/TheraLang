@@ -1,4 +1,6 @@
-﻿namespace TheraLang.Web.ViewModels
+﻿using Common.Enums;
+
+namespace TheraLang.Web.ViewModels
 {
     public class PageViewModel
     {
@@ -7,6 +9,6 @@
         public string Header { get; set; }
         public string MenuTitle { get; set; }
         public string Route { get; set; }
-        public LanguageViewModel Language { get; set; }
+        public Language Language { get; set; }
     }
 }

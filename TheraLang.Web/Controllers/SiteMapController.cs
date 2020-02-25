@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Enums;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
-using TheraLang.DAL.Enums;
 using TheraLang.Web.ViewModels.SiteMap;
 
 namespace TheraLang.Web.Controllers

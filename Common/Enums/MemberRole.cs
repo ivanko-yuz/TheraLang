@@ -1,4 +1,4 @@
-﻿namespace TheraLang.DAL.Enums
+﻿namespace Common.Enums
 {
     public enum MemberRole
     {
