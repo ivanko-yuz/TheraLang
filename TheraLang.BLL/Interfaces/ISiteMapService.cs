@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common.Enums;
 using TheraLang.BLL.DataTransferObjects;
-using TheraLang.DAL.Enums;
 
 namespace TheraLang.BLL.Interfaces
 {

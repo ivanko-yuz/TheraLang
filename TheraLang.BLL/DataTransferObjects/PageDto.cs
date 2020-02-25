@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Common.Enums;
 using TheraLang.BLL.CustomTypes;
 
 namespace TheraLang.BLL.DataTransferObjects
@@ -11,7 +12,7 @@ namespace TheraLang.BLL.DataTransferObjects
         public string MenuTitle { get; set; }
         public int? ParentPageId { get; set; }
         public string Route { get; set; }
-        public LanguageDto Language { get; set; }
+        public Language Language { get; set; }
         public virtual PageDto ParentPage { get; set; }
         public virtual ICollection<PageDto> SubPages { get; set; }
     }

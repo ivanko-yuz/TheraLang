@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Enums;
 using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.DataTransferObjects
@@ -8,9 +9,9 @@ namespace TheraLang.BLL.DataTransferObjects
         public int Id { get; set; }
         public User User { get; set; }
 
-        public MemberRoleDto Role { get; set; }
+        public MemberRole Role { get; set; }
 
-        public ProjectParticipationStatusDto Status { get; set; }
+        public ProjectParticipationStatus Status { get; set; }
 
         public int ProjectId { get; set; }
 
