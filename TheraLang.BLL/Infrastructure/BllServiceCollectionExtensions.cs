@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Infrastructure.AzureConnectionFactory;
+using TheraLang.BLL.Interfaces;
+using TheraLang.BLL.Services.File;
 using TheraLang.DAL;
 using TheraLang.DAL.UnitOfWork;
 
@@ -23,11 +25,18 @@ namespace TheraLang.BLL.Infrastructure
             return services.AddTransient<IUnitOfWork, UnitOfWork>(provider =>
                 new UnitOfWork(provider.GetRequiredService<IttmmDbContext>()));
         }
-        public static IServiceCollection AddAzureStorageClientFactory(this IServiceCollection services, string connectionString)
+        
+        public static IServiceCollection AddFileStorage(this IServiceCollection services, string connectionString)
         {
-            return services.AddTransient<IAzureConnectionFactory, AzureConnectionFactory.AzureConnectionFactory>(serviceProvider =>
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                return services.AddTransient<IFileService, LocalFileService>();
+            }
+            services.AddTransient<IAzureConnectionFactory, AzureConnectionFactory.AzureConnectionFactory>(serviceProvider =>
                 new AzureConnectionFactory.AzureConnectionFactory(connectionString));
+            return services.AddTransient<IFileService, AzureFileService>();
         }
+        
         public static IServiceCollection AddAuthentication(this IServiceCollection services,
             IConfiguration Configuration)
         {
