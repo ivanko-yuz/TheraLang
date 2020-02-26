@@ -2,12 +2,10 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects.Donations;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.LiqPay;
-using TheraLang.Web.ActionFilters;
 using TheraLang.Web.ViewModels.Donations;
 
 namespace TheraLang.Web.Controllers
