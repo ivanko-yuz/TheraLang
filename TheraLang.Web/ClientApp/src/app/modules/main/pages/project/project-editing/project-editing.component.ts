@@ -16,6 +16,8 @@ import { NotificationService } from 'src/app/core/services/notification/notifica
 export class ProjectEditingComponent implements OnInit {
   projectTypes: ProjectType[];
   projectId: number;
+  minDate: Date;
+
   constructor(
     public service: ProjectService,
     public dateAdapter: DateAdapter<Date>,
@@ -39,6 +41,8 @@ export class ProjectEditingComponent implements OnInit {
     this.route.params.subscribe(params => { this.projectId = +params['id']; });
     this.httpService.getProjectInfo(this.projectId)
       .subscribe((data: Project) => (this.populateForm(data)));
+
+      this.minDate = new Date();
   }
 
   populateForm(data: Project) {
