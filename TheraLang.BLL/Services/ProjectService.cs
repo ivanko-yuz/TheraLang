@@ -5,13 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Common.Constants;
+using Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
-using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.BLL.DataTransferObjects.Projects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
-using TheraLang.DAL.Enums;
 using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services

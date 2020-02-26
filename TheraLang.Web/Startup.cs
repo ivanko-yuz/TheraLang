@@ -12,7 +12,6 @@ using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
 using TheraLang.Web.ActionFilters;
-using TheraLang.Web.ExceptionHandling;
 using TheraLang.Web.Extensions;
 
 namespace TheraLang.Web
@@ -52,8 +51,8 @@ namespace TheraLang.Web
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
-            services.AddAzureStorageClientFactory(Configuration.GetConnectionString("AzureConnection"));
-            services.AddTransient<IFileService, LocalFileService>();
+            services.AddFileStorage(Configuration.GetConnectionString("AzureConnection"));
+            
             services.AddAuthentication(Configuration);
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.CustomTypes;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
-using TheraLang.DAL.Enums;
 using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
@@ -69,11 +69,8 @@ namespace TheraLang.BLL.Services
             return pagesDto;
         }
 
-        public async Task<PageDto> GetPageByRoute(string route, LanguageDto langDto)
+        public async Task<PageDto> GetPageByRoute(string route, Language lang)
         {
-            var langMapper = new MapperConfiguration(cfg => cfg.CreateMap<LanguageDto, Language>()).CreateMapper();
-            var lang = langMapper.Map<LanguageDto, Language>(langDto);
-
             var page = await _unitOfWork.Repository<Page>().GetAll()
                 .Include(r => r.PageRoute)
                 .SingleOrDefaultAsync(p => p.Language == lang && p.PageRoute.Route == route);
