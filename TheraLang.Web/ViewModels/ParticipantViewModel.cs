@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Enums;
 
 namespace TheraLang.Web.ViewModels
 {
@@ -6,9 +7,9 @@ namespace TheraLang.Web.ViewModels
     {
         public int Id { get; set; }
 
-        public MemberRoleViewModel Role { get; set; }
+        public MemberRole Role { get; set; }
 
-        public ProjectParticipationStatusViewModel Status { get; set; }
+        public ProjectParticipationStatus Status { get; set; }
 
         public int ProjectId { get; set; }
 

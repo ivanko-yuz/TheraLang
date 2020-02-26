@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
-using TheraLang.BLL.DataTransferObjects.Constants;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
 

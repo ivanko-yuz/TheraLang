@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
-using TheraLang.DAL.Enums;
 using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
@@ -21,7 +21,7 @@ namespace TheraLang.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task ChangeStatus(int participantId, ProjectParticipationStatusDto statusDto)
+        public async Task ChangeStatus(int participantId, ProjectParticipationStatus status)
         {
             try
             {
@@ -33,10 +33,6 @@ namespace TheraLang.BLL.Services
                     throw new NullReferenceException(
                         $"Error while changing status. Participant with id {nameof(participantId)}={participantId} not found");
                 }
-
-                var mapper = new MapperConfiguration(cfg =>
-                    cfg.CreateMap<ProjectParticipationStatusDto, ProjectParticipationStatus>()).CreateMapper();
-                var status = mapper.Map<ProjectParticipationStatusDto, ProjectParticipationStatus>(statusDto);
 
                 participant.Status = status;
 
