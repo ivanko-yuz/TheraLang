@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Common.Exceptions;
 using Microsoft.Azure.Storage.Blob;
 using TheraLang.BLL.Infrastructure.AzureConnectionFactory;
 using TheraLang.BLL.Interfaces;
@@ -40,6 +41,21 @@ namespace TheraLang.BLL.Services.File
 
             await blockBlob.UploadFromStreamAsync(stream);
             return blockBlob.Uri;
+        }
+
+        public async Task RemoveFile(string fileUrl)
+        {
+            var container = _azureConnection.GetClient().GetContainerReference("files");
+            var fileName = Path.GetFileName(fileUrl);
+            if (!await container.ExistsAsync())
+            {
+                return;
+            }
+            var blockBlob = container.GetBlockBlobReference(fileName);
+            if (!await blockBlob.DeleteIfExistsAsync())
+            {
+                throw new FileDoesNotExistException($"azureBlobStorage//{fileName}");
+            }
         }
     }
 }
