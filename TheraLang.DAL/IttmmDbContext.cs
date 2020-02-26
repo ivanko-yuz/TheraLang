@@ -29,6 +29,7 @@ namespace TheraLang.DAL
         public virtual DbSet<PageRoute> PageRoutes { get; set; }
         public virtual DbSet<UserDetails> UsersDetails { get; set; }
         public virtual DbSet<MemberFee> MemberFees { get; set; }
+        public virtual DbSet<PaymentHistory> PaymentHistory { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -13,5 +13,6 @@ namespace TheraLang.BLL.DataTransferObjects
         public string ShortInformation { get; set; }
         public string ImageURl { get; set; }
         public string RoleName { get; set; }
+        public decimal Balance { get; set; }
     }
 }

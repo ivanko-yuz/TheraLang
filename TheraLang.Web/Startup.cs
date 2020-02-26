@@ -72,6 +72,7 @@ namespace TheraLang.Web
             services.AddTransient<ISiteMapService, SiteMapService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IMemberFeeService, MemberFeeService>();
+            services.AddTransient<IPaymentHistoryService, PaymentHistoryService>();
 
             services.AddOpenApiDocument();
         }
