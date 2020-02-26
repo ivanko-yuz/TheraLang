@@ -43,9 +43,44 @@ namespace TheraLang.DataSeeding
                     PasswordHash = PasswordHasher.HashPassword("password"), RoleId = memberRoleId
                 }
             };
+            
+            var resourceCategories = new List<ResourceCategory>()
+            {
+                new ResourceCategory()
+                {
+                    Type = "Файли"
+                },
+                new ResourceCategory()
+                {
+                    Type = "Зображення"
+                },
+                new ResourceCategory()
+                {
+                    Type = "Посилання"
+                },
+
+            };
+            
+            var userDetails = new List<UserDetails>()
+            {
+                new UserDetails()
+                {
+                    UserDetailsId = adminId,
+                    FirstName = "Admin",
+                    LastName = "Adminski"
+                },
+                new UserDetails()
+                {
+                    UserDetailsId = memberId,
+                    FirstName = "Arturka",
+                    LastName = "Member"
+                }
+            };
 
             await dbContext.ClearAndSeed(roles);
             await dbContext.ClearAndSeed(users);
+            await dbContext.ClearAndSeed(resourceCategories);
+            await dbContext.ClearAndSeed(userDetails);
         }
         
         private static DbContext CreateDbContext()

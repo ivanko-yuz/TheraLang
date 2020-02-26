@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheraLang.DataSeeding", "TheraLang.DataSeeding\TheraLang.DataSeeding.csproj", "{B5716785-BCE7-4FE8-931C-14F48CA02751}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSeeding", "DataSeeding\DataSeeding.csproj", "{4BF42012-418C-4278-B540-D0B93BD970BE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,10 +51,6 @@ Global
 		{B5716785-BCE7-4FE8-931C-14F48CA02751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5716785-BCE7-4FE8-931C-14F48CA02751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5716785-BCE7-4FE8-931C-14F48CA02751}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4BF42012-418C-4278-B540-D0B93BD970BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4BF42012-418C-4278-B540-D0B93BD970BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4BF42012-418C-4278-B540-D0B93BD970BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4BF42012-418C-4278-B540-D0B93BD970BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
