@@ -15,7 +15,7 @@ namespace DataSeeding
                     var dataseed = new DbInitializer();
                     dataseed.Seed(scope);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //logger.LogError(ex, "An error occurred seeding the DB.");
                 }

@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
+using Common.Configurations;
 
 namespace TheraLang.BLL.Services
 {
@@ -26,7 +27,8 @@ namespace TheraLang.BLL.Services
 
         public async Task<string> Authenticate(User user)
         {
-            return await Task.Run(() =>
+            if (user.IsConfirmByEmail == true)
+                return await Task.Run(() =>
             {
                 var claim = new[]
                 {
@@ -47,6 +49,8 @@ namespace TheraLang.BLL.Services
                 var token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
                 return token;
             });
+
+            return null;
         }
 
         public async Task<AuthUser> GetAuthUserAsync()

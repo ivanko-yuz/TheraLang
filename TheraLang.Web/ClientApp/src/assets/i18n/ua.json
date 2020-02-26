@@ -131,6 +131,9 @@
       "short_information": "Коротко про себе",
       "age": "Вік",
       "successfully-registration": "Дякуємо за реєстрацію!",
+      "successfully-confirmation": "Ваш профіль підтверджено!",
+      "failed-confirmation": "Виникла помилка, спробуйте ще раз",
+      "redirection-to-login": "Перейти на логін",
       "error": "Помилка"
     },
     "projectTypes": {

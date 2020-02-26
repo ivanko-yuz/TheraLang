@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace TheraLang.BLL.DataTransferObjects
+namespace TheraLang.BLL.DataTransferObjects.UserDtos
 {
     public class UserAllDto
     {
@@ -11,5 +11,7 @@ namespace TheraLang.BLL.DataTransferObjects
         public string Password { get; set; }
         public string ShortInformation { get; set; }
         public string ImageURl { get; set; }
+        public int ConfirmationNumber { get; set; }
+        public bool IsConfirmByEmail { get; set; }
     }
 }

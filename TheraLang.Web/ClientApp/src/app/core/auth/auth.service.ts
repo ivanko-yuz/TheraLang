@@ -91,4 +91,11 @@ export class AuthService {
       responseType: "text"
     });
   }
+
+  confirmUser(confirmationNumber: number, email: string) {
+    return this.http.post(this.baseUrl + "/confirmation", {
+        confirmation_number: confirmationNumber,
+        email,
+      });
+  }
 }

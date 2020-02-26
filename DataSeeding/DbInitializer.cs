@@ -29,20 +29,22 @@ namespace DataSeeding
                     context.Users.Add(new User
                     {
                         Id = Guid.NewGuid(), Email = "admin@utmm.com",
-                        PasswordHash = PasswordHasher.HashPassword("password"), RoleId = adminRoleId
+                        PasswordHash = PasswordHasher.HashPassword("password"), RoleId = adminRoleId,
+                        IsConfirmByEmail = true
                     });
                     context.Users.Add(new User
                     {
                         Id = Guid.NewGuid(), Email = "member@utmm.com",
-                        PasswordHash = PasswordHasher.HashPassword("password"), RoleId = memberRoleId
+                        PasswordHash = PasswordHasher.HashPassword("password"), RoleId = memberRoleId,
+                        IsConfirmByEmail = true
                     });
                 }
 
                 context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                var i = 0;
+                
             }
         }
     }

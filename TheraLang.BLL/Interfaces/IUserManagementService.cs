@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.UserDtos;
 using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.Interfaces
@@ -12,5 +12,8 @@ namespace TheraLang.BLL.Interfaces
         Task<User> GetUserById(Guid id);
 
         Task AddUser(UserAllDto NewUser);
+
+        Task SendEmail(int ConfirmNUm, string Email);
+        Task ConfirmUser(ConfirmUserDto confirmUser);
     }
 }

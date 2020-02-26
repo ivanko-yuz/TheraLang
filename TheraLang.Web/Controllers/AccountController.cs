@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.UserDtos;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.ViewModels;
+using TheraLang.Web.ViewModels.UsersViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -44,10 +46,30 @@ namespace TheraLang.Web.Controllers
         [HttpPost("registration")]
         public async Task<IActionResult> Register([FromForm] UserAllViewModel newUser)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserAllViewModel, UserAllDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UserAllViewModel, UserAllDto>();
+                cfg.CreateMap<UserAllViewModel, ConfirmUserDto>();
+            }).CreateMapper();
+
             var user = mapper.Map<UserAllViewModel, UserAllDto>(newUser);
+            var confirmUser = mapper.Map<UserAllViewModel, ConfirmUserDto>(newUser);
+            Random rand = new Random();
+            user.ConfirmationNumber = rand.Next(10000000, 100000000);
             await _userManagement.AddUser(user);
+            await _userManagement.SendEmail(user.ConfirmationNumber, user.Email);
             return Ok();
         }
+
+        [HttpPost("confirmation")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail([FromBody]ConfirmUserViewModel confirmUser)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ConfirmUserViewModel, ConfirmUserDto>()).CreateMapper();
+            var confirm = mapper.Map<ConfirmUserViewModel, ConfirmUserDto>(confirmUser);
+            await _userManagement.ConfirmUser(confirm);
+            return Ok();
+        }
+
     }
 }

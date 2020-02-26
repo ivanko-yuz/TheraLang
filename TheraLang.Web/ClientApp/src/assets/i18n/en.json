@@ -133,6 +133,9 @@
       "short_information": "Short information",
       "age": "Age",
       "successfully-registration": "Successfully registration",
+      "successfully-confirmation": "Successfully email confirmation",
+      "failed-confirmation": "Failed email confirmation",
+      "redirection-to-login": "go to login",
       "error": "Error"
     },
     "projectTypes": {

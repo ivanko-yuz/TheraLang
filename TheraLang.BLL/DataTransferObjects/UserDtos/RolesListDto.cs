@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TheraLang.BLL.DataTransferObjects
+namespace TheraLang.BLL.DataTransferObjects.UserDtos
 {
     public class RolesListDto
     {

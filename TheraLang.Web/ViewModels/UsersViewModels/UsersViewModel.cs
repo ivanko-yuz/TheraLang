@@ -1,11 +1,10 @@
-﻿namespace TheraLang.BLL.DataTransferObjects
+﻿namespace TheraLang.Web.ViewModels.UsersViewModels
 {
-    public class AdminUserViewDto
+    public class UsersViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ShortInformation { get; set; }
         public string ImageURl { get; set; }
-        public string RoleName { get; set; }
     }
 }

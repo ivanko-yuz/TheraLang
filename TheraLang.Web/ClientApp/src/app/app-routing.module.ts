@@ -26,6 +26,7 @@ import {RegistrationComponent} from "./modules/registration/registration.compone
 import {UserPageComponent} from "./modules/user-page/user-page.component";
 import {UsersListComponent} from "./modules/users_list/users-list.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
+import {ConfirmationComponent} from './modules/registration/confirmation/confirmation.component';
 const routes: Routes = [
   {
     path: "",
@@ -89,6 +90,10 @@ const routes: Routes = [
       {
         component: PageComponent,
         path: "pages/:pageRoute",
+      },
+      {
+        path: "registration/confirm",
+        component: ConfirmationComponent,
       },
     ],
   },
