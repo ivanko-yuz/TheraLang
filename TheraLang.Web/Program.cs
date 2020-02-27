@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using DataSeeding;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using TheraLang.BLL.Services.Scheduler;
 
 namespace TheraLang.Web
 {
@@ -22,6 +24,10 @@ namespace TheraLang.Web
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
+            ScheduleSetter.IntervalInSeconds(new DateTime(2020, 2, 29), 5, () => {
+                Log.Error($"staaart {Thread.CurrentThread.ManagedThreadId}");
+                System.Diagnostics.Debug.WriteLine($"staaart {Thread.CurrentThread.ManagedThreadId}");
+            });
             try
             {
                 BuildWebHost(args).Seed().Run();

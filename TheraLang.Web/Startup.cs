@@ -11,6 +11,7 @@ using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.File;
+using TheraLang.BLL.Services.Scheduler;
 using TheraLang.Web.ActionFilters;
 using TheraLang.Web.Extensions;
 
@@ -73,7 +74,6 @@ namespace TheraLang.Web
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IMemberFeeService, MemberFeeService>();
             services.AddTransient<IPaymentHistoryService, PaymentHistoryService>();
-
             services.AddOpenApiDocument();
         }
 
