@@ -1,0 +1,7 @@
+<mat-card class="home-card  mat-elevation-z5">
+    <mat-card-content fxLayout="column">
+        <span class="comments-count">{{this.commentsCount}}  {{'components.comments.comments-count-title'|translate}}</span>
+        <app-comment-create *ngIf="this.currentUser" [currentUser]="this.currentUser"></app-comment-create>
+        <app-comment *ngFor="let comment of this.comments" [comment]="comment" (commentChanged)="updateComments($event)"></app-comment>
+    </mat-card-content>
+</mat-card>

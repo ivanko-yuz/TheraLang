@@ -71,6 +71,11 @@
       "preview-image":"Preview image",
       "content-images":"Content images"
     },
+    "comments" : {
+      "comments-count-title" : "comments",
+      "create-comment": "Comment",
+      "enter-comment": "Add your comment"
+    },
     "users": {
       "title": "Users"
     },

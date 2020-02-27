@@ -69,6 +69,11 @@
       "preview-image":"Головне зображення",
       "content-images":"Зображення для наповнення"
     },
+    "comments" : {
+      "comments-count-title" : "коментарів",
+      "create-comment": "Коментувати",
+      "enter-comment": "Додайте ваш коментар"
+    },
     "users": {
       "title": "Користувачі"
     },
