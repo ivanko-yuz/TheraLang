@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
@@ -18,11 +17,9 @@ namespace TheraLang.BLL.Services
         {
             _unitOfWork = unitOfWork;
         }
-
         public async Task<IEnumerable<MemberFeeDto>> GetMemberFeesAsync()
         {
-            var memberFees = await _unitOfWork.Repository<MemberFee>().GetAll()
-                .ToListAsync();
+            var memberFees = await _unitOfWork.Repository<MemberFee>().GetAllAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFee, MemberFeeDto>()).CreateMapper();
             var memberFeesDto = mapper.Map<IEnumerable<MemberFee>, IEnumerable<MemberFeeDto>>(memberFees);
@@ -38,7 +35,7 @@ namespace TheraLang.BLL.Services
                 if (memberFee == null)
                 {
                     throw new ArgumentNullException(
-                        $"Error while deleting member fee. Fee with id {nameof(id)}={id} not found");
+                        $"Error while deleting member fee. Fee with id={id} not found");
                 }
 
                 _unitOfWork.Repository<MemberFee>().Remove(memberFee);
