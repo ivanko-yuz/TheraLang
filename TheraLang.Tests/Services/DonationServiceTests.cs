@@ -93,7 +93,7 @@ namespace TheraLang.Tests.Services
         }
 
         [Fact]
-        public async Task AddDonation_ValidData_CallsSaveChanges()
+        public async Task AddDonation_ShouldCallSaveChanges()
         {
             await _donationService.AddDonation(_validCheckout);
             
@@ -101,7 +101,7 @@ namespace TheraLang.Tests.Services
         }
 
         [Fact]
-        public async Task AddDonation_ValidData_CalculatesCorrectAmountWithCommission()
+        public async Task AddDonation_ShouldCalculateCorrectAmountWithCommission()
         {
             const decimal actualAmount = 100.0m;
             const decimal actualCommission = 2.75m;

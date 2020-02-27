@@ -22,7 +22,7 @@ namespace TheraLang.Tests.Services
         }
 
         [Fact]
-        public async Task GetLiqPayCheckoutModel_ValidData_ReturnsData()
+        public async Task GetLiqPayCheckoutModel_ShouldReturnValidDataAndSignature()
         {
             var validData = new LiqPayCheckoutModelRequestDto()
             {
