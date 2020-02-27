@@ -22,8 +22,10 @@ namespace TheraLang.DAL.Entities
         
         public string Currency { get; set; }
         
+        [JsonProperty("payment_id")]
         public int PaymentId { get; set; }
         
+        [JsonProperty("liqpay_order_id")]
         public string LiqpayOrderId { get; set; }
     }
 }
