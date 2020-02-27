@@ -10,7 +10,7 @@ import { Language } from 'src/app/shared/models/language/languages.enum';
   styleUrls: ['./page-preview.component.less']
 })
 export class PagePreviewComponent implements OnInit {
-  private page: Page
+  page: Page
   constructor(
     public dialogRef: MatDialogRef<PagePreviewComponent>,
     @Inject(MAT_DIALOG_DATA) public pageView) {
