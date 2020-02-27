@@ -60,7 +60,7 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<ParticipantViewModel>>> Get()
         {
-            var members = (await _projectParticipationServiceservice.GetAll()).ToList();
+            var members = await _projectParticipationServiceservice.GetAll();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectParticipationDto, ParticipantViewModel>()
                 .ForMember(m => m.UserName, opt => opt.MapFrom(m => m.User.Email))
