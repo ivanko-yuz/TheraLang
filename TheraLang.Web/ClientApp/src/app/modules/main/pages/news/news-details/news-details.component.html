@@ -6,7 +6,6 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="end">
                 <button mat-icon-button *ngIf="authService.isAdmin()">
-                    <!--(click)="onEdit(news)"-->
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-icon-button (click)="onDelete(this.newsId)" *ngIf="authService.isAdmin()">
