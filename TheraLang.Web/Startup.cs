@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
-using TheraLang.BLL.Services.File;
+using TheraLang.BLL.Services.FileServices;
 using TheraLang.Web.ActionFilters;
 using TheraLang.Web.Extensions;
 

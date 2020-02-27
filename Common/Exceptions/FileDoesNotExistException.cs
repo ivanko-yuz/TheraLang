@@ -2,7 +2,7 @@
 {
     public class FileDoesNotExistException: ApiException
     {
-        public FileDoesNotExistException(string filePath): base($"{filePath} does not exist")
+        public FileDoesNotExistException(string filePath) : base($"{filePath} does not exist")
         {}
     }
 }
