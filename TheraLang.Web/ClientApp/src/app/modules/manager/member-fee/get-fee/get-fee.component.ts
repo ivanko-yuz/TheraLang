@@ -29,6 +29,7 @@ export class GetFeeComponent implements OnInit {
     });
   }
   delete(fee: MemberFee) {
+    this.loadMemberFees();
     this.memberFeeService.deleteMemberFee(fee.id)
       .subscribe(data => this.loadMemberFees());
   }
