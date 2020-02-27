@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { ConfirmDialogComponent } from "../../../shared/components/confirm-dialog/confirm-dialog.component";
+import { Page } from 'src/app/shared/models/page/page.model';
+import { PagePreviewComponent } from 'src/app/modules/manager/page-manager/page-preview/page-preview.component';
 
 @Injectable({
   providedIn: "root"
