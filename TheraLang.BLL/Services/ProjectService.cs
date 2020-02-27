@@ -4,10 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Common.Constants;
 using Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.Projects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
@@ -25,18 +27,25 @@ namespace TheraLang.BLL.Services
             _fileService = fileService;
         }
 
-        public async Task<IEnumerable<ProjectDto>> GetAllProjectsAsync()
+        public async Task<IEnumerable<ProjectPreviewDto>> GetAllProjectsAsync()
         {
-            var projects = await _unitOfWork.Repository<Project>().GetAll()
-                .Include(x => x.Donations)
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Project, ProjectPreviewDto>()
+                    .ForMember(dto => dto.DonationTargetSum,
+                        opt => opt.MapFrom(p => p.DonationTarget))
+                    .ForMember(dto => dto.DonationsSum,
+                        opts => opts.MapFrom(entity => entity.Donations.Sum(donation => donation.Amount))
+                    );
+            });
+
+            var projectsDtos = await _unitOfWork.Repository<Project>()
+                .GetAll()
+                .Where(x => x.StatusId == ProjectStatus.Approved)
+                .ProjectTo<ProjectPreviewDto>(mapper)
                 .ToListAsync();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
-                    .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
-                .CreateMapper();
-            var projectsDto = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectDto>>(projects);
-
-            return projectsDto;
+            return projectsDtos;
         }
 
         public async Task<IEnumerable<ProjectDto>> GetAllNewProjectsAsync()
