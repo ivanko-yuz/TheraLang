@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using Common.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using TheraLang.Web.ExceptionHandling;
@@ -36,6 +37,17 @@ namespace TheraLang.Web.Extensions
                         .WithBody(context => new JsonResult(new
                         {
                             Category = "Custom",
+                            context.Exception.Message,
+                            context.Exception.StackTrace
+                        }));
+                });
+
+                handlerOptions.Map<InvalidArgumentException>(responseOpts =>
+                {
+                    responseOpts.WithCode(HttpStatusCode.BadRequest)
+                        .WithBody(context => new JsonResult(new
+                        {
+                            Exception = context.Exception.GetType().ToString(),
                             context.Exception.Message,
                             context.Exception.StackTrace
                         }));

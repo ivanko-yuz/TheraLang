@@ -22,9 +22,9 @@
       "commandName": "Project",
       "launchBrowser": false,
       "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
         "LIQPAY_PRIVATE": "sandbox_nqmktFe8ozPyPOGdjck7HgIfXp14kr0vcBF0RHhY",
-        "LIQPAY_PUBLIC": "sandbox_i42859998914",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "LIQPAY_PUBLIC": "sandbox_i42859998914"
       },
       "applicationUrl": "http://localhost:5000"
     }

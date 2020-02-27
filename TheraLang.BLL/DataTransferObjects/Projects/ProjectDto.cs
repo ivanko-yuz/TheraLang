@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using TheraLang.DAL.Entities;
 
-namespace TheraLang.BLL.DataTransferObjects
+namespace TheraLang.BLL.DataTransferObjects.Projects
 {
     public class ProjectDto
     {
@@ -22,15 +22,17 @@ namespace TheraLang.BLL.DataTransferObjects
         public DateTime ProjectEnd { get; set; }
 
         public int TypeId { get; set; }
+        
         public string ImgUrl { get; set; }
+        
         public IFormFile ImgFile { get; set; }
 
         public decimal DonationTargetSum { get; set; }
+        
+        public decimal DonationsSum { get; set; }
 
-        public virtual IEnumerable<ResourceProject> ProjectResources { get; set; }
+        public IEnumerable<ResourceProject> ProjectResources { get; set; }
 
-        public virtual IEnumerable<ProjectParticipation> ProjectParticipations { get; set; }
-
-        public virtual IEnumerable<Donation> Donations { get; set; }
+        public IEnumerable<ProjectParticipation> ProjectParticipations { get; set; }
     }
 }

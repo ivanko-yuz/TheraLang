@@ -28,18 +28,18 @@ namespace TheraLang.DAL.Entities
 
         [JsonProperty("liqpay_order_id")]
         public string LiqpayOrderId { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public LiqPayAction Action { get; set; }
-        
+
         public DateTime TimeStamp { get; set; }
-        
+
         public Guid? DonatorId { get; set; }
 
         public virtual Project Project { get; set; }
-        
+
         public virtual Society Society { get; set; }
-        
+
         public virtual User Donator { get; set; }
     }
 }

@@ -76,4 +76,20 @@ export class NewsDetailsComponent implements OnInit {
   isAuthenticated() {
     return this.userService.isAuthenticated();
   }
+
+  async like(){
+    if(!this.isAuthenticated()){
+      this.notificationService.info(await this.translate.get("common.messages.register-first").toPromise());
+      return
+    }
+    if(this.newsDetails.isLikedByCurrentUser){
+      this.newsDetails.likesCount--;
+    }
+    else{
+      this.newsDetails.likesCount++;
+    }
+    this.service.like(this.newsId).subscribe();
+    this.newsDetails.isLikedByCurrentUser=!this.newsDetails.isLikedByCurrentUser;
+  }
+
 }
