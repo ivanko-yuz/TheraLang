@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CreateFeeComponent implements OnInit {
   memberFee: MemberFee = new MemberFee();
+  memberFees: MemberFee[] = [];
   constructor(
     private router: Router,
     private memberFeeService: MemberFeeService) { }
@@ -19,7 +20,10 @@ export class CreateFeeComponent implements OnInit {
 
   save() {
     if (this.memberFee.id == null) {
-      this.memberFeeService.createMemberFee(this.memberFee);
+      this.memberFeeService.createMemberFee(this.memberFee)
+        .subscribe((data: MemberFee) => {
+          return this.memberFees.push(data);
+        });
     }
     this.cancel();
   }
