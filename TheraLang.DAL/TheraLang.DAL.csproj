@@ -11,6 +11,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200211150300_UserNewMigration.cs" />
+    <Compile Remove="Migrations\20200211150300_UserNewMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200214142547_RemovingSeed.cs" />
+    <Compile Remove="Migrations\20200214142547_RemovingSeed.Designer.cs" />
+    <Compile Remove="Migrations\20200214143103_AddFee.cs" />
+    <Compile Remove="Migrations\20200214143103_AddFee.Designer.cs" />
+    <Compile Remove="Migrations\20200217083638_master.cs" />
+    <Compile Remove="Migrations\20200217083638_master.Designer.cs" />
+    <Compile Remove="Migrations\20200217083746_Force.cs" />
+    <Compile Remove="Migrations\20200217083746_Force.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FineUploader.AspNet.Mvc" Version="1.0.0-beta2" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
