@@ -1,5 +1,5 @@
 <div class="container mb-5">
-  <div *ngFor="let user of users" class="mt-5">
+  <div *ngFor="let user of usersList.userList" class="mt-5">
     <mat-card class="home-card mat-elevation-z5">
       <mat-card-content class="home-card-content" fxLayout="row" fxLayout.md="column" fxLayout.sm="column" fxLayoutGap="10px" >
         <div class="image-container">
@@ -34,3 +34,6 @@
     </mat-card>
   </div>
 </div>
+
+<app-pagination (pageChange)="pageChange($event)" [collection]="usersList.userList" [totalRows]="usersList.countOfItems"
+                [pageSize]="pageSize"></app-pagination>

@@ -116,6 +116,8 @@ import { UserService } from "./core/services/user/user.service";
 import { ChangeRoleComponent } from "./modules/users_list/change-role/change-role.component";
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
+import {NgxPaginationModule} from 'ngx-pagination';
+import {PaginationComponent} from './modules/paginationg/pagination.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -165,7 +167,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewsDetailsComponent,
     PageComponent,
     ProjectEditingComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PaginationComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -181,6 +184,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxPaginationModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,

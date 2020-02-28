@@ -1,0 +1,19 @@
+<ul *ngIf="collection && collection.length" class="pagination">
+  <li [ngClass]="{disabled:currentPage === 1}" class="page-item first-item">
+    <a (click)="setPage(1)" class="page-link">First</a>
+  </li>
+  <li [ngClass]="{disabled:currentPage === 1}" class="page-item previous-item">
+    <a (click)="setPage(currentPage - 1)" class="page-link">Previous</a>
+  </li>
+  <li *ngFor="let page of numbers" [ngClass]="{active:currentPage === page}" class="page-item number-item">
+    <a (click)="setPage(page)" class="page-link" *ngIf="page <= 3">{{page}}</a>
+    <a (click)="setPage(page)" class="page-link" *ngIf="page > 3 && page < totalPages">...</a>
+    <a (click) = "setPage(page)" class="page-link" *ngIf="page == totalPages">{{page}}</a>
+  </li>
+  <li [ngClass]="{disabled:currentPage === totalPages}" class="page-item next-item">
+    <a (click)="setPage(currentPage + 1)" class="page-link">Next</a>
+  </li>
+  <li [ngClass]="{disabled:currentPage === totalPages}" class="page-item last-item">
+    <a (click)="setPage(totalPages)" class="page-link">Last</a>
+  </li>
+</ul>

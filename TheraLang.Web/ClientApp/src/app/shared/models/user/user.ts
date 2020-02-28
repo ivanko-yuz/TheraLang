@@ -8,4 +8,7 @@ export class User {
     resources: any[];
 }
 
-export class UserPageViewModel {}
+export class UserPageViewModel {
+  userList: User[];
+  countOfItems: number;
+}

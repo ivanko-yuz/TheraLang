@@ -8,6 +8,8 @@ using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
+using Common;
+using System.Linq;
 
 namespace TheraLang.BLL.Services
 {
@@ -62,13 +64,20 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task<IEnumerable<UsersDto>> GetAllUsers()
+        public async Task<UsersListDto> GetAllUsers(PaginationParams pagination)
         {
-            var users = await _unitOfWork.Repository<UserDetails>().GetAllAsync();
+            var users = await _unitOfWork.Repository<UserDetails>().GetAll().Skip((pagination.PageNumber - 1) * pagination.PageSize)
+                .Take(pagination.PageSize).ToListAsync();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>())
                 .CreateMapper();
             var usersDto = mapper.Map<IEnumerable<UserDetails>, IEnumerable<UsersDto>>(users);
-            return usersDto;
+            var usersList = new UsersListDto()
+            {
+                UserList = usersDto.ToList(),
+                CountOfItems = await _unitOfWork.Repository<User>().GetAll().CountAsync()
+            };
+
+            return usersList;
         }
 
         public async Task Update(UserDetailsDto user, Guid id)

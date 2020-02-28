@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { FormBuilder, Validators } from "@angular/forms";
 import {accountUrl, userUrl} from "src/app/configs/api-endpoint.constants";
 import { JwtHelperService } from "@auth0/angular-jwt";
@@ -15,8 +15,13 @@ export class UserService {
 
   readonly baseUrl = userUrl;
 
-  list() {
-    return this.http.get(this.baseUrl);
+  list(pageSize, pageNumber) {
+    const params = new HttpParams().
+    set("PageSize", pageSize).
+    set("PageNumber", pageNumber);
+    return this.http.get(this.baseUrl, {
+      params,
+    });
   }
 
   changeRole(userID: string, roleID: string) {

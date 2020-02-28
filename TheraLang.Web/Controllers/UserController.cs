@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
+using Common;
 
 namespace TheraLang.Web.Controllers
 {
@@ -57,9 +58,9 @@ namespace TheraLang.Web.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers([FromQuery] PaginationParams paginationParams)
         {
-            return Ok(await _userService.GetAllUsers());
+            return Ok(await _userService.GetAllUsers(paginationParams));
         }
 
         [HttpPost("{id}/role")]
