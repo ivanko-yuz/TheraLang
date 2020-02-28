@@ -39,6 +39,7 @@ export class CommentsBlockComponent implements OnInit {
   getCurrentUser() {
     this.userService.me().subscribe(response => {
       this.currentUser = response as User
+      console.log(response)
     })
   }
 
@@ -51,7 +52,6 @@ export class CommentsBlockComponent implements OnInit {
   }
 
   updateComments(){
-    console.log("tet")
     this.getCommentsCount(this.newsId)
     this.getComments(this.newsId);
   }

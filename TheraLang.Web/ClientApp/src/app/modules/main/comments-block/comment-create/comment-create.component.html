@@ -5,7 +5,7 @@
     </ng-template>
     
     <form [formGroup]="this.commentForm" fxFlex>
-        <mat-dialog-content fxLayout="column">
+        <div fxLayout="column">
                 <mat-form-field floatLabel=never>
                     <textarea formControlName="text" class="comment-input" matTextareaAutosize autofocus
                         matInput placeholder="{{'components.comments.enter-comment'|translate}}"></textarea>
@@ -20,6 +20,6 @@
                         {{'components.comments.create-comment'|translate}}
                     </button>
                 </mat-dialog-actions>
-        </mat-dialog-content>
+            </div>
     </form>
 </div>

@@ -5,7 +5,7 @@
     </ng-template>
 
     <form [formGroup]="this.commentForm" fxFlex>
-        <mat-dialog-content fxLayout="column">
+        <div fxLayout="column">
             <mat-form-field floatLabel=never>
                 <textarea formControlName="text" class="comment-input" matTextareaAutosize autofocus matInput
                     placeholder="{{'components.comments.enter-comment'|translate}}" [(ngModel)]="this.comment.text">
@@ -15,12 +15,12 @@
                 <mat-error *ngIf="this.commentForm.controls['text'].errors?.maxlength">
                     {{'common.validation.line-too-long'|translate}}</mat-error>
             </mat-form-field>
-            <mat-dialog-actions>
+            <div>
                 <button mat-raised-button color="primary" type="submit" [disabled]="this.commentForm.invalid"
                     (click)="onSubmit()" class="right-align">
                     {{'components.comments.create-comment'|translate}}
                 </button>
-            </mat-dialog-actions>
-        </mat-dialog-content>
+            </div>
+        </div>
     </form>
 </div>
