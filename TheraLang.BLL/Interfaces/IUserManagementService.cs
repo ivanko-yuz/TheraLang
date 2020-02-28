@@ -13,7 +13,7 @@ namespace TheraLang.BLL.Interfaces
 
         Task AddUser(UserAllDto NewUser);
 
-        Task SendEmail(int ConfirmNUm, string Email);
+        Task SendEmail(string ConfirmNUm, string Email);
         Task ConfirmUser(ConfirmUserDto confirmUser);
     }
 }

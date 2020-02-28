@@ -83,7 +83,7 @@ namespace TheraLang.BLL.Services
                     user.PasswordHash = PasswordHasher.HashPassword(NewUser.Password);
                     user.Details = userDetails;
 
-                    //_unitOfWork.Repository<UserDetails>().Add(userDetails);
+                    _unitOfWork.Repository<UserDetails>().Add(userDetails);
                     _unitOfWork.Repository<User>().Add(user);
 
                     await _unitOfWork.SaveChangesAsync();
@@ -95,46 +95,40 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task SendEmail(int ConfirmNum, string UserEmail)
+        public async Task SendEmail(string ConfirmNum, string UserEmail)
         {
-            try
+            string body = string.Empty;
+            using (StreamReader reader =
+            new StreamReader(Path.Combine(_env.ContentRootPath, "Templates", "welcome.html")))
             {
-                string body = string.Empty;
-                using (StreamReader reader = new StreamReader(_env.ContentRootPath + "/Templates/welcome.html"))
-                {
-                    body = reader.ReadToEnd();
-                }
-
-                var fromAddress = new MailAddress(_emailSettings.Email , "UTMM");
-                var toAddress = new MailAddress(UserEmail, "To User");
-                string fromPassword = _emailSettings.Password;
-                string subject = "Confirm your email";
-
-                body = body.Replace("{EMAIL}", UserEmail);
-                body = body.Replace("{NUMBER}", ConfirmNum.ToString());
-
-                var smtp = new SmtpClient
-                {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = true,
-                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-                };
-                using (var message = new MailMessage(fromAddress, toAddress)
-                {
-                    Subject = subject,
-                    IsBodyHtml = true,
-                    Body = body,
-                })
-                {
-                    smtp.Send(message);
-                }
+                body = await reader.ReadToEndAsync();
             }
-            catch (Exception ex)
+
+            var fromAddress = new MailAddress(_emailSettings.Email, "UTMM");
+            var toAddress = new MailAddress(UserEmail, "To User");
+            string fromPassword = _emailSettings.Password;
+            string subject = "Confirm your email";
+
+            body = body.Replace("{EMAIL}", UserEmail);
+            body = body.Replace("{NUMBER}", ConfirmNum);
+
+            var smtp = new SmtpClient
             {
-                throw new Exception("Error when sending email ", ex);
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = true,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                IsBodyHtml = true,
+                Body = body,
+            })
+            {
+                await smtp.SendMailAsync(message);
             }
         }
 
@@ -143,7 +137,7 @@ namespace TheraLang.BLL.Services
             var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
             if (user.ConfirmationNumber == confirmUser.ConfirmationNumber) user.IsConfirmByEmail = true;
             _unitOfWork.Repository<User>().Update(user);
-           await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

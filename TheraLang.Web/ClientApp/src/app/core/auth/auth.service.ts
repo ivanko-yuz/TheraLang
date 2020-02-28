@@ -93,9 +93,9 @@ export class AuthService {
   }
 
   confirmUser(confirmationNumber: number, email: string) {
-    return this.http.post(this.baseUrl + "/confirmation", {
-        confirmation_number: confirmationNumber,
-        email,
-      });
+    return this.http.post(`${this.baseUrl}/confirmation`, {
+      confirmation_number: confirmationNumber,
+      email,
+    });
   }
 }

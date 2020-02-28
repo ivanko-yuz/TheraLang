@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TheraLang.BLL.DataTransferObjects.UserDtos
+﻿namespace TheraLang.BLL.DataTransferObjects.UserDtos
 {
     public class ConfirmUserDto
     { 

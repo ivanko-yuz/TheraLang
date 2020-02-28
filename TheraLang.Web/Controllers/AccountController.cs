@@ -57,7 +57,7 @@ namespace TheraLang.Web.Controllers
             Random rand = new Random();
             user.ConfirmationNumber = rand.Next(10000000, 100000000);
             await _userManagement.AddUser(user);
-            await _userManagement.SendEmail(user.ConfirmationNumber, user.Email);
+            await _userManagement.SendEmail(user.ConfirmationNumber.ToString(), user.Email);
             return Ok();
         }
 
