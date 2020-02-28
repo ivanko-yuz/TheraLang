@@ -149,8 +149,11 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   isOwner(){
-    let ownerId = this.projectParticipants.find(p=>p.role===1).requstedGuidUserId;
-    return ownerId === this.userService.getCurrentUserId();
+    let owner = this.projectParticipants.find(p => p.role === 1);
+    if (!owner) {
+      return false;
+    }
+    return owner.requstedGuidUserId === this.userService.getCurrentUserId();
   }
 
   getProjectProgress(project: Project) {
