@@ -24,7 +24,7 @@ namespace TheraLang.Web
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
-            ScheduleSetter.IntervalInSeconds(new DateTime(2020, 2, 29), 5, () => {
+            ScheduleSetter.IntervalInDays(new DateTime(2020, 2, 29), 5, () => {
                 Log.Error($"staaart {Thread.CurrentThread.ManagedThreadId}");
                 System.Diagnostics.Debug.WriteLine($"staaart {Thread.CurrentThread.ManagedThreadId}");
             });
