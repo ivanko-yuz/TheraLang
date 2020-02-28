@@ -1,4 +1,4 @@
-export class CommentCreate {
+export class CommentRequest {
     text: string
     newsId: number
 }

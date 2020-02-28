@@ -3,6 +3,7 @@ import { User } from 'src/app/shared/models/user/user';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { CommentsService } from 'src/app/core/http/comments/comments.service';
 import { ActivatedRoute } from '@angular/router';
+import { CommentView } from 'src/app/shared/models/comment/comment-view';
 
 @Component({
   selector: 'app-comments-block',
@@ -13,7 +14,7 @@ export class CommentsBlockComponent implements OnInit {
 
   commentsCount : number = 0;
   currentUser: User;
-  comments: Comment[];
+  comments: CommentView[];
   newsId: number;
 
   constructor
@@ -25,9 +26,9 @@ export class CommentsBlockComponent implements OnInit {
 
   ngOnInit() {
     this.newsId = parseInt(this.route.snapshot.paramMap.get("newsId"))
-    this.getCommentsCount(this.newsId)
     this.getCurrentUser()
-    this.getComments(this.newsId)
+    this.updateComments()
+    this.updateComments()
   }
 
   getCommentsCount(newsId : number) {
@@ -43,13 +44,15 @@ export class CommentsBlockComponent implements OnInit {
 
   getComments(newsId: number){
     this.commentsService.getAllComments(newsId)
-      .subscribe((response: Comment[]) => {
+      .subscribe((response: CommentView[]) => {
          this.comments = response
          console.log(response)
       })
   }
 
-  updateComment(event){
+  updateComments(){
+    console.log("tet")
+    this.getCommentsCount(this.newsId)
     this.getComments(this.newsId);
   }
 }

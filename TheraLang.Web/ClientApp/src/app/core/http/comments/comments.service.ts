@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { baseUrl } from 'src/app/configs/api-endpoint.constants';
 import { HttpClient } from '@angular/common/http';
-import { CommentCreate } from 'src/app/shared/models/comment/comment-create';
-import { CommentEdit } from 'src/app/shared/models/comment/comment-edit';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +25,10 @@ export class CommentsService {
   }
 
   deleteComment(id: number) {
-    return this.http.delete(this.url + "comment" + id);
+    return this.http.delete(this.url + "comment/" + id);
   }
 
   editComment(id: number, editedComment) {
-    return this.http.put(this.url + "comment" + id, editedComment);
+    return this.http.put(this.url + "comment/" + id, editedComment);
   }
 }

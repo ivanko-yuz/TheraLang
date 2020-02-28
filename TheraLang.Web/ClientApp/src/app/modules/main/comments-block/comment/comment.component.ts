@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ComponentFactoryResolver, ViewContainerRef, ViewChild } from '@angular/core';
 import { CommentView } from 'src/app/shared/models/comment/comment-view';
 import { CommentsService } from 'src/app/core/http/comments/comments.service';
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
+import { CommentEditComponent } from '../comment-edit/comment-edit.component';
 
 @Component({
   selector: 'app-comment',
@@ -11,19 +12,22 @@ import { NotificationService } from 'src/app/core/services/notification/notifica
   styleUrls: ['./comment.component.less']
 })
 export class CommentComponent implements OnInit {
+  @ViewChild('container', {read: ViewContainerRef, static: true}) container: ViewContainerRef;
 
   @Input() comment: CommentView;
   @Output() commentChanged = new EventEmitter();
   smallTextSize: number = 500;
   textSize: number = this.smallTextSize;
   isOpened: boolean = false;
+  isEditing: boolean = false;
 
   constructor
     (
       private commentsService: CommentsService,
       private dialogService: DialogService,
       private translate: TranslateService,
-      private notificationService: NotificationService
+      private notificationService: NotificationService,
+      private componentFactoryResolver: ComponentFactoryResolver
     ) { }
 
   ngOnInit() {
@@ -44,6 +48,7 @@ export class CommentComponent implements OnInit {
   }
 
   async onDelete() {
+    this.commentChanged.emit();
     this.dialogService
       .openConfirmDialog(await this.translate.get("common.r-u-sure").toPromise())
       .afterClosed()
@@ -51,13 +56,32 @@ export class CommentComponent implements OnInit {
         if (res) {
           this.commentsService.deleteComment(this.comment.id).subscribe(async result => {
             this.notificationService.success(await this.translate.get("common.deleted-successfully").toPromise());
-            this.commentChanged.emit("");
+            this.commentChanged.emit();
           });
         }
-      });
+      },
+      async error => {
+        console.log(error);
+          error = await this.translate
+            .get("common.wth")
+            .toPromise();
+          this.notificationService.warn(error);
+      }
+      );
   }
 
   onEdit() {
+    this.isEditing = true;
+    this.container.clear();
+    const factory = this.componentFactoryResolver.resolveComponentFactory(CommentEditComponent);
+    const editComponent: any = this.container.createComponent(factory);
+    editComponent.instance.comment = this.comment;
+    editComponent.instance.edited.subscribe(event => {
+      this.isEditing = false; 
+      this.container.clear();
+      this.comment.isEdited = true;
+    })
+
     // this.commentsService.editComment(this.comment.id).subscribe();
   }
 }

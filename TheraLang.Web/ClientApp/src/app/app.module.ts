@@ -119,6 +119,7 @@ import { QuillModule } from "ngx-quill";
 import { CommentsBlockComponent } from './modules/main/comments-block/comments-block.component';
 import { CommentCreateComponent } from './modules/main/comments-block/comment-create/comment-create.component';
 import { CommentComponent } from './modules/main/comments-block/comment/comment.component';
+import { CommentEditComponent } from './modules/main/comments-block/comment-edit/comment-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -171,7 +172,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotFoundComponent,
     CommentsBlockComponent,
     CommentCreateComponent,
-    CommentComponent
+    CommentComponent,
+    CommentEditComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -181,7 +183,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     ResourceCreateComponent,
     ProjectTypeFormComponent,
-    ProjectTypeCreateFormComponent
+    ProjectTypeCreateFormComponent,
+    CommentEditComponent
   ],
   imports: [
     BrowserModule,

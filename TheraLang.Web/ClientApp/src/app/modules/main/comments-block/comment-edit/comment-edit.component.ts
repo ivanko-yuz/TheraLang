@@ -1,31 +1,30 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CommentView } from 'src/app/shared/models/comment/comment-view';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { User } from 'src/app/shared/models/user/user';
 import { CommentsService } from 'src/app/core/http/comments/comments.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { CommentRequest } from 'src/app/shared/models/comment/comment-request';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-comment-create',
-  templateUrl: './comment-create.component.html',
-  styleUrls: ['./comment-create.component.less']
+  selector: 'app-comment-edit',
+  templateUrl: './comment-edit.component.html',
+  styleUrls: ['./comment-edit.component.less']
 })
-export class CommentCreateComponent implements OnInit {
+export class CommentEditComponent implements OnInit {
 
-  @Input() currentUser: User;
+  @Input() comment: CommentView;
+  @Output() edited = new EventEmitter();
   public commentForm: FormGroup;
 
   constructor(
     private commentsService : CommentsService,
     private translate: TranslateService,
-    private notificationService: NotificationService,
-    private route: ActivatedRoute
+    private notificationService: NotificationService
     ) 
     {
       this.commentForm = new FormGroup({
-        "text": new FormControl("", [Validators.maxLength(10000), Validators.minLength(5)]),
+        "text": new FormControl("", [Validators.maxLength(10000), Validators.minLength(5)])
     });
   }
 
@@ -42,24 +41,26 @@ export class CommentCreateComponent implements OnInit {
     }
     else {
       const formData = new FormData();
-      let comment = this.commentForm.value as CommentRequest;
+      const comment = this.commentForm.value as CommentRequest;
       formData.append("text", comment.text);
-      comment.newsId = parseInt(this.route.snapshot.paramMap.get("newsId"))
-      formData.append("newsId", comment.newsId.toString());
 
-      this.commentsService.createComment(formData).subscribe(
+      this.commentsService.editComment(comment.newsId, formData).subscribe(
         async (msg: string) => {
           msg = await this.translate
             .get("common.created-successfully")
             .toPromise();
           this.notificationService.success(msg);
+          this.edited.emit()
         },
         async error => {
           console.log(error);
-          this.notificationService.warn(
-            await this.translate.get("common.wth").toPromise()
-          );
+          error = await this.translate
+            .get("common.wth")
+            .toPromise();
+          this.notificationService.warn(error);
+          this.edited.emit();
         })
     }
   }
+
 }
