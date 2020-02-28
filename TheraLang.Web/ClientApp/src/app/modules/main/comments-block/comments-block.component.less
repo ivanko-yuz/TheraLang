@@ -1,14 +1,37 @@
-.home-card {
-    padding: 30px 50px;
-    margin: 40px;
-    margin-left: 12%;
-    margin-right: 12%;
-}
+// .comments-block {
+//     margin: 40px;
+//     margin-left: 12%;
+//     margin-right: 12%;
+// }
 
 .comments-count {
     font-size: 20px;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+
+  .comments-count::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid ;
+    margin-left: 4px;
+  }
+  
+  .comments-count::before{
+    max-width: 4%;
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid ;
+    margin-right: 4px;
+  }
 
 app-comment-create {
     margin-bottom: 30px;

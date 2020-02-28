@@ -1,4 +1,4 @@
-<div class="comment-create mat-elevation-z3" fxLayout="row">
+<div fxLayout="row">
     <img *ngIf="this.currentUser.imageUrl else defaultImage" src="{{this.currentUsser.imageUrl}}" class="user-image">
     <ng-template #defaultImage>
         <img src="/assets/img/avatar-placeholder.gif" class="user-image">

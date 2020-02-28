@@ -1,6 +1,6 @@
 <ng-container #container>
-    <mat-card *ngIf="!this.isEditing" class="mat-elevation-z3">
-        <mat-card-content fxLayout="row">
+    <div *ngIf="!this.isEditing">
+        <div fxLayout="row">
             <img *ngIf="this.comment.AuthorImageUrl else defaultImage" src="{{this.comment.AuthorImageUrl}}"
                 class="user-image">
             <ng-template #defaultImage>
@@ -30,6 +30,6 @@
                     <a class="change-comment-size" (click)="showSmallComment()">SHOW LESS</a>
                 </div>
             </div>
-        </mat-card-content>
-    </mat-card>
+        </div>
+    </div>
 </ng-container>

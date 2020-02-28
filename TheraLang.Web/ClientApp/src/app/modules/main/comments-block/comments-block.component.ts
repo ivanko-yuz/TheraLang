@@ -28,7 +28,6 @@ export class CommentsBlockComponent implements OnInit {
     this.newsId = parseInt(this.route.snapshot.paramMap.get("newsId"))
     this.getCurrentUser()
     this.updateComments()
-    this.updateComments()
   }
 
   getCommentsCount(newsId : number) {
@@ -39,7 +38,6 @@ export class CommentsBlockComponent implements OnInit {
   getCurrentUser() {
     this.userService.me().subscribe(response => {
       this.currentUser = response as User
-      console.log(response)
     })
   }
 
