@@ -55,7 +55,7 @@ namespace TheraLang.Web
             services.AddFileStorage(Configuration.GetConnectionString("AzureConnection"));
             
             services.AddAuthentication(Configuration);
-            services.Configure<EmailSettings>(Configuration.GetSection("emailSettings"));
+            services.Configure<EmailSettings>(Configuration.GetSection("email_settings"));
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IProjectService, ProjectService>();

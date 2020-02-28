@@ -2,7 +2,7 @@
 
 namespace Common.Configurations
 {
-    [JsonObject("emailSettings")]
+    [JsonObject("email_settings")]
     public class EmailSettings
     {
         [JsonProperty("email")]

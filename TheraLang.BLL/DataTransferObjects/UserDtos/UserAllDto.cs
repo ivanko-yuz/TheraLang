@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace TheraLang.BLL.DataTransferObjects.UserDtos
 {
@@ -13,5 +14,6 @@ namespace TheraLang.BLL.DataTransferObjects.UserDtos
         public string ImageURl { get; set; }
         public int ConfirmationNumber { get; set; }
         public bool IsConfirmByEmail { get; set; }
+        public DateTime BirthdayDate { get; set; }
     }
 }

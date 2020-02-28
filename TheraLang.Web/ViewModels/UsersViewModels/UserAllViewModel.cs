@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
 namespace TheraLang.Web.ViewModels.UsersViewModels
@@ -21,6 +22,6 @@ namespace TheraLang.Web.ViewModels.UsersViewModels
         public string LastName { get; set; }
 
         public IFormFile Image { get; set; }
-        public int Age { get; set; }
+        public DateTime BirthdayDate { get; set; }
     }
 }

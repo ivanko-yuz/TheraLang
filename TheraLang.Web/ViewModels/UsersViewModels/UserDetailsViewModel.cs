@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace TheraLang.Web.ViewModels.UsersViewModels
 {
@@ -9,5 +10,6 @@ namespace TheraLang.Web.ViewModels.UsersViewModels
         public IFormFile Image { get; set; }
         public string PhoneNumber { get; set; }
         public string ShortInformation { get; set; }
+        public DateTime BirthdayDate { get; set; }
     }
 }
