@@ -76,14 +76,14 @@ namespace TheraLang.BLL.Services
             return commentDtos;
         }
 
-        public async Task AddComment(CommentCreateDto commentDto)
+        public async Task AddComment(CommentRequestDto commentDto)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentCreateDto, NewsComment>()
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestDto, NewsComment>()
                     .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => sm.AuthorId))
                     .ForMember(m => m.NewsId, opt => opt.MapFrom(sm => sm.PostId)))
                 .CreateMapper();
 
-            var comment = mapper.Map<CommentCreateDto, NewsComment>(commentDto);
+            var comment = mapper.Map<CommentRequestDto, NewsComment>(commentDto);
 
             _unitOfWork.Repository<NewsComment>().Add(comment);
             await _unitOfWork.SaveChangesAsync();
@@ -102,7 +102,7 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task UpdateComment(int id, CommentEditDto commentDto)
+        public async Task UpdateComment(int id, CommentRequestDto commentDto)
         {
             var commentToUpdate = await _unitOfWork.Repository<NewsComment>().Get(i => i.Id == id);
             if (commentToUpdate == null)

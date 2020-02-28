@@ -12,8 +12,8 @@ namespace TheraLang.BLL.Interfaces
         Task<IEnumerable<CommentResponseDto>> GetCommentsForNews(int newsId);
         Task<IEnumerable<CommentResponseDto>> GetCommentsForNewsPage(int newsId, PaginationParams pagingParameters);
         Task<int> GetCommentsForNewsCount(int newsId);
-        Task AddComment(CommentCreateDto commentDto);
-        Task UpdateComment(int id, CommentEditDto commentDto);
+        Task AddComment(CommentRequestDto commentDto);
+        Task UpdateComment(int id, CommentRequestDto commentDto);
         Task RemoveComment(int id);
     }
 }

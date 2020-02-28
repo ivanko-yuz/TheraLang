@@ -51,7 +51,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet("{newsId}")]
         public async Task<IActionResult> GetCommentsForNewsPage(int newsId, [FromQuery] PaginationParams paginationParams)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentCreateViewModel, CommentCreateDto>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestViewModel, CommentRequestDto>())
                 .CreateMapper();
 
             var commentDtos = await _newsCommentService.GetCommentsForNewsPage(newsId, paginationParams);
@@ -63,12 +63,12 @@ namespace TheraLang.Web.Controllers
         // POST: api/Comment
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] CommentCreateViewModel commentModel)
+        public async Task<IActionResult> Post([FromForm] CommentRequestViewModel commentModel)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentCreateViewModel, CommentCreateDto>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestViewModel, CommentRequestDto>())
                 .CreateMapper();
 
-            var commentDto = mapper.Map<CommentCreateDto>(commentModel);
+            var commentDto = mapper.Map<CommentRequestDto>(commentModel);
             var authUser = await _authenticateService.GetAuthUserAsync();
             commentDto.AuthorId = authUser.Id;
 
@@ -79,12 +79,12 @@ namespace TheraLang.Web.Controllers
         // PUT: api/Comment/5
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, [FromForm] CommentEditViewModel commentModel)
+        public async Task<IActionResult> Edit(int id, [FromForm] CommentRequestViewModel commentModel)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentEditViewModel, CommentEditDto>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestViewModel, CommentRequestDto>())
                 .CreateMapper();
 
-            var commentDto = mapper.Map<CommentEditDto>(commentModel);
+            var commentDto = mapper.Map<CommentRequestDto>(commentModel);
 
             await _newsCommentService.UpdateComment(id, commentDto);
 

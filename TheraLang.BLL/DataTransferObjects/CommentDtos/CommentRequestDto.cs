@@ -2,7 +2,7 @@
 
 namespace TheraLang.BLL.DataTransferObjects.CommentDtos
 {
-    public class CommentCreateDto
+    public class CommentRequestDto
     {
         public string Text { get; set; }
         public Guid AuthorId { get; set; }
