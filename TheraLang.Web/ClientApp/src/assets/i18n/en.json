@@ -10,7 +10,8 @@
       "line-too-long": "The line is too long",
       "line-too-short": "The line is too short",
       "confirm": "Confirm",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "forbidden-file": "File extension is forbidden"
     },
     "deleted-successfully": "Deleted successfully!",
     "added-successfully": "Added successfully!",
@@ -104,7 +105,8 @@
       "url": "URL",
       "file-name": "Name of file",
       "add": "Add resource",
-      "create": "Create resource"
+      "create": "Create resource",
+      "edit": "Edit resource"
     },
     "participation": {
       "title": "Participants requests",

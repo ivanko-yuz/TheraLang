@@ -101,17 +101,17 @@ export class ProjectInfoComponent implements OnInit {
     this.getParticipants();
   }
 
-  async getResourcesData() {
-    if (!this.generateOnceResourcesTable) {
-      const allResources = await this.resourceService.getAllResourcesByProjId(
-        this.projectId
-      );
-      this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(
-        allResources
-      );
-    }
-    this.generateOnceResourcesTable = true;
-  }
+  // async getResourcesData() {
+  //   if (!this.generateOnceResourcesTable) {
+  //     const allResources = await this.resourceService.getAllResourcesByProjId(
+  //       this.projectId
+  //     );
+  //     this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(
+  //       allResources
+  //     );
+  //   }
+  //   this.generateOnceResourcesTable = true;
+  // }
 
   onJoin() {
     this.participService.createParticipRequest(this.projectId).subscribe(
@@ -188,7 +188,7 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   getDetails(){
-    this.getResourcesData();
+    // this.getResourcesData();
     this.arrowOpener();
   }
 

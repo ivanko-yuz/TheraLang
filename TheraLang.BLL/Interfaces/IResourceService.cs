@@ -15,13 +15,12 @@ namespace TheraLang.BLL.Interfaces
 
         Task<ResourceDto> GetResourceById(int id);
 
-        Task<IEnumerable<ResourceCategoryDto>> GetResourcesCategories(bool withAssignedResources);
+        Task<IEnumerable<ResourceCategoryDto>> GetResourcesCategories(int? projectId, bool includeEmpty);
 
-        Task<int> GetResourcesCount(int categoryId);
+        Task<int> GetResourcesCount(int? categoryId, int? projectId);
 
-        Task<IEnumerable<ResourceDto>> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
-
-        Task<IEnumerable<ResourceDto>> GetAllResourcesByProjectId(int projectId);
+        Task<IEnumerable<ResourceDto>> GetResourcesByCategoryId(int categoryId, int? projectId,
+            PagingParametersDto pagingParameters);
 
         Task<IEnumerable<ResourceDto>> GetAllResources();
     }

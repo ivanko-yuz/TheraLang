@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
+using TheraLang.Web.ViewModels.Resources;
 
 namespace TheraLang.Web.Controllers
 {
@@ -26,7 +27,37 @@ namespace TheraLang.Web.Controllers
         private readonly IResourceService _service;
         private readonly IUserManagementService _userManager;
         private readonly IAuthenticateService _authenticateService;
+        
+        /// <summary>
+        /// Get Resource by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>selected resource</returns>
+        [HttpGet]
+        [Route("{Id}")]
+        [Authorize]
+        public async Task<IActionResult> GetResource(int id)
+        {
+            if (id == default)
+            {
+                throw new ArgumentException($"{nameof(id)} can not be 0");
+            }
 
+            var resource = await _service.GetResourceById(id);
+            return Ok(resource);
+        }
+        
+        /// <summary>
+        /// Get all Resources
+        /// </summary>
+        /// <returns>array of resources</returns>
+        [HttpGet]
+        public async Task<IActionResult> GetAllResources()
+        {
+            var resources = await _service.GetAllResources();
+            return Ok(resources);
+        }
+        
         /// <summary>
         /// create resource
         /// </summary>
@@ -55,42 +86,15 @@ namespace TheraLang.Web.Controllers
         [HttpPut]
         [Authorize]
         [Route("update/{id}")]
-        public async Task<IActionResult> PutResource(int id, [FromBody] ResourceViewModel resourceModel)
+        public async Task<IActionResult> PutResource(int id, [FromBody] ResourceTextInfoViewModel resourceModel)
         {
-            var resource = _service.GetResourceById(id);
-
-            if (resource == null)
-            {
-                return NotFound();
-            }
-
             var authUser = await _authenticateService.GetAuthUserAsync();
-            if (authUser == null) return BadRequest();
+            
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceTextInfoViewModel, ResourceDto>()).CreateMapper();
+            var resourceDto = mapper.Map<ResourceTextInfoViewModel, ResourceDto>(resourceModel);
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
-            var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
-
-            await _service.AddResource(resourceDto, authUser.Id);
-            return Ok();
-        }
-
-        /// <summary>
-        /// Get Resource by its id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>selected resource</returns>
-        [HttpGet]
-        [Route("get/{Id}")]
-        [Authorize]
-        public async Task<IActionResult> GetResource(int id)
-        {
-            if (id == default)
-            {
-                throw new ArgumentException($"{nameof(id)} can not be 0");
-            }
-
-            var resource = await _service.GetResourceById(id);
-            return Ok(resource);
+            await _service.UpdateResource(id, resourceDto, authUser.Id);
+            return NoContent();
         }
 
         /// <summary>
@@ -115,44 +119,36 @@ namespace TheraLang.Web.Controllers
         /// <summary>
         /// Get all ResourcesCategories
         /// </summary>
-        /// <param name="withAssignedResources">only those RC that are used</param>
         /// <returns>array of categories</returns>
         [HttpGet]
-        [Route("categories/{withAssignedResources}")]
+        [Route("categories/{projectId?}")]
         [Authorize]
-        public async Task<IActionResult> GetResourcesCategories(bool withAssignedResources)
+        public async Task<IActionResult> GetResourceCategories(int? projectId,[FromQuery]bool includeEmpty = false)
         {
-            var categories = await _service.GetResourcesCategories(withAssignedResources);
-            return Ok(categories);
-        }
+            var categories = await _service.GetResourcesCategories(projectId, includeEmpty);
 
-        /// <summary>
-        /// Get all Resources
-        /// </summary>
-        /// <returns>array of resources</returns>
-        [HttpGet]
-        public async Task<IActionResult> GetAllResources()
-        {
-            var resources = await _service.GetAllResources();
-            return Ok(resources);
+            var mapper = new MapperConfiguration(mapOpts =>
+            {
+                mapOpts.CreateMap<ResourceCategoryDto, ResourceCategoryViewModel>();
+            }).CreateMapper();
+
+            var categoryViewModels =
+                mapper.Map<IEnumerable<ResourceCategoryDto>, IEnumerable<ResourceCategoryViewModel>>(categories);
+            return Ok(categoryViewModels);
         }
 
         /// <summary>
         /// Get count of Resources that belong to Category
         /// </summary>
         /// <param name="categoryId"></param>
+        /// <param name="projectId"></param>
         /// <returns>count</returns>
         [HttpGet]
-        [Route("count/{categoryId}")]
+        [Route("count/")]
         [Authorize]
-        public async Task<IActionResult> CountResourcesByCategoryId(int categoryId)
+        public async Task<IActionResult> CountResources([FromQuery] int? categoryId, [FromQuery] int? projectId)
         {
-            if (categoryId == default)
-            {
-                throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
-            }
-
-            var count = await _service.GetResourcesCount(categoryId);
+            var count = await _service.GetResourcesCount(categoryId, projectId);
             return Ok(count);
         }
 
@@ -160,51 +156,21 @@ namespace TheraLang.Web.Controllers
         /// Get all Resources by Category with pagination
         /// </summary>
         /// <param name="categoryId"></param>
-        /// <param name="pageNumber"></param>
-        /// <param name="recordsPerPage"></param>
         /// <returns>array of resources</returns>
         [HttpGet]
-        [Route("all/{categoryId}/{pageNumber}/{recordsPerPage?}")]
+        [Route("category/{categoryId}/{projectId?}")]
         [Authorize]
-        public async Task<IActionResult> GetAllResourcesByCategoryId(int categoryId, int pageNumber,
-            int recordsPerPage = PaginationConstants.RecordsPerPage)
+        public async Task<IActionResult> GetAllResources(int categoryId, int? projectId,
+            [FromQuery] PagingParametersViewModel pagingParametersViewModel)
         {
-            if (pageNumber == default)
+            var mapper = new MapperConfiguration(mapOpts =>
             {
-                throw new ArgumentException($"{nameof(pageNumber)} cannot be 0");
-            }
+                mapOpts.CreateMap<PagingParametersViewModel, PagingParametersDto>();
+            }).CreateMapper();
 
-            if (categoryId == default)
-            {
-                throw new ArgumentException($"{nameof(categoryId)} cannot be 0");
-            }
-
-            var resources = await _service.GetResourcesByCategoryId(categoryId, pageNumber, recordsPerPage);
+            var pagingParameters = mapper.Map<PagingParametersDto>(pagingParametersViewModel);
+            var resources = await _service.GetResourcesByCategoryId(categoryId, projectId, pagingParameters);
             return Ok(resources);
-        }
-
-        /// <summary>
-        /// Get all Resources by Project
-        /// </summary>
-        /// <param name="projectId"></param>
-        /// <returns>selected Project</returns>
-        [HttpGet]
-        [Route("all/{projectId}")]
-        [Authorize]
-        public async Task<IActionResult> GetAllResourcesByProjectId(int projectId)
-        {
-            if (projectId == default)
-            {
-                throw new ArgumentException($"{nameof(projectId)} cannot be 0");
-            }
-
-            var resourcesDto = await _service.GetAllResourcesByProjectId(projectId);
-
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, ResourceViewModel>())
-                .CreateMapper();
-            var resourceViewModel = mapper.Map<IEnumerable<ResourceViewModel>>(resourcesDto);
-
-            return Ok(resourceViewModel);
         }
     }
 }

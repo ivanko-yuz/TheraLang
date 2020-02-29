@@ -1,0 +1,80 @@
+<div class="content">
+  <p class="title">{{ formTitle }}</p>
+  <mat-divider></mat-divider>
+  <form class="form" [formGroup]="resourceForm">
+    <div fxLayout="column">
+      <mat-form-field class="example-full-width">
+        <mat-select formControlName="categoryId" [placeholder]="'components.resources.type' | translate">
+          <mat-option *ngFor="let category of categories | async" [value]="category.id">
+            {{ category.type }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="resourceForm.controls['categoryId'].errors?.required">{{
+          "common.validation.field-is-required" | translate
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input formControlName="name" autofocus matInput [placeholder]="'components.resources.name' | translate"/>
+        <mat-error *ngIf="resourceForm.controls['name'].errors?.required">{{
+          "common.validation.field-is-required" | translate
+          }}</mat-error>
+        <mat-error *ngIf="resourceForm.controls['name'].errors?.minlength">{{
+          "common.validation.line-too-short" | translate
+          }}</mat-error>
+        <mat-error *ngIf="resourceForm.controls['name'].errors?.maxlength">{{
+          "common.validation.line-too-long" | translate
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <textarea formControlName="description" matInput [placeholder]="'common.description' | translate"
+                    cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"></textarea>
+        <mat-error *ngIf="resourceForm.controls['description'].errors?.required">{{
+          "common.validation.field-is-required" | translate
+          }}</mat-error>
+        <mat-error *ngIf="resourceForm.controls['description'].errors?.minlength">{{
+          "common.validation.line-too-short" | translate
+          }}</mat-error>
+        <mat-error *ngIf="resourceForm.controls['description'].errors?.maxlength">{{
+          "common.validation.line-too-long" | translate
+          }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input formControlName="url" matInput [placeholder]="'components.resources.url' | translate"/>
+        <mat-error *ngIf="resourceForm.controls['url'].errors?.required">{{
+          "common.validation.field-is-required" | translate
+          }}</mat-error>
+        <mat-error *ngIf="resourceForm.controls['url'].errors?.minlength">{{
+          "common.validation.line-too-short" | translate
+          }}</mat-error>
+        <mat-error *ngIf="resourceForm.controls['url'].errors?.maxlength">{{
+          "common.validation.line-too-long" | translate
+          }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field class="file-input">
+        <ngx-mat-file-input formControlName="file" [valuePlaceholder]="'components.resources.add' | translate">
+        </ngx-mat-file-input>
+        <mat-icon matSuffix>folder</mat-icon>
+        <mat-error *ngIf="resourceForm.controls['file'].errors?.forbiddenName">{{
+          "common.validation.forbidden-file" | translate
+          }}</mat-error>
+      </mat-form-field>
+
+      <div class="controls">
+        <button class="submit-btn" mat-raised-button color="primary" type="submit"
+                [disabled]="this.resourceForm.invalid"
+                (click)="onSubmit()">
+          {{ "common.confirm" | translate }}
+        </button>
+        <button class="cancel-btn" mat-raised-button color="warn" type="reset" (click)="onCancel.emit()">
+          {{ "common.cancel" | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

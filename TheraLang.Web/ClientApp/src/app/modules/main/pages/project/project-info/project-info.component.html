@@ -85,10 +85,7 @@
           </mat-chip>
         </mat-chip-list>
         <b class="color-primary">{{'components.resources.title'|translate}}:</b>
-        <app-resources-table
-        *ngIf="generateOnceResourcesTable"
-        [sortedResourcesByCategory]="sortedResourcesByCategory">
-      </app-resources-table>
+        <app-resources-view [projectId]="projectId"></app-resources-view>
       </div>
     </div>
   </div>

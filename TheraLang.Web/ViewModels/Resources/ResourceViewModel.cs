@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 
-namespace TheraLang.BLL.DataTransferObjects
+namespace TheraLang.Web.ViewModels.Resources
 {
-    public class ResourceDto
+    public class ResourceViewModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -21,6 +21,6 @@ namespace TheraLang.BLL.DataTransferObjects
 
         public DateTime CreatedDateUtc { get; set; }
 
-        public ResourceCategoryDto ResourceCategory { get; set; }
+        public ResourceCategoryViewModel ResourceCategory { get; set; }
     }
 }

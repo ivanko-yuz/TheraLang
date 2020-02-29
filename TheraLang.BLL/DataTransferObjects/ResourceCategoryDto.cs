@@ -7,7 +7,5 @@ namespace TheraLang.BLL.DataTransferObjects
         public int Id { get; set; }
 
         public string Type { get; set; }
-
-        public IEnumerable<ResourceDto> Resources { get; set; }
     }
 }
