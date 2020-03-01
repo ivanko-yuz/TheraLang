@@ -79,7 +79,7 @@ namespace TheraLang.BLL.Services
                     }
 
                     var user = mapper.Map<UserAllDto, User>(NewUser);
-                    user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
+                    user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Unconfirmed")).Id;
                     user.PasswordHash = PasswordHasher.HashPassword(NewUser.Password);
                     user.Details = userDetails;
 
@@ -135,7 +135,7 @@ namespace TheraLang.BLL.Services
         public async Task ConfirmUser(ConfirmUserDto confirmUser)
         {
             var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
-            if (user.ConfirmationNumber == confirmUser.ConfirmationNumber) user.IsConfirmByEmail = true;
+            if (user.ConfirmationNumber.ToString() == confirmUser.ConfirmationNumber) user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
             _unitOfWork.Repository<User>().Update(user);
             await _unitOfWork.SaveChangesAsync();
         }

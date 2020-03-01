@@ -2,7 +2,7 @@
 {
     public class ConfirmUserDto
     { 
-        public int ConfirmationNumber { get; set; }
+        public string ConfirmationNumber { get; set; }
         public string Email { get; set; }
     }
 }

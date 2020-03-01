@@ -31,7 +31,7 @@ namespace TheraLang.Web.Controllers
             var loginDto = mapper.Map<LoginModel, LoginModelDto>(login);
             var user = await _userManagement.GetUser(loginDto.Email, loginDto.Password);
             var token = await _authService.Authenticate(user);
-            if (token == "")
+            if (token == "" || token == null)
             {
                 return BadRequest("Invalid Request");
             }
