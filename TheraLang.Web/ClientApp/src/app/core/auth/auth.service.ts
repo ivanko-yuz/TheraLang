@@ -30,19 +30,19 @@ export class AuthService {
     ],
     Password: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
     ],
     ConfirmPassword: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
     ],
     FirstName: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
     ],
     LastName: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
     ],
     Image: [
       null,
