@@ -36,6 +36,5 @@ export class PaginationComponent implements OnInit, OnChanges {
     this.totalPages = this.math.round(this.totalRows / this.pageSize) - 1;
     // @ts-ignore
     this.numbers = Array(this.totalPages).fill().map((x, i) => i + 1);
-    console.log(this.totalPages);
   }
 }

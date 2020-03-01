@@ -5,10 +5,14 @@
   <li [ngClass]="{disabled:currentPage === 1}" class="page-item previous-item">
     <a (click)="setPage(currentPage - 1)" class="page-link">Previous</a>
   </li>
-  <li *ngFor="let page of numbers" [ngClass]="{active:currentPage === page}" class="page-item number-item">
-    <a (click)="setPage(page)" class="page-link" *ngIf="page <= 3">{{page}}</a>
-    <a (click)="setPage(page)" class="page-link" *ngIf="page > 3 && page < totalPages">...</a>
-    <a (click) = "setPage(page)" class="page-link" *ngIf="page == totalPages">{{page}}</a>
+  <li class="page-item number-item disabled">
+    <span class="page-link" *ngIf="currentPage > 3">...</span>
+  </li>
+  <li *ngFor="let page of numbers" [ngClass]="{activelink:currentPage === page}" class="page-item number-item">
+    <a (click)="setPage(page)" class="page-link" [ngClass]="{activelink:currentPage === page}" *ngIf="page <= currentPage + 2 && page >= currentPage - 2">{{page}}</a>
+  </li>
+  <li class="page-item number-item disabled">
+    <span class="page-link" *ngIf="currentPage < totalPages - 2">...</span>
   </li>
   <li [ngClass]="{disabled:currentPage === totalPages}" class="page-item next-item">
     <a (click)="setPage(currentPage + 1)" class="page-link">Next</a>
