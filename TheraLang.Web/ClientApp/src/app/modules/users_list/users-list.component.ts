@@ -16,7 +16,7 @@ import {Role} from "../../shared/models/role/role";
 export class UsersListComponent implements OnInit {
   returnUrl: string;
   usersList: UserPageViewModel;
-  pageSize = 2;
+  pageSize = 10;
 
   constructor(
     private notificationService: NotificationService,
