@@ -26,7 +26,7 @@ namespace TheraLang.BLL.Services
 
         public async Task Add(PaymentHistoryDto paymentDto)
         {
-            var currentBalance = (await _userManagementService.GetUserById(paymentDto.UserId)).Balance;
+            var currentBalance = (await _userManagementService.GetUserById(paymentDto.UserId)).Details.Balance;
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PaymentHistoryDto, PaymentHistory>()
                 .ForMember(p => p.CurrentBalance, opt => opt.MapFrom(n => currentBalance)))
@@ -50,8 +50,7 @@ namespace TheraLang.BLL.Services
             
             if(!paymantsDto.Any())
             {
-                //TODO
-                //throw new NotFoundException("Payments history not found!");
+                throw new NotFoundException("Payments history not found!");
             }
 
             return paymantsDto;
@@ -70,8 +69,7 @@ namespace TheraLang.BLL.Services
 
             if (!paymantsDto.Any())
             {
-                //TODO
-                //throw new NotFoundException("Payments history not found!");
+                throw new NotFoundException("Payments history not found!");
             }
 
             return paymantsDto;

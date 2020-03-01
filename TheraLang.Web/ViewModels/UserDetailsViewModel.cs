@@ -9,5 +9,6 @@ namespace TheraLang.Web.ViewModels
         public IFormFile Image { get; set; }
         public string PhoneNumber { get; set; }
         public string ShortInformation { get; set; }
+        public decimal Balance { get; set; }
     }
 }

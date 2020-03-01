@@ -11,6 +11,7 @@ namespace TheraLang.DAL.Configuration
             builder.ToTable("UsersDetails");
             builder.Property(e => e.FirstName).HasMaxLength(32);
             builder.Property(e => e.LastName).HasMaxLength(32);
+            builder.Property(e => e.Balance).HasDefaultValue(0);
         }
     }
 }

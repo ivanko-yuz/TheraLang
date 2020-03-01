@@ -65,7 +65,8 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<UsersDto>> GetAllUsers()
         {
             var users = await _unitOfWork.Repository<UserDetails>().GetAllAsync();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>())
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>()
+                .ForMember(d => d.RoleName, opt => opt.MapFrom(n => n.User.Role)))
                 .CreateMapper();
             var usersDto = mapper.Map<IEnumerable<UserDetails>, IEnumerable<UsersDto>>(users);
             return usersDto;
