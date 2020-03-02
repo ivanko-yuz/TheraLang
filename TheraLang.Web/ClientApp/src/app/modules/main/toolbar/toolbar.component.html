@@ -1,31 +1,33 @@
 <div>
-  <mat-toolbar class="mat-elevation-z3">
-    <div class="img-wrapper">
-      <a mat-button class="img-wrapper" routerLink="/">
-        <img src="assets/img/uttmm.png" alt="Home" class="img-wrapper">
+  <mat-toolbar class="mat-elevation-z3" fxLayout="row">
+    <div fxLayout="row">
+      <a class="img-wrapper" routerLink="/">
+        <img src="assets/img/uttmm.png" alt="Home">
       </a>
 
-      <app-cms-pages-toolbar-item></app-cms-pages-toolbar-item>
-      <a mat-button class="menu-item" routerLink="/news">{{'components.news.title'|translate}}</a>
-      <a mat-button class="menu-item" routerLink="/projects">{{'components.projects.title'|translate}}</a>
-      <a mat-button class="menu-item" routerLink="/donations">{{'components.donation.title'|translate}}</a>
-      <a mat-button class="menu-item" *ngIf=" isAuthenticated()"
+      <app-cms-pages-toolbar-item fxLayout="row"></app-cms-pages-toolbar-item>
+      <a class="menu-item" routerLink="/news">{{'components.news.title'|translate}}</a>
+      <a class="menu-item" routerLink="/projects">{{'components.projects.title'|translate}}</a>
+      <a class="menu-item" routerLink="/donations">{{'components.donation.title'|translate}}</a>
+      <a class="menu-item" *ngIf=" isAuthenticated()"
         routerLink="/resources">{{'components.resources.title'|translate}}</a>
-      <a mat-button class="menu-item" *ngIf=" isAuthenticated()"
+      <a class="menu-item" *ngIf=" isAuthenticated()"
         routerLink="/participants">{{'components.participation.title'|translate}}
         <span>
           <mat-icon *ngIf="hasNotification">notifications</mat-icon>
         </span>
       </a>
-      <a mat-button class="menu-item" *ngIf="isAdmin()"
+      <!-- <a mat-button class="menu-item" *ngIf="isAdmin()"
         routerLink="/projectRequest">{{'components.projects.new-projects'|translate}}</a>
       <a mat-button class="menu-item"  *ngIf="isAdmin()"
         routerLink="/projectTypes">{{'components.projectTypes.title'|translate}}</a>
       <a mat-button class="menu-item"  *ngIf="isAdmin()"
-        routerLink="/users">{{'components.users.title'|translate}}</a>
+        routerLink="/users">{{'components.users.title'|translate}}</a> -->
+      <a class="menu-item"  *ngIf="isAdmin()"
+        routerLink="/admin">{{'manager.title'|translate}}</a>
     </div>
 
-    <span class="fill-space"></span>
+    <span fxFlex></span>
 
     <div>
       <span class="language">
