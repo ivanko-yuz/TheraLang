@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
@@ -17,6 +18,7 @@ namespace TheraLang.BLL.Services
         {
             _unitOfWork = unitOfWork;
         }
+
         public async Task<IEnumerable<MemberFeeDto>> GetMemberFeesAsync()
         {
             var memberFees = await _unitOfWork.Repository<MemberFee>().GetAllAsync();
@@ -35,7 +37,7 @@ namespace TheraLang.BLL.Services
                 if (memberFee == null)
                 {
                     throw new ArgumentNullException(
-                        $"Error while deleting member fee. Fee with id={id} not found");
+                        $"Error while deleting member fee. Fee with {nameof(id)}={id} not found");
                 }
 
                 _unitOfWork.Repository<MemberFee>().Remove(memberFee);
@@ -59,10 +61,10 @@ namespace TheraLang.BLL.Services
                 _unitOfWork.Repository<MemberFee>().Add(memberFee);
                 await _unitOfWork.SaveChangesAsync();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                e.Data[nameof(MemberFee)] = memberFeeDto;
-                throw new Exception($"Cannot add new {nameof(MemberFee)}.", e);
+                ex.Data[nameof(MemberFee)] = memberFeeDto;
+                throw new Exception($"Cannot add new {nameof(MemberFee)}.", ex);
             }
         }
     }

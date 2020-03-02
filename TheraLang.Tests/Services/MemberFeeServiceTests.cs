@@ -16,22 +16,26 @@ namespace TheraLang.Tests.Services
 {
     public class MemberFeeServiceTests
     {
-        private List<MemberFee> fakeMemberFees = new List<MemberFee>
-        {
-            new MemberFee {Id = 1,FeeDate = new DateTime(2020,1,1),FeeAmount = 200 },
-            new MemberFee {Id = 2,FeeDate = new DateTime(2020,2,1),FeeAmount = 300 },
-            new MemberFee {Id = 3,FeeDate = new DateTime(2020,3,1),FeeAmount = 400 }
-        };
-
+        private List<MemberFee> fakeMemberFees;
         private Mock<IUnitOfWork> mockUnitOfWork;
-        Mock<IRepository<MemberFee>> mockRepo;
+        private Mock<IRepository<MemberFee>> mockRepo;
+
+        public MemberFeeServiceTests()
+        {
+            fakeMemberFees = new List<MemberFee>
+            {
+                 new MemberFee {Id = 1,FeeDate = new DateTime(2020,1,1),FeeAmount = 200 },
+                 new MemberFee {Id = 2,FeeDate = new DateTime(2020,2,1),FeeAmount = 300 },
+                 new MemberFee {Id = 3,FeeDate = new DateTime(2020,3,1),FeeAmount = 400 }
+            };
+
+            mockRepo = new Mock<IRepository<MemberFee>>();
+            mockUnitOfWork = new Mock<IUnitOfWork>();
+        }
 
         [Fact]
         public void GetMemberFeesAsync_ShouldReturnAllFees()
         {
-            mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockRepo = new Mock<IRepository<MemberFee>>();
-
             mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockRepo.Setup(x => x.GetAllAsync(It.IsAny<Expression<Func<MemberFee, bool>>>()))
                 .ReturnsAsync((Expression<Func<MemberFee, bool>> expression) => fakeMemberFees);
@@ -46,9 +50,6 @@ namespace TheraLang.Tests.Services
         [Fact]
         public void DeleteAsync_ShouldDeleteOneFee()
         {
-            mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockRepo = new Mock<IRepository<MemberFee>>();
-
             mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
             mockRepo.Setup(x => x.Get(It.IsAny<Expression<Func<MemberFee, bool>>>()))
@@ -64,31 +65,23 @@ namespace TheraLang.Tests.Services
 
             mockRepo.Verify(x => x.Remove(It.IsAny<MemberFee>()), Times.Once());
             mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Once());
-
-
         }
 
         [Fact]
         public void DeleteAsync_ShouldThrowArgumentNullException()
         {
-            mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockRepo = new Mock<IRepository<MemberFee>>();
-
             mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockRepo.Setup(x => x.Get(It.IsAny<Expression<Func<MemberFee, bool>>>())).ReturnsAsync(() => null);
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
+            int id = 4;
+            Func<Task> act = async () => await memberFeeService.DeleteAsync(id);
 
-            Func<Task> act = async () => await memberFeeService.DeleteAsync(4);
-
-            act.Should().Throw<ArgumentNullException>();
+            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null.\nParameter name: Error while deleting member fee. Fee with {nameof(id)}={id} not found");
         }
 
         [Fact]
-        public void AddAsync_ShouldAddMemberFee() 
+        public void AddAsync_ShouldAddMemberFee()
         {
-            mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockRepo = new Mock<IRepository<MemberFee>>();
-
             mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
             mockRepo.Setup(x => x.Add(It.IsAny<MemberFee>())).Verifiable();
@@ -100,14 +93,12 @@ namespace TheraLang.Tests.Services
             mockRepo.Verify(x => x.Add(It.IsAny<MemberFee>()), Times.Once());
             mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Once());
         }
+
         [Fact]
         public void AddAsync_ShouldThrowException()
         {
-            mockUnitOfWork = new Mock<IUnitOfWork>();
-            mockRepo = new Mock<IRepository<MemberFee>>();
-
-            mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
             mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
+            mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
             mockRepo.Setup(x => x.Add(It.IsAny<MemberFee>())).Throws<Exception>();
 
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
@@ -115,7 +106,7 @@ namespace TheraLang.Tests.Services
             Func<Task> act = async () => await memberFeeService.AddAsync(new MemberFeeDto());
 
             mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Never());
-            act.Should().Throw<Exception>();
+            act.Should().Throw<Exception>().WithMessage($"Cannot add new { nameof(MemberFee) }.");
         }
     }
 }
