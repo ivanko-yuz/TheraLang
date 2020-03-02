@@ -54,10 +54,8 @@ namespace TheraLang.Web.Controllers
 
             var user = mapper.Map<UserAllViewModel, UserAllDto>(newUser);
             var confirmUser = mapper.Map<UserAllViewModel, ConfirmUserDto>(newUser);
-            Random rand = new Random();
-            user.ConfirmationNumber = rand.Next(10000000, 100000000);
             await _userManagement.AddUser(user);
-            await _userManagement.SendEmail(user.ConfirmationNumber.ToString(), user.Email);
+            await _userManagement.SendEmail("170920", user.Email);
             return Ok();
         }
 

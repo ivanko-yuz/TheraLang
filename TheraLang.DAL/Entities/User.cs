@@ -10,7 +10,6 @@ namespace TheraLang.DAL.Entities
         public string PasswordHash { get; set; }
         public Guid RoleId { get; set; }
         public Role Role { get; set; }
-        public int ConfirmationNumber { get; set; }
 
         public virtual ICollection<Resource> Resources { get; set; }
         public virtual ICollection<News> News { get; set; }

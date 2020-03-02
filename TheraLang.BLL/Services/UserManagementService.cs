@@ -109,8 +109,11 @@ namespace TheraLang.BLL.Services
             string fromPassword = _emailSettings.Password;
             string subject = "Confirm your email";
 
+            var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.User.Email == UserEmail);
+
             body = body.Replace("{EMAIL}", UserEmail);
             body = body.Replace("{NUMBER}", ConfirmNum);
+            body = body.Replace("{FIRSTNAME}", user.FirstName);
 
             var smtp = new SmtpClient
             {
@@ -135,7 +138,7 @@ namespace TheraLang.BLL.Services
         public async Task ConfirmUser(ConfirmUserDto confirmUser)
         {
             var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
-            if (user.ConfirmationNumber.ToString() == confirmUser.ConfirmationNumber) user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
+            if (confirmUser.ConfirmationNumber == "170920") user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
             _unitOfWork.Repository<User>().Update(user);
             await _unitOfWork.SaveChangesAsync();
         }

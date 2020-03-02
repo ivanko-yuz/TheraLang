@@ -42,7 +42,6 @@ namespace DataSeeding
                         PasswordHash = PasswordHasher.HashPassword("password"), RoleId = memberRoleId,
                     });
                 }
-
                 context.SaveChanges();
             }
             catch (Exception)
