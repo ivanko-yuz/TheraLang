@@ -24,7 +24,7 @@ namespace TheraLang.Tests.Services
         };
 
         private Mock<IUnitOfWork> mockUnitOfWork;
-        Mock<IRepository<MemberFee>> mockRepo;
+        private  Mock<IRepository<MemberFee>> mockRepo;
 
         [Fact]
         public void GetMemberFeesAsync_ShouldReturnAllFees()
