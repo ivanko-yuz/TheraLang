@@ -116,6 +116,7 @@ import { UserService } from "./core/services/user/user.service";
 import { ChangeRoleComponent } from "./modules/users_list/change-role/change-role.component";
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
+import {LanguageService} from "./core/services/language/language.service";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -272,7 +273,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectTypeHttp,
     PageService,
     AuthGuard,
-    AdminGuard
+    AdminGuard,
+    LanguageService
   ],
   bootstrap: [AppComponent]
 })
