@@ -19,7 +19,6 @@ namespace TheraLang.DAL.Entities
         public User User { get; set; }
         public int Age { get; set; }
         public decimal Balance { get; set; }
-
         public virtual ICollection<Resource> Resources { get; set; }
     }
 }

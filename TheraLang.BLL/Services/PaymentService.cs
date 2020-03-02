@@ -1,53 +1,76 @@
 ﻿using Common.Exceptions;
 using FluentScheduler;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
+using TheraLang.DAL.Entities;
+using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
     public class PaymentService : IJob
-    {
-        private static decimal _paymentSum = 100;
+    { 
         private readonly IMemberFeeService _memberFeeService;
-        private readonly IUserService _userService;
-
-        public PaymentService(IMemberFeeService memberFeeService, IUserService userService)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IPaymentHistoryService _paymentHistoryService;
+        public PaymentService(IMemberFeeService memberFeeService, IUnitOfWork unitOfWork, IPaymentHistoryService paymentHistoryService)
         {
             _memberFeeService = memberFeeService;
-            _userService = userService;
+            _unitOfWork = unitOfWork;
+            _paymentHistoryService = paymentHistoryService;
         }
 
-
-        private async Task<IEnumerable<Guid>> GetMembersId()
+        private async Task<IEnumerable<UserDetails>> GetAllMembersId()
         {
-            var users = await _userService.GetAllUsers();
+            var users = await _unitOfWork.Repository<UserDetails>().GetAll()
+                .Where(i => i.User.Role.Name == "Member")
+                .ToListAsync();
+
             if (users == null)
             {
                 throw new NotFoundException("Users not found");
             }
-            var membersId = users.Where(i => i.RoleName == "Member")
-                .Select(i => i.UserDetailsId);
- 
-            return membersId;
+
+            return users;
+        }
+
+        private async Task<decimal> GetFee()
+        {
+            var fees = await _memberFeeService.GetMemberFeesAsync();
+
+            return -fees.Where(f => f.FeeDate <= DateTime.Now).LastOrDefault().FeeAmount;
         }
 
         public async void Execute()
         {
-            var ids = await GetMembersId();
-            foreach (var id in ids)
+            PaymentHistoryDto _paymentHistoryDto = new PaymentHistoryDto();
+            var description = "Monthly fee";
+            var users = await GetAllMembersId();
+            decimal paymentSum = await GetFee();
+
+            foreach (var user in users)
             {
-                var user = await _userService.GetUserDetailsById(id);
                 if (user == null)
                 {
                     throw new NotFoundException("User details not found");
                 }
-                user.Balance += _paymentSum;
-                await _userService.Update(user, id);
+
+                user.Balance += paymentSum;
+                _unitOfWork.Repository<UserDetails>().Update(user);
+
+                _paymentHistoryDto.Date = DateTime.Now;
+                _paymentHistoryDto.Description = description;
+                _paymentHistoryDto.Saldo = paymentSum;
+                _paymentHistoryDto.UserId = user.UserDetailsId;
+
+                await _paymentHistoryService.Add(_paymentHistoryDto);
             }
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

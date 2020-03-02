@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -64,9 +66,12 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<UsersDto>> GetAllUsers()
         {
-            var users = await _unitOfWork.Repository<UserDetails>().GetAllAsync();
+            var users =  await _unitOfWork.Repository<UserDetails>().GetAll()
+                .Include(u => u.User)
+                .Include(r => r.User.Role)
+                .ToListAsync();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>()
-                .ForMember(d => d.RoleName, opt => opt.MapFrom(n => n.User.Role)))
+                .ForMember(d => d.RoleName, opt => opt.MapFrom(n => n.User.Role.Name)))
                 .CreateMapper();
             var usersDto = mapper.Map<IEnumerable<UserDetails>, IEnumerable<UsersDto>>(users);
             return usersDto;
@@ -78,7 +83,9 @@ namespace TheraLang.BLL.Services
             {
                 var updateUser = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailsDto, UserDetails>())
+
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailsDto, UserDetails>()
+                .ForMember(u => u.UserDetailsId, opt => opt.Ignore()))
                     .CreateMapper();
                 updateUser = mapper.Map<UserDetailsDto, UserDetails>(user);
                 _unitOfWork.Repository<UserDetails>().Update(updateUser);
