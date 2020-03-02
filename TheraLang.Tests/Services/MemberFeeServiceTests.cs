@@ -73,6 +73,7 @@ namespace TheraLang.Tests.Services
             mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockRepo.Setup(x => x.Get(It.IsAny<Expression<Func<MemberFee, bool>>>())).ReturnsAsync(() => null);
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
+            
             int id = 4;
             Func<Task> act = async () => await memberFeeService.DeleteAsync(id);
 
