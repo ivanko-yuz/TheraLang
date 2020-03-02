@@ -18,7 +18,9 @@ namespace TheraLang.DAL.Configuration
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Date).IsRequired();
             builder.Property(x => x.Description).IsRequired().HasMaxLength(32);
-            builder.Property(x => x.Saldo).IsRequired();
+            builder.Property(x => x.Saldo).IsRequired().HasColumnType("decimal(18, 2)");
+            builder.Property(x => x.CurrentBalance).HasColumnType("decimal(18, 2)");
+
             builder.HasOne(x => x.Payer).WithMany().HasForeignKey(x => x.UserId);
         }
     }

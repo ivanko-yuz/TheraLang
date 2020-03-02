@@ -12,6 +12,7 @@ namespace TheraLang.DAL.Configuration
             builder.Property(e => e.FirstName).HasMaxLength(32);
             builder.Property(e => e.LastName).HasMaxLength(32);
             builder.Property(e => e.Balance).HasDefaultValue(0);
+            builder.Property(e=>e.Balance).HasColumnType("decimal(18, 2)");
         }
     }
 }

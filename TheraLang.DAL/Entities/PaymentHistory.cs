@@ -12,6 +12,6 @@ namespace TheraLang.DAL.Entities
         public decimal Saldo { get; set; }
         public Guid UserId { get; set; }
         public User Payer { get; set; }
-        public float CurrentBalance { get; set; }
+        public decimal CurrentBalance { get; set; }
     }
 }

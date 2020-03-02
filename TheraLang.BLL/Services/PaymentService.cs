@@ -25,7 +25,7 @@ namespace TheraLang.BLL.Services
             _paymentHistoryService = paymentHistoryService;
         }
 
-        private async Task<IEnumerable<UserDetails>> GetAllMembersId()
+        private async Task<IEnumerable<UserDetails>> GetAllMembers()
         {
             var users = await _unitOfWork.Repository<UserDetails>().GetAll()
                 .Where(i => i.User.Role.Name == "Member")
@@ -48,28 +48,37 @@ namespace TheraLang.BLL.Services
 
         public async void Execute()
         {
-            PaymentHistoryDto _paymentHistoryDto = new PaymentHistoryDto();
             var description = "Monthly fee";
-            var users = await GetAllMembersId();
+            var members = await GetAllMembers();
             decimal paymentSum = await GetFee();
 
-            foreach (var user in users)
+            if (members == null)
             {
-                if (user == null)
-                {
-                    throw new NotFoundException("User details not found");
-                }
-
-                user.Balance += paymentSum;
-                _unitOfWork.Repository<UserDetails>().Update(user);
-
-                _paymentHistoryDto.Date = DateTime.Now;
-                _paymentHistoryDto.Description = description;
-                _paymentHistoryDto.Saldo = paymentSum;
-                _paymentHistoryDto.UserId = user.UserDetailsId;
-
-                await _paymentHistoryService.Add(_paymentHistoryDto);
+                throw new NotFoundException("User details not found");
             }
+
+            PaymentHistory paymentHistory = new PaymentHistory();
+            List<UserDetails> updatedUsers = new List<UserDetails>();
+            List<PaymentHistory> updatedHistory = new List<PaymentHistory>();
+
+
+            foreach (var member in members)
+            {
+
+                member.Balance += paymentSum;  
+
+                paymentHistory.Date = DateTime.Now;
+                paymentHistory.Description = description;
+                paymentHistory.Saldo = paymentSum;
+                paymentHistory.UserId = member.UserDetailsId;
+                paymentHistory.CurrentBalance = member.Balance;
+
+                updatedUsers.Add(member);
+                updatedHistory.Add(paymentHistory);
+            }
+
+            _unitOfWork.Repository<UserDetails>().UpdateRange(updatedUsers);
+            _unitOfWork.Repository<PaymentHistory>().AddRange(updatedHistory);
             await _unitOfWork.SaveChangesAsync();
         }
     }

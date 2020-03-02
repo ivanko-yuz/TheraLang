@@ -12,7 +12,6 @@ namespace DataSeeding
         {
             var scope = host.Services.CreateScope();
             JobManager.Initialize(new SchedulerRegistry(scope));
-
             return host;
         }
     }

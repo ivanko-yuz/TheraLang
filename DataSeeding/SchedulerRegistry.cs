@@ -11,8 +11,12 @@ namespace DataSeeding
     {
         public SchedulerRegistry(IServiceScope service)
         {
-            //Schedule(service.ServiceProvider.GetRequiredService<PaymentService>()).ToRunEvery(1).Months().OnTheFirst(DayOfWeek.Monday).At(0, 0);
-            Schedule(service.ServiceProvider.GetRequiredService<PaymentService>()).ToRunNow();
+/*            Schedule(service.ServiceProvider.GetRequiredService<PaymentService>())
+                .ToRunEvery(1)
+                .Months()
+                .OnTheFirst(DayOfWeek.Monday)
+                .At(0, 0);*/
+           Schedule(service.ServiceProvider.GetRequiredService<PaymentService>()).ToRunNow();
         }
     }
 }
