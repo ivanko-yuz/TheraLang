@@ -79,8 +79,7 @@ namespace TheraLang.BLL.Services
         public async Task AddComment(CommentRequestDto commentDto)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestDto, NewsComment>()
-                    .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => sm.AuthorId))
-                    .ForMember(m => m.NewsId, opt => opt.MapFrom(sm => sm.PostId)))
+                    .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => sm.AuthorId)))
                 .CreateMapper();
 
             var comment = mapper.Map<CommentRequestDto, NewsComment>(commentDto);
