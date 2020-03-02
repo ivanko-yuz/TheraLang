@@ -10,8 +10,6 @@ import {atLeastOne} from "../../../../../shared/directives/files/atleastone-form
 import {FileInput} from "ngx-material-file-input";
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
-import {NotificationService} from "../../../../../core/services/notification/notification.service";
-import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-resource-form',

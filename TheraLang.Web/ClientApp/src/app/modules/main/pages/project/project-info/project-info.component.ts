@@ -38,7 +38,7 @@ import { Roles } from 'src/app/shared/models/roles/roles';
       state(
         "open",
         style({
-          display: "initial",
+          display: "block",
         })
       ),
       state(
@@ -87,8 +87,6 @@ export class ProjectInfoComponent implements OnInit {
   projectInfo: Project;
   projectId: number;
   projectParticipants;
-  generateOnceResourcesTable = false;
-  sortedResourcesByCategory: Resource[][] = [];
   isOpen = false;
 
   ngOnInit() {
@@ -100,18 +98,6 @@ export class ProjectInfoComponent implements OnInit {
     });
     this.getParticipants();
   }
-
-  // async getResourcesData() {
-  //   if (!this.generateOnceResourcesTable) {
-  //     const allResources = await this.resourceService.getAllResourcesByProjId(
-  //       this.projectId
-  //     );
-  //     this.sortedResourcesByCategory = this.resourceService.sortAllResourcesByCategories(
-  //       allResources
-  //     );
-  //   }
-  //   this.generateOnceResourcesTable = true;
-  // }
 
   onJoin() {
     this.participService.createParticipRequest(this.projectId).subscribe(

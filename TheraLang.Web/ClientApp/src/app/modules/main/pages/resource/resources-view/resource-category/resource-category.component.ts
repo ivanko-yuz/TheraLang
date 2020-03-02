@@ -17,7 +17,7 @@ export class ResourceCategoryComponent implements OnInit {
 
   @Input() category: ResourceCategory;
   @Input() projectId: number;
-  pageSize: number = 6;
+  pageSize: number = 8;
   maxPagesOnControls:number = 5;
 
   paginationConfig: PaginationInstance = {

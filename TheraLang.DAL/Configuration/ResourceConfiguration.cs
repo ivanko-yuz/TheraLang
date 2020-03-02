@@ -10,6 +10,7 @@ namespace TheraLang.DAL.Configuration
         {
             builder.ToTable("Resources");
 
+            builder.HasIndex(x => x.CreatedDateUtc);
             builder.Property(x => x.Name).HasMaxLength(50).IsRequired();
             builder.HasIndex(x => x.Name).IsUnique();
             builder.Property(x => x.Description).HasMaxLength(512).IsRequired();

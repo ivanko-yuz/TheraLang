@@ -5,7 +5,7 @@
                    mat-align-tabs="end">
       <mat-tab *ngFor="let category of categories | async; let i = index">
         <ng-template mat-tab-label> {{ category.type }} </ng-template>
-        <app-resource-category *ngIf="i === selectedIndex" [projectId]="projectId" [category]="category"></app-resource-category>
+        <app-resource-category *ngIf="i === selectedIndex || loadedCategories.has(i)" [projectId]="projectId" [category]="category"></app-resource-category>
       </mat-tab>
     </mat-tab-group>
   </ng-container>
@@ -13,4 +13,4 @@
     <p class="no-content">No content</p>
   </ng-template>
 </div>
-<app-create-button (clicked)="onCreate()"></app-create-button>
+

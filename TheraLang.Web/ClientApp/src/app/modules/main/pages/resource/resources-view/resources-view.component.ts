@@ -14,12 +14,10 @@ export class ResourcesViewComponent implements OnInit {
 
   @Input() projectId:number;
 
+  loadedCategories: Set<number> = new Set<number>();
   categories: Observable<ResourceCategory[]>;
   changedCategoryIndex: number;
   selectedIndex:number = 0;
-
-
-  // TODO : sortedResourcesByCategory: Resource[][]
 
   constructor(
     private resourceService: ResourceService,
@@ -35,26 +33,23 @@ export class ResourcesViewComponent implements OnInit {
         return throwError(err)
       }),
       map(response => {
-        if (!selectedCategoryId) {
-          return response;
+        if (selectedCategoryId) {
+          const categories = response as ResourceCategory[];
+          categories.forEach((cat, index) => {
+            if (selectedCategoryId === cat.id) {
+              this.changedCategoryIndex = index;
+              this.onSelect(index);
+            }
+          });
+          return categories;
         }
-        const categories = response as ResourceCategory[];
-        categories.forEach((cat, index) => {
-          if (cat.id === selectedCategoryId) {
-            this.changedCategoryIndex = index;
-            this.selectedIndex = index;
-          }
-        });
-        return categories;
+        return response;
       })
     );
   }
 
   onSelect(pageIndex: number){
     this.selectedIndex = pageIndex;
-  }
-
-  onCreate() {
-    this.router.navigateByUrl("/resources/create");
+    this.loadedCategories.add(pageIndex);
   }
 }
