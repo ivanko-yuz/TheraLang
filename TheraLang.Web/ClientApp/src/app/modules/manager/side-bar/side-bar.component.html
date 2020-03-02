@@ -4,7 +4,7 @@
         <mat-nav-list>
             <div class="pad">
                 <a mat-list-item [routerLink]="'/admin'">
-                    <h2>MANAGER</h2>
+                    <h2>{{'manager.title'|translate|uppercase}}</h2>
                 </a>
             </div>
             <a class="menu-item" mat-list-item [routerLink]="'/'">
@@ -22,6 +22,21 @@
                 <mat-icon class="white-icon">assignment</mat-icon>
                 <span class="space"> </span>
                 <span>Fee</span>
+            </a>
+            <a class="menu-item" mat-list-item routerLink="/projectRequest">
+                <mat-icon class="white-icon">assignment</mat-icon>
+                <span class="space"> </span>
+                <span>{{'components.projects.new-projects'|translate}}</span>
+            </a>
+            <a class="menu-item" mat-list-item routerLink="/projectTypes">
+                <mat-icon class="white-icon">assignment</mat-icon>
+                <span class="space"> </span>
+                <span>{{'components.projectTypes.title'|translate}}</span>
+            </a>
+            <a class="menu-item" mat-list-item routerLink="/users">
+                <mat-icon class="white-icon">assignment</mat-icon>
+                <span class="space"> </span>
+                <span>{{'components.users.title'|translate}}</span>
             </a>
             <a class="menu-item" mat-list-item>
                 <mat-icon class="white-icon">build</mat-icon>
