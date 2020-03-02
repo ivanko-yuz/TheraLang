@@ -28,6 +28,7 @@ import { ResourcesComponent } from './modules/main/pages/resource/resources.comp
 import { ResourceCreateComponent } from './modules/main/pages/resource/resource-create/resource-create.component';
 import {ResourcesViewComponent} from "./modules/main/pages/resource/resources-view/resources-view.component";
 import {ResourceEditComponent} from "./modules/main/pages/resource/resource-edit/resource-edit.component";
+import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-table/resources-table.component";
 
 const routes: Routes = [
   {
@@ -60,9 +61,9 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
           {path: "create", component: ResourceCreateComponent},
-          {path: "", pathMatch: "full", component: ResourcesViewComponent},
-          {path: ":categoryId", component: ResourcesViewComponent},
-          {path:"edit/:resourceId",component: ResourceEditComponent}
+          {path: "", pathMatch: "full", component: ResourcesTableComponent},
+          {path: ":categoryId", component: ResourcesTableComponent},
+          {path: "edit/:resourceId", component: ResourceEditComponent}
         ]
       },
       {

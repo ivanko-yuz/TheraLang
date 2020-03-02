@@ -77,8 +77,6 @@ import { ProjectInfoComponent } from "./modules/main/pages/project/project-info/
 import { FooterComponent } from "./modules/main/footer/footer.component";
 import { ProjectParticipantsComponent } from "./modules/main/pages/project/project-participants/project-participants.component";
 import { CustomDatePipe } from "./shared/pipes/custom.datepipe";
-import { ResourcesTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-table/resources-table.component";
-import { ResourcesInternalTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component";
 import { ToolbarItemComponent } from "./modules/main/toolbar/toolbar-item/toolbar-item.component";
 import { DonationComponent } from "./modules/main/pages/donation/donation.component";
 import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
@@ -120,6 +118,7 @@ import { ResourceEntryComponent } from './modules/main/pages/resource/resources-
 import {ResourceFormComponent} from "./modules/main/pages/resource/resource-form/resource-form.component";
 import { ResourceEditComponent } from './modules/main/pages/resource/resource-edit/resource-edit.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-table/resources-table.component";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -139,10 +138,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
-    ResourcesTableComponent,
     ConfirmDialogComponent,
     ProjectCreationComponent,
-    ResourcesInternalTableComponent,
     ToolbarItemComponent,
     DonationComponent,
     TransactionResultComponent,
@@ -174,11 +171,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResourcesViewComponent,
     ResourceEntryComponent,
     ResourceFormComponent,
-    ResourceFormComponent,
     ResourceEditComponent,
+    ResourcesTableComponent
   ],
   entryComponents: [
-    ResourcesInternalTableComponent,
     ProjectCreationComponent,
     ConfirmDialogComponent,
     ChangeRoleComponent,
@@ -263,7 +259,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SharedModule,
     NgxPaginationModule
   ],
-  exports: [ResourcesInternalTableComponent],
+  exports: [],
   providers: [
     ResourceService,
     HttpService,

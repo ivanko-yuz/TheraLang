@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-resources',
@@ -8,14 +7,12 @@ import {Router} from "@angular/router";
 })
 export class ResourcesComponent implements OnInit {
 
-  constructor(
-    private router: Router
-  ) { }
+  showCreate: boolean = true;
 
-  ngOnInit() {
+  constructor() { }
+
+  ngOnInit(): void {
   }
 
-  onCreate() {
-    this.router.navigateByUrl("/resources/create");
-  }
+
 }

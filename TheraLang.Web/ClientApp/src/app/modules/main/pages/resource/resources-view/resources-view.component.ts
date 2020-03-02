@@ -16,8 +16,7 @@ export class ResourcesViewComponent implements OnInit {
 
   loadedCategories: Set<number> = new Set<number>();
   categories: Observable<ResourceCategory[]>;
-  changedCategoryIndex: number;
-  selectedIndex:number = 0;
+  selectedIndex: number;
 
   constructor(
     private resourceService: ResourceService,
@@ -27,20 +26,19 @@ export class ResourcesViewComponent implements OnInit {
 
   ngOnInit() {
     const selectedCategoryId: number = parseInt(this.route.snapshot.params["categoryId"]);
+    let index;
     this.categories = this.resourceService.getResourceCategories(this.projectId).pipe(
       catchError(err => {
-        console.log("ERRRR", err);
         return throwError(err)
       }),
       map(response => {
-        if (selectedCategoryId) {
+
+        if (Number.isInteger(selectedCategoryId)) {
           const categories = response as ResourceCategory[];
-          categories.forEach((cat, index) => {
-            if (selectedCategoryId === cat.id) {
-              this.changedCategoryIndex = index;
-              this.onSelect(index);
-            }
-          });
+          index = categories.findIndex(cat => cat.id == selectedCategoryId);
+          if (index > 0 && index != this.selectedIndex) {
+            setTimeout(() => this.onSelect(index), 100);
+          }
           return categories;
         }
         return response;
