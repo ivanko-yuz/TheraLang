@@ -74,7 +74,10 @@
     "comments" : {
       "comments-count-title" : "comments",
       "create-comment": "Comment",
-      "enter-comment": "Add your comment"
+      "enter-comment": "Add your comment",
+      "edited" : "edited",
+      "read-more" : "READ MORE",
+      "show-less" : "SHOW LESS"
     },
     "users": {
       "title": "Users"

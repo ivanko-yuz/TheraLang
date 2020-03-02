@@ -72,7 +72,10 @@
     "comments" : {
       "comments-count-title" : "коментарів",
       "create-comment": "Коментувати",
-      "enter-comment": "Додайте ваш коментар"
+      "enter-comment": "Додайте ваш коментар",
+      "edited" : "редагований",
+      "read-more" : "БІЛЬШЕ",
+      "show-less" : "МЕНШЕ"
     },
     "users": {
       "title": "Користувачі"

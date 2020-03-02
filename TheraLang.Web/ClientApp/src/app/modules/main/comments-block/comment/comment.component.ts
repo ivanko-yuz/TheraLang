@@ -5,6 +5,8 @@ import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { CommentEditComponent } from '../comment-edit/comment-edit.component';
+import { UserService } from 'src/app/core/auth/user.service';
+import { Roles } from 'src/app/shared/models/roles/roles';
 
 @Component({
   selector: 'app-comment',
@@ -16,7 +18,7 @@ export class CommentComponent implements OnInit {
 
   @Input() comment: CommentView;
   @Output() commentChanged = new EventEmitter();
-  smallTextSize: number = 500;
+  smallTextSize: number = 400;
   textSize: number = this.smallTextSize;
   isOpened: boolean = false;
   isEditing: boolean = false;
@@ -27,10 +29,19 @@ export class CommentComponent implements OnInit {
       private dialogService: DialogService,
       private translate: TranslateService,
       private notificationService: NotificationService,
-      private componentFactoryResolver: ComponentFactoryResolver
+      private componentFactoryResolver: ComponentFactoryResolver,
+      private userService : UserService
     ) { }
 
   ngOnInit() {
+  }
+
+  isOwner() {
+    return this.comment.createdById === this.userService.getCurrentUserId()
+  }
+
+  isAdmin() {
+    return this.userService.isRole(Roles.Admin);
   }
 
   isFull() {
@@ -81,7 +92,5 @@ export class CommentComponent implements OnInit {
       this.container.clear();
       this.comment.isEdited = true;
     })
-
-    // this.commentsService.editComment(this.comment.id).subscribe();
   }
 }
