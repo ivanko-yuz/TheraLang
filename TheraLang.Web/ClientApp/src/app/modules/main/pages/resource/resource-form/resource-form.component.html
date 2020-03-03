@@ -4,7 +4,7 @@
   <form class="form" [formGroup]="resourceForm">
     <div fxLayout="column">
       <mat-form-field class="example-full-width">
-        <mat-select formControlName="categoryId" [placeholder]="'components.resources.type' | translate">
+        <mat-select required formControlName="categoryId" [placeholder]="'components.resources.type' | translate">
           <mat-option *ngFor="let category of categories | async" [value]="category.id">
             {{ category.type }}
           </mat-option>
@@ -15,7 +15,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <input formControlName="name" autofocus matInput [placeholder]="'components.resources.name' | translate"/>
+        <input required formControlName="name" autofocus matInput [placeholder]="'components.resources.name' | translate"/>
         <mat-error *ngIf="resourceForm.controls['name'].errors?.required">{{
           "common.validation.field-is-required" | translate
           }}</mat-error>
@@ -28,7 +28,7 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-          <textarea formControlName="description" matInput [placeholder]="'common.description' | translate"
+          <textarea required formControlName="description" matInput [placeholder]="'common.description' | translate"
                     cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"></textarea>
         <mat-error *ngIf="resourceForm.controls['description'].errors?.required">{{
           "common.validation.field-is-required" | translate

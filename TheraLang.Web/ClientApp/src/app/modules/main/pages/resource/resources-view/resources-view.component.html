@@ -1,16 +1,19 @@
-<div class="content">
-  <ng-container *ngIf="(categories | async)?.length > 0 ; else noContent">
+<ng-container *ngIf="(categories | async)?.length > 0 ; else noContent">
+  <div class="content">
     <mat-tab-group (selectedIndexChange)="onSelect($event)" [selectedIndex]="selectedIndex"
                    animationDuration="0s" color="primary"
                    mat-align-tabs="end">
       <mat-tab *ngFor="let category of categories | async; let i = index">
         <ng-template mat-tab-label> {{ category.type }} </ng-template>
-        <app-resource-category *ngIf="i === selectedIndex || loadedCategories.has(i)" [projectId]="projectId" [category]="category"></app-resource-category>
+        <app-resource-category *ngIf="i === selectedIndex || loadedCategories.has(i)" [projectId]="projectId"
+                               [category]="category"></app-resource-category>
       </mat-tab>
     </mat-tab-group>
-  </ng-container>
-  <ng-template #noContent>
-    <p class="no-content">No content</p>
-  </ng-template>
-</div>
+  </div>
+</ng-container>
+<ng-template #noContent>
+</ng-template>
+
+
+
 
