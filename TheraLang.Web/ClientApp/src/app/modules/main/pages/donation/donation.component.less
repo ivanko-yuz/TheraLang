@@ -1,31 +1,49 @@
+.donation-content{
+  width: 70%;
+  margin: 3rem auto 5rem;
+}
 .donate-button {
     margin-left: 15px;
 }
-
-.form-field {
-    width        : 200px;
-    margin-bottom: 15px;
-    margin-left: 15px;
+.headers{
+  text-align: center;
 }
-
-.donation-header {
-    margin-left: 15px;
+.form-field {
+  width: 200px;
+  margin: auto;
 }
 
 ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
     background-color: purple;
 }
 
-.payment-methods{
-    width: 30%;
-    height: 15%;
-    margin-top: 13%;
+.payment-methods {
+  width: 320px;
+  height: 50px;
+  margin: 2rem auto 0;
 }
 
-.organization-donation-header{
-    margin-left: 15px;
+.mat-raised-button:disabled{
+  background-color: rgba(89, 176, 161, 0.2);
+  color: rgba(0, 0, 0, 0.4);
 }
-
-.donated {
-    margin-left: 15px;
+.checkout-button{
+  margin-top: 0.7rem;
+}
+.form-content{
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (max-width: 736px) {
+  .donation-content{
+    width: 95%;
+    margin: 3rem 0 5rem;
+  }
+  .payment-methods {
+    width: 250px;
+    height: 35px;
+    margin: 2rem auto 0;
+  }
 }
