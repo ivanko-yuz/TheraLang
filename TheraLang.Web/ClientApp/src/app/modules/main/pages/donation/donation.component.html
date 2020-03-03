@@ -11,7 +11,7 @@
   <form [formGroup]="amountForm">
     <div class="form-content">
       <mat-form-field class="form-field">
-        <input formControlName="donationAmount" matInput type="number" placeholder="" autofocus>
+        <input formControlName="donationAmount" matInput type="number" min="0" max="9999999999" placeholder="" autofocus>
         <mat-error *ngIf="amountForm.controls['donationAmount'].errors?.required">{{
           "common.validation.field-is-required" | translate
           }}</mat-error>
