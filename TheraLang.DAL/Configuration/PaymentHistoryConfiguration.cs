@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Common.Enums;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Configuration
@@ -11,13 +10,18 @@ namespace TheraLang.DAL.Configuration
     {
         public void Configure(EntityTypeBuilder<PaymentHistory> builder)
         {
+            var descriptionConverter = new EnumToStringConverter<PaymentDescription>();
+
             builder.ToTable("PaymentHistory");
 
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Date).IsRequired();
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(32);
+            builder.Property(x => x.Description)
+                .IsRequired()
+                .HasConversion(descriptionConverter)
+                .HasMaxLength(32);
             builder.Property(x => x.Saldo).IsRequired().HasColumnType("decimal(18, 2)");
             builder.Property(x => x.CurrentBalance).HasColumnType("decimal(18, 2)");
 

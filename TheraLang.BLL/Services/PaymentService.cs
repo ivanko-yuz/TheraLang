@@ -1,12 +1,11 @@
-﻿using Common.Exceptions;
+﻿using Common.Enums;
+using Common.Exceptions;
 using FluentScheduler;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
@@ -14,15 +13,11 @@ using TheraLang.DAL.UnitOfWork;
 namespace TheraLang.BLL.Services
 {
     public class PaymentService : IJob
-    { 
-        private readonly IMemberFeeService _memberFeeService;
+    {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPaymentHistoryService _paymentHistoryService;
-        public PaymentService(IMemberFeeService memberFeeService, IUnitOfWork unitOfWork, IPaymentHistoryService paymentHistoryService)
+        public PaymentService(IUnitOfWork unitOfWork)
         {
-            _memberFeeService = memberFeeService;
             _unitOfWork = unitOfWork;
-            _paymentHistoryService = paymentHistoryService;
         }
 
         private async Task<IEnumerable<UserDetails>> GetAllMembers()
@@ -39,25 +34,30 @@ namespace TheraLang.BLL.Services
             return users;
         }
 
-        private async Task<decimal> GetFee()
+        private decimal GetFee()
         {
-            var fees = await _memberFeeService.GetMemberFeesAsync();
-
-            return -fees.Where(f => f.FeeDate <= DateTime.Now).LastOrDefault().FeeAmount;
+            var fee = _unitOfWork.Repository<MemberFee>()
+                .GetAll()
+                .Where(f => f.FeeDate <= DateTime.Now)
+                .LastOrDefault();
+            if (fee == null)
+            {
+                return 0;
+            }
+            return -fee.FeeAmount;
         }
 
         public async void Execute()
         {
-            var description = "Monthly fee";
             var members = await GetAllMembers();
-            decimal paymentSum = await GetFee();
+            decimal paymentSum = GetFee();
 
             if (members == null)
             {
                 throw new NotFoundException("User details not found");
             }
 
-            PaymentHistory paymentHistory = new PaymentHistory();
+
             List<UserDetails> updatedUsers = new List<UserDetails>();
             List<PaymentHistory> updatedHistory = new List<PaymentHistory>();
 
@@ -65,13 +65,16 @@ namespace TheraLang.BLL.Services
             foreach (var member in members)
             {
 
-                member.Balance += paymentSum;  
+                member.Balance += paymentSum;
 
-                paymentHistory.Date = DateTime.Now;
-                paymentHistory.Description = description;
-                paymentHistory.Saldo = paymentSum;
-                paymentHistory.UserId = member.UserDetailsId;
-                paymentHistory.CurrentBalance = member.Balance;
+                var paymentHistory = new PaymentHistory()
+                {
+                    Date = DateTime.Now,
+                    Description = PaymentDescription.MonthlyFee,
+                    Saldo = paymentSum,
+                    UserId = member.UserDetailsId,
+                    CurrentBalance = member.Balance
+                };
 
                 updatedUsers.Add(member);
                 updatedHistory.Add(paymentHistory);

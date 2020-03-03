@@ -6,9 +6,9 @@ using System;
 
 namespace DataSeeding
 {
-    public static class SchedulerSeed
+    public static class SchedulerExtention
     {
-        public static IWebHost SeedScheduler(this IWebHost host)
+        public static IWebHost StartScheduler(this IWebHost host)
         {
             var scope = host.Services.CreateScope();
             JobManager.Initialize(new SchedulerRegistry(scope));
