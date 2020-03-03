@@ -16,11 +16,13 @@ namespace TheraLang.Web.Controllers
     {
         private readonly IAuthenticateService _authService;
         private readonly IUserManagementService _userManagement;
+        private readonly IConfirmationService _confirmation;
 
-        public AccountController(IAuthenticateService authService, IUserManagementService userManagement)
+        public AccountController(IAuthenticateService authService, IUserManagementService userManagement, IConfirmationService confirmation)
         {
             _authService = authService;
             _userManagement = userManagement;
+            _confirmation = confirmation;
         }
 
         [AllowAnonymous]
@@ -55,7 +57,7 @@ namespace TheraLang.Web.Controllers
             var user = mapper.Map<UserAllViewModel, UserAllDto>(newUser);
             var confirmUser = mapper.Map<UserAllViewModel, ConfirmUserDto>(newUser);
             await _userManagement.AddUser(user);
-            await _userManagement.SendEmail("170920", user.Email);
+            await _confirmation.SendEmail("170920", user.Email);
             return Ok();
         }
 
@@ -65,7 +67,7 @@ namespace TheraLang.Web.Controllers
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ConfirmUserViewModel, ConfirmUserDto>()).CreateMapper();
             var confirm = mapper.Map<ConfirmUserViewModel, ConfirmUserDto>(confirmUser);
-            await _userManagement.ConfirmUser(confirm);
+            await _confirmation.ConfirmUser(confirm);
             return Ok();
         }
 

@@ -8,8 +8,6 @@ using TheraLang.BLL.DataTransferObjects.UserDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
-using System.Net;
-using System.Net.Mail;
 using Common.Configurations;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Hosting;
@@ -20,15 +18,11 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
-        private readonly EmailSettings _emailSettings;
-        private readonly IHostingEnvironment _env;
 
-        public UserManagementService(IUnitOfWork unitOfWork, IFileService fileService, IOptions<EmailSettings> emailSettings, IHostingEnvironment env)
+        public UserManagementService(IUnitOfWork unitOfWork, IFileService fileService)
         {
-            _emailSettings = emailSettings.Value;
             _unitOfWork = unitOfWork;
             _fileService = fileService;
-            _env = env;
         }
 
 
@@ -93,54 +87,6 @@ namespace TheraLang.BLL.Services
             {
                 throw new Exception("Error when adding user ", ex);
             }
-        }
-
-        public async Task SendEmail(string ConfirmNum, string UserEmail)
-        {
-            string body = string.Empty;
-            using (StreamReader reader =
-            new StreamReader(Path.Combine(_env.ContentRootPath, "Templates", "welcome.html")))
-            {
-                body = await reader.ReadToEndAsync();
-            }
-
-            var fromAddress = new MailAddress(_emailSettings.Email, "UTMM");
-            var toAddress = new MailAddress(UserEmail, "To User");
-            string fromPassword = _emailSettings.Password;
-            string subject = "Confirm your email";
-
-            var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.User.Email == UserEmail);
-
-            body = body.Replace("{EMAIL}", UserEmail);
-            body = body.Replace("{NUMBER}", ConfirmNum);
-            body = body.Replace("{FIRSTNAME}", user.FirstName);
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = true,
-                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-            };
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                IsBodyHtml = true,
-                Body = body,
-            })
-            {
-                await smtp.SendMailAsync(message);
-            }
-        }
-
-        public async Task ConfirmUser(ConfirmUserDto confirmUser)
-        {
-            var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
-            if (confirmUser.ConfirmationNumber == "170920") user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
-            _unitOfWork.Repository<User>().Update(user);
-            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

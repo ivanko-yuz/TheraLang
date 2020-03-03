@@ -12,8 +12,5 @@ namespace TheraLang.BLL.Interfaces
         Task<User> GetUserById(Guid id);
 
         Task AddUser(UserAllDto NewUser);
-
-        Task SendEmail(string ConfirmNUm, string Email);
-        Task ConfirmUser(ConfirmUserDto confirmUser);
     }
 }

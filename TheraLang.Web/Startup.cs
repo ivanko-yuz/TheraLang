@@ -49,6 +49,7 @@ namespace TheraLang.Web
             services.AddScoped<IAuthenticateService, AuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IConfirmationService, ConfirmationService>();
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
