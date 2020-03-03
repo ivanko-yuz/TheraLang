@@ -28,22 +28,15 @@ namespace TheraLang.BLL.Services
 
         public async Task<ResourceDto> GetResourceById(int id)
         {
-            try
-            {
-                var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id);
+            var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
-                var resourceDto = mapper.Map<Resource, ResourceDto>(resource);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
+            var resourceDto = mapper.Map<Resource, ResourceDto>(resource);
 
-                return resourceDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when getting resource by {nameof(id)}={id}: ", ex);
-            }
+            return resourceDto;
         }
 
-        public async Task AddResource(ResourceDto resourceDto, Guid userId)
+        public async Task<int> AddResource(ResourceDto resourceDto, Guid userId)
         {
             if (resourceDto.File != null)
             {
@@ -61,6 +54,7 @@ namespace TheraLang.BLL.Services
 
             _unitOfWork.Repository<Resource>().Add(resource);
             await _unitOfWork.SaveChangesAsync();
+            return resource.Id;
         }
 
         public async Task UpdateResource(int id, ResourceDto resourceDto, Guid updatedById)

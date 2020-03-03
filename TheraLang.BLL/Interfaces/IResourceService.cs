@@ -7,7 +7,7 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IResourceService
     {
-        Task AddResource(ResourceDto resource, Guid userId);
+        Task<int> AddResource(ResourceDto resource, Guid userId);
 
         Task UpdateResource(int id, ResourceDto resource, Guid updatedById);
 
