@@ -77,7 +77,9 @@ namespace TheraLang.Tests.Services
             int id = 4;
             Func<Task> act = async () => await memberFeeService.DeleteAsync(id);
 
-            act.Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null.\nParameter name: Error while deleting member fee. Fee with {nameof(id)}={id} not found");
+            act.Should().Throw<ArgumentNullException>()
+                .WithMessage($"Value cannot be null.\n" +
+                $"Parameter name: Error while deleting member fee. Fee with {nameof(id)}={id} not found");
         }
 
         [Fact]
@@ -100,14 +102,16 @@ namespace TheraLang.Tests.Services
         {
             mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
-            mockRepo.Setup(x => x.Add(It.IsAny<MemberFee>())).Throws<Exception>();
+            mockRepo.Setup(x => x.Add(It.IsAny<MemberFee>())).Verifiable();
 
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
 
-            Func<Task> act = async () => await memberFeeService.AddAsync(new MemberFeeDto());
+            Func<Task> act = async () => await memberFeeService.AddAsync(null);
 
             mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Never());
-            act.Should().Throw<Exception>().WithMessage($"Cannot add new { nameof(MemberFee) }.");
+            mockRepo.Verify(x => x.Add(It.IsAny<MemberFee>()), Times.Never());
+            act.Should().Throw<NullReferenceException>()
+                .WithMessage($"{nameof(MemberFeeDto)} cannot be null");
         }
     }
 }

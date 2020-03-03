@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
@@ -54,12 +53,25 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeDto, MemberFee>())
+                if (memberFeeDto == null)
+                {
+                    throw new NullReferenceException(
+                        $"{nameof(MemberFeeDto)} cannot be null");
+                }
+
+                var newDate = new DateTime(memberFeeDto.FeeDate.Year, memberFeeDto.FeeDate.Month, 1);
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeDto, MemberFee>()
+                .ForMember(p => p.FeeDate,opt => opt.MapFrom(n=> newDate)))
                     .CreateMapper();
+
                 var memberFee = mapper.Map<MemberFeeDto, MemberFee>(memberFeeDto);
 
                 _unitOfWork.Repository<MemberFee>().Add(memberFee);
                 await _unitOfWork.SaveChangesAsync();
+            }
+            catch (NullReferenceException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
