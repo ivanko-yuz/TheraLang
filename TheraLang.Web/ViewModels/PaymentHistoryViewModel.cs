@@ -9,7 +9,6 @@ namespace TheraLang.Web.ViewModels
     {
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
         public PaymentDescription Description { get; set; }
         public decimal Saldo { get; set; }
         public Guid UserId { get; set; }

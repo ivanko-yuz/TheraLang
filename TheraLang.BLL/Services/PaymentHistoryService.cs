@@ -10,6 +10,7 @@ using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
+using Common;
 
 namespace TheraLang.BLL.Services
 {
@@ -36,6 +37,7 @@ namespace TheraLang.BLL.Services
             _unitOfWork.Repository<PaymentHistory>().Add(payment);
             await _unitOfWork.SaveChangesAsync();
         }
+
 
         public async Task<IEnumerable<PaymentHistoryDto>> GetAll()
         {
@@ -74,16 +76,37 @@ namespace TheraLang.BLL.Services
 
             return paymantsDto;
         }
-        
-        public async Task<IEnumerable<PaymentHistoryDto>> GetHistoryPage(PagingParametersDto pagingParameters)
+
+        public async Task<IEnumerable<PaymentHistoryDto>> GetPageByUserId(Guid userId, PaginationParams pagingParameters)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PaymentHistory, PaymentHistoryDto>()
                 .ForMember(p => p.UserName, opt => opt.MapFrom(n => $"{n.Payer.Details.FirstName} {n.Payer.Details.LastName}")));
 
             var paymantsDto = await _unitOfWork.Repository<PaymentHistory>()
                 .GetAll()
-                .Skip((pagingParameters.PageNumber-1) * pagingParameters.PageSize)
-                .Take(pagingParameters.PageSize)
+                .Where(p => p.UserId == userId)
+                .Skip(pagingParameters.Skip)
+                .Take(pagingParameters.Take)
+                .ProjectTo<PaymentHistoryDto>(mapper)
+                .ToListAsync();
+
+            if (!paymantsDto.Any())
+            {
+                throw new NotFoundException("Payments history not found!");
+            }
+
+            return paymantsDto;
+        }
+
+        public async Task<IEnumerable<PaymentHistoryDto>> GetHistoryPage(PaginationParams pagingParameters)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PaymentHistory, PaymentHistoryDto>()
+                .ForMember(p => p.UserName, opt => opt.MapFrom(n => $"{n.Payer.Details.FirstName} {n.Payer.Details.LastName}")));
+
+            var paymantsDto = await _unitOfWork.Repository<PaymentHistory>()
+                .GetAll()
+                .Skip(pagingParameters.Skip)
+                .Take(pagingParameters.Take)
                 .ProjectTo<PaymentHistoryDto>(mapper)
                 .ToListAsync();
 
