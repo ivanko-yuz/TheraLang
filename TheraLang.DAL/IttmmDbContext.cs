@@ -49,6 +49,7 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new PageConfiguration());
             modelBuilder.ApplyConfiguration(new PageRouteConfiguration());
             modelBuilder.ApplyConfiguration(new MemberFeeConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentHistoryConfiguration()); 
         }
     }
 }

@@ -7,6 +7,6 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IPaymentService
     {
-        Task WithdrawPaymentFromMembers();
+        Task MonthlyWitdraw();
     }
 }

@@ -74,5 +74,25 @@ namespace TheraLang.BLL.Services
 
             return paymantsDto;
         }
+        
+        public async Task<IEnumerable<PaymentHistoryDto>> GetHistoryPage(PagingParametersDto pagingParameters)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PaymentHistory, PaymentHistoryDto>()
+                .ForMember(p => p.UserName, opt => opt.MapFrom(n => $"{n.Payer.Details.FirstName} {n.Payer.Details.LastName}")));
+
+            var paymantsDto = await _unitOfWork.Repository<PaymentHistory>()
+                .GetAll()
+                .Skip((pagingParameters.PageNumber-1) * pagingParameters.PageSize)
+                .Take(pagingParameters.PageSize)
+                .ProjectTo<PaymentHistoryDto>(mapper)
+                .ToListAsync();
+
+            if (!paymantsDto.Any())
+            {
+                throw new NotFoundException("Payments history not found!");
+            }
+
+            return paymantsDto;
+        }
     }
 }
