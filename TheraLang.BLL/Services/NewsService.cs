@@ -21,13 +21,11 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
-        private readonly IUserManagementService _userManagementService;
 
-        public NewsService(IUnitOfWork unitOfWork, IFileService fileService, IUserManagementService userManagementService)
+        public NewsService(IUnitOfWork unitOfWork, IFileService fileService)
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
-            _userManagementService = userManagementService;
         }
 
         public async Task<int> GetNewsCount()
@@ -47,6 +45,7 @@ namespace TheraLang.BLL.Services
             var newsDtos = await _unitOfWork.Repository<News>().GetAll()
                 .ProjectTo<NewsPreviewDto>(mapper)
                 .ToListAsync();
+            
             if (!newsDtos.Any())
             {
                 throw new NotFoundException("News");
@@ -65,10 +64,11 @@ namespace TheraLang.BLL.Services
             });
 
             var newsDtos = await _unitOfWork.Repository<News>().GetAll()
-                .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
-                .Take(paginationParams.PageSize)
+                .Skip(paginationParams.Skip)
+                .Take(paginationParams.Take)
                 .ProjectTo<NewsPreviewDto>(mapper)
                 .ToListAsync();
+            
             if (!newsDtos.Any())
             {
                 throw new NotFoundException($"News page {paginationParams.PageNumber}");
@@ -93,6 +93,7 @@ namespace TheraLang.BLL.Services
                 .Where(n => n.Id == id)
                 .ProjectTo<NewsDetailsDto>(mapper)
                 .SingleOrDefaultAsync();
+            
             if (newsDto == null)
             {
                 throw new NotFoundException($"News with id {id}");
