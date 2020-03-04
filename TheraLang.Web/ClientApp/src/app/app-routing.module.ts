@@ -22,10 +22,11 @@ import { NewsDetailsComponent } from './modules/main/pages/news/news-details/new
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { PageComponent } from "./modules/main/pages/page/page.component";
 
-import {RegistrationComponent} from "./modules/registration/registration.component";
-import {UserPageComponent} from "./modules/user-page/user-page.component";
-import {UsersListComponent} from "./modules/users_list/users-list.component";
-import {ProfileComponent} from "./modules/profile/profile.component";
+import { RegistrationComponent } from "./modules/registration/registration.component";
+import { UserPageComponent } from "./modules/user-page/user-page.component";
+import { UsersListComponent } from "./modules/users_list/users-list.component";
+import { ProfileComponent } from "./modules/profile/profile.component";
+import { MessangerComponent } from './modules/messanger/messanger.component';
 const routes: Routes = [
   {
     path: "",
@@ -43,10 +44,10 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-      path: "projects/edit/:id",
-      component: ProjectEditingComponent,
-      canActivate: [AuthGuard]
-    },
+        path: "projects/edit/:id",
+        component: ProjectEditingComponent,
+        canActivate: [AuthGuard]
+      },
       { path: "projects/:id", component: ProjectInfoComponent },
       { path: "projects", component: ProjectComponent },
       { path: "donations/:projectId", component: DonationComponent },
@@ -60,11 +61,13 @@ const routes: Routes = [
         path: "transaction/:donationId",
         component: TransactionResultComponent
       },
-      { path: "projectTypes",
+      {
+        path: "projectTypes",
         component: ProjectTypeComponent,
         canActivate: [AdminGuard],
       },
-      { path: "projectRequest",
+      {
+        path: "projectRequest",
         component: ProjectRequestComponent,
         canActivate: [AdminGuard],
       },
@@ -83,13 +86,17 @@ const routes: Routes = [
         component: UsersListComponent,
         canActivate: [AdminGuard],
       },
-      {path: "news", component: NewsPageComponent},
-      {path: "news/create", component: NewsCreateComponent},
-      {path: "news/details/:newsId", component: NewsDetailsComponent},
+      { path: "news", component: NewsPageComponent },
+      { path: "news/create", component: NewsCreateComponent },
+      { path: "news/details/:newsId", component: NewsDetailsComponent },
       {
         component: PageComponent,
         path: "pages/:pageRoute",
       },
+      {
+        component: MessangerComponent,
+        path: "messanger"
+      }
     ],
   },
   { path: "login", component: LoginComponent },

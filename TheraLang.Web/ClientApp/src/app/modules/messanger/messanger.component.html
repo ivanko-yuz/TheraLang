@@ -1,0 +1,36 @@
+<div class="container" scroll="no">
+    <app-chat-list (onChatChange)="updateChat($event)"></app-chat-list>
+
+    <div *ngIf="this.currentChat else loadingChat">
+        <div class="chat">
+            <!-- <div *ngIf="this.currentChat.messages else noMessages"> -->
+            <div class="message-container">
+                <div *ngFor="let message of this.currentChat.messages">
+                    <div class="message" [ngClass]="currentUserId == message.posterId ? 'message-owner' : 'message'">
+                        <div class="message-info">{{message.posterName}}
+                            {{message.timestamp | date: 'MMM d, y, H:mm:ss'}}
+                        </div>
+                        <div class="message-text">{{message.text}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div>
+            <ng-template #noMessages>
+                <div>Your message can be the firs one...</div>
+            </ng-template> -->
+
+            <div class="form-container">
+                <form action="" autocomplete="off" fxLayout="row">
+                    <input [(ngModel)]="messageText" name="messageText" type="text" placeholder="Напишіть повідомлення...">
+                    <button [disabled]="!messageText" type="submit" (click)="sendMessage()" id="send" mat-raised-button
+                        color="primary">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <ng-template #loadingChat>
+        <div>Choose chat...</div>
+    </ng-template>
+</div>
+
+<button (click)="action()">test</button>
