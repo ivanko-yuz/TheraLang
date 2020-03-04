@@ -40,6 +40,7 @@ namespace TheraLang.BLL.Services
 
             var commentDtos = await _unitOfWork.Repository<NewsComment>().GetAll()
                 .Where(c => c.NewsId == newsId)
+                .OrderByDescending(c => c.CreatedDateUtc)
                 .ProjectTo<CommentResponseDto>(mapper)
                 .ToListAsync();
             if (!commentDtos.Any())
@@ -64,6 +65,7 @@ namespace TheraLang.BLL.Services
 
             var commentDtos = await _unitOfWork.Repository<NewsComment>().GetAll()
                 .Where(c => c.NewsId == newsId)
+                .OrderByDescending(c => c.CreatedDateUtc)
                 .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
                 .Take(paginationParams.PageSize)
                 .ProjectTo<CommentResponseDto>(mapper)
