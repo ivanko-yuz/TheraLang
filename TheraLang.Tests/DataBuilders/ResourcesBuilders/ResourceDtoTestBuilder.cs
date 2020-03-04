@@ -1,14 +1,16 @@
 ﻿using System.IO;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.DAL.Entities;
 
 namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
 {
     public class ResourceDtoTestBuilder : IDataBuilder<ResourceDto>
     {
-        private readonly ResourceDto _resource;
+        private ResourceDto _resource;
 
         public ResourceDtoTestBuilder()
         {
@@ -77,6 +79,20 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
         public ResourceDtoTestBuilder WithResourceCategory(ResourceCategoryDto resourceCategoryDto)
         {
             _resource.ResourceCategory = resourceCategoryDto;
+            return this;
+        }
+
+        public ResourceDtoTestBuilder FromEntity(Resource entity)
+        {
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Resource, ResourceDto>()
+                    .ForMember(dto => dto.AuthorName,
+                        opts => opts.MapFrom(resource =>
+                            $"{resource.User.Details.FirstName} {resource.User.Details.LastName}"));
+            }).CreateMapper();
+
+            _resource = mapper.Map<ResourceDto>(entity);
             return this;
         }
 

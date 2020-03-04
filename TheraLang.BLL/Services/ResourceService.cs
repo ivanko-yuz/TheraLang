@@ -81,7 +81,7 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ResourceDto>> GetResourcesByCategoryId(int categoryId, int? projectId,
+        public async Task<IEnumerable<ResourceDto>> GetResources(int? categoryId, int? projectId,
             PagingParametersDto pagingParameters)
         {
             var mapper = new MapperConfiguration(cfg =>
@@ -97,14 +97,14 @@ namespace TheraLang.BLL.Services
 
             var resources = await _unitOfWork.Repository<Resource>()
                 .GetAll()
-                .Where(r => r.CategoryId == categoryId)
+                .Where(r => categoryId == null || r.CategoryId == categoryId)
                 .Where(r => projectId == null || r.ResourceProjects.Any(rp => rp.ProjectId == projectId))
                 .OrderByDescending(r => r.CreatedDateUtc)
                 .Skip(skip) // TODO : calc
                 .Take(take)
                 .ProjectTo<ResourceDto>(mapper)
                 .ToListAsync();
-
+            
             return resources;
         }
 

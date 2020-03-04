@@ -13,18 +13,23 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
 
         public ResourceProjectEntityTestBuilder WithDefaultValues()
         {
-            _resourceProject.Id = DefaultValues.IntId;
             _resourceProject.ProjectId = DefaultValues.IntId;
             _resourceProject.ResourceId = DefaultValues.IntId;
             return this;
         }
-
+        
         public ResourceProjectEntityTestBuilder WithProjectId(int id)
         {
-            _resourceProject.Id = id;
+            _resourceProject.ProjectId = id;
             return this;
         }
 
+        public ResourceProjectEntityTestBuilder WithResourceId(int id)
+        {
+            _resourceProject.ResourceId = id;
+            return this;
+        }
+        
         public ResourceProject Build()
         {
             return _resourceProject;

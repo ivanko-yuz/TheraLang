@@ -169,7 +169,7 @@ namespace TheraLang.Web.Controllers
             }).CreateMapper();
 
             var pagingParameters = mapper.Map<PagingParametersDto>(pagingParametersViewModel);
-            var resources = await _service.GetResourcesByCategoryId(categoryId, projectId, pagingParameters);
+            var resources = await _service.GetResources(categoryId, projectId, pagingParameters);
             return Ok(resources);
         }
     }

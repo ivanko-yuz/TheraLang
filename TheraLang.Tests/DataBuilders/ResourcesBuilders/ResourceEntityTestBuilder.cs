@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TheraLang.DAL.Entities;
 
 namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
@@ -61,6 +62,30 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
         public ResourceEntityTestBuilder WithResourceCategory(ResourceCategory resourceCategoryDto)
         {
             _resource.ResourceCategory = resourceCategoryDto;
+            return this;
+        }
+
+        public ResourceEntityTestBuilder WithResourceProjects(params ResourceProject[] resourceProjects)
+        {
+            _resource.ResourceProjects = resourceProjects;
+            return this;
+        }
+
+        public ResourceEntityTestBuilder WithResourceProjects(int count, int startProjectId = DefaultValues.IntId,
+            Func<int, int> projectIdGenerator = null)
+        {
+            var resourceProjects = new List<ResourceProject>();
+            var nextId = startProjectId;
+            for (int i = 0; i < count; i++)
+            {
+                resourceProjects.Add(new ResourceProjectEntityTestBuilder()
+                    .WithResourceId(_resource.Id)
+                    .WithProjectId(nextId)
+                    .Build());
+                nextId = projectIdGenerator?.Invoke(startProjectId + i) ?? startProjectId + i;
+            }
+
+            _resource.ResourceProjects = resourceProjects;
             return this;
         }
 
