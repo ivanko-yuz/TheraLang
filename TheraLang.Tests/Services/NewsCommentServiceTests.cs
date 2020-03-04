@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Common.Exceptions;
+using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using TheraLang.BLL.DataTransferObjects.CommentDtos;
 using TheraLang.BLL.Services;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Repository;
@@ -21,14 +23,21 @@ namespace TheraLang.Tests.Services
         private readonly NewsCommentService _commentsService;
         private readonly List<NewsComment> _testDb;
 
+        private int notExistedId = -10;
+        private int existedId = 1;
+        private int newsId = 1;
+
         public NewsCommentServiceTests()
         {
             _testDb = GetTestData().ToList();
 
             var repoMock = new Mock<IRepository<NewsComment>>();
             
-            repoMock.Setup(r => r.GetAll()).Returns(_testDb.AsQueryable());
-            
+            repoMock.Setup(r=>r.Get(It.IsAny<Expression<Func<NewsComment, bool>>>()))
+                .ReturnsAsync((Expression<Func<NewsComment, bool>> predicate) => _testDb
+                    .AsQueryable()
+                    .Where(predicate)
+                    .FirstOrDefault());
             repoMock.Setup(r => r.Add(It.IsAny<NewsComment>()))
                 .Callback((NewsComment comment) =>
                 {
@@ -38,59 +47,39 @@ namespace TheraLang.Tests.Services
 
             _unitOfWorkMock = new Mock<IUnitOfWork>();
             _unitOfWorkMock.Setup(u => u.Repository<NewsComment>()).Returns(repoMock.Object);
-            _unitOfWorkMock.Setup(u => u.SaveChangesAsync());
+            _unitOfWorkMock.Setup(u => u.SaveChangesAsync()).Verifiable();
 
             _commentsService = new NewsCommentService(_unitOfWorkMock.Object);
         }
 
         [Fact]
-        public async Task GetCommentsForNewsCount_ShoulReturnCommentsCount()
+        public async Task RemoveComments_NotFoundException()
         {
-            int newsId = 1;
-            int actualCount = _testDb.Where(c => c.NewsId == newsId).Count();
-
-            var result = await _commentsService.GetCommentsForNewsCount(newsId);
-
-            result.Should().Be(actualCount);
+            Func<Task> result = async() => await _commentsService.RemoveComment(notExistedId);
+            await result.Should().ThrowAsync<NotFoundException>();
         }
 
-        //[Fact]
-        //public async Task AddDonation_InvalidSignature()
-        //{
-        //    var liqPayCheckout = new LiqPayCheckoutDto()
-        //    {
-        //        Data = "eyJwdWJsaWNfa2V5IjoidGVzdFB1YmxpY0tleSIsInZlcnNpb24iOjMsImFjdGlvbiI6InBheSIsImFtb3VudCI6MjAwLjAsImN1cnJlbmN5IjoidWFoIiwiZGVzY3JpcHRpb24iOiLQkdC70LDQs9C+0LTRltC50L3RltGB0YLRjCIsInJlc3VsdF91cmwiOiJ0ZXN0VXJsIiwic2VydmVyX3VybCI6InRlc3RVcmwvc2VydmVyIiwibGFuZ3VhZ2UiOiJ1ayJ9",
-        //        Signature = "defNotAValidSignature",
-        //        ProjectId = 1
-        //    };
+        [Fact]
+        public async Task RemoveComments_ShouldCallSaveChanges()
+        {
+            await _commentsService.RemoveComment(existedId);
+            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
+        }
 
-        //    Func<Task> act = async () => await _commentsService.AddDonation(liqPayCheckout);
+        [Fact]
+        public async Task UpdateComments_NotFoundException()
+        {
+            Func<Task> result = async () => await _commentsService.UpdateComment(notExistedId, null);
+            await result.Should().ThrowAsync<NotFoundException>();
+        }
 
-        //    await act.Should().ThrowAsync<InvalidArgumentException>();
-        //}
-
-        //[Fact]
-        //public async Task AddDonation_ShouldCallSaveChanges()
-        //{
-        //    await _commentsService.AddDonation(_validCheckout);
-
-        //    _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
-        //}
-
-        //[Fact]
-        //public async Task AddDonation_ShouldCalculateCorrectAmountWithCommission()
-        //{
-        //    const decimal actualAmount = 100.0m;
-        //    const decimal actualCommission = 2.75m;
-        //    const decimal actualDonationAmount = actualAmount - actualCommission;
-
-        //    var newDonationId = await _commentsService.AddDonation(_validCheckout);
-
-        //    var resultDonation = _testDb.FirstOrDefault(d => d.Id == newDonationId);
-
-        //    resultDonation.Should().NotBeNull();
-        //    resultDonation?.Amount.Should().BePositive().And.Be(actualDonationAmount);
-        //}
+        [Fact]
+        public async Task UpdateComments_ShouldCallSaveChanges()
+        {
+            var comment = new CommentRequestDto() { Text = "New Text" };
+            await _commentsService.UpdateComment(existedId, comment);
+            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
+        }
 
         private IEnumerable<NewsComment> GetTestData()
         {
@@ -98,6 +87,7 @@ namespace TheraLang.Tests.Services
             {
                 new NewsComment()
                 {
+                    Id = 1,
                     Text = "Text",
                     CreatedById = new Guid(),
                     NewsId = 1
