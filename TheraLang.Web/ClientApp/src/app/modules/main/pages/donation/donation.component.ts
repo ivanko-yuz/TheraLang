@@ -3,7 +3,7 @@ import { LiqpayCheckout } from "../../../../shared/models/liqpay-checkout/liqpay
 import { DonationService } from "../../../../core/http/donations/donation.service";
 import { ActivatedRoute } from "@angular/router";
 import { liqpayCheckoutUrl } from "src/app/configs/api-endpoint.constants";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: "app-donation",
@@ -59,6 +59,14 @@ export class DonationComponent implements OnInit {
   clear(){
     this.amountForm.setValue({
       "donationAmount": null
-    })
+    });
+  }
+
+  limit(event: KeyboardEvent){
+    console.log(event);
+    const key = event.key;
+    if(!parseInt(key)){
+
+    }
   }
 }
