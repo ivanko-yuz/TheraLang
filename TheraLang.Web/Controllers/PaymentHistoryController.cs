@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Common.Enums;
+using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL.CustomTypes;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
-    [Route("api/payments")]
+    [Route("api/paymentHistory")]
     [ApiController]
     public class PaymentHistoryController : ControllerBase
     {
@@ -38,8 +36,7 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
-
-        [HttpGet]
+        [HttpGet("all")]
         [Authorize]
         public async Task<IActionResult> GetAll()
         {
@@ -50,13 +47,43 @@ namespace TheraLang.Web.Controllers
 
             return Ok(paymentViewModel);
         }
-        [HttpGet("{id}")]
+
+        [HttpGet("all/{id}")]
+        [Authorize]
         public async Task<IActionResult> GetAllByUserId(Guid id)
         {
             var paymentDto = await _paymentHistoryService.GetByUserId(id);
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PaymentHistoryDto, PaymentHistoryViewModel>())
                 .CreateMapper();
             var paymentViewModel = mapper.Map<IEnumerable<PaymentHistoryDto>, IEnumerable<PaymentHistoryViewModel>>(paymentDto);
+
+            return Ok(paymentViewModel);
+        }
+
+        // GET: api/paymentHistory/id/?pageNumber=2&pageSize=10
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetPageByUserId(Guid id, [FromQuery] PaginationParams pageParameters)
+        {
+            var paymentDto = await _paymentHistoryService.GetPageByUserId(id, pageParameters);
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PaymentHistoryDto, PaymentHistoryViewModel>())
+                .CreateMapper();
+            var paymentViewModel = mapper.Map<IEnumerable<PaymentHistoryDto>, IEnumerable<PaymentHistoryViewModel>>(paymentDto);
+
+            return Ok(paymentViewModel);
+        }
+
+        // GET: api/paymentHistory/?pageNumber=2&pageSize=10
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetPage([FromQuery] PaginationParams pageParameters)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PaymentHistoryDto, PaymentHistoryViewModel>())
+                .CreateMapper();
+
+            var paymentsDto = await _paymentHistoryService.GetHistoryPage(pageParameters);
+            var paymentViewModel = mapper.Map<IEnumerable<PaymentHistoryDto>, IEnumerable<PaymentHistoryViewModel>>(paymentsDto);
 
             return Ok(paymentViewModel);
         }

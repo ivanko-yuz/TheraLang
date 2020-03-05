@@ -1,6 +1,5 @@
 ﻿using Common.Enums;
 using Common.Exceptions;
-using FluentScheduler;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
-    public class PaymentService : IJob
+    public class PaymentService : IPaymentService    
     {
         private readonly IUnitOfWork _unitOfWork;
         public PaymentService(IUnitOfWork unitOfWork)
@@ -47,8 +46,9 @@ namespace TheraLang.BLL.Services
             return -fee.FeeAmount;
         }
 
-        public async void Execute()
+        public async Task MonthlyWitdraw()
         {
+            System.Diagnostics.Debug.WriteLine("BlowJob");
             var members = await GetAllMembers();
             decimal paymentSum = GetFee();
 
@@ -57,10 +57,8 @@ namespace TheraLang.BLL.Services
                 throw new NotFoundException("User details not found");
             }
 
-
             List<UserDetails> updatedUsers = new List<UserDetails>();
             List<PaymentHistory> updatedHistory = new List<PaymentHistory>();
-
 
             foreach (var member in members)
             {

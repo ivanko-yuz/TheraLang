@@ -27,7 +27,6 @@ namespace TheraLang.Web
             {
                 BuildWebHost(args)
                     .Seed()
-                    .StartScheduler()
                     .Run();
             }
             catch (Exception e)
