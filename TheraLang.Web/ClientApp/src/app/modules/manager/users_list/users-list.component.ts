@@ -3,11 +3,11 @@ import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { DialogService } from "src/app/core/services/dialog/dialog.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import {UserService} from "../../core/services/user/user.service";
-import {User} from "../../shared/models/user/user";
 import {ChangeRoleComponent} from "./change-role/change-role.component";
 import {MatDialog} from "@angular/material";
-import {Role} from "../../shared/models/role/role";
+import { UserService } from 'src/app/core/services/user/user.service';
+import { Role } from 'src/app/shared/models/role/role';
+import { User } from 'src/app/shared/models/user/user';
 
 @Component({
   selector: "app-user-profile",

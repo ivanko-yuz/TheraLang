@@ -8,9 +8,9 @@ import { EditPageComponent } from "./page-manager/edit-page/edit-page.component"
 import { MemberFeeComponent } from './member-fee/member-fee.component';
 import { CreateFeeComponent } from './member-fee/create-fee/create-fee.component';
 import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
-import { UsersListComponent } from '../users_list/users-list.component';
-import { ProjectTypeComponent } from '../main/pages/project/project-info/resources-table-for-project/project-type/project-type.component';
-import { ProjectRequestComponent } from '../main/pages/project/project-request/project-request.component';
+import { ProjectTypeComponent } from './project-type/project-type.component';
+import { ProjectRequestComponent } from './project-request/project-request.component';
+import { UsersListComponent } from './users_list/users-list.component';
 
 const routes: Routes = [
   {

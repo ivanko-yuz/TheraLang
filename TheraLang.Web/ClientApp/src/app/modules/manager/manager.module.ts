@@ -31,11 +31,11 @@ import { PageService } from "src/app/core/http/manager/page.service";
 import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
 import { PageViewComponent } from '../shared/page-view/page-view.component';
 import { PagePreviewComponent } from './page-manager/page-preview/page-preview.component';
-import { UsersListComponent } from '../users_list/users-list.component';
-import { ProjectTypeComponent } from '../main/pages/project/project-info/resources-table-for-project/project-type/project-type.component';
-import { ProjectTypeFormComponent } from '../main/pages/project/project-type-form/project-type-form.component';
-import { ProjectTypeCreateFormComponent } from '../main/pages/project/project-type-create-form/project-type-create-form.component';
-import { ProjectRequestComponent } from '../main/pages/project/project-request/project-request.component';
+import { ProjectTypeComponent } from './project-type/project-type.component';
+import { ProjectTypeFormComponent } from './project-type/project-type-form/project-type-form.component';
+import { ProjectTypeCreateFormComponent } from './project-type/project-type-create-form/project-type-create-form.component';
+import { ProjectRequestComponent } from './project-request/project-request.component';
+import { UsersListComponent } from './users_list/users-list.component';
 
 @NgModule({
   declarations: [

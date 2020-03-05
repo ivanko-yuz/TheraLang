@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Project } from "../../../../../shared/models/project/project";
-import { HttpProjectService } from "../../../../../core/http/project/http-project.service";
-import { ProjectStatusRequest } from "../../../../../configs/project-status-request";
+import { Project } from "../../../shared/models/project/project";
+import { HttpProjectService } from "../../../core/http/project/http-project.service";
+import { ProjectStatusRequest } from "../../../configs/project-status-request";
 import { HttpService } from "src/app/core/http/http/http.service";
 
 @Component({

@@ -109,9 +109,9 @@ import { SharedModule} from "./modules/shared/shared.module";
 import { RegistrationComponent } from "./modules/registration/registration.component";
 import { UserPageComponent } from "./modules/user-page/user-page.component";
 import { UserService } from "./core/services/user/user.service";
-import { ChangeRoleComponent } from "./modules/users_list/change-role/change-role.component";
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
+import { ChangeRoleComponent } from './modules/manager/users_list/change-role/change-role.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
