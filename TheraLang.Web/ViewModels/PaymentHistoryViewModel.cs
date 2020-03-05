@@ -14,5 +14,6 @@ namespace TheraLang.Web.ViewModels
         public decimal Saldo { get; set; }
         public Guid UserId { get; set; }
         public string UserName { get; set; }
+        public decimal CurrentBalance { get; set; }
     }
 }

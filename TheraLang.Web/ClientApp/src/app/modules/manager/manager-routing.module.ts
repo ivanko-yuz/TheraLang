@@ -8,6 +8,7 @@ import { EditPageComponent } from "./page-manager/edit-page/edit-page.component"
 import { MemberFeeComponent } from './member-fee/member-fee.component';
 import { CreateFeeComponent } from './member-fee/create-fee/create-fee.component';
 import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
+import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: "paymentHistory",
+    component:PaymentHistoryComponent
+  }
 ];
 
 @NgModule({

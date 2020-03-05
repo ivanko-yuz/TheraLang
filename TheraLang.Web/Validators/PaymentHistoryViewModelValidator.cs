@@ -14,7 +14,6 @@ namespace TheraLang.Web.Validators
             RuleFor(x => x.Date).NotNull();
             RuleFor(x => x.Description).IsInEnum();
             RuleFor(x => x.Saldo).NotNull();
-            RuleFor(x => x.UserName).NotNull();
             RuleFor(x => x.UserId).NotNull();
         }
     }
