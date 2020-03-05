@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.CustomTypes;
 using TheraLang.BLL.DataTransferObjects.Projects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
@@ -52,13 +53,18 @@ namespace TheraLang.Web.Controllers
         /// <returns>array of Projects</returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IEnumerable<ProjectDonationViewModel>> GetAllProjects()
+        public async Task<IEnumerable<ProjectDonationViewModel>> GetAllProjects([FromQuery] FilterQuery query)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var authUser = await _authenticateService.GetAuthUserAsync();
+                query.User = authUser;
+            }
             var mapper = new MapperConfiguration(mapOpts =>
                     mapOpts.CreateMap<ProjectPreviewDto, ProjectDonationViewModel>())
                 .CreateMapper();
 
-            var projectDtos = await _projectService.GetAllProjectsAsync();
+            var projectDtos = await _projectService.GetAllProjectsAsync(query);
 
             var projectModels =
                 mapper.Map<IEnumerable<ProjectPreviewDto>, IEnumerable<ProjectDonationViewModel>>(projectDtos);

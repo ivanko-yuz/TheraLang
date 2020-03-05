@@ -8,6 +8,7 @@ using AutoMapper.QueryableExtensions;
 using Common.Constants;
 using Common.Enums;
 using Microsoft.EntityFrameworkCore;
+using TheraLang.BLL.CustomTypes;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.Projects;
 using TheraLang.BLL.Interfaces;
@@ -27,7 +28,7 @@ namespace TheraLang.BLL.Services
             _fileService = fileService;
         }
 
-        public async Task<IEnumerable<ProjectPreviewDto>> GetAllProjectsAsync()
+        public async Task<IEnumerable<ProjectPreviewDto>> GetAllProjectsAsync(FilterQuery query)
         {
             var mapper = new MapperConfiguration(cfg =>
             {
@@ -39,12 +40,42 @@ namespace TheraLang.BLL.Services
                     );
             });
 
-            var projectsDtos = await _unitOfWork.Repository<Project>()
-                .GetAll()
+            var projectsDtos = await GetFilteredProjects(query)
                 .Where(x => x.StatusId == ProjectStatus.Approved)
                 .ProjectTo<ProjectPreviewDto>(mapper)
                 .ToListAsync();
+            return projectsDtos;
+        }
+        private IQueryable<Project> GetFilteredProjects(FilterQuery query)
+        {
+            var projectsDtos = _unitOfWork.Repository<Project>()
+                .GetAll();
+            if (query.MyProjects)
+            {
+                var prParticipants = projectsDtos.Select(p => p.ProjectParticipations.Where(pr => pr.Role == MemberRole.ProjectOwner).Where(pr => pr.User.Id == query.User.Id));
+                var prs = prParticipants.Select(p => p.Select(pr => pr.Project));
+                projectsDtos = prs.Select(p => p.FirstOrDefault());
+            }
+            if (query.SortByDaysLeft)
+            {
+                projectsDtos = projectsDtos.OrderBy(p => p.ProjectEnd.Date - DateTime.Now.Date);
+            }
+            if (query.Search != null && query.Search != "")
+            {
+                projectsDtos = projectsDtos.Where(p => p.Name.Contains(query.Search));
+            }
+            if (query.SortByDateAsc)
+            {
+                projectsDtos = projectsDtos.OrderBy(p => p.ProjectStart);
+            }
+            else
+            {
+                if (query.SortByDateDesc)
+                {
+                    projectsDtos = projectsDtos.OrderByDescending(p => p.ProjectStart);
 
+                }
+            }
             return projectsDtos;
         }
 
@@ -62,7 +93,7 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<ProjectDto>> GetProjectsByStatusAsync(int status)
         {
             var projects =
-                (await _unitOfWork.Repository<Project>().GetAllAsync(i => i.StatusId == (ProjectStatus) status))
+                (await _unitOfWork.Repository<Project>().GetAllAsync(i => i.StatusId == (ProjectStatus)status))
                 .ToArray();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
