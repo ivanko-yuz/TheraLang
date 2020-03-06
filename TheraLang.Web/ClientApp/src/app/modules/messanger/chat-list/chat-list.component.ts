@@ -9,20 +9,15 @@ import { Chat } from 'src/app/shared/models/chat/chat';
 })
 export class ChatListComponent implements OnInit {
   chats: Chat[];
-  chat: Chat;
-  @Output() onChatChange: EventEmitter<Chat> = new EventEmitter<Chat>();
+  @Output() onChatChange: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private messangerService: MessangerService) { }
 
   ngOnInit() {
     this.messangerService.getAllChats().subscribe(async (data: Chat[]) => this.chats = data);
-    if (this.chats) {
-      this.changeChat(this.chats[0].id);
-    }
   }
 
   changeChat(id: number) {
-    this.messangerService.getChat(id).subscribe(async (data: Chat) => this.chat = data)
-    this.onChatChange.emit(this.chat);
+    this.onChatChange.emit(id);
   }
 }

@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewChecked, ElementRef } from '@angular/core';
 import { MessangerService } from 'src/app/core/http/messanger/messanger.service';
 import { Chat } from 'src/app/shared/models/chat/chat';
 import { Message } from 'src/app/shared/models/message/message';
-import { UserService } from 'src/app/core/auth/user.service';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr'
+import { UserService } from 'src/app/core/auth/user.service';
 
 @Component({
   selector: 'app-messanger',
   templateUrl: './messanger.component.html',
   styleUrls: ['./messanger.component.less']
 })
-export class MessangerComponent implements OnInit {
+export class MessangerComponent implements OnInit, AfterViewChecked {
   currentChat: Chat;
   messageText: string;
   currentUserId: string;
   hubConnection: HubConnection;
+  @ViewChild('chatScroller', { static: false }) scroll: ElementRef;
+  disableScrollDown = false
 
   constructor(private messangerService: MessangerService,
     private userService: UserService) {
@@ -22,38 +24,91 @@ export class MessangerComponent implements OnInit {
 
   ngOnInit() {
     this.currentUserId = this.userService.getCurrentUserId();
-    this.startConnection();
-  }
-
-  startConnection() {
     this.hubConnection = new HubConnectionBuilder()
       .withUrl('/chatHub')
       .build();
 
-    this.hubConnection.on("RecieveMessage", (message: Message) => {
-      console.log('data: ', message)
-    });
+    this.startConnection();
+    this.listenChat();
 
+    console.log('updated!');
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.currentChat) {
+      this.scrollToBottom();
+    }
+  }
+
+  scrollToBottom(): void {
+    if (this.disableScrollDown) {
+      return
+    }
+    try {
+      this.scroll.nativeElement.scrollTop = this.scroll.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
+
+  onScroll() {
+    let element = this.scroll.nativeElement
+    let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight
+    if (this.disableScrollDown && atBottom) {
+      this.disableScrollDown = false
+    }
+
+    if (element.scrollTop == 0) {
+      console.log('*load data*');
+    }
+
+    else {
+      this.disableScrollDown = true
+    }
+
+  }
+
+  // start() {
+  //   this.startConnection();
+  //   this.listenChat();
+  // }
+
+  // stop() {
+  //   this.hubConnection.stop();
+  // }
+
+  joinToChat(chatId: number) {
+    this.hubConnection.invoke('joinRoom', chatId);
+    console.log('joined to ', this.currentChat.id);
+  }
+
+  startConnection() {
     this.hubConnection
       .start()
       .then(function () {
-        this.hubConnection.invoke('joinRoom', this.currentChat.id);
+        console.log('connection started!');
       })
       .catch(function (err) {
         console.log(err)
       })
   }
 
-  action() {
-    console.log('curr user id ', this.currentUserId);
-    console.log('curr chat id ', this.currentChat);
-    console.log('hub conn ', this.hubConnection);
-    //this.startConnection();
+  listenChat() {
+    this.hubConnection.on("RecieveMessage", (message: Message) => {
+      this.currentChat.messages.push(message);
+    });
   }
 
+  action() {
+  }
 
-  updateChat(chat: Chat) {
-    this.currentChat = chat;
+  // leaveChat() {
+  //   this.hubConnection.invoke('leaveRoom', this.currentChat.id);
+  // }
+
+  updateChat(chatId: number) {
+    this.messangerService.getChat(chatId).subscribe(async (data: Chat) => {
+      this.currentChat = data;
+      this.joinToChat(chatId);
+    });
   }
 
   sendMessage() {
@@ -64,9 +119,10 @@ export class MessangerComponent implements OnInit {
 
     this.messangerService.sendMessage(message).subscribe(async (msg: string) => {
       this.messageText = '';
+      this.disableScrollDown = false;
+      this.scrollToBottom();
     }, async (error) => {
       console.log(error);
     });
-    console.log('message: ', message);
   }
 }

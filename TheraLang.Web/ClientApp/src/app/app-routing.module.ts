@@ -95,7 +95,8 @@ const routes: Routes = [
       },
       {
         component: MessangerComponent,
-        path: "messanger"
+        path: "messanger",
+        canActivate: [AuthGuard]
       }
     ],
   },
