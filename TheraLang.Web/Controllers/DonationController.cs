@@ -54,8 +54,10 @@ namespace TheraLang.Web.Controllers
             }.ConvertToQueryString();
 
             var liqPayCheckoutModelDto = mapper.Map<LiqPayCheckoutModelRequestDto>(liqPayCheckoutRequest);
-            
-            liqPayCheckoutModelDto.ResultUrl = hostUrl;
+
+            liqPayCheckoutModelDto.ResultUrl = liqPayCheckoutRequest.ProjectId == null
+                ? hostUrl
+                : $"{hostUrl}/projects/{liqPayCheckoutRequest.ProjectId}";
             liqPayCheckoutModelDto.ServerUrl = $"{hostUrl}/api/donations/checkout?{resultQueryString}";
 
             var liqPayCheckoutDto =
