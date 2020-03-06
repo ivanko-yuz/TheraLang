@@ -35,7 +35,9 @@ namespace TheraLang.BLL.Services
             var news = await _unitOfWork.Repository<News>().GetAll()
                 .Include(e => e.Author)
                 .ThenInclude(a => a.Details)
-                .Include(e => e.UploadedContentImages).ToListAsync();
+                .Include(e => e.UploadedContentImages)
+                .OrderByDescending(e => e.CreatedDateUtc)
+                .ToListAsync();
 
             var mapper = new MapperConfiguration(cfg =>
                 {
@@ -53,6 +55,7 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PagingParametersDto pageParameters)
         {
             var news = await _unitOfWork.Repository<News>().GetAll()
+                .OrderByDescending(e => e.CreatedDateUtc)
                 .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
                 .Take(pageParameters.PageSize)
                 .Include(e => e.Author)
@@ -196,7 +199,7 @@ namespace TheraLang.BLL.Services
             {
                 var imageExtension = Path.GetExtension(image.FileName);
                 var imageUrl = await _fileService.SaveFile(fileStream, imageExtension);
-                var uploadedImage = new UploadedNewsContentImage() {Url = imageUrl.ToString()};
+                var uploadedImage = new UploadedNewsContentImage() { Url = imageUrl.ToString() };
                 return uploadedImage;
             }
         }
