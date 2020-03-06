@@ -47,6 +47,26 @@ namespace TheraLang.BLL.Services
             return messageDto;
         }
 
+        public async Task<IEnumerable<MessageDto>> GetMessages(MessageParameters parameters)
+        {
+            var messages = await _unitOfWork.Repository<Message>().GetAll()
+                .Include(m => m.Chat)
+                .Include(m => m.Poster)
+                .ThenInclude(u => u.Details)
+                .Where(m => m.ChatId == parameters.ChatId)
+                .OrderByDescending(m => m.Timestamp)
+                .Skip((parameters.PageNumber - 1) * parameters.PageSize)
+                .Take(parameters.PageSize)
+                .ToListAsync();
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Message, MessageDto>()
+                .ForMember(m => m.PosterName, opt => opt.MapFrom(m => m.Poster.Details.FirstName))).CreateMapper();
+
+            var messagesDto = mapper.Map<IEnumerable<Message>, IEnumerable<MessageDto>>(messages);
+
+            return messagesDto;
+        }
+
         public async Task<ChatDto> GetChat(int id, Guid userId)
         {
             var chat = await _unitOfWork.Repository<Chat>().GetAll()
@@ -57,18 +77,16 @@ namespace TheraLang.BLL.Services
                 .Where(x => x.Participants.Any(p => p.UserId == userId))
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            var newMapper = new MapperConfiguration(cfg => {
+            var mapper = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<Chat, ChatDto>();
                 cfg.CreateMap<Message, MessageDto>()
                     .ForMember(m => m.PosterName, opt => opt.MapFrom(m => m.Poster.Details.FirstName));
             }).CreateMapper();
 
-            var dest = newMapper.Map<Chat, ChatDto>(chat);
+            var chatDto = mapper.Map<Chat, ChatDto>(chat);
 
-            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Chat, ChatDto>()).CreateMapper();
-            //var chatDto = mapper.Map<Chat, ChatDto>(chat);
-
-            return dest;
+            return chatDto;
         }
 
         public async Task CreateRoom(string name, Guid userId)
@@ -144,7 +162,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<ChatDto>> GetPrivateChats(Guid userId)
         {
-            var chats =  await _unitOfWork.Repository<Chat>().GetAll()
+            var chats = await _unitOfWork.Repository<Chat>().GetAll()
                 .Include(x => x.Participants)
                 .ThenInclude(x => x.User)
                 .Where(x => x.Type == ChatType.Private && x.Participants.Any(y => y.UserId == userId))

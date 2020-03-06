@@ -5,14 +5,14 @@ namespace TheraLang.Web.Hubs
 {
     public class ChatHub : Hub
     {
-        public Task JoinRoom(string roomId)
+        public async Task JoinRoom(string roomId)
         {
-            return Groups.AddToGroupAsync(Context.ConnectionId, roomId);
+            await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
         }
 
-        public Task LeaveRoom(string roomId)
+        public async Task LeaveRoom(string roomId)
         {
-            return Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId);
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId);
         }
     }
 }

@@ -15,5 +15,6 @@ namespace TheraLang.BLL.Interfaces
         Task<int> CreatePrivateChat(Guid rootId, Guid targetId);
         Task<IEnumerable<ChatDto>> GetPrivateChats(Guid userId);
         Task<MessageDto> CreateMessage(MessageCreateDto message, Guid posterId);
+        Task<IEnumerable<MessageDto>> GetMessages (MessageParameters parameters);
     }
 }

@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.SignalR;
 using TheraLang.BLL.DataTransferObjects.ChatDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.Hubs;
-using TheraLang.Web.ViewModels.Chat;
 
 namespace TheraLang.Web.Controllers
 {
+    [Authorize]
     [Route("api/chats")]
     [ApiController]
     public class ChatController : ControllerBase
@@ -45,7 +45,7 @@ namespace TheraLang.Web.Controllers
 
         //?
         [HttpPost("private")]
-        public async Task<IActionResult> CreatePrivateChat([FromBody]Guid userId)
+        public async Task<IActionResult> CreatePrivateChat([FromBody]Guid targetUserId)
         {
             var authUserId = (await _authenticateService.GetAuthUser()).Id;
             var id = await _chatService.CreatePrivateChat(authUserId, userId);
@@ -99,10 +99,29 @@ namespace TheraLang.Web.Controllers
             {
                 Text = message.Text,
                 PosterName = message.PosterName,
-                Timestamp = message.Timestamp.ToString("dd/MM/yyyy hh:mm:ss")
+                Timestamp = message.Timestamp.ToString("dd/MM/yyyy hh:mm:ss"),
+                PosterId = userId
             });
 
             return Ok(message);
+        }
+
+        //api/chats/message
+        [HttpGet("{chatId}/{pageNumber}/{pageSize}")]
+        public async Task<IActionResult> GetMessages(int chatId, int pageNumber, int pageSize)
+        {
+            var userId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var parameters = new MessageParameters()
+            {
+                ChatId = chatId,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                UserId = userId
+            };
+
+            var messages = await _chatService.GetMessages(parameters);
+
+            return Ok(messages);
         }
     }
 }
