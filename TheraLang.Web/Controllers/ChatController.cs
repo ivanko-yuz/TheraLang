@@ -27,7 +27,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetChats()
         {
-            var authUserId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var authUserId = (await _authenticateService.GetAuthUser()).Id;
             var chats = await _chatService.GetChats(authUserId);
 
             return Ok(chats);
@@ -37,7 +37,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet("private")]
         public async Task<IActionResult> GetPrivateChats()
         {
-            var authUserId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var authUserId = (await _authenticateService.GetAuthUser()).Id;
             var chats = await _chatService.GetPrivateChats(authUserId);
 
             return Ok(chats);
@@ -47,7 +47,7 @@ namespace TheraLang.Web.Controllers
         [HttpPost("private")]
         public async Task<IActionResult> CreatePrivateChat([FromBody]Guid userId)
         {
-            var authUserId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var authUserId = (await _authenticateService.GetAuthUser()).Id;
             var id = await _chatService.CreatePrivateChat(authUserId, userId);
 
             return Ok();
@@ -57,7 +57,7 @@ namespace TheraLang.Web.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Chat(int id)
         {
-            var authUserId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var authUserId = (await _authenticateService.GetAuthUser()).Id;
             var chat = await _chatService.GetChat(id, authUserId);
 
             if (chat == null)
@@ -72,7 +72,7 @@ namespace TheraLang.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRoom([FromBody]string name)
         {
-            var authUserId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var authUserId = (await _authenticateService.GetAuthUser()).Id;
             await _chatService.CreateRoom(name, authUserId);
 
             return Ok();
@@ -82,7 +82,7 @@ namespace TheraLang.Web.Controllers
         [HttpPost("join")]
         public async Task<IActionResult> JoinRoom([FromBody]int chatId)
         {
-            var authUserId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var authUserId = (await _authenticateService.GetAuthUser()).Id;
             await _chatService.JoinRoom(chatId, authUserId);
 
             return Ok();
@@ -92,7 +92,7 @@ namespace TheraLang.Web.Controllers
         [HttpPost("message")]
         public async Task<IActionResult> SendMessage([FromBody]MessageCreateDto messageCreateDto, [FromServices] IHubContext<ChatHub> chat)
         {
-            var authUserId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var authUserId = (await _authenticateService.GetAuthUser()).Id;
             var message = await _chatService.CreateMessage(messageCreateDto, authUserId);
 
             await chat.Clients.Group(messageCreateDto.ChatId.ToString()).SendAsync("RecieveMessage", new
