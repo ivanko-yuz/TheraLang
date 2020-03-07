@@ -93,7 +93,7 @@ namespace TheraLang.BLL.Services
             {
                 var user = await _unitOfWork.Repository<User>().Get(u => u.Id == userId);
                 var isRequested = await _unitOfWork.Repository<ProjectParticipation>()
-                    .Get(p => p.ProjectId == projectId && p.User.Id == userId);
+                    .Get(p => p.ProjectId == projectId && p.UserId == userId);
 
 
                 if (isRequested == null)
