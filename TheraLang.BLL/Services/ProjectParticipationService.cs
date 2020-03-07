@@ -15,9 +15,9 @@ namespace TheraLang.BLL.Services
     public class ProjectParticipationService : IProjectParticipationService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ChatService _chatService;
+        private readonly IChatService _chatService;
 
-        public ProjectParticipationService(IUnitOfWork unitOfWork, ChatService chatService)
+        public ProjectParticipationService(IUnitOfWork unitOfWork, IChatService chatService)
         {
             _unitOfWork = unitOfWork;
             _chatService = chatService;
@@ -27,8 +27,9 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var participant = await _unitOfWork.Repository<ProjectParticipation>()
-                    .Get(x => x.Id == participantId);
+                var participant = await _unitOfWork.Repository<ProjectParticipation>().GetAll()
+                        .Include(p => p.Project)
+                        .FirstOrDefaultAsync(x => x.Id == participantId);
 
                 if (participant == null)
                 {
@@ -43,22 +44,13 @@ namespace TheraLang.BLL.Services
 
                 if (status == ProjectParticipationStatus.Approved)
                 {
-                    await JoinToChatOnApprove(participantId);
+                    await _chatService.JoinRoom((int)participant.Project.ChatId, participant.UserId);
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception($"Error while updating the status for {nameof(participantId)}:{participantId}", ex);
             }
-        }
-
-        private async Task JoinToChatOnApprove(int participantId)
-        {
-            var participant = await _unitOfWork.Repository<ProjectParticipation>().GetAll()
-                .Include(p => p.Project)
-                .FirstOrDefaultAsync(x => x.Id == participantId);
-
-            await _chatService.JoinRoom((int)participant.Project.ChatId, participant.CreatedById);
         }
 
         public async Task<IEnumerable<ProjectParticipationDto>> GetAll()

@@ -174,22 +174,14 @@ namespace TheraLang.BLL.Services
 
             project.StatusId = projectStatus;
 
-            _unitOfWork.Repository<Project>().Update(project);
-            await _unitOfWork.SaveChangesAsync();
-
             if (project.StatusId == ProjectStatus.Approved)
             {
-                await CreateChatOnApprove(projectId);
+                var chatId = await _chatService.CreateRoom(project.Name);
+                project.ChatId = chatId;
             }
-        }
-
-        private async Task CreateChatOnApprove(int projectId)
-        {
-            var project = await _unitOfWork.Repository<Project>().Get(p => p.Id == projectId);
-            var chatId = await _chatService.CreateRoom(project.Name);
-            project.ChatId = chatId;
 
             _unitOfWork.Repository<Project>().Update(project);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(int id, ProjectDto projectDto)
