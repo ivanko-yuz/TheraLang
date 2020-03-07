@@ -36,7 +36,7 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> CreateProject([FromForm] ProjectViewModel projectModel)
         {
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             if (authUser == null) return BadRequest();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, ProjectDto>()).CreateMapper();

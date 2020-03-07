@@ -149,7 +149,9 @@
       "to-be-raised": "To be raised",
       "donate-4-org": "Donate for our organisation",
       "donate-4-project": "Donate for this project",
-      "message": "Enter donation amount (Payment will be charged)"
+      "message": "Enter donation amount",
+      "message-commission": "(Payment will be charged)",
+      "invalid-sum": "Invalid sum"
     },
     "user": {
       "email": "Email",

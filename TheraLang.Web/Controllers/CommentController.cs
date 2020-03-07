@@ -69,7 +69,7 @@ namespace TheraLang.Web.Controllers
                 .CreateMapper();
 
             var commentDto = mapper.Map<CommentRequestDto>(commentModel);
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             commentDto.AuthorId = authUser.Id;
 
             await _newsCommentService.AddComment(commentDto);
