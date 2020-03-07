@@ -89,7 +89,7 @@ namespace TheraLang.Web.Controllers
                 return NotFound();
             }
 
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             if (authUser == null) return BadRequest();
 
             await _projectParticipationServiceservice.CreateRequest(authUser.Id, projectId);

@@ -24,7 +24,7 @@ namespace TheraLang.BLL.Services
         public async Task<DonationDto> GetDonation(Guid donationId)
         {
             var donation = await _unitOfWork.Repository<Donation>().Get(d => d.Id == donationId) ??
-                           throw new EntityNotFoundException(nameof(Donation), donationId.ToString());
+                           throw new NotFoundException("Donations");
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Donation, DonationDto>()).CreateMapper();
             var projectsDto = mapper.Map<Donation, DonationDto>(donation);
