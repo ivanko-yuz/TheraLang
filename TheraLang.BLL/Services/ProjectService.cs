@@ -20,11 +20,13 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
+        private readonly IChatService _chatService;
 
-        public ProjectService(IUnitOfWork unitOfWork, IFileService fileService)
+        public ProjectService(IUnitOfWork unitOfWork, IFileService fileService, IChatService chatService)
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
+            _chatService = chatService;
         }
 
         public async Task<IEnumerable<ProjectPreviewDto>> GetAllProjectsAsync()
@@ -171,9 +173,23 @@ namespace TheraLang.BLL.Services
             var projectStatus = mapper.Map<ProjectStatusDto, ProjectStatus>(status);
 
             project.StatusId = projectStatus;
-            _unitOfWork.Repository<Project>().Update(project);
 
+            _unitOfWork.Repository<Project>().Update(project);
             await _unitOfWork.SaveChangesAsync();
+
+            if (project.StatusId == ProjectStatus.Approved)
+            {
+                await CreateChatOnApprove(projectId);
+            }
+        }
+
+        private async Task CreateChatOnApprove(int projectId)
+        {
+            var project = await _unitOfWork.Repository<Project>().Get(p => p.Id == projectId);
+            var chatId = await _chatService.CreateRoom(project.Name);
+            project.ChatId = chatId;
+
+            _unitOfWork.Repository<Project>().Update(project);
         }
 
         public async Task UpdateAsync(int id, ProjectDto projectDto)

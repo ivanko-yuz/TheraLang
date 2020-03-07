@@ -15,10 +15,12 @@ namespace TheraLang.BLL.Services
     public class ProjectParticipationService : IProjectParticipationService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ChatService _chatService;
 
-        public ProjectParticipationService(IUnitOfWork unitOfWork)
+        public ProjectParticipationService(IUnitOfWork unitOfWork, ChatService chatService)
         {
             _unitOfWork = unitOfWork;
+            _chatService = chatService;
         }
 
         public async Task ChangeStatus(int participantId, ProjectParticipationStatus status)
@@ -38,11 +40,25 @@ namespace TheraLang.BLL.Services
 
                 _unitOfWork.Repository<ProjectParticipation>().Update(participant);
                 await _unitOfWork.SaveChangesAsync();
+
+                if (status == ProjectParticipationStatus.Approved)
+                {
+                    await JoinToChatOnApprove(participantId);
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception($"Error while updating the status for {nameof(participantId)}:{participantId}", ex);
             }
+        }
+
+        private async Task JoinToChatOnApprove(int participantId)
+        {
+            var participant = await _unitOfWork.Repository<ProjectParticipation>().GetAll()
+                .Include(p => p.Project)
+                .FirstOrDefaultAsync(x => x.Id == participantId);
+
+            await _chatService.JoinRoom((int)participant.Project.ChatId, participant.CreatedById);
         }
 
         public async Task<IEnumerable<ProjectParticipationDto>> GetAll()
