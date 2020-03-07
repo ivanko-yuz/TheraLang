@@ -48,7 +48,7 @@ namespace TheraLang.BLL.Services.FileServices
 
             var fullPath = FormatFullPath(fileName);
 
-            if (File.Exists(fullPath))
+            if (!File.Exists(fullPath))
             {
                 throw new FileDoesNotExistException(fullPath);
             }
