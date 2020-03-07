@@ -77,10 +77,19 @@ namespace TheraLang.DataSeeding
                 }
             };
 
+            var society = new List<Society>()
+            {
+                new Society()
+                {
+                    Name = "UTTMM"
+                }
+            };
+
             await dbContext.ClearAndSeed(roles);
             await dbContext.ClearAndSeed(users);
             await dbContext.ClearAndSeed(resourceCategories);
             await dbContext.ClearAndSeed(userDetails);
+            await dbContext.ClearAndSeed(society);
         }
         
         private static DbContext CreateDbContext()
