@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 using TheraLang.BLL.DataTransferObjects.ChatDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.Hubs;
+using TheraLang.Web.ViewModels.Chat;
 
 namespace TheraLang.Web.Controllers
 {
@@ -70,20 +71,18 @@ namespace TheraLang.Web.Controllers
 
         //api/chats
         [HttpPost]
-        public async Task<IActionResult> CreateRoom([FromBody]string name)
+        public async Task<IActionResult> CreateRoom([FromBody]ChatCreateViewModel chatModel)
         {
-            var authUserId = (await _authenticateService.GetAuthUser()).Id;
-            await _chatService.CreateRoom(name, authUserId);
+            await _chatService.CreateRoom(chatModel.ChatName);
 
             return Ok();
         }
 
         //api/chats/join
         [HttpPost("join")]
-        public async Task<IActionResult> JoinRoom([FromBody]int chatId)
+        public async Task<IActionResult> JoinRoom([FromBody]JoinChatViewModel joinModel)
         {
-            var authUserId = (await _authenticateService.GetAuthUser()).Id;
-            await _chatService.JoinRoom(chatId, authUserId);
+            await _chatService.JoinRoom(joinModel.ChatId, joinModel.UserId);
 
             return Ok();
         }
@@ -99,7 +98,7 @@ namespace TheraLang.Web.Controllers
             {
                 Text = message.Text,
                 PosterName = message.PosterName,
-                Timestamp = message.Timestamp.ToString("dd/MM/yyyy hh:mm:ss"),
+                Timestamp = message.Timestamp,
                 PosterId = userId
             });
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Constants;
 using Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects.ChatDtos;
@@ -15,10 +16,12 @@ namespace TheraLang.BLL.Services
     public class ChatService : IChatService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAuthenticateService _authenticateService;
 
-        public ChatService(IUnitOfWork unitOfWork)
+        public ChatService(IUnitOfWork unitOfWork, IAuthenticateService authenticateService)
         {
             _unitOfWork = unitOfWork;
+            _authenticateService = authenticateService;
         }
 
         public async Task<MessageDto> CreateMessage(MessageCreateDto messageCreateDto, Guid posterId)
@@ -72,16 +75,14 @@ namespace TheraLang.BLL.Services
             var chat = await _unitOfWork.Repository<Chat>().GetAll()
                 .Include(x => x.Messages)
                 .Include(x => x.Participants)
-                .ThenInclude(x => x.User)
-                .ThenInclude(x => x.Details)
                 .Where(x => x.Participants.Any(p => p.UserId == userId))
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             var mapper = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Chat, ChatDto>();
-                cfg.CreateMap<Message, MessageDto>()
-                    .ForMember(m => m.PosterName, opt => opt.MapFrom(m => m.Poster.Details.FirstName));
+                cfg.CreateMap<Chat, ChatDto>()
+                    .ForMember(m => m.PagesCount, opt => opt
+                        .MapFrom(m => (int)Math.Ceiling((double)m.Messages.Count() / PaginationConstants.MessagesPerPage)));
             }).CreateMapper();
 
             var chatDto = mapper.Map<Chat, ChatDto>(chat);
@@ -89,8 +90,9 @@ namespace TheraLang.BLL.Services
             return chatDto;
         }
 
-        public async Task CreateRoom(string name, Guid userId)
+        public async Task<int> CreateRoom(string name)
         {
+            var userId = (await _authenticateService.GetAuthUserAsync()).Id;
             var chat = new Chat
             {
                 Name = name,
@@ -104,8 +106,9 @@ namespace TheraLang.BLL.Services
             });
 
             _unitOfWork.Repository<Chat>().Add(chat);
-
             await _unitOfWork.SaveChangesAsync();
+
+            return chat.Id;
         }
 
         public async Task JoinRoom(int chatId, Guid userId)
