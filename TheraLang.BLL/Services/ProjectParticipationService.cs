@@ -49,7 +49,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<ProjectParticipationDto>> GetAll()
         {
-            var currentUserId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var currentUserId = (await _authenticateService.GetAuthUser()).Id;
 
             var projectParticipations = await _unitOfWork.Repository<ProjectParticipation>().GetAll()
                 .Where(p => p.Role != MemberRole.ProjectOwner)
