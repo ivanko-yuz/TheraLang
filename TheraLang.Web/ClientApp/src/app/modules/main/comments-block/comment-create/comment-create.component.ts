@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/user/user';
 import { CommentsService } from 'src/app/core/http/comments/comments.service';
@@ -15,6 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 export class CommentCreateComponent implements OnInit {
 
   @Input() currentUser: User;
+  @Output() commentCreated = new EventEmitter();
   public commentForm: FormGroup;
 
   constructor(
@@ -53,6 +54,7 @@ export class CommentCreateComponent implements OnInit {
             .get("common.created-successfully")
             .toPromise();
           this.notificationService.success(msg);
+          this.commentCreated.emit();
         },
         async error => {
           console.log(error);

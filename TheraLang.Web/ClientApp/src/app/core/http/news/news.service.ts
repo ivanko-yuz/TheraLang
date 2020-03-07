@@ -27,4 +27,9 @@ export class NewsService {
   deleteNews(newsId:number){
     return this.http.delete(this.url + "news/"+newsId);
   }
+
+  like(newsId: number){
+    return this.http.put(this.url + "news/like/" + newsId, null)
+  }
+
 }

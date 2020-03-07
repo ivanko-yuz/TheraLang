@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
+using TheraLang.DAL.Entities.ManyToMany;
+using Common;
+using AutoMapper.QueryableExtensions;
+using Common.Exceptions;
 
 namespace TheraLang.BLL.Services
 {
@@ -18,11 +21,13 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
+        private readonly IAuthenticateService _authenticateService;
 
-        public NewsService(IUnitOfWork unitOfWork, IFileService fileService)
+        public NewsService(IUnitOfWork unitOfWork, IFileService fileService, IAuthenticateService authenticateService)
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
+            _authenticateService = authenticateService;
         }
 
         public async Task<int> GetNewsCount()
@@ -32,54 +37,53 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<NewsPreviewDto>> GetAllNews()
         {
-            var news = await _unitOfWork.Repository<News>().GetAll()
-                .Include(e => e.Author)
-                .ThenInclude(a => a.Details)
-                .Include(e => e.UploadedContentImages).ToListAsync();
-
             var mapper = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<News, NewsPreviewDto>()
-                        .ForMember(m => m.AuthorName,
-                            opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
-                }
-            ).CreateMapper();
+            {
+                cfg.CreateMap<News, NewsPreviewDto>()
+                    .ForMember(m => m.AuthorName,
+                    opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
+            });
 
-            var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
+            var newsDtos = await _unitOfWork.Repository<News>().GetAll()
+                .OrderByDescending(e => e.CreatedDateUtc)
+                .ProjectTo<NewsPreviewDto>(mapper)
+                .ToListAsync();
+            
+            if (!newsDtos.Any())
+            {
+                throw new NotFoundException("News");
+            }
 
             return newsDtos;
         }
 
-        public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PagingParametersDto pageParameters)
+        public async Task<IEnumerable<NewsPreviewDto>> GetNewsPage(PaginationParams paginationParams)
         {
-            var news = await _unitOfWork.Repository<News>().GetAll()
-                .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
-                .Take(pageParameters.PageSize)
-                .Include(e => e.Author)
-                .ThenInclude(a => a.Details)
-                .Include(e => e.UploadedContentImages)
-                .ToListAsync();
-
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsPreviewDto>()
                     .ForMember(m => m.AuthorName,
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"));
-            }).CreateMapper();
+            });
 
-            var newsDtos = mapper.Map<IEnumerable<News>, IEnumerable<NewsPreviewDto>>(news);
+            var newsDtos = await _unitOfWork.Repository<News>().GetAll()
+                .OrderByDescending(e => e.CreatedDateUtc)
+                .Skip(paginationParams.Skip)
+                .Take(paginationParams.Take)
+                .ProjectTo<NewsPreviewDto>(mapper)
+                .ToListAsync();
+            
+            if (!newsDtos.Any())
+            {
+                throw new NotFoundException($"News page {paginationParams.PageNumber}");
+            }
 
             return newsDtos;
         }
 
         public async Task<NewsDetailsDto> GetNewsById(int id)
         {
-            var news = await _unitOfWork.Repository<News>().GetAll()
-                .Include(e => e.Author)
-                .ThenInclude(a => a.Details)
-                .Include(e => e.UploadedContentImages)
-                .Include(e => e.UsersThatLiked)
-                .SingleOrDefaultAsync(n => n.Id == id);
+            var currentUser = await _authenticateService.TryGetAuthUserAsync();
 
             var mapper = new MapperConfiguration(cfg =>
             {
@@ -88,10 +92,20 @@ namespace TheraLang.BLL.Services
                         opt => opt.MapFrom(sm => sm.UploadedContentImages.Select(i => i.Url)))
                     .ForMember(m => m.AuthorName,
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
-                    .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.UsersThatLiked.Count));
-            }).CreateMapper();
+                    .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.Likes.Count))
+                    .ForMember(m => m.IsLikedByCurrentUser,
+                        opt => opt.MapFrom(sm => sm.Likes.Select(u => u.UserThatLikedId).Contains(currentUser.Id)));
+            });
 
-            var newsDto = mapper.Map<News, NewsDetailsDto>(news);
+            var newsDto = await _unitOfWork.Repository<News>().GetAll()
+                .Where(n => n.Id == id)
+                .ProjectTo<NewsDetailsDto>(mapper)
+                .SingleOrDefaultAsync();
+            
+            if (newsDto == null)
+            {
+                throw new NotFoundException($"News with id {id}");
+            }
 
             return newsDto;
         }
@@ -120,7 +134,7 @@ namespace TheraLang.BLL.Services
             var news = await _unitOfWork.Repository<News>().Get(i => i.Id == id);
             if (news == null)
             {
-                throw new ArgumentNullException($"News with id {id} not found!");
+                throw new NotFoundException($"News with id {id}");
             }
 
             _unitOfWork.Repository<News>().Remove(news);
@@ -135,7 +149,7 @@ namespace TheraLang.BLL.Services
 
             if (newsToUpdate == null)
             {
-                throw new ArgumentNullException($"News with id {id} not found!");
+                throw new NotFoundException($"News with id {id} not found!");
             }
 
             newsToUpdate.UpdatedById = newsDto.EditorId;
@@ -168,23 +182,23 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task Like(int id, User user)
+        public async Task Like(int id, Guid userId)
         {
-            var newsToLike = await _unitOfWork.Repository<News>().GetAll()
-                .Include(e => e.UsersThatLiked)
-                .SingleOrDefaultAsync(n => n.Id == id);
+            var existedLikeFromUser = (await _unitOfWork.Repository<NewsLike>()
+                .GetAllAsync(e => e.NewsId == id && e.UserThatLikedId == userId))
+                .SingleOrDefault();
 
             //remove like if user already liked
-            if (newsToLike.UsersThatLiked.Contains(user))
+            if (existedLikeFromUser != null)
             {
-                newsToLike.UsersThatLiked.Remove(user);
+                _unitOfWork.Repository<NewsLike>().Remove(existedLikeFromUser);
             }
             else
             {
-                newsToLike.UsersThatLiked.Add(user);
+                var newLikeFromUser = new NewsLike() { NewsId = id, UserThatLikedId = userId };
+                _unitOfWork.Repository<NewsLike>().Add(newLikeFromUser);
             }
 
-            _unitOfWork.Repository<News>().Update(newsToLike);
             await _unitOfWork.SaveChangesAsync();
         }
 
@@ -196,7 +210,7 @@ namespace TheraLang.BLL.Services
             {
                 var imageExtension = Path.GetExtension(image.FileName);
                 var imageUrl = await _fileService.SaveFile(fileStream, imageExtension);
-                var uploadedImage = new UploadedNewsContentImage() {Url = imageUrl.ToString()};
+                var uploadedImage = new UploadedNewsContentImage() { Url = imageUrl.ToString() };
                 return uploadedImage;
             }
         }

@@ -7,4 +7,5 @@ export class NewsDetails {
     authorName: string
     createdDateUtc : Date
     likesCount: number
+    isLikedByCurrentUser: boolean
 }

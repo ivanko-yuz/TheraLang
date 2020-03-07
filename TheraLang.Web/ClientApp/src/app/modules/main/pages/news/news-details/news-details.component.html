@@ -6,17 +6,12 @@
             </div>
             <div fxLayout="row" fxLayoutAlign="end">
                 <button mat-icon-button *ngIf="authService.isAdmin()">
-                    <!--(click)="onEdit(news)"-->
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-icon-button (click)="onDelete(this.newsId)" *ngIf="authService.isAdmin()">
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
-        </div>
-        <div class="author-container">
-            <h6 fxLayoutAlign="start">{{this.newsDetails?.authorName}}<span
-                    class="space">{{this.newsDetails?.createdDateUtc | date}}</span></h6>
         </div>
         <div fxLayout="column" fxLayoutAlign=" center">
             <img mat-card-image class="prewiew-image" src="{{this.newsDetails?.mainImageUrl}}" alt="" />
@@ -26,6 +21,29 @@
         </div>
         <div *ngIf="contentImages?.length > 0" class="slider">
             <ng-image-slider [images]="contentImages" [infinite]="true" #nav></ng-image-slider>
+        </div>
+
+        <div fxLayout="row" class="like">
+            <button mat-icon-button *ngIf="this.newsDetails?.isLikedByCurrentUser;else notLiked" color="accent"
+                (click)="like()">
+                <div fxLayout="row" fxLayoutAlign=" center">
+                    <mat-icon class="like-icon">thumb_up_alt</mat-icon>
+                    <span class="like-count">{{this.newsDetails?.likesCount}}</span>
+                </div>
+            </button>
+            <ng-template #notLiked>
+                <button mat-icon-button (click)="like()">
+                    <div fxLayout="row" fxLayoutAlign=" center">
+                        <mat-icon class="like-icon">thumb_up_alt</mat-icon>
+                        <span class="like-count">{{this.newsDetails?.likesCount}}</span>
+                    </div>
+                </button>
+            </ng-template>
+            <div fxFlex></div>
+            <div fxLayout="row" fxLayoutAlign=" center">
+                <span class="author-container">{{this.newsDetails?.authorName}}</span>
+                <span class="author-container">{{this.newsDetails?.createdDateUtc | date}}</span>
+            </div>
         </div>
         <div class="comments">
             <app-comments-block></app-comments-block>

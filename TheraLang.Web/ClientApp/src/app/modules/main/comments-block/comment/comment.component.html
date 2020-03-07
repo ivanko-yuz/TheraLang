@@ -9,7 +9,7 @@
             <div fxLayout="column" fxFlex>
                 <div fxLayout="row" fxLayoutAlign=" center">
                     <span class="author-name padding-right">{{this.comment.authorName}}</span>
-                    <span class="foreign-text padding-right">{{this.comment.createdDateUtc | date:'M.d.yyyy H:mm'}}</span>
+                    <span class="foreign-text padding-right">{{this.comment.createdDateUtc | date:'MM.dd.yyyy HH:mm'}}</span>
                     <span *ngIf="this.comment.isEdited" class="foreign-text">({{'components.comments.edited'|translate}})</span>
                     <span fxFlex></span>
                     <span>

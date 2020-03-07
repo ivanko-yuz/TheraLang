@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.Projects;
 
 namespace TheraLang.BLL.Interfaces
 {
@@ -15,7 +16,7 @@ namespace TheraLang.BLL.Interfaces
 
         Task UpdateAsync(int id, ProjectDto project);
 
-        Task<IEnumerable<ProjectDto>> GetAllProjectsAsync();
+        Task<IEnumerable<ProjectPreviewDto>> GetAllProjectsAsync();
 
         Task<ProjectDto> GetByIdAsync(int id);
 

@@ -18,7 +18,7 @@ export class CommentsBlockComponent implements OnInit {
   comments: CommentView[];
   newsId: number;
   maxPageCount: number
-  pageSize: number = 10;
+  pageSize: number = 5;
   lastPage: number = 1;
 
   constructor
@@ -32,12 +32,15 @@ export class CommentsBlockComponent implements OnInit {
     this.newsId = parseInt(this.route.snapshot.paramMap.get("newsId"))
     this.getCurrentUser()
     this.updateComments()
-    this.maxPageCount = Math.ceil(this.commentsCount / this.pageSize);
   }
 
   getCommentsCount() {
     this.commentsService.getCommentsCount(this.newsId)
-        .subscribe((count : number) => this.commentsCount = count)
+        .subscribe((count : number) => {
+          this.commentsCount = count
+          this.maxPageCount = Math.ceil(this.commentsCount / this.pageSize);
+          console.log(this.maxPageCount)
+        })
   }
 
   getCurrentUser() {
@@ -55,7 +58,7 @@ export class CommentsBlockComponent implements OnInit {
   }
 
   getNextCommentsPage() {
-    if(this.lastPage == this.maxPageCount) return;
+    if(this.lastPage >= this.maxPageCount) return;
     
     console.log(this.lastPage)
     let paginationParams:PaginationParams = { pageNumber: this.lastPage + 1, pageSize : this.pageSize }
@@ -64,6 +67,7 @@ export class CommentsBlockComponent implements OnInit {
       .subscribe((response: CommentView[]) => {
          this.comments.push(...response)
          this.lastPage++
+         console.log(this.lastPage)
       })
   }
 
@@ -83,7 +87,7 @@ export class CommentsBlockComponent implements OnInit {
     //In chrome and some browser scroll is given to body tag
     let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     let max = document.documentElement.scrollHeight;
-    if (pos == max) {
+    if (Math.ceil(pos) >= max) {
       this.getNextCommentsPage()
     }
 }

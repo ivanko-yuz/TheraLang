@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.ViewModels;
 using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web.Controllers
@@ -18,14 +15,11 @@ namespace TheraLang.Web.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
-        private readonly IUserManagementService _userManagementService;
         private readonly IAuthenticateService _authenticateService;
 
-        public NewsController(INewsService newsService, IUserManagementService userManagementService,
-            IAuthenticateService authenticateService)
+        public NewsController(INewsService newsService, IAuthenticateService authenticateService)
         {
             _newsService = newsService;
-            _userManagementService = userManagementService;
             _authenticateService = authenticateService;
         }
 
@@ -39,11 +33,6 @@ namespace TheraLang.Web.Controllers
 
             var newsDtos = await _newsService.GetAllNews();
 
-            if (!newsDtos.Any())
-            {
-                return NotFound();
-            }
-
             var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
             return Ok(newsModels);
         }
@@ -51,22 +40,15 @@ namespace TheraLang.Web.Controllers
         // GET: api/news?pageNumber=2&pageSize=10
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery] PagingParametersViewModel pageParametersModel)
+        public async Task<IActionResult> GetPage([FromQuery] PaginationParams paginationParams)
         {
             var mapper = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<NewsDetailsDto, NewsPreviewViewModel>();
-                    cfg.CreateMap<PagingParametersViewModel, PagingParametersDto>();
                 }
             ).CreateMapper();
 
-            var pageParametersDto = mapper.Map<PagingParametersDto>(pageParametersModel);
-            var newsDtos = await _newsService.GetNewsPage(pageParametersDto);
-
-            if (!newsDtos.Any())
-            {
-                return NotFound();
-            }
+            var newsDtos = await _newsService.GetNewsPage(paginationParams);
 
             var newsModels = mapper.Map<List<NewsPreviewViewModel>>(newsDtos);
             return Ok(newsModels);
@@ -89,10 +71,6 @@ namespace TheraLang.Web.Controllers
                 .CreateMapper();
 
             var newsDto = await _newsService.GetNewsById(id);
-            if (newsDto == null)
-            {
-                return NotFound();
-            }
 
             var newsModel = mapper.Map<NewsDetailsViewModel>(newsDto);
 
@@ -126,14 +104,7 @@ namespace TheraLang.Web.Controllers
             var authUser = await _authenticateService.GetAuthUserAsync();
             newsDto.EditorId = authUser.Id;
 
-            try
-            {
-                await _newsService.UpdateNews(id, newsDto);
-            }
-            catch (ArgumentNullException)
-            {
-                return NotFound();
-            }
+            await _newsService.UpdateNews(id, newsDto);
 
             return Ok();
         }
@@ -143,9 +114,8 @@ namespace TheraLang.Web.Controllers
         public async Task<IActionResult> Like(int id)
         {
             var authUser = await _authenticateService.GetAuthUserAsync();
-            var user = await _userManagementService.GetUserById(authUser.Id);
 
-            await _newsService.Like(id, user);
+            await _newsService.Like(id, authUser.Id);
             return Ok();
         }
 
@@ -154,14 +124,7 @@ namespace TheraLang.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            try
-            {
-                await _newsService.RemoveNews(id);
-            }
-            catch (ArgumentNullException)
-            {
-                return NotFound();
-            }
+            await _newsService.RemoveNews(id);
 
             return Ok();
         }
