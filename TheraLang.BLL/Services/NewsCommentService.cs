@@ -16,15 +16,17 @@ namespace TheraLang.BLL.Services
     public class NewsCommentService : INewsCommentService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAuthenticateService _authenticateService;
 
-        public NewsCommentService(IUnitOfWork unitOfWork)
+        public NewsCommentService(IUnitOfWork unitOfWork, IAuthenticateService authenticateService)
         {
             _unitOfWork = unitOfWork;
+            _authenticateService = authenticateService;
         }
 
         public async Task<int> GetCommentsForNewsCount(int newsId)
         {
-            return await _unitOfWork.Repository<NewsComment>().GetAll().CountAsync();
+            return await _unitOfWork.Repository<NewsComment>().GetAll().Where(c => c.NewsId == newsId).CountAsync();
         }
 
         public async Task<IEnumerable<CommentResponseDto>> GetCommentsForNews(int newsId)
@@ -43,7 +45,7 @@ namespace TheraLang.BLL.Services
                 .OrderByDescending(c => c.CreatedDateUtc)
                 .ProjectTo<CommentResponseDto>(mapper)
                 .ToListAsync();
-            
+
             if (!commentDtos.Any())
             {
                 throw new NotFoundException($"Comments for news with id {newsId}");
@@ -71,7 +73,7 @@ namespace TheraLang.BLL.Services
                 .Take(paginationParams.Take)
                 .ProjectTo<CommentResponseDto>(mapper)
                 .ToListAsync();
-            
+
             if (!commentDtos.Any())
             {
                 throw new NotFoundException($"Comments for news with id {newsId} page {paginationParams.PageNumber}");
@@ -82,8 +84,10 @@ namespace TheraLang.BLL.Services
 
         public async Task AddComment(CommentRequestDto commentDto)
         {
+            var authUser = await _authenticateService.GetAuthUserAsync();
+
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestDto, NewsComment>()
-                    .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => sm.AuthorId)))
+                    .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => authUser.Id)))
                 .CreateMapper();
 
             var comment = mapper.Map<CommentRequestDto, NewsComment>(commentDto);

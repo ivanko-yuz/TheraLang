@@ -14,12 +14,12 @@
                     <mat-error *ngIf="this.commentForm.controls['text'].errors?.maxlength">
                         {{'common.validation.line-too-long'|translate}}</mat-error>
                 </mat-form-field>
-                <mat-dialog-actions>
+                <div>
                     <button mat-raised-button color="primary" type="submit" [disabled]="this.commentForm.invalid"
                         (click)="onSubmit()" class="right-align">
                         {{'components.comments.create-comment'|translate}}
                     </button>
-                </mat-dialog-actions>
+                </div>
             </div>
     </form>
 </div>

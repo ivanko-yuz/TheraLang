@@ -59,15 +59,14 @@ export class CommentComponent implements OnInit {
   }
 
   async onDelete() {
-    this.commentChanged.emit();
     this.dialogService
       .openConfirmDialog(await this.translate.get("common.r-u-sure").toPromise())
       .afterClosed()
       .subscribe(async res => {
         if (res) {
           this.commentsService.deleteComment(this.comment.id).subscribe(async result => {
-            this.notificationService.success(await this.translate.get("common.deleted-successfully").toPromise());
             this.commentChanged.emit();
+            this.notificationService.success(await this.translate.get("common.deleted-successfully").toPromise());
           });
         }
       },

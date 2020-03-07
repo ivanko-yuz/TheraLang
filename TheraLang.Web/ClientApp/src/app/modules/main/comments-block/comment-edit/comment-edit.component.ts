@@ -41,13 +41,13 @@ export class CommentEditComponent implements OnInit {
     }
     else {
       const formData = new FormData();
-      const comment = this.commentForm.value as CommentRequest;
+      let comment = this.commentForm.value as CommentRequest;
       formData.append("text", comment.text);
 
-      this.commentsService.editComment(comment.newsId, formData).subscribe(
+      this.commentsService.editComment(this.comment.id, formData).subscribe(
         async (msg: string) => {
           msg = await this.translate
-            .get("common.created-successfully")
+            .get("common.updated-successfully")
             .toPromise();
           this.notificationService.success(msg);
           this.edited.emit()

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Common;
@@ -16,12 +15,10 @@ namespace TheraLang.Web.Controllers
     public class CommentController : ControllerBase
     {
         private readonly INewsCommentService _newsCommentService;
-        private readonly IAuthenticateService _authenticateService;
 
-        public CommentController(INewsCommentService newsCommentService, IAuthenticateService authenticateService)
+        public CommentController(INewsCommentService newsCommentService)
         {
             _newsCommentService = newsCommentService;
-            _authenticateService = authenticateService;
         }
 
         [AllowAnonymous]
@@ -70,8 +67,6 @@ namespace TheraLang.Web.Controllers
                 .CreateMapper();
 
             var commentDto = mapper.Map<CommentRequestDto>(commentModel);
-            var authUser = await _authenticateService.GetAuthUserAsync();
-            commentDto.AuthorId = authUser.Id;
 
             await _newsCommentService.AddComment(commentDto);
             return Ok();

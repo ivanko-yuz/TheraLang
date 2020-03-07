@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Repository;
@@ -44,6 +45,9 @@ namespace TheraLang.Tests.Services
             _unitOfWorkMock = new Mock<IUnitOfWork>();
             _unitOfWorkMock.Setup(u => u.Repository<NewsComment>()).Returns(repoMock.Object);
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync()).Verifiable();
+
+            var _authService = new Mock<IAuthenticateService>();
+            //_authService.Setup(a=>a.GetAuthUserAsync()).Returns()
 
             _commentsService = new NewsCommentService(_unitOfWorkMock.Object);
         }

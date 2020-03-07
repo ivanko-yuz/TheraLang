@@ -48,7 +48,7 @@ namespace TheraLang.BLL.Services
                 .OrderByDescending(e => e.CreatedDateUtc)
                 .ProjectTo<NewsPreviewDto>(mapper)
                 .ToListAsync();
-            
+
             if (!newsDtos.Any())
             {
                 throw new NotFoundException("News");
@@ -72,7 +72,7 @@ namespace TheraLang.BLL.Services
                 .Take(paginationParams.Take)
                 .ProjectTo<NewsPreviewDto>(mapper)
                 .ToListAsync();
-            
+
             if (!newsDtos.Any())
             {
                 throw new NotFoundException($"News page {paginationParams.PageNumber}");
@@ -94,14 +94,16 @@ namespace TheraLang.BLL.Services
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
                     .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.Likes.Count))
                     .ForMember(m => m.IsLikedByCurrentUser,
-                        opt => opt.MapFrom(sm => sm.Likes.Select(u => u.UserThatLikedId).Contains(currentUser.Id)));
+                        opt => opt.MapFrom(sm => currentUser == null ? false :
+                            sm.Likes.Select(u => u.UserThatLikedId).Contains(currentUser.Id)
+                        ));
             });
 
             var newsDto = await _unitOfWork.Repository<News>().GetAll()
                 .Where(n => n.Id == id)
                 .ProjectTo<NewsDetailsDto>(mapper)
                 .SingleOrDefaultAsync();
-            
+
             if (newsDto == null)
             {
                 throw new NotFoundException($"News with id {id}");
