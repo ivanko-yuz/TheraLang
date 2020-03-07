@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200304174245_start1.cs" />
-    <Compile Remove="Migrations\20200304174245_start1.Designer.cs" />
+    <Compile Remove="Migrations\20200307121737_MergeWithMaster2.cs" />
+    <Compile Remove="Migrations\20200307121737_MergeWithMaster2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

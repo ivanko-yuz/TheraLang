@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TheraLang.Tests.Builders
+﻿namespace TheraLang.Tests.DataBuilders
 {
     interface IDataBuilder<T>
     {
