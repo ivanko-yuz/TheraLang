@@ -1,7 +1,4 @@
 ﻿using Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TheraLang.BLL.DataTransferObjects.CommentDtos;
 
 namespace TheraLang.Tests
@@ -12,7 +9,8 @@ namespace TheraLang.Tests
         public static readonly int FakeId = -10;
         public static readonly int ExistedId = 1;
         public static readonly PaginationParams PaginationParams = new PaginationParams() { PageNumber = 1, PageSize = 2 };
-        public static readonly PaginationParams FakePaginationParams = new PaginationParams() { PageNumber = 999, PageSize = 999 };
+        public static readonly PaginationParams FakePaginationParams =
+            new PaginationParams() { PageNumber = int.MaxValue, PageSize = int.MaxValue };
         public static readonly CommentRequestDto CommentRequest = new CommentRequestDto() { Text = "Text" };
     }
 }
