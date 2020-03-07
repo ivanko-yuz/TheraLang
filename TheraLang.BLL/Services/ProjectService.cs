@@ -89,7 +89,8 @@ namespace TheraLang.BLL.Services
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, Project>()
                     .ForMember(p => p.DonationTarget, opt => opt.MapFrom(src => src.DonationTargetSum))
-                    .ForMember(p => p.IsActive, opt => opt.MapFrom(src => true)))
+                    .ForMember(p => p.IsActive, opt => opt.MapFrom(src => true))
+                    .ForMember(p => p.OwnerId, opt => opt.MapFrom(p => userId)))
                 .CreateMapper();
 
             var project = mapper.Map<ProjectDto, Project>(projectDto);

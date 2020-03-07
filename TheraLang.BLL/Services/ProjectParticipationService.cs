@@ -15,10 +15,12 @@ namespace TheraLang.BLL.Services
     public class ProjectParticipationService : IProjectParticipationService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAuthenticateService _authenticateService;
 
-        public ProjectParticipationService(IUnitOfWork unitOfWork)
+        public ProjectParticipationService(IUnitOfWork unitOfWork, IAuthenticateService authenticateService)
         {
             _unitOfWork = unitOfWork;
+            _authenticateService = authenticateService;
         }
 
         public async Task ChangeStatus(int participantId, ProjectParticipationStatus status)
@@ -47,8 +49,13 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<ProjectParticipationDto>> GetAll()
         {
+            var currentUserId = (await _authenticateService.GetAuthUserAsync()).Id;
+
             var projectParticipations = await _unitOfWork.Repository<ProjectParticipation>().GetAll()
+                .Where(p => p.Role != MemberRole.ProjectOwner)
+                .Where(p => p.Project.OwnerId == currentUserId)
                 .Include(p => p.User)
+                .ThenInclude(p => p.Details)
                 .Include(p => p.Project)
                 .ToListAsync();
 
@@ -56,11 +63,9 @@ namespace TheraLang.BLL.Services
                 .ForMember(m => m.RequstedGuidUserId, opt => opt.MapFrom(m => m.User.Id))
                 .ForMember(m => m.RequestedUserName,
                     opt => opt.MapFrom(m => $"{m.User.Details.FirstName} {m.User.Details.LastName}"))
-                .ForMember(m => m.RequestedUserEmail, opt => opt.MapFrom(m => m.User.Email))
             ).CreateMapper();
-            var projectParticipationDtos =
-                mapper.Map<IEnumerable<ProjectParticipation>, IEnumerable<ProjectParticipationDto>>(
-                    projectParticipations);
+
+            var projectParticipationDtos = mapper.Map<IEnumerable<ProjectParticipation>, IEnumerable<ProjectParticipationDto>>(projectParticipations);
 
             return projectParticipationDtos;
         }
