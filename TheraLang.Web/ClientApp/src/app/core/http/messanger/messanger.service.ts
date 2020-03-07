@@ -4,6 +4,7 @@ import { chatUrl } from 'src/app/configs/api-endpoint.constants';
 import { Message } from 'src/app/shared/models/message/message';
 import { MessageParameters } from 'src/app/shared/models/chat/message-parameters';
 import { Observable } from 'rxjs';
+import { Chat } from 'src/app/shared/models/chat/chat';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ export class MessangerService {
 
   constructor(private http: HttpClient) { }
 
-  getAllChats() {
-    return this.http.get(this.url);
+  getAllChats(): Observable<Chat[]> {
+    return this.http.get<Chat[]>(this.url);
   }
 
-  getChat(id: number) {
-    return this.http.get(`${this.url}/${id}`);
+  getChat(id: number): Observable<Chat> {
+    return this.http.get<Chat>(`${this.url}/${id}`);
   }
 
   getMessages(params: MessageParameters): Observable<Message[]> {

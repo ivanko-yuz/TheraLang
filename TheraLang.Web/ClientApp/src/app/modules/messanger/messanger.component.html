@@ -4,10 +4,11 @@
     <div *ngIf="this.currentChat else loadingChat">
         <div class="chat">
             <div class="message-container" #chatScroller (scroll)="onScroll()">
-                <div *ngFor="let message of this.currentChat.messages">
+                <div *ngFor="let message of this.messages">
                     <div class="message" [ngClass]="currentUserId == message.posterId ? 'message-owner' : 'message'">
-                        <div class="message-info">{{message.posterName}}
-                            {{message.timestamp | date: 'MMM d, y, H:mm:ss'}}
+                        <div class="message-info">
+                            <a href="users/{{message.posterId}}">{{message.posterName}}</a>
+                            {{message.timestamp | date: 'MMM d, H:mm'}}
                         </div>
                         <div class="message-text">{{message.text}}</div>
                     </div>
@@ -15,9 +16,10 @@
             </div>
 
             <div class="form-container">
-                <form action="" autocomplete="off" fxLayout="row">
-                    <input [(ngModel)]="messageText" name="messageText" type="text" placeholder="Напишіть повідомлення...">
-                    <button [disabled]="!messageText" type="submit" (click)="sendMessage()" id="send" mat-raised-button
+                <form [formGroup]="form" (ngSubmit)="sendMessage()" autocomplete="off" fxLayout="row">
+                    <input formControlName="messageText" type="text" placeholder="Напишіть повідомлення...">
+
+                    <button type="submit" [disabled]="form.invalid" id="send" mat-raised-button
                         color="primary">Send</button>
                 </form>
             </div>
@@ -27,6 +29,3 @@
         <div class="choose-chat">Виберіть чат</div>
     </ng-template>
 </div>
-
-<button (click)="action()">test</button>
-<button (click)="stop()">stop</button>

@@ -1,43 +1,74 @@
-import { Component, OnInit, ViewChild, AfterViewChecked, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewChecked, ElementRef, OnDestroy } from '@angular/core';
 import { MessangerService } from 'src/app/core/http/messanger/messanger.service';
 import { Chat } from 'src/app/shared/models/chat/chat';
 import { Message } from 'src/app/shared/models/message/message';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr'
 import { UserService } from 'src/app/core/auth/user.service';
+import { MessageParameters } from 'src/app/shared/models/chat/message-parameters';
+import { fromPromise } from 'rxjs/internal-compatibility';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-messanger',
   templateUrl: './messanger.component.html',
   styleUrls: ['./messanger.component.less']
 })
-export class MessangerComponent implements OnInit, AfterViewChecked {
+export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   currentChat: Chat;
-  messageText: string;
   currentUserId: string;
   hubConnection: HubConnection;
+  messages: Message[];
+  disableScrollDown = false;
+  pageNumber: number;
   @ViewChild('chatScroller', { static: false }) scroll: ElementRef;
-  disableScrollDown = false
+  form: FormGroup;
 
   constructor(private messangerService: MessangerService,
     private userService: UserService) {
   }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      messageText: new FormControl(null, [Validators.required, Validators.maxLength(256)]),
+    });
+    this.pageNumber = 1;
+    this.messages = [];
     this.currentUserId = this.userService.getCurrentUserId();
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('/chatHub')
+      .withUrl(`/chatHub`)
       .build();
 
-    this.startConnection();
+    this.connect();
     this.listenChat();
-
-    console.log('updated!');
   }
 
   ngAfterViewChecked(): void {
     if (this.currentChat) {
       this.scrollToBottom();
     }
+  }
+
+  ngOnDestroy(): void {
+    if (this.hubConnection.state == 1) {
+      console.log(this.hubConnection.state);
+      this.leaveChat();
+      // this.disconnect().subscribe(async () => {
+      //   console.log('disconected');
+      // });
+    }
+  }
+
+  loadMessages() {
+    var params: MessageParameters = {
+      chatId: this.currentChat.id,
+      pageNumber: this.pageNumber,
+      pageSize: 15
+    };
+
+    this.messangerService.getMessages(params).subscribe(async (data: Message[]) => {
+      this.messages.unshift(...data.reverse());
+      this.pageNumber++;
+    });
   }
 
   scrollToBottom(): void {
@@ -50,42 +81,36 @@ export class MessangerComponent implements OnInit, AfterViewChecked {
   }
 
   onScroll() {
-    let element = this.scroll.nativeElement
-    let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight
+    let element = this.scroll.nativeElement;
+    let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
     if (this.disableScrollDown && atBottom) {
-      this.disableScrollDown = false
+      this.disableScrollDown = false;
     }
 
     if (element.scrollTop == 0) {
-      console.log('*load data*');
+      this.loadMessages();
+      element.scrollTop = 35;
     }
 
     else {
-      this.disableScrollDown = true
+      this.disableScrollDown = true;
     }
-
   }
 
-  // start() {
-  //   this.startConnection();
-  //   this.listenChat();
-  // }
-
-  // stop() {
-  //   this.hubConnection.stop();
-  // }
+  disconnect() {
+    return fromPromise(this.hubConnection.stop()
+      .catch(function error(err) {
+        console.log(err);
+      }));
+  }
 
   joinToChat(chatId: number) {
     this.hubConnection.invoke('joinRoom', chatId);
-    console.log('joined to ', this.currentChat.id);
   }
 
-  startConnection() {
+  connect() {
     this.hubConnection
       .start()
-      .then(function () {
-        console.log('connection started!');
-      })
       .catch(function (err) {
         console.log(err)
       })
@@ -93,32 +118,41 @@ export class MessangerComponent implements OnInit, AfterViewChecked {
 
   listenChat() {
     this.hubConnection.on("RecieveMessage", (message: Message) => {
-      this.currentChat.messages.push(message);
+      this.messages.push(message);
+      this.disableScrollDown = false;
+      this.scrollToBottom();
     });
   }
 
-  action() {
+  leaveChat() {
+    if (this.currentChat) {
+      this.hubConnection.invoke('leaveRoom', this.currentChat.id);
+    }
   }
-
-  // leaveChat() {
-  //   this.hubConnection.invoke('leaveRoom', this.currentChat.id);
-  // }
 
   updateChat(chatId: number) {
+    this.leaveChat();
     this.messangerService.getChat(chatId).subscribe(async (data: Chat) => {
+      this.reset();
       this.currentChat = data;
       this.joinToChat(chatId);
+      this.loadMessages();
     });
+  }
+
+  reset() {
+    this.messages = [];
+    this.pageNumber = 1;
   }
 
   sendMessage() {
     const message: Message = {
-      text: this.messageText,
+      text: this.form.value.messageText,
       chatId: this.currentChat.id
     };
 
     this.messangerService.sendMessage(message).subscribe(async (msg: string) => {
-      this.messageText = '';
+      this.form.reset();
       this.disableScrollDown = false;
       this.scrollToBottom();
     }, async (error) => {
