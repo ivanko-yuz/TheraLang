@@ -12,6 +12,6 @@ namespace TheraLang.BLL.DataTransferObjects.ChatDtos
 
         public ChatType Type { get; set; }
 
-        public IEnumerable<MessageDto> Messages { get; set; }
+        public int PagesCount { get; set; }
     }
 }

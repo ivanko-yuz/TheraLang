@@ -5,4 +5,5 @@ export class Chat {
   name: string;
   type: number;
   messages?: Message[];
+  pagesCount: number;
 }
