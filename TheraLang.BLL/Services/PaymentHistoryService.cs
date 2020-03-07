@@ -38,7 +38,6 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-
         public async Task<IEnumerable<PaymentHistoryDto>> GetAll()
         {
 

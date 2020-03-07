@@ -14,7 +14,6 @@ namespace TheraLang.BLL.Scheduler
                 .Months()
                 .OnTheFirst(DayOfWeek.Monday)
                 .At(0, 0);
-           // Schedule(service.ServiceProvider.GetRequiredService<PaymentService>()).ToRunEvery(5).Seconds();
         }
     }
 }

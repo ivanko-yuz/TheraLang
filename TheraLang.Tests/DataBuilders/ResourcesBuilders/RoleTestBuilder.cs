@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TheraLang.DAL.Entities;
-using TheraLang.Tests.Builders;
 
 namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
 {

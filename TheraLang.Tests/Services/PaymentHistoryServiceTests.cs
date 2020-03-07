@@ -1,5 +1,4 @@
-﻿
-using Common.Enums;
+﻿using Common.Enums;
 using Common.Exceptions;
 using FluentAssertions;
 using MockQueryable.Moq;
@@ -7,14 +6,13 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Repository;
 using TheraLang.DAL.UnitOfWork;
-using TheraLang.Tests.DataBuilders;
 using TheraLang.Tests.DataBuilders.ResourcesBuilders;
 using Xunit;
 
@@ -27,7 +25,6 @@ namespace TheraLang.Tests.Services
         private readonly PaymentHistoryService _paymentHistory;
         private readonly List<PaymentHistory> _dbSet;
 
-        private Guid _fakeUserGuid = new Guid("2960ECE9-49DA-431E-B5B2-9E9251261488");
         public PaymentHistoryServiceTests()
         {
             var repoMock = new Mock<IRepository<PaymentHistory>>();
@@ -42,28 +39,43 @@ namespace TheraLang.Tests.Services
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync()).Verifiable();
 
             _userManagementService = new Mock<IUserManagementService>();
+            _userManagementService.Setup(u => u.GetUserById(It.IsAny<Guid>()))
+                .ReturnsAsync(new UserTestBuilder()
+                    .WithId(DefaultValues.UserGuid)
+                    .WithDefault()
+                    .WithDefaultDetails()
+                    .WithDefaultRole()
+                    .Build());
 
             _paymentHistory = new PaymentHistoryService(_unitOfWorkMock.Object, _userManagementService.Object);
         }
 
         [Fact]
         public async Task GetPaymentHistoryByUserId_NotFoundException()
-
         {
-            Func<Task> result = async () => await _paymentHistory.GetByUserId(_fakeUserGuid);
+            Func<Task> result = async () => await _paymentHistory.GetByUserId(DefaultValues.FakeGuid);
             await result.Should().ThrowAsync<NotFoundException>();
         }
 
+        [Fact]
         public async Task GetPagePaymentHistoryByUserId_NotFoundException()
-
         {
-            Func<Task> result = async () => await _paymentHistory.GetPageByUserId(_fakeUserGuid, DefaultValues.PaginationParams);
+            Func<Task> result = async () => await _paymentHistory.GetPageByUserId(DefaultValues.FakeGuid, DefaultValues.PaginationParams);
             await result.Should().ThrowAsync<NotFoundException>();
         }
 
+        [Fact]
         public async Task AddPaymentHistory_ShouldCallSaveChanges()
         {
-           // await _paymentHistory.Add()
+            await _paymentHistory.Add(new PaymentHistoryDto()
+            {
+                CurrentBalance = 500,
+                Date = DateTime.Now,
+                Saldo = -100,
+                Description = 0,
+                UserId = DefaultValues.UserGuid
+            });
+            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
         private List<PaymentHistory> GetTestData()

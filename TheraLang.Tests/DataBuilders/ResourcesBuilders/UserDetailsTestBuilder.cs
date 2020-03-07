@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TheraLang.DAL.Entities;
-using TheraLang.Tests.Builders;
 
 namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
 {
@@ -22,6 +19,31 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
             _userDetails.ShortInformation = "My name is Anton";
             _userDetails.Age = 27;
             _userDetails.Balance = 0;
+            return this;
+        }
+        /// <summary>
+        /// Creats deafultUser only was created UserDetailsId.
+        /// In default user field UserDetails is empty.
+        /// </summary>
+        /// <returns></returns>
+        public UserDetailsTestBuilder WithDefaultUser()
+        {
+            _userDetails.User = new UserTestBuilder()
+                .WithId(_userDetails.UserDetailsId)
+                .WithDefault()
+                .WithDefaultRole()
+                .Build();
+                return this;
+        }
+
+        public UserDetailsTestBuilder WithDefaultUserAndCustomRole(Role role)
+        {
+            _userDetails.User = new UserTestBuilder()
+                .WithId(_userDetails.UserDetailsId)
+                .WithDefault()
+                .WithRole(role)
+                .WithRoleId(role.Id)
+                .Build();
             return this;
         }
 
