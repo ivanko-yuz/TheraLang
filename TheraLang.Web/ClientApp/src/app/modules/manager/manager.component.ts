@@ -13,8 +13,8 @@ export class ManagerComponent implements OnInit {
     private translate: TranslateService,
     private languageService: LanguageService
   ) {
-    const lang = languageService.getCurrentLang();
-    translate.use(Language[lang]);
+    const lang: string = this.languageService.setIfNotExists();
+    this.translate.use(lang);
   }
 
   ngOnInit() {}

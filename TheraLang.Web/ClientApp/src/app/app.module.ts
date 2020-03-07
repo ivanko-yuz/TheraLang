@@ -117,6 +117,7 @@ import { ChangeRoleComponent } from "./modules/users_list/change-role/change-rol
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
 import {LanguageService} from "./core/services/language/language.service";
+import {CookieService} from "ngx-cookie-service";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -274,7 +275,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageService,
     AuthGuard,
     AdminGuard,
-    LanguageService
+    LanguageService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
