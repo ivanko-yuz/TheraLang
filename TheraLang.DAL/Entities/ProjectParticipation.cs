@@ -1,4 +1,4 @@
-using TheraLang.DAL.Enums;
+using Common.Enums;
 
 namespace TheraLang.DAL.Entities
 {

@@ -8,8 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
 import { transliterate } from 'transliteration';
 import { Language } from 'src/app/shared/models/language/languages.enum';
-import { delay } from 'rxjs/operators';
-
+import { MatDialog } from '@angular/material';
+import { PagePreviewComponent } from '../page-preview/page-preview.component';
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
@@ -26,6 +26,7 @@ export class CreatePageComponent implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private translate: TranslateService,
+    private dialog: MatDialog,
     private slugifyPipe: SlugifyPipe) {
   }
 
@@ -69,26 +70,45 @@ export class CreatePageComponent implements OnInit {
       return;
     }
 
-    this.page = {
-      header: this.form.value.header,
-      content: this.form.value.content,
-      menuTitle: this.form.value.menuTitle,
-      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header)),
-      language: Language.ua
-    };
+    this.page = this.getFormDataUa();
 
-    this.page_eng = {
-      header: this.form.value.header_eng,
-      content: this.form.value.content_eng,
-      menuTitle: this.form.value.menuTitle_eng,
-      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header)),
-      language: Language.en
-    };
+    this.page_eng = this.getFormDataEng();
 
     if (this.page_eng.header && this.page_eng.menuTitle && this.page_eng.content) {
       await this.createPage([this.page, this.page_eng]);
     } else {
       await this.createPage([this.page]);
     }
+  }
+
+  getFormDataUa(){
+    const page = {
+      header: this.form.value.header,
+      content: this.form.value.content,
+      menuTitle: this.form.value.menuTitle,
+      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header)),
+      language: Language.ua
+    };
+    return page;
+  }
+
+  getFormDataEng(){
+    const page = {
+      header: this.form.value.header_eng,
+      content: this.form.value.content_eng,
+      menuTitle: this.form.value.menuTitle_eng,
+      route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header)),
+      language: Language.en
+    };
+    return page;
+  }
+  preview(){
+    const page = this.getFormDataUa()
+
+    const dialogRef = this.dialog.open(PagePreviewComponent, {
+      width: "60%",
+      height: "95%",
+      data: page
+    });
   }
 }

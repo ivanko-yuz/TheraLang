@@ -64,12 +64,14 @@ namespace TheraLang.BLL.Services
 
         public async Task<IEnumerable<UsersDto>> GetAllUsers()
         {
-            var users = await _unitOfWork.Repository<UserDetails>().GetAllAsync();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>())
-                .CreateMapper();
-            var usersDto = mapper.Map<IEnumerable<UserDetails>, IEnumerable<UsersDto>>(users);
-            return usersDto;
-        }
+            
+                var users = await _unitOfWork.Repository<UserDetails>().GetAllAsync();
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>())
+                    .CreateMapper();
+                var usersDto = mapper.Map<IEnumerable<UserDetails>, IEnumerable<UsersDto>>(users);
+                return usersDto;
+            }
+
 
         public async Task Update(UserDetailsDto user, Guid id)
         {

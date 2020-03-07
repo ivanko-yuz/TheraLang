@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
@@ -40,18 +41,14 @@ namespace TheraLang.Web.Controllers
         [Route("{participantId}")]
         [Authorize]
         public async Task<IActionResult> ChangeStatus(int participantId,
-            [FromBody] ProjectParticipationStatusViewModel status)
+            [FromBody] ProjectParticipationStatus status)
         {
             if (participantId == default)
             {
                 throw new ArgumentException($"{nameof(participantId)} can not be 0");
             }
-
-            var mapper = new MapperConfiguration(cfg =>
-                cfg.CreateMap<ProjectParticipationStatusViewModel, ProjectParticipationStatusDto>()).CreateMapper();
-            var statusDto = mapper.Map<ProjectParticipationStatusViewModel, ProjectParticipationStatusDto>(status);
-
-            await _projectParticipationServiceservice.ChangeStatus(participantId, statusDto);
+            
+            await _projectParticipationServiceservice.ChangeStatus(participantId, status);
             return Ok();
         }
 

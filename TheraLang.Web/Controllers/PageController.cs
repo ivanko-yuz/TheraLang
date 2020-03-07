@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.CustomTypes;
@@ -85,13 +86,9 @@ namespace TheraLang.Web.Controllers
 
         [HttpGet("{lang}/{route}")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetPageByRoute(LanguageViewModel lang, string route)
+        public async Task<IActionResult> GetPageByRoute(Language lang, string route)
         {
-            var langMapper = new MapperConfiguration(cfg => cfg.CreateMap<LanguageViewModel, LanguageDto>())
-                .CreateMapper();
-            var langDto = langMapper.Map<LanguageViewModel, LanguageDto>(lang);
-
-            var page = await _pageService.GetPageByRoute(route, langDto);
+            var page = await _pageService.GetPageByRoute(route, lang);
             if (page == null) return NotFound();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PageDto, PageViewModel>())

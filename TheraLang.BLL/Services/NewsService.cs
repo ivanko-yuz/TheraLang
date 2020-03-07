@@ -43,6 +43,7 @@ namespace TheraLang.BLL.Services
             });
 
             var newsDtos = await _unitOfWork.Repository<News>().GetAll()
+                .OrderByDescending(e => e.CreatedDateUtc)
                 .ProjectTo<NewsPreviewDto>(mapper)
                 .ToListAsync();
             
@@ -64,6 +65,7 @@ namespace TheraLang.BLL.Services
             });
 
             var newsDtos = await _unitOfWork.Repository<News>().GetAll()
+                .OrderByDescending(e => e.CreatedDateUtc)
                 .Skip(paginationParams.Skip)
                 .Take(paginationParams.Take)
                 .ProjectTo<NewsPreviewDto>(mapper)

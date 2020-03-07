@@ -17,7 +17,6 @@ namespace TheraLang.DAL.Entities
         public string ShortInformation { get; set; }
         public string ImageURl { get; set; }
         public User User { get; set; }
-        public int Age { get; set; }
 
         public virtual ICollection<Resource> Resources { get; set; }
     }
