@@ -73,6 +73,7 @@ namespace TheraLang.Web
             services.AddTransient<ISiteMapService, SiteMapService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IMemberFeeService, MemberFeeService>();
+            services.AddTransient<INewsCommentService, NewsCommentService>();
 
             services.AddOpenApiDocument();
         }
@@ -101,7 +102,7 @@ namespace TheraLang.Web
                 routes.MapRoute(
                     "angular",
                     "{*template}",
-                    new {controller = "Home", action = "Index"});
+                    new { controller = "Home", action = "Index" });
             });
 
             app.UseSpa(spa =>
