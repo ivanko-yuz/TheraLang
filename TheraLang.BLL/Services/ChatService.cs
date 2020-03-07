@@ -92,7 +92,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<int> CreateRoom(string name)
         {
-            var userId = (await _authenticateService.GetAuthUserAsync()).Id;
+            var userId = (await _authenticateService.GetAuthUser()).Id;
             var chat = new Chat
             {
                 Name = name,
