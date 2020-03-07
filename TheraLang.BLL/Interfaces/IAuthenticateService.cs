@@ -8,5 +8,6 @@ namespace TheraLang.BLL.Interfaces
     {
         Task<string> Authenticate(User user);
         Task<AuthUser> GetAuthUserAsync();
+        Task<AuthUser> TryGetAuthUserAsync();
     }
 }

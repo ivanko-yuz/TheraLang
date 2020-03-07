@@ -21,11 +21,13 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
+        private readonly IAuthenticateService _authenticateService;
 
-        public NewsService(IUnitOfWork unitOfWork, IFileService fileService)
+        public NewsService(IUnitOfWork unitOfWork, IFileService fileService, IAuthenticateService authenticateService)
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
+            _authenticateService = authenticateService;
         }
 
         public async Task<int> GetNewsCount()
@@ -81,6 +83,8 @@ namespace TheraLang.BLL.Services
 
         public async Task<NewsDetailsDto> GetNewsById(int id)
         {
+            var currentUser = await _authenticateService.TryGetAuthUserAsync();
+
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<News, NewsDetailsDto>()
@@ -88,7 +92,9 @@ namespace TheraLang.BLL.Services
                         opt => opt.MapFrom(sm => sm.UploadedContentImages.Select(i => i.Url)))
                     .ForMember(m => m.AuthorName,
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
-                    .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.Likes.Count));
+                    .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.Likes.Count))
+                    .ForMember(m => m.IsLikedByCurrentUser,
+                        opt => opt.MapFrom(sm => sm.Likes.Select(u => u.UserThatLikedId).Contains(currentUser.Id)));
             });
 
             var newsDto = await _unitOfWork.Repository<News>().GetAll()

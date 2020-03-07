@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TheraLang.DAL.Configuration;
 using TheraLang.DAL.Entities;
+using TheraLang.DAL.Entities.ManyToMany;
 using TheraLang.DAL.Piranha.Configuration;
 
 namespace TheraLang.DAL
@@ -30,6 +31,7 @@ namespace TheraLang.DAL
         public virtual DbSet<UserDetails> UsersDetails { get; set; }
         public virtual DbSet<MemberFee> MemberFees { get; set; }
         public virtual DbSet<NewsComment> NewsComments { get; set; }
+        public virtual DbSet<NewsLike> NewsLikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
