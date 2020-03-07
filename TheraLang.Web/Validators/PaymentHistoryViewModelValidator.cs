@@ -11,7 +11,6 @@ namespace TheraLang.Web.Validators
     {
         public PaymentHistoryViewModelValidator()
         {
-            RuleFor(x => x.Date).NotNull();
             RuleFor(x => x.Description).IsInEnum();
             RuleFor(x => x.Saldo).NotNull();
             RuleFor(x => x.UserName).NotNull();
