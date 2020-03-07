@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 using DataSeeding;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using TheraLang.BLL.Scheduler;
 
 namespace TheraLang.Web
 {
@@ -27,6 +27,7 @@ namespace TheraLang.Web
             {
                 BuildWebHost(args)
                     .Seed()
+                    .StartScheduler()
                     .Run();
             }
             catch (Exception e)

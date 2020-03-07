@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSeeding", "DataSeeding\DataSeeding.csproj", "{3B402725-2840-45F6-9BFE-EEE3729E5026}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler", "Scheduler\Scheduler.csproj", "{6CD98394-F256-44A6-A474-3AA675DFAAAD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,10 +51,6 @@ Global
 		{3B402725-2840-45F6-9BFE-EEE3729E5026}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B402725-2840-45F6-9BFE-EEE3729E5026}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B402725-2840-45F6-9BFE-EEE3729E5026}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CD98394-F256-44A6-A474-3AA675DFAAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CD98394-F256-44A6-A474-3AA675DFAAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CD98394-F256-44A6-A474-3AA675DFAAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CD98394-F256-44A6-A474-3AA675DFAAAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

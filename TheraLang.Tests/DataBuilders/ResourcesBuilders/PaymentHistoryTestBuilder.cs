@@ -26,7 +26,7 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
             _paymentHistory.Id = id;
             return this;
         }
-        
+
         public PaymentHistoryTestBuilder WithDescription(PaymentDescription description)
         {
             _paymentHistory.Description = description;
@@ -44,16 +44,30 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
             _paymentHistory.UserId = userId;
             return this;
         }
-        
+
         public PaymentHistoryTestBuilder WithPayer(User payer)
         {
             _paymentHistory.Payer = payer;
             return this;
         }
-        
+
         public PaymentHistoryTestBuilder WithCurrentBalance(decimal balance)
         {
             _paymentHistory.CurrentBalance = balance;
+            return this;
+        }
+
+        public PaymentHistoryTestBuilder WithGeneratedPayer(Guid id)
+        {
+            _paymentHistory.UserId = id;
+
+            _paymentHistory.Payer = new UserTestBuilder()
+                .WithDefault()
+                .WithId(id)
+                .WithDefaultDetails()
+                .WithDefaultRole()
+                .Build();
+
             return this;
         }
 

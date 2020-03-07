@@ -1,17 +1,17 @@
 ﻿using Common.Enums;
 using Common.Exceptions;
+using FluentScheduler;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 
 namespace TheraLang.BLL.Services
 {
-    public class PaymentService : IPaymentService    
+    public class PaymentService : IJob 
     {
         private readonly IUnitOfWork _unitOfWork;
         public PaymentService(IUnitOfWork unitOfWork)
@@ -25,20 +25,15 @@ namespace TheraLang.BLL.Services
                 .Where(i => i.User.Role.Name == "Member")
                 .ToListAsync();
 
-            if (users == null)
-            {
-                throw new NotFoundException("Users not found");
-            }
-
             return users;
         }
 
-        private decimal GetFee()
+        private async Task<decimal> GetFee()
         {
-            var fee = _unitOfWork.Repository<MemberFee>()
+            var fee = await _unitOfWork.Repository<MemberFee>()
                 .GetAll()
                 .Where(f => f.FeeDate <= DateTime.Now)
-                .LastOrDefault();
+                .LastOrDefaultAsync();
             if (fee == null)
             {
                 return 0;
@@ -46,11 +41,10 @@ namespace TheraLang.BLL.Services
             return -fee.FeeAmount;
         }
 
-        public async Task MonthlyWitdraw()
+        public async void Execute()
         {
-            System.Diagnostics.Debug.WriteLine("BlowJob");
             var members = await GetAllMembers();
-            decimal paymentSum = GetFee();
+            decimal paymentSum = await GetFee();
 
             if (members == null)
             {
@@ -59,7 +53,6 @@ namespace TheraLang.BLL.Services
 
             List<UserDetails> updatedUsers = new List<UserDetails>();
             List<PaymentHistory> updatedHistory = new List<PaymentHistory>();
-
             foreach (var member in members)
             {
 
@@ -82,5 +75,6 @@ namespace TheraLang.BLL.Services
             _unitOfWork.Repository<PaymentHistory>().AddRange(updatedHistory);
             await _unitOfWork.SaveChangesAsync();
         }
+
     }
 }

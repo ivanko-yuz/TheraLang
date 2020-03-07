@@ -22,6 +22,29 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
             return this;
         }
 
+        /// <summary>
+        /// Creats deafultUserDetails only was created UserId.
+        /// </summary>
+        /// <returns></returns>
+        public UserTestBuilder WithDefaultDetails()
+        {
+            _user.Details = new UserDetailsTestBuilder()
+                .WithDefault()
+                .WithUserDetailsId(_user.Id)
+                .Build();
+
+            return this;
+        }
+
+        public UserTestBuilder WithDefaultRole()
+        {
+            _user.Role = new RoleTestBuilder()
+                 .RoleMember()
+                 .Build();
+
+            return this;
+        }
+
         public UserTestBuilder WithId(Guid id)
         {
             _user.Id = id;
@@ -66,7 +89,7 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
 
         public User Build()
         {
-            throw new NotImplementedException();
+            return _user;
         }
     }
 }
