@@ -50,33 +50,8 @@ namespace TheraLang.BLL.Services
         {
             var projectsDtos = _unitOfWork.Repository<Project>()
                 .GetAll();
-            if (query.MyProjects)
-            {
-                var prParticipants = projectsDtos.Select(p => p.ProjectParticipations.Where(pr => pr.Role == MemberRole.ProjectOwner).Where(pr => pr.User.Id == query.User.Id));
-                var prs = prParticipants.Select(p => p.Select(pr => pr.Project));
-                projectsDtos = prs.Select(p => p.FirstOrDefault());
-            }
-            if (query.SortByDaysLeft)
-            {
-                projectsDtos = projectsDtos.OrderBy(p => p.ProjectEnd.Date - DateTime.Now.Date);
-            }
-            if (query.Search != null && query.Search != "")
-            {
-                projectsDtos = projectsDtos.Where(p => p.Name.Contains(query.Search));
-            }
-            if (query.SortByDateAsc)
-            {
-                projectsDtos = projectsDtos.OrderBy(p => p.ProjectStart);
-            }
-            else
-            {
-                if (query.SortByDateDesc)
-                {
-                    projectsDtos = projectsDtos.OrderByDescending(p => p.ProjectStart);
-
-                }
-            }
-            return projectsDtos;
+      
+            return query.Filter(projectsDtos);
         }
 
         public async Task<IEnumerable<ProjectDto>> GetAllNewProjectsAsync()
