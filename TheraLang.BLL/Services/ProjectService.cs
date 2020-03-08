@@ -207,22 +207,23 @@ namespace TheraLang.BLL.Services
 
         public async Task<ProjectDto> GetByIdAsync(int id)
         {
-            try
+            var mapper = new MapperConfiguration(cfg =>
             {
-                var project = await _unitOfWork.Repository<Project>().Get(i => i.Id == id);
+                cfg.CreateMap<Project, ProjectDto>()
+                    .ForMember(dto => dto.DonationTargetSum,
+                        opt => opt.MapFrom(p => p.DonationTarget))
+                    .ForMember(dto => dto.DonationsSum,
+                        opts => opts.MapFrom(entity => entity.Donations.Sum(donation => donation.Amount))
+                    );
+            });
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
-                        .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(src => src.DonationTarget)))
-                    .CreateMapper();
+            var projectDto = await _unitOfWork.Repository<Project>()
+                .GetAll()
+                .Where(i => i.Id == id)
+                .ProjectTo<ProjectDto>(mapper)
+                .FirstOrDefaultAsync();
 
-                var projectDto = mapper.Map<Project, ProjectDto>(project);
-
-                return projectDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when getting project by {nameof(id)} = {id} ", ex);
-            }
+            return projectDto;
         }
     }
 }
