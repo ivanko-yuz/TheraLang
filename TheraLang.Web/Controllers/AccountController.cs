@@ -57,7 +57,6 @@ namespace TheraLang.Web.Controllers
             var user = mapper.Map<UserAllViewModel, UserAllDto>(newUser);
             var confirmUser = mapper.Map<UserAllViewModel, ConfirmUserDto>(newUser);
             await _userManagement.AddUser(user);
-            await _confirmation.SendEmail("170920", user.Email);
             return Ok();
         }
 
@@ -71,5 +70,19 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
+        [HttpPost("forgot/password")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword([FromBody]string Email)
+        {
+            await _userManagement.PasswordConfirmationRequest(Email);
+            return Ok();
+        }
+
+        [HttpPost("orgot/password/confirmation")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmUser([FromBody]int Numb)
+        {
+
+        }
     }
 }

@@ -77,9 +77,11 @@ namespace TheraLang.BLL.Services
         public async Task ConfirmUser(ConfirmUserDto confirmUser)
         {
             var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
-            if (confirmUser.ConfirmationNumber == "170920") user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
+            var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
+            if (confirmUser.ConfirmationNumber == conf.Number.ToString() && conf.ConfDateTime <= DateTime.Now.AddMinutes(30)) user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Guest")).Id;
             _unitOfWork.Repository<User>().Update(user);
             await _unitOfWork.SaveChangesAsync();
         }
+
     }
 }

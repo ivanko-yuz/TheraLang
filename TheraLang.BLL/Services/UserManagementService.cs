@@ -18,11 +18,13 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
+        private readonly IConfirmationService _confirmation;
 
-        public UserManagementService(IUnitOfWork unitOfWork, IFileService fileService)
+        public UserManagementService(IUnitOfWork unitOfWork, IFileService fileService, IConfirmationService confirmation)
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
+            _confirmation = confirmation;
         }
 
 
@@ -76,11 +78,23 @@ namespace TheraLang.BLL.Services
                     user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Unconfirmed")).Id;
                     user.PasswordHash = PasswordHasher.HashPassword(NewUser.Password);
                     user.Details = userDetails;
+                    Random rand = new Random();
+                    int random = rand.Next(10000000, 100000000);
+
+                    var confUser = new UserConfirmation()
+                    {
+                        Number = random,
+                        ConfDateTime = DateTime.Now
+                    };
+
+                    user.Confirmation = confUser;
 
                     _unitOfWork.Repository<UserDetails>().Add(userDetails);
                     _unitOfWork.Repository<User>().Add(user);
+                    _unitOfWork.Repository<UserConfirmation>().Add(confUser);
 
                     await _unitOfWork.SaveChangesAsync();
+                    await _confirmation.SendEmail(confUser.Number.ToString(), user.Email);
                 }
             }
             catch (Exception ex)
@@ -88,5 +102,25 @@ namespace TheraLang.BLL.Services
                 throw new Exception("Error when adding user ", ex);
             }
         }
+
+        public async Task PasswordConfirmation(string Email)
+        {
+            try
+            {
+                var user = await _unitOfWork.Repository<User>().Get(u => u.Email == Email);
+                var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
+                Random rand = new Random();
+                int random = rand.Next(10000000, 100000000);
+                conf.Number = random;
+                conf.ConfDateTime = DateTime.Now;
+                await _unitOfWork.SaveChangesAsync();
+                await _confirmation.SendEmail(random.ToString(), Email);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error when sending email ", ex);
+            }
+        }
+
     }
 }
