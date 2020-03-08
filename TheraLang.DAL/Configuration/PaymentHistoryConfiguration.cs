@@ -17,7 +17,7 @@ namespace TheraLang.DAL.Configuration
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Date).ValueGeneratedOnAdd();
+            builder.Property(x => x.Date).HasDefaultValueSql("GETDATE()");
             builder.Property(x => x.Description)
                 .IsRequired()
                 .HasConversion(descriptionConverter)
