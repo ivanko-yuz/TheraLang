@@ -5,7 +5,6 @@ import { Message } from 'src/app/shared/models/message/message';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr'
 import { UserService } from 'src/app/core/auth/user.service';
 import { MessageParameters } from 'src/app/shared/models/chat/message-parameters';
-import { fromPromise } from 'rxjs/internal-compatibility';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -20,8 +19,9 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   messages: Message[];
   disableScrollDown = false;
   pageNumber: number;
-  @ViewChild('chatScroller', { static: false }) scroll: ElementRef;
   form: FormGroup;
+  chatsExist: boolean;
+  @ViewChild('chatScroller', { static: false }) scroll: ElementRef;
 
   constructor(private messangerService: MessangerService,
     private userService: UserService) {
@@ -50,11 +50,7 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.hubConnection.state == 1) {
-      console.log(this.hubConnection.state);
       this.leaveChat();
-      // this.disconnect().subscribe(async () => {
-      //   console.log('disconected');
-      // });
     }
   }
 
@@ -87,7 +83,7 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
       this.disableScrollDown = false;
     }
 
-    if (element.scrollTop == 0) {
+    if (element.scrollTop == 0 && this.pageNumber <= this.currentChat.pagesCount) {
       this.loadMessages();
       element.scrollTop = 35;
     }
@@ -95,13 +91,6 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
     else {
       this.disableScrollDown = true;
     }
-  }
-
-  disconnect() {
-    return fromPromise(this.hubConnection.stop()
-      .catch(function error(err) {
-        console.log(err);
-      }));
   }
 
   joinToChat(chatId: number) {
@@ -128,6 +117,10 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (this.currentChat) {
       this.hubConnection.invoke('leaveRoom', this.currentChat.id);
     }
+  }
+
+  checkIfchats(chatsExist: boolean) {
+    this.chatsExist = chatsExist;
   }
 
   updateChat(chatId: number) {

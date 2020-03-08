@@ -97,6 +97,7 @@
       "new-projects": "New projects",
       "owner": "Project Owner",
       "join": "Join project",
+      "to-chat": "Chat",
       "days-left": "Days left",
       "rised-of": "rised of",
       "add-image": "Add image"
@@ -169,5 +170,11 @@
   "notFoundPage": {
     "title": "Page not found",
     "message": "The page you are looking for might have been removed, had its name changed or is temporarily unavailable."
+  },
+  "messanger": {
+    "choose-chat": "Choose chat",
+    "no-chats": "You don't have available chats",
+    "send": "Send",
+    "send-message": "Write a message..."
   }
 }
