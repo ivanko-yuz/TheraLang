@@ -1,0 +1,71 @@
+<mat-card class="form mat-elevation-z5" appCardStyle>
+  <h2 mat-dialog-title>
+    <span>{{'common.validation.edit_profile'|translate}}</span>
+  </h2>
+  <mat-card-title>
+    <img *ngIf="user.imageURl == null || imageSrc != null" class ="avatar" [src]="imageSrc || '/assets/img/login.png'" alt="" (click)="avatarChange()" width="150px">
+    <img *ngIf="user.imageURl != null && imageSrc == null"
+         class ="avatar"
+         style="width: 250px"
+         src="{{ user.imageURl }}"
+         (click)="avatarChange()"
+         alt=""
+    />
+    <input id="input-file-id" type="file" autofocus (change)="onFileChange($event)" hidden>
+  </mat-card-title>
+
+  <form [formGroup]="this.EditProfileForm">
+    <mat-dialog-content>
+      <div fxLayout="column">
+        <mat-form-field>
+          <input formControlName="FirstName" autofocus required matInput [placeholder]="'components.account.first_name'|translate">
+          <mat-error *ngIf="this.EditProfileForm.controls['FirstName'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+          <mat-error *ngIf="this.EditProfileForm.controls['FirstName'].errors?.minlength">{{'common.validation.line-too-short'|translate}}</mat-error>
+          <mat-error *ngIf="this.EditProfileForm.controls['FirstName'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+
+          <input formControlName="LastName" autofocus required matInput [placeholder]="'components.account.last_name'|translate">
+          <mat-error *ngIf="this.EditProfileForm.controls['LastName'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
+          <mat-error *ngIf="this.EditProfileForm.controls['LastName'].errors?.minlength">{{'common.validation.line-too-short'|translate}}</mat-error>
+          <mat-error *ngIf="this.EditProfileForm.controls['LastName'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="ShortInformation" autofocus matInput [placeholder]="'common.short_information'|translate">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>{{'common.birthdayDate'|translate}}</mat-label>
+          <input matInput [matDatepicker]="picker" matInput [max]="maxDate" placeholder="mm/dd/yy" formControlName="BirthdayDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="City" autofocus matInput [placeholder]="'common.city'|translate">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label></mat-label>
+          <span matPrefix>+38</span>
+          <input type="text" matInput formControlName="PhoneNumber" [placeholder]="'common.phone_number'|translate">
+        </mat-form-field>
+
+        <mat-dialog-actions fxLayout="row" fxFlexAlign="end">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="EditProfileForm.invalid"
+            (click)="onSubmit()"
+          >
+            {{ "common.confirm" | translate }}
+          </button>
+          <button mat-raised-button color="warn" type="reset" [routerLink]="['/edit']">
+            {{ "common.cancel" | translate }}
+          </button>
+        </mat-dialog-actions>
+      </div>
+    </mat-dialog-content>
+  </form>
+</mat-card>
+

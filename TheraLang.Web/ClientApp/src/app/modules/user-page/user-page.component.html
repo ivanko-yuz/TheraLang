@@ -27,8 +27,25 @@
       <div>
         <div class="content md-padding m-3">
           <div class="info-line">
-            <div class="title">{{'common.short_information'|translate}}</div>
-            <div class="info">{{ user.shortInformation }}</div>
+            <div class="info-line" *ngIf="user.shortInformation != null">
+              <div class="title">{{'common.short_information'|translate}}</div>
+              <div class="info">{{ user.shortInformation }}</div>
+            </div>
+
+            <div class="info-line" *ngIf="user.city != null">
+              <div class="title">{{'common.city'|translate}}</div>
+              <div class="info">{{ user.city }}</div>
+            </div>
+
+            <div class="info-line" *ngIf="user.phoneNumber != null">
+              <div class="title">{{'common.phone_number'|translate}}</div>
+              <div class="info">{{ user.phoneNumber }}</div>
+            </div>
+
+            <div class="info-line"  *ngIf="user.birthdayDate != null">
+              <div class="title">{{'common.birthdayDate'|translate}}</div>
+              <div class="info">{{ user.birthdayDate | date: 'dd\\MM\\yyyy' }}</div>
+            </div>
           </div>
         </div>
       </div>

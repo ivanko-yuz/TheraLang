@@ -10,7 +10,9 @@
       "line-too-long": "The line is too long",
       "line-too-short": "The line is too short",
       "confirm": "Confirm",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "edit": "edit",
+      "edit_profile": "Edit profile"
     },
     "deleted-successfully": "Deleted successfully!",
     "added-successfully": "Added successfully!",
@@ -52,6 +54,9 @@
     "ok": "Ok",
     "general_information": "General information",
     "short_information": "Short information",
+    "city": "City",
+    "birthdayDate": "Birthday date",
+    "phone_number": "Phone number",
     "mainpage": "Main page"
   },
   "components": {

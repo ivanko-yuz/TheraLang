@@ -10,7 +10,9 @@
       "line-too-long": "Стрічка задовга",
       "line-too-short": "Стрічка закоротка",
       "confirm": "Підтвердити",
-      "cancel": "Відмінити"
+      "cancel": "Відмінити",
+      "edit": "редагування",
+      "edit_profile": "Pедагувати профіль"
     },
     "deleted-successfully": "Видалено успішно!",
     "added-successfully": "Успішно додано!",
@@ -50,7 +52,10 @@
     "no_thanks": "Ні, дякую",
     "ok": "ОК",
     "general_information": "Про користувача",
-    "short_information": "Коротка інформація"
+    "short_information": "Коротка інформація",
+    "city": "Місто",
+    "birthdayDate": "Дата народження",
+    "phone_number": "Номер телефону"
   },
   "components": {
     "home": {

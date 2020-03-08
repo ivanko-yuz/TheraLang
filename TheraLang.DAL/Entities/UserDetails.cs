@@ -16,6 +16,8 @@ namespace TheraLang.DAL.Entities
         public string PhoneNumber { get; set; }
         public string ShortInformation { get; set; }
         public string ImageURl { get; set; }
+        public string City { get; set; }
+        public DateTime? BirthdayDate { get; set; }
         public User User { get; set; }
 
         public virtual ICollection<Resource> Resources { get; set; }
