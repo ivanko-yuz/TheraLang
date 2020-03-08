@@ -21,6 +21,5 @@ namespace TheraLang.Web.ViewModels
         public string LastName { get; set; }
 
         public IFormFile Image { get; set; }
-        public int Age { get; set; }
     }
 }

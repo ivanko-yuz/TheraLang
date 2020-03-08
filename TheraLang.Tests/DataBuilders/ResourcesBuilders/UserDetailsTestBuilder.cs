@@ -17,7 +17,6 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
             _userDetails.LastName = "Baran";
             _userDetails.PhoneNumber = "+380961487229";
             _userDetails.ShortInformation = "My name is Anton";
-            _userDetails.Age = 27;
             _userDetails.Balance = 0;
             return this;
         }
@@ -86,12 +85,6 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
         public UserDetailsTestBuilder WithUser(User user)
         {
             _userDetails.User = user;
-            return this;
-        }
-
-        public UserDetailsTestBuilder WithAge(int age)
-        {
-            _userDetails.Age = age;
             return this;
         }
 
