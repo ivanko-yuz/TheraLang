@@ -12,6 +12,7 @@ using TheraLang.Web.ViewModels;
 namespace TheraLang.Web.Controllers
 {
     [Route("api/paymentHistory")]
+    [Authorize]
     [ApiController]
     public class PaymentHistoryController : ControllerBase
     {
@@ -25,7 +26,6 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> AddPayment([FromBody] PaymentHistoryViewModel paymentHistoryViewModel)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PaymentHistoryViewModel, PaymentHistoryDto>())
@@ -37,7 +37,6 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpGet("all")]
-        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             var paymentDto = await _paymentHistoryService.GetAll();
@@ -49,7 +48,6 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpGet("all/{id}")]
-        [Authorize]
         public async Task<IActionResult> GetAllByUserId(Guid id)
         {
             var paymentDto = await _paymentHistoryService.GetByUserId(id);
@@ -62,7 +60,6 @@ namespace TheraLang.Web.Controllers
 
         // GET: api/paymentHistory/id/?pageNumber=2&pageSize=10
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<IActionResult> GetPageByUserId(Guid id, [FromQuery] PaginationParams pageParameters)
         {
             var paymentDto = await _paymentHistoryService.GetPageByUserId(id, pageParameters);
@@ -76,7 +73,6 @@ namespace TheraLang.Web.Controllers
 
         // GET: api/paymentHistory/?pageNumber=2&pageSize=10
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetPage([FromQuery] PaginationParams pageParameters)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<PaymentHistoryDto, PaymentHistoryViewModel>())
