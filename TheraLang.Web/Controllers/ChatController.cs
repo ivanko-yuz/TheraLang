@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -24,42 +23,18 @@ namespace TheraLang.Web.Controllers
             _authenticateService = authenticateService;
         }
 
-        //api/chats
         [HttpGet]
         public async Task<IActionResult> GetChats()
         {
-            var authUserId = (await _authenticateService.GetAuthUser()).Id;
-            var chats = await _chatService.GetChats(authUserId);
+            var chats = await _chatService.GetOwnChats();
 
             return Ok(chats);
         }
 
-        //?
-        [HttpGet("private")]
-        public async Task<IActionResult> GetPrivateChats()
-        {
-            var authUserId = (await _authenticateService.GetAuthUser()).Id;
-            var chats = await _chatService.GetPrivateChats(authUserId);
-
-            return Ok(chats);
-        }
-
-        //?
-        [HttpPost("private")]
-        public async Task<IActionResult> CreatePrivateChat([FromBody]Guid targetUserId)
-        {
-            var userId = (await _authenticateService.GetAuthUser()).Id;
-            var id = await _chatService.CreatePrivateChat(userId, userId);
-
-            return Ok();
-        }
-
-        //chats/id??
         [HttpGet("{id}")]
         public async Task<IActionResult> Chat(int id)
         {
-            var authUserId = (await _authenticateService.GetAuthUser()).Id;
-            var chat = await _chatService.GetChat(id, authUserId);
+            var chat = await _chatService.GetChat(id);
 
             if (chat == null)
             {
@@ -69,43 +44,30 @@ namespace TheraLang.Web.Controllers
             return Ok(chat);
         }
 
-        //api/chats
         [HttpPost]
-        public async Task<IActionResult> CreateRoom([FromBody]ChatCreateViewModel chatModel)
+        public async Task<IActionResult> CreateChat([FromBody]ChatCreateViewModel chatModel)
         {
-            await _chatService.CreateRoom(chatModel.ChatName);
+            await _chatService.CreateChat(chatModel.ChatName);
 
             return Ok();
         }
 
-        //api/chats/join
-        [HttpPost("join")]
-        public async Task<IActionResult> JoinRoom([FromBody]JoinChatViewModel joinModel)
-        {
-            await _chatService.JoinRoom(joinModel.ChatId, joinModel.UserId);
-
-            return Ok();
-        }
-
-        //api/chats/message
         [HttpPost("message")]
         public async Task<IActionResult> SendMessage([FromBody]MessageCreateDto messageCreateDto, [FromServices] IHubContext<ChatHub> chat)
         {
-            var userId = (await _authenticateService.GetAuthUser()).Id;
-            var message = await _chatService.CreateMessage(messageCreateDto, userId);
+            var message = await _chatService.CreateMessage(messageCreateDto);
 
             await chat.Clients.Group(messageCreateDto.ChatId.ToString()).SendAsync("RecieveMessage", new
             {
                 Text = message.Text,
                 PosterName = message.PosterName,
                 Timestamp = message.Timestamp,
-                PosterId = userId
+                PosterId = message.PosterId
             });
 
             return Ok(message);
         }
 
-        //api/chats/message
         [HttpGet("{chatId}/{pageNumber}/{pageSize}")]
         public async Task<IActionResult> GetMessages(int chatId, int pageNumber, int pageSize)
         {

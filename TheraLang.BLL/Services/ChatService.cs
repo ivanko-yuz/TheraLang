@@ -24,13 +24,14 @@ namespace TheraLang.BLL.Services
             _authenticateService = authenticateService;
         }
 
-        public async Task<MessageDto> CreateMessage(MessageCreateDto messageCreateDto, Guid posterId)
+        public async Task<MessageDto> CreateMessage(MessageCreateDto messageCreateDto)
         {
+            var userId = (await _authenticateService.GetAuthUser()).Id;
             var message = new Message
             {
                 ChatId = messageCreateDto.ChatId,
                 Text = messageCreateDto.Text,
-                PosterId = posterId,
+                PosterId = userId,
                 Timestamp = DateTime.Now
             };
 
@@ -39,7 +40,7 @@ namespace TheraLang.BLL.Services
 
             var posterName = (await _unitOfWork.Repository<User>().GetAll()
                 .Include(u => u.Details)
-                .SingleOrDefaultAsync(u => u.Id == posterId)).Details.FirstName;
+                .SingleOrDefaultAsync(u => u.Id == userId)).Details.FirstName;
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Message, MessageDto>()
                    .ForMember(m => m.PosterName, opt => opt.MapFrom(sm => posterName)))
@@ -70,8 +71,10 @@ namespace TheraLang.BLL.Services
             return messagesDto;
         }
 
-        public async Task<ChatDto> GetChat(int id, Guid userId)
+        public async Task<ChatDto> GetChat(int id)
         {
+            var userId = (await _authenticateService.GetAuthUser()).Id;
+
             var chat = await _unitOfWork.Repository<Chat>().GetAll()
                 .Include(x => x.Messages)
                 .Include(x => x.Participants)
@@ -90,7 +93,7 @@ namespace TheraLang.BLL.Services
             return chatDto;
         }
 
-        public async Task<int> CreateRoom(string name)
+        public async Task<int> CreateChat(string name)
         {
             var userId = (await _authenticateService.GetAuthUser()).Id;
             var chat = new Chat
@@ -111,7 +114,7 @@ namespace TheraLang.BLL.Services
             return chat.Id;
         }
 
-        public async Task JoinRoom(int chatId, Guid userId)
+        public async Task JoinToChat(int chatId, Guid userId)
         {
             var chatUser = new ChatUser
             {
@@ -125,50 +128,13 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        //??
-        public async Task<IEnumerable<ChatDto>> GetChats(Guid userId)
+        public async Task<IEnumerable<ChatDto>> GetOwnChats()
         {
+            var userId = (await _authenticateService.GetAuthUser()).Id;
+
             var chats = await _unitOfWork.Repository<Chat>().GetAll()
                 .Include(x => x.Participants)
                 .Where(x => x.Participants.Any(p => p.UserId == userId))
-                .ToListAsync();
-
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Chat, ChatDto>()).CreateMapper();
-            var chatsDto = mapper.Map<IEnumerable<Chat>, IEnumerable<ChatDto>>(chats);
-
-            return chatsDto;
-        }
-
-        public async Task<int> CreatePrivateChat(Guid rootId, Guid targetId)
-        {
-            var chat = new Chat
-            {
-                Type = ChatType.Private
-            };
-
-            chat.Participants.Add(new ChatUser
-            {
-                UserId = targetId
-            });
-
-            chat.Participants.Add(new ChatUser
-            {
-                UserId = rootId
-            });
-
-            _unitOfWork.Repository<Chat>().Add(chat);
-
-            await _unitOfWork.SaveChangesAsync();
-
-            return chat.Id;
-        }
-
-        public async Task<IEnumerable<ChatDto>> GetPrivateChats(Guid userId)
-        {
-            var chats = await _unitOfWork.Repository<Chat>().GetAll()
-                .Include(x => x.Participants)
-                .ThenInclude(x => x.User)
-                .Where(x => x.Type == ChatType.Private && x.Participants.Any(y => y.UserId == userId))
                 .ToListAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Chat, ChatDto>()).CreateMapper();

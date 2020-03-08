@@ -176,7 +176,7 @@ namespace TheraLang.BLL.Services
 
             if (project.StatusId == ProjectStatus.Approved)
             {
-                var chatId = await _chatService.CreateRoom(project.Name);
+                var chatId = await _chatService.CreateChat(project.Name);
                 project.ChatId = chatId;
             }
 

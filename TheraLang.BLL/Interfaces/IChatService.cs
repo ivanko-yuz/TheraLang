@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects.ChatDtos;
-using TheraLang.DAL.Entities;
 
 namespace TheraLang.BLL.Interfaces
 {
     public interface IChatService
     {
-        Task<ChatDto> GetChat(int id, Guid userId);
-        Task<int> CreateRoom(string name);
-        Task JoinRoom(int chatId, Guid userId);
-        Task<IEnumerable<ChatDto>> GetChats(Guid userId);
-        Task<int> CreatePrivateChat(Guid rootId, Guid targetId);
-        Task<IEnumerable<ChatDto>> GetPrivateChats(Guid userId);
-        Task<MessageDto> CreateMessage(MessageCreateDto message, Guid posterId);
+        Task<ChatDto> GetChat(int id);
+        Task<int> CreateChat(string name);
+        Task JoinToChat(int chatId, Guid userId);
+        Task<IEnumerable<ChatDto>> GetOwnChats();
+        Task<MessageDto> CreateMessage(MessageCreateDto message);
         Task<IEnumerable<MessageDto>> GetMessages (MessageParameters parameters);
     }
 }

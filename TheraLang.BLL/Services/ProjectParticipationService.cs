@@ -44,7 +44,7 @@ namespace TheraLang.BLL.Services
 
                 if (status == ProjectParticipationStatus.Approved)
                 {
-                    await _chatService.JoinRoom((int)participant.Project.ChatId, participant.UserId);
+                    await _chatService.JoinToChat((int)participant.Project.ChatId, participant.UserId);
                 }
             }
             catch (Exception ex)
