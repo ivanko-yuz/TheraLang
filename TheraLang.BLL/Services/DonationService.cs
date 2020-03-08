@@ -35,7 +35,7 @@ namespace TheraLang.BLL.Services
         public async Task<Guid> AddDonation(LiqPayCheckoutDto liqPayCheckoutDto)
         {
             var liqPayData = new LiqPayData(liqPayCheckoutDto.Data);
-            var liqPaySignature = new LiqPaySignature(liqPayData,_liqPayInfo.PrivateKey);
+            var liqPaySignature = new LiqPaySignature(liqPayData, _liqPayInfo.PrivateKey);
 
             if (!await liqPaySignature.Validate(liqPayCheckoutDto.Signature))
             {

@@ -16,7 +16,7 @@ namespace TheraLang.Tests.Services
     public class PaymentServiceTests
     {
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
-        private readonly PaymentService _paymentService;
+        private readonly SchedulerService _paymentService;
         private readonly List<MemberFee> _dbSetMemberFees;
         private readonly List<UserDetails> _dbSetUserDetails;
         public PaymentServiceTests()
@@ -44,7 +44,7 @@ namespace TheraLang.Tests.Services
             _unitOfWorkMock.Setup(u => u.Repository<PaymentHistory>()).Returns(paymentHistoryRepoMock.Object);
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync()).Verifiable();
 
-            _paymentService = new PaymentService(_unitOfWorkMock.Object);
+            _paymentService = new SchedulerService(_unitOfWorkMock.Object);
         }
 
         [Fact]

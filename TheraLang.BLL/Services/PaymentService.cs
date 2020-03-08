@@ -1,80 +1,61 @@
-﻿using Common.Enums;
-using Common.Exceptions;
-using FluentScheduler;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Common.Exceptions;
 using System.Threading.Tasks;
+using TheraLang.BLL.DataTransferObjects.Donations;
+using TheraLang.BLL.Interfaces;
+using TheraLang.BLL.LiqPay;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
+using Common.Enums;
+using System;
 
 namespace TheraLang.BLL.Services
 {
-    public class PaymentService : IJob 
+    public class PaymentService : IPaymentService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public PaymentService(IUnitOfWork unitOfWork)
+        private readonly ILiqPayInfo _liqPayInfo;
+
+        public PaymentService(IUnitOfWork unitOfWork, ILiqPayInfo liqPayInfo)
         {
             _unitOfWork = unitOfWork;
+            _liqPayInfo = liqPayInfo;
         }
-
-        private async Task<IEnumerable<UserDetails>> GetAllMembers()
+        public async Task TopUpBalance(LiqPayCheckoutDto liqPayCheckoutDto)
         {
-            var users = await _unitOfWork.Repository<UserDetails>().GetAll()
-                .Where(i => i.User.Role.Name == "Member")
-                .ToListAsync();
+            var liqPayData = new LiqPayData(liqPayCheckoutDto.Data);
+            var liqPaySignature = new LiqPaySignature(liqPayData, _liqPayInfo.PrivateKey);
 
-            return users;
-        }
-
-        private async Task<decimal> GetFee()
-        {
-            var fee = await _unitOfWork.Repository<MemberFee>()
-                .GetAll()
-                .Where(f => f.FeeDate <= DateTime.Now)
-                .LastOrDefaultAsync();
-            if (fee == null)
+            if (!await liqPaySignature.Validate(liqPayCheckoutDto.Signature))
             {
-                return 0;
-            }
-            return -fee.FeeAmount;
-        }
-
-        public async void Execute()
-        {
-            var members = await GetAllMembers();
-            decimal paymentSum = await GetFee();
-
-            if (members == null)
-            {
-                throw new NotFoundException("User details not found");
+                throw new InvalidArgumentException(nameof(liqPayCheckoutDto.Signature),
+                    "Invalid signature");
             }
 
-            List<UserDetails> updatedUsers = new List<UserDetails>();
-            List<PaymentHistory> updatedHistory = new List<PaymentHistory>();
-            foreach (var member in members)
+            var user = await _unitOfWork.Repository<UserDetails>()
+                    .Get(i => i.UserDetailsId == liqPayCheckoutDto.MemberId);
+
+            if (user == null)
             {
-
-                member.Balance += paymentSum;
-
-                var paymentHistory = new PaymentHistory()
-                {
-                    Date = DateTime.Now,
-                    Description = PaymentDescription.MonthlyFee,
-                    Saldo = paymentSum,
-                    UserId = member.UserDetailsId,
-                    CurrentBalance = member.Balance
-                };
-
-                updatedUsers.Add(member);
-                updatedHistory.Add(paymentHistory);
+                throw new NotFoundException($"User with id {liqPayCheckoutDto.MemberId}");
             }
+            var donation = liqPayData.Donation;
 
-            _unitOfWork.Repository<UserDetails>().UpdateRange(updatedUsers);
-            _unitOfWork.Repository<PaymentHistory>().AddRange(updatedHistory);
+            var commissionModel = liqPayData.Commission;
+            donation.Amount -= commissionModel.ReceiverCommission;
+            user.Balance += donation.Amount;
+
+            var paymentHistory = new PaymentHistory()
+            {
+                Description = PaymentDescription.TopUp,
+                Saldo = donation.Amount,
+                UserId = (Guid)liqPayCheckoutDto.MemberId,
+                CurrentBalance = user.Balance
+            };
+
+            _unitOfWork.Repository<UserDetails>().Update(user);
+            _unitOfWork.Repository<PaymentHistory>().Add(paymentHistory);
             await _unitOfWork.SaveChangesAsync();
-        }
 
+        }
     }
 }
