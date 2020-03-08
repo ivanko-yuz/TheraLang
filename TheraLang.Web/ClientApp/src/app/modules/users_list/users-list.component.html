@@ -25,7 +25,7 @@
                 <p *ngIf="user.shortInformation != null">{{'common.short_information'|translate}}: {{ user.shortInformation.substring(0, 400) }}</p>
                 <p *ngIf="user.city != null">{{'common.city'|translate}}: {{ user.city.substring(0, 400) }}</p>
                 <p *ngIf="user.birthdayDate != null"> {{'common.birthdayDate'|translate}}: {{ user.birthdayDate | date: 'shortDate' }}</p>
-                <p *ngIf="user.phoneNumber!=null"> {{'common.phone_number'|translate}}: {{user.phoneNumber}}</p>
+                <p *ngIf="user.phoneNumber!=null">{{'common.phone_number'|translate}}: {{user.phoneNumber}}</p>
               </div>
             </div>
           </div>

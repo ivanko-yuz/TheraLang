@@ -43,14 +43,17 @@ export class UserService {
   }
   editProfile(value) {
     const formData = new FormData();
-    const date = new Date(value.BirthdayDate);
+    if (value.BirthdayDate !== "") {
+      const date = new Date(value.BirthdayDate);
+      formData.append("BirthdayDate", date.toDateString());
+    }
     formData.append("FirstName", value.FirstName);
     formData.append("LastName", value.LastName);
     formData.append("Image", value.Image);
     formData.append("City", value.City);
     formData.append("ShortInformation", value.ShortInformation);
-    formData.append("BirthdayDate", date.toDateString());
     formData.append("PhoneNumber", value.PhoneNumber);
+
     return this.http.put(this.baseUrl, formData);
   }
 }

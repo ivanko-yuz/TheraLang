@@ -89,7 +89,7 @@ namespace TheraLang.BLL.Services
                 if (user.Image != null)
                 {
                     var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(),
-                        Path.GetExtension(user.Image.Name));
+                        Path.GetExtension(user.Image.FileName));
                     updateUser.ImageURl = imageUri.ToString();
                 }
 
