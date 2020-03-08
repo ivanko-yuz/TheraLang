@@ -1,11 +1,14 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using TheraLang.BLL.DataTransferObjects.ChatDtos;
+using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.Hubs;
 using TheraLang.Web.ViewModels.Chat;
+using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -53,11 +56,14 @@ namespace TheraLang.Web.Controllers
         }
 
         [HttpPost("message")]
-        public async Task<IActionResult> SendMessage([FromBody]MessageCreateDto messageCreateDto, [FromServices] IHubContext<ChatHub> chat)
+        public async Task<IActionResult> SendMessage([FromBody]MessageCreateViewModel messageModel, [FromServices] IHubContext<ChatHub> chat)
         {
-            var message = await _chatService.CreateMessage(messageCreateDto);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MessageCreateViewModel, MessageCreateDto>()).CreateMapper();
+            var messageDto = mapper.Map<MessageCreateViewModel, MessageCreateDto>(messageModel);
 
-            await chat.Clients.Group(messageCreateDto.ChatId.ToString()).SendAsync("RecieveMessage", new
+            var message = await _chatService.CreateMessage(messageDto);
+
+            await chat.Clients.Group(messageModel.ChatId.ToString()).SendAsync("RecieveMessage", new
             {
                 Text = message.Text,
                 PosterName = message.PosterName,

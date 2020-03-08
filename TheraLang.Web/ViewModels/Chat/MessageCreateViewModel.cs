@@ -2,6 +2,7 @@
 {
     public class MessageCreateViewModel
     {
-        public string Name { get; set; }
+        public int ChatId { get; set; }
+        public string Text { get; set; }
     }
 }
