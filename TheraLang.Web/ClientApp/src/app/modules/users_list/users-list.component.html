@@ -1,5 +1,5 @@
 <div class="container mb-5">
-  <div *ngFor="let user of users" class="mt-5">
+  <div *ngFor="let user of usersList.userList" class="mt-5">
     <mat-card class="home-card mat-elevation-z5">
       <mat-card-content class="home-card-content" fxLayout="row" fxLayout.md="column" fxLayout.sm="column" fxLayoutGap="10px" >
         <div class="image-container">
@@ -22,7 +22,10 @@
                 <a class="details" [routerLink]="['/users', user.id]">{{ user.firstName }} {{ user.lastName }}</a>
               </mat-card-title>
               <div class="project-description">
-                <p *ngIf="user.shortInformation != null">{{ user.shortInformation.substring(0, 400) }}</p>
+                <p *ngIf="user.shortInformation != null">{{'common.short_information'|translate}}: {{ user.shortInformation.substring(0, 400) }}</p>
+                <p *ngIf="user.city != null">{{'common.city'|translate}}: {{ user.city.substring(0, 400) }}</p>
+                <p *ngIf="user.birthDay != null"> {{'common.birthdayDate'|translate}}: {{ user.birthDay | date: 'shortDate' }}</p>
+                <p *ngIf="user.phoneNumber!=null">{{'common.phone_number'|translate}}: {{user.phoneNumber}}</p>
               </div>
             </div>
           </div>
@@ -34,3 +37,6 @@
     </mat-card>
   </div>
 </div>
+
+<app-pagination (pageChange)="pageChange($event)" [collection]="usersList.userList" [totalRows]="usersList.countOfItems"
+                [pageSize]="pageSize" fxLayout="row" fxLayoutAlign="center"></app-pagination>

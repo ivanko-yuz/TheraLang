@@ -14,7 +14,9 @@
       "number-min": "The number must be greater than",
       "number-max": "The number must be less than",
       "number-positive": "The number must be positive",
-      "date-intersect": "End date must be less than start date"
+      "date-intersect": "End date must be less than start date",
+      "edit": "edit",
+      "edit_profile": "Edit profile"
     },
     "deleted-successfully": "Deleted successfully!",
     "added-successfully": "Added successfully!",
@@ -56,6 +58,9 @@
     "ok": "Ok",
     "general_information": "General information",
     "short_information": "Short information",
+    "city": "City",
+    "birthdayDate": "Birthday date",
+    "phone_number": "Phone number",
     "mainpage": "Main page"
   },
   "components": {
