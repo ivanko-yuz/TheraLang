@@ -23,6 +23,7 @@ import { PageComponent } from "./modules/main/pages/page/page.component";
 import {RegistrationComponent} from "./modules/registration/registration.component";
 import {UserPageComponent} from "./modules/user-page/user-page.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
+import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
 const routes: Routes = [
   {
     path: "",
@@ -66,6 +67,10 @@ const routes: Routes = [
         path: "profile",
         component: ProfileComponent,
         canActivate: [AuthGuard],
+      },
+      {
+        path: "profile/edit",
+        component: ProfileEditComponent
       },
       {path: "news", component: NewsPageComponent},
       {path: "news/create", component: NewsCreateComponent},

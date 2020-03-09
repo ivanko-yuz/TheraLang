@@ -110,6 +110,9 @@ import { RegistrationComponent } from "./modules/registration/registration.compo
 import { UserPageComponent } from "./modules/user-page/user-page.component";
 import { UserService } from "./core/services/user/user.service";
 import { ProfileComponent } from "./modules/profile/profile.component";
+import { QuillModule } from "ngx-quill";
+import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
+import {Ng2TelInputModule} from 'ng2-tel-input';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -124,6 +127,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     routingComponents,
     ToolbarComponent,
     ProjectComponent,
+    ProfileEditComponent,
     HomeComponent,
     ProjectInfoComponent,
     FooterComponent,
@@ -220,6 +224,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    Ng2TelInputModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

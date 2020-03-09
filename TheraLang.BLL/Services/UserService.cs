@@ -79,14 +79,17 @@ namespace TheraLang.BLL.Services
             {
                 var updateUser = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailsDto, UserDetails>())
-                    .CreateMapper();
-                updateUser = mapper.Map<UserDetailsDto, UserDetails>(user);
-                _unitOfWork.Repository<UserDetails>().Update(updateUser);
+                updateUser.FirstName = user.FirstName;
+                updateUser.LastName = user.LastName;
+                updateUser.PhoneNumber = user.PhoneNumber;
+                updateUser.BirthDay = user.BirthDay;
+                updateUser.City = user.City;
+                updateUser.ShortInformation = user.ShortInformation;
+
                 if (user.Image != null)
                 {
                     var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(),
-                        Path.GetExtension(user.Image.Name));
+                        Path.GetExtension(user.Image.FileName));
                     updateUser.ImageURl = imageUri.ToString();
                 }
 

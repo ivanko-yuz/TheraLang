@@ -10,6 +10,8 @@
       "line-too-long": "Стрічка задовга",
       "line-too-short": "Стрічка закоротка",
       "confirm": "Підтвердити",
+      "edit": "редагування",
+      "edit_profile": "Pедагувати профіль",
       "cancel": "Відмінити",
       "number-min": "Число повинно бути більшим за",
       "number-max": "Число повинно бути меншим за",
@@ -54,7 +56,10 @@
     "no_thanks": "Ні, дякую",
     "ok": "ОК",
     "general_information": "Про користувача",
-    "short_information": "Коротка інформація"
+    "short_information": "Коротка інформація",
+    "city": "Місто",
+    "birthdayDate": "Дата народження",
+    "phone_number": "Номер телефону"
   },
   "components": {
     "home": {
