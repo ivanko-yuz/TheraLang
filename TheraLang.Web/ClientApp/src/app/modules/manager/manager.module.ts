@@ -39,6 +39,7 @@ import { UsersListComponent } from './users_list/users-list.component';
 import { ChangeRoleComponent } from './users_list/change-role/change-role.component';
 import { PaginationComponent } from '../paginationg/pagination.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
+import { PaymentHistoryService } from 'src/app/core/http/manager/paymentHistory.services';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { PaymentHistoryComponent } from './payment-history/payment-history.compo
   providers: [
     PageService,
     SlugifyPipe,
-    MemberFeeService
+    MemberFeeService,
+    PaymentHistoryService
   ]
 })
 export class ManagerModule { }
