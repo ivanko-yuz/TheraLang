@@ -53,6 +53,7 @@ export class CommentCreateComponent implements OnInit {
           msg = await this.translate
             .get("common.created-successfully")
             .toPromise();
+          this.commentForm.reset();
           this.notificationService.success(msg);
           this.commentCreated.emit();
         },
