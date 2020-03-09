@@ -8,14 +8,13 @@ namespace TheraLang.Web.NewsValidators.Validators
     {
         public NewsEditViewModelValidator()
         {
-            RuleFor(x => x.Title).NotNull().NotEmpty().MinimumLength(3).MaximumLength(250);
-            RuleFor(x => x.Text).NotNull().NotEmpty().MinimumLength(5).MaximumLength(10000);
-            //TODO: Check
-            RuleFor(x => x.NewMainImage).IsImage().NotNull().NotEmpty()
+            RuleFor(x => x.Title).NotNull().MinimumLength(3).MaximumLength(500);
+            RuleFor(x => x.Text).NotNull().MinimumLength(5).MaximumLength(50000);
+            RuleFor(x => x.NewMainImage).IsImage().NotNull()
                 .When(model => model.UploadedMainImageUrl == null);
-            RuleFor(x => x.UploadedMainImageUrl).NotNull().NotEmpty().When(model => model.NewMainImage == null);
+            RuleFor(x => x.UploadedMainImageUrl).NotNull().When(model => model.NewMainImage == null);
             RuleFor(x => x.AddedContentImages).ForEach(img => img.IsImage());
-            RuleFor(x => x.NotDeletedContentImageUrls).NotNull();
+            RuleFor(x => x.NotDeletedContentImageUrls);
         }
     }
 }

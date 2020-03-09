@@ -176,6 +176,7 @@
     }
   },
   "manager": {
+    "title": "Admin panel",
     "add-new-page": "Add new page",
     "save-changes": "Save changes"
   },

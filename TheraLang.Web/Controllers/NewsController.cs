@@ -15,12 +15,10 @@ namespace TheraLang.Web.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsService _newsService;
-        private readonly IAuthenticateService _authenticateService;
 
-        public NewsController(INewsService newsService, IAuthenticateService authenticateService)
+        public NewsController(INewsService newsService)
         {
             _newsService = newsService;
-            _authenticateService = authenticateService;
         }
 
         // GET: api/news
@@ -86,8 +84,6 @@ namespace TheraLang.Web.Controllers
                 .CreateMapper();
 
             var newsDto = mapper.Map<NewsCreateDto>(newsModel);
-            var authUser = await _authenticateService.GetAuthUser();
-            newsDto.AuthorId = authUser.Id;
 
             await _newsService.AddNews(newsDto);
             return Ok();
@@ -101,8 +97,6 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsEditViewModel, NewsEditDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsEditDto>(newsModel);
-            var authUser = await _authenticateService.GetAuthUser();
-            newsDto.EditorId = authUser.Id;
 
             await _newsService.UpdateNews(id, newsDto);
 
@@ -113,9 +107,7 @@ namespace TheraLang.Web.Controllers
         [HttpPut("like/{id}")]
         public async Task<IActionResult> Like(int id)
         {
-            var authUser = await _authenticateService.GetAuthUser();
-
-            await _newsService.Like(id, authUser.Id);
+            await _newsService.Like(id);
             return Ok();
         }
 
