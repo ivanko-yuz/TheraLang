@@ -11,6 +11,6 @@ namespace TheraLang.Web.ViewModels
         public string PhoneNumber { get; set; } 
         public string ShortInformation { get; set; }
         public string City { get; set; }
-        public DateTime? BirthdayDate { get; set; }
+        public DateTime? BirthDay { get; set; }
     }
 }

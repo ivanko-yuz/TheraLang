@@ -82,7 +82,7 @@ namespace TheraLang.BLL.Services
                 updateUser.FirstName = user.FirstName;
                 updateUser.LastName = user.LastName;
                 updateUser.PhoneNumber = user.PhoneNumber;
-                updateUser.BirthdayDate = user.BirthdayDate;
+                updateUser.BirthDay = user.BirthDay;
                 updateUser.City = user.City;
                 updateUser.ShortInformation = user.ShortInformation;
 
