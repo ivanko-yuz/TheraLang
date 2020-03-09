@@ -117,6 +117,8 @@ import { ChangeRoleComponent } from "./modules/users_list/change-role/change-rol
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
 import {ConfirmationComponent} from './modules/registration/confirmation/confirmation.component';
+import {ForgotPasswordComponent} from './modules/password/email/forgot-password.component';
+import {ResetPasswordComponent} from './modules/password/reset-password.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -167,7 +169,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewsDetailsComponent,
     PageComponent,
     ProjectEditingComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ResetPasswordComponent,
+    ForgotPasswordComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,

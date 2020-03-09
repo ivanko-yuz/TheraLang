@@ -27,6 +27,8 @@ import {UserPageComponent} from "./modules/user-page/user-page.component";
 import {UsersListComponent} from "./modules/users_list/users-list.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
 import {ConfirmationComponent} from './modules/registration/confirmation/confirmation.component';
+import {ResetPasswordComponent} from './modules/password/reset-password.component';
+import {ForgotPasswordComponent} from './modules/password/email/forgot-password.component';
 const routes: Routes = [
   {
     path: "",
@@ -110,9 +112,17 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: '**',
-    redirectTo: 'page-not-found',
-    pathMatch: 'full'
+    path: "password/forgot",
+    component: ForgotPasswordComponent,
+  },
+  {
+    path: "password/reset",
+    component: ResetPasswordComponent,
+  },
+  {
+    path: "**",
+    redirectTo: "page-not-found",
+    pathMatch: "full"
   }
 ];
 

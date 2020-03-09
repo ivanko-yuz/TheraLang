@@ -9,7 +9,7 @@ namespace TheraLang.DAL
     {
         public IttmmDbContext(DbContextOptions options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
 
         public virtual DbSet<Project> Projects { get; set; }

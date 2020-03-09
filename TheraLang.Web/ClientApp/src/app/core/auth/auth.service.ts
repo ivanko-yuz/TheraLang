@@ -98,4 +98,19 @@ export class AuthService {
       email,
     });
   }
+
+  resetPassword(password, confirmPassword, email, code) {
+    return this.http.post(`${this.baseUrl}/password/reset`, {
+      password,
+      confirm_password: confirmPassword,
+      email,
+      confirmation_number: code,
+    });
+  }
+
+  forgotPassword(email) {
+    return this.http.post(`${this.baseUrl}/password/forgot`, {
+     email,
+    });
+  }
 }

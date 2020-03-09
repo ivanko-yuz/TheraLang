@@ -52,7 +52,7 @@ namespace TheraLang.BLL.Services
             var fromAddress = new MailAddress(_emailSettings.Email, "UTTMM");
             var toAddress = new MailAddress(UserEmail, "To User");
             string fromPassword = _emailSettings.Password;
-            string subject = "Confirm your email";
+            string subject = "UTTMM";
 
             var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.User.Email == UserEmail);
             var url = "https://theralang.azurewebsites.net";

@@ -70,15 +70,15 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
-        [HttpPost("forgot/password")]
+        [HttpPost("password/forgot")]
         [AllowAnonymous]
-        public async Task<IActionResult> ForgotPassword([FromBody]string Email)
+        public async Task<IActionResult> ForgotPassword([FromBody]ConfirmPasswordChangingViewModel req)
         {
-            await _userManagement.PasswordConfirmationRequest(Email);
+            await _userManagement.PasswordConfirmationRequest(req.Email);
             return Ok();
         }
 
-        [HttpPost("forgot/password/confirmation")]
+        [HttpPost("password/reset")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmUser([FromBody]ConfirmPasswordChangingViewModel confirmPassword)
         {
