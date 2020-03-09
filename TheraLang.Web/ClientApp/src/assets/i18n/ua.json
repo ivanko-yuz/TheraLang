@@ -168,7 +168,24 @@
   "manager": {
     "title": "Адмін панель",
     "add-new-page": "Додати сторінку",
-    "save-changes": "Зберегти зміни"
+    "save-changes": "Зберегти зміни",
+    "monthly-fee": "Місячна плата",
+    "top-up": "Поповнення",
+    "payment-history": "Історія платежів",
+    "user-name":"Ім'я користувача",
+    "description":"Опис",
+    "payment": "Платіж",
+    "current-balance": "Поточний баланс",
+    "date":"Дата",
+    "home": "Домівка",
+    "pages": "Сторінки",
+    "fees": "Внески",
+    "settings": "Налаштування",
+    "member-fees": "Членські внески",
+    "fee-amount": "Сума платежа",
+    "cancel":"Відмінити",
+    "save": "Зберегти",
+    "add":"Додати"
   },
   "notFoundPage": {
     "title": "Сторінку не знайдено",

@@ -10,13 +10,12 @@
             <a class="menu-item" mat-list-item routerLink="/">
                 <mat-icon class="white-icon">home</mat-icon>
                 <span class="space"> </span>
-                <span>Home</span>
+                <span>{{'manager.home'|translate}}</span>
             </a>
-
             <a class="menu-item" mat-list-item routerLink="/admin/sitemap">
                 <mat-icon class="white-icon" >dvr</mat-icon>
                 <span class="space"> </span>
-                <span>Pages</span>
+                <span>{{'manager.pages'|translate}}</span>
             </a>
             <a class="menu-item" mat-list-item routerLink="/admin/projectRequest">
                 <mat-icon class="white-icon">post_add</mat-icon>
@@ -31,7 +30,12 @@
             <a class="menu-item" mat-list-item routerLink="/admin/fee">
                 <mat-icon class="white-icon">assignment</mat-icon>
                 <span class="space"> </span>
-                <span>Fee</span>
+                <span>{{'manager.member-fees'|translate}}</span>
+            </a>
+            <a class="menu-item" mat-list-item routerLink='/admin/paymentHistory'>
+                <mat-icon class="white-icon">assignment</mat-icon>
+                <span class="space"> </span>
+                <span>{{'manager.payment-history'|translate}}</span>
             </a>
             <a class="menu-item" mat-list-item routerLink="/admin/users">
                 <mat-icon class="white-icon">people_alt</mat-icon>
@@ -41,7 +45,7 @@
             <a class="menu-item" mat-list-item>
                 <mat-icon class="white-icon">settings</mat-icon>
                 <span class="space"> </span>
-                <span>Settings</span>
+                <span>{{'manager.settings'|translate}}</span>
             </a>
         </mat-nav-list>
     </mat-sidenav>
