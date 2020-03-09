@@ -37,6 +37,7 @@ import { ProjectTypeCreateFormComponent } from './project-type/project-type-crea
 import { ProjectRequestComponent } from './project-request/project-request.component';
 import { UsersListComponent } from './users_list/users-list.component';
 import { ChangeRoleComponent } from './users_list/change-role/change-role.component';
+import { PaginationComponent } from '../paginationg/pagination.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ChangeRoleComponent } from './users_list/change-role/change-role.compon
     ProjectTypeFormComponent,
     ProjectTypeCreateFormComponent,
     ProjectRequestComponent,
-    ChangeRoleComponent
+    ChangeRoleComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
