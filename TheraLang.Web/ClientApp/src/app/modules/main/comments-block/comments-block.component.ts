@@ -81,7 +81,6 @@ export class CommentsBlockComponent implements OnInit {
   }
 
   onScroll() {
-    console.log("scrolled")
     this.getNextCommentsPage()
   }
 

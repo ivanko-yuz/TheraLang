@@ -94,15 +94,28 @@ namespace TheraLang.BLL.Services
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
                     .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.Likes.Count))
                     .ForMember(m => m.IsLikedByCurrentUser,
-                        opt => opt.MapFrom(sm => currentUser == null ? false :
-                            sm.Likes.Select(u => u.UserThatLikedId).Contains(currentUser.Id)
-                        ));
-            });
+                        opt =>
+                        {
+                            opt.Condition(sm => currentUser != null);
+                            opt.MapFrom(sm => sm.Likes.Select(u => u.UserThatLikedId).Contains(currentUser.Id));
+                        });
+            }).CreateMapper();
 
-            var newsDto = await _unitOfWork.Repository<News>().GetAll()
+            var news = await _unitOfWork.Repository<News>().GetAll()
                 .Where(n => n.Id == id)
-                .ProjectTo<NewsDetailsDto>(mapper)
+                .Include(n => n.Author)
+                .ThenInclude(a => a.Details)
+                .Include(n => n.UploadedContentImages)
+                .Include(n => n.Likes)
                 .SingleOrDefaultAsync();
+
+            var newsDto = mapper.Map<NewsDetailsDto>(news);
+
+            // Cannot use ProjectTo With conditional mapping
+            //var newsDto = await _unitOfWork.Repository<News>().GetAll()
+            //    .Where(n => n.Id == id)
+            //    .ProjectTo<NewsDetailsDto>(mapper)
+            //    .SingleOrDefaultAsync();
 
             if (newsDto == null)
             {
