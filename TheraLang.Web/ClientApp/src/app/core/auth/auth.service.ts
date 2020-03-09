@@ -30,19 +30,19 @@ export class AuthService {
     ],
     Password: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
     ],
     ConfirmPassword: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
     ],
     FirstName: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
     ],
     LastName: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
     ],
     Image: [
       null,
@@ -89,6 +89,28 @@ export class AuthService {
   getUserName() {
     return this.http.get(this.baseUrl + "/getUserName", {
       responseType: "text"
+    });
+  }
+
+  confirmUser(confirmationNumber: number, email: string) {
+    return this.http.post(`${this.baseUrl}/confirmation`, {
+      confirmation_number: confirmationNumber,
+      email,
+    });
+  }
+
+  resetPassword(password, confirmPassword, email, code) {
+    return this.http.post(`${this.baseUrl}/password/reset`, {
+      password,
+      confirm_password: confirmPassword,
+      email,
+      confirmation_number: code,
+    });
+  }
+
+  forgotPassword(email) {
+    return this.http.post(`${this.baseUrl}/password/forgot`, {
+     email,
     });
   }
 }

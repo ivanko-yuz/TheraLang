@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common;
 using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.BLL.Interfaces
 {
     public interface IResourceService
     {
-        Task AddResource(ResourceDto resource, Guid userId);
+        Task<int> AddResource(ResourceDto resource, Guid userId);
 
         Task UpdateResource(int id, ResourceDto resource, Guid updatedById);
 
@@ -15,13 +16,12 @@ namespace TheraLang.BLL.Interfaces
 
         Task<ResourceDto> GetResourceById(int id);
 
-        Task<IEnumerable<ResourceCategoryDto>> GetResourcesCategories(bool withAssignedResources);
+        Task<IEnumerable<ResourceCategoryDto>> GetResourcesCategories(int? projectId, bool includeEmpty);
 
-        Task<int> GetResourcesCount(int categoryId);
+        Task<int> GetResourcesCount(int? categoryId, int? projectId);
 
-        Task<IEnumerable<ResourceDto>> GetResourcesByCategoryId(int categoryId, int pageNumber, int recordsPerPage);
-
-        Task<IEnumerable<ResourceDto>> GetAllResourcesByProjectId(int projectId);
+        Task<IEnumerable<ResourceDto>> GetResources(int? categoryId, int? projectId,
+            PaginationParams paginationParams);
 
         Task<IEnumerable<ResourceDto>> GetAllResources();
     }

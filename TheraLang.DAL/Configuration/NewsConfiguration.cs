@@ -16,11 +16,11 @@ namespace TheraLang.DAL.Configuration
             builder.Property(e => e.Title).HasMaxLength(250).IsRequired();
             builder.Property(e => e.Text).IsRequired();
             builder.Property(e => e.CreatedById).IsRequired();
+            builder.Property(e => e.CreatedDateUtc).IsRequired();
             builder.Property(e => e.MainImageUrl).IsRequired();
             builder.HasMany(e => e.UploadedContentImages).WithOne(i => i.News).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(e => e.Author).WithMany(a => a.News).HasForeignKey(n => n.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
-            builder.HasMany(e => e.UsersThatLiked);
         }
     }
 }

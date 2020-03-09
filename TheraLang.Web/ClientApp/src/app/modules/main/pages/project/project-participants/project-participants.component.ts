@@ -19,7 +19,6 @@ export class ProjectParticipantsComponent implements OnInit {
   displayedColumns: string[] = [
     "requestedUserName",
     "projectName",
-    "status",
     "actions"
   ];
   constructor(

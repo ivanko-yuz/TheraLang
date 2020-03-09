@@ -1,3 +1,4 @@
+using Common.Configurations;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,8 +11,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
+using TheraLang.BLL.LiqPay;
 using TheraLang.BLL.Services;
-using TheraLang.BLL.Services.File;
+using TheraLang.BLL.Services.FileServices;
 using TheraLang.Web.ActionFilters;
 using TheraLang.Web.Extensions;
 
@@ -49,12 +51,16 @@ namespace TheraLang.Web
             services.AddScoped<IAuthenticateService, AuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IConfirmationService, ConfirmationService>();
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
             services.AddFileStorage(Configuration.GetConnectionString("AzureConnection"));
             
             services.AddAuthentication(Configuration);
+            services.Configure<EmailSettings>(Configuration.GetSection("email_settings"));
+
+            services.AddLiqPayServices(Configuration.GetSection("LiqPay"));
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IProjectService, ProjectService>();
@@ -67,12 +73,14 @@ namespace TheraLang.Web
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             services.AddTransient<IDonationService, DonationService>();
-            services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddTransient<IPageService, PageService>();
             services.AddTransient<IHtmlContentService, HtmlContentService>();
             services.AddTransient<ISiteMapService, SiteMapService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IMemberFeeService, MemberFeeService>();
+            services.AddTransient<IPaymentHistoryService, PaymentHistoryService>();
+            services.AddTransient<PaymentService>();
+            services.AddTransient<INewsCommentService, NewsCommentService>();
 
             services.AddOpenApiDocument();
         }
@@ -101,7 +109,7 @@ namespace TheraLang.Web
                 routes.MapRoute(
                     "angular",
                     "{*template}",
-                    new {controller = "Home", action = "Index"});
+                    new { controller = "Home", action = "Index" });
             });
 
             app.UseSpa(spa =>
