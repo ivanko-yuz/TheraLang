@@ -57,7 +57,7 @@ namespace TheraLang.Web.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                query.User = await _authenticateService.GetAuthUserAsync();
+                query.User = await _authenticateService.GetAuthUser();
             }
             var mapper = new MapperConfiguration(mapOpts =>
                     mapOpts.CreateMap<ProjectPreviewDto, ProjectDonationViewModel>())
