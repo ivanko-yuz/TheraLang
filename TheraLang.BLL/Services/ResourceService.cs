@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Common;
 using Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
@@ -60,7 +61,7 @@ namespace TheraLang.BLL.Services
         public async Task UpdateResource(int id, ResourceDto resourceDto, Guid updatedById)
         {
             var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id) ??
-                           throw new ApiException("Should be notfoundexception");
+                           throw new NotFoundException("Resource");
             
             resource.Name = resourceDto.Name;
             resource.Description = resourceDto.Description;
@@ -75,14 +76,14 @@ namespace TheraLang.BLL.Services
         public async Task RemoveResource(int id)
         {
             var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id) ??
-                           throw new ApiException("Should be notfoundexception");
+                           throw new NotFoundException("Resource");
             
             _unitOfWork.Repository<Resource>().Remove(resource);
             await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ResourceDto>> GetResources(int? categoryId, int? projectId,
-            PagingParametersDto pagingParameters)
+            PaginationParams paginationParams)
         {
             var mapper = new MapperConfiguration(cfg =>
             {
@@ -92,16 +93,13 @@ namespace TheraLang.BLL.Services
                             $"{resource.User.Details.FirstName} {resource.User.Details.LastName}"));
             });
 
-            var skip = (pagingParameters.PageNumber - 1) * pagingParameters.PageSize;
-            var take = pagingParameters.PageSize;
-
             var resources = await _unitOfWork.Repository<Resource>()
                 .GetAll()
                 .Where(r => categoryId == null || r.CategoryId == categoryId)
                 .Where(r => projectId == null || r.ResourceProjects.Any(rp => rp.ProjectId == projectId))
                 .OrderByDescending(r => r.CreatedDateUtc)
-                .Skip(skip) // TODO : calc
-                .Take(take)
+                .Skip(paginationParams.Skip)
+                .Take(paginationParams.Take)
                 .ProjectTo<ResourceDto>(mapper)
                 .ToListAsync();
             

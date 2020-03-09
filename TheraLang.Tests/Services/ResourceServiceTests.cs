@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Common;
 using FluentAssertions;
 using MockQueryable.Moq;
 using Moq;
@@ -24,12 +25,12 @@ namespace TheraLang.Tests.Services
         private Mock<IUnitOfWork> _unitOfWorkMock;
         private Mock<IFileService> _fileServiceMock;
         private readonly List<Resource> _resources;
-        private readonly PagingParametersDto _defaultPagingParameter;
+        private readonly PaginationParams _defaultPaginationParams;
 
         public ResourceServiceTests()
         {
             _resources = new List<Resource>();
-            _defaultPagingParameter = new PagingParametersDto()
+            _defaultPaginationParams = new PaginationParams()
             {
                 PageNumber = 1,
                 PageSize = Int32.MaxValue
@@ -100,7 +101,7 @@ namespace TheraLang.Tests.Services
 
             var actual = await resourceService.GetResources(null,
                 projectId,
-                _defaultPagingParameter);
+                _defaultPaginationParams);
 
             
             actual.Should().BeEquivalentTo(expected);

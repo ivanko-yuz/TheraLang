@@ -10,8 +10,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
+using TheraLang.BLL.LiqPay;
 using TheraLang.BLL.Services;
-using TheraLang.BLL.Services.File;
+using TheraLang.BLL.Services.FileServices;
 using TheraLang.Web.ActionFilters;
 using TheraLang.Web.Extensions;
 
@@ -66,12 +67,15 @@ namespace TheraLang.Web
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
+            services.AddTransient<ILiqPayService, LiqPayService>();
+            services.AddTransient<ILiqPayInfo, LiqPayInfo>();
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IPageService, PageService>();
             services.AddTransient<IHtmlContentService, HtmlContentService>();
             services.AddTransient<ISiteMapService, SiteMapService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IMemberFeeService, MemberFeeService>();
+            services.AddTransient<INewsCommentService, NewsCommentService>();
 
             services.AddOpenApiDocument();
         }
@@ -100,7 +104,7 @@ namespace TheraLang.Web
                 routes.MapRoute(
                     "angular",
                     "{*template}",
-                    new {controller = "Home", action = "Index"});
+                    new { controller = "Home", action = "Index" });
             });
 
             app.UseSpa(spa =>

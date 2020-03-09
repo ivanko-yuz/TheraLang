@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common;
 using Common.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace TheraLang.Web.Controllers
         private readonly IResourceService _service;
         private readonly IUserManagementService _userManager;
         private readonly IAuthenticateService _authenticateService;
-        
+
         /// <summary>
         /// Get Resource by its id
         /// </summary>
@@ -42,7 +43,6 @@ namespace TheraLang.Web.Controllers
             {
                 throw new ArgumentException($"{nameof(id)} can not be 0");
             }
-
             var resource = await _service.GetResourceById(id);
             return Ok(resource);
         }
@@ -58,6 +58,7 @@ namespace TheraLang.Web.Controllers
             return Ok(resources);
         }
         
+
         /// <summary>
         /// create resource
         /// </summary>
@@ -68,7 +69,7 @@ namespace TheraLang.Web.Controllers
         [Route("create")]
         public async Task<IActionResult> PostResource([FromForm] ResourceViewModel resourceModel)
         {
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             if (authUser == null) return BadRequest();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceViewModel, ResourceDto>(resourceModel);
@@ -88,7 +89,7 @@ namespace TheraLang.Web.Controllers
         [Route("update/{id}")]
         public async Task<IActionResult> PutResource(int id, [FromBody] ResourceTextInfoViewModel resourceModel)
         {
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceTextInfoViewModel, ResourceDto>()).CreateMapper();
             var resourceDto = mapper.Map<ResourceTextInfoViewModel, ResourceDto>(resourceModel);
@@ -156,20 +157,16 @@ namespace TheraLang.Web.Controllers
         /// Get all Resources by Category with pagination
         /// </summary>
         /// <param name="categoryId"></param>
+        /// <param name="projectId"></param>
+        /// <param name="paginationParams"></param>
         /// <returns>array of resources</returns>
         [HttpGet]
         [Route("category/{categoryId}/{projectId?}")]
         [Authorize]
         public async Task<IActionResult> GetAllResources(int categoryId, int? projectId,
-            [FromQuery] PagingParametersViewModel pagingParametersViewModel)
+            [FromQuery] PaginationParams paginationParams)
         {
-            var mapper = new MapperConfiguration(mapOpts =>
-            {
-                mapOpts.CreateMap<PagingParametersViewModel, PagingParametersDto>();
-            }).CreateMapper();
-
-            var pagingParameters = mapper.Map<PagingParametersDto>(pagingParametersViewModel);
-            var resources = await _service.GetResources(categoryId, projectId, pagingParameters);
+            var resources = await _service.GetResources(categoryId, projectId, paginationParams);
             return Ok(resources);
         }
     }

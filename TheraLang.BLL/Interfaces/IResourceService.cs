@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common;
 using TheraLang.BLL.DataTransferObjects;
 
 namespace TheraLang.BLL.Interfaces
@@ -20,7 +21,7 @@ namespace TheraLang.BLL.Interfaces
         Task<int> GetResourcesCount(int? categoryId, int? projectId);
 
         Task<IEnumerable<ResourceDto>> GetResources(int? categoryId, int? projectId,
-            PagingParametersDto pagingParameters);
+            PaginationParams paginationParams);
 
         Task<IEnumerable<ResourceDto>> GetAllResources();
     }
