@@ -168,7 +168,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommentsBlockComponent,
     CommentCreateComponent,
     CommentComponent,
-    CommentEditComponent
+    CommentEditComponent,
     PaginationComponent
   ],
   entryComponents: [
