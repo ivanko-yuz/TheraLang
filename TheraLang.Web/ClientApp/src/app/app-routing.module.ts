@@ -26,6 +26,7 @@ import {RegistrationComponent} from "./modules/registration/registration.compone
 import {UserPageComponent} from "./modules/user-page/user-page.component";
 import {UsersListComponent} from "./modules/users_list/users-list.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
+import { NewsEditComponent } from './modules/main/pages/news/news-edit/news-edit.component';
 const routes: Routes = [
   {
     path: "",
@@ -86,6 +87,7 @@ const routes: Routes = [
       {path: "news", component: NewsPageComponent},
       {path: "news/create", component: NewsCreateComponent},
       {path: "news/details/:newsId", component: NewsDetailsComponent},
+      {path: "news/edit/:newsId", component: NewsEditComponent},
       {
         component: PageComponent,
         path: "pages/:pageRoute",

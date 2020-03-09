@@ -7,14 +7,14 @@
         <mat-dialog-content>
             <div fxLayout="column">
                 <mat-form-field>
-                    <input formControlName="title" autofocus required matInput
+                    <input formControlName="title" required matInput
                         [placeholder]="'components.news.news-title'|translate">
                         <mat-error *ngIf="this.newsForm.controls['title'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
                         <mat-error *ngIf="this.newsForm.controls['title'].errors?.minlength">{{'common.validation.line-too-short'|translate}}</mat-error>
                         <mat-error *ngIf="this.newsForm.controls['title'].errors?.maxlength">{{'common.validation.line-too-long'|translate}}</mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea formControlName="text" matTextareaAutosize matInput autofocus required
+                    <textarea formControlName="text" matTextareaAutosize matInput required
                         [placeholder]="'components.news.news-text'|translate"></textarea>
                         <mat-error *ngIf="this.newsForm.controls['text'].errors?.required">{{'common.validation.field-is-required'|translate}}</mat-error>
                         <mat-error *ngIf="this.newsForm.controls['text'].errors?.minlength">{{'common.validation.line-too-short'|translate}}</mat-error>
@@ -45,7 +45,7 @@
                     >
                     {{ "common.confirm" | translate }}
                     </button>
-                        <button mat-raised-button color="warn" type="reset" [routerLink]="['/news']">
+                    <button mat-raised-button color="warn" type="reset" [routerLink]="['/news']">
                         {{ "common.cancel" | translate }}
                     </button>
                 </mat-dialog-actions>

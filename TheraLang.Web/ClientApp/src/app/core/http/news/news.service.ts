@@ -27,4 +27,8 @@ export class NewsService {
   deleteNews(newsId:number){
     return this.http.delete(this.url + "news/"+newsId);
   }
+
+  editNews(newsId:number,news){
+    return this.http.put(this.url + "news/" + newsId,news);
+  }
 }
