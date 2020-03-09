@@ -1,7 +1,7 @@
 import DateTimeFormat = Intl.DateTimeFormat;
 
 export class User {
-    id: number;
+    id: string;
     firstName: string;
     lastName: string;
     shortInformation: string;
@@ -11,6 +11,7 @@ export class User {
     city: string;
     birthDay: Date;
     phoneNumber: string;
+    balance: number;
 }
 
 export class UserPageViewModel {

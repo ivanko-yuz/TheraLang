@@ -141,7 +141,10 @@
       "short_information": "Коротко про себе",
       "age": "Вік",
       "successfully-registration": "Дякуємо за реєстрацію!",
-      "error": "Помилка"
+      "error": "Помилка",
+      "balance": "Баланс",
+      "sum": "Введіть суму",
+      "topup": "Поповноити  "
     },
     "projectTypes": {
       "title": "Типи Проектів",

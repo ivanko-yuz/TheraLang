@@ -143,7 +143,10 @@
       "short_information": "Short information",
       "age": "Age",
       "successfully-registration": "Successfully registration",
-      "error": "Error"
+      "error": "Error",
+      "balance": "Balance",
+      "sum": "Enter sum",
+      "topup": "Top Up"
     },
     "projectTypes": {
       "title": "Types Of Project",

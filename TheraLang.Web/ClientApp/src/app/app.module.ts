@@ -114,6 +114,7 @@ import { QuillModule } from "ngx-quill";
 import {NgxPaginationModule} from 'ngx-pagination';
 import {PaginationComponent} from './modules/paginationg/pagination.component';
 import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
+import { UserFinancesComponent } from './modules/profile/user-finances/user-finances.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -159,7 +160,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewsDetailsComponent,
     PageComponent,
     ProjectEditingComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UserFinancesComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
