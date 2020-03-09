@@ -15,10 +15,10 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Input() currentPage = 1;
   @Input() totalRows: number;
   math = Math;
-  private totalPages: number;
+  public totalPages: number;
 
   @Output() pageChange = new EventEmitter<any>(true);
-  private numbers: number[];
+  public numbers: number[];
 
   setPage(pageNumber: number) {
     this.currentPage = pageNumber;

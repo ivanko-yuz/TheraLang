@@ -57,6 +57,8 @@ namespace TheraLang.Web
             
             services.AddAuthentication(Configuration);
 
+            services.AddLiqPayServices(Configuration.GetSection("LiqPay"));
+
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
@@ -67,8 +69,6 @@ namespace TheraLang.Web
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
-            services.AddTransient<ILiqPayService, LiqPayService>();
-            services.AddTransient<ILiqPayInfo, LiqPayInfo>();
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddTransient<IPageService, PageService>();
@@ -76,6 +76,8 @@ namespace TheraLang.Web
             services.AddTransient<ISiteMapService, SiteMapService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IMemberFeeService, MemberFeeService>();
+            services.AddTransient<IPaymentHistoryService, PaymentHistoryService>();
+            services.AddTransient<PaymentService>();
             services.AddTransient<INewsCommentService, NewsCommentService>();
 
             services.AddOpenApiDocument();

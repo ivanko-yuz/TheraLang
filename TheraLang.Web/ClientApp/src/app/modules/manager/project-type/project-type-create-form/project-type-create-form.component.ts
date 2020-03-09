@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ProjectTypeService } from "../../../../../core/services/project-type/project-type.service";
-import { ProjectType } from "../../../../../shared/models/project-type/project-type.model";
+import { ProjectTypeService } from "../../../../core/services/project-type/project-type.service";
+import { ProjectType } from "../../../../shared/models/project-type/project-type.model";
 import { DateAdapter, MatDialogRef } from "@angular/material";
 
 @Component({

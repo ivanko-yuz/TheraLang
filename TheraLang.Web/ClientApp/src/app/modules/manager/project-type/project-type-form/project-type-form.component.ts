@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, DateAdapter, MAT_DIALOG_DATA } from "@angular/material";
-import { DialogData } from "../project-info/resources-table-for-project/project-type/project-type.component";
-import { ProjectTypeService } from "../../../../../core/services/project-type/project-type.service";
-import { ProjectType } from "../../../../../shared/models/project-type/project-type.model";
+import { DialogData } from "../project-type.component";
+import { ProjectTypeService } from "../../../../core/services/project-type/project-type.service";
+import { ProjectType } from "../../../../shared/models/project-type/project-type.model";
 
 @Component({
   selector: "app-project-type-form",

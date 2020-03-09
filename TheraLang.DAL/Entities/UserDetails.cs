@@ -19,6 +19,7 @@ namespace TheraLang.DAL.Entities
         public string City { get; set; }
         public DateTime? BirthDay { get; set; }
         public User User { get; set; }
+        public decimal Balance { get; set; }
 
         public virtual ICollection<Resource> Resources { get; set; }
     }
