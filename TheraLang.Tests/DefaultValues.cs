@@ -2,6 +2,7 @@ using Common;
 using System;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.CommentDtos;
+using TheraLang.BLL.DataTransferObjects.UserDtos;
 
 namespace TheraLang.Tests
 {

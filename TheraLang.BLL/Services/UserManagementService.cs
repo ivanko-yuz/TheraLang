@@ -26,7 +26,6 @@ namespace TheraLang.BLL.Services
             _confirmation = confirmation;
         }
 
-
         public async Task<User> GetUser(string email, string password)
         {
             var user = await _unitOfWork.Repository<User>().GetAll().Include(x => x.Role)

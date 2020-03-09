@@ -23,20 +23,24 @@ namespace TheraLang.Tests.Services
     {
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
         private readonly Mock<IFileService> _fileService;
+        private readonly Mock<IConfirmationService> _confirmationService;
         private readonly UserManagementService _userService;
         private readonly List<User> _testUsersDb;
         private readonly List<Role> _testRolesDb;
         private readonly List<UserDetails> _testUserDetailsDb;
+        private readonly List<UserConfirmation> _testUserConfirmationsDb;
 
         public UserManagmentTests()
         {
             _testUsersDb = GetUsersTestData().ToList();
             _testRolesDb = GetRolesTestData().ToList();
             _testUserDetailsDb = GetUserDetailsTestData().ToList();
+            _testUserConfirmationsDb = GetUserConfirmationsTestData().ToList();
 
             var userRepoMock = new Mock<IRepository<User>>();
             var userDetailsRepoMock = new Mock<IRepository<UserDetails>>();
             var roleRepoMock = new Mock<IRepository<Role>>();
+            var userConfirmationRepoMock = new Mock<IRepository<UserConfirmation>>();
 
             userRepoMock.Setup(r => r.GetAll()).Returns(_testUsersDb.AsQueryable().BuildMock().Object);
             userRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<User, bool>>>()))
@@ -63,14 +67,23 @@ namespace TheraLang.Tests.Services
                     _testUserDetailsDb.Add(details);
                 });
 
+            userConfirmationRepoMock.Setup(r => r.Add(It.IsAny<UserConfirmation>()))
+                .Callback((UserConfirmation confirmation) =>
+                {
+                    _testUserConfirmationsDb.Add(confirmation);
+                });
+
             _unitOfWorkMock = new Mock<IUnitOfWork>();
             _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(userRepoMock.Object);
             _unitOfWorkMock.Setup(u => u.Repository<Role>()).Returns(roleRepoMock.Object);
             _unitOfWorkMock.Setup(u => u.Repository<UserDetails>()).Returns(userDetailsRepoMock.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<UserConfirmation>()).Returns(userConfirmationRepoMock.Object);
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync()).Verifiable();
             _fileService = new Mock<IFileService>();
+            _confirmationService = new Mock<IConfirmationService>();
+            _confirmationService.Setup(x => x.SendEmail("", "", "")).Returns(Task.CompletedTask);
 
-            _userService = new UserManagementService(_unitOfWorkMock.Object, _fileService.Object);
+            _userService = new UserManagementService(_unitOfWorkMock.Object, _fileService.Object, _confirmationService.Object);
         }
 
         [Fact]
@@ -160,7 +173,7 @@ namespace TheraLang.Tests.Services
             data.Add(new Role()
             {
                 Id = Guid.NewGuid(),
-                Name = "Guest",
+                Name = "Unconfirmed",
             });
 
             return data.AsEnumerable();
@@ -169,7 +182,12 @@ namespace TheraLang.Tests.Services
         private IEnumerable<UserDetails> GetUserDetailsTestData()
         {
             var data = new List<UserDetails>();
+            return data.AsEnumerable();
+        }
 
+        private IEnumerable<UserConfirmation> GetUserConfirmationsTestData()
+        {
+            var data = new List<UserConfirmation>();
             return data.AsEnumerable();
         }
     }
