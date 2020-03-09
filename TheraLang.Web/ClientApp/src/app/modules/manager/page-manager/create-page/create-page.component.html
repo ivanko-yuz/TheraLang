@@ -73,8 +73,9 @@
         </div>
 
         <div class="button-container">
-            <button mat-raised-button type="submit" color="accent" [disabled]="form.invalid">Create</button>
+            <button mat-raised-button type="submit" color="primary" [disabled]="form.invalid">Create</button>
             <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+            <button type="button" mat-button color="primary" (click)="preview()" [disabled]="form.invalid">Preview</button>
         </div>
     </form>
 </div>

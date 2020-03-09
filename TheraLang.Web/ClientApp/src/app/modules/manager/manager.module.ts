@@ -6,7 +6,7 @@ import { CreatePageComponent } from "./page-manager/create-page/create-page.comp
 import { ManagerComponent } from "./manager.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { QuillModule } from "ngx-quill";
-import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule, MatDatepickerModule } from "@angular/material";
+import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule, MatDatepickerModule, MatDialogModule, MatTableModule, MatSelectModule } from "@angular/material";
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { SortablejsModule } from "ngx-sortablejs";
 import { PageEntryComponent } from "./sitemap-editor/page-entry/page-entry.component";
@@ -29,6 +29,15 @@ import { CreateFeeComponent } from "./member-fee/create-fee/create-fee.component
 import { GetFeeComponent } from "./member-fee/get-fee/get-fee.component";
 import { PageService } from "src/app/core/http/manager/page.service";
 import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
+import { PageViewComponent } from '../shared/page-view/page-view.component';
+import { PagePreviewComponent } from './page-manager/page-preview/page-preview.component';
+import { ProjectTypeComponent } from './project-type/project-type.component';
+import { ProjectTypeFormComponent } from './project-type/project-type-form/project-type-form.component';
+import { ProjectTypeCreateFormComponent } from './project-type/project-type-create-form/project-type-create-form.component';
+import { ProjectRequestComponent } from './project-request/project-request.component';
+import { UsersListComponent } from './users_list/users-list.component';
+import { ChangeRoleComponent } from './users_list/change-role/change-role.component';
+import { PaginationComponent } from '../paginationg/pagination.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +53,15 @@ import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
     SlugifyPipe,
     MemberFeeComponent,
     CreateFeeComponent,
-    GetFeeComponent
+    GetFeeComponent,
+    PagePreviewComponent,
+    UsersListComponent,
+    ProjectTypeComponent,
+    ProjectTypeFormComponent,
+    ProjectTypeCreateFormComponent,
+    ProjectRequestComponent,
+    ChangeRoleComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
@@ -57,6 +74,7 @@ import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
     MatCardModule,
     SortablejsModule,
     MatIconModule,
+    MatDialogModule,
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
@@ -74,7 +92,15 @@ import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
       }
     }),
     SharedModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    MatSelectModule
+  ],
+  entryComponents:[
+    PagePreviewComponent,
+    ProjectTypeFormComponent,
+    ProjectTypeCreateFormComponent,
+    ChangeRoleComponent
   ],
   exports: [
     MatButtonModule,

@@ -12,7 +12,8 @@ namespace TheraLang.BLL.DataTransferObjects.UserDtos
         public string LastName { get; set; }
         public string ShortInformation { get; set; }
         public string ImageURl { get; set; }
+        public string City { get; set; }
         public string RoleName { get; set; }
-        public DateTime BirthdayDate { get; set; }
+        public DateTime? BirthDay { get; set; }
     }
 }

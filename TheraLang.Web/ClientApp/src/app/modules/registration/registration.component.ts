@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import { AuthService } from "../../core/auth/auth.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
@@ -15,6 +15,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class RegistrationComponent implements OnInit {
   hide = true;
   returnUrl: string;
+  imageSrc: string | ArrayBuffer;
 
   constructor(
     private notificationService: NotificationService,
@@ -48,11 +49,18 @@ export class RegistrationComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      console.log(file);
+      const reader = new FileReader();
+      reader.onload = e => this.imageSrc = reader.result;
+
+      reader.readAsDataURL(file);
 
       this.authService.registrationForm.patchValue({
         Image: file,
       });
     }
+  }
+
+  avatarChange() {
+    document.getElementById("input-file-id").click();
   }
 }

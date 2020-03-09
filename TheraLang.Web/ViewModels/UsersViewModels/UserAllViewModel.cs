@@ -22,6 +22,8 @@ namespace TheraLang.Web.ViewModels.UsersViewModels
         public string LastName { get; set; }
 
         public IFormFile Image { get; set; }
-        public DateTime BirthdayDate { get; set; }
+        public DateTime? BirthDay { get; set; }
+        public string City { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

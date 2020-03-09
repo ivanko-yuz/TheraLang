@@ -7,8 +7,8 @@ namespace TheraLang.Web.Validators.ValidationRules
     {
         public RegistrationViewMoselValidator()
         {
-            RuleFor(x => x.FirstName).NotNull().NotEmpty().MinimumLength(3).MaximumLength(50);
-            RuleFor(x => x.LastName).NotNull().NotEmpty().MinimumLength(5).MaximumLength(50);
+            RuleFor(x => x.FirstName).NotNull().NotEmpty().MinimumLength(2).MaximumLength(50);
+            RuleFor(x => x.LastName).NotNull().NotEmpty().MinimumLength(2).MaximumLength(50);
             RuleFor(x => x.Image).IsSafe();
             RuleFor(s => s.Email).NotEmpty().WithMessage("Email address is required")
                 .EmailAddress().WithMessage("A valid email is required");

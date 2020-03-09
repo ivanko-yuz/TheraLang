@@ -4,10 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Common.Constants;
 using Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.Projects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
@@ -25,18 +27,25 @@ namespace TheraLang.BLL.Services
             _fileService = fileService;
         }
 
-        public async Task<IEnumerable<ProjectDto>> GetAllProjectsAsync()
+        public async Task<IEnumerable<ProjectPreviewDto>> GetAllProjectsAsync()
         {
-            var projects = await _unitOfWork.Repository<Project>().GetAll()
-                .Include(x => x.Donations)
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Project, ProjectPreviewDto>()
+                    .ForMember(dto => dto.DonationTargetSum,
+                        opt => opt.MapFrom(p => p.DonationTarget))
+                    .ForMember(dto => dto.DonationsSum,
+                        opts => opts.MapFrom(entity => entity.Donations.Sum(donation => donation.Amount))
+                    );
+            });
+
+            var projectsDtos = await _unitOfWork.Repository<Project>()
+                .GetAll()
+                .Where(x => x.StatusId == ProjectStatus.Approved)
+                .ProjectTo<ProjectPreviewDto>(mapper)
                 .ToListAsync();
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
-                    .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(p => p.DonationTarget)))
-                .CreateMapper();
-            var projectsDto = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectDto>>(projects);
-
-            return projectsDto;
+            return projectsDtos;
         }
 
         public async Task<IEnumerable<ProjectDto>> GetAllNewProjectsAsync()
@@ -80,7 +89,8 @@ namespace TheraLang.BLL.Services
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, Project>()
                     .ForMember(p => p.DonationTarget, opt => opt.MapFrom(src => src.DonationTargetSum))
-                    .ForMember(p => p.IsActive, opt => opt.MapFrom(src => true)))
+                    .ForMember(p => p.IsActive, opt => opt.MapFrom(src => true))
+                    .ForMember(p => p.OwnerId, opt => opt.MapFrom(p => userId)))
                 .CreateMapper();
 
             var project = mapper.Map<ProjectDto, Project>(projectDto);
@@ -197,22 +207,23 @@ namespace TheraLang.BLL.Services
 
         public async Task<ProjectDto> GetByIdAsync(int id)
         {
-            try
+            var mapper = new MapperConfiguration(cfg =>
             {
-                var project = await _unitOfWork.Repository<Project>().Get(i => i.Id == id);
+                cfg.CreateMap<Project, ProjectDto>()
+                    .ForMember(dto => dto.DonationTargetSum,
+                        opt => opt.MapFrom(p => p.DonationTarget))
+                    .ForMember(dto => dto.DonationsSum,
+                        opts => opts.MapFrom(entity => entity.Donations.Sum(donation => donation.Amount))
+                    );
+            });
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
-                        .ForMember(p => p.DonationTargetSum, opt => opt.MapFrom(src => src.DonationTarget)))
-                    .CreateMapper();
+            var projectDto = await _unitOfWork.Repository<Project>()
+                .GetAll()
+                .Where(i => i.Id == id)
+                .ProjectTo<ProjectDto>(mapper)
+                .FirstOrDefaultAsync();
 
-                var projectDto = mapper.Map<Project, ProjectDto>(project);
-
-                return projectDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when getting project by {nameof(id)} = {id} ", ex);
-            }
+            return projectDto;
         }
     }
 }

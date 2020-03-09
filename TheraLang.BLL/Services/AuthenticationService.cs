@@ -54,20 +54,25 @@ namespace TheraLang.BLL.Services
             return null;
         }
 
-        public async Task<AuthUser> GetAuthUserAsync()
+        public async Task<AuthUser> GetAuthUser()
+        {
+            return await TryGetAuthUser() ?? throw new Exception($"Error while getting user id from token");
+        }
+        
+        public async Task<AuthUser> TryGetAuthUser()
         {
             return await Task.Run(() =>
             {
                 var claims = _context.HttpContext.User.Claims;
                 var userId = claims.FirstOrDefault(x => x.Type == "Id")?.Value;
-                if (userId == null)
-                {
-                    throw new Exception($"Error while getting user id from token");
-                }
-
                 var userEmail = claims.FirstOrDefault(x => x.Type == ClaimTypes.Email)?.Value;
                 var userRole = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
 
+                if (userId == null || userEmail == null || userRole == null)
+                {
+                    return null;
+                }
+                
                 return new AuthUser()
                 {
                     Id = new Guid(userId),
