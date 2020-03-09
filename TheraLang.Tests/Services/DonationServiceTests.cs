@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Common.Enums;
 using Common.Exceptions;
 using FluentAssertions;
+using Microsoft.Extensions.Options;
 using Moq;
 using TheraLang.BLL.DataTransferObjects.Donations;
 using TheraLang.BLL.LiqPay;
@@ -20,9 +21,8 @@ namespace TheraLang.Tests.Services
     public class DonationServiceTests
     {
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
-        private readonly Mock<ILiqPayInfo> _liqPayInfoMock;
         private readonly DonationService _donationService;
-
+        private readonly IOptions<LiqPayKeys> _liqPayKeysOptions;
         private readonly List<Donation> _testDb;
         private readonly LiqPayCheckoutDto _validCheckout;
 
@@ -35,9 +35,11 @@ namespace TheraLang.Tests.Services
                 Signature = "unholN06qwKFFl/LB3tc1qegq4E="
             };
             
-            _liqPayInfoMock = new Mock<ILiqPayInfo>();
-            _liqPayInfoMock.Setup(l => l.PrivateKey).Returns("testPrivateKey");
-            _liqPayInfoMock.Setup(l => l.PublicKey).Returns("testPublicKey");
+            _liqPayKeysOptions = Options.Create(new LiqPayKeys()
+            {
+                PrivateKey = "testPrivateKey",
+                PublicKey = "testPublicKey"
+            });
 
             var repoMock = new Mock<IRepository<Donation>>();
             repoMock.Setup(r => r.Get(It.IsAny<Expression<Func<Donation, bool>>>()))
@@ -56,7 +58,7 @@ namespace TheraLang.Tests.Services
             _unitOfWorkMock.Setup(u => u.Repository<Donation>()).Returns(repoMock.Object);
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync());
 
-            _donationService = new DonationService(_unitOfWorkMock.Object,_liqPayInfoMock.Object);
+            _donationService = new DonationService(_unitOfWorkMock.Object, _liqPayKeysOptions);
         }
 
         [Fact]
