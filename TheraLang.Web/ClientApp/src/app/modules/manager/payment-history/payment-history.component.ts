@@ -18,13 +18,14 @@ export class PaymentHistoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadPaymentsHistory();
   }
-  loadMemberFees() {
+
+  loadPaymentsHistory() {
     this.paymentHistoryService.getPaymentHistory().subscribe({
       next: (data: PaymentHistory[]) => {
          this.paymentsHistory = data;
       }
     });
   }
-
 }

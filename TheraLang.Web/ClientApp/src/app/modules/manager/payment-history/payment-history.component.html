@@ -1,1 +1,58 @@
-<p>payment-history works!</p>
+<div class="center">
+    <h1>{{'manager.payment-history' | translate}}</h1>
+</div>
+<div class="f">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td><b>{{'manager.user-name' | translate}}</b></td>
+                <td><b>{{'manager.description' | translate}}</b></td>
+                <td><b>{{'manager.payment' | translate}}</b></td>
+                <td><b>{{'manager.current-balance' | translate}}</b></td>
+                <td><b>{{'manager.date' | translate}}</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let f of paymentsHistory.reverse()">
+                <ng-template [ngIf]="f.description == 0" [ngIfElse]="exp">
+                    <td>
+                        <div class="with-icon">
+                            <mat-icon class="red-icon">keyboard_arrow_down</mat-icon>
+                            <a routerLink="/users/{{f.userId}}">{{f.userName}}</a>
+                        </div>
+                    </td>
+                </ng-template>
+                <ng-template #exp>
+                    <td>
+                        <mat-icon class="green-icon">keyboard_arrow_up</mat-icon>
+                        <a routerLink="/users/{{f.userId}}">{{f.userName}}</a>
+                    </td>
+                </ng-template>
+                <ng-template [ngIf]="f.description == 0" [ngIfElse]="expr">
+                    <td>{{ 'manager.monthly-fee' | translate }}</td>
+                </ng-template>
+                <ng-template #expr>
+                    <td>
+                        {{ 'manager.top-up' | translate }}
+                    </td>
+                </ng-template>
+                <ng-template [ngIf]="f.saldo > 0" [ngIfElse]="ex">
+                    <td>
+                        <span class="green-icon">
+                            {{f.saldo}}
+                        </span>
+                    </td>
+                </ng-template>
+                <ng-template #ex>
+                    <td>
+                        <span class="red-icon">
+                            {{f.saldo}}
+                        </span>
+                    </td>
+                </ng-template>
+                <td>{{f.currentBalance}}</td>
+                <td>{{f.date |  date:'dd.MM.yyyy, HH:mm'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
