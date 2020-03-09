@@ -1,6 +1,6 @@
-﻿namespace TheraLang.Web.ViewModels
+﻿namespace TheraLang.Web.ViewModels.Donations
 {
-    public class LiqPayCheckoutModel
+    public class LiqPayCheckoutViewModel
     {
         public string Data { get; set; }
         public string Signature { get; set; }

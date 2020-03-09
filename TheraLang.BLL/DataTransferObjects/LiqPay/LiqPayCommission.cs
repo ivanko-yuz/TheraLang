@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace TheraLang.DAL.Models
+namespace TheraLang.BLL.DataTransferObjects.LiqPay
 {
-    public class LiqPayCommissionModel
+    public class LiqPayCommission
     {
         [JsonProperty("receiver_commission")]
         public decimal ReceiverCommission { get; set; }
