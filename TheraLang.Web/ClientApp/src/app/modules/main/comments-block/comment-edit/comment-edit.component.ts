@@ -24,7 +24,7 @@ export class CommentEditComponent implements OnInit {
     ) 
     {
       this.commentForm = new FormGroup({
-        "text": new FormControl("", [Validators.maxLength(10000), Validators.minLength(5)])
+        "text": new FormControl("", [Validators.required, Validators.maxLength(10000), Validators.minLength(1)])
     });
   }
 

@@ -16,7 +16,8 @@
                     {{'common.validation.line-too-long'|translate}}</mat-error>
             </mat-form-field>
             <div>
-                <button mat-raised-button color="primary" type="submit" [disabled]="this.commentForm.invalid"
+                <button mat-raised-button color="primary" type="submit" 
+                    [disabled]="this.commentForm.invalid || !this.commentForm.dirty"
                     (click)="onSubmit()" class="right-align">
                     {{'components.comments.create-comment'|translate}}
                 </button>

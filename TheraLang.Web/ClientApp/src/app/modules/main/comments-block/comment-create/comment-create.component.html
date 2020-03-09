@@ -8,14 +8,16 @@
         <div fxLayout="column">
                 <mat-form-field floatLabel=never>
                     <textarea formControlName="text" class="comment-input" matTextareaAutosize autofocus
-                        matInput placeholder="{{'components.comments.enter-comment'|translate}}"></textarea>
+                        matInput placeholder="{{'components.comments.enter-comment'|translate}}" 
+                        [(ngModel)]="this.commentForm.text"></textarea>
                     <mat-error *ngIf="this.commentForm.controls['text'].errors?.minlength">
                         {{'common.validation.line-too-short'|translate}}</mat-error>
                     <mat-error *ngIf="this.commentForm.controls['text'].errors?.maxlength">
                         {{'common.validation.line-too-long'|translate}}</mat-error>
                 </mat-form-field>
                 <div>
-                    <button mat-raised-button color="primary" type="submit" [disabled]="this.commentForm.invalid"
+                    <button mat-raised-button color="primary" type="submit" 
+                        [disabled]="this.commentForm.invalid || !this.commentForm.dirty || !this.commentForm.text"
                         (click)="onSubmit()" class="right-align">
                         {{'components.comments.create-comment'|translate}}
                     </button>

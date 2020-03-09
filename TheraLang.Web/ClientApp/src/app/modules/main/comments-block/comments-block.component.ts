@@ -63,6 +63,9 @@ export class CommentsBlockComponent implements OnInit {
          this.comments.push(...response)
          this.lastPage++
          this.loading = false;
+      },
+      error => {
+        this.loading = false;
       })
   }
 
