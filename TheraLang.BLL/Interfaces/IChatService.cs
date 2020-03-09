@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common;
 using TheraLang.BLL.DataTransferObjects.ChatDtos;
 
 namespace TheraLang.BLL.Interfaces
@@ -12,6 +13,6 @@ namespace TheraLang.BLL.Interfaces
         Task JoinToChat(int chatId, Guid userId);
         Task<IEnumerable<ChatDto>> GetOwnChats();
         Task<MessageDto> CreateMessage(MessageCreateDto message);
-        Task<IEnumerable<MessageDto>> GetMessages (MessageParameters parameters);
+        Task<IEnumerable<MessageDto>> GetMessages (int chatId, PaginationParams parameters);
     }
 }

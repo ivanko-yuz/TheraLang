@@ -4,8 +4,8 @@ import { Chat } from 'src/app/shared/models/chat/chat';
 import { Message } from 'src/app/shared/models/message/message';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr'
 import { UserService } from 'src/app/core/auth/user.service';
-import { MessageParameters } from 'src/app/shared/models/chat/message-parameters';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PaginationParams } from 'src/app/shared/models/pagination-params/pagination-params';
 
 @Component({
   selector: 'app-messanger',
@@ -21,6 +21,7 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   pageNumber: number;
   form: FormGroup;
   chatsExist: boolean;
+  pageSize = 15;
   @ViewChild('chatScroller', { static: false }) scroll: ElementRef;
 
   constructor(private messangerService: MessangerService,
@@ -55,16 +56,12 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   loadMessages() {
-    var params: MessageParameters = {
-      chatId: this.currentChat.id,
-      pageNumber: this.pageNumber,
-      pageSize: 15
-    };
-
-    this.messangerService.getMessages(params).subscribe(async (data: Message[]) => {
-      this.messages.unshift(...data.reverse());
-      this.pageNumber++;
-    });
+    let paginationParams: PaginationParams = { pageNumber: this.pageNumber, pageSize: this.pageSize }
+    this.messangerService.getMessages(this.currentChat.id, paginationParams)
+      .subscribe(async (data: Message[]) => {
+        this.messages.unshift(...data.reverse());
+        this.pageNumber++;
+      });
   }
 
   scrollToBottom(): void {
@@ -106,7 +103,7 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   listenChat() {
-    this.hubConnection.on("RecieveMessage", (message: Message) => {
+    this.hubConnection.on("ReceiveMessage", (message: Message) => {
       this.messages.push(message);
       this.disableScrollDown = false;
       this.scrollToBottom();

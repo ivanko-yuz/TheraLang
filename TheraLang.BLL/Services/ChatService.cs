@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common;
 using Common.Constants;
 using Common.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -51,16 +52,16 @@ namespace TheraLang.BLL.Services
             return messageDto;
         }
 
-        public async Task<IEnumerable<MessageDto>> GetMessages(MessageParameters parameters)
+        public async Task<IEnumerable<MessageDto>> GetMessages(int chatId, PaginationParams parameters)
         {
             var messages = await _unitOfWork.Repository<Message>().GetAll()
                 .Include(m => m.Chat)
                 .Include(m => m.Poster)
                 .ThenInclude(u => u.Details)
-                .Where(m => m.ChatId == parameters.ChatId)
+                .Where(m => m.ChatId == chatId)
                 .OrderByDescending(m => m.Timestamp)
-                .Skip((parameters.PageNumber - 1) * parameters.PageSize)
-                .Take(parameters.PageSize)
+                .Skip(parameters.Skip)
+                .Take(parameters.Take)
                 .ToListAsync();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Message, MessageDto>()

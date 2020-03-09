@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using TheraLang.BLL.DataTransferObjects.ChatDtos;
-using TheraLang.BLL.DataTransferObjects.NewsDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.Hubs;
 using TheraLang.Web.ViewModels.Chat;
-using TheraLang.Web.ViewModels.NewsViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -63,7 +62,7 @@ namespace TheraLang.Web.Controllers
 
             var message = await _chatService.CreateMessage(messageDto);
 
-            await chat.Clients.Group(messageModel.ChatId.ToString()).SendAsync("RecieveMessage", new
+            await chat.Clients.Group(messageModel.ChatId.ToString()).SendAsync("ReceiveMessage", new
             {
                 Text = message.Text,
                 PosterName = message.PosterName,
@@ -74,19 +73,10 @@ namespace TheraLang.Web.Controllers
             return Ok(message);
         }
 
-        [HttpGet("{chatId}/{pageNumber}/{pageSize}")]
-        public async Task<IActionResult> GetMessages(int chatId, int pageNumber, int pageSize)
+        [HttpGet("{chatId}/messages")]
+        public async Task<IActionResult> GetMessages(int chatId, [FromQuery]PaginationParams paginationParams)
         {
-            var userId = (await _authenticateService.GetAuthUser()).Id;
-            var parameters = new MessageParameters()
-            {
-                ChatId = chatId,
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                UserId = userId
-            };
-
-            var messages = await _chatService.GetMessages(parameters);
+            var messages = await _chatService.GetMessages(chatId, paginationParams);
 
             return Ok(messages);
         }
