@@ -11,6 +11,7 @@
       "line-too-short": "The line is too short",
       "confirm": "Confirm",
       "cancel": "Cancel",
+      "forbidden-file": "File extension is forbidden",
       "number-min": "The number must be greater than",
       "number-max": "The number must be less than",
       "number-positive": "The number must be positive",
@@ -121,7 +122,8 @@
       "url": "URL",
       "file-name": "Name of file",
       "add": "Add resource",
-      "create": "Create resource"
+      "create": "Create resource",
+      "edit": "Edit resource"
     },
     "participation": {
       "title": "Participants requests",
