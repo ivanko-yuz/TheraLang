@@ -26,26 +26,16 @@ export class ProjectService {
 
   form: FormGroup = this.fb.group({
     id: [""],
-    name: [
-      "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
-    ],
-    description: [
-      "",
-      [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(8000)
-      ]
-    ],
+    name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+    description: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(8000)]],
     details: ["", Validators.maxLength(8000)],
     projectStart: ["", Validators.required],
-    projectEnd: [""],
+    projectEnd: ["", Validators.required],
     typeId: ["", Validators.required],
-    donationTargetSum: [""], 
-    imgFile:[null],
-    imgUrl:[""]
-  });
+    donationTargetSum: ["", [Validators.required, Validators.min(1), Validators.max(99999999)]],
+    imgFile: [null],
+    imgUrl: [""]
+  }, { validators: this.checkDates });
 
   initializeFormGroup() {
     this.form.setValue({
@@ -57,8 +47,8 @@ export class ProjectService {
       projectEnd: "",
       typeId: "",
       donationTargetSum: "",
-      imgFile:null,
-      imgUrl:""
+      imgFile: null,
+      imgUrl: ""
     });
   }
 
@@ -73,7 +63,7 @@ export class ProjectService {
       typeId: project.typeId,
       donationTargetSum: project.donationTargetSum,
       imgFile: project.imgFile,
-      imgUrl:project.imgUrl
+      imgUrl: project.imgUrl
     });
   }
 
@@ -89,7 +79,7 @@ export class ProjectService {
     formData.append("donationTargetSum", project.donationTargetSum.toString());
     formData.append("imgFile", project.imgFile as File);
     formData.append("imgUrl", project.imgUrl);
-    
+
     return this.http.post(this.url + "create", formData);
   }
 
@@ -99,5 +89,14 @@ export class ProjectService {
 
   getProjectTypes() {
     return this.httpService.getAllProjectTypes();
+  }
+
+  checkDates(group: FormGroup) {
+    if (group.controls.projectEnd.valid &&
+      group.controls.projectStart.valid &&
+      group.controls.projectEnd.value <= group.controls.projectStart.value) {
+      return { dateIntersect: true }
+    }
+    return null;
   }
 }
