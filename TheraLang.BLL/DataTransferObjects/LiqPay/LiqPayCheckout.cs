@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Common.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace TheraLang.DAL.Models
+namespace TheraLang.BLL.DataTransferObjects.LiqPay
 {
     public class LiqPayCheckout
     {
@@ -11,13 +13,15 @@ namespace TheraLang.DAL.Models
         public int Version { get; set; }
 
         [JsonProperty("action")]
-        public string Action { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public LiqPayAction Action { get; set; }
 
         [JsonProperty("amount")]
         public decimal Amount { get; set; }
 
         [JsonProperty("currency")]
-        public string Currency { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public LiqPayCurrency Currency { get; set; }
 
         [JsonProperty("description")]
         public string Description { get; set; }
@@ -29,6 +33,7 @@ namespace TheraLang.DAL.Models
         public string ServerUrl { get; set; }
 
         [JsonProperty("language")]
-        public string Language { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public LiqPayLanguage Language { get; set; }
     }
 }

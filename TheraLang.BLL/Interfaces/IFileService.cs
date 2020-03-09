@@ -7,5 +7,6 @@ namespace TheraLang.BLL.Interfaces
     public interface IFileService
     {
         Task<Uri> SaveFile(Stream stream, string fileExtension);
+        Task RemoveFile(string fileUrl);
     }
 }

@@ -52,6 +52,17 @@ namespace TheraLang.Web.Extensions
                             context.Exception.StackTrace
                         }));
                 });
+
+                handlerOptions.Map<InvalidArgumentException>(responseOpts =>
+                {
+                    responseOpts.WithCode(HttpStatusCode.BadRequest)
+                        .WithBody(context => new JsonResult(new
+                        {
+                            Exception = context.Exception.GetType().ToString(),
+                            context.Exception.Message,
+                            context.Exception.StackTrace
+                        }));
+                });
             });
             serviceCollection.Configure(options);
             return serviceCollection;

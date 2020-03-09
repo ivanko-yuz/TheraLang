@@ -86,7 +86,7 @@ namespace TheraLang.Web.Controllers
                 .CreateMapper();
 
             var newsDto = mapper.Map<NewsCreateDto>(newsModel);
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             newsDto.AuthorId = authUser.Id;
 
             await _newsService.AddNews(newsDto);
@@ -101,7 +101,7 @@ namespace TheraLang.Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsEditViewModel, NewsEditDto>()).CreateMapper();
 
             var newsDto = mapper.Map<NewsEditDto>(newsModel);
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             newsDto.EditorId = authUser.Id;
 
             await _newsService.UpdateNews(id, newsDto);
@@ -113,7 +113,7 @@ namespace TheraLang.Web.Controllers
         [HttpPut("like/{id}")]
         public async Task<IActionResult> Like(int id)
         {
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
 
             await _newsService.Like(id, authUser.Id);
             return Ok();
