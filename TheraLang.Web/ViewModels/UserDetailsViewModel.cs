@@ -10,6 +10,7 @@ namespace TheraLang.Web.ViewModels
         public IFormFile Image { get; set; }
         public string PhoneNumber { get; set; } 
         public string ShortInformation { get; set; }
+        public decimal Balance { get; set; }
         public string City { get; set; }
         public DateTime? BirthDay { get; set; }
     }
