@@ -1,10 +1,12 @@
 ﻿using Common;
+using System;
 using TheraLang.BLL.DataTransferObjects.CommentDtos;
 
 namespace TheraLang.Tests
 {
     static class DefaultValues
     {
+        public static readonly Guid UserId = new Guid(); 
         public static readonly int ListSize = 10;
         public static readonly int FakeId = -10;
         public static readonly int ExistedId = 1;
