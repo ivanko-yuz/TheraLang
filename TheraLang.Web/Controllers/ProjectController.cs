@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.Projects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.Web.ViewModels;
 
@@ -54,22 +54,15 @@ namespace TheraLang.Web.Controllers
         [AllowAnonymous]
         public async Task<IEnumerable<ProjectDonationViewModel>> GetAllProjects()
         {
-            var projectModels = (await _projectService.GetAllProjectsAsync())
-                .Where(x => x.StatusId == ProjectStatusDto.Approved)
-                .Select(p => new ProjectDonationViewModel
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    DonationsSum = p.Donations.Sum(y => y.Amount),
-                    DonationTargetSum = p.DonationTargetSum,
-                    SumLeftToCollect = p.DonationTargetSum - p.Donations.Sum(y => y.Amount),
-                    Description = p.Description,
-                    Details = p.Details,
-                    ProjectStart = p.ProjectStart,
-                    ProjectEnd = p.ProjectEnd,
-                    ImgUrl = p.ImgUrl
-                }).ToList();
+            var mapper = new MapperConfiguration(mapOpts =>
+                    mapOpts.CreateMap<ProjectPreviewDto, ProjectDonationViewModel>())
+                .CreateMapper();
 
+            var projectDtos = await _projectService.GetAllProjectsAsync();
+
+            var projectModels =
+                mapper.Map<IEnumerable<ProjectPreviewDto>, IEnumerable<ProjectDonationViewModel>>(projectDtos);
+            
             return projectModels;
         }
 
@@ -90,10 +83,7 @@ namespace TheraLang.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetProject(int id)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, ProjectDonationViewModel>()
-                    .ForMember(m => m.DonationsSum, opt => opt.MapFrom(sm => sm.Donations.Sum(y => y.Amount)))
-                    .ForMember(m => m.SumLeftToCollect,
-                        opt => opt.MapFrom(sm => sm.DonationTargetSum - sm.Donations.Sum(y => y.Amount))))
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, ProjectDonationViewModel>())
                 .CreateMapper();
 
             var projectDto = await _projectService.GetByIdAsync(id);

@@ -38,7 +38,8 @@
     "status": "Status",
     "messages": {
       "request-sent": "The application has been sent",
-      "cant-send-request": "Request has been sent alredy"
+      "cant-send-request": "Request has been sent already",
+      "register-first":"Please, sign in so we can reflect your opinion"
     },
     "added-by": "Added by:",
     "name": "Name",

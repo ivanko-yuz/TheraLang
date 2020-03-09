@@ -36,7 +36,8 @@
     "status": "Статус",
     "messages": {
       "request-sent": "Заявку надіслано",
-      "cant-send-request": "Запит вже надіслано"
+      "cant-send-request": "Запит вже надіслано",
+      "register-first":"Увійдіть, щоб ми могли врахувати вашу думку"
     },
     "added-by": "Доданий:",
     "name": "Назва",

@@ -31,4 +31,9 @@ export class NewsService {
   editNews(newsId:number,news){
     return this.http.put(this.url + "news/" + newsId,news);
   }
+  
+  like(newsId: number){
+    return this.http.put(this.url + "news/like/" + newsId, null)
+  }
+
 }
