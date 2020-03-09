@@ -118,6 +118,7 @@ import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
 import {NgxPaginationModule} from 'ngx-pagination';
 import {PaginationComponent} from './modules/paginationg/pagination.component';
+import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -132,6 +133,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     routingComponents,
     ToolbarComponent,
     ProjectComponent,
+    ProfileEditComponent,
     HomeComponent,
     ProjectInfoComponent,
     FooterComponent,
@@ -238,6 +240,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    Ng2TelInputModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

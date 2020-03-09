@@ -6,15 +6,15 @@ import { donationUrl } from "src/app/configs/api-endpoint.constants";
 export class DonationService {
   constructor(private http: HttpClient) {}
 
-  getProjectCheckoutModel(donationAmount: string, projectId: number) {
-    return this.http.get(`${donationUrl}/${donationAmount}/${projectId}`);
+  getProjectCheckoutModel(donationAmount: number, projectId: number) {
+    return this.http.get(`${donationUrl}/liqpay/?donationAmount=${donationAmount}&projectId=${projectId}&action=paydonate&currency=uah&language=uk`);
   }
 
-  getSocietyCheckoutModel(donationAmount: string) {
-    return this.http.get(`${donationUrl}/${donationAmount}`);
+  getSocietyCheckoutModel(donationAmount: number, societyId: number) {
+    return this.http.get(`${donationUrl}/liqpay/?donationAmount=${donationAmount}&societyId=${societyId}&action=paydonate&currency=uah&language=uk`);
   }
 
   getDonationTransaction(donationId: string) {
-    return this.http.get(`${donationUrl}/transaction/${donationId}`);
+    return this.http.get(`${donationUrl}/${donationId}`);
   }
 }

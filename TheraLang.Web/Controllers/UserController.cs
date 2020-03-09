@@ -28,7 +28,7 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> GetMyProfile()
         {
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             if (authUser == null) return BadRequest();
             var user = await _userService.GetMyProfile(authUser.Id);
             return Ok(user);
@@ -47,7 +47,7 @@ namespace TheraLang.Web.Controllers
         [Authorize]
         public async Task<IActionResult> UpdateUserDetails([FromForm] UserDetailsViewModel userUpdate)
         {
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             if (authUser == null) return BadRequest();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailsViewModel, UserDetailsDto>())
                 .CreateMapper();
@@ -67,7 +67,7 @@ namespace TheraLang.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ChangeRole(Guid id, [FromBody] ChangeRoleViewModel newRole)
         {
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             if (authUser == null) return BadRequest();
             if (await _userService.ChangeRole(id, newRole.NewRoleId)) return Ok();
             return BadRequest();
@@ -79,7 +79,7 @@ namespace TheraLang.Web.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAdminUserView(Guid Id)
         {
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
             if (authUser == null) return BadRequest();
             var user = await _userService.AdminUserView(Id);
             if (user == null) return BadRequest();
