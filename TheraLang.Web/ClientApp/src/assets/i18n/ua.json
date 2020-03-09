@@ -141,7 +141,7 @@
       "confirm_password": "Пароль підтвердження",
       "short_information": "Коротко про себе",
       "age": "Вік",
-      "successfully-registration": "Дякуємо за реєстрацію!",
+      "successfully-registration": "Дякуємо за реєстрацію! Перейдіть на емейл для підтвердження!",
       "successfully-confirmation": "Ваш профіль підтверджено!",
       "failed-confirmation": "Виникла помилка, спробуйте ще раз",
       "redirection-to-login": "Перейти на логін",
