@@ -1,7 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { KeyValue } from '@angular/common';
-import { filter, debounceTime } from 'rxjs/operators';
-import { keyValuesToMap } from '@angular/flex-layout/extended/typings/style/style-transforms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Component({
@@ -14,7 +11,6 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 
 export class ProjectFiltersComponent implements OnInit {
 
-  @Input() fieldvalue = '';
   @Output() filtered = new EventEmitter<string>();
   filterQuery: string = "?";
   search: string = "";
