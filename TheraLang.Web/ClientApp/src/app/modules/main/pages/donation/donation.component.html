@@ -1,16 +1,38 @@
-<div *ngIf="projectId === 0; else projectDonation">
-  <h2 class="organization-donation-header">{{'components.donation.donate-4-org'|translate}}</h2>
+<div class="donation-content container">
+  <div class="donation-inner">
+    <div class="headers">
+      <div *ngIf="projectId === 0; else projectDonation">
+        <span class="organization-donation-header">{{'components.donation.donate-4-org'|translate}}</span>
+      </div>
+      <ng-template #projectDonation>
+        <span class="organization-donation-header">{{'components.donation.donate-4-project'|translate}}</span>
+      </ng-template>
+    </div>
+    <form [formGroup]="amountForm">
+      <div class="form-content">
+        <span class="donation-header">{{'components.donation.message'|translate}}</span>
+        <div><span class="commission-message">{{'components.donation.message-commission'|translate}}</span></div>
+        <mat-form-field class="form-field">
+          <input formControlName="donationAmount" type="number" matInput min="0" max="9999999999"
+                 placeholder=""
+                 autofocus>
+          <mat-error *ngIf="amountForm.controls['donationAmount'].errors?.required">{{
+            "common.validation.field-is-required" | translate
+            }}</mat-error>
+          <mat-error *ngIf="amountForm.controls['donationAmount'].errors?.min">{{
+            "components.donation.invalid-sum" | translate
+            }}</mat-error>
+          <mat-error *ngIf="amountForm.controls['donationAmount'].errors?.max">{{
+            "components.donation.invalid-sum" | translate
+            }}</mat-error>
+          <button mat-button matSuffix (click)="clear()" mat-icon-button aria-label="Clear">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <button class="checkout-button" mat-raised-button [disabled]="amountForm.invalid" color="accent"
+                (click)="checkout()">{{'components.donation.title'|translate}}</button>
+        <img src="assets/img/paymentmethods.png" alt="" class="payment-methods">
+      </div>
+    </form>
+  </div>
 </div>
-<ng-template #projectDonation>
-  <h2 class="organization-donation-header">{{'components.donation.donate-4-project'|translate}}</h2>
-</ng-template>
-<h3 class="donation-header">{{'components.donation.message'|translate}}</h3>
-<mat-form-field class="form-field">
-  <input matInput type="number" placeholder="" [(ngModel)]="donationAmount" autofocus>
-  <button mat-button *ngIf="donationAmount" matSuffix mat-icon-button aria-label="Clear" (click)="donationAmount = ''">
-    <mat-icon>close</mat-icon>
-  </button>
-</mat-form-field>
-<br>
-<span class="donate-button"><button mat-raised-button color="accent" (click)="checkout()">{{'components.donation.title'|translate}}</button></span>
-<div><img src="assets/img/paymentmethods.png" alt="" class="payment-methods"></div>

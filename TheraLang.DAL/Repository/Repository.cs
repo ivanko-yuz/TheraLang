@@ -68,6 +68,11 @@ namespace TheraLang.DAL.Repository
             _dbSet.Update(entity);
         }
 
+        public void UpdateRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.UpdateRange(entities);
+        }
+
         public void Attach(TEntity entity, EntityState state = EntityState.Unchanged)
         {
             _dbSet.Attach(entity).State = state;

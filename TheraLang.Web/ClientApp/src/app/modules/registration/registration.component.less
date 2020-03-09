@@ -29,6 +29,15 @@
   }
 }
 
+@media screen and (max-height: 790px) {
+  .mat-card {
+    box-shadow: 0px 0px 0px 0px
+  }
+  :host {
+    height: auto;
+  }
+}
+
 mat-card-title {
   display: flex;
   justify-content: center;
@@ -42,5 +51,14 @@ mat-card-content {
 
 .button {
   display: flex;
-  justify-content: center ;
+  justify-content: center;
+}
+
+.avatar {
+  cursor: pointer;
+}
+
+.add-avatar {
+  position: absolute;
+  right: 210px;
 }
