@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { DialogData } from "../../main/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
 
 @Component({
   selector: "app-change-role",
