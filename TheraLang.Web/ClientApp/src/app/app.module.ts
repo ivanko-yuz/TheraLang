@@ -251,7 +251,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     PortalModule,
     ScrollingModule,
     InfiniteScrollModule,
-    Ng2TelInputModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
