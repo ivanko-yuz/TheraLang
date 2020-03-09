@@ -60,6 +60,8 @@ namespace TheraLang.Web
             services.AddAuthentication(Configuration);
             services.Configure<EmailSettings>(Configuration.GetSection("email_settings"));
 
+            services.AddLiqPayServices(Configuration.GetSection("LiqPay"));
+
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IProjectService, ProjectService>();
             services.AddTransient<IProjectTypeService, ProjectTypeService>();
@@ -70,8 +72,6 @@ namespace TheraLang.Web
             services.AddTransient<IResourceService, ResourceService>();
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
-            services.AddTransient<ILiqPayService, LiqPayService>();
-            services.AddTransient<ILiqPayInfo, LiqPayInfo>();
             services.AddTransient<IDonationService, DonationService>();
             services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddTransient<IPageService, PageService>();

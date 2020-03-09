@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Common.Exceptions;
+using Microsoft.Extensions.Options;
 using TheraLang.BLL.DataTransferObjects.Donations;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.LiqPay;
@@ -13,12 +14,12 @@ namespace TheraLang.BLL.Services
     public class DonationService : IDonationService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILiqPayInfo _liqPayInfo;
+        private readonly LiqPayKeys _liqPayKeys;
 
-        public DonationService(IUnitOfWork unitOfWork, ILiqPayInfo liqPayInfo)
+        public DonationService(IUnitOfWork unitOfWork, IOptions<LiqPayKeys> liqPayKeyOptions)
         {
             _unitOfWork = unitOfWork;
-            _liqPayInfo = liqPayInfo;
+            _liqPayKeys = liqPayKeyOptions.Value;
         }
 
         public async Task<DonationDto> GetDonation(Guid donationId)
@@ -35,7 +36,7 @@ namespace TheraLang.BLL.Services
         public async Task<Guid> AddDonation(LiqPayCheckoutDto liqPayCheckoutDto)
         {
             var liqPayData = new LiqPayData(liqPayCheckoutDto.Data);
-            var liqPaySignature = new LiqPaySignature(liqPayData,_liqPayInfo.PrivateKey);
+            var liqPaySignature = new LiqPaySignature(liqPayData, _liqPayKeys.PrivateKey);
 
             if (!await liqPaySignature.Validate(liqPayCheckoutDto.Signature))
             {
