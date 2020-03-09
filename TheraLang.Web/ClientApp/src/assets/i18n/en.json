@@ -61,16 +61,16 @@
     "cms-pages": {
       "title": "CMS Pages"
     },
-    "news" : {
-      "title" : "News",
+    "news": {
+      "title": "News",
       "create": "Create news",
       "news-title": "Title",
       "news-text": "Text",
       "NEWS-CREATION": "NEWS-CREATION",
       "NEWS-EDITING": "NEWS-EDITING",
       "read-more": "read more...",
-      "preview-image":"Preview image",
-      "content-images":"Content images"
+      "preview-image": "Preview image",
+      "content-images": "Content images"
     },
     "users": {
       "title": "Users"
@@ -96,6 +96,15 @@
       "days-left": "Days left",
       "rised-of": "rised of",
       "add-image": "Add image"
+    },
+    "filters": {
+      "search": "Search",
+      "filters": "Filters",
+      "my-projects": "My projects",
+      "sort-by-date-asc": "From newer to older",
+      "sort-by-date-desc": "From older to newer",
+      "sort-by-days-left": "Will be expired soon",
+      "none": "None"
     },
     "resources": {
       "title": "Resources",

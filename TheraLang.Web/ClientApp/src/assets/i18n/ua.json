@@ -95,6 +95,16 @@
       "rised-of": "зібрано з",
       "add-image": "Додати зображення"
     },
+    "filters": {
+      "search": "Пошук",
+      "filters": "Фільтри",
+      "my-projects": "Мої проекти",
+      "sort-by-date-asc": "Від новіших до старіших",
+      "sort-by-date-desc": "Від старіших до новіших",
+      "sort-by-days-left": "Скоро завершаться",
+      "none": "Без фільтру"
+
+    },
     "resources": {
       "title": "Ресурси",
       "name": "Назва ресурсу",

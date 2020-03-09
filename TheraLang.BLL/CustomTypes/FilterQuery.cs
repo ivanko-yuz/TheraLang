@@ -30,7 +30,9 @@ namespace TheraLang.BLL.CustomTypes
         {
             if (MyProjects)
             {
-                var prParticipants = _projectsDtos.Select(p => p.ProjectParticipations.Where(pr => pr.Role == MemberRole.ProjectOwner).Where(pr => pr.User.Id == User.Id));
+                var prParticipants = _projectsDtos.Select(p => p.ProjectParticipations
+                .Where(pr => pr.Role == MemberRole.ProjectOwner)
+                .Where(pr => pr.User.Id == User.Id));
                 var prs = prParticipants.Select(p => p.Select(pr => pr.Project));
                 _projectsDtos = prs.Select(p => p.FirstOrDefault());
             }
