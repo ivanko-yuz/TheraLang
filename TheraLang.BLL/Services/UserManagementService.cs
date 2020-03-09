@@ -94,7 +94,7 @@ namespace TheraLang.BLL.Services
                     _unitOfWork.Repository<UserConfirmation>().Add(confUser);
 
                     await _unitOfWork.SaveChangesAsync();
-                    await _confirmation.SendEmail(confUser.Number.ToString(), user.Email);
+                    await _confirmation.SendEmail(confUser.Number.ToString(), user.Email, "welcome.html");
                 }
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace TheraLang.BLL.Services
                 conf.Number = random;
                 conf.ConfDateTime = DateTime.Now;
                 await _unitOfWork.SaveChangesAsync();
-                await _confirmation.SendEmail(random.ToString(), Email);
+                await _confirmation.SendEmail(random.ToString(), Email, "password.html");
             }
             catch (Exception ex)
             {

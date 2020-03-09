@@ -78,12 +78,14 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
-        [HttpPost("orgot/password/confirmation")]
+        [HttpPost("forgot/password/confirmation")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmUser([FromBody]ConfirmPasswordChangingViewModel confirmPassword)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ConfirmPasswordChangingViewModel, ConfirmPasswordChangingDto>()).CreateMapper();
             var confirm = mapper.Map<ConfirmPasswordChangingViewModel, ConfirmPasswordChangingDto>(confirmPassword);
+            await _confirmation.ConfirmPassword(confirm);
+            return Ok();
         }
     }
 }

@@ -35,20 +35,21 @@ namespace TheraLang.BLL.Services
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = true,
-                Credentials = new NetworkCredential(new MailAddress(_emailSettings.Email, "UTMM").Address, _emailSettings.Password)
+                Credentials = new NetworkCredential(new MailAddress(_emailSettings.Email, "UTTMM").Address, _emailSettings.Password)
             };
         }
 
-        public async Task SendEmail(string ConfirmNum, string UserEmail)
+
+        public async Task SendEmail(string ConfirmNum, string UserEmail, string PathTo)
         {
             string body = string.Empty;
             using (StreamReader reader =
-            new StreamReader(Path.Combine(_env.ContentRootPath, "Templates", "welcome.html")))
+            new StreamReader(Path.Combine(_env.ContentRootPath, "Templates", PathTo)))
             {
                 body = await reader.ReadToEndAsync();
             }
 
-            var fromAddress = new MailAddress(_emailSettings.Email, "UTMM");
+            var fromAddress = new MailAddress(_emailSettings.Email, "UTTMM");
             var toAddress = new MailAddress(UserEmail, "To User");
             string fromPassword = _emailSettings.Password;
             string subject = "Confirm your email";
