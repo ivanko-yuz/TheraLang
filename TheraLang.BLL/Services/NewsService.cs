@@ -83,7 +83,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<NewsDetailsDto> GetNewsById(int id)
         {
-            var currentUser = await _authenticateService.TryGetAuthUserAsync();
+            var currentUser = await _authenticateService.TryGetAuthUser();
 
             var mapper = new MapperConfiguration(cfg =>
             {
