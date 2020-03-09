@@ -121,6 +121,9 @@ import { CommentsBlockComponent } from './modules/main/comments-block/comments-b
 import { CommentCreateComponent } from './modules/main/comments-block/comment-create/comment-create.component';
 import { CommentComponent } from './modules/main/comments-block/comment/comment.component';
 import { CommentEditComponent } from './modules/main/comments-block/comment-edit/comment-edit.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {PaginationComponent} from './modules/paginationg/pagination.component';
+import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -135,6 +138,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     routingComponents,
     ToolbarComponent,
     ProjectComponent,
+    ProfileEditComponent,
     HomeComponent,
     ProjectInfoComponent,
     FooterComponent,
@@ -175,6 +179,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommentCreateComponent,
     CommentComponent,
     CommentEditComponent
+    PaginationComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -191,6 +196,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxPaginationModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -245,6 +251,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PortalModule,
     ScrollingModule,
     InfiniteScrollModule,
+    Ng2TelInputModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,3 +1,5 @@
+import DateTimeFormat = Intl.DateTimeFormat;
+
 export class User {
     id: number;
     firstName: string;
@@ -6,6 +8,12 @@ export class User {
     imageURl: string;
     email: string;
     resources: any[];
+    city: string;
+    birthDay: Date;
+    phoneNumber: string;
 }
 
-export class UserPageViewModel {}
+export class UserPageViewModel {
+  userList: User[];
+  countOfItems: number;
+}
