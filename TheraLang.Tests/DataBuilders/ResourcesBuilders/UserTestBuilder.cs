@@ -68,6 +68,7 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
             _user.RoleId = id;
             return this;
         }
+
         public UserTestBuilder WithNews(ICollection<News> news)
         {
             _user.News = news;

@@ -51,7 +51,7 @@ import { CdkStepperModule } from "@angular/cdk/stepper";
 import { CdkTableModule } from "@angular/cdk/table";
 import { CdkTreeModule } from "@angular/cdk/tree";
 import { ScrollingModule } from "@angular/cdk/scrolling";
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confirm-dialog.component";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
@@ -121,6 +121,9 @@ import { ResourceEntryComponent } from './modules/main/pages/resource/resources-
 import {ResourceFormComponent} from "./modules/main/pages/resource/resource-form/resource-form.component";
 import { ResourceEditComponent } from './modules/main/pages/resource/resource-edit/resource-edit.component';
 import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-table/resources-table.component";
+import {ConfirmationComponent} from './modules/registration/confirmation/confirmation.component';
+import {ForgotPasswordComponent} from './modules/password/email/forgot-password.component';
+import {ResetPasswordComponent} from './modules/password/reset-password.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -148,6 +151,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TransactionResultComponent,
     LoginComponent,
     RegistrationComponent,
+    ConfirmationComponent,
     UserPageComponent,
     ProfileComponent,
     ProfileMenuComponent,
@@ -163,6 +167,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageComponent,
     ProjectEditingComponent,
     NotFoundComponent,
+    ResetPasswordComponent,
     ResourceCategoryComponent,
     CreateButtonComponent,
     ResourcesComponent,
@@ -173,9 +178,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResourcesTableComponent,
     NotFoundComponent,
     CommentsBlockComponent,
-    CommentCreateComponent,
     CommentComponent,
-    CommentEditComponent
+    CommentCreateComponent,
+    CommentEditComponent,
+    ForgotPasswordComponent,
   ],
   entryComponents: [
     ProjectCreationComponent,

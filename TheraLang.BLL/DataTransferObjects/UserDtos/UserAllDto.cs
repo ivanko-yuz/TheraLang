@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 
-namespace TheraLang.BLL.DataTransferObjects
+namespace TheraLang.BLL.DataTransferObjects.UserDtos
 {
     public class UserAllDto
     {

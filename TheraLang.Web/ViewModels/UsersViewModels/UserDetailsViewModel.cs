@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 
-namespace TheraLang.Web.ViewModels
+namespace TheraLang.Web.ViewModels.UsersViewModels
 {
     public class UserDetailsViewModel
     {

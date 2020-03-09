@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.UserDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
@@ -138,5 +138,6 @@ namespace TheraLang.BLL.Services
             var user = await _unitOfWork.Repository<User>().Get(u => u.Id == userId);
             return user.RoleId;
         }
+
     }
 }

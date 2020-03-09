@@ -1,4 +1,4 @@
-﻿namespace TheraLang.BLL.DataTransferObjects
+﻿namespace TheraLang.BLL.DataTransferObjects.UserDtos
 {
     public class LoginModelDto
     {

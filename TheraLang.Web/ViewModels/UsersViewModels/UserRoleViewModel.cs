@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TheraLang.Web.ViewModels
+namespace TheraLang.Web.ViewModels.UsersViewModels
 {
     public class UserRoleViewModel
     {

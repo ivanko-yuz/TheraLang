@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
-namespace TheraLang.Web.ViewModels
+namespace TheraLang.Web.ViewModels.UsersViewModels
 {
     public class UserAllViewModel
     {

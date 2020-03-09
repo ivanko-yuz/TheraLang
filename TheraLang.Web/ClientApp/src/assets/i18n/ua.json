@@ -131,6 +131,7 @@
     },
     "account": {
       "signUp": "Реєстрація",
+      "forgotPassword": "Забули пароль?",
       "signIn": "Вхід",
       "logout": "Вийти",
       "profile": "Сторінка юзера",
@@ -150,8 +151,20 @@
       "confirm_password": "Пароль підтвердження",
       "short_information": "Коротко про себе",
       "age": "Вік",
-      "successfully-registration": "Дякуємо за реєстрацію!",
-      "error": "Помилка"
+      "successfully-registration": "Дякуємо за реєстрацію! Перейдіть на емейл для підтвердження!",
+      "successfully-confirmation": "Ваш профіль підтверджено!",
+      "failed-confirmation": "Виникла помилка, спробуйте ще раз",
+      "redirection-to-login": "Перейти на логін",
+      "error": "Помилка",
+      "password-forgot": {
+        "title": "Введіть ваш емейл",
+        "success": "Ми відправили Вам емейл з наступними кроками!",
+        "error": "Користувача з даним емейлом не знайдено!"
+      },
+      "password-reset": {
+        "title": "Введіть новий пароль",
+        "error": "Неможливо оновити пароль!"
+      }
     },
     "projectTypes": {
       "title": "Типи Проектів",

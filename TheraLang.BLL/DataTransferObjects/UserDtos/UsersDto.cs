@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace TheraLang.BLL.DataTransferObjects
+namespace TheraLang.BLL.DataTransferObjects.UserDtos
 {
     public class UsersDto
     {

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TheraLang.BLL.DataTransferObjects
+namespace Common.Configurations
 {
     [JsonObject("tokenManagement")]
     public class TokenManagement
