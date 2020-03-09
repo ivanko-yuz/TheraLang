@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.Extensions.Options;
 using TheraLang.BLL.DataTransferObjects.Donations;
 using TheraLang.BLL.DataTransferObjects.LiqPay;
 using TheraLang.BLL.Interfaces;
@@ -9,11 +10,11 @@ namespace TheraLang.BLL.Services
 {
     public class LiqPayService: ILiqPayService
     {
-        private readonly ILiqPayInfo _liqPayInfo;
+        private readonly LiqPayKeys _liqPayKeys;
 
-        public LiqPayService(ILiqPayInfo liqPayInfo)
+        public LiqPayService(IOptions<LiqPayKeys> liqPayKeysOptions)
         {
-            _liqPayInfo = liqPayInfo;
+            _liqPayKeys = liqPayKeysOptions.Value;
         }
 
         public async Task<LiqPayCheckoutDto> GetLiqPayCheckoutModel(
@@ -27,9 +28,9 @@ namespace TheraLang.BLL.Services
             
             var liqPayCheckout = mapper.Map<LiqPayCheckout>(liqPayCheckoutModelRequest);
 
-            liqPayCheckout.PublicKey = _liqPayInfo.PublicKey;
+            liqPayCheckout.PublicKey = _liqPayKeys.PublicKey;
             var liqPayData = new LiqPayData(liqPayCheckout);
-            var liqPaySignature = new LiqPaySignature(liqPayData,_liqPayInfo.PrivateKey);
+            var liqPaySignature = new LiqPaySignature(liqPayData, _liqPayKeys.PrivateKey);
             
             return new LiqPayCheckoutDto()
             {
