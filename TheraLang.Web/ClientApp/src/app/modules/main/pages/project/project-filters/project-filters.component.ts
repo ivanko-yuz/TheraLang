@@ -25,19 +25,16 @@ export class ProjectFiltersComponent implements OnInit {
   constructor(private userService: AuthService) { }
   Search() {
     if (this.search != "") {
-      console.log(this.search);
       this.params.set("search", this.search);
     }
   }
 
   MyProjects() {
     if (this.myProjects) {
-      console.log(this.myProjects);
       this.params.set("myprojects", this.myProjects.toString());
     }
   }
   Sort() {
-    console.log("sort: " + this.sort);
     switch (this.sort) {
 
       case "sortByDateAsc":
