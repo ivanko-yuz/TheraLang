@@ -59,6 +59,7 @@ const routes: Routes = [
   { 
     path: "projectRequest",
     component: ProjectRequestComponent
+  },
   {
     path: "paymentHistory",
     component:PaymentHistoryComponent
