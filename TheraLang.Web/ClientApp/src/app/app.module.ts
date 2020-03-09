@@ -173,7 +173,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectEditingComponent,
     NotFoundComponent,
 
-    ProjectFiltersComponent
+    ProjectFiltersComponent,
 
     ResetPasswordComponent,
     ResourceCategoryComponent,
