@@ -13,4 +13,7 @@ export class User {
     phoneNumber: string;
 }
 
-export class UserPageViewModel {}
+export class UserPageViewModel {
+  userList: User[];
+  countOfItems: number;
+}
