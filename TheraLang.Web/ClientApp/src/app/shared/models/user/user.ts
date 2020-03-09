@@ -9,7 +9,7 @@ export class User {
     email: string;
     resources: any[];
     city: string;
-    birthdayDate: Date;
+    birthDay: Date;
     phoneNumber: string;
 }
 

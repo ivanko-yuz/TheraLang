@@ -43,9 +43,9 @@ export class UserService {
   }
   editProfile(value) {
     const formData = new FormData();
-    if (value.BirthdayDate !== "") {
-      const date = new Date(value.BirthdayDate);
-      formData.append("BirthdayDate", date.toDateString());
+    if (value.BirthDay !== "") {
+      const date = new Date(value.BirthDay);
+      formData.append("BirthDay", date.toDateString());
     }
     formData.append("FirstName", value.FirstName);
     formData.append("LastName", value.LastName);

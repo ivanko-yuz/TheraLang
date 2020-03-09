@@ -38,7 +38,7 @@ export class ProfileEditComponent implements OnInit {
     Image: [
       null,
     ],
-    BirthdayDate: [
+    BirthDay: [
       ""
     ],
     ShortInformation: [
@@ -62,7 +62,7 @@ export class ProfileEditComponent implements OnInit {
         FirstName: this.user.firstName,
         LastName: this.user.lastName,
         Image: null,
-        BirthdayDate: this.user.birthdayDate === null ? "" : this.user.birthdayDate,
+        BirthDay: this.user.birthDay === null ? "" : this.user.birthDay,
         PhoneNumber: this.user.phoneNumber === null ? "" : this.user.phoneNumber,
         City: this.user.city === null ? "" : this.user.city,
         ShortInformation: this.user.shortInformation === null ? "" : this.user.shortInformation,

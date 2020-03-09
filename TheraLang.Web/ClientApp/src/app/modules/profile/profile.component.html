@@ -50,9 +50,9 @@
             <div class="info">{{ user.phoneNumber }}</div>
           </div>
 
-          <div class="info-line"  *ngIf="user.birthdayDate != null">
+          <div class="info-line"  *ngIf="user.birthDay != null">
             <div class="title">{{'common.birthdayDate'|translate}}</div>
-            <div class="info">{{ user.birthdayDate | date: 'dd\\MM\\yyyy' }}</div>
+            <div class="info">{{ user.birthDay | date: 'dd\\MM\\yyyy' }}</div>
           </div>
 
         </div>
