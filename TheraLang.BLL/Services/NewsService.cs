@@ -109,13 +109,9 @@ namespace TheraLang.BLL.Services
                 .Include(n => n.Likes)
                 .SingleOrDefaultAsync();
 
+            // Cannot use ProjectTo With conditional mapping
             var newsDto = mapper.Map<NewsDetailsDto>(news);
 
-            // Cannot use ProjectTo With conditional mapping
-            //var newsDto = await _unitOfWork.Repository<News>().GetAll()
-            //    .Where(n => n.Id == id)
-            //    .ProjectTo<NewsDetailsDto>(mapper)
-            //    .SingleOrDefaultAsync();
 
             if (newsDto == null)
             {
