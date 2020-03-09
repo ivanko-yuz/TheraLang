@@ -52,8 +52,7 @@ namespace TheraLang.BLL.Services
             {
                 var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>())
-                    .CreateMapper();
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>()).CreateMapper();
                 var userDto = mapper.Map<UserDetails, UserDetailsDto>(user);
 
                 return userDto;
@@ -66,10 +65,8 @@ namespace TheraLang.BLL.Services
 
         public async Task<UsersListDto> GetAllUsers(PaginationParams pagination)
         {
-            var users = await _unitOfWork.Repository<UserDetails>().GetAll().Skip((pagination.PageNumber - 1) * pagination.PageSize)
-                .Take(pagination.PageSize).ToListAsync();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>())
-                .CreateMapper();
+            var users = await _unitOfWork.Repository<UserDetails>().GetAll().Skip((pagination.PageNumber - 1) * pagination.PageSize).Take(pagination.PageSize).ToListAsync();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>()).CreateMapper();
             var usersDto = mapper.Map<IEnumerable<UserDetails>, IEnumerable<UsersDto>>(users);
             var usersList = new UsersListDto()
             {
