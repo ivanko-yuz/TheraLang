@@ -1,10 +1,10 @@
 <form >
   <div class="filterDiv">
-    <mat-checkbox *ngIf="this.isAuthenticated()" class="myProjectsCheck" labelPosition="before" name="myProjects"
+    <mat-checkbox *ngIf="this.isAuthenticated()" (change)="onClick()" class="myProjectsCheck" labelPosition="before" name="myProjects"
       [(ngModel)]="myProjects"> {{ "components.filters.my-projects" | translate }}</mat-checkbox>
     <mat-form-field class="selectFilter">
       <mat-label>{{ "components.filters.filters" | translate }}</mat-label>
-      <mat-select name="selected filter" [(ngModel)]="sort">
+      <mat-select name="selected filter" (selectionChange)="onClick()" [(ngModel)]="sort">
         <mat-option value="sortByDateAsc">
           {{ "components.filters.sort-by-date-asc" | translate }}
         </mat-option>
@@ -20,7 +20,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field  floatLabel="never" color="primary">
-      <input class="toolbar-search" type="text" matInput name="searchInput" [(ngModel)]="search"
+      <input class="toolbar-search" type="text" matInput name="searchInput" [(ngModel)]="search" 
         placeholder="{{ 'components.filters.search' | translate }}">
       <mat-icon (click)="onClick()" matSuffix style="font-size: 1.2em">search</mat-icon>
     </mat-form-field>
