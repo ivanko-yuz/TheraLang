@@ -3,27 +3,27 @@
         [attr.color]="themeColor">
         <mat-nav-list>
             <div class="pad">
-                <a mat-list-item [routerLink]="'/admin'">
+                <a mat-list-item routerLink="/amin">
                     <h2>MANAGER</h2>
                 </a>
             </div>
-            <a class="menu-item" mat-list-item [routerLink]="'/'">
+            <a class="menu-item" mat-list-item routerLink="/">
                 <mat-icon class="white-icon">home</mat-icon>
                 <span class="space"> </span>
                 <span>{{'manager.home'|translate}}</span>
             </a>
-            <a class="menu-item" mat-list-item [routerLink]="['/admin', 'sitemap']">
+            <a class="menu-item" mat-list-item routerLink="/admin/sitemap">
                 <mat-icon class="white-icon" >dvr</mat-icon>
                 <span class="space"> </span>
                 <span>{{'manager.pages'|translate}}</span>
             </a>
-            <a class="menu-item" mat-list-item [routerLink]="'/admin/fee'">
+            <a class="menu-item" mat-list-item routerLink="/admin/fee">
                 <mat-icon class="white-icon">assignment</mat-icon>
                 <span class="space"> </span>
                 <span>{{'manager.member-fees'|translate}}</span>
             </a>
-            <a class="menu-item" mat-list-item routerLink='/admin/paymentHistory'>
-                <mat-icon class="white-icon">assignment</mat-icon>
+            <a class="menu-item" mat-list-item routerLink="/admin/paymentHistory">
+                <mat-icon class="white-icon">history</mat-icon>
                 <span class="space"> </span>
                 <span>{{'manager.payment-history'|translate}}</span>
             </a>
