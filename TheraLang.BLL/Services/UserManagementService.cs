@@ -103,7 +103,7 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task PasswordConfirmation(string Email)
+        public async Task PasswordConfirmationRequest(string Email)
         {
             try
             {

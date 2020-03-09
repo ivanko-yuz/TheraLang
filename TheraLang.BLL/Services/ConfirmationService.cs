@@ -12,6 +12,7 @@ using TheraLang.BLL.DataTransferObjects.UserDtos;
 using Common.Configurations;
 using Microsoft.Extensions.Options;
 using TheraLang.BLL.Interfaces;
+using Common.Helpers.PasswordHelper;
 
 namespace TheraLang.BLL.Services
 {
@@ -83,5 +84,15 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
+        public async Task ConfirmPassword (ConfirmPasswordChangingDto confirmUser)
+        {
+            var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
+            var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
+            if (confirmUser.ConfirmationNumber == conf.Number.ToString() && conf.ConfDateTime <= DateTime.Now.AddMinutes(30))
+            {
+                user.PasswordHash = PasswordHasher.HashPassword(confirmUser.Password);
+                await _unitOfWork.SaveChangesAsync();
+            }
+        }
     }
 }
