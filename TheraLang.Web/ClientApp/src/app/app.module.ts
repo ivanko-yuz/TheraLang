@@ -168,8 +168,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommentsBlockComponent,
     CommentCreateComponent,
     CommentComponent,
-    CommentEditComponent,
-    PaginationComponent
+    CommentEditComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
