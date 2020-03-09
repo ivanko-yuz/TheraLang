@@ -22,6 +22,6 @@ namespace TheraLang.BLL.Interfaces
 
         Task<NewsDetailsDto> GetNewsById(int id);
 
-        Task Like(int id, Guid userId);
+        Task Like(int id);
     }
 }

@@ -112,8 +112,9 @@ namespace TheraLang.BLL.Services
 
         public async Task AddNews(NewsCreateDto newsDto)
         {
+            var user = await _authenticateService.GetAuthUser();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()
-                    .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => sm.AuthorId)))
+                    .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => user.Id)))
                 .CreateMapper();
 
             var news = mapper.Map<NewsCreateDto, News>(newsDto);
@@ -152,7 +153,9 @@ namespace TheraLang.BLL.Services
                 throw new NotFoundException($"News with id {id} not found!");
             }
 
-            newsToUpdate.UpdatedById = newsDto.EditorId;
+            var user = await _authenticateService.GetAuthUser();
+
+            newsToUpdate.UpdatedById = user.Id;
             newsToUpdate.Title = newsDto.Title;
             newsToUpdate.Text = newsDto.Text;
 
@@ -182,10 +185,11 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task Like(int id, Guid userId)
+        public async Task Like(int id)
         {
+            var user = await _authenticateService.GetAuthUser();
             var existedLikeFromUser = (await _unitOfWork.Repository<NewsLike>()
-                .GetAllAsync(e => e.NewsId == id && e.UserThatLikedId == userId))
+                .GetAllAsync(e => e.NewsId == id && e.UserThatLikedId == user.Id))
                 .SingleOrDefault();
 
             //remove like if user already liked
@@ -195,7 +199,7 @@ namespace TheraLang.BLL.Services
             }
             else
             {
-                var newLikeFromUser = new NewsLike() { NewsId = id, UserThatLikedId = userId };
+                var newLikeFromUser = new NewsLike() { NewsId = id, UserThatLikedId = user.Id };
                 _unitOfWork.Repository<NewsLike>().Add(newLikeFromUser);
             }
 

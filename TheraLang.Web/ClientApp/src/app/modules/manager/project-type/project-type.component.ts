@@ -1,11 +1,11 @@
-import { ProjectTypeService } from "../../../../../../../core/services/project-type/project-type.service";
-import { ProjectType } from "../../../../../../../shared/models/project-type/project-type.model";
-import { ProjectTypeHttp } from "../../../../../../../core/http/project-type/project-type-Http.service";
+import { ProjectTypeService } from "../../../core/services/project-type/project-type.service";
+import { ProjectType } from "../../../shared/models/project-type/project-type.model";
+import { ProjectTypeHttp } from "../../../core/http/project-type/project-type-Http.service";
 import { MatDialog } from "@angular/material";
 import { Component, OnInit } from "@angular/core";
-import { ProjectTypeFormComponent } from "../../../project-type-form/project-type-form.component";
+import { ProjectTypeFormComponent } from "./project-type-form/project-type-form.component";
 import { DialogService } from "src/app/core/services/dialog/dialog.service";
-import { ProjectTypeCreateFormComponent } from "../../../project-type-create-form/project-type-create-form.component";
+import { ProjectTypeCreateFormComponent } from "./project-type-create-form/project-type-create-form.component";
 
 export interface DialogData {
   id: number;

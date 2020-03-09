@@ -10,6 +10,8 @@
       "line-too-long": "Стрічка задовга",
       "line-too-short": "Стрічка закоротка",
       "confirm": "Підтвердити",
+      "edit": "редагування",
+      "edit_profile": "Pедагувати профіль",
       "cancel": "Відмінити",
       "forbidden-file": "Даний тип файлу заборонений",
       "number-min": "Число повинно бути більшим за",
@@ -55,7 +57,10 @@
     "no_thanks": "Ні, дякую",
     "ok": "ОК",
     "general_information": "Про користувача",
-    "short_information": "Коротка інформація"
+    "short_information": "Коротка інформація",
+    "city": "Місто",
+    "birthdayDate": "Дата народження",
+    "phone_number": "Номер телефону"
   },
   "components": {
     "home": {
@@ -163,6 +168,7 @@
     }
   },
   "manager": {
+    "title": "Адмін панель",
     "add-new-page": "Додати сторінку",
     "save-changes": "Зберегти зміни"
   },

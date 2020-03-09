@@ -7,8 +7,6 @@ import { ProjectParticipantsComponent } from "./modules/main/pages/project/proje
 import { ProjectInfoComponent } from "./modules/main/pages/project/project-info/project-info.component";
 import { DonationComponent } from "./modules/main/pages/donation/donation.component";
 import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
-import { ProjectTypeComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
-import { ProjectRequestComponent } from "./modules/main/pages/project/project-request/project-request.component";
 import { LoginComponent } from "./modules/login/login.component";
 import { ProjectCreationComponent } from "./modules/main/pages/project/project-creation/project-creation.component";
 import { ProjectEditingComponent } from "./modules/main/pages/project/project-editing/project-editing.component";
@@ -19,14 +17,12 @@ import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-
 import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { PageComponent } from "./modules/main/pages/page/page.component";
-
+import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
 import { RegistrationComponent } from "./modules/registration/registration.component";
 import { UserPageComponent } from "./modules/user-page/user-page.component";
-import { UsersListComponent } from "./modules/users_list/users-list.component";
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { ResourcesComponent } from './modules/main/pages/resource/resources.component';
 import { ResourceCreateComponent } from './modules/main/pages/resource/resource-create/resource-create.component';
-import {ResourcesViewComponent} from "./modules/main/pages/resource/resources-view/resources-view.component";
 import {ResourceEditComponent} from "./modules/main/pages/resource/resource-edit/resource-edit.component";
 import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-table/resources-table.component";
 
@@ -71,16 +67,6 @@ const routes: Routes = [
         component: TransactionResultComponent
       },
       {
-        path: "projectTypes",
-        component: ProjectTypeComponent,
-        canActivate: [AdminGuard],
-      },
-      {
-        path: "projectRequest",
-        component: ProjectRequestComponent,
-        canActivate: [AdminGuard],
-      },
-      {
         path: "users/:userID",
         component: UserPageComponent,
         canActivate: [AdminGuard],
@@ -91,9 +77,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: "users",
-        component: UsersListComponent,
-        canActivate: [AdminGuard],
+        path: "profile/edit",
+        component: ProfileEditComponent
       },
       { path: "news", component: NewsPageComponent },
       { path: "news/create", component: NewsCreateComponent },
@@ -140,10 +125,8 @@ export const routingComponents = [
   ProjectComponent,
   HomeComponent,
   ProjectInfoComponent,
-  ProjectTypeComponent,
   TransactionResultComponent,
   DonationComponent,
-  ProjectRequestComponent,
   LoginComponent,
   MainComponent
 ];
