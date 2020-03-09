@@ -2,26 +2,24 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Common;
 using FluentAssertions;
 using MockQueryable.Moq;
 using Moq;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
+using TheraLang.BLL.Services;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Repository;
 using TheraLang.DAL.UnitOfWork;
 using TheraLang.Tests.DataBuilders.ResourcesBuilders;
-using TheraLang.Tests.DataBuilders.ServicesBuilders;
 using Xunit;
 
 namespace TheraLang.Tests.Services
 {
     public class ResourceServiceTests
     {
-        private ResourceServiceBuilder _resourceServiceBuilder;
+        private ResourceService _resourceService;
         private Mock<IUnitOfWork> _unitOfWorkMock;
         private Mock<IFileService> _fileServiceMock;
         private readonly List<Resource> _resources;
@@ -35,33 +33,6 @@ namespace TheraLang.Tests.Services
                 PageNumber = 1,
                 PageSize = Int32.MaxValue
             };
-        }
-
-        [Fact]
-        public async Task AddResource_ShouldCallSaveChanges()
-        {
-            _resources.AddRange(new[]
-            {
-                new ResourceEntityTestBuilder()
-                    .WithDefaultValues()
-                    .WithId(1)
-                    .WithUser(new User()
-                    {
-                        Details = new UserDetails()
-                        {
-                            FirstName = "Name",
-                            LastName = "JHDSADJasd"
-                        }
-                    })
-                    .WithResourceProjects(3, 1)
-                    .Build(),
-                new ResourceEntityTestBuilder()
-                    .WithDefaultValues()
-                    .WithId(2)
-                    .WithResourceProjects(3, 10)
-                    .Build(),
-            });
-            BuildMocks();
         }
 
         [Fact]
@@ -80,8 +51,7 @@ namespace TheraLang.Tests.Services
                 .WithUrl(DefaultValues.Uri.ToString())
                 .Build();
 
-            var resourceService = _resourceServiceBuilder.Buid();
-            var addedId = await resourceService.AddResource(resource, userGuid);
+            var addedId = await _resourceService.AddResource(resource, userGuid);
 
             var actual = _resources.FirstOrDefault(r => r.Id == addedId);
 
@@ -94,17 +64,31 @@ namespace TheraLang.Tests.Services
         [InlineData(999)]
         public async Task GetResources_ShouldFilterByProjectId(int projectId)
         {
+            FillTestData();
             BuildMocks();
-            var resourceService = _resourceServiceBuilder.Buid();
-            var expected = _resources.Where(r => r.ResourceProjects.Any(rp => rp.ProjectId == projectId))
-                .Select(r => new ResourceDtoTestBuilder().FromEntity(r).Build());
 
-            var actual = await resourceService.GetResources(null,
+            var actual = await _resourceService.GetResources(null,
                 projectId,
                 _defaultPaginationParams);
 
-            
+            var expected = _resources.Where(r => r.ResourceProjects.Any(rp => rp.ProjectId == projectId))
+                .Select(r => new ResourceDtoTestBuilder().FromEntity(r).Build());
+
             actual.Should().BeEquivalentTo(expected);
+        }
+
+        [Theory]
+        [InlineData(1, 1, 1)]
+        [InlineData(null, null, 3)]
+        [InlineData(999, 999, 0)]
+        public async Task GetResourcesCount_ShouldReturnCorrectCount(int? categoryId, int? projectId, int expected)
+        {
+            FillTestData();
+            BuildMocks();
+
+            var actual = await _resourceService.GetResourcesCount(categoryId, projectId);
+
+            actual.Should().Be(expected);
         }
 
         private void BuildMocks()
@@ -122,8 +106,53 @@ namespace TheraLang.Tests.Services
             _fileServiceMock.Setup(f => f.SaveFile(It.IsAny<Stream>(), It.IsAny<string>()))
                 .ReturnsAsync(DefaultValues.Uri);
 
-            _resourceServiceBuilder = new ResourceServiceBuilder().WithUnitOfWork(_unitOfWorkMock.Object)
-                .WithFileService(_fileServiceMock.Object);
+            _resourceService = new ResourceService(_unitOfWorkMock.Object, _fileServiceMock.Object);
+        }
+
+        private void FillTestData()
+        {
+            _resources.AddRange(new[]
+            {
+                new ResourceEntityTestBuilder()
+                    .WithDefaultValues()
+                    .WithId(1)
+                    .WithUser(new User()
+                    {
+                        Details = new UserDetails()
+                        {
+                            FirstName = "Name",
+                            LastName = "Lastname"
+                        }
+                    })
+                    .WithResourceProjects(3, 1)
+                    .Build(),
+                new ResourceEntityTestBuilder()
+                    .WithDefaultValues()
+                    .WithId(2)
+                    .WithUser(new User()
+                    {
+                        Details = new UserDetails()
+                        {
+                            FirstName = "Name",
+                            LastName = "Lastname"
+                        }
+                    })
+                    .WithResourceProjects(3, 10)
+                    .Build(),
+                new ResourceEntityTestBuilder()
+                    .WithDefaultValues()
+                    .WithId(3)
+                    .WithUser(new User()
+                    {
+                        Details = new UserDetails()
+                        {
+                            FirstName = "Name",
+                            LastName = "Lastname"
+                        }
+                    })
+                    .WithResourceProjects(1, 20)
+                    .Build(),
+            });
         }
     }
 }
