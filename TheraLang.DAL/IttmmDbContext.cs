@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TheraLang.DAL.Configuration;
 using TheraLang.DAL.Entities;
+using TheraLang.DAL.Entities.ManyToMany;
 using TheraLang.DAL.Piranha.Configuration;
 
 namespace TheraLang.DAL
@@ -29,6 +30,9 @@ namespace TheraLang.DAL
         public virtual DbSet<PageRoute> PageRoutes { get; set; }
         public virtual DbSet<UserDetails> UsersDetails { get; set; }
         public virtual DbSet<MemberFee> MemberFees { get; set; }
+        public virtual DbSet<PaymentHistory> PaymentHistory { get; set; }
+        public virtual DbSet<NewsComment> NewsComments { get; set; }
+        public virtual DbSet<NewsLike> NewsLikes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,12 +46,15 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             modelBuilder.ApplyConfiguration(new NewsConfiguration());
+            modelBuilder.ApplyConfiguration(new NewsLikesConfiguration());
             modelBuilder.ApplyConfiguration(new UploadedNewsContentImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new UserDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new PageConfiguration());
             modelBuilder.ApplyConfiguration(new PageRouteConfiguration());
             modelBuilder.ApplyConfiguration(new MemberFeeConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentHistoryConfiguration()); 
+            modelBuilder.ApplyConfiguration(new NewsCommentConfiguration());
         }
     }
 }

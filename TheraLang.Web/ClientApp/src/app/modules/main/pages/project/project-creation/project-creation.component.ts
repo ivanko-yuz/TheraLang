@@ -15,6 +15,7 @@ import { Project } from 'src/app/shared/models/project/project';
 })
 export class ProjectCreationComponent implements OnInit {
   projectTypes: ProjectType[];
+  minDate: Date;
 
 
   constructor(
@@ -35,8 +36,8 @@ export class ProjectCreationComponent implements OnInit {
         .subscribe(
           (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes)
         );
+        this.minDate = new Date();
   }
-
 
   onSubmit() {
     if (this.service.form.invalid) {
@@ -47,8 +48,8 @@ export class ProjectCreationComponent implements OnInit {
       return;
     } else if (!this.service.form.get("id").value) {
       const project: Project = this.service.form.value;
-      if(project.imgFile != null){
-        project.imgFile  = this.service.form.value.imgFile.files[0] as File;
+      if (project.imgFile != null) {
+        project.imgFile = this.service.form.value.imgFile.files[0] as File;
       }
       this.service.createProject(project).subscribe(
         async (msg: string) => {

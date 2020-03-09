@@ -7,6 +7,7 @@ namespace TheraLang.BLL.Interfaces
     public interface IAuthenticateService
     {
         Task<string> Authenticate(User user);
-        Task<AuthUser> GetAuthUserAsync();
+        Task<AuthUser> GetAuthUser();
+        Task<AuthUser> TryGetAuthUser();
     }
 }

@@ -13,5 +13,6 @@ namespace TheraLang.BLL.DataTransferObjects.NewsDtos
         public string AuthorName { get; set; }
         public DateTime CreatedDateUtc { get; set; }
         public int LikesCount { get; set; }
+        public bool IsLikedByCurrentUser { get; set; }
     }
 }
