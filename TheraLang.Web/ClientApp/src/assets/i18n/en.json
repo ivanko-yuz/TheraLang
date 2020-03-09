@@ -113,6 +113,7 @@
     },
     "account": {
       "signUp": "Sign Up",
+      "forgotPassword": "Forgot password?",
       "signIn": "Sign In",
       "profile": "Your profile",
       "logout": "Logout",

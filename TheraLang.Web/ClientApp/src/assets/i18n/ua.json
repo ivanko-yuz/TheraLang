@@ -111,6 +111,7 @@
     },
     "account": {
       "signUp": "Реєстрація",
+      "forgotPassword": "Заубли пароль?",
       "signIn": "Вхід",
       "logout": "Вийти",
       "profile": "Сторінка юзера",
