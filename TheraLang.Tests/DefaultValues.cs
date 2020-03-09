@@ -6,7 +6,6 @@ namespace TheraLang.Tests
 {
     static class DefaultValues
     {
-        public static readonly Guid UserId = new Guid("2960ECE9-49DA-431E-B5B2-9E9251260707");
         public static readonly int ListSize = 10;
         public static readonly int FakeId = -10;
         public static readonly int ExistedId = 1;
