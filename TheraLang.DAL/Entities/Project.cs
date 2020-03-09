@@ -34,6 +34,10 @@ namespace TheraLang.DAL.Entities
 
         public virtual ICollection<Donation> Donations { get; set; }
 
+        public virtual User Owner { get; set; }
+
+        public Guid OwnerId { get; set; }
+
         public Project()
         {
             ProjectResources = new List<ResourceProject>();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace TheraLang.BLL.DataTransferObjects
 {
@@ -10,6 +11,7 @@ namespace TheraLang.BLL.DataTransferObjects
         public string PhoneNumber { get; set; }
         public string ShortInformation { get; set; }
         public string ImageURl { get; set; }
-        public decimal Balance { get; set; }
+        public string City { get; set; }
+        public DateTime? BirthDay { get; set; }
     }
 }

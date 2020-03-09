@@ -26,6 +26,7 @@ import {RegistrationComponent} from "./modules/registration/registration.compone
 import {UserPageComponent} from "./modules/user-page/user-page.component";
 import {UsersListComponent} from "./modules/users_list/users-list.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
+import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
 const routes: Routes = [
   {
     path: "",
@@ -77,6 +78,10 @@ const routes: Routes = [
         path: "profile",
         component: ProfileComponent,
         canActivate: [AuthGuard],
+      },
+      {
+        path: "profile/edit",
+        component: ProfileEditComponent
       },
       {
         path: "users",

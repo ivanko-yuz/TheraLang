@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using DataSeeding;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +25,6 @@ namespace TheraLang.Web
             try
             {
                 BuildWebHost(args)
-                    .Seed()
                     .StartScheduler()
                     .Run();
             }
