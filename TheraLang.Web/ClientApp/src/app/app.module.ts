@@ -159,8 +159,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewsDetailsComponent,
     PageComponent,
     ProjectEditingComponent,
-    NotFoundComponent,
-    PaginationComponent
+    NotFoundComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
