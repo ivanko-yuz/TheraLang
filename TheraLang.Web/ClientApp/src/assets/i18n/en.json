@@ -157,7 +157,25 @@
   },
   "manager": {
     "add-new-page": "Add new page",
-    "save-changes": "Save changes"
+    "save-changes": "Save changes",
+    "monthly-fee": "Monthly Fee",
+    "top-up": "Top Up",
+    "payment-history": "Payment History",
+    "user-name":"User name",
+    "description":"Description",
+    "payment": "Payment",
+    "current-balance": "Current balance",
+    "date":"Data",
+    "home": "Home",
+    "pages": "Pages",
+    "fees": "Fees",
+    "settings": "Settings",
+    "member-fees": "Member Fees",
+    "fee-amount": "Fee amount",
+    "cancel":"Cancel",
+    "save": "Save",
+    "add":"Add fee"
+
   },
   "notFoundPage": {
     "title": "Page not found",
