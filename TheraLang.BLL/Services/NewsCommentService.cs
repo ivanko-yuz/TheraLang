@@ -84,7 +84,7 @@ namespace TheraLang.BLL.Services
 
         public async Task AddComment(CommentRequestDto commentDto)
         {
-            var authUser = await _authenticateService.GetAuthUserAsync();
+            var authUser = await _authenticateService.GetAuthUser();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CommentRequestDto, NewsComment>()
                     .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => authUser.Id)))
