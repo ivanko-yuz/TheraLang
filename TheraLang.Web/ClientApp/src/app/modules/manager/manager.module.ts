@@ -30,6 +30,7 @@ import { GetFeeComponent } from "./member-fee/get-fee/get-fee.component";
 import { PageService } from "src/app/core/http/manager/page.service";
 import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
+import { PaymentHistoryService } from 'src/app/core/http/manager/paymentHistory.services';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { PaymentHistoryComponent } from './payment-history/payment-history.compo
   providers: [
     PageService,
     SlugifyPipe,
-    MemberFeeService
+    MemberFeeService,
+    PaymentHistoryService
   ]
 })
 export class ManagerModule { }

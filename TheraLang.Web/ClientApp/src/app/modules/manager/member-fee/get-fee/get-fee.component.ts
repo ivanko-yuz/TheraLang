@@ -14,8 +14,8 @@ export class GetFeeComponent implements OnInit {
   memberFees: MemberFee[] = [];
   constructor(
     private router:Router,
-    private memberFeeService: MemberFeeService) {  
-    }
+    private memberFeeService: MemberFeeService
+    ) { }
 
   ngOnInit() {
     this.loadMemberFees();
