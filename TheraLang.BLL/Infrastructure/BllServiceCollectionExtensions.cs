@@ -10,6 +10,7 @@ using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services.FileServices;
 using TheraLang.DAL;
 using TheraLang.DAL.UnitOfWork;
+using Common.Configurations;
 
 namespace TheraLang.BLL.Infrastructure
 {

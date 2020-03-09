@@ -1,3 +1,4 @@
+using Common.Configurations;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,12 +51,14 @@ namespace TheraLang.Web
             services.AddScoped<IAuthenticateService, AuthenticationService>();
             services.AddScoped<IUserManagementService, UserManagementService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IConfirmationService, ConfirmationService>();
 
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
             services.AddFileStorage(Configuration.GetConnectionString("AzureConnection"));
             
             services.AddAuthentication(Configuration);
+            services.Configure<EmailSettings>(Configuration.GetSection("email_settings"));
 
             services.AddLiqPayServices(Configuration.GetSection("LiqPay"));
 
@@ -70,7 +73,6 @@ namespace TheraLang.Web
             services.AddTransient<IResourceCategoryService, ResourceCategoryService>();
             services.AddTransient<IProjectParticipationService, ProjectParticipationService>();
             services.AddTransient<IDonationService, DonationService>();
-            services.AddTransient<IResourceAttachmentService, ResourceAttachmentService>();
             services.AddTransient<IPageService, PageService>();
             services.AddTransient<IHtmlContentService, HtmlContentService>();
             services.AddTransient<ISiteMapService, SiteMapService>();

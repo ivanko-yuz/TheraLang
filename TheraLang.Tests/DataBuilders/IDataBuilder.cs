@@ -1,6 +1,6 @@
 ﻿namespace TheraLang.Tests.DataBuilders
 {
-    interface IDataBuilder<T>
+    public interface IDataBuilder<T>
     {
         T Build();
     }

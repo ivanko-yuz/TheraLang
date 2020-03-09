@@ -51,6 +51,7 @@ import { CdkStepperModule } from "@angular/cdk/stepper";
 import { CdkTableModule } from "@angular/cdk/table";
 import { CdkTreeModule } from "@angular/cdk/tree";
 import { ScrollingModule } from "@angular/cdk/scrolling";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confirm-dialog.component";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
@@ -69,7 +70,6 @@ import { ProjectTypeService } from "./core/services/project-type/project-type.se
 import { DonationService } from "./core/http/donations/donation.service";
 import { HttpProjectService } from "./core/http/project/http-project.service";
 import { AuthService } from "./core/auth/auth.service";
-import { ResourceCreateService } from "./core/http/resource/resource-create.service";
 import { ProjectTypeHttp } from "./core/http/project-type/project-type-Http.service";
 import { CmsPagesToolbarItemComponent } from "./modules/main/toolbar/cms-pages-toolbar-item/cms-pages-toolbar-item.component";
 import { ProjectComponent } from "./modules/main/pages/project/project.component";
@@ -78,10 +78,6 @@ import { ProjectInfoComponent } from "./modules/main/pages/project/project-info/
 import { FooterComponent } from "./modules/main/footer/footer.component";
 import { ProjectParticipantsComponent } from "./modules/main/pages/project/project-participants/project-participants.component";
 import { CustomDatePipe } from "./shared/pipes/custom.datepipe";
-import { ResourcesTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-table/resources-table.component";
-import { ResourcesInternalTableComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/resources-internal-table/resources-internal-table.component";
-import { GeneralResourcesTableComponent } from "./modules/main/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
-import { GeneralResourcesInnerTableComponent } from "./modules/main/pages/resource/general-resources-tables/general-resources-inner-table/general-resources-inner-table.component";
 import { ToolbarItemComponent } from "./modules/main/toolbar/toolbar-item/toolbar-item.component";
 import { DonationComponent } from "./modules/main/pages/donation/donation.component";
 import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
@@ -105,15 +101,29 @@ import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { PageComponent } from "./modules/main/pages/page/page.component";
 import { PageService } from "./core/http/manager/page.service";
-import { SharedModule} from "./modules/shared/shared.module";
+import { SharedModule } from "./modules/shared/shared.module";
 import { RegistrationComponent } from "./modules/registration/registration.component";
 import { UserPageComponent } from "./modules/user-page/user-page.component";
 import { UserService } from "./core/services/user/user.service";
 import { ProfileComponent } from "./modules/profile/profile.component";
-import { QuillModule } from "ngx-quill";
+import { CommentsBlockComponent } from './modules/main/comments-block/comments-block.component';
+import { CommentCreateComponent } from './modules/main/comments-block/comment-create/comment-create.component';
+import { CommentComponent } from './modules/main/comments-block/comment/comment.component';
+import { CommentEditComponent } from './modules/main/comments-block/comment-edit/comment-edit.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {PaginationComponent} from './modules/paginationg/pagination.component';
 import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
+import { CreateButtonComponent } from './shared/components/create-button/create-button.component';
+import { ResourcesComponent } from './modules/main/pages/resource/resources.component';
+import {ResourcesViewComponent} from "./modules/main/pages/resource/resources-view/resources-view.component";
+import {ResourceCategoryComponent} from "./modules/main/pages/resource/resources-view/resource-category/resource-category.component";
+import { ResourceEntryComponent } from './modules/main/pages/resource/resources-view/resource-entry/resource-entry.component';
+import {ResourceFormComponent} from "./modules/main/pages/resource/resource-form/resource-form.component";
+import { ResourceEditComponent } from './modules/main/pages/resource/resource-edit/resource-edit.component';
+import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-table/resources-table.component";
+import {ConfirmationComponent} from './modules/registration/confirmation/confirmation.component';
+import {ForgotPasswordComponent} from './modules/password/email/forgot-password.component';
+import {ResetPasswordComponent} from './modules/password/reset-password.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -134,17 +144,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     FooterComponent,
     ProjectParticipantsComponent,
     CustomDatePipe,
-    ResourcesTableComponent,
     ConfirmDialogComponent,
     ProjectCreationComponent,
-    ResourcesInternalTableComponent,
-    GeneralResourcesTableComponent,
-    GeneralResourcesInnerTableComponent,
     ToolbarItemComponent,
     DonationComponent,
     TransactionResultComponent,
     LoginComponent,
     RegistrationComponent,
+    ConfirmationComponent,
     UserPageComponent,
     ProfileComponent,
     ProfileMenuComponent,
@@ -159,20 +166,34 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewsDetailsComponent,
     PageComponent,
     ProjectEditingComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ResetPasswordComponent,
+    ResourceCategoryComponent,
+    CreateButtonComponent,
+    ResourcesComponent,
+    ResourcesViewComponent,
+    ResourceEntryComponent,
+    ResourceFormComponent,
+    ResourceEditComponent,
+    ResourcesTableComponent,
+    NotFoundComponent,
+    CommentsBlockComponent,
+    CommentComponent,
+    CommentCreateComponent,
+    CommentEditComponent,
+    ForgotPasswordComponent,
   ],
   entryComponents: [
-    ResourcesInternalTableComponent,
     ProjectCreationComponent,
     ConfirmDialogComponent,
     LoginComponent,
     ResourceCreateComponent,
+    CommentEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgxPaginationModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -226,6 +247,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    InfiniteScrollModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -242,10 +264,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     NgImageSliderModule,
-    SortablejsModule.forRoot({ animation: 400 }),
-    SharedModule
+    SortablejsModule.forRoot({animation: 400}),
+    SharedModule,
+    NgxPaginationModule
   ],
-  exports: [ResourcesInternalTableComponent],
+  exports: [],
   providers: [
     ResourceService,
     HttpService,
@@ -260,7 +283,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpProjectService,
     AuthService,
     UserService,
-    ResourceCreateService,
     ProjectTypeHttp,
     PageService,
     AuthGuard,
