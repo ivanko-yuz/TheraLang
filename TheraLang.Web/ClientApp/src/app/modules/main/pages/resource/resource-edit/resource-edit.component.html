@@ -1,0 +1,3 @@
+<ng-container *ngIf="loaded">
+  <app-resource-form  [formTitle]=' "components.resources.edit" | translate ' [initValue]="resource" (onCancel)="onCancel()" (onFormSubmit)="onSubmit($event)"></app-resource-form>
+</ng-container>

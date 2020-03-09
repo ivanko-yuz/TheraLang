@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects;
 using Common;
+using TheraLang.BLL.DataTransferObjects.UserDtos;
 
 namespace TheraLang.BLL.Interfaces
 {
