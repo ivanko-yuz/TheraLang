@@ -51,6 +51,7 @@ import { CdkStepperModule } from "@angular/cdk/stepper";
 import { CdkTableModule } from "@angular/cdk/table";
 import { CdkTreeModule } from "@angular/cdk/tree";
 import { ScrollingModule } from "@angular/cdk/scrolling";
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confirm-dialog.component";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
@@ -111,6 +112,10 @@ import { UserPageComponent } from "./modules/user-page/user-page.component";
 import { UserService } from "./core/services/user/user.service";
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
+import { CommentsBlockComponent } from './modules/main/comments-block/comments-block.component';
+import { CommentCreateComponent } from './modules/main/comments-block/comment-create/comment-create.component';
+import { CommentComponent } from './modules/main/comments-block/comment/comment.component';
+import { CommentEditComponent } from './modules/main/comments-block/comment-edit/comment-edit.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {PaginationComponent} from './modules/paginationg/pagination.component';
 import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
@@ -159,7 +164,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewsDetailsComponent,
     PageComponent,
     ProjectEditingComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CommentsBlockComponent,
+    CommentCreateComponent,
+    CommentComponent,
+    CommentEditComponent
+    PaginationComponent
   ],
   entryComponents: [
     ResourcesInternalTableComponent,
@@ -167,6 +177,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfirmDialogComponent,
     LoginComponent,
     ResourceCreateComponent,
+    CommentEditComponent
   ],
   imports: [
     BrowserModule,
@@ -226,6 +237,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    InfiniteScrollModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
