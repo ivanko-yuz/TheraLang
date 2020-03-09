@@ -15,6 +15,7 @@ namespace TheraLang.DAL.Piranha.Configuration
                 .OnDelete(DeleteBehavior.Restrict);
             builder.HasIndex(x => x.Email).IsUnique();
             builder.HasOne(d => d.Details).WithOne(u => u.User).HasForeignKey<UserDetails>(x => x.UserDetailsId);
+            builder.HasOne(d => d.Confirmation).WithOne(u => u.User).HasForeignKey<UserConfirmation>(x => x.Id);
         }
     }
 }

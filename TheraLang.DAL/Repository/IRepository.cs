@@ -17,6 +17,7 @@ namespace TheraLang.DAL.Repository
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entity);
         void Update(TEntity entity);
+        void UpdateRange(IEnumerable<TEntity> entity);
         void Attach(TEntity entity, EntityState state = EntityState.Unchanged);
     }
 }

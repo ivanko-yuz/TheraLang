@@ -48,7 +48,7 @@ namespace TheraLang.BLL.Services
                 .OrderByDescending(e => e.CreatedDateUtc)
                 .ProjectTo<NewsPreviewDto>(mapper)
                 .ToListAsync();
-            
+
             if (!newsDtos.Any())
             {
                 throw new NotFoundException("News");
@@ -72,7 +72,7 @@ namespace TheraLang.BLL.Services
                 .Take(paginationParams.Take)
                 .ProjectTo<NewsPreviewDto>(mapper)
                 .ToListAsync();
-            
+
             if (!newsDtos.Any())
             {
                 throw new NotFoundException($"News page {paginationParams.PageNumber}");
@@ -94,14 +94,25 @@ namespace TheraLang.BLL.Services
                         opt => opt.MapFrom(sm => $"{sm.Author.Details.FirstName} {sm.Author.Details.LastName}"))
                     .ForMember(m => m.LikesCount, opt => opt.MapFrom(sm => sm.Likes.Count))
                     .ForMember(m => m.IsLikedByCurrentUser,
-                        opt => opt.MapFrom(sm => sm.Likes.Select(u => u.UserThatLikedId).Contains(currentUser.Id)));
-            });
+                        opt =>
+                        {
+                            opt.Condition(sm => currentUser != null);
+                            opt.MapFrom(sm => sm.Likes.Select(u => u.UserThatLikedId).Contains(currentUser.Id));
+                        });
+            }).CreateMapper();
 
-            var newsDto = await _unitOfWork.Repository<News>().GetAll()
+            var news = await _unitOfWork.Repository<News>().GetAll()
                 .Where(n => n.Id == id)
-                .ProjectTo<NewsDetailsDto>(mapper)
+                .Include(n => n.Author)
+                .ThenInclude(a => a.Details)
+                .Include(n => n.UploadedContentImages)
+                .Include(n => n.Likes)
                 .SingleOrDefaultAsync();
-            
+
+            // Cannot use ProjectTo With conditional mapping
+            var newsDto = mapper.Map<NewsDetailsDto>(news);
+
+
             if (newsDto == null)
             {
                 throw new NotFoundException($"News with id {id}");
@@ -112,8 +123,9 @@ namespace TheraLang.BLL.Services
 
         public async Task AddNews(NewsCreateDto newsDto)
         {
+            var user = await _authenticateService.GetAuthUser();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<NewsCreateDto, News>()
-                    .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => sm.AuthorId)))
+                    .ForMember(m => m.CreatedById, opt => opt.MapFrom(sm => user.Id)))
                 .CreateMapper();
 
             var news = mapper.Map<NewsCreateDto, News>(newsDto);
@@ -152,7 +164,9 @@ namespace TheraLang.BLL.Services
                 throw new NotFoundException($"News with id {id} not found!");
             }
 
-            newsToUpdate.UpdatedById = newsDto.EditorId;
+            var user = await _authenticateService.GetAuthUser();
+
+            newsToUpdate.UpdatedById = user.Id;
             newsToUpdate.Title = newsDto.Title;
             newsToUpdate.Text = newsDto.Text;
 
@@ -182,10 +196,11 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task Like(int id, Guid userId)
+        public async Task Like(int id)
         {
+            var user = await _authenticateService.GetAuthUser();
             var existedLikeFromUser = (await _unitOfWork.Repository<NewsLike>()
-                .GetAllAsync(e => e.NewsId == id && e.UserThatLikedId == userId))
+                .GetAllAsync(e => e.NewsId == id && e.UserThatLikedId == user.Id))
                 .SingleOrDefault();
 
             //remove like if user already liked
@@ -195,7 +210,7 @@ namespace TheraLang.BLL.Services
             }
             else
             {
-                var newLikeFromUser = new NewsLike() { NewsId = id, UserThatLikedId = userId };
+                var newLikeFromUser = new NewsLike() { NewsId = id, UserThatLikedId = user.Id };
                 _unitOfWork.Repository<NewsLike>().Add(newLikeFromUser);
             }
 

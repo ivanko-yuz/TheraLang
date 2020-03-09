@@ -1,0 +1,13 @@
+<div class="content" *ngIf="loaded">
+  <div class="list">
+    <ng-container *ngFor="let resource of resources | async | paginate: paginationConfig ">
+      <app-resource-entry (resourceDeleted)="onDelete($event)" [resource]="resource"></app-resource-entry>
+    </ng-container>
+  </div>
+  <div class="pagination">
+    <pagination-controls class="pagination-controls" [id]="category.type" autoHide="true" [maxSize]="maxPagesOnControls"
+                         responsive="true"
+                         (pageChange)="onPageChange($event)" nextLabel="" previousLabel=""></pagination-controls>
+  </div>
+</div>
+

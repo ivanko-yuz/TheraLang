@@ -1,0 +1,4 @@
+<h1 *ngIf="confirmed">{{'components.account.successfully-confirmation'|translate}}
+  <a href="/login">{{'components.account.redirection-to-login'|translate}}</a>
+</h1>
+<h1 *ngIf="!confirmed">{{'components.account.failed-confirmation'|translate}}</h1>
