@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.CommentDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.DAL.Entities;
@@ -23,6 +24,8 @@ namespace TheraLang.Tests.Services
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
         private readonly NewsCommentService _commentsService;
         private readonly List<NewsComment> _testDb;
+
+        private readonly CommentRequestDto _commentRequest = new CommentRequestDto() { Text = "Text" };
 
         public NewsCommentServiceTests()
         {
@@ -77,14 +80,14 @@ namespace TheraLang.Tests.Services
         [Fact]
         public async Task UpdateComments_ShouldCallSaveChanges()
         {
-            await _commentsService.UpdateComment(DefaultValues.ExistedId, DefaultValues.CommentRequest);
+            await _commentsService.UpdateComment(DefaultValues.ExistedId, _commentRequest);
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
         [Fact]
         public async Task AddComment_ShouldCallSaveChanges()
         {
-            await _commentsService.AddComment(DefaultValues.CommentRequest);
+            await _commentsService.AddComment(_commentRequest);
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
