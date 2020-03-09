@@ -240,7 +240,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
-    Ng2TelInputModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
