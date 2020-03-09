@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TheraLang.DAL.Entities;
 
 namespace TheraLang.DAL.Configuration
@@ -12,7 +9,6 @@ namespace TheraLang.DAL.Configuration
             public void Configure(EntityTypeBuilder<UserConfirmation> builder)
             {
                 builder.ToTable("UsersConfirmations");
-
             }
     }
 }
