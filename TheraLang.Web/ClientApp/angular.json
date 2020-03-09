@@ -30,10 +30,12 @@
             "styles": [
               "src/assets/themes/purple-white-green.css",
               "src/styles.less",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/intl-tel-input/build/js/intlTelInput.min.js"
             ]
           },
           "configurations": {

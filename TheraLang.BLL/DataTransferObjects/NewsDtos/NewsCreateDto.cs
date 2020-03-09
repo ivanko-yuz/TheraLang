@@ -10,6 +10,5 @@ namespace TheraLang.BLL.DataTransferObjects.NewsDtos
         public string Text { get; set; }
         public IFormFile MainImage { get; set; }
         public ICollection<IFormFile> ContentImages { get; set; }
-        public Guid AuthorId { get; set; }
     }
 }

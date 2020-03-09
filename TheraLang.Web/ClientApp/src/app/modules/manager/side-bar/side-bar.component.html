@@ -3,28 +3,43 @@
         [attr.color]="themeColor">
         <mat-nav-list>
             <div class="pad">
-                <a mat-list-item [routerLink]="'/admin'">
-                    <h2>MANAGER</h2>
+                <a mat-list-item routerLink="/admin">
+                    <h2>{{'manager.title'|translate|uppercase}}</h2>
                 </a>
             </div>
-            <a class="menu-item" mat-list-item [routerLink]="'/'">
+            <a class="menu-item" mat-list-item routerLink="/">
                 <mat-icon class="white-icon">home</mat-icon>
                 <span class="space"> </span>
                 <span>Home</span>
             </a>
 
-            <a class="menu-item" mat-list-item [routerLink]="['/admin', 'sitemap']">
+            <a class="menu-item" mat-list-item routerLink="/admin/sitemap">
                 <mat-icon class="white-icon" >dvr</mat-icon>
                 <span class="space"> </span>
                 <span>Pages</span>
             </a>
-            <a class="menu-item" mat-list-item [routerLink]="'/admin/fee'">
+            <a class="menu-item" mat-list-item routerLink="/admin/projectRequest">
+                <mat-icon class="white-icon">post_add</mat-icon>
+                <span class="space"> </span>
+                <span>{{'components.projects.new-projects'|translate}}</span>
+            </a>
+            <a class="menu-item" mat-list-item routerLink="/admin/projectTypes">
+                <mat-icon class="white-icon">bubble_chart</mat-icon>
+                <span class="space"> </span>
+                <span>{{'components.projectTypes.title'|translate}}</span>
+            </a>
+            <a class="menu-item" mat-list-item routerLink="/admin/fee">
                 <mat-icon class="white-icon">assignment</mat-icon>
                 <span class="space"> </span>
                 <span>Fee</span>
             </a>
+            <a class="menu-item" mat-list-item routerLink="/admin/users">
+                <mat-icon class="white-icon">people_alt</mat-icon>
+                <span class="space"> </span>
+                <span>{{'components.users.title'|translate}}</span>
+            </a>
             <a class="menu-item" mat-list-item>
-                <mat-icon class="white-icon">build</mat-icon>
+                <mat-icon class="white-icon">settings</mat-icon>
                 <span class="space"> </span>
                 <span>Settings</span>
             </a>
@@ -32,7 +47,6 @@
     </mat-sidenav>
     <mat-sidenav-content>
         <div style="height:100vh;">
-            <ng-content></ng-content>
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>

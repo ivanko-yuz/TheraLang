@@ -8,8 +8,6 @@ import { ProjectInfoComponent } from "./modules/main/pages/project/project-info/
 import { DonationComponent } from "./modules/main/pages/donation/donation.component";
 import { GeneralResourcesTableComponent } from "./modules/main/pages/resource/general-resources-tables/general-resources-table/general-resources-table.component";
 import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
-import { ProjectTypeComponent } from "./modules/main/pages/project/project-info/resources-table-for-project/project-type/project-type.component";
-import { ProjectRequestComponent } from "./modules/main/pages/project/project-request/project-request.component";
 import { LoginComponent } from "./modules/login/login.component";
 import { GeneralResourcesComponent } from "./modules/main/pages/resource/general-resources.component";
 import { ProjectCreationComponent } from "./modules/main/pages/project/project-creation/project-creation.component";
@@ -24,9 +22,9 @@ import { PageComponent } from "./modules/main/pages/page/page.component";
 
 import {RegistrationComponent} from "./modules/registration/registration.component";
 import {UserPageComponent} from "./modules/user-page/user-page.component";
-import {UsersListComponent} from "./modules/users_list/users-list.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
 import { NewsEditComponent } from './modules/main/pages/news/news-edit/news-edit.component';
+import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
 const routes: Routes = [
   {
     path: "",
@@ -61,14 +59,6 @@ const routes: Routes = [
         path: "transaction/:donationId",
         component: TransactionResultComponent
       },
-      { path: "projectTypes",
-        component: ProjectTypeComponent,
-        canActivate: [AdminGuard],
-      },
-      { path: "projectRequest",
-        component: ProjectRequestComponent,
-        canActivate: [AdminGuard],
-      },
       {
         path: "users/:userID",
         component: UserPageComponent,
@@ -80,9 +70,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: "users",
-        component: UsersListComponent,
-        canActivate: [AdminGuard],
+        path: "profile/edit",
+        component: ProfileEditComponent
       },
       {path: "news", component: NewsPageComponent},
       {path: "news/create", component: NewsCreateComponent},
@@ -131,10 +120,8 @@ export const routingComponents = [
   HomeComponent,
   ProjectInfoComponent,
   GeneralResourcesComponent,
-  ProjectTypeComponent,
   TransactionResultComponent,
   DonationComponent,
-  ProjectRequestComponent,
   LoginComponent,
   MainComponent
 ];

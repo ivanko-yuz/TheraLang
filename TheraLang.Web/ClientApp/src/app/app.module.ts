@@ -85,12 +85,9 @@ import { GeneralResourcesInnerTableComponent } from "./modules/main/pages/resour
 import { ToolbarItemComponent } from "./modules/main/toolbar/toolbar-item/toolbar-item.component";
 import { DonationComponent } from "./modules/main/pages/donation/donation.component";
 import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
-import { ProjectRequestComponent } from "./modules/main/pages/project/project-request/project-request.component";
 import { LoginComponent } from "./modules/login/login.component";
 import { ProfileMenuComponent } from "./modules/main/toolbar/profile-menu/profile-menu.component";
 import { ResourceCreateComponent } from "./modules/main/pages/resource/resource-create/resource-create.component";
-import { ProjectTypeFormComponent } from "./modules/main/pages/project/project-type-form/project-type-form.component";
-import { ProjectTypeCreateFormComponent } from "./modules/main/pages/project/project-type-create-form/project-type-create-form.component";
 import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
 import { SortablejsModule } from "ngx-sortablejs";
@@ -111,14 +108,14 @@ import { PageService } from "./core/http/manager/page.service";
 import { SharedModule} from "./modules/shared/shared.module";
 import { RegistrationComponent } from "./modules/registration/registration.component";
 import { UserPageComponent } from "./modules/user-page/user-page.component";
-import { UsersListComponent } from "./modules/users_list/users-list.component";
 import { UserService } from "./core/services/user/user.service";
-import { ChangeRoleComponent } from "./modules/users_list/change-role/change-role.component";
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
 import { NewsEditComponent } from './modules/main/pages/news/news-edit/news-edit.component';
 import { SliderRowComponent } from './modules/main/pages/news/slider-row/slider-row.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
+import {PaginationComponent} from './modules/paginationg/pagination.component';
+import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -133,6 +130,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     routingComponents,
     ToolbarComponent,
     ProjectComponent,
+    ProfileEditComponent,
     HomeComponent,
     ProjectInfoComponent,
     FooterComponent,
@@ -147,17 +145,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToolbarItemComponent,
     DonationComponent,
     TransactionResultComponent,
-    ProjectRequestComponent,
     LoginComponent,
     RegistrationComponent,
     UserPageComponent,
-    UsersListComponent,
-    ChangeRoleComponent,
     ProfileComponent,
     ProfileMenuComponent,
     ResourceCreateComponent,
-    ProjectTypeFormComponent,
-    ProjectTypeCreateFormComponent,
     LanguageComponent,
     MainComponent,
     CmsPagesToolbarItemComponent,
@@ -176,16 +169,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResourcesInternalTableComponent,
     ProjectCreationComponent,
     ConfirmDialogComponent,
-    ChangeRoleComponent,
     LoginComponent,
     ResourceCreateComponent,
-    ProjectTypeFormComponent,
-    ProjectTypeCreateFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxPaginationModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatButtonModule,

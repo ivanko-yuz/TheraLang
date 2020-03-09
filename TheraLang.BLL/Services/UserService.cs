@@ -8,6 +8,8 @@ using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
+using Common;
+using System.Linq;
 
 namespace TheraLang.BLL.Services
 {
@@ -50,8 +52,7 @@ namespace TheraLang.BLL.Services
             {
                 var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>())
-                    .CreateMapper();
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>()).CreateMapper();
                 var userDto = mapper.Map<UserDetails, UserDetailsDto>(user);
 
                 return userDto;
@@ -62,14 +63,20 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        public async Task<IEnumerable<UsersDto>> GetAllUsers()
+        public async Task<UsersListDto> GetAllUsers(PaginationParams pagination)
         {
-            var users = await _unitOfWork.Repository<UserDetails>().GetAllAsync();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>())
-                .CreateMapper();
+            var users = await _unitOfWork.Repository<UserDetails>().GetAll().Skip((pagination.PageNumber - 1) * pagination.PageSize).Take(pagination.PageSize).ToListAsync();
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>()).CreateMapper();
             var usersDto = mapper.Map<IEnumerable<UserDetails>, IEnumerable<UsersDto>>(users);
-            return usersDto;
+            var usersList = new UsersListDto()
+            {
+                UserList = usersDto.ToList(),
+                CountOfItems = await _unitOfWork.Repository<User>().GetAll().CountAsync()
+            };
+
+            return usersList;
         }
+
 
         public async Task Update(UserDetailsDto user, Guid id)
         {
@@ -77,14 +84,17 @@ namespace TheraLang.BLL.Services
             {
                 var updateUser = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetailsDto, UserDetails>())
-                    .CreateMapper();
-                updateUser = mapper.Map<UserDetailsDto, UserDetails>(user);
-                _unitOfWork.Repository<UserDetails>().Update(updateUser);
+                updateUser.FirstName = user.FirstName;
+                updateUser.LastName = user.LastName;
+                updateUser.PhoneNumber = user.PhoneNumber;
+                updateUser.BirthDay = user.BirthDay;
+                updateUser.City = user.City;
+                updateUser.ShortInformation = user.ShortInformation;
+
                 if (user.Image != null)
                 {
                     var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(),
-                        Path.GetExtension(user.Image.Name));
+                        Path.GetExtension(user.Image.FileName));
                     updateUser.ImageURl = imageUri.ToString();
                 }
 
