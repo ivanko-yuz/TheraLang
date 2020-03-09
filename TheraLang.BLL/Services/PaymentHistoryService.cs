@@ -25,6 +25,20 @@ namespace TheraLang.BLL.Services
            _userManagementService = userManagementService;
         }
 
+        public async Task<int> GetUserPaymentHistoryCount(Guid userId)
+        {
+            return await _unitOfWork.Repository<PaymentHistory>()
+                .GetAll()
+                .Where(ph => ph.UserId == userId)
+                .CountAsync();
+        }
+
+        public async Task<int> GetAllPaymentHistoryCount()
+        {
+            return await _unitOfWork.Repository<PaymentHistory>()
+                .GetAll()
+                .CountAsync();
+        }
         public async Task Add(PaymentHistoryDto paymentDto)
         {
             var currentBalance = (await _userManagementService.GetUserById(paymentDto.UserId)).Details.Balance;

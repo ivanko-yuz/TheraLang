@@ -13,5 +13,7 @@ namespace TheraLang.BLL.Interfaces
         Task<IEnumerable<PaymentHistoryDto>> GetAll();
         Task<IEnumerable<PaymentHistoryDto>> GetHistoryPage(PaginationParams pagingParameters);
         Task<IEnumerable<PaymentHistoryDto>> GetPageByUserId(Guid userId, PaginationParams pagingParameters);
+        Task<int> GetUserPaymentHistoryCount(Guid userId);
+        Task<int> GetAllPaymentHistoryCount();
     }
 }

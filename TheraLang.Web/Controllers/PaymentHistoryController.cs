@@ -36,6 +36,20 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
+        [HttpGet("count/all")]
+        public async Task<IActionResult> GetAllHistoryCount()
+        {
+            var pageCount = await _paymentHistoryService.GetAllPaymentHistoryCount();
+            return Ok(pageCount);
+        }
+
+        [HttpGet("count/{id}")]
+        public async Task<IActionResult> GetUserHistoryCount(Guid id)
+        {
+            var pageCount = await _paymentHistoryService.GetUserPaymentHistoryCount(id);
+            return Ok(pageCount);
+        }
+
         [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
