@@ -17,6 +17,7 @@ export class CommentCreateComponent implements OnInit {
   @Input() currentUser: User;
   @Output() commentCreated = new EventEmitter();
   public commentForm: FormGroup;
+  commentText: string;
 
   constructor(
     private commentsService : CommentsService,

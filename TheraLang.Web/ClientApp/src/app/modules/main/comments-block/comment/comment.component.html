@@ -1,7 +1,7 @@
 <ng-container #container>
     <div *ngIf="!this.isEditing">
         <div fxLayout="row">
-            <img *ngIf="this.comment.AuthorImageUrl else defaultImage" src="{{this.comment.AuthorImageUrl}}"
+            <img *ngIf="this.comment.authorImageUrl else defaultImage" src="{{this.comment.authorImageUrl}}"
                 class="user-image">
             <ng-template #defaultImage>
                 <img src="/assets/img/avatar-placeholder.gif" class="user-image">

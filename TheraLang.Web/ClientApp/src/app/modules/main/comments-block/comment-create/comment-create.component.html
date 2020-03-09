@@ -1,5 +1,5 @@
 <div fxLayout="row">
-    <img *ngIf="this.currentUser.imageUrl else defaultImage" src="{{this.currentUsser.imageUrl}}" class="user-image">
+    <img *ngIf="this.currentUser.imageURl else defaultImage" src="{{this.currentUser.imageURl}}" class="user-image">
     <ng-template #defaultImage>
         <img src="/assets/img/avatar-placeholder.gif" class="user-image">
     </ng-template>
@@ -9,7 +9,7 @@
                 <mat-form-field floatLabel=never>
                     <textarea formControlName="text" class="comment-input" matTextareaAutosize autofocus
                         matInput placeholder="{{'components.comments.enter-comment'|translate}}" 
-                        [(ngModel)]="this.commentForm.text"></textarea>
+                        [(ngModel)]="this.commentText"></textarea>
                     <mat-error *ngIf="this.commentForm.controls['text'].errors?.minlength">
                         {{'common.validation.line-too-short'|translate}}</mat-error>
                     <mat-error *ngIf="this.commentForm.controls['text'].errors?.maxlength">
@@ -17,7 +17,7 @@
                 </mat-form-field>
                 <div>
                     <button mat-raised-button color="primary" type="submit" 
-                        [disabled]="this.commentForm.invalid || !this.commentForm.dirty || !this.commentForm.text"
+                        [disabled]="this.commentForm.invalid || !this.commentForm.dirty || !this.commentText"
                         (click)="onSubmit()" class="right-align">
                         {{'components.comments.create-comment'|translate}}
                     </button>
