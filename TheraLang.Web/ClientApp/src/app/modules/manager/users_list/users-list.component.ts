@@ -1,13 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit, Output} from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
-import { DialogService } from "src/app/core/services/dialog/dialog.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import {ChangeRoleComponent} from "./change-role/change-role.component";
 import {MatDialog} from "@angular/material";
 import { UserService } from 'src/app/core/services/user/user.service';
 import { Role } from 'src/app/shared/models/role/role';
-import { User } from 'src/app/shared/models/user/user';
+import { User, UserPageViewModel } from 'src/app/shared/models/user/user';
 
 @Component({
   selector: "app-user-profile",
@@ -16,7 +15,8 @@ import { User } from 'src/app/shared/models/user/user';
 })
 export class UsersListComponent implements OnInit {
   returnUrl: string;
-  users: User[];
+  usersList: UserPageViewModel;
+  pageSize = 10;
 
   constructor(
     private notificationService: NotificationService,
@@ -29,8 +29,14 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || "/";
-    this.userService.list().subscribe((value: User[]) => {
-      this.users = value;
+    this.userService.list(this.pageSize, 1).subscribe((value: UserPageViewModel) => {
+      this.usersList = value;
+    });
+  }
+
+  pageChange(event) {
+    this.userService.list(this.pageSize, event).subscribe((value: UserPageViewModel) => {
+      this.usersList = value;
     });
   }
 
