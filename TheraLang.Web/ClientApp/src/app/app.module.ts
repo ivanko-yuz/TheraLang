@@ -51,6 +51,7 @@ import { CdkStepperModule } from "@angular/cdk/stepper";
 import { CdkTableModule } from "@angular/cdk/table";
 import { CdkTreeModule } from "@angular/cdk/tree";
 import { ScrollingModule } from "@angular/cdk/scrolling";
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ConfirmDialogComponent } from "./shared/components/confirm-dialog/confirm-dialog.component";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
@@ -243,6 +244,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    InfiniteScrollModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

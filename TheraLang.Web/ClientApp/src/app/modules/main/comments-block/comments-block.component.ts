@@ -5,6 +5,7 @@ import { CommentsService } from 'src/app/core/http/comments/comments.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommentView } from 'src/app/shared/models/comment/comment-view';
 import { PaginationParams } from 'src/app/shared/models/pagination-params/pagination-params';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-comments-block',
@@ -18,7 +19,7 @@ export class CommentsBlockComponent implements OnInit {
   comments: CommentView[];
   newsId: number;
   maxPageCount: number
-  pageSize: number = 5;
+  pageSize: number = 10;
   lastPage: number = 1;
   loading: boolean = false;
 
@@ -49,20 +50,15 @@ export class CommentsBlockComponent implements OnInit {
     })
   }
 
-  getComments(){
-    this.commentsService.getAllComments(this.newsId)
-      .subscribe((response: CommentView[]) => {
-         this.comments = response
-      })
-  }
-
   getNextCommentsPage() {
     if(this.lastPage >= this.maxPageCount) return;
+    if(this.loading) return;
 
     this.loading = true
     let paginationParams:PaginationParams = { pageNumber: this.lastPage + 1, pageSize : this.pageSize }
     
     this.commentsService.getCommentsPage(this.newsId, paginationParams)
+      .pipe(delay(100))
       .subscribe((response: CommentView[]) => {
          this.comments.push(...response)
          this.lastPage++
@@ -81,21 +77,13 @@ export class CommentsBlockComponent implements OnInit {
       })
   }
 
-  // TODO: fix this (now scroll event binded to window and it works with document height,
-  // so if move component on top of the page it wouldn't work)
-  // Make this event binded to component
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event: any) {
-    //In chrome and some browser scroll is given to body tag
-    let pos = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
-    let max = document.documentElement.scrollHeight;
-    if (pos >= max - 160) {
-      this.getNextCommentsPage()
-    }
+  onScroll() {
+    console.log("scrolled")
+    this.getNextCommentsPage()
   }
 
-  canLoadMore() {
-    return this.lastPage < this.maxPageCount;
+  isLoading() {
+    return this.loading;
   }
 
 }
