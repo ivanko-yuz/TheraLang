@@ -6,7 +6,7 @@ import { CreatePageComponent } from "./page-manager/create-page/create-page.comp
 import { ManagerComponent } from "./manager.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { QuillModule } from "ngx-quill";
-import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule, MatDatepickerModule, MatDialogModule, MatTableModule } from "@angular/material";
+import { MatButtonModule, MatFormFieldModule, MatRippleModule, MatInputModule, MatCardModule, MatIconModule, MatDatepickerModule, MatDialogModule, MatTableModule, MatSelectModule } from "@angular/material";
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { SortablejsModule } from "ngx-sortablejs";
 import { PageEntryComponent } from "./sitemap-editor/page-entry/page-entry.component";
@@ -36,6 +36,7 @@ import { ProjectTypeFormComponent } from './project-type/project-type-form/proje
 import { ProjectTypeCreateFormComponent } from './project-type/project-type-create-form/project-type-create-form.component';
 import { ProjectRequestComponent } from './project-request/project-request.component';
 import { UsersListComponent } from './users_list/users-list.component';
+import { ChangeRoleComponent } from './users_list/change-role/change-role.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { UsersListComponent } from './users_list/users-list.component';
     ProjectTypeComponent,
     ProjectTypeFormComponent,
     ProjectTypeCreateFormComponent,
-    ProjectRequestComponent
+    ProjectRequestComponent,
+    ChangeRoleComponent
   ],
   imports: [
     CommonModule,
@@ -89,12 +91,14 @@ import { UsersListComponent } from './users_list/users-list.component';
     }),
     SharedModule,
     MatMenuModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule
   ],
   entryComponents:[
     PagePreviewComponent,
     ProjectTypeFormComponent,
-    ProjectTypeCreateFormComponent
+    ProjectTypeCreateFormComponent,
+    ChangeRoleComponent
   ],
   exports: [
     MatButtonModule,

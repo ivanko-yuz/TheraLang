@@ -110,8 +110,6 @@ import { RegistrationComponent } from "./modules/registration/registration.compo
 import { UserPageComponent } from "./modules/user-page/user-page.component";
 import { UserService } from "./core/services/user/user.service";
 import { ProfileComponent } from "./modules/profile/profile.component";
-import { QuillModule } from "ngx-quill";
-import { ChangeRoleComponent } from './modules/manager/users_list/change-role/change-role.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -143,7 +141,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     RegistrationComponent,
     UserPageComponent,
-    ChangeRoleComponent,
     ProfileComponent,
     ProfileMenuComponent,
     ResourceCreateComponent,
@@ -163,7 +160,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ResourcesInternalTableComponent,
     ProjectCreationComponent,
     ConfirmDialogComponent,
-    ChangeRoleComponent,
     LoginComponent,
     ResourceCreateComponent,
   ],
