@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.UserDtos;
 using TheraLang.BLL.Interfaces;
-using TheraLang.Web.ViewModels;
+using TheraLang.Web.ViewModels.UsersViewModels;
 
 namespace TheraLang.Web.Controllers
 {
@@ -14,11 +16,13 @@ namespace TheraLang.Web.Controllers
     {
         private readonly IAuthenticateService _authService;
         private readonly IUserManagementService _userManagement;
+        private readonly IConfirmationService _confirmation;
 
-        public AccountController(IAuthenticateService authService, IUserManagementService userManagement)
+        public AccountController(IAuthenticateService authService, IUserManagementService userManagement, IConfirmationService confirmation)
         {
             _authService = authService;
             _userManagement = userManagement;
+            _confirmation = confirmation;
         }
 
         [AllowAnonymous]
@@ -29,7 +33,7 @@ namespace TheraLang.Web.Controllers
             var loginDto = mapper.Map<LoginModel, LoginModelDto>(login);
             var user = await _userManagement.GetUser(loginDto.Email, loginDto.Password);
             var token = await _authService.Authenticate(user);
-            if (token == "")
+            if (token == "" || token == null)
             {
                 return BadRequest("Invalid Request");
             }
@@ -44,9 +48,43 @@ namespace TheraLang.Web.Controllers
         [HttpPost("registration")]
         public async Task<IActionResult> Register([FromForm] UserAllViewModel newUser)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserAllViewModel, UserAllDto>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UserAllViewModel, UserAllDto>();
+                cfg.CreateMap<UserAllViewModel, ConfirmUserDto>();
+            }).CreateMapper();
+
             var user = mapper.Map<UserAllViewModel, UserAllDto>(newUser);
+            var confirmUser = mapper.Map<UserAllViewModel, ConfirmUserDto>(newUser);
             await _userManagement.AddUser(user);
+            return Ok();
+        }
+
+        [HttpPost("confirmation")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail([FromBody]ConfirmUserViewModel confirmUser)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ConfirmUserViewModel, ConfirmUserDto>()).CreateMapper();
+            var confirm = mapper.Map<ConfirmUserViewModel, ConfirmUserDto>(confirmUser);
+            await _confirmation.ConfirmUser(confirm);
+            return Ok();
+        }
+
+        [HttpPost("password/forgot")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword([FromBody]ConfirmPasswordChangingViewModel req)
+        {
+            await _userManagement.PasswordConfirmationRequest(req.Email);
+            return Ok();
+        }
+
+        [HttpPost("password/reset")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmUser([FromBody]ConfirmPasswordChangingViewModel confirmPassword)
+        {
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ConfirmPasswordChangingViewModel, ConfirmPasswordChangingDto>()).CreateMapper();
+            var confirm = mapper.Map<ConfirmPasswordChangingViewModel, ConfirmPasswordChangingDto>(confirmPassword);
+            await _confirmation.ConfirmPassword(confirm);
             return Ok();
         }
     }

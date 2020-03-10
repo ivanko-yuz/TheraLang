@@ -1,68 +1,61 @@
 import { Injectable } from "@angular/core";
 import { Resource } from "../../../shared/models/resource/resource";
 import { HttpService } from "../http/http.service";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import { baseUrl, resourceUrl } from 'src/app/configs/api-endpoint.constants';
+import { Observable } from 'rxjs';
+import { ResourceCategory } from 'src/app/shared/models/resource/resource-category';
+import {share} from "rxjs/operators";
 
 @Injectable()
 export class ResourceService {
-  allProjectResources: Resource[] = [];
-  allResources: Resource[] = [];
-  countAllResourcesByCategoryId: number;
 
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpClient) { }
 
-  getAllResourcesByProjId(projid: number): Promise<Resource[]> {
-    const allData = this.http
-      .getAllResourcesById(projid)
-      .toPromise()
-      .then((data: Resource[]) => {
-        this.allProjectResources = data;
-        return data;
-      });
-    return allData;
+  getResource(id:number): Observable<Resource>{
+    return this.http.get(`${resourceUrl}/${id}`) as Observable<Resource>;
   }
 
-  getAllResourceCategories(arr: Resource[][]): string[] {
-    const allResourceCategories: string[] = [];
-    for (const cat in arr) {
-      allResourceCategories.push(cat);
+  getResourceCategories(projectId: number,includeEmpty: Boolean = false): Observable<ResourceCategory[]> {
+    const params = new HttpParams()
+      .set("includeEmpty",includeEmpty.toString());
+    return this.http.get(`${resourceUrl}/categories/${projectId || ""}`,{params}) as Observable<ResourceCategory[]>
+  }
+
+  getRosourcesByCategory(categoryId: number, projectId: number, pageNumber: number, pageSize: number): Observable<Resource[]> {
+    const params = new HttpParams()
+      .set("pageNumber", pageNumber.toString())
+      .set("pageSize", pageSize.toString());
+    return this.http.get(`${resourceUrl}/category/${categoryId}/${projectId || ""}`, {params}) as Observable<Resource[]>
+  }
+
+  countTotalResources(categoryId: number = null, projectId: number = null): Observable<number> {
+    let params = new HttpParams();
+    if(categoryId !== null)
+      params = params.set("categoryId", categoryId && categoryId.toString() || null);
+    if(projectId !== null)
+      params = params.set("projectId", projectId && projectId.toString() || null);
+    return this.http.get(`${resourceUrl}/count/`, {params}) as Observable<number>;
+  }
+
+  postResource(resource: Resource) {
+    const formData = new FormData();
+    formData.append("name", resource.name);
+    formData.append("description", resource.description);
+    formData.append("categoryId", resource.categoryId.toString());
+    if (resource.file) {
+      formData.append("File", resource.file as File);
+    } else {
+      formData.append("url", resource.url);
     }
-    return allResourceCategories;
+    return this.http.post(`${resourceUrl}/create`, formData);
   }
 
-  sortAllResourcesByCategories(res: Resource[]): Resource[][] {
-    const sortedArray: Resource[][] = [];
-    res.forEach(resuorce => {
-      if (!sortedArray[resuorce.resourceCategory.type]) {
-        sortedArray[resuorce.resourceCategory.type] = [];
-      }
-      sortedArray[resuorce.resourceCategory.type].push(resuorce);
-    });
-    return sortedArray;
+  updateResource(resource:Resource){
+    return this.http.put(`${resourceUrl}/update/${resource.id}`,resource)
   }
 
-  getResourcesByCategoryId(
-    categoryId: number,
-    pageNumber: number,
-    recordsPerPage: number
-  ): Promise<Resource[]> {
-    const allData = this.http
-      .getResourcesByCategoryId(categoryId, pageNumber, recordsPerPage)
-      .toPromise()
-      .then((data: Resource[]) => {
-        this.allResources = data;
-        return data;
-      });
-    return allData;
-  }
-
-  getResourcesCountByCategoryId(categoryId: number) {
-    const allData = this.http
-      .getResourcesCountByCategoryId(categoryId)
-      .toPromise()
-      .then((data: number) => {
-        this.countAllResourcesByCategoryId = data;
-        return data;
-      });
-    return allData;
+  deleteResource(resourceId: number){
+    return this.http.delete(`${resourceUrl}/delete/${resourceId}`)
   }
 }

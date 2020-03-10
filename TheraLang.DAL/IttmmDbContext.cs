@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TheraLang.DAL.Configuration;
 using TheraLang.DAL.Entities;
+using TheraLang.DAL.Entities.ManyToMany;
 using TheraLang.DAL.Piranha.Configuration;
 
 namespace TheraLang.DAL
@@ -20,7 +21,6 @@ namespace TheraLang.DAL
         public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
         public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<Society> Societies { get; set; }
-        public virtual DbSet<ResourceAttachment> ResourceAttachments { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<News> News { get; set; }
@@ -29,6 +29,10 @@ namespace TheraLang.DAL
         public virtual DbSet<PageRoute> PageRoutes { get; set; }
         public virtual DbSet<UserDetails> UsersDetails { get; set; }
         public virtual DbSet<MemberFee> MemberFees { get; set; }
+        public virtual DbSet<PaymentHistory> PaymentHistory { get; set; }
+        public virtual DbSet<NewsComment> NewsComments { get; set; }
+        public virtual DbSet<NewsLike> NewsLikes { get; set; }
+        public virtual DbSet<UserConfirmation> UsersConfirmation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,14 +44,17 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
             modelBuilder.ApplyConfiguration(new DonationConfiguration());
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
-            modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             modelBuilder.ApplyConfiguration(new NewsConfiguration());
+            modelBuilder.ApplyConfiguration(new NewsLikesConfiguration());
             modelBuilder.ApplyConfiguration(new UploadedNewsContentImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new UserDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new PageConfiguration());
             modelBuilder.ApplyConfiguration(new PageRouteConfiguration());
             modelBuilder.ApplyConfiguration(new MemberFeeConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentHistoryConfiguration()); 
+            modelBuilder.ApplyConfiguration(new NewsCommentConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfirmationConfiguration());
         }
     }
 }

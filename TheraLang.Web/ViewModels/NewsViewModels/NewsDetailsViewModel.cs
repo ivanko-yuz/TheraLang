@@ -13,5 +13,6 @@ namespace TheraLang.Web.ViewModels.NewsViewModels
         public string AuthorName { get; set; }
         public DateTime CreatedDateUtc { get; set; }
         public int LikesCount { get; set; }
+        public bool IsLikedByCurrentUser { get; set; }
     }
 }
