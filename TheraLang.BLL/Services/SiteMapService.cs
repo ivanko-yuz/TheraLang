@@ -37,6 +37,7 @@ namespace TheraLang.BLL.Services
 
             var onlyRoots = mapper.Map<IEnumerable<Page>, IEnumerable<SiteMapDto>>(entities)
                 .Where(sm => sm.ParentPageId == null).ToList();
+        
 
             return onlyRoots;
         }

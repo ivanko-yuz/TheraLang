@@ -46,57 +46,65 @@ namespace TheraLang.BLL.Services
 
         public async Task AddUser(UserAllDto newUser)
         {
-            if (newUser != null)
+            try
             {
-                var mapper = new MapperConfiguration(cfg =>
+                if (newUser != null)
                 {
-                    cfg.CreateMap<UserAllDto, UserDetails>();
-                    cfg.CreateMap<UserAllDto, User>();
-                }).CreateMapper();
+                    var mapper = new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateMap<UserAllDto, UserDetails>();
+                        cfg.CreateMap<UserAllDto, User>();
+                    }).CreateMapper();
 
-                var userDetails = mapper.Map<UserAllDto, UserDetails>(newUser);
+                    var userDetails = mapper.Map<UserAllDto, UserDetails>(newUser);
 
-                if (newUser.Image != null)
-                {
-                    var imageUri = await _fileService.SaveFile(newUser.Image.OpenReadStream(),
-                        Path.GetExtension(newUser.Image.FileName));
-                    userDetails.ImageURl = imageUri.ToString();
+                    if (newUser.Image != null)
+                    {
+                        var imageUri = await _fileService.SaveFile(newUser.Image.OpenReadStream(),
+                            Path.GetExtension(newUser.Image.FileName));
+                        userDetails.ImageURl = imageUri.ToString();
+                    }
+
+                    var user = mapper.Map<UserAllDto, User>(newUser);
+                    user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Unconfirmed")).Id;
+                    user.PasswordHash = PasswordHasher.HashPassword(newUser.Password);
+                    user.Details = userDetails;
+                    Random rand = new Random();
+                    int random = rand.Next(10000000, 100000000);
+
+                    var confUser = new UserConfirmation()
+                    {
+                        Number = random,
+                        ConfDateTime = DateTime.Now
+                    };
+
+                    user.Confirmation = confUser;
+
+                    _unitOfWork.Repository<UserDetails>().Add(userDetails);
+                    _unitOfWork.Repository<User>().Add(user);
+                    _unitOfWork.Repository<UserConfirmation>().Add(confUser);
+
+                    await _unitOfWork.SaveChangesAsync();
+                    await _confirmation.SendEmail(confUser.Number.ToString(), user.Email, "welcome.html");
                 }
-
-                var user = mapper.Map<UserAllDto, User>(newUser);
-                user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Unconfirmed")).Id;
-                user.PasswordHash = PasswordHasher.HashPassword(newUser.Password);
-                user.Details = userDetails;
-                Random rand = new Random();
-                int random = rand.Next(10000000, 100000000);
-
-                var confUser = new UserConfirmation()
-                {
-                    Number = random,
-                    ConfDateTime = DateTime.Now
-                };
-
-                user.Confirmation = confUser;
-
-                _unitOfWork.Repository<UserDetails>().Add(userDetails);
-                _unitOfWork.Repository<User>().Add(user);
-                _unitOfWork.Repository<UserConfirmation>().Add(confUser);
-
-                await _unitOfWork.SaveChangesAsync();
-                await _confirmation.SendEmail(confUser.Number.ToString(), user.Email, "welcome.html");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{1}", ex);
             }
         }
+    
 
-        public async Task PasswordConfirmationRequest(string email)
-        {
-            var user = await _unitOfWork.Repository<User>().Get(u => u.Email == email);
-            var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
-            Random rand = new Random();
-            int random = rand.Next(10000000, 100000000);
-            conf.Number = random;
-            conf.ConfDateTime = DateTime.Now;
-            await _unitOfWork.SaveChangesAsync();
-            await _confirmation.SendEmail(random.ToString(), email, "password.html");
-        }
+    public async Task PasswordConfirmationRequest(string email)
+    {
+        var user = await _unitOfWork.Repository<User>().Get(u => u.Email == email);
+        var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
+        Random rand = new Random();
+        int random = rand.Next(10000000, 100000000);
+        conf.Number = random;
+        conf.ConfDateTime = DateTime.Now;
+        await _unitOfWork.SaveChangesAsync();
+        await _confirmation.SendEmail(random.ToString(), email, "password.html");
     }
+}
 }
