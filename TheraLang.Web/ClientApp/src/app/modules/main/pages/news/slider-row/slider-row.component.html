@@ -1,0 +1,6 @@
+<div fxLayout="row">
+    <div  fxLayout="row" *ngFor="let image of images" fxFlex="33" class="single-image">
+            <img  src={{image}} fxFill> 
+            <mat-icon class="clear" (click)="onRemove(image)">clear</mat-icon>
+    </div>
+</div>

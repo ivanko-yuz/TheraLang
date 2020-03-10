@@ -80,7 +80,8 @@ namespace TheraLang.Web
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IMemberFeeService, MemberFeeService>();
             services.AddTransient<IPaymentHistoryService, PaymentHistoryService>();
-            services.AddTransient<PaymentService>();
+            services.AddTransient<IPaymentService, PaymentService>();
+            services.AddTransient<SchedulerService>();
             services.AddTransient<INewsCommentService, NewsCommentService>();
             services.AddTransient<IChatService, ChatService>();
 

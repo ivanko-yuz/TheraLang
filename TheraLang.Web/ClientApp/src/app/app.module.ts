@@ -110,6 +110,11 @@ import { QuillModule } from "ngx-quill";
 import { MessangerComponent } from './modules/messanger/messanger.component';
 import { MessangerService } from './core/http/messanger/messanger.service';
 import { ChatListComponent } from './modules/messanger/chat-list/chat-list.component';
+import { ProjectFiltersComponent } from './modules/main/pages/project/project-filters/project-filters.component';
+import { NewsEditComponent } from './modules/main/pages/news/news-edit/news-edit.component';
+import { SliderRowComponent } from './modules/main/pages/news/slider-row/slider-row.component';
+import {LanguageService} from "./core/services/language/language.service";
+import {CookieService} from "ngx-cookie-service";
 import { CommentsBlockComponent } from './modules/main/comments-block/comments-block.component';
 import { CommentCreateComponent } from './modules/main/comments-block/comment-create/comment-create.component';
 import { CommentComponent } from './modules/main/comments-block/comment/comment.component';
@@ -117,6 +122,7 @@ import { CommentEditComponent } from './modules/main/comments-block/comment-edit
 import {NgxPaginationModule} from 'ngx-pagination';
 import {PaginationComponent} from './modules/paginationg/pagination.component';
 import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
+import { UserFinancesComponent } from './modules/profile/user-finances/user-finances.component';
 import { CreateButtonComponent } from './shared/components/create-button/create-button.component';
 import { ResourcesComponent } from './modules/main/pages/resource/resources.component';
 import {ResourcesViewComponent} from "./modules/main/pages/resource/resources-view/resources-view.component";
@@ -128,6 +134,7 @@ import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-t
 import {ConfirmationComponent} from './modules/registration/confirmation/confirmation.component';
 import {ForgotPasswordComponent} from './modules/password/email/forgot-password.component';
 import {ResetPasswordComponent} from './modules/password/reset-password.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -173,6 +180,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotFoundComponent,
     MessangerComponent,
     ChatListComponent,
+    ProjectFiltersComponent,
+    NewsEditComponent,
+    SliderRowComponent,
+    UserFinancesComponent,
     ResetPasswordComponent,
     ResourceCategoryComponent,
     CreateButtonComponent,
@@ -293,7 +304,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageService,
     AuthGuard,
     AdminGuard,
-    MessangerService
+    MessangerService,
+    LanguageService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

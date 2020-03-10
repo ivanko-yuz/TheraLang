@@ -57,7 +57,10 @@ export class NewsCreateComponent implements OnInit {
       const prev_img: FileInput = this.newsForm.get('previewImage').value;
       const cont_imgs: FileInput = this.newsForm.get('contentImages').value;
       const file = prev_img.files[0];
-      const files = cont_imgs.files;
+      let files:File[]=[]
+      if(cont_imgs){
+        files = cont_imgs.files;
+      }
       const news = this.newsForm.value as NewsCreate;
       formData.append("title", news.title);
       formData.append("text", news.text);
