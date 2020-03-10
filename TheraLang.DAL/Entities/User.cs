@@ -18,5 +18,6 @@ namespace TheraLang.DAL.Entities
         public virtual ICollection<NewsComment> Comments { get; set; }
         public virtual ICollection<Donation> Donations { get; set; }
         public UserDetails Details { get; set; }
+        public ICollection<ChatUser> Chats { get; set; }
     }
 }

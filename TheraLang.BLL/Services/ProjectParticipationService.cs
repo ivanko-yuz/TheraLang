@@ -15,11 +15,13 @@ namespace TheraLang.BLL.Services
     public class ProjectParticipationService : IProjectParticipationService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IChatService _chatService;
         private readonly IAuthenticateService _authenticateService;
 
-        public ProjectParticipationService(IUnitOfWork unitOfWork, IAuthenticateService authenticateService)
+        public ProjectParticipationService(IUnitOfWork unitOfWork, IChatService chatService, IAuthenticateService authenticateService)
         {
             _unitOfWork = unitOfWork;
+            _chatService = chatService;
             _authenticateService = authenticateService;
         }
 
@@ -27,8 +29,9 @@ namespace TheraLang.BLL.Services
         {
             try
             {
-                var participant = await _unitOfWork.Repository<ProjectParticipation>()
-                    .Get(x => x.Id == participantId);
+                var participant = await _unitOfWork.Repository<ProjectParticipation>().GetAll()
+                        .Include(p => p.Project)
+                        .FirstOrDefaultAsync(x => x.Id == participantId);
 
                 if (participant == null)
                 {
@@ -40,6 +43,11 @@ namespace TheraLang.BLL.Services
 
                 _unitOfWork.Repository<ProjectParticipation>().Update(participant);
                 await _unitOfWork.SaveChangesAsync();
+
+                if (status == ProjectParticipationStatus.Approved)
+                {
+                    await _chatService.JoinToChat((int)participant.Project.ChatId, participant.UserId);
+                }
             }
             catch (Exception ex)
             {
@@ -98,7 +106,7 @@ namespace TheraLang.BLL.Services
             {
                 var user = await _unitOfWork.Repository<User>().Get(u => u.Id == userId);
                 var isRequested = await _unitOfWork.Repository<ProjectParticipation>()
-                    .Get(p => p.ProjectId == projectId && p.User.Id == userId);
+                    .Get(p => p.ProjectId == projectId && p.UserId == userId);
 
 
                 if (isRequested == null)

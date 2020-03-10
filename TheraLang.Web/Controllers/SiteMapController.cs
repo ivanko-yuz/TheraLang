@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -22,25 +23,18 @@ namespace TheraLang.Web.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("{lang?}")]
+        public async Task<IActionResult> GetAll(Language? lang)
         {
-            var siteMapDtos = await _siteMapService.GetAll();
+            Request.Cookies.TryGetValue("lang", out var stringLang);
+            Enum.TryParse<Language>(stringLang,true, out var enumLang);
+            var siteMapDtos = await _siteMapService.GetAll(lang ?? enumLang);
             var mapper = new MapperConfiguration(mapOpts => mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>())
                 .CreateMapper();
             var siteMapVMs = mapper.Map<IEnumerable<SiteMapDto>, IEnumerable<SiteMapViewModel>>(siteMapDtos);
             return Ok(new {pages = siteMapVMs});
         }
 
-        [HttpGet("{lang}")]
-        public async Task<IActionResult> GetByLang(Language lang)
-        {
-            var siteMapDtos = await _siteMapService.GetAll(lang);
-            var mapper = new MapperConfiguration(mapOpts => mapOpts.CreateMap<SiteMapDto, SiteMapViewModel>())
-                .CreateMapper();
-            var siteMapVMs = mapper.Map<IEnumerable<SiteMapDto>, IEnumerable<SiteMapViewModel>>(siteMapDtos);
-            return Ok(new {pages = siteMapVMs});
-        }
 
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] ChangedSiteMapStructureViewModel siteMapStructure)

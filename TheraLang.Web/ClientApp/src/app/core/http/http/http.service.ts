@@ -11,6 +11,9 @@ export class HttpService {
   getAllProjects() {
     return this.http.get(this.url + "projects");
   }
+  getAllProjectsFiltered(query:string) {
+    return this.http.get(this.url + "projects" + query);
+  }
 
   getProjectInfo(id: number) {
     return this.http.get(this.url + "projects" + "/" + id);

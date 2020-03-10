@@ -1,3 +1,4 @@
+using System;
 using Common.Enums;
 
 namespace TheraLang.DAL.Entities
@@ -5,6 +6,8 @@ namespace TheraLang.DAL.Entities
     public class ProjectParticipation : BaseEntity
     {
         public virtual User User { get; set; }
+
+        public Guid UserId { get; set; }
 
         public MemberRole Role { get; set; }
 

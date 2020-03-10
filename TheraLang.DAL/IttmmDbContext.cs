@@ -32,6 +32,9 @@ namespace TheraLang.DAL
         public virtual DbSet<PaymentHistory> PaymentHistory { get; set; }
         public virtual DbSet<NewsComment> NewsComments { get; set; }
         public virtual DbSet<NewsLike> NewsLikes { get; set; }
+        public virtual DbSet<Chat> Chats { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<ChatUser> ChatUsers { get; set; }
         public virtual DbSet<UserConfirmation> UsersConfirmation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -54,6 +57,9 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new MemberFeeConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentHistoryConfiguration()); 
             modelBuilder.ApplyConfiguration(new NewsCommentConfiguration());
+            modelBuilder.ApplyConfiguration(new ChatConfiguration());
+            modelBuilder.ApplyConfiguration(new MessageConfiguration());
+            modelBuilder.ApplyConfiguration(new ChatUserConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfirmationConfiguration());
         }
     }

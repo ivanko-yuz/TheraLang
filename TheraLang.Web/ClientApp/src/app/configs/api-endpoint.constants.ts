@@ -16,3 +16,5 @@ export const accountUrl = baseUrl + "account";
 export const memberFeeUrl = baseUrl + "memberFee";
 export const userUrl = baseUrl + "user";
 export const paymentHistoryUrl = baseUrl + "paymentHistory/all";
+export const chatUrl = baseUrl + "chats";
+export const paymentUrl = baseUrl + "user/payment";

@@ -8,6 +8,7 @@ using AutoMapper.QueryableExtensions;
 using Common.Constants;
 using Common.Enums;
 using Microsoft.EntityFrameworkCore;
+using TheraLang.BLL.CustomTypes;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.Projects;
 using TheraLang.BLL.Interfaces;
@@ -20,14 +21,16 @@ namespace TheraLang.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileService _fileService;
+        private readonly IChatService _chatService;
 
-        public ProjectService(IUnitOfWork unitOfWork, IFileService fileService)
+        public ProjectService(IUnitOfWork unitOfWork, IFileService fileService, IChatService chatService)
         {
             _unitOfWork = unitOfWork;
             _fileService = fileService;
+            _chatService = chatService;
         }
 
-        public async Task<IEnumerable<ProjectPreviewDto>> GetAllProjectsAsync()
+        public async Task<IEnumerable<ProjectPreviewDto>> GetAllProjectsAsync(FilterQuery query)
         {
             var mapper = new MapperConfiguration(cfg =>
             {
@@ -39,13 +42,18 @@ namespace TheraLang.BLL.Services
                     );
             });
 
-            var projectsDtos = await _unitOfWork.Repository<Project>()
-                .GetAll()
+            var projectsDtos = await GetFilteredProjects(query)
                 .Where(x => x.StatusId == ProjectStatus.Approved)
                 .ProjectTo<ProjectPreviewDto>(mapper)
                 .ToListAsync();
-
             return projectsDtos;
+        }
+        private IQueryable<Project> GetFilteredProjects(FilterQuery query)
+        {
+            var projectsDtos = _unitOfWork.Repository<Project>()
+                .GetAll();
+      
+            return query.Filter(projectsDtos);
         }
 
         public async Task<IEnumerable<ProjectDto>> GetAllNewProjectsAsync()
@@ -62,7 +70,7 @@ namespace TheraLang.BLL.Services
         public async Task<IEnumerable<ProjectDto>> GetProjectsByStatusAsync(int status)
         {
             var projects =
-                (await _unitOfWork.Repository<Project>().GetAllAsync(i => i.StatusId == (ProjectStatus) status))
+                (await _unitOfWork.Repository<Project>().GetAllAsync(i => i.StatusId == (ProjectStatus)status))
                 .ToArray();
 
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>()
@@ -172,8 +180,14 @@ namespace TheraLang.BLL.Services
             var projectStatus = mapper.Map<ProjectStatusDto, ProjectStatus>(status);
 
             project.StatusId = projectStatus;
-            _unitOfWork.Repository<Project>().Update(project);
 
+            if (project.StatusId == ProjectStatus.Approved)
+            {
+                var chatId = await _chatService.CreateChat(project.Name);
+                project.ChatId = chatId;
+            }
+
+            _unitOfWork.Repository<Project>().Update(project);
             await _unitOfWork.SaveChangesAsync();
         }
 
