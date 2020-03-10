@@ -1,0 +1,5 @@
+<div class="chat-list">
+    <div *ngFor="let chat of this.chats">
+        <div (click)="changeChat(chat.id)" class="chat-item"><b>{{chat.name}}</b></div>
+    </div>
+</div>

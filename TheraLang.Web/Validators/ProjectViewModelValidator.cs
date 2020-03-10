@@ -12,7 +12,7 @@ namespace TheraLang.Web.Validators
 
         public ProjectModelValidator()
         {
-            ValidateStringLength(p => p.Name, 3, 30);
+            ValidateStringLength(p => p.Name, 3, 55);
             RuleFor(p => p.TypeId).NotEqual(0)
                 .WithMessage("Project type must be specified");
         }

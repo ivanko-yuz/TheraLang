@@ -28,6 +28,10 @@ namespace TheraLang.DAL.Entities
 
         public string ImgUrl { get; set; }
 
+        public virtual Chat Chat { get; set; }
+
+        public int? ChatId { get; set; }
+
         public virtual ICollection<ResourceProject> ProjectResources { get; set; }
 
         public virtual ICollection<ProjectParticipation> ProjectParticipations { get; set; }

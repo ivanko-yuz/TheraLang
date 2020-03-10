@@ -16,6 +16,7 @@ using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.FileServices;
 using TheraLang.Web.ActionFilters;
 using TheraLang.Web.Extensions;
+using TheraLang.Web.Hubs;
 
 namespace TheraLang.Web
 {
@@ -82,8 +83,10 @@ namespace TheraLang.Web
             services.AddTransient<IPaymentService, PaymentService>();
             services.AddTransient<SchedulerService>();
             services.AddTransient<INewsCommentService, NewsCommentService>();
+            services.AddTransient<IChatService, ChatService>();
 
             services.AddOpenApiDocument();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,7 +115,10 @@ namespace TheraLang.Web
                     "{*template}",
                     new { controller = "Home", action = "Index" });
             });
-
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
+            });
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

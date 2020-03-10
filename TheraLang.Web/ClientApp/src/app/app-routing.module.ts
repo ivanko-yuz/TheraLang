@@ -21,7 +21,7 @@ import { ResourcesComponent } from "./modules/main/pages/resource/resources.comp
 import { ResourceCreateComponent } from "./modules/main/pages/resource/resource-create/resource-create.component";
 import {ResourceEditComponent} from "./modules/main/pages/resource/resource-edit/resource-edit.component";
 import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-table/resources-table.component";
-
+import { MessangerComponent } from './modules/messanger/messanger.component';
 import {RegistrationComponent} from "./modules/registration/registration.component";
 import {UserPageComponent} from "./modules/user-page/user-page.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
@@ -30,6 +30,7 @@ import {ProfileEditComponent} from './modules/profile/edit/profile-edit.componen
 import {ConfirmationComponent} from "./modules/registration/confirmation/confirmation.component";
 import {ResetPasswordComponent} from "./modules/password/reset-password.component";
 import {ForgotPasswordComponent} from "./modules/password/email/forgot-password.component";
+
 const routes: Routes = [
   {
     path: "",
@@ -93,8 +94,13 @@ const routes: Routes = [
         path: "pages/:pageRoute",
       },
       {
-        path: "registration/confirm",
+        component: MessangerComponent,
+        path: "messanger",
+        canActivate: [AuthGuard]
+      },
+      {
         component: ConfirmationComponent,
+        path: "registration/confirm",
       },
     ],
   },

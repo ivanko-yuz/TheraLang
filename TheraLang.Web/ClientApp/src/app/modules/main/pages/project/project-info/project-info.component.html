@@ -14,6 +14,14 @@
           *ngIf="((isAdmin()||isMember()) && !isOwner())&& !isParticipant()">
           {{'components.projects.join'|translate}}
         </button>
+        <button
+          [routerLink]="['/messanger']"
+          mat-raised-button
+          class="chat-button"
+          color="primary"
+          *ngIf="isParticipant()">
+          {{'components.projects.to-chat' | translate}}
+        </button>
         <button mat-icon-button (click)="onEdit(projectInfo)"  *ngIf="isAdmin() || isOwner()">
           <mat-icon>edit</mat-icon>
         </button>

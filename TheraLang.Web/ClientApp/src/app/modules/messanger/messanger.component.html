@@ -1,0 +1,42 @@
+<div class="container" scroll="no">
+    <app-chat-list (onChatChange)="updateChat($event)" (onLoad)="checkIfchats($event)"></app-chat-list>
+
+    <div *ngIf="this.chatsExist else noChats">
+        <div *ngIf="this.currentChat else chooseChat">
+            <div class="chat">
+                <div class="chat-header">
+                    <p><b>{{currentChat.name}}</b></p>
+                </div>
+                <div class="message-container" #chatScroller (scroll)="onScroll()">
+                    <div *ngFor="let message of this.messages; index as i">
+                        <div class="message"
+                            [ngClass]="currentUserId == message.posterId ? 'message-owner' : 'message'">
+                            <div class="message-author" *ngIf="i == 0 || messages[i-1].posterId != message.posterId">
+                                <a href="users/{{message.posterId}}">{{message.posterName}}</a>
+                            </div>
+                            <div class="message-text">
+                                <div>{{message.text}}</div>
+                                <div class="timestamp">{{message.timestamp | date: 'MMM d, H:mm'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-container">
+                    <form [formGroup]="form" (ngSubmit)="sendMessage()" autocomplete="off" fxLayout="row">
+                        <input class="message-input" formControlName="messageText" type="text"
+                            placeholder="{{'messanger.send-message' | translate}}">
+
+                        <button type="submit" [disabled]="form.invalid" id="send" mat-raised-button
+                            color="primary">{{'messanger.send' | translate}}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <ng-template #chooseChat>
+            <div class="info">{{'messanger.choose-chat' | translate}}</div>
+        </ng-template>
+    </div>
+</div>
+<ng-template #noChats>
+    <div class="info">{{'messanger.no-chats' | translate}}</div>
+</ng-template>
