@@ -116,6 +116,7 @@ import { CommentEditComponent } from './modules/main/comments-block/comment-edit
 import {NgxPaginationModule} from 'ngx-pagination';
 import {PaginationComponent} from './modules/paginationg/pagination.component';
 import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
+import { UserFinancesComponent } from './modules/profile/user-finances/user-finances.component';
 import { CreateButtonComponent } from './shared/components/create-button/create-button.component';
 import { ResourcesComponent } from './modules/main/pages/resource/resources.component';
 import {ResourcesViewComponent} from "./modules/main/pages/resource/resources-view/resources-view.component";
@@ -170,6 +171,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageComponent,
     ProjectEditingComponent,
     NotFoundComponent,
+    UserFinancesComponent,
     ResetPasswordComponent,
     ResourceCategoryComponent,
     CreateButtonComponent,

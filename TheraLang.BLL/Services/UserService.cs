@@ -36,7 +36,9 @@ namespace TheraLang.BLL.Services
                 var detailsMapper = new MapperConfiguration(cfg =>
                     cfg.CreateMap<UserDetails, UserAllDto>()
                         .ForMember(userAllDto => userAllDto.Email,
-                            opts => opts.MapFrom(details => details.User.Email))).CreateMapper();
+                            opts => opts.MapFrom(details => details.User.Email))
+                        .ForMember(userAllDto => userAllDto.Id, opt => opt.MapFrom(details => details.UserDetailsId)))
+                    .CreateMapper();
                 var userAll = detailsMapper.Map<UserDetails, UserAllDto>(userDetails);
                 return userAll;
             }
