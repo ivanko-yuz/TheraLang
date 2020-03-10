@@ -11,30 +11,27 @@ using Common.Configurations;
 using Microsoft.Extensions.Options;
 using TheraLang.BLL.Interfaces;
 using Common.Helpers.PasswordHelper;
+using SendGrid;
+using Microsoft.Extensions.Configuration;
+using SendGrid.Helpers.Mail;
+using System.Collections.Generic;
 
 namespace TheraLang.BLL.Services
 {
-    public class ConfirmationService: IConfirmationService
+    public class ConfirmationService : IConfirmationService
     {
         private readonly IHostingEnvironment _env;
         private readonly IUnitOfWork _unitOfWork;
         private readonly EmailSettings _emailSettings;
-        private readonly SmtpClient _smtpClient;
+        private readonly SendGridClient _emailClient;
 
-        public ConfirmationService(IHostingEnvironment env, IUnitOfWork unitOfWork, IOptions<EmailSettings> emailSettings)
+        public ConfirmationService(IHostingEnvironment env, IUnitOfWork unitOfWork, IOptions<EmailSettings> emailSettings, IConfiguration configuration)
         {
             _env = env;
             _unitOfWork = unitOfWork;
             _emailSettings = emailSettings.Value;
-            _smtpClient = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = true,
-                Credentials = new NetworkCredential(new MailAddress(_emailSettings.Email, "UTTMM").Address, _emailSettings.Password)
-            };
+            var apiKey = configuration.GetSection("send_grip_api_key").Value; ;
+            _emailClient = new SendGridClient(apiKey);
         }
 
 
@@ -47,11 +44,6 @@ namespace TheraLang.BLL.Services
                 body = await reader.ReadToEndAsync();
             }
 
-            var fromAddress = new MailAddress(_emailSettings.Email, "UTTMM");
-            var toAddress = new MailAddress(UserEmail, "To User");
-            string fromPassword = _emailSettings.Password;
-            string subject = "UTTMM";
-
             var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.User.Email == UserEmail);
             var url = "https://theralang.azurewebsites.net";
             if (_env.IsDevelopment())
@@ -63,15 +55,13 @@ namespace TheraLang.BLL.Services
             body = body.Replace("{NUMBER}", ConfirmNum);
             body = body.Replace("{FIRSTNAME}", user.FirstName);
             body = body.Replace("{URL}", url);
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                IsBodyHtml = true,
-                Body = body,
-            })
-            {
-                await _smtpClient.SendMailAsync(message);
-            }
+
+            var from = new EmailAddress(_emailSettings.Email, "UTTMM");
+            var to = new EmailAddress(UserEmail);
+
+            var subject = "UTTMM";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, "", body);
+            var response = await _emailClient.SendEmailAsync(msg);
         }
 
         public async Task ConfirmUser(ConfirmUserDto confirmUser)
@@ -83,7 +73,7 @@ namespace TheraLang.BLL.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task ConfirmPassword (ConfirmPasswordChangingDto confirmUser)
+        public async Task ConfirmPassword(ConfirmPasswordChangingDto confirmUser)
         {
             var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
             var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
