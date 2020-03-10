@@ -24,6 +24,7 @@
     "created-successfully": "Успішно створено!",
     "updated-successfully": "Успішно оновлено!",
     "saved-successfully": "Успішно збережено!",
+    "edited-successfully": "Змінено успішно!",
     "r-u-sure": "Ви впевнені?",
     "error": "Помилка",
     "yes": "ТАК",
@@ -72,13 +73,16 @@
     "news" : {
       "title" : "Новини",
       "create": "Створити новину",
+      "edit":"Редагувати новину",
       "news-title": "Заголовок",
       "news-text": "Текст",
       "NEWS-CREATION": "СТВОРЕННЯ НОВИНИ",
       "NEWS-EDITING": "РЕДАГУВАННЯ НОВИНИ",
       "read-more": "більше...",
       "preview-image":"Головне зображення",
-      "content-images":"Зображення для наповнення"
+      "content-images":"Зображення для наповнення",
+      "new-preview-image":"Нове головне зображення",
+      "new-content-images":"Нові зображення для наповнення"
     },
     "comments" : {
       "comments-count-title" : "коментарів",

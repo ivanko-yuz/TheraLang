@@ -24,6 +24,7 @@
     "created-successfully": "Created successfully!",
     "updated-successfully": "Updated successfully!",
     "saved-successfully": "Successfully saved!",
+    "edited-successfully": "Successfully edited!",
     "r-u-sure": "Are you sure?",
     "error": "Error",
     "yes": "Yes",
@@ -74,13 +75,16 @@
     "news" : {
       "title" : "News",
       "create": "Create news",
+      "edit":"Edit news",
       "news-title": "Title",
       "news-text": "Text",
       "NEWS-CREATION": "NEWS-CREATION",
       "NEWS-EDITING": "NEWS-EDITING",
       "read-more": "read more...",
       "preview-image":"Preview image",
-      "content-images":"Content images"
+      "content-images":"Content images",
+      "new-preview-image":"New preview image",
+      "new-content-images":"New content images"
     },
     "comments" : {
       "comments-count-title" : "comments",

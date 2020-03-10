@@ -5,8 +5,8 @@
                 <h1>{{this.newsDetails?.title}}</h1>
             </div>
             <div fxLayout="row" fxLayoutAlign="end">
-                <button mat-icon-button *ngIf="authService.isAdmin()">
-                    <mat-icon>edit</mat-icon>
+                <button mat-icon-button *ngIf="authService.isAdmin()" [routerLink]="['/news/edit/'+this.newsId]">
+                  <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-icon-button (click)="onDelete(this.newsId)" *ngIf="authService.isAdmin()">
                     <mat-icon>delete</mat-icon>

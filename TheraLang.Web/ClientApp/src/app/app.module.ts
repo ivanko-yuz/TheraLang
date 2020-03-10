@@ -107,6 +107,8 @@ import { UserPageComponent } from "./modules/user-page/user-page.component";
 import { UserService } from "./core/services/user/user.service";
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
+import { NewsEditComponent } from './modules/main/pages/news/news-edit/news-edit.component';
+import { SliderRowComponent } from './modules/main/pages/news/slider-row/slider-row.component';
 import {LanguageService} from "./core/services/language/language.service";
 import {CookieService} from "ngx-cookie-service";
 import { CommentsBlockComponent } from './modules/main/comments-block/comments-block.component';
@@ -171,6 +173,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageComponent,
     ProjectEditingComponent,
     NotFoundComponent,
+    NewsEditComponent,
+    SliderRowComponent,
     UserFinancesComponent,
     ResetPasswordComponent,
     ResourceCategoryComponent,
