@@ -1,6 +1,6 @@
 <div class="main-container" fxLayout="raw" fxFlex="100">
   <div class="balance-block" fxLayout="column" fxFlex="8">
-    <span class="balance">{{'components.user.balance'|translate}}</span>
+    <span class="balance">{{'components.account.balance'|translate}}</span>
     <span class="color-accent balance">
       <strong>₴{{ user.balance }}</strong></span>
   </div>
@@ -9,7 +9,7 @@
     <div class="form-content" fxLayout="raw">
       <div fxLayoutAlign="center center">
         <mat-form-field appearance="outline" class="form-field">
-          <mat-label>{{'components.user.sum'|translate}}</mat-label>
+          <mat-label>{{'components.account.sum'|translate}}</mat-label>
           <input class="input" formControlName="donationAmount" type="number" matInput min="0" max="9999999999"
             placeholder="">
 
@@ -25,7 +25,7 @@
       </div>
       <div fxLayoutAlign="center center">
         <button class="checkout-button" mat-raised-button [disabled]="amountForm.invalid" color="accent"
-          (click)="onTopUp()">{{'components.user.topup'|translate}}</button>
+          (click)="onTopUp()">{{'components.account.topup'|translate}}</button>
       </div>
     </div>
 
