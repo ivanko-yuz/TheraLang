@@ -5,6 +5,6 @@ namespace TheraLang.BLL.Interfaces
 {
     public interface IPaymentService
     {
-        public Task TopUpBalance(LiqPayCheckoutDto liqPayCheckoutDt);
+        Task TopUpBalance(LiqPayCheckoutDto liqPayCheckoutDt);
     }
 }

@@ -14,6 +14,10 @@ namespace TheraLang.DAL.Configuration
             builder.Property(x => x.Status).HasDefaultValue(ProjectParticipationStatus.New);
             builder.Property(x => x.Role).HasDefaultValue(MemberRole.Member);
             builder.Property(x => x.ProjectId).IsRequired();
+            builder.HasOne(x => x.User)
+                .WithMany(p => p.ProjectParticipations)
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
     }
 }
