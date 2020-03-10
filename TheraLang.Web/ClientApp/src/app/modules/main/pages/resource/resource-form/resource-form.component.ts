@@ -68,7 +68,7 @@ export class ResourceFormComponent implements OnInit {
       {validators: [atLeastOne(Validators.required, ["url", "file"])]}
     );
 
-    if(this.initValue && this.initValue.url){
+    if(this.initValue){
       this.resourceForm.get("url").disable();
       this.resourceForm.get("file").disable();
     }
