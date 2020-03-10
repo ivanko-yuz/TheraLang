@@ -105,12 +105,9 @@ export class NewsEditComponent implements OnInit {
 
       if(file){
         formData.append("newMainImage", file);
-        console.log("newMainImage if true")
-        console.log(file)
       }
       else{
         formData.append("newMainImage", null);
-        console.log("newMainImage if false")
       }
 
       if (files.length > 0) {
@@ -128,7 +125,6 @@ export class NewsEditComponent implements OnInit {
       }
 
       formData.append("uploadedMainImageUrl", this.newsDetails.mainImageUrl);
-      console.log(formData)
 
       this.service.editNews(this.newsId,formData).subscribe(
         async (msg: string) => {
