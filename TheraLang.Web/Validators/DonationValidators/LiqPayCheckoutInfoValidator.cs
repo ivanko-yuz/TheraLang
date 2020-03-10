@@ -3,9 +3,9 @@ using TheraLang.Web.ViewModels.Donations;
 
 namespace TheraLang.Web.Validators.DonationValidators
 {
-    public class LiqPayCheckoutInfoValidator : AbstractValidator<LiqPayCheckoutInfoViewModel>
+    public class PaymentCheckoutInfoValidator : AbstractValidator<LiqPayCheckoutInfoViewModel>
     {
-        public LiqPayCheckoutInfoValidator()
+        public PaymentCheckoutInfoValidator()
         {
             RuleFor(p => p.ProjectId)
                 .GreaterThanOrEqualTo(1)

@@ -36,8 +36,8 @@ export class SiteMapService {
     });
   }
 
-  public getSiteMap(language:Language): Observable<SiteMap[]> {
-    return this.http.get<SiteMap[]>(cmsSitemapUrl + "/" + language);
+  public getSiteMap(lang:Language = null): Observable<SiteMap[]> {
+    return this.http.get<SiteMap[]>(`${cmsSitemapUrl}/${ lang || ""}`);
   }
 
   public updateSiteMapStructure(): Observable<any> {
@@ -61,7 +61,7 @@ export class SiteMapService {
       this.siteMapUpdating = true;
     }
 
-    const subscription = this.getSiteMap(Language.ua).subscribe(
+    const subscription = this.getSiteMap().subscribe(
       next => {
         this.siteMap.next(next["pages"]);
         this.siteMapUpdating = false;

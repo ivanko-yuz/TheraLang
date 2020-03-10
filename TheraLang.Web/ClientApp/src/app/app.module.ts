@@ -108,7 +108,10 @@ import { UserService } from "./core/services/user/user.service";
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
 import { ProjectFiltersComponent } from './modules/main/pages/project/project-filters/project-filters.component';
-
+import { NewsEditComponent } from './modules/main/pages/news/news-edit/news-edit.component';
+import { SliderRowComponent } from './modules/main/pages/news/slider-row/slider-row.component';
+import {LanguageService} from "./core/services/language/language.service";
+import {CookieService} from "ngx-cookie-service";
 import { CommentsBlockComponent } from './modules/main/comments-block/comments-block.component';
 import { CommentCreateComponent } from './modules/main/comments-block/comment-create/comment-create.component';
 import { CommentComponent } from './modules/main/comments-block/comment/comment.component';
@@ -117,6 +120,7 @@ import { CommentEditComponent } from './modules/main/comments-block/comment-edit
 import {NgxPaginationModule} from 'ngx-pagination';
 import {PaginationComponent} from './modules/paginationg/pagination.component';
 import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
+import { UserFinancesComponent } from './modules/profile/user-finances/user-finances.component';
 import { CreateButtonComponent } from './shared/components/create-button/create-button.component';
 import { ResourcesComponent } from './modules/main/pages/resource/resources.component';
 import {ResourcesViewComponent} from "./modules/main/pages/resource/resources-view/resources-view.component";
@@ -172,9 +176,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageComponent,
     ProjectEditingComponent,
     NotFoundComponent,
-
     ProjectFiltersComponent,
-
+    NewsEditComponent,
+    SliderRowComponent,
+    UserFinancesComponent,
     ResetPasswordComponent,
     ResourceCategoryComponent,
     CreateButtonComponent,
@@ -294,7 +299,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectTypeHttp,
     PageService,
     AuthGuard,
-    AdminGuard
+    AdminGuard,
+    LanguageService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

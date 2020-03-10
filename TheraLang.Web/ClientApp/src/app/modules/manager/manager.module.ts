@@ -38,6 +38,7 @@ import { ProjectRequestComponent } from './project-request/project-request.compo
 import { UsersListComponent } from './users_list/users-list.component';
 import { ChangeRoleComponent } from './users_list/change-role/change-role.component';
 import { PaginationComponent } from '../paginationg/pagination.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { PaginationComponent } from '../paginationg/pagination.component';
     SharedModule,
     MatMenuModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    FlexLayoutModule,
   ],
   entryComponents:[
     PagePreviewComponent,

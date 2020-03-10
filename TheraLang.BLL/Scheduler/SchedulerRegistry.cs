@@ -9,7 +9,7 @@ namespace TheraLang.BLL.Scheduler
     {
         public SchedulerRegistry(IServiceScope service)
         {
-            Schedule(service.ServiceProvider.GetRequiredService<PaymentService>())
+            Schedule(service.ServiceProvider.GetRequiredService<SchedulerService>())
                 .ToRunEvery(1)
                 .Months()
                 .OnTheFirst(DayOfWeek.Monday)

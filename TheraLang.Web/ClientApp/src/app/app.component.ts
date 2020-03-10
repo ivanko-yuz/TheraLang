@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import {LanguageService} from "./core/services/language/language.service";
+import {Language} from "./shared/models/language/languages.enum";
 
 @Component({
   selector: "app-root",
@@ -8,11 +10,15 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class AppComponent {
   title = "UTTMM";
-  constructor(translate: TranslateService) {
-    // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang("ua");
+  constructor(
+    private translate: TranslateService,
+    private languageService: LanguageService
+  ) {
+  }
 
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translate.use("ua");
+  ngOnInit(): void {
+    const lang: string = this.languageService.setIfNotExists();
+    this.translate.setDefaultLang(lang);
+    this.translate.use(lang);
   }
 }

@@ -16,7 +16,6 @@
                     <div class="news-description" fxFlex="100">
                         {{this.news?.text.substring(0, 420)}}
                         <a [routerLink]="['/news/details/', news.id]">
-                            <!-- <b>...</b> -->
                             {{'components.news.read-more'|translate}}
                          </a>
                     </div>

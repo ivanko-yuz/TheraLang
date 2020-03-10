@@ -17,6 +17,8 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
             _userDetails.LastName = "Baran";
             _userDetails.PhoneNumber = "+380961487229";
             _userDetails.ShortInformation = "My name is Anton";
+            _userDetails.City = "Lviv";
+            _userDetails.BirthDay = DateTime.Now;
             _userDetails.Balance = 0;
             return this;
         }
@@ -87,7 +89,17 @@ namespace TheraLang.Tests.DataBuilders.ResourcesBuilders
             _userDetails.User = user;
             return this;
         }
+        public UserDetailsTestBuilder WithBalance(string city)
+        {
+            _userDetails.City = city;
+            return this;
+        }
 
+        public UserDetailsTestBuilder WithBirthDate(DateTime birthDate)
+        {
+            _userDetails.BirthDay = birthDate;
+            return this;
+        }
         public UserDetailsTestBuilder WithBalance(decimal balance)
         {
             _userDetails.Balance = balance;

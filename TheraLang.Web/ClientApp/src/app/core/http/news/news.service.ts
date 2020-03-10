@@ -28,6 +28,10 @@ export class NewsService {
     return this.http.delete(this.url + "news/"+newsId);
   }
 
+  editNews(newsId:number,news){
+    return this.http.put(this.url + "news/" + newsId,news);
+  }
+  
   like(newsId: number){
     return this.http.put(this.url + "news/like/" + newsId, null)
   }
