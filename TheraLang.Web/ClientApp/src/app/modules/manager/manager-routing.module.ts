@@ -11,6 +11,7 @@ import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
 import { ProjectTypeComponent } from './project-type/project-type.component';
 import { ProjectRequestComponent } from './project-request/project-request.component';
 import { UsersListComponent } from './users_list/users-list.component';
+import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
   { 
     path: "projectRequest",
     component: ProjectRequestComponent
+  },
+  {
+    path: "paymentHistory",
+    component:PaymentHistoryComponent
   }
 ];
 

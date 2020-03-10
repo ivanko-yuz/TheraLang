@@ -38,6 +38,8 @@ import { ProjectRequestComponent } from './project-request/project-request.compo
 import { UsersListComponent } from './users_list/users-list.component';
 import { ChangeRoleComponent } from './users_list/change-role/change-role.component';
 import { PaginationComponent } from '../paginationg/pagination.component';
+import { PaymentHistoryComponent } from './payment-history/payment-history.component';
+import { PaymentHistoryService } from 'src/app/core/http/manager/paymentHistory.services';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
@@ -62,7 +64,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     ProjectTypeCreateFormComponent,
     ProjectRequestComponent,
     ChangeRoleComponent,
-    PaginationComponent
+    PaginationComponent,
+    PaymentHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -113,7 +116,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   providers: [
     PageService,
     SlugifyPipe,
-    MemberFeeService
+    MemberFeeService,
+    PaymentHistoryService
   ]
 })
 export class ManagerModule { }
