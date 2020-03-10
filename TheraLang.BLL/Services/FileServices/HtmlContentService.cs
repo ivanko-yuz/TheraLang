@@ -18,7 +18,7 @@ namespace TheraLang.BLL.Services.FileServices
 
         public async Task<HtmlContent> SavePictures(HtmlContent htmlContent)
         {
-            var regex = new Regex("data:image/(?<exteniton>\\w*);base64.(?<data>\\S*)\"/>",
+            var regex = new Regex("data:image/(?<extension>\\w*);base64.(?<data>\\S*)\"/>",
                 RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline);
             var matches = regex.Matches(htmlContent.ToString());
             var html = htmlContent.ToString();
