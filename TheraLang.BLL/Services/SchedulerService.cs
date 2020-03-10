@@ -51,11 +51,10 @@ namespace TheraLang.BLL.Services
                 throw new NotFoundException("User details not found");
             }
 
-            List<UserDetails> updatedUsers = new List<UserDetails>();
-            List<PaymentHistory> updatedHistory = new List<PaymentHistory>();
+            var updatedUsers = new List<UserDetails>();
+            var updatedHistory = new List<PaymentHistory>();
             foreach (var member in members)
             {
-
                 member.Balance += paymentSum;
 
                 var paymentHistory = new PaymentHistory()
