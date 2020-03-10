@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Common.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
+using TheraLang.DAL.Entities;
 using TheraLang.Web.ViewModels.SiteMap;
 
 namespace TheraLang.Web.Controllers
@@ -37,6 +39,7 @@ namespace TheraLang.Web.Controllers
 
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromBody] ChangedSiteMapStructureViewModel siteMapStructure)
         {
             if (!siteMapStructure.SiteMaps.Any())

@@ -16,7 +16,7 @@ import { User, UserPageViewModel } from 'src/app/shared/models/user/user';
 export class UsersListComponent implements OnInit {
   returnUrl: string;
   usersList: UserPageViewModel;
-  pageSize = 10;
+  pageSize = 3;
 
   constructor(
     private notificationService: NotificationService,
