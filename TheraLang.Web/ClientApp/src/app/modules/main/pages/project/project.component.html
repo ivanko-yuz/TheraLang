@@ -1,7 +1,15 @@
-<button mat-raised-button color="primary" class="create-button" (click)="onCreate()" *ngIf="isAuthenticated()">
+<div class="row" style="height: 60px; margin-right: 10px;">
+  <div class="col">
+    <button style="margin-top:10px;" mat-raised-button color="primary" class="create-button" (click)="onCreate()" *ngIf="isAuthenticated()">
+     <mat-icon>add</mat-icon>{{ "components.projects.create" | translate }}
+    </button> 
+   </div>
+  <app-project-filters class="col"
+  (filtered)="onFilter($event)">
+   </app-project-filters>
+   
+  </div>
 
-  <mat-icon>add</mat-icon>{{ "components.projects.create" | translate }}
-</button>
 
 <div *ngFor="let project of projects">
   <mat-card class="home-card mat-elevation-z5">

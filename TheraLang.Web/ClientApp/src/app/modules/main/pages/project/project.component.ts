@@ -28,7 +28,7 @@ export class ProjectComponent implements OnInit {
     private translate: TranslateService,
     private userService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.httpService
@@ -42,7 +42,7 @@ export class ProjectComponent implements OnInit {
 
   onEdit(project) {
 
-       this.router.navigate(["projects/edit/" + project.id]);
+    this.router.navigate(["projects/edit/" + project.id]);
   }
 
   async onDelete(id) {
@@ -68,14 +68,16 @@ export class ProjectComponent implements OnInit {
   getProjectProgress(project: Project) {
     return (project.donationsSum / project.donationTargetSum);
   }
-  isAuthenticated()
-  {
-       return this.userService.isAuthenticated();
+  isAuthenticated() {
+    return this.userService.isAuthenticated();
   }
 
-  isAdmin()
-  {
+  isAdmin() {
     return this.userService.isAdmin();
   }
-
+  onFilter(filterQuery: string) {
+    this.httpService
+      .getAllProjectsFiltered(filterQuery)
+      .subscribe((projects: Project[]) => (this.projects = projects));
+  }
 }

@@ -72,8 +72,8 @@
     "cms-pages": {
       "title": "CMS Pages"
     },
-    "news" : {
-      "title" : "News",
+    "news": {
+      "title": "News",
       "create": "Create news",
       "edit":"Edit news",
       "news-title": "Title",
@@ -118,6 +118,15 @@
       "days-left": "Days left",
       "rised-of": "rised of",
       "add-image": "Add image"
+    },
+    "filters": {
+      "search": "Search",
+      "filters": "Filters",
+      "my-projects": "My projects",
+      "sort-by-date-asc": "From newer to older",
+      "sort-by-date-desc": "From older to newer",
+      "sort-by-days-left": "Will be expired soon",
+      "none": "None"
     },
     "resources": {
       "title": "Resources",
