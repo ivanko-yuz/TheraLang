@@ -11,6 +11,7 @@
       "line-too-short": "The line is too short",
       "confirm": "Confirm",
       "cancel": "Cancel",
+      "forbidden-file": "File extension is forbidden",
       "number-min": "The number must be greater than",
       "number-max": "The number must be less than",
       "number-positive": "The number must be positive",
@@ -81,6 +82,14 @@
       "preview-image":"Preview image",
       "content-images":"Content images"
     },
+    "comments" : {
+      "comments-count-title" : "comments",
+      "create-comment": "Comment",
+      "enter-comment": "Add your comment",
+      "edited" : "edited",
+      "read-more" : "READ MORE",
+      "show-less" : "SHOW LESS"
+    },
     "users": {
       "title": "Users"
     },
@@ -113,7 +122,8 @@
       "url": "URL",
       "file-name": "Name of file",
       "add": "Add resource",
-      "create": "Create resource"
+      "create": "Create resource",
+      "edit": "Edit resource"
     },
     "participation": {
       "title": "Participants requests",
@@ -123,6 +133,7 @@
     },
     "account": {
       "signUp": "Sign Up",
+      "forgotPassword": "Forgot password?",
       "signIn": "Sign In",
       "profile": "Your profile",
       "logout": "Logout",
@@ -143,10 +154,22 @@
       "short_information": "Short information",
       "age": "Age",
       "successfully-registration": "Successfully registration",
-      "error": "Error",
       "balance": "Balance",
       "sum": "Enter sum",
-      "topup": "Top Up"
+      "topup": "Top Up",
+      "successfully-confirmation": "Successfully email confirmation",
+      "failed-confirmation": "Failed email confirmation",
+      "redirection-to-login": "go to login",
+      "error": "Error",
+      "password-forgot": {
+        "title": "Enter your email",
+        "success": "Check your email with next steps!",
+        "error": "User with the same email is not exist!"
+      },
+      "password-reset": {
+        "title": "Enter new password",
+        "error": "Can't update password!"
+      }
     },
     "projectTypes": {
       "title": "Types Of Project",

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Common.Enums;
 using FluentAssertions;
-using Moq;
+using Microsoft.Extensions.Options;
 using TheraLang.BLL.DataTransferObjects.Donations;
 using TheraLang.BLL.LiqPay;
 using TheraLang.BLL.Services;
@@ -12,13 +12,15 @@ namespace TheraLang.Tests.Services
 {
     public class LiqPayServiceTests
     {
-        private readonly Mock<ILiqPayInfo> _liqPayInfo;
+        private readonly IOptions<LiqPayKeys> _liqPayKeysOptions;
 
         public LiqPayServiceTests()
         {
-            _liqPayInfo = new Mock<ILiqPayInfo>();
-            _liqPayInfo.Setup(l => l.PrivateKey).Returns("testPrivateKey");
-            _liqPayInfo.Setup(l => l.PublicKey).Returns("testPublicKey");
+            _liqPayKeysOptions = Options.Create(new LiqPayKeys()
+            {
+                PrivateKey = "testPrivateKey",
+                PublicKey = "testPublicKey"
+            });
         }
 
         [Fact]
@@ -35,7 +37,7 @@ namespace TheraLang.Tests.Services
                 ProjectId = 1,
                 UserId = new Guid("c6d93b65-022b-437e-ba65-f2d39f40b70f")
             };
-            var liqPayService = new LiqPayService(_liqPayInfo.Object);
+            var liqPayService = new LiqPayService(_liqPayKeysOptions);
 
             var result = await liqPayService.GetLiqPayCheckoutModel(validData);
             

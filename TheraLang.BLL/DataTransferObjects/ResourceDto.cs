@@ -13,11 +13,11 @@ namespace TheraLang.BLL.DataTransferObjects
 
         public string Url { get; set; }
 
-        public string FileName { get; set; }
-
         public IFormFile File { get; set; }
 
         public int CategoryId { get; set; }
+
+        public string AuthorName { get; set; }
 
         public DateTime CreatedDateUtc { get; set; }
 

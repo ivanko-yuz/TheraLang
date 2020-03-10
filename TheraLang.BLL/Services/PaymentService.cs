@@ -7,18 +7,19 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using Common.Enums;
 using System;
+using Microsoft.Extensions.Options;
 
 namespace TheraLang.BLL.Services
 {
     public class PaymentService : IPaymentService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILiqPayInfo _liqPayInfo;
+        private readonly LiqPayKeys _liqPayInfo;
 
-        public PaymentService(IUnitOfWork unitOfWork, ILiqPayInfo liqPayInfo)
+        public PaymentService(IUnitOfWork unitOfWork, IOptions<LiqPayKeys> liqPayInfo)
         {
             _unitOfWork = unitOfWork;
-            _liqPayInfo = liqPayInfo;
+            _liqPayInfo = liqPayInfo.Value;
         }
         public async Task TopUpBalance(LiqPayCheckoutDto liqPayCheckoutDto)
         {

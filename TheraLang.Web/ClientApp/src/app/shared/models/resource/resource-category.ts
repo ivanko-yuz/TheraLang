@@ -1,5 +1,5 @@
-export class ResourceCategory {
+export interface ResourceCategory {
     id: number;
     type: string;
-    resources: any[];
+    resources?: any[];
 }
