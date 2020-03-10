@@ -106,6 +106,9 @@ import { RegistrationComponent } from "./modules/registration/registration.compo
 import { UserPageComponent } from "./modules/user-page/user-page.component";
 import { UserService } from "./core/services/user/user.service";
 import { ProfileComponent } from "./modules/profile/profile.component";
+import { QuillModule } from "ngx-quill";
+import {LanguageService} from "./core/services/language/language.service";
+import {CookieService} from "ngx-cookie-service";
 import { CommentsBlockComponent } from './modules/main/comments-block/comments-block.component';
 import { CommentCreateComponent } from './modules/main/comments-block/comment-create/comment-create.component';
 import { CommentComponent } from './modules/main/comments-block/comment/comment.component';
@@ -286,7 +289,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProjectTypeHttp,
     PageService,
     AuthGuard,
-    AdminGuard
+    AdminGuard,
+    LanguageService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
