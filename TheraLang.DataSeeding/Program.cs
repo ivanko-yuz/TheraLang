@@ -18,6 +18,8 @@ namespace TheraLang.DataSeeding
             var adminRoleId = new Guid("f4cbff0f-4bc0-42a4-9738-8d9f9bb734ba");
             var memberRoleId = new Guid("50245ab3-6770-4269-ac26-30a942116a70");
             var guestRoleId = new Guid("7e9b3674-e720-4d50-939b-93ce8e8b1c44");
+            var unconfirmedRoleId = new Guid("5ea1ce2d-1bf0-4d39-a01b-a5d90962bdb1");
+            var blockedRoleId = new Guid("7a0f5ea1-f192-4188-bc98-b59d95f6e109");
             
             var adminId = new Guid("f5aa0c0e-b669-466c-825a-2c52c58a019b");
             var memberId = new Guid("3bcec608-e6a4-45e5-b3b2-cdf252a639de");
@@ -27,7 +29,9 @@ namespace TheraLang.DataSeeding
             {
                 new Role() {Id = adminRoleId, Name = "Admin"},
                 new Role() {Id = memberRoleId, Name = "Member"},
-                new Role() {Id = guestRoleId, Name = "Guest"}
+                new Role() {Id = guestRoleId, Name = "Guest"},
+                new Role() {Id = unconfirmedRoleId, Name = "Unconfirmed"},
+                new Role() {Id = blockedRoleId, Name = "Blocked"}
             };
             
             var users = new List<User>()

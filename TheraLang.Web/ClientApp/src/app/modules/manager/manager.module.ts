@@ -40,6 +40,7 @@ import { ChangeRoleComponent } from './users_list/change-role/change-role.compon
 import { PaginationComponent } from '../paginationg/pagination.component';
 import { PaymentHistoryComponent } from './payment-history/payment-history.component';
 import { PaymentHistoryService } from 'src/app/core/http/manager/paymentHistory.services';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { PaymentHistoryService } from 'src/app/core/http/manager/paymentHistory.
     SharedModule,
     MatMenuModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    FlexLayoutModule,
   ],
   entryComponents:[
     PagePreviewComponent,

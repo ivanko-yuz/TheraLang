@@ -21,7 +21,6 @@ namespace TheraLang.DAL
         public virtual DbSet<ProjectParticipation> ProjectParticipations { get; set; }
         public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<Society> Societies { get; set; }
-        public virtual DbSet<ResourceAttachment> ResourceAttachments { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<News> News { get; set; }
@@ -33,6 +32,7 @@ namespace TheraLang.DAL
         public virtual DbSet<PaymentHistory> PaymentHistory { get; set; }
         public virtual DbSet<NewsComment> NewsComments { get; set; }
         public virtual DbSet<NewsLike> NewsLikes { get; set; }
+        public virtual DbSet<UserConfirmation> UsersConfirmation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,7 +44,6 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new ProjectParticipationConfiguration());
             modelBuilder.ApplyConfiguration(new DonationConfiguration());
             modelBuilder.ApplyConfiguration(new SocietyConfiguration());
-            modelBuilder.ApplyConfiguration(new ResourceAttachmentConfiguration());
             modelBuilder.ApplyConfiguration(new NewsConfiguration());
             modelBuilder.ApplyConfiguration(new NewsLikesConfiguration());
             modelBuilder.ApplyConfiguration(new UploadedNewsContentImageConfiguration());
@@ -55,6 +54,7 @@ namespace TheraLang.DAL
             modelBuilder.ApplyConfiguration(new MemberFeeConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentHistoryConfiguration()); 
             modelBuilder.ApplyConfiguration(new NewsCommentConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfirmationConfiguration());
         }
     }
 }
