@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using TheraLang.BLL.DataTransferObjects;
+using TheraLang.BLL.DataTransferObjects.UserDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
@@ -36,7 +36,9 @@ namespace TheraLang.BLL.Services
                 var detailsMapper = new MapperConfiguration(cfg =>
                     cfg.CreateMap<UserDetails, UserAllDto>()
                         .ForMember(userAllDto => userAllDto.Email,
-                            opts => opts.MapFrom(details => details.User.Email))).CreateMapper();
+                            opts => opts.MapFrom(details => details.User.Email))
+                        .ForMember(userAllDto => userAllDto.Id, opt => opt.MapFrom(details => details.UserDetailsId)))
+                    .CreateMapper();
                 var userAll = detailsMapper.Map<UserDetails, UserAllDto>(userDetails);
                 return userAll;
             }
@@ -138,5 +140,6 @@ namespace TheraLang.BLL.Services
             var user = await _unitOfWork.Repository<User>().Get(u => u.Id == userId);
             return user.RoleId;
         }
+
     }
 }

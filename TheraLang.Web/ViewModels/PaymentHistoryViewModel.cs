@@ -1,6 +1,4 @@
 ﻿using Common.Enums;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 
 namespace TheraLang.Web.ViewModels

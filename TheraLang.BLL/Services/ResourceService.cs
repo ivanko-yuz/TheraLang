@@ -5,6 +5,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Common;
+using Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -26,185 +29,110 @@ namespace TheraLang.BLL.Services
 
         public async Task<ResourceDto> GetResourceById(int id)
         {
-            try
-            {
-                var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id);
+            var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
-                var resourceDto = mapper.Map<Resource, ResourceDto>(resource);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
+            var resourceDto = mapper.Map<Resource, ResourceDto>(resource);
 
-                return resourceDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when getting resource by {nameof(id)}={id}: ", ex);
-            }
+            return resourceDto;
         }
 
-        public async Task AddResource(ResourceDto resourceDto, Guid userId)
+        public async Task<int> AddResource(ResourceDto resourceDto, Guid userId)
         {
-            try
+            if (resourceDto.File != null)
             {
-                if (resourceDto.File != null)
-                {
-                    using (var fileStream = resourceDto.File.OpenReadStream())
-                    {
-                        var fileExtension = Path.GetExtension(resourceDto.File.FileName);
-                        var fileUri = await _fileService.SaveFile(fileStream, fileExtension);
-                        resourceDto.Url = fileUri.ToString();
-                    }
-                }
-
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
-                        .ForMember(r => r.File, opt => opt.Ignore())
-                        .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId)))
-                    .CreateMapper();
-
-                var resource = mapper.Map<ResourceDto, Resource>(resourceDto);
-
-                _unitOfWork.Repository<Resource>().Add(resource);
-                await _unitOfWork.SaveChangesAsync();
+                using var fileStream = resourceDto.File.OpenReadStream();
+                var fileExtension = Path.GetExtension(resourceDto.File.FileName);
+                var fileUri = await _fileService.SaveFile(fileStream, fileExtension);
+                resourceDto.Url = fileUri.ToString();
             }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when adding the {nameof(resourceDto)}: ", ex);
-            }
+
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ResourceDto, Resource>()
+                    .ForMember(r => r.CreatedById, opt => opt.MapFrom(r => userId)))
+                .CreateMapper();
+
+            var resource = mapper.Map<ResourceDto, Resource>(resourceDto);
+
+            _unitOfWork.Repository<Resource>().Add(resource);
+            await _unitOfWork.SaveChangesAsync();
+            return resource.Id;
         }
 
         public async Task UpdateResource(int id, ResourceDto resourceDto, Guid updatedById)
         {
-            try
-            {
-                if (resourceDto.File != null)
-                {
-                    using (var binaryReader = new BinaryReader(resourceDto.File.OpenReadStream()))
-                    {
-                        var byteFile = binaryReader.ReadBytes((int) resourceDto.File.Length);
-                        BitConverter.ToString(byteFile);
-                    }
-                }
+            var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id) ??
+                           throw new NotFoundException("Resource");
+            
+            resource.Name = resourceDto.Name;
+            resource.Description = resourceDto.Description;
+            resource.Url = resourceDto.Url;
+            resource.UpdatedById = updatedById;
+            resource.UpdatedDateUtc = DateTime.Now;
 
-                var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id);
-
-                if (resource != null)
-                {
-                    resource.Name = resourceDto.Name;
-                    resource.Description = resourceDto.Description;
-                    resource.Url = resourceDto.Url;
-                    resource.FileName = resourceDto.FileName;
-
-                    _unitOfWork.Repository<Resource>().Update(resource);
-                    await _unitOfWork.SaveChangesAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when updating the {nameof(resourceDto)}: {id} ", ex);
-            }
+            _unitOfWork.Repository<Resource>().Update(resource);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task RemoveResource(int id)
         {
-            try
-            {
-                var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id);
-                _unitOfWork.Repository<Resource>().Remove(resource);
-
-                await _unitOfWork.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when remove resource by {nameof(id)}: {id} ", ex);
-            }
+            var resource = await _unitOfWork.Repository<Resource>().Get(i => i.Id == id) ??
+                           throw new NotFoundException("Resource");
+            
+            _unitOfWork.Repository<Resource>().Remove(resource);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ResourceDto>> GetResourcesByCategoryId(int categoryId, int pageNumber,
-            int recordsPerPage)
+        public async Task<IEnumerable<ResourceDto>> GetResources(int? categoryId, int? projectId,
+            PaginationParams paginationParams)
         {
-            try
+            var mapper = new MapperConfiguration(cfg =>
             {
-                var resources = (await _unitOfWork.Repository<Resource>().GetAllAsync(x => x.CategoryId == categoryId))
-                    .Skip((pageNumber - 1) * recordsPerPage)
-                    .Take(recordsPerPage).ToList();
+                cfg.CreateMap<Resource, ResourceDto>()
+                    .ForMember(dto => dto.AuthorName,
+                        opts => opts.MapFrom(resource =>
+                            $"{resource.User.Details.FirstName} {resource.User.Details.LastName}"));
+            });
 
-
-                var mapper = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<Resource, ResourceDto>()
-                        .ForMember(res => res.File, opt => opt.Ignore());
-                }).CreateMapper();
-                var resourcesPerPagesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resources);
-
-                return resourcesPerPagesDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when get resources by {nameof(categoryId)} = {categoryId}", ex);
-            }
+            var resources = await _unitOfWork.Repository<Resource>()
+                .GetAll()
+                .Where(r => categoryId == null || r.CategoryId == categoryId)
+                .Where(r => projectId == null || r.ResourceProjects.Any(rp => rp.ProjectId == projectId))
+                .OrderByDescending(r => r.CreatedDateUtc)
+                .Skip(paginationParams.Skip)
+                .Take(paginationParams.Take)
+                .ProjectTo<ResourceDto>(mapper)
+                .ToListAsync();
+            
+            return resources;
         }
 
-        public async Task<int> GetResourcesCount(int categoryId)
+        public async Task<int> GetResourcesCount(int? categoryId, int? projectId)
         {
-            try
-            {
-                var resourcesCount =
-                    (await _unitOfWork.Repository<Resource>().GetAllAsync()).Count(x => x.CategoryId == categoryId);
-                return resourcesCount;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when get resources count by category id", ex);
-            }
+            var resourcesCount = await _unitOfWork.Repository<Resource>()
+                .GetAll()
+                .Where(r => categoryId == null || r.CategoryId == categoryId)
+                .Where(r => projectId == null || r.ResourceProjects.Any(rp => rp.ProjectId == projectId))
+                .CountAsync();
+
+            return resourcesCount;
         }
 
-        public async Task<IEnumerable<ResourceCategoryDto>> GetResourcesCategories(bool withAssignedResources)
+        public async Task<IEnumerable<ResourceCategoryDto>> GetResourcesCategories(int? projectId, bool includeEmpty)
         {
-            try
+            var mapper = new MapperConfiguration(cfg =>
             {
-                var resourceEntities = await _unitOfWork.Repository<ResourceCategory>()
-                    .GetAllAsync(
-                        withAssignedResources
-                            ? cat => cat.Resources.Any()
-                            : (Expression<Func<ResourceCategory, bool>>) null
-                    );
-                var mapper = new MapperConfiguration(cfg =>
-                    {
-                        cfg.CreateMap<ResourceCategory, ResourceCategoryDto>(MemberList.None);
-                        cfg.CreateMap<Resource, ResourceDto>(MemberList.None)
-                            .ForMember(r => r.File, opt => opt.Ignore());
-                    })
-                    .CreateMapper();
-                var resourceCategoriesDto =
-                    mapper.Map<IEnumerable<ResourceCategory>, IEnumerable<ResourceCategoryDto>>(resourceEntities);
+                cfg.CreateMap<ResourceCategory, ResourceCategoryDto>();
+                cfg.CreateMap<Resource, ResourceDto>();
+            });
 
-                return resourceCategoriesDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when get all Resource Categories", ex);
-            }
-        }
+            var resourceCategories = await _unitOfWork.Repository<ResourceCategory>().GetAll()
+                .Where(cat =>
+                    includeEmpty || cat.Resources.Any(r =>
+                        projectId == null || r.ResourceProjects.Any(rp => rp.ProjectId == projectId)))
+                .ProjectTo<ResourceCategoryDto>(mapper)
+                .ToListAsync();
 
-        public async Task<IEnumerable<ResourceDto>> GetAllResourcesByProjectId(int projectId)
-        {
-            try
-            {
-                var resources = await _unitOfWork.Repository<Resource>()
-                    .GetAll()
-                    .Where(x => x.ResourceProjects.Any(c => c.ProjectId == projectId))
-                    .Include(x => x.ResourceCategory)
-                    .ToListAsync();
-
-
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Resource, ResourceDto>()).CreateMapper();
-                var resourcesDto = mapper.Map<IEnumerable<Resource>, IEnumerable<ResourceDto>>(resources);
-
-                return resourcesDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when get all resources by {nameof(projectId)} = {projectId} ", ex);
-            }
+            return resourceCategories;
         }
 
         public async Task<IEnumerable<ResourceDto>> GetAllResources()

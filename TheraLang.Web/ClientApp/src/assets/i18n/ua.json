@@ -13,6 +13,7 @@
       "edit": "редагування",
       "edit_profile": "Pедагувати профіль",
       "cancel": "Відмінити",
+      "forbidden-file": "Даний тип файлу заборонений",
       "number-min": "Число повинно бути більшим за",
       "number-max": "Число повинно бути меншим за",
       "number-positive": "Число повинно бути додатнім",
@@ -83,6 +84,14 @@
       "new-preview-image":"Нове головне зображення",
       "new-content-images":"Нові зображення для наповнення"
     },
+    "comments" : {
+      "comments-count-title" : "коментарів",
+      "create-comment": "Коментувати",
+      "enter-comment": "Додайте ваш коментар",
+      "edited" : "редагований",
+      "read-more" : "БІЛЬШЕ",
+      "show-less" : "МЕНШЕ"
+    },
     "users": {
       "title": "Користувачі"
     },
@@ -115,7 +124,8 @@
       "url": "Посилання",
       "file-name": "Назва файлу",
       "add": "Додати ресурс",
-      "create": "Створити ресурс"
+      "create": "Створити ресурс",
+      "edit": "Редагування ресурсу"
     },
     "participation": {
       "title": "Запити",
@@ -125,6 +135,7 @@
     },
     "account": {
       "signUp": "Реєстрація",
+      "forgotPassword": "Забули пароль?",
       "signIn": "Вхід",
       "logout": "Вийти",
       "profile": "Сторінка юзера",
@@ -144,8 +155,23 @@
       "confirm_password": "Пароль підтвердження",
       "short_information": "Коротко про себе",
       "age": "Вік",
-      "successfully-registration": "Дякуємо за реєстрацію!",
-      "error": "Помилка"
+      "balance": "Баланс",
+      "sum": "Введіть суму",
+      "topup": "Поповнити",
+      "successfully-registration": "Дякуємо за реєстрацію! Перейдіть на емейл для підтвердження!",
+      "successfully-confirmation": "Ваш профіль підтверджено!",
+      "failed-confirmation": "Виникла помилка, спробуйте ще раз",
+      "redirection-to-login": "Перейти на логін",
+      "error": "Помилка",
+      "password-forgot": {
+        "title": "Введіть ваш емейл",
+        "success": "Ми відправили Вам емейл з наступними кроками!",
+        "error": "Користувача з даним емейлом не знайдено!"
+      },
+      "password-reset": {
+        "title": "Введіть новий пароль",
+        "error": "Неможливо оновити пароль!"
+      }
     },
     "projectTypes": {
       "title": "Типи Проектів",

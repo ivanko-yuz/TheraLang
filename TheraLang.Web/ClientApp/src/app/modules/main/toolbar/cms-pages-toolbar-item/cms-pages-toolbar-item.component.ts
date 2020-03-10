@@ -19,8 +19,7 @@ export class CmsPagesToolbarItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const lang = Language[this.translateService.currentLang];
-    this.siteMapService.getSiteMap(lang).subscribe(
+    this.siteMapService.getSiteMap().subscribe(
       {
         next: value => {
           this.toolbarItems = value["pages"] as SiteMap[];

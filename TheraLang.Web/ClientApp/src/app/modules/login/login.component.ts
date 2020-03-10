@@ -48,6 +48,11 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl("/registration");
   }
 
+  forgotPassword() {
+    this.router.navigateByUrl("/password/forgot");
+  }
+
+
   onClose() {
     this.authService.loginForm.reset();
     this.dialog.closeDialogs();

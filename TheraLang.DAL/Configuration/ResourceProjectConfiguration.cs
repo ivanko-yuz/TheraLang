@@ -10,11 +10,7 @@ namespace TheraLang.DAL.Configuration
         {
             builder.ToTable("ResourceToProject");
 
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
-
-            builder.Property(x => x.ProjectId).IsRequired();
-            builder.Property(x => x.ResourceId).IsRequired();
+            builder.HasKey(x => new {x.ProjectId, x.ResourceId});
         }
     }
 }

@@ -1,0 +1,33 @@
+<div class="main-container" fxLayout="raw" fxFlex="100">
+  <div class="balance-block" fxLayout="column" fxFlex="8">
+    <span class="balance">{{'components.user.balance'|translate}}</span>
+    <span class="color-accent balance">
+      <strong>₴{{ user.balance }}</strong></span>
+  </div>
+  <div fxFlex></div>
+  <form [formGroup]="amountForm">
+    <div class="form-content" fxLayout="raw">
+      <div fxLayoutAlign="center center">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>{{'components.user.sum'|translate}}</mat-label>
+          <input class="input" formControlName="donationAmount" type="number" matInput min="0" max="9999999999"
+            placeholder="">
+
+          <mat-error *ngIf="amountForm.controls['donationAmount'].errors?.min">{{
+              "components.donation.invalid-sum" | translate
+              }}</mat-error>
+
+          <mat-error *ngIf="amountForm.controls['donationAmount'].errors?.max">{{
+              "components.donation.invalid-sum" | translate
+              }}</mat-error>
+
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="center center">
+        <button class="checkout-button" mat-raised-button [disabled]="amountForm.invalid" color="accent"
+          (click)="onTopUp()">{{'components.user.topup'|translate}}</button>
+      </div>
+    </div>
+
+  </form>
+</div>

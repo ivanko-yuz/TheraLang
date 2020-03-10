@@ -2,21 +2,19 @@ import { ResourceProjects } from "./resource-projects";
 import { ResourceCategory } from "./resource-category";
 import { User } from "../user/user";
 
-export class Resource {
-  toLowerCase() {
-    throw new Error("Method not implemented.");
-  }
+export interface Resource {
   user: User;
   name: string;
   description: string;
-  url?: any;
+  url?: string;
   file?: any;
   categoryId: number;
-  resourceCategory: ResourceCategory;
-  resourceProjects: ResourceProjects;
+  authorName?: string;
+  resourceCategory?: ResourceCategory;
+  resourceProjects?: ResourceProjects;
   id: number;
-  createdById: number;
-  updatedById: number;
+  createdById: string;
+  updatedById: string;
   createdDateUtc: Date;
-  updatedDateUtc?: any;
+  updatedDateUtc?: Date;
 }
