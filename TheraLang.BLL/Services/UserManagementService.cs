@@ -93,18 +93,20 @@ namespace TheraLang.BLL.Services
                 Console.WriteLine($"{1}", ex);
             }
         }
-    
 
-    public async Task PasswordConfirmationRequest(string email)
-    {
-        var user = await _unitOfWork.Repository<User>().Get(u => u.Email == email);
-        var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
-        Random rand = new Random();
-        int random = rand.Next(10000000, 100000000);
-        conf.Number = random;
-        conf.ConfDateTime = DateTime.Now;
-        await _unitOfWork.SaveChangesAsync();
-        await _confirmation.SendEmail(random.ToString(), email, "password.html");
+
+        public async Task PasswordConfirmationRequest(string email)
+        {
+
+            var user = await _unitOfWork.Repository<User>().Get(u => u.Email == email);
+            var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
+            Random rand = new Random();
+            int random = rand.Next(10000000, 100000000);
+            conf.Number = random;
+            conf.ConfDateTime = DateTime.Now;
+            await _unitOfWork.SaveChangesAsync();
+            await _confirmation.SendEmail(random.ToString(), email, "password.html");
+
+        }
     }
-}
 }

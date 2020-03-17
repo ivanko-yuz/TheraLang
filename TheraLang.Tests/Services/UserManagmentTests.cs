@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TheraLang.BLL.DataTransferObjects.UserDtos;
 using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.DAL.Entities;
@@ -65,6 +66,7 @@ namespace TheraLang.Tests.Services
                 .Callback((UserDetails details) =>
                 {
                     _testUserDetailsDb.Add(details);
+                   
                 });
 
             userConfirmationRepoMock.Setup(r => r.Add(It.IsAny<UserConfirmation>()))
@@ -72,6 +74,12 @@ namespace TheraLang.Tests.Services
                 {
                     _testUserConfirmationsDb.Add(confirmation);
                 });
+
+            userConfirmationRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<UserConfirmation, bool>>>()))
+               .ReturnsAsync((Expression<Func<UserConfirmation, bool>> predicate) => _testUserConfirmationsDb
+                   .AsQueryable()
+                   .Where(predicate)
+                   .FirstOrDefault());
 
             _unitOfWorkMock = new Mock<IUnitOfWork>();
             _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(userRepoMock.Object);
@@ -148,6 +156,38 @@ namespace TheraLang.Tests.Services
             var email = "email@gmail.com";
             Func<Task> result = async () => await _userService.GetUser(email, "password");
             await result.Should().ThrowAsync<Exception>();
+        }
+
+        [Fact]
+        public async Task PasswordConfirmationRequest_ShouldCallSaveChanges()
+        {
+            var testId = new Guid("507f77df-fd1c-48c5-9900-f7ace8c250f7");
+            var testEmail = "testmail@gmail.com";
+            var user = new User
+            { 
+                Id = testId,
+                Email = testEmail,
+                PasswordHash = "password"
+            };
+
+            var userConfirmation = new UserConfirmation
+            { 
+               Id = testId
+            };
+
+            _testUsersDb.Add(user);
+            _testUserConfirmationsDb.Add(userConfirmation);
+
+            await _userService.PasswordConfirmationRequest(testEmail);
+            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
+        }
+
+        [Fact]
+        public async Task PasswordConfirmationRequest_Exception()
+        {
+            string email = "email@gmail.com";
+            Func<Task> result = async () => await _userService.PasswordConfirmationRequest(email);
+            await result.Should().ThrowAsync<NullReferenceException>();
         }
 
         private IEnumerable<User> GetUsersTestData()
