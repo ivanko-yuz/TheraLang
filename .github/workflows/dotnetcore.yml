@@ -20,16 +20,11 @@ jobs:
     - name: Build with dotnet
       run: dotnet build --configuration Release
       
-    - name: Building angular
-      run: npm run build --prefix .\TheraLang.Web\ClientApp\ -- --prod
+    - name: dotnet publish
+      run: dotnet publish -c Release -o myapp 
       
     - name: Testing
       run: dotnet test
-      
-    - name: dotnet publish
-      if: github.ref == 'refs/heads/master'
-      run: |
-        dotnet publish -c Release -o myapp 
 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       if: github.ref == 'refs/heads/master'
