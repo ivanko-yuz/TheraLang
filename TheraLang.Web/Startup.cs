@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
-using TheraLang.BLL.LiqPay;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.FileServices;
 using TheraLang.Web.ActionFilters;
@@ -57,8 +56,8 @@ namespace TheraLang.Web
             services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
             services.AddUnitOfWork();
             services.AddFileStorage(Configuration.GetConnectionString("AzureConnection"));
-            
-            services.AddAuthentication(Configuration);
+
+            AddAuth(services, Configuration);
             services.Configure<EmailSettings>(Configuration.GetSection("email_settings"));
 
             services.AddLiqPayServices(Configuration.GetSection("LiqPay"));
@@ -132,6 +131,11 @@ namespace TheraLang.Web
                     spa.UseAngularCliServer("start");
                 }
             });
+        }
+
+        protected virtual void AddAuth(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication(configuration);
         }
     }
 }
