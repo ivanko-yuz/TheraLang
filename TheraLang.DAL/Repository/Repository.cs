@@ -30,11 +30,13 @@ namespace TheraLang.DAL.Repository
         public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
             var query = GetAll();
-            if (predicate != null)
-            {
-                query = query.Where(predicate);
-            }
+            query = query.Where(predicate);
+            return await query.ToListAsync();
+        }
 
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            var query = GetAll();
             return await query.ToListAsync();
         }
 

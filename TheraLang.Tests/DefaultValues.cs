@@ -19,30 +19,6 @@ namespace TheraLang.Tests
         public static readonly PaginationParams PaginationParams = new PaginationParams() { PageNumber = 1, PageSize = 2 };
         public static readonly PaginationParams FakePaginationParams =
             new PaginationParams() { PageNumber = int.MaxValue, PageSize = int.MaxValue };
-        public static readonly UserAllDto userAll = new UserAllDto()
-        {
-            Id = new Guid("507f555f-fd1c-4555-9540-1555e8c250f7"),
-            FirstName = "Andriana",
-            LastName = "Baran",
-            Email = "andriana@gmail.com",
-            Password = "password"
-        };
-
-        public static readonly UserAllDto myInfo = new UserAllDto()
-        {
-            Id = new Guid("507f555f-f31c-4555-9540-155333c250f7"),
-            FirstName = "Andriana",
-            LastName = "Baran",
-            Email = "andriana@gmail.com",
-        };
-
-        public static readonly UserDetailsDto detailsDto = new UserDetailsDto
-        {
-            FirstName = "Andriana",
-            LastName = "Baran",
-            City = "Lviv",
-            PhoneNumber = "3809654298768"
-        };
         public static readonly Guid UserGuid = new Guid("2960ECE9-49DA-431E-B5B2-9E9251260707");
         public static readonly Guid FakeGuid = new Guid("2960ECE9-49DA-431E-B5B2-9E9251261488");
     }

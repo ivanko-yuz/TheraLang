@@ -37,8 +37,7 @@ namespace TheraLang.Tests.Services
         public void GetMemberFeesAsync_ShouldReturnAllFees()
         {
             mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
-            mockRepo.Setup(x => x.GetAllAsync(It.IsAny<Expression<Func<MemberFee, bool>>>()))
-                .ReturnsAsync((Expression<Func<MemberFee, bool>> expression) => fakeMemberFees);
+            mockRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(fakeMemberFees.AsQueryable());
 
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
             var result = memberFeeService.GetMemberFeesAsync();

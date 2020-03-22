@@ -114,7 +114,7 @@ namespace TheraLang.Tests.Services
         [Fact]
         public async Task AddUser_ShouldCallSaveChanges()
         {
-            await _userService.AddUser(DefaultValues.userAll);
+            await _userService.AddUser(UserDefaultValues.userAll);
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
@@ -142,7 +142,7 @@ namespace TheraLang.Tests.Services
         [Fact]
         public async Task GetUserById_NotFound()
         {
-            var result = await _userService.GetUserById(Guid.NewGuid());
+            var result = await _userService.GetUserById(DefaultValues.FakeGuid);
             result.Should().BeNull();
         }
 
