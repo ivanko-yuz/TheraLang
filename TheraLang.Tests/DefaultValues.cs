@@ -10,9 +10,9 @@ namespace TheraLang.Tests
     {
         public const int IntId = 1;
         public const string Name = "default name";
-        
+
         public static readonly Guid Guid = new Guid("017a41aa-b005-4464-8cb6-1a6851b50c6f");
-        public static readonly Uri Uri = new Uri("test/uri",UriKind.RelativeOrAbsolute);
+        public static readonly Uri Uri = new Uri("test/uri", UriKind.RelativeOrAbsolute);
         public static readonly int ListSize = 10;
         public static readonly int FakeId = -10;
         public static readonly int ExistedId = 1;
@@ -21,12 +21,28 @@ namespace TheraLang.Tests
             new PaginationParams() { PageNumber = int.MaxValue, PageSize = int.MaxValue };
         public static readonly UserAllDto userAll = new UserAllDto()
         {
+            Id = new Guid("507f555f-fd1c-4555-9540-1555e8c250f7"),
             FirstName = "Andriana",
             LastName = "Baran",
             Email = "andriana@gmail.com",
-            Password = "password",
+            Password = "password"
         };
 
+        public static readonly UserAllDto myInfo = new UserAllDto()
+        {
+            Id = new Guid("507f555f-f31c-4555-9540-155333c250f7"),
+            FirstName = "Andriana",
+            LastName = "Baran",
+            Email = "andriana@gmail.com",
+        };
+
+        public static readonly UserDetailsDto detailsDto = new UserDetailsDto
+        {
+            FirstName = "Andriana",
+            LastName = "Baran",
+            City = "Lviv",
+            PhoneNumber = "3809654298768"
+        };
         public static readonly Guid UserGuid = new Guid("2960ECE9-49DA-431E-B5B2-9E9251260707");
         public static readonly Guid FakeGuid = new Guid("2960ECE9-49DA-431E-B5B2-9E9251261488");
     }
