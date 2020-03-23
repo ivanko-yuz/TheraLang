@@ -7,6 +7,8 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using TheraLang.IntegrationTests.Infrastucture.TestAuthentication;
+using TheraLang.IntegrationTests.Infrastucture.TestDataSeeding;
 using TheraLang.Web.ViewModels.NewsViewModels;
 using Xunit;
 
@@ -18,7 +20,7 @@ namespace TheraLang.IntegrationTests
 
         public NewsControllerTests(TestFixture fixture)
         {
-            _client = fixture.Client;
+            _client = fixture.CreateClient(TestClaimsProvider.WithAdminClaims());
         }
 
         [Fact]
@@ -60,11 +62,9 @@ namespace TheraLang.IntegrationTests
             file1.Headers.ContentDisposition.Name = "MainImage";
             file1.Headers.ContentDisposition.FileName = "4_main.jpg";
             formDataContent.Add(file1);
-            
+
             // Act
             var response = await _client.PostAsync("api/news", formDataContent);
-            var value = await response.Content.ReadAsStringAsync();
-            //response = await _client.GetAsync("/api/news/all");
 
             // Assert
             response.EnsureSuccessStatusCode();
