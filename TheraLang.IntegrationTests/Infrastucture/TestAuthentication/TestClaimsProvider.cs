@@ -18,6 +18,11 @@ namespace TheraLang.IntegrationTests.Infrastucture.TestAuthentication
             Claims = new List<Claim>();
         }
 
+        public static TestClaimsProvider Unauthorized()
+        {
+            return new TestClaimsProvider();
+        }
+
         public static TestClaimsProvider WithAdminClaims()
         {
             var provider = new TestClaimsProvider();

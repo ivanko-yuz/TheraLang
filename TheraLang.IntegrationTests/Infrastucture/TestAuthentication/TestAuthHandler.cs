@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -23,8 +24,17 @@ public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions
         var identity = new ClaimsIdentity(_claims, "Test");
         var principal = new ClaimsPrincipal(identity);
         var ticket = new AuthenticationTicket(principal, "Test");
+        AuthenticateResult result;
 
-        var result = AuthenticateResult.Success(ticket);
+        //Do not authorize users without any claims
+        if (_claims.Any())
+        {
+            result = AuthenticateResult.Success(ticket);
+        }
+        else
+        {
+            result = AuthenticateResult.NoResult();
+        }
 
         return Task.FromResult(result);
     }
