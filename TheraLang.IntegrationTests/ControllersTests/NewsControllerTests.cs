@@ -1,15 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using TheraLang.IntegrationTests.Infrastucture.TestAuthentication;
-using TheraLang.IntegrationTests.Infrastucture.TestDataSeeding;
-using TheraLang.Web.ViewModels.NewsViewModels;
 using Xunit;
 
 namespace TheraLang.IntegrationTests

@@ -1,12 +1,10 @@
-﻿using Castle.Core.Logging;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TheraLang.DAL;
-using TheraLang.IntegrationTests.Infrastucture.TestAuthentication;
 using TheraLang.IntegrationTests.Infrastucture.TestDataSeeding;
 using TheraLang.Web;
 
