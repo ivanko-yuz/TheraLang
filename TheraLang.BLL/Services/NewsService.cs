@@ -112,7 +112,6 @@ namespace TheraLang.BLL.Services
             // Cannot use ProjectTo With conditional mapping
             var newsDto = mapper.Map<NewsDetailsDto>(news);
 
-
             if (newsDto == null)
             {
                 throw new NotFoundException($"News with id {id}");
