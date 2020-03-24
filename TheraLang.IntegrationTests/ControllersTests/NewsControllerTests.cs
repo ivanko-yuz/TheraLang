@@ -1,12 +1,9 @@
-﻿using Microsoft.Extensions.PlatformAbstractions;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using TheraLang.IntegrationTests.DataBuilders;
 using TheraLang.IntegrationTests.Infrastucture;
-using TheraLang.IntegrationTests.Infrastucture.TestAuthentication;
 using TheraLang.Web.ViewModels.NewsViewModels;
 using Xunit;
 
@@ -18,26 +15,6 @@ namespace TheraLang.IntegrationTests
 
         public NewsControllerTests(TestFixture testFixture) : base(testFixture)
         {
-        }
-
-        private MultipartFormDataContent CreateNewsFormData()
-        {
-            MultipartFormDataContent formDataContent = new MultipartFormDataContent();
-            
-            formDataContent.Add(new StringContent("Hello World!"), name: "Title");
-            formDataContent.Add(new StringContent("Hello World!"), name: "Text");
-            
-            var filePath = Path.GetFullPath(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath,
-                "../../../../TheraLang.Web/ClientApp/src/assets/img/uttmm.png"));
-            StreamContent file1 = new StreamContent(File.OpenRead(filePath));
-            
-            file1.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
-            file1.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
-            file1.Headers.ContentDisposition.Name = "MainImage";
-            file1.Headers.ContentDisposition.FileName = "uttmm.png";
-            formDataContent.Add(file1);
-
-            return formDataContent;
         }
 
         [Fact]
@@ -63,10 +40,10 @@ namespace TheraLang.IntegrationTests
 
             // Act
             var response = await UnauthorizedClient.GetAsync(request);
+            var result = await response.Content.ReadAsAsync<List<NewsPreviewViewModel>>();
 
             // Assert
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsAsync<List<NewsPreviewViewModel>>();
             Assert.Equal(result.Count, pageSize);
         }
 
@@ -88,7 +65,11 @@ namespace TheraLang.IntegrationTests
         public async Task Post_SuccessStatusCode()
         {
             // Arrange
-            var news = CreateNewsFormData();
+            var news = new NewsFormDataBuilder()
+                .WithDefaultTitle()
+                .WithDefaultText()
+                .WithDefaultImage("MainImage")
+                .Build();
             var request = _baseUrl;
 
             // Act
@@ -102,11 +83,81 @@ namespace TheraLang.IntegrationTests
         public async Task Post_FailureUnauthorized()
         {
             // Arrange
-            var news = CreateNewsFormData();
+            var news = new NewsFormDataBuilder()
+                .WithDefaultTitle()
+                .WithDefaultText()
+                .WithDefaultImage("MainImage")
+                .Build();
             var request = _baseUrl;
 
             // Act
             var response = await UnauthorizedClient.PostAsync(request, news);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Edit_SuccessStatusCode()
+        {
+            // Arrange
+            var newsId = 1;
+            var request = $"{ _baseUrl}/{newsId}";
+            var news = new NewsFormDataBuilder()
+                .WithDefaultTitle()
+                .WithDefaultText()
+                .WithDefaultImage("NewMainImage")
+                .Build();
+
+            // Act
+            var response = await AdminClient.PutAsync(request, news);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task Edit_FailureUnauthorized()
+        {
+            // Arrange
+            var newsId = 1;
+            var request = $"{ _baseUrl}/{newsId}";
+            var news = new NewsFormDataBuilder()
+                .WithDefaultTitle()
+                .WithDefaultText()
+                .WithDefaultImage("NewMainImage")
+                .Build();
+
+            // Act
+            var response = await UnauthorizedClient.PutAsync(request, news);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Like_SuccessStatusCode()
+        {
+            // Arrange
+            var newsId = 1;
+            var request = $"{ _baseUrl}/like/{newsId}";
+
+            // Act
+            var response = await AdminClient.PutAsync(request, null);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
+        public async Task Like_FailureUnauthorized()
+        {
+            // Arrange
+            var newsId = 1;
+            var request = $"{ _baseUrl}/like/{newsId}";
+
+            // Act
+            var response = await UnauthorizedClient.PutAsync(request, null);
 
             // Assert
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
