@@ -1,23 +1,23 @@
 ﻿using Microsoft.Extensions.PlatformAbstractions;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using TheraLang.IntegrationTests.Infrastucture;
 using TheraLang.IntegrationTests.Infrastucture.TestAuthentication;
+using TheraLang.Web.ViewModels.NewsViewModels;
 using Xunit;
 
 namespace TheraLang.IntegrationTests
 {
-    public class NewsControllerTests : IClassFixture<TestFixture>
+    public class NewsControllerTests : TestBase
     {
-        private TestFixture _testFixture;
-        private HttpClient _defaultClient;
+        private const string _baseUrl = "api/news";
 
-        public NewsControllerTests(TestFixture testFixture)
+        public NewsControllerTests(TestFixture testFixture) : base(testFixture)
         {
-            _testFixture = testFixture;
-            _defaultClient = testFixture.CreateClient(TestClaimsProvider.Unauthorized());
         }
 
         private MultipartFormDataContent CreateNewsFormData()
@@ -44,23 +44,41 @@ namespace TheraLang.IntegrationTests
         public async Task GetAll_SuccessStatusCode()
         {
             // Arrange
-            var request = "/api/news/all";
+            var request = $"{_baseUrl}/all";
 
             // Act
-            var response = await _defaultClient.GetAsync(request);
+            var response = await UnauthorizedClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
         }
 
         [Fact]
+        public async Task GetPage_SuccessStatusCode_RightPageSize()
+        {
+            // Arrange
+            var pageSize = 2;
+            var pageNumber = 1;
+            var request = $"{_baseUrl}?pageSize={pageSize}&pageNumber={pageNumber}";
+
+            // Act
+            var response = await UnauthorizedClient.GetAsync(request);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadAsAsync<List<NewsPreviewViewModel>>();
+            Assert.Equal(result.Count, pageSize);
+        }
+
+        [Fact]
         public async Task GetById_SuccessStatusCode()
         {
             // Arrange
-            var request = "/api/news/1";
+            int newsId = 1;
+            var request = $"{_baseUrl}/{newsId}";
 
             // Act
-            var response = await _defaultClient.GetAsync(request);
+            var response = await UnauthorizedClient.GetAsync(request);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -70,11 +88,11 @@ namespace TheraLang.IntegrationTests
         public async Task Post_SuccessStatusCode()
         {
             // Arrange
-            var adminClient = _testFixture.CreateClient(TestClaimsProvider.WithAdminClaims());
             var news = CreateNewsFormData();
+            var request = _baseUrl;
 
             // Act
-            var response = await adminClient.PostAsync("api/news", news);
+            var response = await AdminClient.PostAsync(request, news);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -85,12 +103,41 @@ namespace TheraLang.IntegrationTests
         {
             // Arrange
             var news = CreateNewsFormData();
+            var request = _baseUrl;
 
             // Act
-            var response = await _defaultClient.PostAsync("api/news", news);
+            var response = await UnauthorizedClient.PostAsync(request, news);
 
             // Assert
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Remove_FailureUnauthorized()
+        {
+            // Arrange
+            int newsId = 1;
+            var request = $"{_baseUrl}/{newsId}";
+
+            // Act
+            var response = await UnauthorizedClient.DeleteAsync(request);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Remove_SuccessStatusCode()
+        {
+            // Arrange
+            int newsId = 1;
+            var request = $"{_baseUrl}/{newsId}";
+
+            // Act
+            var response = await AdminClient.DeleteAsync(request);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
         }
     }
 }
