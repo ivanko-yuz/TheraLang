@@ -12,6 +12,7 @@ namespace TheraLang.IntegrationTests
     public class NewsControllerTests : TestBase
     {
         private const string _baseUrl = "api/news";
+        private const int _newsId = 1;
 
         public NewsControllerTests(TestFixture testFixture) : base(testFixture)
         {
@@ -51,8 +52,7 @@ namespace TheraLang.IntegrationTests
         public async Task GetById_SuccessStatusCode()
         {
             // Arrange
-            int newsId = 1;
-            var request = $"{_baseUrl}/{newsId}";
+            var request = $"{_baseUrl}/{_newsId}";
 
             // Act
             var response = await UnauthorizedClient.GetAsync(request);
@@ -101,8 +101,7 @@ namespace TheraLang.IntegrationTests
         public async Task Edit_SuccessStatusCode()
         {
             // Arrange
-            var newsId = 1;
-            var request = $"{ _baseUrl}/{newsId}";
+            var request = $"{ _baseUrl}/{_newsId}";
             var news = new NewsFormDataBuilder()
                 .WithDefaultTitle()
                 .WithDefaultText()
@@ -120,8 +119,7 @@ namespace TheraLang.IntegrationTests
         public async Task Edit_FailureUnauthorized()
         {
             // Arrange
-            var newsId = 1;
-            var request = $"{ _baseUrl}/{newsId}";
+            var request = $"{ _baseUrl}/{_newsId}";
             var news = new NewsFormDataBuilder()
                 .WithDefaultTitle()
                 .WithDefaultText()
@@ -139,8 +137,7 @@ namespace TheraLang.IntegrationTests
         public async Task Like_SuccessStatusCode()
         {
             // Arrange
-            var newsId = 1;
-            var request = $"{ _baseUrl}/like/{newsId}";
+            var request = $"{ _baseUrl}/like/{_newsId}";
 
             // Act
             var response = await AdminClient.PutAsync(request, null);
@@ -153,8 +150,7 @@ namespace TheraLang.IntegrationTests
         public async Task Like_FailureUnauthorized()
         {
             // Arrange
-            var newsId = 1;
-            var request = $"{ _baseUrl}/like/{newsId}";
+            var request = $"{ _baseUrl}/like/{_newsId}";
 
             // Act
             var response = await UnauthorizedClient.PutAsync(request, null);
@@ -167,8 +163,7 @@ namespace TheraLang.IntegrationTests
         public async Task Remove_FailureUnauthorized()
         {
             // Arrange
-            int newsId = 1;
-            var request = $"{_baseUrl}/{newsId}";
+            var request = $"{_baseUrl}/{_newsId}";
 
             // Act
             var response = await UnauthorizedClient.DeleteAsync(request);
@@ -181,8 +176,7 @@ namespace TheraLang.IntegrationTests
         public async Task Remove_SuccessStatusCode()
         {
             // Arrange
-            int newsId = 1;
-            var request = $"{_baseUrl}/{newsId}";
+            var request = $"{_baseUrl}/{_newsId}";
 
             // Act
             var response = await AdminClient.DeleteAsync(request);
