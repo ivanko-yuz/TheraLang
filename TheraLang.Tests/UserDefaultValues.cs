@@ -77,7 +77,9 @@ namespace TheraLang.Tests
             return Roles;
         }
 
-
+        public static string FakeConfirmNum = "1238328";
+        public static string PathTo = "welcome.html";
+        public static string FakeEmail = "andriana@gmail.com";
 
     }
 }
