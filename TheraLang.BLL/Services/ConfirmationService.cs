@@ -80,12 +80,19 @@ namespace TheraLang.BLL.Services
 
         public async Task ConfirmPassword(ConfirmPasswordChangingDto confirmUser)
         {
-            var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
-            var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
-            if (confirmUser.ConfirmationNumber == conf.Number.ToString() && conf.ConfDateTime <= DateTime.Now.AddMinutes(30))
+            try
             {
-                user.PasswordHash = PasswordHasher.HashPassword(confirmUser.Password);
-                await _unitOfWork.SaveChangesAsync();
+                var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
+                var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
+                if (confirmUser.ConfirmationNumber == conf.Number.ToString() && conf.ConfDateTime <= DateTime.Now.AddMinutes(30))
+                {
+                    user.PasswordHash = PasswordHasher.HashPassword(confirmUser.Password);
+                    await _unitOfWork.SaveChangesAsync();
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
     }

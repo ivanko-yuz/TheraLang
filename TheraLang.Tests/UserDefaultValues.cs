@@ -69,7 +69,7 @@ namespace TheraLang.Tests
             Name = "Member"
         };
 
-       public static List<RolesListDto> Roles = new List<RolesListDto>();
+        public static List<RolesListDto> Roles = new List<RolesListDto>();
         public static IEnumerable<RolesListDto> RolesListInit()
         {
             Roles.Add(roleNumOne);
@@ -80,6 +80,21 @@ namespace TheraLang.Tests
         public static string FakeConfirmNum = "1238328";
         public static string PathTo = "welcome.html";
         public static string FakeEmail = "andriana@gmail.com";
+
+        public static readonly ConfirmUserDto ConfirmUser = new ConfirmUserDto
+        {
+            ConfirmationNumber = "1111",
+            Email = "andriana@gmail.com"
+        };
+
+        public static readonly ConfirmPasswordChangingDto confirmPasswordChanging = new ConfirmPasswordChangingDto
+        {
+            Password = "password",
+            ConfirmPassword = "password",
+            Email = "andriana@gmail.com",
+            ConfirmationNumber = "1111"
+        };
+
 
     }
 }

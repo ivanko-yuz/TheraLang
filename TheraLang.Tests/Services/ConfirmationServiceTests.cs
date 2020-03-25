@@ -7,7 +7,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using TheraLang.BLL.Interfaces;
 using TheraLang.BLL.Services;
 using TheraLang.DAL.Entities;
 using TheraLang.DAL.Repository;
@@ -16,10 +15,10 @@ using TheraLang.Tests.DataBuilders.ResourcesBuilders;
 using Xunit;
 using Microsoft.AspNetCore.Hosting;
 using Common.Configurations;
+using Common.Helpers.PasswordHelper;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using System.Net.Http.Headers;
 
 namespace TheraLang.Tests.Services
 {
@@ -132,6 +131,59 @@ namespace TheraLang.Tests.Services
             _sendGridMock.Verify(x => x.SendEmailAsync(It.IsAny<SendGridMessage>(), CancellationToken.None), Times.Once);
         }
 
+        [Fact]
+        public async Task ConfirmUser_ShouldChangeRole()
+        {
+            var user = new User { 
+                Id = DefaultValues.Guid,
+                Email = UserDefaultValues.ConfirmUser.Email
+            };
+
+            var confUser = new UserConfirmation
+            {
+                Id = DefaultValues.Guid,
+                ConfDateTime = DateTime.Now,
+                Number = Int32.Parse(UserDefaultValues.ConfirmUser.ConfirmationNumber)
+            };
+
+            _testUsersDb.Add(user);
+            _testUserConfirmationDb.Add(confUser);
+
+            await _confirmationService.ConfirmUser(UserDefaultValues.ConfirmUser);
+            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
+        }
+
+        [Fact]
+        public async Task ConfirmUser_Exception()
+        {
+            Func<Task> result = async () => await _confirmationService.ConfirmUser(UserDefaultValues.ConfirmUser);
+            await result.Should().ThrowAsync<NullReferenceException>();
+        }
+
+        [Fact]
+        public async Task ConfirmPassword_ShouldChangePassword()
+        {
+            var user = new User
+            {
+                Id = DefaultValues.Guid,
+                Email = UserDefaultValues.confirmPasswordChanging.Email,
+                PasswordHash = PasswordHasher.HashPassword("oldpassword")
+            };
+
+            var confUser = new UserConfirmation
+            {
+                Id = DefaultValues.Guid,
+                Number = Int32.Parse(UserDefaultValues.confirmPasswordChanging.ConfirmationNumber),
+                ConfDateTime = DateTime.Now
+            };
+
+            _testUserConfirmationDb.Add(confUser);
+            _testUsersDb.Add(user);
+
+            await _confirmationService.ConfirmPassword(UserDefaultValues.confirmPasswordChanging);
+            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
+        }
+
         private IEnumerable<User> GetUsersTestData()
         {
             var data = new List<User>();
@@ -157,6 +209,13 @@ namespace TheraLang.Tests.Services
                 Id = Guid.NewGuid(),
                 Name = "Unconfirmed",
             });
+
+            data.Add(new Role()
+            {
+                Id = Guid.NewGuid(),
+                Name = "Guest"
+            });
+
 
             return data.AsEnumerable();
         }
