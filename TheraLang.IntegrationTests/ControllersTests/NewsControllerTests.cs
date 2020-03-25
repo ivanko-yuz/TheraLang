@@ -11,11 +11,12 @@ namespace TheraLang.IntegrationTests
 {
     public class NewsControllerTests : TestBase
     {
-        private const string _baseUrl = "api/news";
+        private readonly string _baseUrl;
         private const int _newsId = 1;
 
         public NewsControllerTests(TestFixture testFixture) : base(testFixture)
         {
+            _baseUrl = ControllersUrls["newsUrl"];
         }
 
         [Fact]
