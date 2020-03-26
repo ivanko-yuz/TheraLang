@@ -104,7 +104,13 @@ namespace TheraLang.BLL.Services
                 throw new NotFoundException($"Comment with id {id}");
             }
 
-            //TODO: Check permissions (only owner and admin)
+            //Check permissions (only owner and admin)
+            var authUser = await _authenticateService.GetAuthUser();
+            if (authUser.Id == comment.CreatedById || authUser.Role.Equals("Admin"))
+            {
+                throw new NoPermissionsException("Only comment owner and admin can remove comment");
+            }
+
             _unitOfWork.Repository<NewsComment>().Remove(comment);
             await _unitOfWork.SaveChangesAsync();
         }
@@ -117,7 +123,13 @@ namespace TheraLang.BLL.Services
                 throw new NotFoundException($"Comment with id {id}");
             }
 
-            //TODO: Check permissions (only owner)
+            //Check permissions (only owner)
+            var authUser = await _authenticateService.GetAuthUser();
+            if(authUser.Id == commentToUpdate.CreatedById)
+            {
+                throw new NoPermissionsException("Only comment owner can edit comment");
+            }
+
             commentToUpdate.Text = commentDto.Text;
 
             _unitOfWork.Repository<NewsComment>().Update(commentToUpdate);
