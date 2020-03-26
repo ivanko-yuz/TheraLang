@@ -76,7 +76,7 @@ namespace TheraLang.Web.Controllers
         }
 
         // POST: api/news
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] NewsCreateViewModel newsModel)
         {
@@ -90,7 +90,7 @@ namespace TheraLang.Web.Controllers
         }
 
         // PUT: api/news/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit(int id, [FromForm] NewsEditViewModel newsModel)
         {
@@ -112,7 +112,7 @@ namespace TheraLang.Web.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
