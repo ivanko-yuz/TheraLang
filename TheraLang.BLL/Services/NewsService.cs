@@ -112,7 +112,6 @@ namespace TheraLang.BLL.Services
             // Cannot use ProjectTo With conditional mapping
             var newsDto = mapper.Map<NewsDetailsDto>(news);
 
-
             if (newsDto == null)
             {
                 throw new NotFoundException($"News with id {id}");
@@ -182,7 +181,7 @@ namespace TheraLang.BLL.Services
             {
                 if (!newsDto.NotDeletedContentImageUrls.Contains(uploadedImage.Url))
                 {
-                    DeleteImage(uploadedImage);
+                    await DeleteImage(uploadedImage);
                 }
             }
 
@@ -230,17 +229,15 @@ namespace TheraLang.BLL.Services
             }
         }
 
-        private void DeleteImage(UploadedNewsContentImage image)
+        private async Task DeleteImage(UploadedNewsContentImage image)
         {
-            //await DeleteImageFile(image.Url);
+            await DeleteImageFile(image.Url);
             _unitOfWork.Repository<UploadedNewsContentImage>().Remove(image);
         }
 
-        //TODO
-        //private async Task DeleteImageFile(string url)
-        //{
-        //    //delete file from storage something like that 
-        //    //_fileService.DeleteFile(url);
-        //}
+        private async Task DeleteImageFile(string url)
+        {
+            await _fileService.RemoveFile(url);
+        }
     }
 }
