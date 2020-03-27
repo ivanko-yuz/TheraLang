@@ -106,7 +106,7 @@ namespace TheraLang.BLL.Services
 
             //Check permissions (only owner and admin)
             var authUser = await _authenticateService.GetAuthUser();
-            if (authUser.Id == comment.CreatedById || authUser.Role.Equals("Admin"))
+            if (authUser.Id != comment.CreatedById || !authUser.Role.Equals("Admin"))
             {
                 throw new NoPermissionsException("Only comment owner and admin can remove comment");
             }
@@ -125,7 +125,7 @@ namespace TheraLang.BLL.Services
 
             //Check permissions (only owner)
             var authUser = await _authenticateService.GetAuthUser();
-            if(authUser.Id == commentToUpdate.CreatedById)
+            if(authUser.Id != commentToUpdate.CreatedById)
             {
                 throw new NoPermissionsException("Only comment owner can edit comment");
             }
