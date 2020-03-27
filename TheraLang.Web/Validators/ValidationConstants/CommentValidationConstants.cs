@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TheraLang.Web.Validators.ValidationConstants
+﻿namespace TheraLang.Web.Validators.ValidationConstants
 {
     public static class CommentValidationConstants
     {

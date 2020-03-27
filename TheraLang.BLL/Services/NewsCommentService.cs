@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Common;
+using Common.Constants;
 using Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -106,7 +107,7 @@ namespace TheraLang.BLL.Services
 
             //Check permissions (only owner and admin)
             var authUser = await _authenticateService.GetAuthUser();
-            if (authUser.Id != comment.CreatedById || !authUser.Role.Equals("Admin"))
+            if (authUser.Id != comment.CreatedById || !authUser.Role.Equals(RolesConstants.Admin))
             {
                 throw new NoPermissionsException("Only comment owner and admin can remove comment");
             }
