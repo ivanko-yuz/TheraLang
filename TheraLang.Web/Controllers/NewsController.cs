@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Common;
+using Common.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects.NewsDtos;
@@ -76,7 +77,7 @@ namespace TheraLang.Web.Controllers
         }
 
         // POST: api/news
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = RolesConstants.Admin)]
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] NewsCreateViewModel newsModel)
         {
@@ -90,7 +91,7 @@ namespace TheraLang.Web.Controllers
         }
 
         // PUT: api/news/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = RolesConstants.Admin)]
         [HttpPut("{id}")]
         public async Task<IActionResult> Edit(int id, [FromForm] NewsEditViewModel newsModel)
         {
@@ -103,6 +104,7 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
+        //PUT: api/news/like/5
         [Authorize]
         [HttpPut("like/{id}")]
         public async Task<IActionResult> Like(int id)
@@ -111,8 +113,8 @@ namespace TheraLang.Web.Controllers
             return Ok();
         }
 
-        // DELETE: api/ApiWithActions/5
-        [Authorize(Roles = "Admin")]
+        // DELETE: api/news/5
+        [Authorize(Roles = RolesConstants.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
