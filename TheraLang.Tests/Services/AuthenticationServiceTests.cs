@@ -115,6 +115,7 @@ namespace TheraLang.Tests.Services
             result.Should().BeEquivalentTo(UserDefaultValues.authUser);
         }
 
+        [Fact]
         public async Task GetAuthUser_ShouldReturnAuthUser()
         {
             var result = await _authService.GetAuthUser();

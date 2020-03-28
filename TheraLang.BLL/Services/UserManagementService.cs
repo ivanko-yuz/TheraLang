@@ -97,7 +97,6 @@ namespace TheraLang.BLL.Services
 
         public async Task PasswordConfirmationRequest(string email)
         {
-
             var user = await _unitOfWork.Repository<User>().Get(u => u.Email == email);
             var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
             Random rand = new Random();

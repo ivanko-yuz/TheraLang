@@ -46,19 +46,12 @@ namespace TheraLang.BLL.Services
 
         public async Task<UserDetailsDto> GetUserDetailsById(Guid id)
         {
-            try
-            {
                 var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>()).CreateMapper();
                 var userDto = mapper.Map<UserDetails, UserDetailsDto>(user);
 
                 return userDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when getting user by {nameof(id)}={id}: ", ex);
-            }
         }
 
         public async Task<UsersListDto> GetAllUsers(PaginationParams pagination)
@@ -78,7 +71,6 @@ namespace TheraLang.BLL.Services
 
         public async Task Update(UserDetailsDto user, Guid id)
         {
-            
                 var updateUser = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
                 updateUser.FirstName = user.FirstName;
@@ -96,7 +88,6 @@ namespace TheraLang.BLL.Services
                 }
 
                 await _unitOfWork.SaveChangesAsync();
-            
         }
 
         public async Task<bool> ChangeRole(Guid userId, Guid newRole)
