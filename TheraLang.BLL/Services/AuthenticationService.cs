@@ -27,6 +27,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<string> Authenticate(User user)
         {
+
             if (user.Role.Name != "Unconfirmed" && user.Role.Name != "Blocked")
             {
                 return await Task.Run(() =>
@@ -58,7 +59,7 @@ namespace TheraLang.BLL.Services
         {
             return await TryGetAuthUser() ?? throw new Exception($"Error while getting user id from token");
         }
-        
+
         public async Task<AuthUser> TryGetAuthUser()
         {
             return await Task.Run(() =>
@@ -72,7 +73,7 @@ namespace TheraLang.BLL.Services
                 {
                     return null;
                 }
-                
+
                 return new AuthUser()
                 {
                     Id = new Guid(userId),

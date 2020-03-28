@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.UserDtos;
 
 namespace TheraLang.Tests
@@ -76,7 +77,14 @@ namespace TheraLang.Tests
             Roles.Add(roleNumTwo);
             return Roles;
         }
+        public static readonly AuthUser authUser = new AuthUser
+        {
+            Id = new Guid("d4dc40a3-8f4b-4047-a7fb-21608eba812c"),
+            UserEmail = "user@gmail.com",
+            Role = "Member"
+        };
 
+        public static Guid FakeId = new Guid("54e7ed49-6d82-4045-a3fb-a9188f8c4816");
         public static string FakeConfirmNum = "1238328";
         public static string PathTo = "welcome.html";
         public static string FakeEmail = "andriana@gmail.com";

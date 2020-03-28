@@ -98,7 +98,6 @@ namespace TheraLang.Tests.Services
             mockEnvironment.SetupAllProperties();
             mockEnvironment.Setup(m => m.ContentRootPath).Returns("");
             mockEnvironment.Setup(m => m.EnvironmentName).Returns("TEST");
-            // mockEnvironment.Setup(m => m.IsDevelopment()).Returns(true);
             var _emailSettings = Options.Create(new EmailSettings());
             _sendGridMock = new Mock<ISendGridClient>();
             _sendGridMock.SetupAllProperties();
