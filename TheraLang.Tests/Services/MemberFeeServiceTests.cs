@@ -42,7 +42,7 @@ namespace TheraLang.Tests.Services
 
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
             var result = memberFeeService.GetMemberFeesAsync();
-
+            
             result.Should().NotBeNull();
             result.Result.Count().Should().Be(3);
         }
@@ -88,10 +88,13 @@ namespace TheraLang.Tests.Services
             mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
             mockRepo.Setup(x => x.Add(It.IsAny<MemberFee>())).Verifiable();
+            mockRepo.Setup(x => x.GetAllAsync(It.IsAny<Expression<Func<MemberFee, bool>>>()))
+                 .ReturnsAsync((Expression<Func<MemberFee, bool>> expression) => fakeMemberFees);
 
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
 
-            var result = memberFeeService.AddAsync(new MemberFeeDto());
+            var result = memberFeeService.AddAsync(new MemberFeeDto() 
+                { FeeDate = new DateTime(2022,7,20),FeeAmount = 500});
 
             mockRepo.Verify(x => x.Add(It.IsAny<MemberFee>()), Times.Once());
             mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Once());

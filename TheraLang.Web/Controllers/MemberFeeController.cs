@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -9,6 +10,7 @@ using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
+    [Authorize]
     [Route("api/memberFee")]
     [ApiController]
     public class MemberFeeController : ControllerBase

@@ -3,7 +3,7 @@
         <label class="center"><b>{{'manager.date'| translate}}</b></label>
     </div>
     <mat-form-field>
-        <input matInput [matDatepicker]="dp" [formControl]="date" placeholder="" (click)="dp.open()">
+        <input matInput [matDatepicker]="dp" [min]="minDate"  [formControl]="date" placeholder="" (click)="dp.open()">
         <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
         <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)"
             (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
@@ -19,4 +19,7 @@
         </a>
         <button class="marg" mat-raised-button color="warn" (click)="cancel()">{{'manager.cancel'| translate}}</button>
     </div>
+    
+       
+    
 </div>

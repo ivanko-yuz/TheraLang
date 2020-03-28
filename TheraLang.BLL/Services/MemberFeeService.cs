@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TheraLang.BLL.DataTransferObjects;
@@ -59,6 +60,12 @@ namespace TheraLang.BLL.Services
                         $"{nameof(MemberFeeDto)} cannot be null");
                 }
 
+                var minDate = GetMemberFeesAsync().Result.Last().FeeDate.AddMonths(1);
+                if (memberFeeDto.FeeDate <= minDate)
+                {
+                    throw new Exception(
+                        $"Cannot add new {nameof(MemberFee)}.");
+                }
                 var newDate = new DateTime(memberFeeDto.FeeDate.Year, memberFeeDto.FeeDate.Month, 1);
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeDto, MemberFee>()
                 .ForMember(p => p.FeeDate,opt => opt.MapFrom(n=> newDate)))
@@ -76,7 +83,7 @@ namespace TheraLang.BLL.Services
             catch (Exception ex)
             {
                 ex.Data[nameof(MemberFee)] = memberFeeDto;
-                throw new Exception($"Cannot add new {nameof(MemberFee)}.", ex);
+                throw;
             }
         }
     }
