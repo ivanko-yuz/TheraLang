@@ -13,6 +13,7 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.Repository;
 using TheraLang.DAL.UnitOfWork;
 using TheraLang.Tests.DataBuilders.ResourcesBuilders;
+using TheraLang.Tests.Mocks;
 using Xunit;
 
 namespace TheraLang.Tests.Services
@@ -23,88 +24,31 @@ namespace TheraLang.Tests.Services
         private readonly Mock<IFileService> _fileService;
         private readonly Mock<IConfirmationService> _confirmationService;
         private readonly UserManagementService _userService;
-        private readonly List<User> _testUsersDb;
-        private readonly List<Role> _testRolesDb;
-        private readonly List<UserDetails> _testUserDetailsDb;
-        private readonly List<UserConfirmation> _testUserConfirmationsDb;
-         
+        private readonly RepositoryMock<User> _userRepoMock;
+        private readonly RepositoryMock<UserDetails> _userDetailsRepoMock;
+        private readonly RepositoryMock<Role> _roleRepoMock;
+        private readonly RepositoryMock<UserConfirmation> _userConfirmationRepoMock;
+        private List<User> usersTestData;
+
         public UserManagmentServiceTests()
         {
-            _testUsersDb = GetUsersTestData().ToList();
-            _testRolesDb = GetRolesTestData().ToList();
-            _testUserDetailsDb = GetUserDetailsTestData().ToList();
-            _testUserConfirmationsDb = GetUserConfirmationsTestData().ToList();
-
-            var userRepoMock = new Mock<IRepository<User>>();
-            var userDetailsRepoMock = new Mock<IRepository<UserDetails>>();
-            var roleRepoMock = new Mock<IRepository<Role>>();
-            var userConfirmationRepoMock = new Mock<IRepository<UserConfirmation>>();
-            userRepoMock.Setup(r => r.GetAll()).Returns(_testUsersDb.AsQueryable().BuildMock().Object);
-            userRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<User, bool>>>()))
-                .ReturnsAsync((Expression<Func<User, bool>> predicate) => _testUsersDb
-                    .AsQueryable()
-                    .Where(predicate)
-                    .FirstOrDefault());
-            userRepoMock.Setup(r => r.Add(It.IsAny<User>()))
-                .Callback((User user) =>
-                {
-                    user.Id = new Guid();
-                    _testUsersDb.Add(user);
-                });
-
-            roleRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<Role, bool>>>()))
-                .ReturnsAsync((Expression<Func<Role, bool>> predicate) => _testRolesDb
-                    .AsQueryable()
-                    .Where(predicate)
-                    .FirstOrDefault());
-
-            userDetailsRepoMock.Setup(r => r.Add(It.IsAny<UserDetails>()))
-                .Callback((UserDetails details) =>
-                {
-                    _testUserDetailsDb.Add(details);
-                   
-                });
-
-            userConfirmationRepoMock.Setup(r => r.Add(It.IsAny<UserConfirmation>()))
-                .Callback((UserConfirmation confirmation) =>
-                {
-                    _testUserConfirmationsDb.Add(confirmation);
-                });
-
-            userConfirmationRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<UserConfirmation, bool>>>()))
-               .ReturnsAsync((Expression<Func<UserConfirmation, bool>> predicate) => _testUserConfirmationsDb
-                   .AsQueryable()
-                   .Where(predicate)
-                   .FirstOrDefault());
+            usersTestData = GetUsersTestData().ToList();
+            _userRepoMock = new RepositoryMock<User>(usersTestData);
+            _userDetailsRepoMock = new RepositoryMock<UserDetails>(GetUserDetailsTestData().ToList());
+            _roleRepoMock = new RepositoryMock<Role>(GetRolesTestData().ToList());
+            _userConfirmationRepoMock = new RepositoryMock<UserConfirmation>(GetUserConfirmationsTestData().ToList());
 
             _unitOfWorkMock = new Mock<IUnitOfWork>();
-            _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(userRepoMock.Object);
-            _unitOfWorkMock.Setup(u => u.Repository<Role>()).Returns(roleRepoMock.Object);
-            _unitOfWorkMock.Setup(u => u.Repository<UserDetails>()).Returns(userDetailsRepoMock.Object);
-            _unitOfWorkMock.Setup(u => u.Repository<UserConfirmation>()).Returns(userConfirmationRepoMock.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(_userRepoMock.Repository.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<Role>()).Returns(_roleRepoMock.Repository.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<UserDetails>()).Returns(_userDetailsRepoMock.Repository.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<UserConfirmation>()).Returns(_userConfirmationRepoMock.Repository.Object);
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync()).Verifiable();
             _fileService = new Mock<IFileService>();
             _confirmationService = new Mock<IConfirmationService>();
             _confirmationService.Setup(x => x.SendEmail("", "", "")).Returns(Task.CompletedTask);
 
             _userService = new UserManagementService(_unitOfWorkMock.Object, _fileService.Object, _confirmationService.Object);
-        }
-
-        [Fact]
-        public async Task GetUser_ShouldReturnUser()
-        {
-            var email = "email@gmail.com";
-            var password = PasswordHasher.HashPassword("password");
-            var user = new User
-            {
-                Id = new Guid("507f77df-fd1c-48c5-9900-f7ace8c250f7"),
-                Email = email,
-                PasswordHash = password,
-                RoleId = new Guid()
-            };
-            _testUsersDb.Add(user);
-            var result = await _userService.GetUser(email, "password");
-            result.Should().BeEquivalentTo(user);
         }
 
         [Fact]
@@ -124,16 +68,8 @@ namespace TheraLang.Tests.Services
         [Fact]
         public async Task GetUserById_ShouldReturnUser()
         {
-            var testGuid = new Guid("507f77df-fd1c-48c5-9900-f7ace8c250f7");
-            var user = new User
-            {
-                Id = testGuid,
-                Email = "andriana@gmail.com",
-                PasswordHash = "password",
-                RoleId = new Guid()
-            };
-            _testUsersDb.Add(user);
-            var result = await _userService.GetUserById(testGuid);
+            User user = usersTestData.Where(u => u.Id == UserDefaultValues.DefaultId).FirstOrDefault();
+            var result = await _userService.GetUserById(UserDefaultValues.DefaultId);
             result.Should().BeEquivalentTo(user);
         }
 
@@ -145,10 +81,10 @@ namespace TheraLang.Tests.Services
         }
 
         [Fact]
-        public async Task GetUser_Exception()
+        public async Task GetUser_NotFound()
         {
-            Func<Task> result = async () => await _userService.GetUser(UserDefaultValues.FakeEmail, UserDefaultValues.DefaultString);
-            await result.Should().ThrowAsync<Exception>();
+            var result = await _userService.GetUser(UserDefaultValues.FakeEmail, UserDefaultValues.DefaultString);
+            result.Should().BeNull();
         }
 
         [Fact]
@@ -177,14 +113,23 @@ namespace TheraLang.Tests.Services
                     .WithDefault()
                     .Build());
             }
+
+            Role role = new Role
+            { 
+                Id = UserDefaultValues.DefaultRoleId,
+                Name = UserDefaultValues.DefaultRoleName
+            };
+
             data.Add(new User()
             {
                 Id = UserDefaultValues.DefaultId,
                 Email = UserDefaultValues.DefaultEmail,
-                PasswordHash = UserDefaultValues.DefaultString,
+                PasswordHash = Common.Helpers.PasswordHelper.PasswordHasher.HashPassword(UserDefaultValues.DefaultString),
                 RoleId = UserDefaultValues.DefaultRoleId,
+                Role = role
 
-            });
+            }); 
+
             return data.AsEnumerable();
         }
         private IEnumerable<Role> GetRolesTestData()
@@ -196,12 +141,6 @@ namespace TheraLang.Tests.Services
                 Id = Guid.NewGuid(),
                 Name = "Unconfirmed",
             });
-            data.Add(new Role()
-            {
-                Id = UserDefaultValues.DefaultRoleId,
-                Name = UserDefaultValues.DefaultRoleName
-            });
-
             return data.AsEnumerable();
         }
 

@@ -17,6 +17,7 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.Repository;
 using TheraLang.DAL.UnitOfWork;
 using TheraLang.Tests.DataBuilders.ResourcesBuilders;
+using TheraLang.Tests.Mocks;
 using Xunit;
 
 namespace TheraLang.Tests.Services
@@ -25,44 +26,17 @@ namespace TheraLang.Tests.Services
     {
         private readonly AuthenticationService _authService;
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
-        private readonly List<User> _testUsersDb;
-        private readonly List<Role> _testRolesDb;
+        private readonly RepositoryMock<User> _userRepoMock;
+        private readonly RepositoryMock<Role> _roleRepoMock;
 
         public AuthenticationServiceTests()
         {
-            _testUsersDb = GetUsersTestData().ToList();
-            _testRolesDb = GetRolesTestData().ToList();
-
-            var userRepoMock = new Mock<IRepository<User>>();
-            var roleRepoMock = new Mock<IRepository<Role>>();
-            userRepoMock.Setup(r => r.GetAll()).Returns(_testUsersDb.AsQueryable().BuildMock().Object);
-            userRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<User, bool>>>()))
-                 .ReturnsAsync((Expression<Func<User, bool>> predicate) => _testUsersDb
-                 .AsQueryable()
-                 .Where(predicate)
-                 .FirstOrDefault());
-            userRepoMock.Setup(r => r.Add(It.IsAny<User>()))
-                .Callback((User User) =>
-                {
-                    _testUsersDb.Add(User);
-                });
-
-            roleRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<Role, bool>>>()))
-                .ReturnsAsync((Expression<Func<Role, bool>> predicate) => _testRolesDb
-                .AsQueryable()
-                .Where(predicate)
-                .FirstOrDefault());
-            roleRepoMock.Setup(r => r.Add(It.IsAny<Role>()))
-                .Callback((Role role) =>
-                {
-                    _testRolesDb.Add(role);
-                });
-            roleRepoMock.Setup(r => r.GetAll()).Returns(_testRolesDb.AsQueryable().BuildMock().Object);
-            roleRepoMock.Setup(r => r.GetAllAsync()).ReturnsAsync(_testRolesDb.AsQueryable().BuildMock().Object);
+            _userRepoMock = new RepositoryMock<User>(GetUsersTestData().ToList());
+            _roleRepoMock = new RepositoryMock<Role>(GetRolesTestData().ToList());
 
             _unitOfWorkMock = new Mock<IUnitOfWork>();
-            _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(userRepoMock.Object);
-            _unitOfWorkMock.Setup(u => u.Repository<Role>()).Returns(roleRepoMock.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(_userRepoMock.Repository.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<Role>()).Returns(_roleRepoMock.Repository.Object);
             var _tokenSettings = Options.Create(new TokenManagement());
             _tokenSettings.Value.Secret = "Any String used to sign and verify JWT Tokens,  Replace this string with your own Secret";
             _tokenSettings.Value.Issuer = "Some secret";
@@ -80,22 +54,7 @@ namespace TheraLang.Tests.Services
         [Fact]
         public async Task Authenticate_ShouldAutificateUser()
         {
-            var role = new Role
-            {
-                Id = DefaultValues.FakeGuid,
-                Name = "Admin"
-            };
-            var user = new User
-            {
-                Id = DefaultValues.Guid,
-                Email = UserDefaultValues.FakeEmail,
-                RoleId = DefaultValues.FakeGuid,
-                Role = role
-            };
-
-            _testRolesDb.Add(role);
-            _testUsersDb.Add(user);
-
+            var user = GetUsersTestData().Where(u => u.Id == UserDefaultValues.DefaultId).FirstOrDefault();
             var result = await _authService.Authenticate(user);
             result.Should().BeOfType<string>();
         }
@@ -126,14 +85,20 @@ namespace TheraLang.Tests.Services
         {
             var data = new List<User>();
 
-            for (int i = 0; i < DefaultValues.ListSize; i++)
+            var role = new Role
             {
-                var dataBuilder = new UserTestBuilder();
-                data.Add(dataBuilder
-                    .WithId(new Guid())
-                    .WithDefault()
-                    .Build());
-            }
+                Id = UserDefaultValues.DefaultRoleId,
+                Name = "Admin"
+            };
+
+            var user = new User
+            {
+                Id = UserDefaultValues.DefaultId,
+                Email = UserDefaultValues.FakeEmail,
+                RoleId = DefaultValues.FakeGuid,
+                Role = role
+            };
+            data.Add(user);
             return data.AsEnumerable();
         }
 

@@ -12,6 +12,7 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.Repository;
 using TheraLang.DAL.UnitOfWork;
 using TheraLang.Tests.DataBuilders.ResourcesBuilders;
+using TheraLang.Tests.Mocks;
 using Xunit;
 
 namespace TheraLang.Tests.Services
@@ -21,61 +22,19 @@ namespace TheraLang.Tests.Services
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
         private readonly Mock<IFileService> _fileService;
         private readonly UserService _userService;
-        private readonly List<User> _testUsersDb;
-        private readonly List<Role> _testRolesDb;
-        private readonly List<UserDetails> _testUserDetailsDb;
+        private readonly RepositoryMock<User> _userRepoMock;
+        private readonly RepositoryMock<UserDetails> _userDetailsRepoMock;
+        private readonly RepositoryMock<Role> _roleRepoMock;
 
         public UserServiceTests()
         {
-            _testUsersDb = GetUsersTestData().ToList();
-            _testRolesDb = GetRolesTestData().ToList();
-            _testUserDetailsDb = GetUserDetailsTestData().ToList();
-
-            var userRepoMock = new Mock<IRepository<User>>();
-            var userDetailsRepoMock = new Mock<IRepository<UserDetails>>();
-            var roleRepoMock = new Mock<IRepository<Role>>();
-
-            userRepoMock.Setup(r => r.GetAll()).Returns(_testUsersDb.AsQueryable().BuildMock().Object);
-            userRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<User, bool>>>()))
-                 .ReturnsAsync((Expression<Func<User, bool>> predicate) => _testUsersDb
-                 .AsQueryable()
-                 .Where(predicate)
-                 .FirstOrDefault());
-            userRepoMock.Setup(r => r.Add(It.IsAny<User>()))
-                .Callback((User user) =>
-                {
-                    _testUsersDb.Add(user);
-                });
-
-            roleRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<Role, bool>>>()))
-                .ReturnsAsync((Expression<Func<Role, bool>> predicate) => _testRolesDb
-                .AsQueryable()
-                .Where(predicate)
-                .FirstOrDefault());
-            roleRepoMock.Setup(r => r.Add(It.IsAny<Role>()))
-                .Callback((Role role) =>
-                {
-                    _testRolesDb.Add(role);
-                });
-            roleRepoMock.Setup(r => r.GetAll()).Returns(_testRolesDb.AsQueryable().BuildMock().Object);
-            roleRepoMock.Setup(r => r.GetAllAsync()).ReturnsAsync(_testRolesDb.AsQueryable().BuildMock().Object);
-
-            userDetailsRepoMock.Setup(r => r.GetAll()).Returns(_testUserDetailsDb.AsQueryable().BuildMock().Object);
-            userDetailsRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<UserDetails, bool>>>()))
-                .ReturnsAsync((Expression<Func<UserDetails, bool>> predicate) => _testUserDetailsDb
-                .AsQueryable()
-                .Where(predicate)
-                .FirstOrDefault());
-            userDetailsRepoMock.Setup(r => r.Add(It.IsAny<UserDetails>()))
-                .Callback((UserDetails details) =>
-                {
-                    _testUserDetailsDb.Add(details);
-
-                });
+            _userRepoMock = new RepositoryMock<User>(GetUsersTestData().ToList());
+            _userDetailsRepoMock = new RepositoryMock<UserDetails>(GetUserDetailsTestData().ToList());
+            _roleRepoMock = new RepositoryMock<Role>(GetRolesTestData().ToList());
             _unitOfWorkMock = new Mock<IUnitOfWork>();
-            _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(userRepoMock.Object);
-            _unitOfWorkMock.Setup(u => u.Repository<Role>()).Returns(roleRepoMock.Object);
-            _unitOfWorkMock.Setup(u => u.Repository<UserDetails>()).Returns(userDetailsRepoMock.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(_userRepoMock.Repository.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<Role>()).Returns(_roleRepoMock.Repository.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<UserDetails>()).Returns(_userDetailsRepoMock.Repository.Object);
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync()).Verifiable();
             _fileService = new Mock<IFileService>();
             _userService = new UserService(_unitOfWorkMock.Object, _fileService.Object);
@@ -233,3 +192,4 @@ namespace TheraLang.Tests.Services
         }
     }
 }
+

@@ -19,6 +19,7 @@ using Common.Helpers.PasswordHelper;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using TheraLang.Tests.Mocks;
 
 namespace TheraLang.Tests.Services
 {
@@ -26,73 +27,23 @@ namespace TheraLang.Tests.Services
     {
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
         private readonly ConfirmationService _confirmationService;
-        private readonly List<User> _testUsersDb;
-        private readonly List<Role> _testRolesDb;
-        private readonly List<UserConfirmation> _testUserConfirmationDb;
-        private readonly List<UserDetails> _testUserDetailsDb;
         private readonly Mock<ISendGridClient> _sendGridMock;
+        private readonly RepositoryMock<User> _userRepoMock;
+        private readonly RepositoryMock<UserDetails> _userDetailsRepoMock;
+        private readonly RepositoryMock<Role> _roleRepoMock;
+        private readonly RepositoryMock<UserConfirmation> _userConfirmationRepoMock;
 
         public ConfirmationServiceTests()
         {
-            _testRolesDb = GetRolesTestData().ToList();
-            _testUsersDb = GetUsersTestData().ToList();
-            _testUserConfirmationDb = GetUserConfirmationsTestData().ToList();
-            _testUserDetailsDb = GetUserDetailsTestData().ToList();
-
-            var userRepoMock = new Mock<IRepository<User>>();
-            var roleRepoMock = new Mock<IRepository<Role>>();
-            var confirmationRepoMock = new Mock<IRepository<UserConfirmation>>();
-            var userDetailsRepoMock = new Mock<IRepository<UserDetails>>();
-
-            userRepoMock.Setup(r => r.GetAll()).Returns(_testUsersDb.AsQueryable().BuildMock().Object);
-            userRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<User, bool>>>()))
-                .ReturnsAsync((Expression<Func<User, bool>> predicate) => _testUsersDb
-                    .AsQueryable()
-                    .Where(predicate)
-                    .FirstOrDefault());
-            userRepoMock.Setup(r => r.Add(It.IsAny<User>()))
-                .Callback((User user) =>
-                {
-                    user.Id = new Guid();
-                    _testUsersDb.Add(user);
-                });
-
-            roleRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<Role, bool>>>()))
-            .ReturnsAsync((Expression<Func<Role, bool>> predicate) => _testRolesDb
-            .AsQueryable()
-            .Where(predicate)
-            .FirstOrDefault());
-
-            confirmationRepoMock.Setup(r => r.Add(It.IsAny<UserConfirmation>()))
-            .Callback((UserConfirmation confirmation) =>
-            {
-                _testUserConfirmationDb.Add(confirmation);
-            });
-
-            confirmationRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<UserConfirmation, bool>>>()))
-               .ReturnsAsync((Expression<Func<UserConfirmation, bool>> predicate) => _testUserConfirmationDb
-               .AsQueryable()
-               .Where(predicate)
-               .FirstOrDefault());
-
-            userDetailsRepoMock.Setup(r => r.GetAll()).Returns(_testUserDetailsDb.AsQueryable().BuildMock().Object);
-            userDetailsRepoMock.Setup(r => r.Get(It.IsAny<Expression<Func<UserDetails, bool>>>()))
-                .ReturnsAsync((Expression<Func<UserDetails, bool>> predicate) => _testUserDetailsDb
-                .AsQueryable()
-                .Where(predicate)
-                .FirstOrDefault());
-            userDetailsRepoMock.Setup(r => r.Add(It.IsAny<UserDetails>()))
-                .Callback((UserDetails details) =>
-                {
-                    _testUserDetailsDb.Add(details);
-
-                });
-
+            _userRepoMock = new RepositoryMock<User>(GetUsersTestData().ToList());
+            _userDetailsRepoMock = new RepositoryMock<UserDetails>(GetUserDetailsTestData().ToList());
+            _roleRepoMock = new RepositoryMock<Role>(GetRolesTestData().ToList());
+            _userConfirmationRepoMock = new RepositoryMock<UserConfirmation>(GetUserConfirmationsTestData().ToList());
             _unitOfWorkMock = new Mock<IUnitOfWork>();
-            _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(userRepoMock.Object);
-            _unitOfWorkMock.Setup(u => u.Repository<UserDetails>()).Returns(userDetailsRepoMock.Object);
-            _unitOfWorkMock.Setup(u => u.Repository<Role>()).Returns(roleRepoMock.Object);
-            _unitOfWorkMock.Setup(u => u.Repository<UserConfirmation>()).Returns(confirmationRepoMock.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<User>()).Returns(_userRepoMock.Repository.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<UserDetails>()).Returns(_userDetailsRepoMock.Repository.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<Role>()).Returns(_roleRepoMock.Repository.Object);
+            _unitOfWorkMock.Setup(u => u.Repository<UserConfirmation>()).Returns(_userConfirmationRepoMock.Repository.Object);
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync()).Verifiable();
             var mockEnvironment = new Mock<IHostingEnvironment>();
             mockEnvironment.SetupAllProperties();

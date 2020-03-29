@@ -28,14 +28,21 @@ namespace TheraLang.BLL.Services
 
         public async Task<User> GetUser(string email, string password)
         {
-            var user = await _unitOfWork.Repository<User>().GetAll().Include(x => x.Role)
-                .FirstOrDefaultAsync(u => u.Email == email);
-            if (PasswordHasher.VerifyHashedPassword(user.PasswordHash, password))
+            try
             {
-                return user;
-            }
+                var user = await _unitOfWork.Repository<User>().GetAll().Include(x => x.Role)
+                    .FirstOrDefaultAsync(u => u.Email == email);
+                if (PasswordHasher.VerifyHashedPassword(user.PasswordHash, password))
+                {
+                    return user;
+                }
 
-            throw new Exception($"Cannot get user with {nameof(email)}: {email}.");
+                throw new Exception($"Cannot get user with {nameof(email)}: {email}.");
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<User> GetUserById(Guid id)
