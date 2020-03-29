@@ -36,7 +36,7 @@ namespace TheraLang.Tests.Services
         {
             _testRolesDb = GetRolesTestData().ToList();
             _testUsersDb = GetUsersTestData().ToList();
-            _testUserConfirmationDb = GetUserConfirmationTestData().ToList();
+            _testUserConfirmationDb = GetUserConfirmationsTestData().ToList();
             _testUserDetailsDb = GetUserDetailsTestData().ToList();
 
             var userRepoMock = new Mock<IRepository<User>>();
@@ -110,44 +110,13 @@ namespace TheraLang.Tests.Services
         [Fact]
         public async Task SendEmail_ShouldSendEmail()
         {
-            var user = new User
-            {
-                Id = DefaultValues.Guid,
-                Email = "andriana@gmail.com"
-            };
-
-            _testUsersDb.Add(user);
-
-            var userDetails = new UserDetails
-            {
-                UserDetailsId = DefaultValues.Guid,
-                User = user
-            };
-
-            _testUserDetailsDb.Add(userDetails);
-
-            await _confirmationService.SendEmail(UserDefaultValues.FakeConfirmNum, UserDefaultValues.FakeEmail, UserDefaultValues.PathTo);
+            await _confirmationService.SendEmail(UserDefaultValues.DefaultConfirmNum, UserDefaultValues.DefaultEmail, UserDefaultValues.DefaultPathTo);
             _sendGridMock.Verify(x => x.SendEmailAsync(It.IsAny<SendGridMessage>(), CancellationToken.None), Times.Once);
         }
 
         [Fact]
         public async Task ConfirmUser_ShouldChangeRole()
         {
-            var user = new User { 
-                Id = DefaultValues.Guid,
-                Email = UserDefaultValues.ConfirmUser.Email
-            };
-
-            var confUser = new UserConfirmation
-            {
-                Id = DefaultValues.Guid,
-                ConfDateTime = DateTime.Now,
-                Number = Int32.Parse(UserDefaultValues.ConfirmUser.ConfirmationNumber)
-            };
-
-            _testUsersDb.Add(user);
-            _testUserConfirmationDb.Add(confUser);
-
             await _confirmationService.ConfirmUser(UserDefaultValues.ConfirmUser);
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
@@ -155,30 +124,13 @@ namespace TheraLang.Tests.Services
         [Fact]
         public async Task ConfirmUser_Exception()
         {
-            Func<Task> result = async () => await _confirmationService.ConfirmUser(UserDefaultValues.ConfirmUser);
+            Func<Task> result = async () => await _confirmationService.ConfirmUser(UserDefaultValues.FakeConfirnmation);
             await result.Should().ThrowAsync<NullReferenceException>();
         }
 
         [Fact]
         public async Task ConfirmPassword_ShouldChangePassword()
         {
-            var user = new User
-            {
-                Id = DefaultValues.Guid,
-                Email = UserDefaultValues.confirmPasswordChanging.Email,
-                PasswordHash = PasswordHasher.HashPassword("oldpassword")
-            };
-
-            var confUser = new UserConfirmation
-            {
-                Id = DefaultValues.Guid,
-                Number = Int32.Parse(UserDefaultValues.confirmPasswordChanging.ConfirmationNumber),
-                ConfDateTime = DateTime.Now
-            };
-
-            _testUserConfirmationDb.Add(confUser);
-            _testUsersDb.Add(user);
-
             await _confirmationService.ConfirmPassword(UserDefaultValues.confirmPasswordChanging);
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
@@ -195,10 +147,16 @@ namespace TheraLang.Tests.Services
                     .WithDefault()
                     .Build());
             }
+            data.Add(new User()
+            {
+                Id = UserDefaultValues.DefaultId,
+                Email = UserDefaultValues.DefaultEmail,
+                PasswordHash = UserDefaultValues.DefaultString,
+                RoleId = UserDefaultValues.DefaultRoleId,
 
+            });
             return data.AsEnumerable();
         }
-
         private IEnumerable<Role> GetRolesTestData()
         {
             var data = new List<Role>();
@@ -206,28 +164,49 @@ namespace TheraLang.Tests.Services
             data.Add(new Role()
             {
                 Id = Guid.NewGuid(),
-                Name = "Unconfirmed",
+                Name = "Guest",
             });
-
             data.Add(new Role()
             {
-                Id = Guid.NewGuid(),
-                Name = "Guest"
+                Id = UserDefaultValues.DefaultRoleId,
+                Name = UserDefaultValues.DefaultRoleName
             });
 
-
-            return data.AsEnumerable();
-        }
-
-        private IEnumerable<UserConfirmation> GetUserConfirmationTestData()
-        {
-            var data = new List<UserConfirmation>();
             return data.AsEnumerable();
         }
 
         private IEnumerable<UserDetails> GetUserDetailsTestData()
         {
+            var user = new User()
+            {
+                Id = UserDefaultValues.DefaultId,
+                Email = UserDefaultValues.DefaultEmail
+            };
             var data = new List<UserDetails>();
+            data.Add(new UserDetails()
+            {
+                UserDetailsId = UserDefaultValues.DefaultId,
+                FirstName = UserDefaultValues.DefaultString,
+                LastName = UserDefaultValues.DefaultString,
+                City = UserDefaultValues.DefaultString,
+                PhoneNumber = UserDefaultValues.DefaultString,
+                ShortInformation = UserDefaultValues.DefaultString,
+                BirthDay = UserDefaultValues.DefaultBirthDate,
+                User = user,
+            });
+            return data.AsEnumerable();
+        }
+
+        private IEnumerable<UserConfirmation> GetUserConfirmationsTestData()
+        {
+            var data = new List<UserConfirmation>();
+            data.Add(new UserConfirmation()
+            {
+                Id = UserDefaultValues.DefaultId,
+                Number = Int32.Parse(UserDefaultValues.DefaultConfirmNum),
+                ConfDateTime = DateTime.Now
+            });
+
             return data.AsEnumerable();
         }
     }

@@ -137,7 +137,6 @@ namespace TheraLang.Tests.Services
             return data.AsEnumerable();
         }
 
-
         private IEnumerable<Role> GetRolesTestData()
         {
             var data = new List<Role>();

@@ -9,53 +9,80 @@ namespace TheraLang.Tests
 {
     public static class UserDefaultValues
     {
+        public static string DefaultString = "SomeString";
+        public static DateTime DefaultBirthDate = new DateTime(2017, 7, 15);
+        public static Guid DefaultRoleId = new Guid("3f857412-cf5e-4087-bc85-6426fa791d91");
+        public static Guid DefaultId = new Guid("54e7ed49-6d82-4045-a3fb-a9188f8c4816");
+        public static string DefaultConfirmNum = "1238328";
+        public static string DefaultPathTo = "welcome.html";
+        public static string DefaultEmail = "andriana@gmail.com";
+        public static string DefaultRoleName = "Member";
+
+        public static DateTime FakeBirthDate = new DateTime(2018, 9, 23);
+        public static Guid FakeRoleId = new Guid("fd873b92-5fd0-4521-98e6-da1f46b57cdb");
+        public static Guid FakeId = new Guid("207b701b-fe10-4f1b-80d8-47c772ea71d5");
+        public static string FakeConfirmNum = "3764735";
+        public static string FakeEmail = "someEmail@gmail.com";
+        public static string FakeRoleName = "Guest";
+
         public static readonly UserAllDto userAll = new UserAllDto()
         {
-            Id = new Guid("507f555f-fd1c-4555-9540-1555e8c250f7"),
-            FirstName = "Andriana",
-            LastName = "Baran",
-            Email = "andriana@gmail.com",
-            Password = "password"
+            Id = DefaultId,
+            FirstName = DefaultString,
+            LastName = DefaultString,
+            Email = DefaultEmail,
+            Password = DefaultString
         };
 
         public static readonly UserAllDto myInfo = new UserAllDto()
         {
-            Id = new Guid("507f555f-f31c-4555-9540-155333c250f7"),
-            FirstName = "Andriana",
-            LastName = "Baran",
-            Email = "andriana@gmail.com",
+            Id = DefaultId,
+            FirstName = DefaultString,
+            LastName = DefaultString,
+            BirthDay = DefaultBirthDate,
+            City = DefaultString,
+            ShortInformation = DefaultString,
+            PhoneNumber = DefaultString
         };
 
         public static readonly UserDetailsDto detailsDto = new UserDetailsDto
         {
-            FirstName = "Andriana",
-            LastName = "Baran",
-            City = "Lviv",
-            PhoneNumber = "3809654298768"
+            FirstName = DefaultString,
+            LastName = DefaultString,
+            City = DefaultString,
+            PhoneNumber = DefaultString,
+            ShortInformation = DefaultString,
+            BirthDay = DefaultBirthDate,
         };
 
-        public static UsersDto userNumOne = new UsersDto { FirstName = "FirstName", LastName = "LastName", City = "city" };
-        public static UsersDto userNumTwo = new UsersDto { FirstName = "Andriana", LastName = "Baran", ShortInformation = "info" };
+        public static UsersDto user = new UsersDto
+        {
+            FirstName = DefaultString,
+            LastName = DefaultString,
+            City = DefaultString,
+            ShortInformation = DefaultString,
+            BirthDay = DefaultBirthDate,
+            UserDetailsId = DefaultId
+        };
         public static List<UsersDto> Users = new List<UsersDto>();
         public static IEnumerable<UsersDto> ListInit()
         {
-            Users.Add(userNumOne);
-            Users.Add(userNumTwo);
+            Users.Add(user);
             return Users;
         }
 
         public static readonly UsersListDto usersListDto = new UsersListDto
         {
             UserList = ListInit(),
-            CountOfItems = 2
+            CountOfItems = Users.Count
         };
 
         public static readonly AdminUserViewDto userViewDto = new AdminUserViewDto
         {
-            FirstName = "Andriana",
-            LastName = "Baran",
-            ShortInformation = "Info",
-            RoleName = "Admin"
+            FirstName = DefaultString,
+            LastName = DefaultString,
+            ShortInformation = DefaultString,
+            RoleName = DefaultRoleName
         };
 
         public static readonly RolesListDto roleNumOne = new RolesListDto
@@ -79,28 +106,29 @@ namespace TheraLang.Tests
         }
         public static readonly AuthUser authUser = new AuthUser
         {
-            Id = new Guid("d4dc40a3-8f4b-4047-a7fb-21608eba812c"),
-            UserEmail = "user@gmail.com",
-            Role = "Member"
+            Id = DefaultId,
+            UserEmail = DefaultEmail,
+            Role = DefaultRoleName
         };
-
-        public static Guid FakeId = new Guid("54e7ed49-6d82-4045-a3fb-a9188f8c4816");
-        public static string FakeConfirmNum = "1238328";
-        public static string PathTo = "welcome.html";
-        public static string FakeEmail = "andriana@gmail.com";
 
         public static readonly ConfirmUserDto ConfirmUser = new ConfirmUserDto
         {
-            ConfirmationNumber = "1111",
-            Email = "andriana@gmail.com"
+            ConfirmationNumber = DefaultConfirmNum,
+            Email = DefaultEmail
+        };
+
+        public static readonly ConfirmUserDto FakeConfirnmation = new ConfirmUserDto
+        {
+            ConfirmationNumber = FakeConfirmNum,
+            Email = FakeEmail
         };
 
         public static readonly ConfirmPasswordChangingDto confirmPasswordChanging = new ConfirmPasswordChangingDto
         {
-            Password = "password",
-            ConfirmPassword = "password",
-            Email = "andriana@gmail.com",
-            ConfirmationNumber = "1111"
+            Password = DefaultString,
+            ConfirmPassword = DefaultString,
+            Email = DefaultEmail,
+            ConfirmationNumber = DefaultConfirmNum
         };
 
 

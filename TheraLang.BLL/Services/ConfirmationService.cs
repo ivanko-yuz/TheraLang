@@ -27,16 +27,12 @@ namespace TheraLang.BLL.Services
             _env = env;
             _unitOfWork = unitOfWork;
             _emailSettings = emailSettings.Value;
-            //var apiKey = configuration.GetSection("send_grip_api_key").Value; ;
-            //_emailClient = new SendGridClient(apiKey);
             _emailClient = emailClient;
         }
 
 
         public async Task SendEmail(string ConfirmNum, string UserEmail, string PathTo)
-        {
-            try
-            {
+        { 
                 string body = string.Empty;
                 using (StreamReader reader =
                 new StreamReader(Path.Combine(_env.ContentRootPath, "Templates", PathTo)))
@@ -62,11 +58,6 @@ namespace TheraLang.BLL.Services
                 var subject = "UTTMM";
                 var msg = MailHelper.CreateSingleEmail(from, to, subject, "", body);
                 var response = await _emailClient.SendEmailAsync(msg);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
         }
 
         public async Task ConfirmUser(ConfirmUserDto confirmUser)
@@ -80,8 +71,6 @@ namespace TheraLang.BLL.Services
 
         public async Task ConfirmPassword(ConfirmPasswordChangingDto confirmUser)
         {
-            try
-            {
                 var user = await _unitOfWork.Repository<User>().Get(u => u.Email == confirmUser.Email);
                 var conf = await _unitOfWork.Repository<UserConfirmation>().Get(u => u.Id == user.Id);
                 if (confirmUser.ConfirmationNumber == conf.Number.ToString() && conf.ConfDateTime <= DateTime.Now.AddMinutes(30))
@@ -89,11 +78,6 @@ namespace TheraLang.BLL.Services
                     user.PasswordHash = PasswordHasher.HashPassword(confirmUser.Password);
                     await _unitOfWork.SaveChangesAsync();
                 }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
         }
     }
 }

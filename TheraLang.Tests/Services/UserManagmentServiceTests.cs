@@ -95,7 +95,6 @@ namespace TheraLang.Tests.Services
         {
             var email = "email@gmail.com";
             var password = PasswordHasher.HashPassword("password");
-
             var user = new User
             {
                 Id = new Guid("507f77df-fd1c-48c5-9900-f7ace8c250f7"),
@@ -103,11 +102,8 @@ namespace TheraLang.Tests.Services
                 PasswordHash = password,
                 RoleId = new Guid()
             };
-
             _testUsersDb.Add(user);
-
             var result = await _userService.GetUser(email, "password");
-
             result.Should().BeEquivalentTo(user);
         }
 
@@ -115,15 +111,20 @@ namespace TheraLang.Tests.Services
         public async Task AddUser_ShouldCallSaveChanges()
         {
             await _userService.AddUser(UserDefaultValues.userAll);
-            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
+            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.AtLeastOnce);
         }
 
+        [Fact]
+        public async Task AddConfirmation_ShouldReturnConfirmationUser()
+        { 
+             await _userService.AddConfirmation(UserDefaultValues.DefaultId);
+            _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
+        }
 
         [Fact]
         public async Task GetUserById_ShouldReturnUser()
         {
             var testGuid = new Guid("507f77df-fd1c-48c5-9900-f7ace8c250f7");
-
             var user = new User
             {
                 Id = testGuid,
@@ -131,58 +132,36 @@ namespace TheraLang.Tests.Services
                 PasswordHash = "password",
                 RoleId = new Guid()
             };
-
             _testUsersDb.Add(user);
-
             var result = await _userService.GetUserById(testGuid);
-
             result.Should().BeEquivalentTo(user);
         }
 
         [Fact]
         public async Task GetUserById_NotFound()
         {
-            var result = await _userService.GetUserById(DefaultValues.FakeGuid);
+            var result = await _userService.GetUserById(UserDefaultValues.FakeId);
             result.Should().BeNull();
         }
 
         [Fact]
         public async Task GetUser_Exception()
         {
-            var email = "email@gmail.com";
-            Func<Task> result = async () => await _userService.GetUser(email, "password");
+            Func<Task> result = async () => await _userService.GetUser(UserDefaultValues.FakeEmail, UserDefaultValues.DefaultString);
             await result.Should().ThrowAsync<Exception>();
         }
 
         [Fact]
         public async Task PasswordConfirmationRequest_ShouldCallSaveChanges()
         {
-            var testId = new Guid("507f77df-fd1c-48c5-9900-f7ace8c250f7");
-            var testEmail = "testmail@gmail.com";
-            var user = new User
-            { 
-                Id = testId,
-                Email = testEmail,
-                PasswordHash = "password"
-            };
-
-            var userConfirmation = new UserConfirmation
-            { 
-               Id = testId
-            };
-
-            _testUsersDb.Add(user);
-            _testUserConfirmationsDb.Add(userConfirmation);
-
-            await _userService.PasswordConfirmationRequest(testEmail);
+            await _userService.PasswordConfirmationRequest(UserDefaultValues.DefaultEmail);
             _unitOfWorkMock.Verify(u => u.SaveChangesAsync(), Times.Once);
         }
 
         [Fact]
         public async Task PasswordConfirmationRequest_Exception()
         {
-            string email = "email@gmail.com";
-            Func<Task> result = async () => await _userService.PasswordConfirmationRequest(email);
+            Func<Task> result = async () => await _userService.PasswordConfirmationRequest(UserDefaultValues.FakeEmail);
             await result.Should().ThrowAsync<NullReferenceException>();
         }
 
@@ -198,10 +177,16 @@ namespace TheraLang.Tests.Services
                     .WithDefault()
                     .Build());
             }
+            data.Add(new User()
+            {
+                Id = UserDefaultValues.DefaultId,
+                Email = UserDefaultValues.DefaultEmail,
+                PasswordHash = UserDefaultValues.DefaultString,
+                RoleId = UserDefaultValues.DefaultRoleId,
 
+            });
             return data.AsEnumerable();
         }
-
         private IEnumerable<Role> GetRolesTestData()
         {
             var data = new List<Role>();
@@ -211,6 +196,11 @@ namespace TheraLang.Tests.Services
                 Id = Guid.NewGuid(),
                 Name = "Unconfirmed",
             });
+            data.Add(new Role()
+            {
+                Id = UserDefaultValues.DefaultRoleId,
+                Name = UserDefaultValues.DefaultRoleName
+            });
 
             return data.AsEnumerable();
         }
@@ -218,12 +208,28 @@ namespace TheraLang.Tests.Services
         private IEnumerable<UserDetails> GetUserDetailsTestData()
         {
             var data = new List<UserDetails>();
+            data.Add(new UserDetails()
+            {
+                UserDetailsId = UserDefaultValues.DefaultId,
+                FirstName = UserDefaultValues.DefaultString,
+                LastName = UserDefaultValues.DefaultString,
+                City = UserDefaultValues.DefaultString,
+                PhoneNumber = UserDefaultValues.DefaultString,
+                ShortInformation = UserDefaultValues.DefaultString,
+                BirthDay = UserDefaultValues.DefaultBirthDate
+            });
             return data.AsEnumerable();
         }
-
         private IEnumerable<UserConfirmation> GetUserConfirmationsTestData()
         {
             var data = new List<UserConfirmation>();
+            data.Add(new UserConfirmation()
+            {
+                Id = UserDefaultValues.DefaultId,
+                Number = Int32.Parse(UserDefaultValues.DefaultConfirmNum),
+                ConfDateTime = DateTime.Now
+            });
+
             return data.AsEnumerable();
         }
     }

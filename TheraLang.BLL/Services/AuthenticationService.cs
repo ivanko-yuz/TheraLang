@@ -27,7 +27,6 @@ namespace TheraLang.BLL.Services
 
         public async Task<string> Authenticate(User user)
         {
-
             if (user.Role.Name != "Unconfirmed" && user.Role.Name != "Blocked")
             {
                 return await Task.Run(() =>

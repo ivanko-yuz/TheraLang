@@ -46,51 +46,60 @@ namespace TheraLang.BLL.Services
 
         public async Task AddUser(UserAllDto newUser)
         {
+            if (newUser != null)
+            {
+                var mapper = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<UserAllDto, UserDetails>();
+                    cfg.CreateMap<UserAllDto, User>();
+                }).CreateMapper();
+
+                var userDetails = mapper.Map<UserAllDto, UserDetails>(newUser);
+
+                if (newUser.Image != null)
+                {
+                    var imageUri = await _fileService.SaveFile(newUser.Image.OpenReadStream(),
+                        Path.GetExtension(newUser.Image.FileName));
+                    userDetails.ImageURl = imageUri.ToString();
+                }
+
+                var user = mapper.Map<UserAllDto, User>(newUser);
+                user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Unconfirmed")).Id;
+                user.PasswordHash = PasswordHasher.HashPassword(newUser.Password);
+                user.Details = userDetails;
+
+                _unitOfWork.Repository<UserDetails>().Add(userDetails);
+                _unitOfWork.Repository<User>().Add(user);
+                await _unitOfWork.SaveChangesAsync();
+
+                user.Confirmation = await  AddConfirmation(user.Id);
+                await _unitOfWork.SaveChangesAsync();
+
+                await _confirmation.SendEmail(user.Confirmation.Number.ToString(), user.Email, "welcome.html");
+            }
+
+        }
+
+        public async Task<UserConfirmation> AddConfirmation(Guid id)
+        {
             try
             {
-                if (newUser != null)
+                Random rand = new Random();
+                int random = rand.Next(10000000, 100000000);
+                var confUser = new UserConfirmation()
                 {
-                    var mapper = new MapperConfiguration(cfg =>
-                    {
-                        cfg.CreateMap<UserAllDto, UserDetails>();
-                        cfg.CreateMap<UserAllDto, User>();
-                    }).CreateMapper();
-
-                    var userDetails = mapper.Map<UserAllDto, UserDetails>(newUser);
-
-                    if (newUser.Image != null)
-                    {
-                        var imageUri = await _fileService.SaveFile(newUser.Image.OpenReadStream(),
-                            Path.GetExtension(newUser.Image.FileName));
-                        userDetails.ImageURl = imageUri.ToString();
-                    }
-
-                    var user = mapper.Map<UserAllDto, User>(newUser);
-                    user.RoleId = (await _unitOfWork.Repository<Role>().Get(r => r.Name == "Unconfirmed")).Id;
-                    user.PasswordHash = PasswordHasher.HashPassword(newUser.Password);
-                    user.Details = userDetails;
-                    Random rand = new Random();
-                    int random = rand.Next(10000000, 100000000);
-
-                    var confUser = new UserConfirmation()
-                    {
-                        Number = random,
-                        ConfDateTime = DateTime.Now
-                    };
-
-                    user.Confirmation = confUser;
-
-                    _unitOfWork.Repository<UserDetails>().Add(userDetails);
-                    _unitOfWork.Repository<User>().Add(user);
-                    _unitOfWork.Repository<UserConfirmation>().Add(confUser);
-
-                    await _unitOfWork.SaveChangesAsync();
-                    await _confirmation.SendEmail(confUser.Number.ToString(), user.Email, "welcome.html");
-                }
+                    Id = id,
+                    Number = random,
+                    ConfDateTime = DateTime.Now
+                };
+                _unitOfWork.Repository<UserConfirmation>().Add(confUser);
+                await _unitOfWork.SaveChangesAsync();
+                return confUser;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"{1}", ex);
+                Console.WriteLine($"{ex}");
+                return null;
             }
         }
 
