@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Exceptions;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
@@ -60,11 +61,14 @@ namespace TheraLang.BLL.Services
                         $"{nameof(MemberFeeDto)} cannot be null");
                 }
 
-                var minDate = GetMemberFeesAsync().Result.Last().FeeDate.AddMonths(1);
+                var minDate = getMinDate();
                 if (memberFeeDto.FeeDate <= minDate)
                 {
-                    throw new Exception(
-                        $"Cannot add new {nameof(MemberFee)}.");
+                    throw new InvalidArgumentException(nameof(MemberFeeDto.FeeDate), "Invalid FeeDate");
+                }
+                if (memberFeeDto.FeeAmount <= 0)
+                {
+                    throw new InvalidArgumentException(nameof(MemberFeeDto.FeeAmount), "Invalid FeeAmount");
                 }
                 var newDate = new DateTime(memberFeeDto.FeeDate.Year, memberFeeDto.FeeDate.Month, 1);
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeDto, MemberFee>()
@@ -85,6 +89,15 @@ namespace TheraLang.BLL.Services
                 ex.Data[nameof(MemberFee)] = memberFeeDto;
                 throw;
             }
+        }
+        private DateTime getMinDate()
+        {
+            DateTime minDate = DateTime.Now.AddMonths(-1);
+            if (GetMemberFeesAsync().Result.Count() > 0)
+            {
+                minDate = GetMemberFeesAsync().Result.LastOrDefault().FeeDate.AddMonths(1);
+            }
+            return minDate;
         }
     }
 }
