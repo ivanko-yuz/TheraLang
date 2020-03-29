@@ -89,9 +89,7 @@ namespace TheraLang.BLL.Services
 
         public async Task<UserConfirmation> AddConfirmation(Guid id)
         {
-            try
-            {
-                Random rand = new Random();
+             Random rand = new Random();
                 int random = rand.Next(10000000, 100000000);
                 var confUser = new UserConfirmation()
                 {
@@ -102,12 +100,6 @@ namespace TheraLang.BLL.Services
                 _unitOfWork.Repository<UserConfirmation>().Add(confUser);
                 await _unitOfWork.SaveChangesAsync();
                 return confUser;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"{ex}");
-                return null;
-            }
         }
 
 
