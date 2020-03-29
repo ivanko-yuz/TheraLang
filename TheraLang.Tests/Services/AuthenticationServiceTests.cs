@@ -1,15 +1,6 @@
-﻿using Common.Configurations;
-using FluentAssertions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using MockQueryable.Moq;
-using Moq;
+﻿using FluentAssertions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Security.Claims;
-using System.Security.Principal;
 using System.Threading.Tasks;
 using TheraLang.DAL.Entities;
 using TheraLang.Tests.Setups;

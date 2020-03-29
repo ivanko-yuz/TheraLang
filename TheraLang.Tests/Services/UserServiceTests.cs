@@ -1,18 +1,7 @@
 ﻿using FluentAssertions;
-using MockQueryable.Moq;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-using TheraLang.BLL.Interfaces;
-using TheraLang.BLL.Services;
-using TheraLang.DAL.Entities;
-using TheraLang.DAL.Repository;
-using TheraLang.DAL.UnitOfWork;
-using TheraLang.Tests.DataBuilders.ResourcesBuilders;
-using TheraLang.Tests.Mocks;
 using TheraLang.Tests.Setups;
 using Xunit;
 
@@ -100,7 +89,6 @@ namespace TheraLang.Tests.Services
             Func<Task> result = async () => await _userService.AdminUserView(UserDefaultValues.FakeId);
             await result.Should().ThrowAsync<NullReferenceException>();
         }
-
 
         [Fact]
         public async Task GetUserRole_ShouldReturnRole()

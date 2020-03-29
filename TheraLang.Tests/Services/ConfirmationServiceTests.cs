@@ -1,25 +1,10 @@
 ﻿using FluentAssertions;
-using MockQueryable.Moq;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using TheraLang.BLL.Services;
-using TheraLang.DAL.Entities;
-using TheraLang.DAL.Repository;
-using TheraLang.DAL.UnitOfWork;
-using TheraLang.Tests.DataBuilders.ResourcesBuilders;
 using Xunit;
-using Microsoft.AspNetCore.Hosting;
-using Common.Configurations;
-using Common.Helpers.PasswordHelper;
-using Microsoft.Extensions.Options;
-using SendGrid;
 using SendGrid.Helpers.Mail;
-using TheraLang.Tests.Mocks;
 using TheraLang.Tests.Setups;
 
 namespace TheraLang.Tests.Services
