@@ -1,8 +1,6 @@
 ﻿using Common;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.DataTransferObjects.CommentDtos;
 
 namespace TheraLang.BLL.Interfaces

@@ -24,7 +24,8 @@ namespace TheraLang.Web
 
             try
             {
-                BuildWebHost(args)
+                CreateWebHostBuilder(args)
+                    .Build()
                     .StartScheduler()
                     .Run();
             }
@@ -38,12 +39,11 @@ namespace TheraLang.Web
             }
         }
 
-        public static IWebHost BuildWebHost(string[] args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseSerilog()
-                .Build();
+                .UseSerilog();
         }
     }
 }
