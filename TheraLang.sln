@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.BLL", "TheraLang.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{5A8EE289-AA54-4115-AF67-8F78F22FE37B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheraLang.DataSeeding", "TheraLang.DataSeeding\TheraLang.DataSeeding.csproj", "{B5716785-BCE7-4FE8-931C-14F48CA02751}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheraLang.DataSeeding", "TheraLang.DataSeeding\TheraLang.DataSeeding.csproj", "{B5716785-BCE7-4FE8-931C-14F48CA02751}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheraLang.IntegrationTests", "TheraLang.IntegrationTests\TheraLang.IntegrationTests.csproj", "{3A10B4A3-232D-419F-AE99-7C9BBC261363}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{B5716785-BCE7-4FE8-931C-14F48CA02751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5716785-BCE7-4FE8-931C-14F48CA02751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5716785-BCE7-4FE8-931C-14F48CA02751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A10B4A3-232D-419F-AE99-7C9BBC261363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A10B4A3-232D-419F-AE99-7C9BBC261363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A10B4A3-232D-419F-AE99-7C9BBC261363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A10B4A3-232D-419F-AE99-7C9BBC261363}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
