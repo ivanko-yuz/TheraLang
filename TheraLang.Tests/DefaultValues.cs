@@ -10,15 +10,17 @@ namespace TheraLang.Tests
     {
         public const int IntId = 1;
         public const string Name = "default name";
-        
         public static readonly Guid Guid = new Guid("017a41aa-b005-4464-8cb6-1a6851b50c6f");
-        public static readonly Uri Uri = new Uri("test/uri",UriKind.RelativeOrAbsolute);
+        public static readonly Uri Uri = new Uri("test/uri", UriKind.RelativeOrAbsolute);
         public static readonly int ListSize = 10;
         public static readonly int FakeId = -10;
         public static readonly int ExistedId = 1;
-        public static readonly PaginationParams PaginationParams = new PaginationParams() { PageNumber = 1, PageSize = 2 };
+        
+        public static readonly PaginationParams PaginationParams = 
+            new PaginationParams() { PageNumber = 1, PageSize = 2 };
         public static readonly PaginationParams FakePaginationParams =
             new PaginationParams() { PageNumber = int.MaxValue, PageSize = int.MaxValue };
+        
         public static readonly UserAllDto userAll = new UserAllDto()
         {
             FirstName = "Andriana",
@@ -28,5 +30,11 @@ namespace TheraLang.Tests
         };
         public static readonly Guid UserGuid = new Guid("2960ECE9-49DA-431E-B5B2-9E9251260707");
         public static readonly Guid FakeGuid = new Guid("2960ECE9-49DA-431E-B5B2-9E9251261488");
+        public static readonly AuthUser AuthUser = new AuthUser()
+        {
+            Id = UserGuid,
+            Role = "Admin",
+            UserEmail = "admin@utmm.com"
+        };
     }
 }
