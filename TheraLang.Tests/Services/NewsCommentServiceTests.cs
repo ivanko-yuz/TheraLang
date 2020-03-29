@@ -51,7 +51,7 @@ namespace TheraLang.Tests.Services
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync()).Verifiable();
 
             var _authService = new Mock<IAuthenticateService>();
-            _authService.Setup(a => a.GetAuthUser()).ReturnsAsync(new AuthUser() { Id = DefaultValues.UserGuid });
+            _authService.Setup(a => a.GetAuthUser()).ReturnsAsync(DefaultValues.AuthUser);
 
             _commentsService = new NewsCommentService(_unitOfWorkMock.Object, _authService.Object);
         }
@@ -124,7 +124,7 @@ namespace TheraLang.Tests.Services
                 var dataBuilder = new CommentsBuilder();
                 data.Add(dataBuilder
                     .WithId(i)
-                    .WithAuthorId(new Guid())
+                    .WithAuthorId(DefaultValues.UserGuid)
                     .WithNewsId(DefaultValues.ExistedId)
                     .WithDefaultText()
                     .Build()); 
