@@ -27,20 +27,6 @@ namespace TheraLang.IntegrationTests.ControllersTests
         }
 
         [Fact]
-        public async Task Register_SuccessStatusCode()
-        {
-            var registerRequest = new UsersFormDataBuilder()
-              .WithDefaultFirstName()
-              .WithDefaultLastName()
-              .WithDefaultPassword()
-              .WithDefaultEmail()
-              .Build();
-            var request = $"{_baseUrl}/registration";
-            var response = await UnauthorizedClient.PostAsync(request, registerRequest);
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
         public async Task ConfirmEmail_SuccessStatusCode()
         {
             var user = new UserJsonDataBuilder()
@@ -48,17 +34,6 @@ namespace TheraLang.IntegrationTests.ControllersTests
               .WithDefailtConfNum()
               .Build();
             var request = $"{_baseUrl}/confirmation";
-            var response = await UnauthorizedClient.PostAsync(request, user);
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task ForgotPassword_SuccessStatusCode()
-        {
-            var user = new UserJsonDataBuilder()
-             .WithDefaultEmail()
-             .Build();
-            var request = $"{_baseUrl}/password/forgot";
             var response = await UnauthorizedClient.PostAsync(request, user);
             response.EnsureSuccessStatusCode();
         }
