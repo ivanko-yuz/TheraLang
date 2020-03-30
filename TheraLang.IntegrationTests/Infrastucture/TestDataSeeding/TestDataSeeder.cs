@@ -1,4 +1,5 @@
 ﻿using Common.Helpers.PasswordHelper;
+using System;
 using System.Collections.Generic;
 using TheraLang.DAL;
 using TheraLang.DAL.Entities;
@@ -19,6 +20,8 @@ namespace TheraLang.IntegrationTests.Infrastucture.TestDataSeeding
             _context.Roles.AddRange(GetSeedingRoles());
             _context.Users.AddRange(GetSeedingUsers());
             _context.News.AddRange(GetSeedingNews());
+            _context.UsersDetails.AddRange(GetSeedingUsersDetails());
+            _context.UsersConfirmation.AddRange(GetDeedingUsersConfirmation());
 
             _context.SaveChanges();
         }
@@ -87,6 +90,40 @@ namespace TheraLang.IntegrationTests.Infrastucture.TestDataSeeding
             };
 
             return users;
+        }
+
+        private List<UserDetails> GetSeedingUsersDetails()
+        {
+            var users = new List<UserDetails>
+            {
+                new UserDetails()
+                {
+                     UserDetailsId = DefaultValues.MemberId,
+                     FirstName = DefaultValues.DefaultString,
+                     LastName = DefaultValues.DefaultString,
+                     PhoneNumber = DefaultValues.DefaultString,
+                     BirthDay = DefaultValues.DefaultDate,
+                     City = DefaultValues.DefaultString,
+                     ShortInformation = DefaultValues.DefaultString,
+                }
+            };
+
+            return users;
+        }
+
+        private List<UserConfirmation> GetDeedingUsersConfirmation()
+        {
+            var usersConfirmation = new List<UserConfirmation>
+            {
+                new UserConfirmation()
+                {
+                    Id = DefaultValues.MemberId,
+                    ConfDateTime = DateTime.Now,
+                    Number = 123456
+                }
+            };
+
+            return usersConfirmation;
         }
     }
 }
