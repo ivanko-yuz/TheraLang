@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using Common.Configurations;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;

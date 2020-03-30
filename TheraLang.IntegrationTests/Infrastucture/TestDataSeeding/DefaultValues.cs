@@ -15,6 +15,6 @@ namespace TheraLang.IntegrationTests.Infrastucture.TestDataSeeding
 
         public static readonly string DefaultString = "someString";
         public static readonly DateTime DefaultDate = new DateTime(2009, 8, 7);
-        public static readonly string DefaultEmal = "email@gmail.com";
+        public static readonly string DefaultEmail = "email@gmail.com";
     }
 }

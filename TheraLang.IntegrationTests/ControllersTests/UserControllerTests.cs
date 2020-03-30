@@ -47,7 +47,7 @@ namespace TheraLang.IntegrationTests.ControllersTests
         public async Task UpdateUserDetails_SuccessStatusCode()
         {
             var request = _baseUrl;
-            var user = new UsersDetailsFormDataBuilder()
+            var user = new UsersFormDataBuilder()
                 .WithDefaultFirstName()
                 .WithDefaultLastName()
                 .Build();
@@ -59,7 +59,7 @@ namespace TheraLang.IntegrationTests.ControllersTests
         public async Task UpdateUserDetails_FailureUnauthorized()
         {
             var request = _baseUrl;
-            var user = new UsersDetailsFormDataBuilder()
+            var user = new UsersFormDataBuilder()
                 .WithDefaultFirstName()
                 .WithDefaultLastName()
                 .Build();
@@ -88,6 +88,39 @@ namespace TheraLang.IntegrationTests.ControllersTests
             var request = _baseUrl;
             var response = await MemberClient.GetAsync(request);
             Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task ChangeRole_FailureUnauthorized()
+        {
+            var role = new UserJsonDataBuilder()
+                .WithDefaultRoleId()
+                .Build();
+            var request = $"{_baseUrl}/{DefaultValues.MemberId}/role";
+            var response = await UnauthorizedClient.PostAsync(request, role);
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task ChangeRole_FailNotAdmin()
+        {
+            var role = new UserJsonDataBuilder()
+                .WithDefaultRoleId()
+                .Build();
+            var request = $"{_baseUrl}/{DefaultValues.MemberId}/role";
+            var response = await MemberClient.PostAsync(request, role);
+            Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task ChangeRole_SuccessStatusCode()
+        {
+            var role = new UserJsonDataBuilder()
+                .WithDefaultRoleId()
+                .Build();
+            var request = $"{_baseUrl}/{DefaultValues.MemberId}/role";
+            var response = await AdminClient.PostAsync(request, role);
+            response.EnsureSuccessStatusCode();
         }
 
         [Fact]

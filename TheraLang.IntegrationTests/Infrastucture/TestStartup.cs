@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using Common.Configurations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,7 @@ namespace TheraLang.IntegrationTests
             services.AddAuthentication("Test")
                     .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
                         "Test", options => { });
+            services.Configure<TokenManagement>(Configuration.GetSection("tokenManagement"));
         }
 
         protected override void ConfigureDatabase(IServiceCollection services)

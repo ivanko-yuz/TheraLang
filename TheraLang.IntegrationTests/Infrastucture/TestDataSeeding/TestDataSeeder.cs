@@ -21,7 +21,7 @@ namespace TheraLang.IntegrationTests.Infrastucture.TestDataSeeding
             _context.Users.AddRange(GetSeedingUsers());
             _context.News.AddRange(GetSeedingNews());
             _context.UsersDetails.AddRange(GetSeedingUsersDetails());
-            _context.UsersConfirmation.AddRange(GetDeedingUsersConfirmation());
+            _context.UsersConfirmation.AddRange(GetSeedingUsersConfirmation());
 
             _context.SaveChanges();
         }
@@ -111,13 +111,13 @@ namespace TheraLang.IntegrationTests.Infrastucture.TestDataSeeding
             return users;
         }
 
-        private List<UserConfirmation> GetDeedingUsersConfirmation()
+        private List<UserConfirmation> GetSeedingUsersConfirmation()
         {
             var usersConfirmation = new List<UserConfirmation>
             {
                 new UserConfirmation()
                 {
-                    Id = DefaultValues.MemberId,
+                    Id = DefaultValues.AdminId,
                     ConfDateTime = DateTime.Now,
                     Number = 123456
                 }
@@ -125,5 +125,6 @@ namespace TheraLang.IntegrationTests.Infrastucture.TestDataSeeding
 
             return usersConfirmation;
         }
+
     }
 }
