@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Common.Exceptions;
+using FluentAssertions;
 using Moq;
 using System;
 using System.Linq;
@@ -47,8 +48,8 @@ namespace TheraLang.Tests.Services
         [Fact]
         public async Task GetUser_NotFound()
         {
-            var result = await _userService.GetUser(UserDefaultValues.FakeEmail, UserDefaultValues.DefaultString);
-            result.Should().BeNull();
+            Func<Task> result = async () => await _userService.GetUser(UserDefaultValues.FakeEmail, UserDefaultValues.DefaultString);
+            await result.Should().ThrowAsync<NullReferenceException>();
         }
 
         [Fact]

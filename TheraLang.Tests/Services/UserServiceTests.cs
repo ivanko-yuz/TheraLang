@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Common.Exceptions;
+using FluentAssertions;
 using Moq;
 using System;
 using System.Threading.Tasks;
@@ -59,7 +60,7 @@ namespace TheraLang.Tests.Services
         public async Task Update_Exception()
         {
             Func<Task> result = async () => await _userService.Update(UserDefaultValues.detailsDto, UserDefaultValues.FakeId);
-            await result.Should().ThrowAsync<Exception>();
+            await result.Should().ThrowAsync<NullReferenceException>();
         }
 
         [Fact]
@@ -73,7 +74,7 @@ namespace TheraLang.Tests.Services
         public async Task ChangeRole_Exception()
         {
             Func<Task> result = async () => await _userService.ChangeRole(UserDefaultValues.FakeId, DefaultValues.FakeGuid);
-            await result.Should().ThrowAsync<Exception>();
+            await result.Should().ThrowAsync<NullReferenceException>();
         }
 
         [Fact]
@@ -101,7 +102,7 @@ namespace TheraLang.Tests.Services
         public async Task GetUserRole_Exception()
         {
             Func<Task> result = async () => await _userService.GetUserRole(UserDefaultValues.FakeId);
-            await result.Should().ThrowAsync<Exception>();
+            await result.Should().ThrowAsync<NullReferenceException>();
         }
     }
 }

@@ -27,31 +27,29 @@ namespace TheraLang.BLL.Services
 
         public async Task<UserAllDto> GetMyProfile(Guid id)
         {
+            var user = await _unitOfWork.Repository<User>().Get(u => u.Id == id);
 
-                var user = await _unitOfWork.Repository<User>().Get(u => u.Id == id);
-
-                var userDetails = await _unitOfWork.Repository<UserDetails>().GetAll()
-                    .Include(ud => ud.User)
-                    .FirstOrDefaultAsync(ud => ud.UserDetailsId == id);
-                var detailsMapper = new MapperConfiguration(cfg =>
-                    cfg.CreateMap<UserDetails, UserAllDto>()
-                        .ForMember(userAllDto => userAllDto.Email,
-                            opts => opts.MapFrom(details => details.User.Email))
-                        .ForMember(userAllDto => userAllDto.Id, opt => opt.MapFrom(details => details.UserDetailsId)))
-                    .CreateMapper();
-                var userAll = detailsMapper.Map<UserDetails, UserAllDto>(userDetails);
-                return userAll;
-            }
-
+            var userDetails = await _unitOfWork.Repository<UserDetails>().GetAll()
+                .Include(ud => ud.User)
+                .FirstOrDefaultAsync(ud => ud.UserDetailsId == id);
+            var detailsMapper = new MapperConfiguration(cfg =>
+                cfg.CreateMap<UserDetails, UserAllDto>()
+                    .ForMember(userAllDto => userAllDto.Email,
+                        opts => opts.MapFrom(details => details.User.Email))
+                    .ForMember(userAllDto => userAllDto.Id, opt => opt.MapFrom(details => details.UserDetailsId)))
+                .CreateMapper();
+            var userAll = detailsMapper.Map<UserDetails, UserAllDto>(userDetails);
+            return userAll;
+        }
 
         public async Task<UserDetailsDto> GetUserDetailsById(Guid id)
         {
-                var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
+            var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>()).CreateMapper();
-                var userDto = mapper.Map<UserDetails, UserDetailsDto>(user);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>()).CreateMapper();
+            var userDto = mapper.Map<UserDetails, UserDetailsDto>(user);
 
-                return userDto;
+            return userDto;
         }
 
         public async Task<UsersListDto> GetAllUsers(PaginationParams pagination)
@@ -71,23 +69,23 @@ namespace TheraLang.BLL.Services
 
         public async Task Update(UserDetailsDto user, Guid id)
         {
-                var updateUser = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
+            var updateUser = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                updateUser.FirstName = user.FirstName;
-                updateUser.LastName = user.LastName;
-                updateUser.PhoneNumber = user.PhoneNumber;
-                updateUser.BirthDay = user.BirthDay;
-                updateUser.City = user.City;
-                updateUser.ShortInformation = user.ShortInformation;
+            updateUser.FirstName = user.FirstName;
+            updateUser.LastName = user.LastName;
+            updateUser.PhoneNumber = user.PhoneNumber;
+            updateUser.BirthDay = user.BirthDay;
+            updateUser.City = user.City;
+            updateUser.ShortInformation = user.ShortInformation;
 
-                if (user.Image != null)
-                {
-                    var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(),
-                        Path.GetExtension(user.Image.FileName));
-                    updateUser.ImageURl = imageUri.ToString();
-                }
+            if (user.Image != null)
+            {
+                var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(),
+                    Path.GetExtension(user.Image.FileName));
+                updateUser.ImageURl = imageUri.ToString();
+            }
 
-                await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task<bool> ChangeRole(Guid userId, Guid newRole)
