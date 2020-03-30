@@ -32,8 +32,6 @@ namespace TheraLang.BLL.Services
 
         public async Task DeleteAsync(int id)
         {
-            try
-            {
                 var memberFee = await _unitOfWork.Repository<MemberFee>().Get(x => x.Id == id);
                 if (memberFee == null)
                 {
@@ -43,32 +41,14 @@ namespace TheraLang.BLL.Services
 
                 _unitOfWork.Repository<MemberFee>().Remove(memberFee);
                 await _unitOfWork.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                e.Data["Id"] = id;
-                throw;
-            }
         }
 
         public async Task AddAsync(MemberFeeDto memberFeeDto)
         {
-            try
-            {
-                if (memberFeeDto == null)
-                {
-                    throw new NullReferenceException(
-                        $"{nameof(MemberFeeDto)} cannot be null");
-                }
-
                 var minDate = getMinDate();
                 if (memberFeeDto.FeeDate <= minDate)
                 {
                     throw new InvalidArgumentException(nameof(MemberFeeDto.FeeDate), "Invalid FeeDate");
-                }
-                if (memberFeeDto.FeeAmount <= 0)
-                {
-                    throw new InvalidArgumentException(nameof(MemberFeeDto.FeeAmount), "Invalid FeeAmount");
                 }
                 var newDate = new DateTime(memberFeeDto.FeeDate.Year, memberFeeDto.FeeDate.Month, 1);
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeDto, MemberFee>()
@@ -79,16 +59,6 @@ namespace TheraLang.BLL.Services
 
                 _unitOfWork.Repository<MemberFee>().Add(memberFee);
                 await _unitOfWork.SaveChangesAsync();
-            }
-            catch (NullReferenceException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                ex.Data[nameof(MemberFee)] = memberFeeDto;
-                throw;
-            }
         }
         private DateTime getMinDate()
         {
