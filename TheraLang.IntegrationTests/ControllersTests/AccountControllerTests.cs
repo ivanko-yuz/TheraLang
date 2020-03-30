@@ -30,18 +30,6 @@ namespace TheraLang.IntegrationTests.ControllersTests
         }
 
         [Fact]
-        public async Task SignIn_SuccessStatusCode()
-        {
-            var loginRequest = new UserJsonDataBuilder()
-               .WithDefaultEmail()
-               .WithDefaultPassword()
-               .Build();
-            var request = $"{_baseUrl}/login";
-            var response = await UnauthorizedClient.PostAsync(request, loginRequest);
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
         public async Task ConfirmEmail_SuccessStatusCode()
         {
             var user = new UserJsonDataBuilder()
