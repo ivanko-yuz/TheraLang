@@ -91,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\DataSeeding\DataSeeding.csproj" />
     <ProjectReference Include="..\TheraLang.BLL\TheraLang.BLL.csproj" />
   </ItemGroup>
   <ItemGroup>
