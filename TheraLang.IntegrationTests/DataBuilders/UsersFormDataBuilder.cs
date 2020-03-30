@@ -13,7 +13,6 @@ namespace TheraLang.IntegrationTests.DataBuilders
             WithField(new StringContent("Andriana"), "FirstName");
             return this;
         }
-
         public UsersFormDataBuilder WithDefaultLastName()
         {
             WithField(new StringContent("Baran"), "LastName");
@@ -25,11 +24,18 @@ namespace TheraLang.IntegrationTests.DataBuilders
             WithField(new StringContent("newmail@gmail.com"), "Email");
             return this;
         }
+
         public UsersFormDataBuilder WithDefaultPassword()
         {
             WithField(new StringContent("password"), "Password");
             return this;
         }
+        public UsersFormDataBuilder WithDefaultConfirmPassword()
+        {
+            WithField(new StringContent("password"), "ConfirmPassword");
+            return this;
+        }
+
         public UsersFormDataBuilder WithDefaultImage(string fieldName)
         {
             var filePath = Path.GetFullPath(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath,

@@ -15,6 +15,21 @@ namespace TheraLang.IntegrationTests.ControllersTests
         }
 
         [Fact]
+        public async Task Register_SuccessStatusCode()
+        {
+            var registerRequest = new UsersFormDataBuilder()
+              .WithDefaultFirstName()
+              .WithDefaultLastName()
+              .WithDefaultPassword()
+              .WithDefaultEmail()
+              .WithDefaultConfirmPassword()
+              .Build();
+            var request = $"{_baseUrl}/registration";
+            var response = await UnauthorizedClient.PostAsync(request, registerRequest);
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Fact]
         public async Task SignIn_SuccessStatusCode()
         {
             var loginRequest = new UserJsonDataBuilder()
