@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Exceptions;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
 using TheraLang.DAL.Entities;
@@ -30,8 +32,6 @@ namespace TheraLang.BLL.Services
 
         public async Task DeleteAsync(int id)
         {
-            try
-            {
                 var memberFee = await _unitOfWork.Repository<MemberFee>().Get(x => x.Id == id);
                 if (memberFee == null)
                 {
@@ -41,24 +41,15 @@ namespace TheraLang.BLL.Services
 
                 _unitOfWork.Repository<MemberFee>().Remove(memberFee);
                 await _unitOfWork.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                e.Data["Id"] = id;
-                throw;
-            }
         }
 
         public async Task AddAsync(MemberFeeDto memberFeeDto)
         {
-            try
-            {
-                if (memberFeeDto == null)
+                var minDate = getMinDate();
+                if (memberFeeDto.FeeDate <= minDate)
                 {
-                    throw new NullReferenceException(
-                        $"{nameof(MemberFeeDto)} cannot be null");
+                    throw new InvalidArgumentException(nameof(MemberFeeDto.FeeDate), $"FeeDate is less than {minDate}");
                 }
-
                 var newDate = new DateTime(memberFeeDto.FeeDate.Year, memberFeeDto.FeeDate.Month, 1);
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeDto, MemberFee>()
                 .ForMember(p => p.FeeDate,opt => opt.MapFrom(n=> newDate)))
@@ -68,16 +59,15 @@ namespace TheraLang.BLL.Services
 
                 _unitOfWork.Repository<MemberFee>().Add(memberFee);
                 await _unitOfWork.SaveChangesAsync();
-            }
-            catch (NullReferenceException)
+        }
+        private DateTime getMinDate()
+        {
+            DateTime minDate = DateTime.Now.AddMonths(-1);
+            if (GetMemberFeesAsync().Result.Any())
             {
-                throw;
+                minDate = GetMemberFeesAsync().Result.LastOrDefault().FeeDate.AddMonths(1);
             }
-            catch (Exception ex)
-            {
-                ex.Data[nameof(MemberFee)] = memberFeeDto;
-                throw new Exception($"Cannot add new {nameof(MemberFee)}.", ex);
-            }
+            return minDate;
         }
     }
 }

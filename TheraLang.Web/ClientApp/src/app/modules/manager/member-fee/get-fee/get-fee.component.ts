@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MemberFee } from 'src/app/shared/models/member-fee/member-fee';
 import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/core/services/dialog/dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
+import { MemberFee } from 'src/app/shared/models/member-fee/member-fee';
 
 @Component({
   selector: 'app-get-fee',
@@ -13,7 +13,7 @@ import { NotificationService } from 'src/app/core/services/notification/notifica
 })
 export class GetFeeComponent implements OnInit {
 
-  memberFee: MemberFee = new MemberFee();
+  memberFee: MemberFee = new MemberFee(); 
   memberFees: MemberFee[] = [];
   constructor(
     private router: Router,

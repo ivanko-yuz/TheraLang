@@ -2,14 +2,14 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MemberFee } from 'src/app/shared/models/member-fee/member-fee';
 import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
 import { Router } from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
-import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {MatDatepicker} from '@angular/material/datepicker';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 import * as _moment from 'moment';
 
- const moment = _moment;
+const moment = _moment;
 
 export const MY_FORMATS = {
   parse: {
@@ -34,22 +34,34 @@ export const MY_FORMATS = {
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
     },
 
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ]
 })
 export class CreateFeeComponent implements OnInit {
   memberFee: MemberFee = new MemberFee();
   memberFees: MemberFee[] = [];
   date = new FormControl(moment());
-  
+  minDate = new Date();
   constructor(
     private router: Router,
     private memberFeeService: MemberFeeService
-    ) { }
+  ) { }
 
   ngOnInit() {
-    this.memberFee.feeDate = this.date.value,
-    this.memberFee.feeAmount = 1
+    this.memberFee.feeDate = this.date.value;
+    this.memberFee.feeAmount = 1;
+    this.loadMemberFees();    
+  }
+  loadMemberFees() {
+    this.memberFeeService.getMemberFees().subscribe({
+      next: (data: MemberFee[]) => {
+        this.memberFees = data;
+        if(data[data.length-1] && data[data.length-1].feeDate ){
+          this.minDate = new Date( data[data.length-1].feeDate);
+          this.minDate.setMonth(this.minDate.getMonth()+1);
+        }
+    }
+    });
   }
 
   save() {
@@ -84,5 +96,5 @@ export class CreateFeeComponent implements OnInit {
     this.date.setValue(ctrlValue);
     this.memberFee.feeDate = this.date.value;
     datepicker.close();
-  }  
+  }
 }
