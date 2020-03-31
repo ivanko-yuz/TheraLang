@@ -76,9 +76,7 @@ namespace TheraLang.Tests.Services
             int id = 4;
             Func<Task> act = async () => await memberFeeService.DeleteAsync(id);
 
-            act.Should().Throw<ArgumentNullException>()
-                .WithMessage($"Value cannot be null.\n" +
-                $"Parameter name: Error while deleting member fee. Fee with {nameof(id)}={id} not found");
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
@@ -110,8 +108,7 @@ namespace TheraLang.Tests.Services
 
             mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Never());
             mockRepo.Verify(x => x.Add(It.IsAny<MemberFee>()), Times.Never());
-            act.Should().Throw<NullReferenceException>()
-                .WithMessage("Object reference not set to an instance of an object.");
+            act.Should().Throw<NullReferenceException>();
         }
         [Fact]
         public void AddAsync_ShouldThrowInvalidArgumentException()
@@ -126,8 +123,7 @@ namespace TheraLang.Tests.Services
 
             mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Never());
             mockRepo.Verify(x => x.Add(It.IsAny<MemberFee>()), Times.Never());
-            act.Should().Throw<InvalidArgumentException>()
-                .WithMessage($"Invalid parameter: {nameof(MemberFeeDto.FeeDate)}, reason: {"Invalid FeeDate"}");
+            act.Should().Throw<InvalidArgumentException>();
         }
     }
 }

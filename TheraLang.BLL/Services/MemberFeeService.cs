@@ -48,7 +48,7 @@ namespace TheraLang.BLL.Services
                 var minDate = getMinDate();
                 if (memberFeeDto.FeeDate <= minDate)
                 {
-                    throw new InvalidArgumentException(nameof(MemberFeeDto.FeeDate), "Invalid FeeDate");
+                    throw new InvalidArgumentException(nameof(MemberFeeDto.FeeDate), $"FeeDate is less than {minDate}");
                 }
                 var newDate = new DateTime(memberFeeDto.FeeDate.Year, memberFeeDto.FeeDate.Month, 1);
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeDto, MemberFee>()
@@ -63,7 +63,7 @@ namespace TheraLang.BLL.Services
         private DateTime getMinDate()
         {
             DateTime minDate = DateTime.Now.AddMonths(-1);
-            if (GetMemberFeesAsync().Result.Count() > 0)
+            if (GetMemberFeesAsync().Result.Any())
             {
                 minDate = GetMemberFeesAsync().Result.LastOrDefault().FeeDate.AddMonths(1);
             }

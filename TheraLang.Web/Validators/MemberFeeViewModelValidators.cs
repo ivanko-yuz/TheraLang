@@ -7,7 +7,7 @@ namespace TheraLang.Web.Validators
     {
         public MemberFeeViewModelValidators()
         {
-            RuleFor(x => x.FeeDate).NotNull().NotEmpty();
+            RuleFor(x => x.FeeDate).NotNull();
             RuleFor(x => x.FeeAmount).GreaterThan(0);
         }
     }

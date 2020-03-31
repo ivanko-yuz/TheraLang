@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
@@ -10,7 +10,7 @@ using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = RolesConstants.Admin)]
     [Route("api/memberFee")]
     [ApiController]
     public class MemberFeeController : ControllerBase
