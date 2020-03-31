@@ -12,13 +12,13 @@ export class HttpProjectService {
   }
 
   GetProjectsByStatus(status: number) {
-    return this.http.get(this.url + "/newstatus/" + status);
+    return this.http.get(`${this.url}/newstatus/${status}`);
   }
 
   Approve(id: number) {
-    return this.http.get(this.url + "/approve/" + id);
+    return this.http.get(`${this.url}/approve/${id}`);
   }
   Reject(id: number) {
-    return this.http.get(this.url + "/reject/" + id);
+    return this.http.get(`${this.url}/reject/${id}`);
   }
 }

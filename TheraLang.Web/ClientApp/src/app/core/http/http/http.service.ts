@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { baseUrl } from "src/app/configs/api-endpoint.constants";
-
+import { baseUrl,projectUrl,resourceUrl,projectTypeUrl } from "src/app/configs/api-endpoint.constants";
 @Injectable()
 export class HttpService {
   constructor(private http: HttpClient) {}
@@ -9,55 +8,41 @@ export class HttpService {
   private url = baseUrl;
 
   getAllProjects() {
-    return this.http.get(this.url + "projects");
+    return this.http.get(`${projectUrl}`);
   }
   getAllProjectsFiltered(query:string) {
-    return this.http.get(this.url + "projects" + query);
+    return this.http.get(`${projectUrl}${query}`);
   }
 
   getProjectInfo(id: number) {
-    return this.http.get(this.url + "projects" + "/" + id);
+    return this.http.get(`${projectUrl}/${id}`);
   }
 
-  getResourcesByCategoryId(
-    categoryId: number,
-    pageNumber: number,
-    recordsPerPage: number
-  ) {
-    return this.http.get(
-      this.url +
-        "resources/all/" +
-        categoryId +
-        "/" +
-        pageNumber +
-        "/" +
-        recordsPerPage
-    );
+  getResourcesByCategoryId(categoryId: number, pageNumber: number, recordsPerPage: number) {
+    return this.http.get(`${resourceUrl}/all/${categoryId}/${pageNumber}/${recordsPerPage}`);
   }
 
   getResourceCategories(withAssignedResources: boolean) {
-    return this.http.get(
-      this.url + "resources/categories" + "/" + withAssignedResources
-    );
+    return this.http.get(`${resourceUrl}/categories/${withAssignedResources}`);
   }
 
   getResourcesCountByCategoryId(categoryId: number) {
-    return this.http.get(this.url + "resources/count" + "/" + categoryId);
+    return this.http.get(`${resourceUrl}/count/${categoryId}`);
   }
 
   getAllResourcesById(projectId: number) {
-    return this.http.get(this.url + "resources/all/" + projectId);
+    return this.http.get(`${resourceUrl}/all/${projectId}`);
   }
 
   getAllProjectTypes() {
-    return this.http.get(this.url + "projectTypes");
+    return this.http.get(`${projectTypeUrl}`);
   }
 
   deleteProject(id: number) {
-    return this.http.delete(this.url + "projects" + "/" + id);
+    return this.http.delete(`${projectUrl}/${id}`);
   }
 
   getAllNewProjects() {
-    return this.http.get(this.url + "projects/new");
+    return this.http.get(`${projectUrl}/new`);
   }
 }
