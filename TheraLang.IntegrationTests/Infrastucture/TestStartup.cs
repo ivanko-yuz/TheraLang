@@ -36,7 +36,6 @@ namespace TheraLang.IntegrationTests
             services.AddAuthentication("Test")
                     .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
                         "Test", options => { });
-            services.Configure<TokenManagement>(Configuration.GetSection("tokenManagement"));
         }
 
         protected override void ConfigureDatabase(IServiceCollection services)

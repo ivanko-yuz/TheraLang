@@ -76,29 +76,11 @@ namespace TheraLang.IntegrationTests.ControllersTests
         }
 
         [Fact]
-        public async Task GetAllUsers_FailureUnauthorized()
-        {
-            var request = _baseUrl;
-            var response = await UnauthorizedClient.GetAsync(request);
-            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        }
-        [Fact]
         public async Task GetAllUsers_FailNotAdmin()
         {
             var request = _baseUrl;
             var response = await MemberClient.GetAsync(request);
             Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
-        }
-
-        [Fact]
-        public async Task ChangeRole_FailureUnauthorized()
-        {
-            var role = new UserJsonDataBuilder()
-                .WithDefaultRoleId()
-                .Build();
-            var request = $"{_baseUrl}/{DefaultValues.MemberId}/role";
-            var response = await UnauthorizedClient.PostAsync(request, role);
-            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
 
         [Fact]
@@ -121,14 +103,6 @@ namespace TheraLang.IntegrationTests.ControllersTests
             var request = $"{_baseUrl}/{DefaultValues.MemberId}/role";
             var response = await AdminClient.PostAsync(request, role);
             response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task GetAdminUserView_FailureUnauthorized()
-        {
-            var request = $"{_baseUrl}/admin/{DefaultValues.MemberId}";
-            var response = await UnauthorizedClient.GetAsync(request);
-            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
 
         [Fact]
@@ -156,14 +130,6 @@ namespace TheraLang.IntegrationTests.ControllersTests
         }
 
         [Fact]
-        public async Task GetRoles_FailureUnauthorized()
-        {
-            var request = $"{_baseUrl}/roles";
-            var response = await UnauthorizedClient.GetAsync(request);
-            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
-        }
-
-        [Fact]
         public async Task GetRoles_FailNotAdmin()
         {
             var request = $"{_baseUrl}/roles";
@@ -177,14 +143,6 @@ namespace TheraLang.IntegrationTests.ControllersTests
             var request = $"{_baseUrl}/{DefaultValues.MemberId}/role";
             var response = await AdminClient.GetAsync(request);
             response.EnsureSuccessStatusCode();
-        }
-
-        [Fact]
-        public async Task GetUserRole_FailureUnauthorized()
-        {
-            var request = $"{_baseUrl}/{DefaultValues.MemberId}/role";
-            var response = await UnauthorizedClient.GetAsync(request);
-            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
 
         [Fact]
