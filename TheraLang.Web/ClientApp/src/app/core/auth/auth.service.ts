@@ -49,7 +49,7 @@ export class AuthService {
     ]
   });
   login(loginData) {
-    return this.http.post(this.baseUrl + "/login", loginData);
+    return this.http.post(`${this.baseUrl}/login`, loginData);
   }
 
   registration(req) {
@@ -60,7 +60,7 @@ export class AuthService {
     formData.append("Password", req.Password);
     formData.append("ConfirmPassword", req.ConfirmPassword);
     formData.append("Image", req.Image);
-    return this.http.post(this.baseUrl + "/registration", formData);
+    return this.http.post(`${this.baseUrl}/registration`, formData);
   }
 
   logout() {
@@ -87,7 +87,7 @@ export class AuthService {
   }
 
   getUserName() {
-    return this.http.get(this.baseUrl + "/getUserName", {
+    return this.http.get(`${this.baseUrl}/getUserName`, {
       responseType: "text"
     });
   }
