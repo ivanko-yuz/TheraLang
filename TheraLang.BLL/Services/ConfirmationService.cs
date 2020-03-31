@@ -27,8 +27,7 @@ namespace TheraLang.BLL.Services
             _env = env;
             _unitOfWork = unitOfWork;
             _emailSettings = emailSettings.Value;
-            var apiKey = configuration.GetSection("send_grip_api_key").Value;
-            _emailClient = new SendGridClient(apiKey);
+            _emailClient = emailClient;
         }
 
         public async Task SendEmail(string ConfirmNum, string UserEmail, string PathTo)
