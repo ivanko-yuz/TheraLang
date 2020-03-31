@@ -19,7 +19,7 @@ namespace TheraLang.Tests.Mocks
             Repository.Setup(r => r.Get(It.IsAny<Expression<Func<T, bool>>>()))
                       .ReturnsAsync((Expression<Func<T, bool>> predicate) => testDB
                       .AsQueryable()
-                      .Where(predicate)
+                      .Where(predicate ?? (_ => true))
                       .FirstOrDefault());
             Repository.Setup(r => r.Add(It.IsAny<T>()))
                      .Callback((T item) =>
@@ -28,7 +28,7 @@ namespace TheraLang.Tests.Mocks
                      });
             Repository.Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<T, bool>>>()))
                 .ReturnsAsync((Expression<Func<T, bool>> predicate) => testDB.AsQueryable()
-                .Where((predicate == null ? _ => true : predicate))
+                .Where(predicate ?? (_ => true))
                 .BuildMock().Object);
         }
     }
