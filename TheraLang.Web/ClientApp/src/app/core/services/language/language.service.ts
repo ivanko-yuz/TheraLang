@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
+import {Injectable} from "@angular/core";
 import {Language} from "../../../shared/models/language/languages.enum";
 import {CookieService} from "ngx-cookie-service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class LanguageService {
   public defaultLang: Language = Language.ua;
@@ -11,31 +11,31 @@ export class LanguageService {
   public languages: Language[];
 
   constructor(
-    private cookieService: CookieService
+    private cookieService: CookieService,
   ) {
     this.languages = Object.keys(Language)
-      .filter((elem) => !Number.isInteger(parseInt(elem)))
+      .filter(elem => !Number.isInteger(parseInt(elem)))
       .map(val => Language[val]);
   }
 
   langToString(lang: Language): string {
-    const stringLang:string = Language[lang];
-    if(Number.isNaN(parseInt(stringLang))){
+    const stringLang: string = Language[lang];
+    if (Number.isNaN(parseInt(stringLang))) {
       return stringLang;
     }
     return Language[stringLang];
   }
 
-  getCurrentLang(): Language{
-    return Language[this.cookieService.get("lang")]
+  getCurrentLang(): Language {
+    return Language[this.cookieService.get("lang")];
   }
 
-  setLanguage(lang: Language): void{
-    if(this.cookieService.check("lang")){
+  setLanguage(lang: Language): void {
+    if (this.cookieService.check("lang")) {
       this.cookieService.delete("lang");
     }
-    const exp:Date = new Date(Date.now().valueOf() + 14400000); // 4 Hours
-    this.cookieService.set("lang",this.langToString(lang),exp)
+    const exp: Date = new Date(Date.now().valueOf() + 14400000); // 4 Hours
+    this.cookieService.set("lang", this.langToString(lang), exp);
   }
 
   setIfNotExists(): string {

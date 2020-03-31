@@ -3,26 +3,26 @@ import { HttpClient } from "@angular/common/http";
 import { FormBuilder, Validators } from "@angular/forms";
 import { accountUrl } from "src/app/configs/api-endpoint.constants";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { Roles } from 'src/app/shared/models/roles/roles';
+import { Roles } from "src/app/shared/models/roles/roles";
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 
 export class UserService {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
   ) {}
   loginForm = this.fb.group({
     username: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
     ],
     password: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
-    ]
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
+    ],
   });
   readonly baseUrl = accountUrl;
   login(loginData) {
@@ -32,7 +32,7 @@ export class UserService {
     localStorage.removeItem("jwt");
   }
   isAuthenticated() {
-    let token: string = localStorage.getItem("jwt");
+    const token: string = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
       return true;
     } else {
@@ -40,10 +40,10 @@ export class UserService {
     }
   }
 
-  isRole(userRole: Roles){
-    let token: string = localStorage.getItem("jwt");
+  isRole(userRole: Roles) {
+    const token: string = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
-      let role = this.jwtHelper.decodeToken(token)[
+      const role = this.jwtHelper.decodeToken(token)[
         "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
       ];
       if (role === userRole) {
@@ -56,18 +56,17 @@ export class UserService {
 
   getUserName() {
     return this.http.get(`${this.baseUrl}/getUserName`, {
-      responseType: "text"
+      responseType: "text",
     });
   }
-  getCurrentUserId()
-  {
-    let token: string = localStorage.getItem("jwt");
+  getCurrentUserId() {
+    const token: string = localStorage.getItem("jwt");
     if (token && !this.jwtHelper.isTokenExpired(token)) {
-      let jwtData = this.jwtHelper.decodeToken(token);
-      let userId = jwtData['Id'];
+      const jwtData = this.jwtHelper.decodeToken(token);
+      const userId = jwtData.Id;
       return userId;
-    }
-    else
+    } else {
     return undefined;
+    }
   }
 }

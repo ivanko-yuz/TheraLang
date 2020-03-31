@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild, AfterViewChecked, ElementRef, OnDestroy } from '@angular/core';
-import { MessangerService } from 'src/app/core/http/messanger/messanger.service';
-import { Chat } from 'src/app/shared/models/chat/chat';
-import { Message } from 'src/app/shared/models/message/message';
-import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr'
-import { UserService } from 'src/app/core/auth/user.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PaginationParams } from 'src/app/shared/models/pagination-params/pagination-params';
+import { Component, OnInit, ViewChild, AfterViewChecked, ElementRef, OnDestroy } from "@angular/core";
+import { MessangerService } from "src/app/core/http/messanger/messanger.service";
+import { Chat } from "src/app/shared/models/chat/chat";
+import { Message } from "src/app/shared/models/message/message";
+import { HubConnection, HubConnectionBuilder } from "@aspnet/signalr";
+import { UserService } from "src/app/core/auth/user.service";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { PaginationParams } from "src/app/shared/models/pagination-params/pagination-params";
 
 @Component({
-  selector: 'app-messanger',
-  templateUrl: './messanger.component.html',
-  styleUrls: ['./messanger.component.less']
+  selector: "app-messanger",
+  templateUrl: "./messanger.component.html",
+  styleUrls: ["./messanger.component.less"],
 })
 export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   currentChat: Chat;
@@ -22,10 +22,10 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   form: FormGroup;
   chatsExist: boolean;
   pageSize = 15;
-  @ViewChild('chatScroller', { static: false }) scroll: ElementRef;
+  @ViewChild("chatScroller", { static: false }) scroll: ElementRef;
 
   constructor(private messangerService: MessangerService,
-    private userService: UserService) {
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -56,7 +56,7 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   loadMessages() {
-    let paginationParams: PaginationParams = { pageNumber: this.pageNumber, pageSize: this.pageSize }
+    const paginationParams: PaginationParams = { pageNumber: this.pageNumber, pageSize: this.pageSize };
     this.messangerService.getMessages(this.currentChat.id, paginationParams)
       .subscribe(async (data: Message[]) => {
         this.messages.unshift(...data.reverse());
@@ -66,7 +66,7 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   scrollToBottom(): void {
     if (this.disableScrollDown) {
-      return
+      return;
     }
     try {
       this.scroll.nativeElement.scrollTop = this.scroll.nativeElement.scrollHeight;
@@ -74,8 +74,8 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   onScroll() {
-    let element = this.scroll.nativeElement;
-    let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
+    const element = this.scroll.nativeElement;
+    const atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
     if (this.disableScrollDown && atBottom) {
       this.disableScrollDown = false;
     }
@@ -83,23 +83,21 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (element.scrollTop == 0 && this.pageNumber <= this.currentChat.pagesCount) {
       this.loadMessages();
       element.scrollTop = 35;
-    }
-
-    else {
+    } else {
       this.disableScrollDown = true;
     }
   }
 
   joinToChat(chatId: number) {
-    this.hubConnection.invoke('joinRoom', chatId);
+    this.hubConnection.invoke("joinRoom", chatId);
   }
 
   connect() {
     this.hubConnection
       .start()
-      .catch(function (err) {
-        console.log(err)
-      })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 
   listenChat() {
@@ -112,7 +110,7 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   leaveChat() {
     if (this.currentChat) {
-      this.hubConnection.invoke('leaveRoom', this.currentChat.id);
+      this.hubConnection.invoke("leaveRoom", this.currentChat.id);
     }
   }
 
@@ -138,14 +136,14 @@ export class MessangerComponent implements OnInit, AfterViewChecked, OnDestroy {
   sendMessage() {
     const message: Message = {
       text: this.form.value.messageText,
-      chatId: this.currentChat.id
+      chatId: this.currentChat.id,
     };
 
     this.messangerService.sendMessage(message).subscribe(async (msg: string) => {
       this.form.reset();
       this.disableScrollDown = false;
       this.scrollToBottom();
-    }, async (error) => {
+    }, async error => {
       console.log(error);
     });
   }

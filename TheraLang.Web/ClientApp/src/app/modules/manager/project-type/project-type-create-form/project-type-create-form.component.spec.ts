@@ -1,13 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProjectTypeCreateFormComponent } from './project-type-create-form.component';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ProjectTypeCreateFormComponent } from "./project-type-create-form.component";
 
-describe('ProjectTypeCreateFormComponent', () => {
+describe("ProjectTypeCreateFormComponent", () => {
   let component: ProjectTypeCreateFormComponent;
   let fixture: ComponentFixture<ProjectTypeCreateFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProjectTypeCreateFormComponent]
+      declarations: [ProjectTypeCreateFormComponent],
     })
       .compileComponents();
   }));
@@ -18,7 +18,7 @@ describe('ProjectTypeCreateFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

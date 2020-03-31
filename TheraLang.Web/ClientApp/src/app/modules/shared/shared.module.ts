@@ -1,23 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PageViewComponent } from './page-view/page-view.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { PageViewComponent } from "./page-view/page-view.component";
 import {QuillModule} from "ngx-quill";
-import {MatCardModule} from '@angular/material/card';
-
-
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
-    PageViewComponent
+    PageViewComponent,
   ],
   imports: [
     CommonModule,
     QuillModule.forRoot(),
-    MatCardModule
+    MatCardModule,
   ],
   exports: [
     PageViewComponent,
-    QuillModule
-  ]
+    QuillModule,
+  ],
 })
 export class SharedModule { }

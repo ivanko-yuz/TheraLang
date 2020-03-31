@@ -5,7 +5,7 @@ import { CmsRoute } from "../../../modules/main/toolbar/toolbar-item/cms-route";
 import { ToolbarItem } from "../../../modules/main/toolbar/cms-pages-toolbar-item/toolbar-item";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class CmsRouteHelperService {
   public currentRoute: CmsRoute;
@@ -43,7 +43,7 @@ export class CmsRouteHelperService {
 
   private getRouteByPathAndUpdate(
     siteSlugMap: Map<string, CmsRoute>,
-    path: string
+    path: string,
   ): void {
     const nextRoute = siteSlugMap.get(path);
     if (nextRoute) {
@@ -56,7 +56,7 @@ export class CmsRouteHelperService {
   public updateRouteByPath(path: string): void {
     if (this.siteMapService.siteMapUpdating || !this.siteSlugMap) {
       this.siteSlugMapSubject.subscribe(next =>
-        this.getRouteByPathAndUpdate(next, path)
+        this.getRouteByPathAndUpdate(next, path),
       );
     } else {
       this.getRouteByPathAndUpdate(this.siteSlugMap, path);
@@ -68,12 +68,12 @@ export class CmsRouteHelperService {
   }
 
   private createSiteSlugMap(
-    toolbarItems: ToolbarItem[]
+    toolbarItems: ToolbarItem[],
   ): Map<string, CmsRoute> {
     const map = new Map<string, CmsRoute>();
     toolbarItems.forEach(item => {
       this.createSiteSlugMap(item.subItems).forEach((value, key) =>
-        map.set(key, value)
+        map.set(key, value),
       );
       map.set(item.permalink, item.cmsRoute);
     });

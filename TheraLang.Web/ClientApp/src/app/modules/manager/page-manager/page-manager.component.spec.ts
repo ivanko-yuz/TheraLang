@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PageManagerComponent } from './page-manager.component';
+import { PageManagerComponent } from "./page-manager.component";
 
-describe('PageManagerComponent', () => {
+describe("PageManagerComponent", () => {
   let component: PageManagerComponent;
   let fixture: ComponentFixture<PageManagerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageManagerComponent ]
+      declarations: [ PageManagerComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('PageManagerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -5,13 +5,13 @@ import { ManagerComponent } from "./manager.component";
 import { SitemapEditorComponent } from "./sitemap-editor/sitemap-editor.component";
 import { PageManagerComponent } from "./page-manager/page-manager.component";
 import { EditPageComponent } from "./page-manager/edit-page/edit-page.component";
-import { MemberFeeComponent } from './member-fee/member-fee.component';
-import { CreateFeeComponent } from './member-fee/create-fee/create-fee.component';
-import { GetFeeComponent } from './member-fee/get-fee/get-fee.component';
-import { ProjectTypeComponent } from './project-type/project-type.component';
-import { ProjectRequestComponent } from './project-request/project-request.component';
-import { UsersListComponent } from './users_list/users-list.component';
-import { PaymentHistoryComponent } from './payment-history/payment-history.component';
+import { MemberFeeComponent } from "./member-fee/member-fee.component";
+import { CreateFeeComponent } from "./member-fee/create-fee/create-fee.component";
+import { GetFeeComponent } from "./member-fee/get-fee/get-fee.component";
+import { ProjectTypeComponent } from "./project-type/project-type.component";
+import { ProjectRequestComponent } from "./project-request/project-request.component";
+import { UsersListComponent } from "./users_list/users-list.component";
+import { PaymentHistoryComponent } from "./payment-history/payment-history.component";
 
 const routes: Routes = [
   {
@@ -23,18 +23,18 @@ const routes: Routes = [
       {
         path: "",
         pathMatch: "full",
-        redirectTo: "/admin/sitemap"
-      }
-    ]
+        redirectTo: "/admin/sitemap",
+      },
+    ],
   },
   {
     path: "sitemap",
-    component: SitemapEditorComponent
+    component: SitemapEditorComponent,
   },
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "sitemap"
+    redirectTo: "sitemap",
   },
   {
     path: "fee", component: MemberFeeComponent,
@@ -44,26 +44,26 @@ const routes: Routes = [
       {
         path: "",
         pathMatch: "full",
-        redirectTo: "/admin/fee/get"
-      }
-    ]
+        redirectTo: "/admin/fee/get",
+      },
+    ],
   },
-  { 
+  {
     path: "projectTypes",
-    component: ProjectTypeComponent
+    component: ProjectTypeComponent,
   },
   {
     path: "users",
-    component: UsersListComponent
+    component: UsersListComponent,
   },
-  { 
+  {
     path: "projectRequest",
-    component: ProjectRequestComponent
+    component: ProjectRequestComponent,
   },
   {
     path: "paymentHistory",
-    component:PaymentHistoryComponent
-  }
+    component: PaymentHistoryComponent,
+  },
 ];
 
 @NgModule({
@@ -72,10 +72,10 @@ const routes: Routes = [
       {
         path: "",
         component: ManagerComponent,
-        children: routes
-      }
-    ])
+        children: routes,
+      },
+    ]),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ManagerRoutingModule {}

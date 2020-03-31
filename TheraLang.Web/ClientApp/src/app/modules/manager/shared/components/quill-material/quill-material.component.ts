@@ -8,50 +8,50 @@ import {
   OnDestroy,
   Injector,
   DoCheck,
-  HostBinding
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, NgControl } from '@angular/forms';
-import { MatFormFieldControl } from '@angular/material';
-import { Subject } from 'rxjs';
-import { FocusMonitor } from '@angular/cdk/a11y';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import Quill from 'quill';
-import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
-import ImageResize from 'quill-image-resize';
-import { ImageDrop } from 'quill-image-drop-module';
- 
-Quill.register('modules/imageDrop', ImageDrop);
-Quill.register('modules/imageResize', ImageResize);
+  HostBinding,
+} from "@angular/core";
+import { NG_VALUE_ACCESSOR, ControlValueAccessor, NgControl } from "@angular/forms";
+import { MatFormFieldControl } from "@angular/material";
+import { Subject } from "rxjs";
+import { FocusMonitor } from "@angular/cdk/a11y";
+import { coerceBooleanProperty } from "@angular/cdk/coercion";
+import Quill from "quill";
+import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
+import ImageResize from "quill-image-resize";
+import { ImageDrop } from "quill-image-drop-module";
+
+Quill.register("modules/imageDrop", ImageDrop);
+Quill.register("modules/imageResize", ImageResize);
 
 @Component({
-  selector: 'quill-material',
-  templateUrl: './quill-material.component.html',
-  styleUrls: ['./quill-material.component.less'],
+  selector: "quill-material",
+  templateUrl: "./quill-material.component.html",
+  styleUrls: ["./quill-material.component.less"],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => QuillMaterialComponent),
-    multi: true
+    multi: true,
   },
   {
     provide: MatFormFieldControl,
-    useExisting: QuillMaterialComponent
+    useExisting: QuillMaterialComponent,
   }],
   host: {
-    '[id]': 'id',
-    '[attr.aria-describedby]': 'describedBy'
-  }
+    "[id]": "id",
+    "[attr.aria-describedby]": "describedBy",
+  },
 })
 
 export class QuillMaterialComponent implements OnInit, DoCheck, OnDestroy, ControlValueAccessor, MatFormFieldControl<any> {
   static nextId = 0;
 
   @HostBinding() id = `quill-material-${QuillMaterialComponent.nextId++}`;
-  @ViewChild('container', { read: ElementRef, static: true }) container: ElementRef;
+  @ViewChild("container", { read: ElementRef, static: true }) container: ElementRef;
 
   stateChanges = new Subject<void>();
   quill: any = Quill;
   editor: any;
-  controlType = 'quill-material';
+  controlType = "quill-material";
   errorState = false;
   ngControl: any;
   touched = false;
@@ -62,24 +62,24 @@ export class QuillMaterialComponent implements OnInit, DoCheck, OnDestroy, Contr
       toolbar:
       {
         container: [
-          ['bold', 'italic', 'underline'],
-          ['blockquote'],
-          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-          [{ 'script': 'sub' }, { 'script': 'super' }],
-          [{ 'indent': '-1' }, { 'indent': '+1' }],
-          [{ 'size': ['small', false, 'large', 'huge'] }],
-          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-          ['link', 'image', 'video'],
-          [{ 'color': [] }],
-          [{ 'font': ['sans-serif'] }],
-          [{ 'align': [] }],
-          ['clean']
-        ]
+          ["bold", "italic", "underline"],
+          ["blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ script: "sub" }, { script: "super" }],
+          [{ indent: "-1" }, { indent: "+1" }],
+          [{ size: ["small", false, "large", "huge"] }],
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          ["link", "image", "video"],
+          [{ color: [] }],
+          [{ font: ["sans-serif"] }],
+          [{ align: [] }],
+          ["clean"],
+        ],
       },
       imageResize: { },
-      imageDrop: true
+      imageDrop: true,
     },
-    theme: 'snow'
+    theme: "snow",
   };
   _value: any;
 
@@ -131,14 +131,14 @@ export class QuillMaterialComponent implements OnInit, DoCheck, OnDestroy, Contr
   @Input()
   options: any = null;
 
-  @HostBinding('class.floating')
+  @HostBinding("class.floating")
   get shouldLabelFloat() {
     return this.focused || !this.empty;
   }
 
-  @HostBinding('attr.aria-describedby') describedBy = '';
+  @HostBinding("attr.aria-describedby") describedBy = "";
   setDescribedByIds(ids: string[]) {
-    this.describedBy = ids.join(' ');
+    this.describedBy = ids.join(" ");
   }
 
   constructor(public elRef: ElementRef, public injector: Injector, public fm: FocusMonitor) {
@@ -152,13 +152,13 @@ export class QuillMaterialComponent implements OnInit, DoCheck, OnDestroy, Contr
     this.ngControl = this.injector.get(NgControl);
     if (this.ngControl != null) { this.ngControl.valueAccessor = this; }
 
-    const editorRef = this.container.nativeElement.querySelector('.editor');
+    const editorRef = this.container.nativeElement.querySelector(".editor");
     const options = this.options || this.defaultOptions;
-    if (typeof options.theme === 'undefined') {
-      options.theme = 'snow';
+    if (typeof options.theme === "undefined") {
+      options.theme = "snow";
     }
     this.editor = new Quill(editorRef, options);
-    this.editor.on('text-change', () => {
+    this.editor.on("text-change", () => {
       if (!this.writingValue) {
         this.onChange(this.getValue());
       }
@@ -234,11 +234,11 @@ export class QuillMaterialComponent implements OnInit, DoCheck, OnDestroy, Contr
       return false;
     }
 
-    if (opsTypes[0] !== 'insert') {
+    if (opsTypes[0] !== "insert") {
       return false;
     }
 
-    if (contents.ops[0].insert !== '\n') {
+    if (contents.ops[0].insert !== "\n") {
       return false;
     }
 

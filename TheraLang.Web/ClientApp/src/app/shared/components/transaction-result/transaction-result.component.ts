@@ -6,7 +6,7 @@ import { LiqpayResponse } from "../../models/lisqpay-response/liqpay-response";
 @Component({
   selector: "app-transaction-result",
   templateUrl: "./transaction-result.component.html",
-  styleUrls: ["./transaction-result.component.less"]
+  styleUrls: ["./transaction-result.component.less"],
 })
 export class TransactionResultComponent implements OnInit {
   liqpayResponse: LiqpayResponse;
@@ -14,7 +14,7 @@ export class TransactionResultComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private donationService: DonationService
+    private donationService: DonationService,
   ) {}
 
   ngOnInit() {

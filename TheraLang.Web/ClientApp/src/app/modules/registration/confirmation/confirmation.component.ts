@@ -7,7 +7,7 @@ import {AuthService} from "../../../core/auth/auth.service";
 @Component({
   selector: "app-confirmation",
   templateUrl: "./confirmation.component.html",
-  styleUrls: ["./confirmation.component.less"]
+  styleUrls: ["./confirmation.component.less"],
 })
 export class ConfirmationComponent implements OnInit {
   confirmed: boolean;
@@ -18,7 +18,7 @@ export class ConfirmationComponent implements OnInit {
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -33,4 +33,4 @@ export class ConfirmationComponent implements OnInit {
     });
   }
 }
-
+

@@ -8,6 +8,6 @@ export class ProjectParticipationRequest {
     public requstedGuidUserId: string,
     public projectName: string,
     public requestedUserName: string,
-    public requestedUserEmail: string
+    public requestedUserEmail: string,
   ) {}
 }

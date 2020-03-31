@@ -5,12 +5,10 @@ import { NotificationService } from "src/app/core/services/notification/notifica
 import { DialogService } from "src/app/core/services/dialog/dialog.service";
 import { Router, ActivatedRoute } from "@angular/router";
 
-
-
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.less"]
+  styleUrls: ["./login.component.less"],
 })
 export class LoginComponent implements OnInit {
   hide = true;
@@ -22,16 +20,16 @@ export class LoginComponent implements OnInit {
     public authService: AuthService,
     private translate: TranslateService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || "/";
   }
 
   onSubmit() {
     this.authService.login(this.authService.loginForm.value).subscribe(response => {
-      const token = (<any>response).token;
+      const token = (response as any).token;
       localStorage.setItem("jwt", token);
       this.notificationService.success(this.translate
         .instant("components.account.logged-in-successfully"));
@@ -51,7 +49,6 @@ export class LoginComponent implements OnInit {
   forgotPassword() {
     this.router.navigateByUrl("/password/forgot");
   }
-
 
   onClose() {
     this.authService.loginForm.reset();

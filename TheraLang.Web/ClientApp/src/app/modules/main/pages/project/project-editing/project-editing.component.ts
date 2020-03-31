@@ -3,15 +3,15 @@ import { DateAdapter } from "@angular/material";
 import { ProjectService } from "../../../../../core/http/project/project.service";
 import { ProjectType } from "../../../../../shared/models/project-type/project-type.model";
 import { TranslateService } from "@ngx-translate/core";
-import { Router, ActivatedRoute } from '@angular/router';
-import { Project } from 'src/app/shared/models/project/project';
-import { HttpService } from 'src/app/core/http/http/http.service';
-import { NotificationService } from 'src/app/core/services/notification/notification.service';
+import { Router, ActivatedRoute } from "@angular/router";
+import { Project } from "src/app/shared/models/project/project";
+import { HttpService } from "src/app/core/http/http/http.service";
+import { NotificationService } from "src/app/core/services/notification/notification.service";
 
 @Component({
-  selector: 'app-project-editing',
-  templateUrl: './project-editing.component.html',
-  styleUrls: ['./project-editing.component.less']
+  selector: "app-project-editing",
+  templateUrl: "./project-editing.component.html",
+  styleUrls: ["./project-editing.component.less"],
 })
 export class ProjectEditingComponent implements OnInit {
   projectTypes: ProjectType[];
@@ -25,7 +25,7 @@ export class ProjectEditingComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private httpService: HttpService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
@@ -36,13 +36,13 @@ export class ProjectEditingComponent implements OnInit {
       this.service
         .getProjectTypes()
         .subscribe(
-          (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes)
+          (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes),
         );
-    this.route.params.subscribe(params => { this.projectId = +params['id']; });
+    this.route.params.subscribe(params => { this.projectId = +params.id; });
     this.httpService.getProjectInfo(this.projectId)
       .subscribe((data: Project) => (this.populateForm(data)));
 
-      this.minDate = new Date();
+    this.minDate = new Date();
   }
 
   populateForm(data: Project) {
@@ -55,16 +55,16 @@ export class ProjectEditingComponent implements OnInit {
       projectEnd: data.projectEnd,
       typeId: data.typeId,
       donationTargetSum: data.donationTargetSum,
-      imgUrl:data.imgUrl,
-      imgFile:null
-    })
+      imgUrl: data.imgUrl,
+      imgFile: null,
+    });
   }
 
   onSubmit() {
     if (this.service.form.invalid) {
       const controls = this.service.form.controls;
       Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
+        controls[controlName].markAsTouched(),
       );
       return;
     } else {
@@ -78,9 +78,9 @@ export class ProjectEditingComponent implements OnInit {
         async error => {
           console.log(error);
           this.notificationService.warn(
-            await this.translate.get("common.wth").toPromise()
+            await this.translate.get("common.wth").toPromise(),
           );
-        }
+        },
       );
     }
   }

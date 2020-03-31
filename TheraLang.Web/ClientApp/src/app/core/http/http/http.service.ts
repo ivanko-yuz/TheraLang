@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { baseUrl,projectUrl,resourceUrl,projectTypeUrl } from "src/app/configs/api-endpoint.constants";
+import { baseUrl, projectUrl, resourceUrl, projectTypeUrl } from "src/app/configs/api-endpoint.constants";
 @Injectable()
 export class HttpService {
   constructor(private http: HttpClient) {}
@@ -10,7 +10,7 @@ export class HttpService {
   getAllProjects() {
     return this.http.get(`${projectUrl}`);
   }
-  getAllProjectsFiltered(query:string) {
+  getAllProjectsFiltered(query: string) {
     return this.http.get(`${projectUrl}${query}`);
   }
 

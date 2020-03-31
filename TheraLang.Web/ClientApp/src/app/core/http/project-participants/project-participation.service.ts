@@ -4,7 +4,7 @@ import { participationUrl } from "src/app/configs/api-endpoint.constants";
 import { ProjectParticipationRequestStatus } from "src/app/configs/project-participation-request-status";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ProjectParticipationService {
   constructor(private http: HttpClient) {}
@@ -17,7 +17,7 @@ export class ProjectParticipationService {
 
   changeParticipationStatus(
     requestId: number,
-    requestStatus: ProjectParticipationRequestStatus
+    requestStatus: ProjectParticipationRequestStatus,
   ) {
     return this.http.put(`${this.url}/${requestId}`, requestStatus);
   }
@@ -26,7 +26,7 @@ export class ProjectParticipationService {
     return this.http.post(`${this.url}/create`, projectId);
   }
 
-  getProjectParticipants(projectId){
+  getProjectParticipants(projectId) {
     return this.http.get(`${this.url}/${projectId}`);
   }
 }

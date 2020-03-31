@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MessangerComponent } from './messanger.component';
+import { MessangerComponent } from "./messanger.component";
 
-describe('MessangerComponent', () => {
+describe("MessangerComponent", () => {
   let component: MessangerComponent;
   let fixture: ComponentFixture<MessangerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessangerComponent ]
+      declarations: [ MessangerComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('MessangerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

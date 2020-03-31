@@ -9,7 +9,7 @@ import {AuthService} from "../../../core/auth/auth.service";
 @Component({
   selector: "app-email-conf",
   templateUrl: "./forgot-password.component.html",
-  styleUrls: ["./forgot-password.component.less"]
+  styleUrls: ["./forgot-password.component.less"],
 })
 export class ForgotPasswordComponent implements OnInit {
   constructor(
@@ -19,13 +19,13 @@ export class ForgotPasswordComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {}
 
   forgotPasswordForm = this.fb.group({
     Email: [
       "",
-      [Validators.required, Validators.email]
+      [Validators.required, Validators.email],
     ],
   });
 

@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MessangerService } from 'src/app/core/http/messanger/messanger.service';
-import { Chat } from 'src/app/shared/models/chat/chat';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { MessangerService } from "src/app/core/http/messanger/messanger.service";
+import { Chat } from "src/app/shared/models/chat/chat";
 
 @Component({
-  selector: 'app-chat-list',
-  templateUrl: './chat-list.component.html',
-  styleUrls: ['./chat-list.component.less']
+  selector: "app-chat-list",
+  templateUrl: "./chat-list.component.html",
+  styleUrls: ["./chat-list.component.less"],
 })
 export class ChatListComponent implements OnInit {
   chats: Chat[];

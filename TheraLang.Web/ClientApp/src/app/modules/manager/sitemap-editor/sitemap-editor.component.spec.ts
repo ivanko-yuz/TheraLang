@@ -8,7 +8,7 @@ describe("SitemapEditorComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SitemapEditorComponent]
+      declarations: [SitemapEditorComponent],
     }).compileComponents();
   }));
 

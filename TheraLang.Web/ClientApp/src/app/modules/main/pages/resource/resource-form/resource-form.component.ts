@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {ResourceCategory} from "../../../../../shared/models/resource/resource-category";
 import {Router} from "@angular/router";
 import {Resource} from "../../../../../shared/models/resource/resource";
@@ -12,9 +12,9 @@ import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 
 @Component({
-  selector: 'app-resource-form',
-  templateUrl: './resource-form.component.html',
-  styleUrls: ['./resource-form.component.less']
+  selector: "app-resource-form",
+  templateUrl: "./resource-form.component.html",
+  styleUrls: ["./resource-form.component.less"],
 })
 export class ResourceFormComponent implements OnInit {
 
@@ -29,18 +29,18 @@ export class ResourceFormComponent implements OnInit {
   constructor(
     public service: ResourceService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {
 
   }
 
   ngOnInit() {
     this.categories = this.service
-      .getResourceCategories(null,true).pipe(
+      .getResourceCategories(null, true).pipe(
         catchError(err => {
           console.log(err);
           return throwError(err);
-        })
+        }),
     );
     this.resourceForm = this.formBuilder.group(
       {
@@ -50,29 +50,28 @@ export class ResourceFormComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(3),
-            Validators.maxLength(50)
-          ]
+            Validators.maxLength(50),
+          ],
         ],
         description: [
           this.initValue && this.initValue.description || "",
           [
             Validators.required,
             Validators.minLength(5),
-            Validators.maxLength(512)
-          ]
+            Validators.maxLength(512),
+          ],
         ],
-        url: [this.initValue && this.initValue.url || "",[Validators.maxLength(256), Validators.minLength(4)]],
+        url: [this.initValue && this.initValue.url || "", [Validators.maxLength(256), Validators.minLength(4)]],
         file: [null, [forbiddenExtensionValidator(ForbiddenExts)]],
-        categoryId: [this.initValue && this.initValue.categoryId || null, Validators.required]
+        categoryId: [this.initValue && this.initValue.categoryId || null, Validators.required],
       },
-      {validators: [atLeastOne(Validators.required, ["url", "file"])]}
+      {validators: [atLeastOne(Validators.required, ["url", "file"])]},
     );
 
-    if(this.initValue){
+    if (this.initValue) {
       this.resourceForm.get("url").disable();
       this.resourceForm.get("file").disable();
-    }
-    else {
+    } else {
       this.resourceForm.get("file").valueChanges.subscribe(val => {
         const isValidFile = !this.isNullOrEmpty(val);
         if (isValidFile) {
@@ -96,7 +95,7 @@ export class ResourceFormComponent implements OnInit {
     if (this.resourceForm.invalid) {
       const controls = this.resourceForm.controls;
       Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
+        controls[controlName].markAsTouched(),
       );
       return;
     }
@@ -109,7 +108,6 @@ export class ResourceFormComponent implements OnInit {
     }
     this.onFormSubmit.emit(resource);
   }
-
 
   isNullOrEmpty(fileInput: FileInput) {
     if (fileInput == null) {

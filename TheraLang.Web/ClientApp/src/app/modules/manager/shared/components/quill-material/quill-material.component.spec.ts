@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { QuillMaterialComponent } from './quill-material.component';
+import { QuillMaterialComponent } from "./quill-material.component";
 
-describe('QuillMaterialComponent', () => {
+describe("QuillMaterialComponent", () => {
   let component: QuillMaterialComponent;
   let fixture: ComponentFixture<QuillMaterialComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuillMaterialComponent ]
+      declarations: [ QuillMaterialComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('QuillMaterialComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

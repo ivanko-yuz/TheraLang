@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ResourcesViewComponent } from './resources-view.component';
+import { ResourcesViewComponent } from "./resources-view.component";
 
-describe('ResourcesViewComponent', () => {
+describe("ResourcesViewComponent", () => {
   let component: ResourcesViewComponent;
   let fixture: ComponentFixture<ResourcesViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourcesViewComponent ]
+      declarations: [ ResourcesViewComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('ResourcesViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-import { Message } from '../message/message';
+import { Message } from "../message/message";
 
 export class Chat {
   id?: number;

@@ -7,12 +7,10 @@ import { Router, ActivatedRoute } from "@angular/router";
 import {UserService} from "../../core/services/user/user.service";
 import {User} from "../../shared/models/user/user";
 
-
-
 @Component({
   selector: "app-user-profile",
   templateUrl: "./user-page.component.html",
-  styleUrls: ["./user-page.component.less"]
+  styleUrls: ["./user-page.component.less"],
 })
 export class UserPageComponent implements OnInit {
   userID: string;

@@ -9,7 +9,7 @@ export class ToolbarItem {
     route: string,
     cmsRoute: CmsRoute,
     title: string,
-    subItems?: ToolbarItem[]
+    subItems?: ToolbarItem[],
   ) {
     this.title = title;
     this.subItems = subItems ? subItems : [];

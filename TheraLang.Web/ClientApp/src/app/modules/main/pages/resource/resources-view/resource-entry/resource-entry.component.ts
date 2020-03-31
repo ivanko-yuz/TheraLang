@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Resource} from "../../../../../../shared/models/resource/resource";
 import {AuthService} from "../../../../../../core/auth/auth.service";
 
 @Component({
-  selector: 'app-resource-entry',
-  templateUrl: './resource-entry.component.html',
-  styleUrls: ['./resource-entry.component.less']
+  selector: "app-resource-entry",
+  templateUrl: "./resource-entry.component.html",
+  styleUrls: ["./resource-entry.component.less"],
 })
 export class ResourceEntryComponent implements OnInit {
 
@@ -13,7 +13,7 @@ export class ResourceEntryComponent implements OnInit {
   @Output() resourceDeleted: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
   ) { }
 
   ngOnInit() {

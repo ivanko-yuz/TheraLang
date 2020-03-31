@@ -21,12 +21,12 @@ import { ResourcesComponent } from "./modules/main/pages/resource/resources.comp
 import { ResourceCreateComponent } from "./modules/main/pages/resource/resource-create/resource-create.component";
 import {ResourceEditComponent} from "./modules/main/pages/resource/resource-edit/resource-edit.component";
 import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-table/resources-table.component";
-import { MessangerComponent } from './modules/messanger/messanger.component';
+import { MessangerComponent } from "./modules/messanger/messanger.component";
 import {RegistrationComponent} from "./modules/registration/registration.component";
 import {UserPageComponent} from "./modules/user-page/user-page.component";
 import {ProfileComponent} from "./modules/profile/profile.component";
-import { NewsEditComponent } from './modules/main/pages/news/news-edit/news-edit.component';
-import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
+import { NewsEditComponent } from "./modules/main/pages/news/news-edit/news-edit.component";
+import {ProfileEditComponent} from "./modules/profile/edit/profile-edit.component";
 import {ConfirmationComponent} from "./modules/registration/confirmation/confirmation.component";
 import {ResetPasswordComponent} from "./modules/password/reset-password.component";
 import {ForgotPasswordComponent} from "./modules/password/email/forgot-password.component";
@@ -40,17 +40,17 @@ const routes: Routes = [
       {
         path: "participants",
         component: ProjectParticipantsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         path: "projects/create",
         component: ProjectCreationComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         path: "projects/edit/:id",
         component: ProjectEditingComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       { path: "projects/:id", component: ProjectInfoComponent },
       { path: "projects", component: ProjectComponent },
@@ -64,12 +64,12 @@ const routes: Routes = [
           {path: "create", component: ResourceCreateComponent},
           {path: "", pathMatch: "full", component: ResourcesTableComponent},
           {path: ":categoryId", component: ResourcesTableComponent},
-          {path: "edit/:resourceId", component: ResourceEditComponent}
-        ]
+          {path: "edit/:resourceId", component: ResourceEditComponent},
+        ],
       },
       {
         path: "transaction/:donationId",
-        component: TransactionResultComponent
+        component: TransactionResultComponent,
       },
       {
         path: "users/:userID",
@@ -83,7 +83,7 @@ const routes: Routes = [
       },
       {
         path: "profile/edit",
-        component: ProfileEditComponent
+        component: ProfileEditComponent,
       },
       {path: "news", component: NewsPageComponent},
       {path: "news/create", component: NewsCreateComponent},
@@ -96,7 +96,7 @@ const routes: Routes = [
       {
         component: MessangerComponent,
         path: "messanger",
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         component: ConfirmationComponent,
@@ -114,7 +114,7 @@ const routes: Routes = [
   {
     path: "page-not-found",
     component: NotFoundComponent,
-    pathMatch: "full"
+    pathMatch: "full",
   },
   {
     path: "password/forgot",
@@ -127,17 +127,17 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "page-not-found",
-    pathMatch: "full"
-  }
+    pathMatch: "full",
+  },
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      onSameUrlNavigation: "reload"
-    })
+      onSameUrlNavigation: "reload",
+    }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
 
@@ -151,5 +151,5 @@ export const routingComponents = [
   TransactionResultComponent,
   DonationComponent,
   LoginComponent,
-  MainComponent
+  MainComponent,
 ];

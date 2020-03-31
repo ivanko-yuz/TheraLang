@@ -7,16 +7,16 @@ import { HttpService } from "src/app/core/http/http/http.service";
 @Component({
   selector: "app-project-request",
   templateUrl: "./project-request.component.html",
-  styleUrls: ["./project-request.component.less"]
+  styleUrls: ["./project-request.component.less"],
 })
 export class ProjectRequestComponent implements OnInit {
   projects: Project[];
   projectService: HttpProjectService;
-  showActionButtons: boolean = true;
+  showActionButtons = true;
 
   constructor(
     private http: HttpService,
-    private projectRequestService: HttpProjectService
+    private projectRequestService: HttpProjectService,
   ) {}
 
   changeStatus(status: string, project: Project) {

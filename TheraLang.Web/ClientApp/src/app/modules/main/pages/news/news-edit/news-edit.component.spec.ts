@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NewsEditComponent } from './news-edit.component';
+import { NewsEditComponent } from "./news-edit.component";
 
-describe('NewsEditComponent', () => {
+describe("NewsEditComponent", () => {
   let component: NewsEditComponent;
   let fixture: ComponentFixture<NewsEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewsEditComponent ]
+      declarations: [ NewsEditComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('NewsEditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

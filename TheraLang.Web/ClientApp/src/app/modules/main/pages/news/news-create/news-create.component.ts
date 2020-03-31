@@ -1,34 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NewsService } from 'src/app/core/http/news/news.service';
-import { Router } from '@angular/router';
-import { NewsCreate } from 'src/app/shared/models/news/newsCreate';
-import { TranslateService } from '@ngx-translate/core';
-import { NotificationService } from 'src/app/core/services/notification/notification.service';
-import { Resource } from 'src/app/shared/models/resource/resource';
-import { FileInput } from 'ngx-material-file-input';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { NewsService } from "src/app/core/http/news/news.service";
+import { Router } from "@angular/router";
+import { NewsCreate } from "src/app/shared/models/news/newsCreate";
+import { TranslateService } from "@ngx-translate/core";
+import { NotificationService } from "src/app/core/services/notification/notification.service";
+import { Resource } from "src/app/shared/models/resource/resource";
+import { FileInput } from "ngx-material-file-input";
 
 @Component({
-  selector: 'app-news-create',
-  templateUrl: './news-create.component.html',
-  styleUrls: ['./news-create.component.less']
+  selector: "app-news-create",
+  templateUrl: "./news-create.component.html",
+  styleUrls: ["./news-create.component.less"],
 })
 export class NewsCreateComponent implements OnInit {
 
   public newsForm: FormGroup;
 
   constructor(
-    private service:NewsService,
+    private service: NewsService,
     private router: Router,
     private translate: TranslateService,
-    private notificationService: NotificationService
-    )
-    {
+    private notificationService: NotificationService,
+    ) {
     this.newsForm = new FormGroup({
-      "title":new FormControl("",[Validators.required,Validators.maxLength(250), Validators.minLength(3)]),
-      "text":new FormControl("", [Validators.required,Validators.maxLength(10000), Validators.minLength(5)]),
-      "previewImage":new FormControl(null,[Validators.required,Validators.max(1)]),
-      "contentImages":new FormControl(null)
+      title: new FormControl("", [Validators.required, Validators.maxLength(250), Validators.minLength(3)]),
+      text: new FormControl("", [Validators.required, Validators.maxLength(10000), Validators.minLength(5)]),
+      previewImage: new FormControl(null, [Validators.required, Validators.max(1)]),
+      contentImages: new FormControl(null),
     });
   }
 
@@ -40,7 +39,7 @@ export class NewsCreateComponent implements OnInit {
       title: "",
       text: "",
       previewImage: null,
-      contentImages: null
+      contentImages: null,
     });
   }
 
@@ -48,17 +47,16 @@ export class NewsCreateComponent implements OnInit {
     if (this.newsForm.invalid) {
       const controls = this.newsForm.controls;
       Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
+        controls[controlName].markAsTouched(),
       );
       return;
-    }
-    else {
+    } else {
       const formData = new FormData();
-      const prev_img: FileInput = this.newsForm.get('previewImage').value;
-      const cont_imgs: FileInput = this.newsForm.get('contentImages').value;
+      const prev_img: FileInput = this.newsForm.get("previewImage").value;
+      const cont_imgs: FileInput = this.newsForm.get("contentImages").value;
       const file = prev_img.files[0];
-      let files:File[]=[]
-      if(cont_imgs){
+      let files: File[] = [];
+      if (cont_imgs) {
         files = cont_imgs.files;
       }
       const news = this.newsForm.value as NewsCreate;
@@ -67,7 +65,7 @@ export class NewsCreateComponent implements OnInit {
       formData.append("mainImage", file);
       if (files.length > 0) {
         for (let i = 0; i < files.length; i++) {
-          formData.append('contentImages', files[i]);
+          formData.append("contentImages", files[i]);
         }
       }
       this.service.createNews(formData).subscribe(
@@ -81,9 +79,9 @@ export class NewsCreateComponent implements OnInit {
         async error => {
           console.log(error);
           this.notificationService.warn(
-            await this.translate.get("common.wth").toPromise()
+            await this.translate.get("common.wth").toPromise(),
           );
-        })
+        });
       this.router.navigate(["/news/create"]);
     }
   }

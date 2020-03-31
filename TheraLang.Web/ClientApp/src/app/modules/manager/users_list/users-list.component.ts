@@ -1,17 +1,17 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit, Output} from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import {ChangeRoleComponent} from "./change-role/change-role.component";
 import {MatDialog} from "@angular/material";
-import { UserService } from 'src/app/core/services/user/user.service';
-import { Role } from 'src/app/shared/models/role/role';
-import { User, UserPageViewModel } from 'src/app/shared/models/user/user';
+import { UserService } from "src/app/core/services/user/user.service";
+import { Role } from "src/app/shared/models/role/role";
+import { User, UserPageViewModel } from "src/app/shared/models/user/user";
 
 @Component({
   selector: "app-user-profile",
   templateUrl: "./users-list.component.html",
-  styleUrls: ["./users-list.component.less"]
+  styleUrls: ["./users-list.component.less"],
 })
 export class UsersListComponent implements OnInit {
   returnUrl: string;
@@ -24,7 +24,7 @@ export class UsersListComponent implements OnInit {
     private userService: UserService,
     private translate: TranslateService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class UsersListComponent implements OnInit {
             data: {
               rolesList: roles,
               userRoleId: value.id,
-            }
+            },
           });
           dialog.afterClosed().subscribe(result => {
             if (result === undefined) {

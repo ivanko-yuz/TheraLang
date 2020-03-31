@@ -1,17 +1,17 @@
 import { Injectable } from "@angular/core";
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from "@angular/common/http";
 import { FormBuilder, Validators } from "@angular/forms";
 import {accountUrl, userUrl} from "src/app/configs/api-endpoint.constants";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import {User} from '../../../shared/models/user/user';
+import {User} from "../../../shared/models/user/user";
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class UserService {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
   ) {}
 
   readonly baseUrl = userUrl;

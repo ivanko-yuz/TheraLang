@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ResourceCategory} from 'src/app/shared/models/resource/resource-category';
+import {Component, Input, OnInit} from "@angular/core";
+import {ResourceCategory} from "src/app/shared/models/resource/resource-category";
 import {ResourceService} from "../../../../../../core/http/resource/resource.service";
 import {Observable, throwError} from "rxjs";
 import {Resource} from "../../../../../../shared/models/resource/resource";
@@ -9,34 +9,34 @@ import {DialogService} from "../../../../../../core/services/dialog/dialog.servi
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-resource-category',
-  templateUrl: './resource-category.component.html',
-  styleUrls: ['./resource-category.component.less']
+  selector: "app-resource-category",
+  templateUrl: "./resource-category.component.html",
+  styleUrls: ["./resource-category.component.less"],
 })
 export class ResourceCategoryComponent implements OnInit {
 
   @Input() category: ResourceCategory;
   @Input() projectId: number;
-  pageSize: number = 6;
-  maxPagesOnControls:number = 5;
+  pageSize = 6;
+  maxPagesOnControls = 5;
 
   paginationConfig: PaginationInstance = {
     currentPage: 1,
-    itemsPerPage: this.pageSize
+    itemsPerPage: this.pageSize,
   };
-  loaded: boolean = false;
+  loaded = false;
 
   resources: Observable<Resource[]>;
 
   constructor(
     private resourceService: ResourceService,
     private dialogService: DialogService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) { }
 
   ngOnInit() {
     this.paginationConfig.id = this.category.type;
-    this.resourceService.countTotalResources(this.category.id,this.projectId).toPromise()
+    this.resourceService.countTotalResources(this.category.id, this.projectId).toPromise()
       .then(res => {
         this.paginationConfig.totalItems = res as number;
         this.onPageChange(1);
@@ -44,11 +44,11 @@ export class ResourceCategoryComponent implements OnInit {
       });
   }
 
-  onPageChange(pageNumber:number){
+  onPageChange(pageNumber: number) {
     this.resources = this.getPage(pageNumber);
   }
 
-  getPage(pageNumber: number) : Observable<Resource[]>{
+  getPage(pageNumber: number): Observable<Resource[]> {
     return this.resourceService.getRosourcesByCategory(this.category.id, this.projectId, pageNumber, this.pageSize).pipe(
       catchError(err => {
         return throwError(err);
@@ -56,8 +56,8 @@ export class ResourceCategoryComponent implements OnInit {
       map(res => {
         this.paginationConfig.currentPage = pageNumber;
         return res;
-      })
-    )
+      }),
+    );
   }
 
   onDelete(resourceId: number) {
@@ -71,13 +71,13 @@ export class ResourceCategoryComponent implements OnInit {
               this.resourceService.deleteResource(resourceId).subscribe(
                 res => {
                   this.onPageChange(this.paginationConfig.currentPage);
-                  this.resourceService.countTotalResources(this.category.id,this.projectId).subscribe({
-                    next: value1 => this.paginationConfig.totalItems = value1 as number
-                  })
+                  this.resourceService.countTotalResources(this.category.id, this.projectId).subscribe({
+                    next: value1 => this.paginationConfig.totalItems = value1 as number,
+                  });
                 });
-            }
+            },
           });
-      }
-    })
+      },
+    });
   }
 }

@@ -14,7 +14,7 @@ export class ProjectTypeService {
   constructor(
     private http: ProjectTypeHttp,
     private notificationService: NotificationService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {}
 
   getAllProjectTypes() {
@@ -32,14 +32,14 @@ export class ProjectTypeService {
     this.http.put(projectType).subscribe(
       async response => {
         this.notificationService.success(
-          await this.getLocalization("common.updated-successfully")
+          await this.getLocalization("common.updated-successfully"),
         );
         // "Project type was successfully updated"
       },
       async error => {
         this.notificationService.warn(await this.getLocalization("common.wth"));
         // "Project type was not updated"
-      }
+      },
     );
   }
 
@@ -47,14 +47,14 @@ export class ProjectTypeService {
     this.http.post(newProjectType).subscribe(
       async response => {
         this.notificationService.success(
-          await this.getLocalization("common.added-successfully")
+          await this.getLocalization("common.added-successfully"),
         );
         // "Project type was successfully added"
       },
       async error => {
         this.notificationService.warn(await this.getLocalization("common.wth"));
         // "Project type was not added"
-      }
+      },
     );
     return;
   }
@@ -63,14 +63,14 @@ export class ProjectTypeService {
     this.http.delete(projectTypeId).subscribe(
       async response => {
         this.notificationService.success(
-          await this.getLocalization("common.deleted-successfully")
+          await this.getLocalization("common.deleted-successfully"),
         );
         // "Project type was successfully deleted"
       },
       async error => {
         this.notificationService.warn(await this.getLocalization("common.wth"));
         // "Project type was not deleted"
-      }
+      },
     );
   }
 

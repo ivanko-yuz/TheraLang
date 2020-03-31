@@ -8,19 +8,19 @@ import {switchMap} from "rxjs/operators";
 @Component({
   selector: "app-page",
   templateUrl: "./page.component.html",
-  styleUrls: ["./page.component.less"]
+  styleUrls: ["./page.component.less"],
 })
 export class PageComponent implements OnInit {
   page: Observable<Page>;
   constructor(
     private pageService: PageService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
   ) {}
 
   ngOnInit() {
     this.router.params.subscribe(params => {
-        this.page = this.pageService.getPageByRoute(params["pageRoute"]) as Observable<Page>;
-      }
-    )
+        this.page = this.pageService.getPageByRoute(params.pageRoute) as Observable<Page>;
+      },
+    );
   }
 }

@@ -3,7 +3,7 @@ import { HttpClient, HttpEventType } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class FileService {
   constructor(private http: HttpClient) {}
@@ -17,7 +17,7 @@ export class FileService {
 
     return this.http.post("http://localhost:5000/api/file/upload", formData, {
       reportProgress: true,
-      observe: "events"
+      observe: "events",
     });
   }
 }

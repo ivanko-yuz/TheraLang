@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ResourceCategoryComponent } from './resource-category.component';
+import { ResourceCategoryComponent } from "./resource-category.component";
 
-describe('ResourceCategoryComponent', () => {
+describe("ResourceCategoryComponent", () => {
   let component: ResourceCategoryComponent;
   let fixture: ComponentFixture<ResourceCategoryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourceCategoryComponent ]
+      declarations: [ ResourceCategoryComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('ResourceCategoryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

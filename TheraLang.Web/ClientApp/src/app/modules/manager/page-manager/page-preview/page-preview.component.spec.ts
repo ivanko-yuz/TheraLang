@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PagePreviewComponent } from './page-preview.component';
+import { PagePreviewComponent } from "./page-preview.component";
 
-describe('PagePreviewComponent', () => {
+describe("PagePreviewComponent", () => {
   let component: PagePreviewComponent;
   let fixture: ComponentFixture<PagePreviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PagePreviewComponent ]
+      declarations: [ PagePreviewComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('PagePreviewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

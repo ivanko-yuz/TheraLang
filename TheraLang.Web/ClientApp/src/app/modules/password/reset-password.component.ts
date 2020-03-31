@@ -8,7 +8,7 @@ import {AuthService} from "../../core/auth/auth.service";
 @Component({
   selector: "app-reset-password",
   templateUrl: "./reset-password.component.html",
-  styleUrls: ["./reset-password.component.less"]
+  styleUrls: ["./reset-password.component.less"],
 })
 export class ResetPasswordComponent implements OnInit {
   confirmed: boolean;
@@ -23,18 +23,18 @@ export class ResetPasswordComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {}
 
   confirmPasswordForm = this.fb.group({
     Password: [
       "",
-      [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(4), Validators.maxLength(50)],
     ],
     ConfirmPassword: [
       "",
-      [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
-    ]
+      [Validators.required, Validators.minLength(4), Validators.maxLength(50)],
+    ],
   });
 
   ngOnInit() {
@@ -51,7 +51,7 @@ export class ResetPasswordComponent implements OnInit {
       this.confirmPasswordForm.value.Password,
       this.confirmPasswordForm.value.ConfirmPassword,
       this.email,
-      this.code
+      this.code,
     ).subscribe(() => {
       this.router.navigateByUrl("/login");
     }, err => {

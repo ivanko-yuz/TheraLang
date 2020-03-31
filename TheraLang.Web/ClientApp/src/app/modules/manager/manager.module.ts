@@ -19,28 +19,28 @@ import { SideBarComponent } from "./side-bar/side-bar.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatListModule } from "@angular/material/list";
 import { MatTooltipModule } from "@angular/material/tooltip";
-import { QuillMaterialComponent } from './shared/components/quill-material/quill-material.component';
-import { EditPageComponent } from './page-manager/edit-page/edit-page.component';
-import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
+import { QuillMaterialComponent } from "./shared/components/quill-material/quill-material.component";
+import { EditPageComponent } from "./page-manager/edit-page/edit-page.component";
+import { SlugifyPipe } from "src/app/shared/pipes/slugify";
 import { SharedModule } from "../shared/shared.module";
 import { MatMenuModule } from "@angular/material/menu";
 import { MemberFeeComponent } from "./member-fee/member-fee.component";
 import { CreateFeeComponent } from "./member-fee/create-fee/create-fee.component";
 import { GetFeeComponent } from "./member-fee/get-fee/get-fee.component";
 import { PageService } from "src/app/core/http/manager/page.service";
-import { MemberFeeService } from 'src/app/core/http/manager/fee.service';
-import { PageViewComponent } from '../shared/page-view/page-view.component';
-import { PagePreviewComponent } from './page-manager/page-preview/page-preview.component';
-import { ProjectTypeComponent } from './project-type/project-type.component';
-import { ProjectTypeFormComponent } from './project-type/project-type-form/project-type-form.component';
-import { ProjectTypeCreateFormComponent } from './project-type/project-type-create-form/project-type-create-form.component';
-import { ProjectRequestComponent } from './project-request/project-request.component';
-import { UsersListComponent } from './users_list/users-list.component';
-import { ChangeRoleComponent } from './users_list/change-role/change-role.component';
-import { PaginationComponent } from '../paginationg/pagination.component';
-import { PaymentHistoryComponent } from './payment-history/payment-history.component';
-import { PaymentHistoryService } from 'src/app/core/http/manager/paymentHistory.services';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { MemberFeeService } from "src/app/core/http/manager/fee.service";
+import { PageViewComponent } from "../shared/page-view/page-view.component";
+import { PagePreviewComponent } from "./page-manager/page-preview/page-preview.component";
+import { ProjectTypeComponent } from "./project-type/project-type.component";
+import { ProjectTypeFormComponent } from "./project-type/project-type-form/project-type-form.component";
+import { ProjectTypeCreateFormComponent } from "./project-type/project-type-create-form/project-type-create-form.component";
+import { ProjectRequestComponent } from "./project-request/project-request.component";
+import { UsersListComponent } from "./users_list/users-list.component";
+import { ChangeRoleComponent } from "./users_list/change-role/change-role.component";
+import { PaginationComponent } from "../paginationg/pagination.component";
+import { PaymentHistoryComponent } from "./payment-history/payment-history.component";
+import { PaymentHistoryService } from "src/app/core/http/manager/paymentHistory.services";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -65,7 +65,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     ProjectRequestComponent,
     ChangeRoleComponent,
     PaginationComponent,
-    PaymentHistoryComponent
+    PaymentHistoryComponent,
   ],
   imports: [
     CommonModule,
@@ -92,8 +92,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     SharedModule,
     MatMenuModule,
@@ -101,23 +101,23 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatSelectModule,
     FlexLayoutModule,
   ],
-  entryComponents:[
+  entryComponents: [
     PagePreviewComponent,
     ProjectTypeFormComponent,
     ProjectTypeCreateFormComponent,
-    ChangeRoleComponent
+    ChangeRoleComponent,
   ],
   exports: [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRippleModule
+    MatRippleModule,
   ],
   providers: [
     PageService,
     SlugifyPipe,
     MemberFeeService,
-    PaymentHistoryService
-  ]
+    PaymentHistoryService,
+  ],
 })
 export class ManagerModule { }

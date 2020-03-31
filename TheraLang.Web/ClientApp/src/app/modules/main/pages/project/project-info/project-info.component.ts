@@ -8,10 +8,10 @@ import { ProjectParticipationService } from "../../../../../core/http/project-pa
 import { ResourceService } from "../../../../../core/http/resource/resource.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
-import { DialogService } from 'src/app/core/services/dialog/dialog.service';
-import { ProjectService } from 'src/app/core/http/project/project.service';
-import { UserService } from 'src/app/core/auth/user.service';
-import { Roles } from 'src/app/shared/models/roles/roles';
+import { DialogService } from "src/app/core/services/dialog/dialog.service";
+import { ProjectService } from "src/app/core/http/project/project.service";
+import { UserService } from "src/app/core/auth/user.service";
+import { Roles } from "src/app/shared/models/roles/roles";
 
 @Component({
   selector: "app-project-info",
@@ -23,51 +23,51 @@ import { Roles } from 'src/app/shared/models/roles/roles';
       state(
         "open",
         style({
-          opacity: 1
-        })
+          opacity: 1,
+        }),
       ),
       state(
         "closed",
         style({
-          opacity: 0
-        })
+          opacity: 0,
+        }),
       ),
-      transition('open <=> closed', animate('.5s'))
+      transition("open <=> closed", animate(".5s")),
     ]),
     trigger("openCloseDisplay", [
       state(
         "open",
         style({
           display: "block",
-        })
+        }),
       ),
       state(
         "closed",
         style({
-          display: "none"
-        })
+          display: "none",
+        }),
       ),
-      transition('open => closed', animate('.5s')),
-      transition('closed => open', animate('.5s'))
+      transition("open => closed", animate(".5s")),
+      transition("closed => open", animate(".5s")),
     ]),
     trigger("openCloseArrow", [
       state(
         "open",
         style({
-          transform: 'rotate(-180deg)'
-        })
+          transform: "rotate(-180deg)",
+        }),
       ),
       state(
         "closed",
         style({
-          transform: 'rotate(0)'
-        })
+          transform: "rotate(0)",
+        }),
       ),
-      transition('open => closed', animate('.5s')),
-      transition('closed => open', animate('.5s'))
-    ])
+      transition("open => closed", animate(".5s")),
+      transition("closed => open", animate(".5s")),
+    ]),
   ],
-  providers: [HttpService, ProjectParticipationService]
+  providers: [HttpService, ProjectParticipationService],
 })
 
 export class ProjectInfoComponent implements OnInit {
@@ -81,7 +81,7 @@ export class ProjectInfoComponent implements OnInit {
     private dialogService: DialogService,
     private router: Router,
     private userService: UserService,
-    public service: ProjectService
+    public service: ProjectService,
   ) { }
 
   projectInfo: Project;
@@ -112,9 +112,9 @@ export class ProjectInfoComponent implements OnInit {
         this.notificationService.warn(
           await this.translate
             .get("common.messages.cant-send-request")
-            .toPromise()
+            .toPromise(),
         );
-      }
+      },
     );
   }
 
@@ -130,12 +130,12 @@ export class ProjectInfoComponent implements OnInit {
     return this.userService.isRole(Roles.Member);
   }
 
-  isParticipant(){
-    return this.projectParticipants.some(p=>p.requstedGuidUserId === this.userService.getCurrentUserId());
+  isParticipant() {
+    return this.projectParticipants.some(p => p.requstedGuidUserId === this.userService.getCurrentUserId());
   }
 
-  isOwner(){
-    let owner = this.projectParticipants.find(p => p.role === 1);
+  isOwner() {
+    const owner = this.projectParticipants.find(p => p.role === 1);
     if (!owner) {
       return false;
     }
@@ -154,7 +154,7 @@ export class ProjectInfoComponent implements OnInit {
   async onDelete(id) {
     this.dialogService
       .openConfirmDialog(
-        await this.translate.get("common.r-u-sure").toPromise()
+        await this.translate.get("common.r-u-sure").toPromise(),
       )
       .afterClosed()
       .subscribe(async res => {
@@ -163,22 +163,22 @@ export class ProjectInfoComponent implements OnInit {
             this.router.navigate(["/projects"]);
           });
           this.notificationService.warn(
-            await this.translate.get("common.deleted-successfully").toPromise()
+            await this.translate.get("common.deleted-successfully").toPromise(),
           );
         }
       });
   }
 
-  arrowOpener(){
+  arrowOpener() {
     this.isOpen = !this.isOpen;
   }
 
-  getDetails(){
+  getDetails() {
     // this.getResourcesData();
     this.arrowOpener();
   }
 
-  getParticipants(){
+  getParticipants() {
     this.participService.getProjectParticipants(this.projectId)
       .subscribe(response => {
         this.projectParticipants = response;

@@ -1,4 +1,4 @@
 export enum Language {
     ua = 1,
-    en = 2
+    en = 2,
 }

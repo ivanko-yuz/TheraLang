@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SliderRowComponent } from './slider-row.component';
+import { SliderRowComponent } from "./slider-row.component";
 
-describe('SliderRowComponent', () => {
+describe("SliderRowComponent", () => {
   let component: SliderRowComponent;
   let fixture: ComponentFixture<SliderRowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SliderRowComponent ]
+      declarations: [ SliderRowComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('SliderRowComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -4,12 +4,12 @@ import { Project } from "../../../shared/models/project/project";
 import { HttpService } from "../http/http.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "../../services/notification/notification.service";
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClient } from '@angular/common/http';
-import { baseUrl } from 'src/app/configs/api-endpoint.constants';
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { HttpClient } from "@angular/common/http";
+import { baseUrl } from "src/app/configs/api-endpoint.constants";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ProjectService {
 
@@ -34,7 +34,7 @@ export class ProjectService {
     typeId: ["", Validators.required],
     donationTargetSum: ["", [Validators.required, Validators.min(1), Validators.max(99999999)]],
     imgFile: [null],
-    imgUrl: [""]
+    imgUrl: [""],
   }, { validators: this.checkDates });
 
   initializeFormGroup() {
@@ -48,7 +48,7 @@ export class ProjectService {
       typeId: "",
       donationTargetSum: "",
       imgFile: null,
-      imgUrl: ""
+      imgUrl: "",
     });
   }
 
@@ -63,7 +63,7 @@ export class ProjectService {
       typeId: project.typeId,
       donationTargetSum: project.donationTargetSum,
       imgFile: project.imgFile,
-      imgUrl: project.imgUrl
+      imgUrl: project.imgUrl,
     });
   }
 
@@ -95,7 +95,7 @@ export class ProjectService {
     if (group.controls.projectEnd.valid &&
       group.controls.projectStart.valid &&
       group.controls.projectEnd.value <= group.controls.projectStart.value) {
-      return { dateIntersect: true }
+      return { dateIntersect: true };
     }
     return null;
   }

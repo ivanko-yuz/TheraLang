@@ -6,12 +6,12 @@ import {Language} from "../../shared/models/language/languages.enum";
 @Component({
   selector: "app-manager",
   templateUrl: "./manager.component.html",
-  styleUrls: ["./manager.component.less"]
+  styleUrls: ["./manager.component.less"],
 })
 export class ManagerComponent implements OnInit {
   constructor(
     private translate: TranslateService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
   ) {
     const lang: string = this.languageService.setIfNotExists();
     this.translate.use(lang);

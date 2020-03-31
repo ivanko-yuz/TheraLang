@@ -16,7 +16,7 @@ export interface DialogData {
   selector: "app-project-type",
   templateUrl: "./project-type.component.html",
   styleUrls: ["./project-type.component.less"],
-  providers: [ProjectTypeService, ProjectTypeFormComponent]
+  providers: [ProjectTypeService, ProjectTypeFormComponent],
 })
 export class ProjectTypeComponent implements OnInit {
   id: number;
@@ -28,16 +28,16 @@ export class ProjectTypeComponent implements OnInit {
     private projectTypeService: ProjectTypeService,
     private dialogService: DialogService,
     private http: ProjectTypeHttp,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
-  dataSource: any; //TODO: Ostap
+  dataSource: any; // TODO: Ostap
 
   async ngOnInit() {
     this.projectTypes = await this.projectTypeService.getAllProjectTypes();
   }
 
   onCreate() {
-    let dialogRef = this.dialog
+    const dialogRef = this.dialog
       .open(ProjectTypeCreateFormComponent, { })
       .afterClosed()
       .subscribe(res => {
@@ -46,9 +46,9 @@ export class ProjectTypeComponent implements OnInit {
   }
 
   onEdit(projectType: ProjectType) {
-    let dialogRef = this.dialog
+    const dialogRef = this.dialog
       .open(ProjectTypeFormComponent, {
-        data: { name: projectType.typeName, id: projectType.id }
+        data: { name: projectType.typeName, id: projectType.id },
       })
       .afterClosed()
       .subscribe(res => {

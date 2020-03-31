@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-resources',
-  templateUrl: './resources.component.html',
-  styleUrls: ['./resources.component.less']
+  selector: "app-resources",
+  templateUrl: "./resources.component.html",
+  styleUrls: ["./resources.component.less"],
 })
 export class ResourcesComponent implements OnInit {
 
-  showCreate: boolean = true;
+  showCreate = true;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 
 }

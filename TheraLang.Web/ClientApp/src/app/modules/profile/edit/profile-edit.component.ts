@@ -10,7 +10,7 @@ import {UserService} from "../../../core/services/user/user.service";
 @Component({
   selector: "app-profile-edit",
   templateUrl: "./profile-edit.component.html",
-  styleUrls: ["./profile-edit.component.less"]
+  styleUrls: ["./profile-edit.component.less"],
 })
 export class ProfileEditComponent implements OnInit {
   imageSrc: string | ArrayBuffer;
@@ -29,28 +29,28 @@ export class ProfileEditComponent implements OnInit {
   EditProfileForm = this.fb.group({
     FirstName: [
       "",
-      [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)],
     ],
     LastName: [
       "",
-      [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)],
     ],
     Image: [
       null,
     ],
     BirthDay: [
-      ""
+      "",
     ],
     ShortInformation: [
-      ""
+      "",
     ],
     PhoneNumber: [
       "",
-      [Validators.pattern(/^\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})$/g)]
+      [Validators.pattern(/^\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})$/g)],
     ],
     City: [
-      ""
-    ]
+      "",
+    ],
   });
   maxDate: Date;
 
@@ -74,7 +74,7 @@ export class ProfileEditComponent implements OnInit {
     if (this.EditProfileForm.invalid) {
       const controls = this.EditProfileForm.controls;
       Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
+        controls[controlName].markAsTouched(),
       );
 
       return;

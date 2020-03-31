@@ -4,7 +4,7 @@ import {SiteMap} from "../../../../shared/models/site-map/site-map";
 @Component({
   selector: "app-toolbar-item",
   templateUrl: "./toolbar-item.component.html",
-  styleUrls: ["./toolbar-item.component.less"]
+  styleUrls: ["./toolbar-item.component.less"],
 })
 export class ToolbarItemComponent implements OnInit {
   @Input() toolbarItem: SiteMap;

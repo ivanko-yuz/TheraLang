@@ -5,4 +5,4 @@ export class Message {
     chatId?: number;
     posterId?: string;
   }
-  
+

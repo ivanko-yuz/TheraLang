@@ -1,22 +1,21 @@
-import {Component, OnInit, ViewChild, Input} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import {Component, OnInit, ViewChild, Input} from "@angular/core";
+import {TranslateService} from "@ngx-translate/core";
 import {LanguageService} from "../../../../core/services/language/language.service";
 import {Language} from "../../../../shared/models/language/languages.enum";
 
 @Component({
-  selector: 'app-language',
-  templateUrl: './language.component.html',
-  styleUrls: ['./language.component.less']
+  selector: "app-language",
+  templateUrl: "./language.component.html",
+  styleUrls: ["./language.component.less"],
 })
 export class LanguageComponent implements OnInit {
 
-
-  @ViewChild('menu', {static: false}) menu: any;
+  @ViewChild("menu", {static: false}) menu: any;
   languages: Language[];
 
   constructor(
     private translate: TranslateService,
-    public languageService: LanguageService
+    public languageService: LanguageService,
     ) { }
 
   ngOnInit() {

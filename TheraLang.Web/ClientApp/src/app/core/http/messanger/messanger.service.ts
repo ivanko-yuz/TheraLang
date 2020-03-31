@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { chatUrl } from 'src/app/configs/api-endpoint.constants';
-import { Message } from 'src/app/shared/models/message/message';
-import { Observable } from 'rxjs';
-import { Chat } from 'src/app/shared/models/chat/chat';
-import { PaginationParams } from 'src/app/shared/models/pagination-params/pagination-params';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { chatUrl } from "src/app/configs/api-endpoint.constants";
+import { Message } from "src/app/shared/models/message/message";
+import { Observable } from "rxjs";
+import { Chat } from "src/app/shared/models/chat/chat";
+import { PaginationParams } from "src/app/shared/models/pagination-params/pagination-params";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MessangerService {
 

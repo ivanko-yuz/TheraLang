@@ -10,7 +10,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {Language} from "../../../shared/models/language/languages.enum";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class SiteMapService {
   siteMap = new Subject<SiteMap[]>();
@@ -19,7 +19,7 @@ export class SiteMapService {
   changesToMake: Map<number, ChangedSiteMap>;
 
   constructor(private http: HttpClient,
-              private translateService: TranslateService
+              private translateService: TranslateService,
   ) {
     this.updateToolbarItemsOnSubscription();
     this.updateSiteMap();
@@ -36,7 +36,7 @@ export class SiteMapService {
     });
   }
 
-  public getSiteMap(lang:Language = null): Observable<SiteMap[]> {
+  public getSiteMap(lang: Language = null): Observable<SiteMap[]> {
     return this.http.get<SiteMap[]>(`${cmsSitemapUrl}/${ lang || ""}`);
   }
 
@@ -63,7 +63,7 @@ export class SiteMapService {
 
     const subscription = this.getSiteMap().subscribe(
       next => {
-        this.siteMap.next(next["pages"]);
+        this.siteMap.next(next.pages);
         this.siteMapUpdating = false;
         subscription.unsubscribe();
       },
@@ -71,7 +71,7 @@ export class SiteMapService {
         this.siteMap.error(error);
         this.siteMapUpdating = false;
         subscription.unsubscribe();
-      }
+      },
     );
   }
 
@@ -82,7 +82,7 @@ export class SiteMapService {
       },
       error => {
         this.toolbarItems.error(error);
-      }
+      },
     );
   }
 
@@ -93,7 +93,7 @@ export class SiteMapService {
         item.route,
         route,
         item.menuTitle,
-        this.mapToolbarItems(item.subPages)
+        this.mapToolbarItems(item.subPages),
       );
     });
   }

@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CmsPagesToolbarItemComponent } from './cms-pages-toolbar-item.component';
+import { CmsPagesToolbarItemComponent } from "./cms-pages-toolbar-item.component";
 
-describe('CmsPagesToolbarItemComponent', () => {
+describe("CmsPagesToolbarItemComponent", () => {
   let component: CmsPagesToolbarItemComponent;
   let fixture: ComponentFixture<CmsPagesToolbarItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CmsPagesToolbarItemComponent ]
+      declarations: [ CmsPagesToolbarItemComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('CmsPagesToolbarItemComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

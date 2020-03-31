@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import {MatDialog} from "@angular/material";
@@ -6,7 +6,7 @@ import {MatDialog} from "@angular/material";
 @Component({
   selector: "app-pagination",
   templateUrl: "./pagination.component.html",
-  styleUrls: ["./pagination.component.less"]
+  styleUrls: ["./pagination.component.less"],
 })
 
 export class PaginationComponent implements OnInit, OnChanges {

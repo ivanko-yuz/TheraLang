@@ -9,7 +9,7 @@ export class ResourceCategoriesService {
   constructor(private http: HttpService) {}
 
   getResourceCategories(
-    withAssignedResources: boolean
+    withAssignedResources: boolean,
   ): Promise<ResourceCategory[]> {
     const categories = this.http
       .getResourceCategories(withAssignedResources)

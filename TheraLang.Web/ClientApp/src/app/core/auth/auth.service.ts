@@ -4,49 +4,49 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { accountUrl } from "src/app/configs/api-endpoint.constants";
 import { JwtHelperService } from "@auth0/angular-jwt";
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class AuthService {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
   ) {}
   loginForm = this.fb.group({
     email: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
     ],
     password: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50)]
-    ]
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
+    ],
   });
   readonly baseUrl = accountUrl;
   registrationForm = this.fb.group({
     Email: [
       "",
-      [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.email]
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.email],
     ],
     Password: [
       "",
-      [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(4), Validators.maxLength(50)],
     ],
     ConfirmPassword: [
       "",
-      [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(4), Validators.maxLength(50)],
     ],
     FirstName: [
       "",
-      [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)],
     ],
     LastName: [
       "",
-      [Validators.required, Validators.minLength(2), Validators.maxLength(50)]
+      [Validators.required, Validators.minLength(2), Validators.maxLength(50)],
     ],
     Image: [
       null,
-    ]
+    ],
   });
   login(loginData) {
     return this.http.post(`${this.baseUrl}/login`, loginData);
@@ -88,7 +88,7 @@ export class AuthService {
 
   getUserName() {
     return this.http.get(`${this.baseUrl}/getUserName`, {
-      responseType: "text"
+      responseType: "text",
     });
   }
 

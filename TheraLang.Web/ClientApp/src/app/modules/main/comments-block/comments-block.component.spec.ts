@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CommentsBlockComponent } from './comments-block.component';
+import { CommentsBlockComponent } from "./comments-block.component";
 
-describe('CommentsBlockComponent', () => {
+describe("CommentsBlockComponent", () => {
   let component: CommentsBlockComponent;
   let fixture: ComponentFixture<CommentsBlockComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CommentsBlockComponent ]
+      declarations: [ CommentsBlockComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('CommentsBlockComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

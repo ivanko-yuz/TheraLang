@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Page } from 'src/app/shared/models/page/page.model';
-import { PageService } from 'src/app/core/http/manager/page.service';
-import { NotificationService } from 'src/app/core/services/notification/notification.service';
-import { TranslateService } from '@ngx-translate/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SlugifyPipe } from 'src/app/shared/pipes/slugify';
-import { transliterate } from 'transliteration';
-import { Language } from 'src/app/shared/models/language/languages.enum';
-import { MatDialog } from '@angular/material';
-import { PagePreviewComponent } from '../page-preview/page-preview.component';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Page } from "src/app/shared/models/page/page.model";
+import { PageService } from "src/app/core/http/manager/page.service";
+import { NotificationService } from "src/app/core/services/notification/notification.service";
+import { TranslateService } from "@ngx-translate/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { SlugifyPipe } from "src/app/shared/pipes/slugify";
+import { transliterate } from "transliteration";
+import { Language } from "src/app/shared/models/language/languages.enum";
+import { MatDialog } from "@angular/material";
+import { PagePreviewComponent } from "../page-preview/page-preview.component";
 @Component({
-  selector: 'app-create-page',
-  templateUrl: './create-page.component.html',
-  styleUrls: ['./create-page.component.less']
+  selector: "app-create-page",
+  templateUrl: "./create-page.component.html",
+  styleUrls: ["./create-page.component.less"],
 })
 export class CreatePageComponent implements OnInit {
 
@@ -40,12 +40,12 @@ export class CreatePageComponent implements OnInit {
       content_eng: new FormControl(),
       menuTitle_eng: new FormControl(null, [Validators.maxLength(40)]),
 
-      route: new FormControl(null, [Validators.maxLength(140), Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')])
-    })
+      route: new FormControl(null, [Validators.maxLength(140), Validators.pattern("^[a-z0-9]+(?:-[a-z0-9]+)*$")]),
+    });
   }
 
   onCancel() {
-    this.router.navigate(['admin', 'sitemap']);
+    this.router.navigate(["admin", "sitemap"]);
   }
 
   hasError(controlName: string, errorName: string) {
@@ -58,8 +58,8 @@ export class CreatePageComponent implements OnInit {
         .get("common.created-successfully")
         .toPromise();
       this.notificationService.success(msg);
-      this.router.navigate(['admin', 'sitemap']);
-    }, async (error) => {
+      this.router.navigate(["admin", "sitemap"]);
+    }, async error => {
       console.log(error);
       this.notificationService.warn(await this.translate.get("common.wth").toPromise());
     });
@@ -81,34 +81,34 @@ export class CreatePageComponent implements OnInit {
     }
   }
 
-  getFormDataUa(){
+  getFormDataUa() {
     const page = {
       header: this.form.value.header,
       content: this.form.value.content,
       menuTitle: this.form.value.menuTitle,
       route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header)),
-      language: Language.ua
+      language: Language.ua,
     };
     return page;
   }
 
-  getFormDataEng(){
+  getFormDataEng() {
     const page = {
       header: this.form.value.header_eng,
       content: this.form.value.content_eng,
       menuTitle: this.form.value.menuTitle_eng,
       route: this.form.value.route || this.slugifyPipe.transform(transliterate(this.form.value.header)),
-      language: Language.en
+      language: Language.en,
     };
     return page;
   }
-  preview(){
-    const page = this.getFormDataUa()
+  preview() {
+    const page = this.getFormDataUa();
 
     const dialogRef = this.dialog.open(PagePreviewComponent, {
       width: "60%",
       height: "95%",
-      data: page
+      data: page,
     });
   }
 }

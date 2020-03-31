@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CommentEditComponent } from './comment-edit.component';
+import { CommentEditComponent } from "./comment-edit.component";
 
-describe('CommentEditComponent', () => {
+describe("CommentEditComponent", () => {
   let component: CommentEditComponent;
   let fixture: ComponentFixture<CommentEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CommentEditComponent ]
+      declarations: [ CommentEditComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('CommentEditComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

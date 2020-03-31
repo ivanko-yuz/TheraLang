@@ -1,18 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NewsDetails } from 'src/app/shared/models/news/newsDetails';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NewsService } from 'src/app/core/http/news/news.service';
-import { DialogService } from 'src/app/core/services/dialog/dialog.service';
-import { TranslateService } from '@ngx-translate/core';
-import { NewsPreview } from 'src/app/shared/models/news/newsPreview';
-import { NotificationService } from 'src/app/core/services/notification/notification.service';
-import { UserService } from 'src/app/core/auth/user.service';
+import { Component, OnInit, Input } from "@angular/core";
+import { NewsDetails } from "src/app/shared/models/news/newsDetails";
+import { ActivatedRoute, Router } from "@angular/router";
+import { NewsService } from "src/app/core/http/news/news.service";
+import { DialogService } from "src/app/core/services/dialog/dialog.service";
+import { TranslateService } from "@ngx-translate/core";
+import { NewsPreview } from "src/app/shared/models/news/newsPreview";
+import { NotificationService } from "src/app/core/services/notification/notification.service";
+import { UserService } from "src/app/core/auth/user.service";
 import { AuthService } from "../../../../../core/auth/auth.service";
 
 @Component({
-  selector: 'app-news-details',
-  templateUrl: './news-details.component.html',
-  styleUrls: ['./news-details.component.less']
+  selector: "app-news-details",
+  templateUrl: "./news-details.component.html",
+  styleUrls: ["./news-details.component.less"],
 })
 export class NewsDetailsComponent implements OnInit {
   newsId: number;
@@ -20,7 +20,6 @@ export class NewsDetailsComponent implements OnInit {
   contentImages: Array<object> = [];
   values: any;
   news: NewsPreview[];
-
 
   constructor(
     private route: ActivatedRoute,
@@ -43,8 +42,8 @@ export class NewsDetailsComponent implements OnInit {
       this.newsDetails = data;
       this.newsDetails.contentImageUrls.map(image => {
         this.contentImages.push({
-          image: image,
-          thumbImage: image
+          image,
+          thumbImage: image,
         });
       });
     });
@@ -53,7 +52,7 @@ export class NewsDetailsComponent implements OnInit {
   async onDelete(newsId: number) {
     this.dialogService
       .openConfirmDialog(
-        await this.translate.get("common.r-u-sure").toPromise()
+        await this.translate.get("common.r-u-sure").toPromise(),
       )
       .afterClosed()
       .subscribe(async res => {
@@ -77,19 +76,18 @@ export class NewsDetailsComponent implements OnInit {
     return this.userService.isAuthenticated();
   }
 
-  async like(){
-    if(!this.isAuthenticated()){
+  async like() {
+    if (!this.isAuthenticated()) {
       this.notificationService.info(await this.translate.get("common.messages.register-first").toPromise());
-      return
+      return;
     }
-    if(this.newsDetails.isLikedByCurrentUser){
+    if (this.newsDetails.isLikedByCurrentUser) {
       this.newsDetails.likesCount--;
-    }
-    else{
+    } else {
       this.newsDetails.likesCount++;
     }
     this.service.like(this.newsId).subscribe();
-    this.newsDetails.isLikedByCurrentUser=!this.newsDetails.isLikedByCurrentUser;
+    this.newsDetails.isLikedByCurrentUser = !this.newsDetails.isLikedByCurrentUser;
   }
 
 }

@@ -31,7 +31,7 @@ import {
   MatSortModule,
   MatTooltipModule,
   MatTreeModule,
-  MatFormField
+  MatFormField,
 } from "@angular/material";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule, routingComponents } from "./app-routing.module";
@@ -89,14 +89,14 @@ import { MaterialFileInputModule } from "ngx-material-file-input";
 import { SortablejsModule } from "ngx-sortablejs";
 import { JwtModule } from "@auth0/angular-jwt";
 import { DaysLeftPipe } from "./modules/main/pages/project/days-left.pipe";
-import { NewsPageComponent } from './modules/main/pages/news/news-page.component';
-import { NewsCardComponent } from './modules/main/pages/news/news-card/news-card.component';
-import { NewsCreateComponent } from './modules/main/pages/news/news-create/news-create.component';
-import { NewsDetailsComponent } from './modules/main/pages/news/news-details/news-details.component';
-import { NgImageSliderModule } from 'ng-image-slider';
-import { ProjectCreationComponent } from './modules/main/pages/project/project-creation/project-creation.component';
-import { ProjectEditingComponent } from './modules/main/pages/project/project-editing/project-editing.component';
-import { NotFoundComponent } from './shared/components/not-found/not-found.component';
+import { NewsPageComponent } from "./modules/main/pages/news/news-page.component";
+import { NewsCardComponent } from "./modules/main/pages/news/news-card/news-card.component";
+import { NewsCreateComponent } from "./modules/main/pages/news/news-create/news-create.component";
+import { NewsDetailsComponent } from "./modules/main/pages/news/news-details/news-details.component";
+import { NgImageSliderModule } from "ng-image-slider";
+import { ProjectCreationComponent } from "./modules/main/pages/project/project-creation/project-creation.component";
+import { ProjectEditingComponent } from "./modules/main/pages/project/project-editing/project-editing.component";
+import { NotFoundComponent } from "./shared/components/not-found/not-found.component";
 import { AuthGuard } from "./shared/guards/auth-guard.service";
 import { AdminGuard } from "./shared/guards/admin-guard.service";
 import { PageComponent } from "./modules/main/pages/page/page.component";
@@ -107,34 +107,33 @@ import { UserPageComponent } from "./modules/user-page/user-page.component";
 import { UserService } from "./core/services/user/user.service";
 import { ProfileComponent } from "./modules/profile/profile.component";
 import { QuillModule } from "ngx-quill";
-import { MessangerComponent } from './modules/messanger/messanger.component';
-import { MessangerService } from './core/http/messanger/messanger.service';
-import { ChatListComponent } from './modules/messanger/chat-list/chat-list.component';
-import { ProjectFiltersComponent } from './modules/main/pages/project/project-filters/project-filters.component';
-import { NewsEditComponent } from './modules/main/pages/news/news-edit/news-edit.component';
-import { SliderRowComponent } from './modules/main/pages/news/slider-row/slider-row.component';
+import { MessangerComponent } from "./modules/messanger/messanger.component";
+import { MessangerService } from "./core/http/messanger/messanger.service";
+import { ChatListComponent } from "./modules/messanger/chat-list/chat-list.component";
+import { ProjectFiltersComponent } from "./modules/main/pages/project/project-filters/project-filters.component";
+import { NewsEditComponent } from "./modules/main/pages/news/news-edit/news-edit.component";
+import { SliderRowComponent } from "./modules/main/pages/news/slider-row/slider-row.component";
 import {LanguageService} from "./core/services/language/language.service";
 import {CookieService} from "ngx-cookie-service";
-import { CommentsBlockComponent } from './modules/main/comments-block/comments-block.component';
-import { CommentCreateComponent } from './modules/main/comments-block/comment-create/comment-create.component';
-import { CommentComponent } from './modules/main/comments-block/comment/comment.component';
-import { CommentEditComponent } from './modules/main/comments-block/comment-edit/comment-edit.component';
-import {NgxPaginationModule} from 'ngx-pagination';
-import {PaginationComponent} from './modules/paginationg/pagination.component';
-import {ProfileEditComponent} from './modules/profile/edit/profile-edit.component';
-import { UserFinancesComponent } from './modules/profile/user-finances/user-finances.component';
-import { CreateButtonComponent } from './shared/components/create-button/create-button.component';
-import { ResourcesComponent } from './modules/main/pages/resource/resources.component';
+import { CommentsBlockComponent } from "./modules/main/comments-block/comments-block.component";
+import { CommentCreateComponent } from "./modules/main/comments-block/comment-create/comment-create.component";
+import { CommentComponent } from "./modules/main/comments-block/comment/comment.component";
+import { CommentEditComponent } from "./modules/main/comments-block/comment-edit/comment-edit.component";
+import {NgxPaginationModule} from "ngx-pagination";
+import {PaginationComponent} from "./modules/paginationg/pagination.component";
+import {ProfileEditComponent} from "./modules/profile/edit/profile-edit.component";
+import { UserFinancesComponent } from "./modules/profile/user-finances/user-finances.component";
+import { CreateButtonComponent } from "./shared/components/create-button/create-button.component";
+import { ResourcesComponent } from "./modules/main/pages/resource/resources.component";
 import {ResourcesViewComponent} from "./modules/main/pages/resource/resources-view/resources-view.component";
 import {ResourceCategoryComponent} from "./modules/main/pages/resource/resources-view/resource-category/resource-category.component";
-import { ResourceEntryComponent } from './modules/main/pages/resource/resources-view/resource-entry/resource-entry.component';
+import { ResourceEntryComponent } from "./modules/main/pages/resource/resources-view/resource-entry/resource-entry.component";
 import {ResourceFormComponent} from "./modules/main/pages/resource/resource-form/resource-form.component";
-import { ResourceEditComponent } from './modules/main/pages/resource/resource-edit/resource-edit.component';
+import { ResourceEditComponent } from "./modules/main/pages/resource/resource-edit/resource-edit.component";
 import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-table/resources-table.component";
-import {ConfirmationComponent} from './modules/registration/confirmation/confirmation.component';
-import {ForgotPasswordComponent} from './modules/password/email/forgot-password.component';
-import {ResetPasswordComponent} from './modules/password/reset-password.component';
-
+import {ConfirmationComponent} from "./modules/registration/confirmation/confirmation.component";
+import {ForgotPasswordComponent} from "./modules/password/email/forgot-password.component";
+import {ResetPasswordComponent} from "./modules/password/reset-password.component";
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -205,7 +204,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfirmDialogComponent,
     LoginComponent,
     ResourceCreateComponent,
-    CommentEditComponent
+    CommentEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -269,21 +268,21 @@ export function HttpLoaderFactory(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     MaterialFileInputModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
         whitelistedDomains: ["localhost:5000"],
-        blacklistedRoutes: []
-      }
+        blacklistedRoutes: [],
+      },
     }),
     NgImageSliderModule,
     SortablejsModule.forRoot({animation: 400}),
     SharedModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   exports: [],
   providers: [
@@ -306,8 +305,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminGuard,
     MessangerService,
     LanguageService,
-    CookieService
+    CookieService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Language } from '../language/languages.enum';
+import { Language } from "../language/languages.enum";
 
 export class Page {
   id?: number;

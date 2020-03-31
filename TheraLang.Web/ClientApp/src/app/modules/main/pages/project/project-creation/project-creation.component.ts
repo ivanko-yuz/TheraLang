@@ -3,27 +3,26 @@ import { DateAdapter } from "@angular/material";
 import { ProjectService } from "../../../../../core/http/project/project.service";
 import { ProjectType } from "../../../../../shared/models/project-type/project-type.model";
 import { TranslateService } from "@ngx-translate/core";
-import { Router } from '@angular/router';
-import { NotificationService } from 'src/app/core/services/notification/notification.service';
-import { Project } from 'src/app/shared/models/project/project';
+import { Router } from "@angular/router";
+import { NotificationService } from "src/app/core/services/notification/notification.service";
+import { Project } from "src/app/shared/models/project/project";
 
 @Component({
   selector: "app-create-project",
   templateUrl: "./project-creation.component.html",
   styleUrls: ["./project-creation.component.less"],
-  providers: [ProjectService]
+  providers: [ProjectService],
 })
 export class ProjectCreationComponent implements OnInit {
   projectTypes: ProjectType[];
   minDate: Date;
-
 
   constructor(
     public service: ProjectService,
     public dateAdapter: DateAdapter<Date>,
     private translate: TranslateService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
@@ -34,16 +33,16 @@ export class ProjectCreationComponent implements OnInit {
       this.service
         .getProjectTypes()
         .subscribe(
-          (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes)
+          (projectTypes: ProjectType[]) => (this.projectTypes = projectTypes),
         );
-        this.minDate = new Date();
+    this.minDate = new Date();
   }
 
   onSubmit() {
     if (this.service.form.invalid) {
       const controls = this.service.form.controls;
       Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
+        controls[controlName].markAsTouched(),
       );
       return;
     } else if (!this.service.form.get("id").value) {
@@ -62,9 +61,9 @@ export class ProjectCreationComponent implements OnInit {
         async error => {
           console.log(error);
           this.notificationService.warn(
-            await this.translate.get("common.wth").toPromise()
+            await this.translate.get("common.wth").toPromise(),
           );
-        }
+        },
       );
     } else {
       // TODO: Is it needed here?

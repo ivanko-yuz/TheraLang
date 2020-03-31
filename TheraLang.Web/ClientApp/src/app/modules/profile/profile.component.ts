@@ -10,7 +10,7 @@ import {User} from "../../shared/models/user/user";
 @Component({
   selector: "app-user-profile",
   templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.less"]
+  styleUrls: ["./profile.component.less"],
 })
 export class ProfileComponent implements OnInit {
   user: User;

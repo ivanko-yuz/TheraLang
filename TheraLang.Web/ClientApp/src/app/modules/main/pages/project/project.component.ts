@@ -5,17 +5,17 @@ import { ProjectService } from "../../../../core/http/project/project.service";
 import { DialogService } from "../../../../core/services/dialog/dialog.service";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "src/app/core/services/notification/notification.service";
-import { PercentPipe } from '@angular/common';
-import { AuthService } from 'src/app/core/auth/auth.service';
-import { Router } from '@angular/router';
-import { Roles } from 'src/app/shared/models/roles/roles';
-import { ProjectCreationComponent } from './project-creation/project-creation.component';
+import { PercentPipe } from "@angular/common";
+import { AuthService } from "src/app/core/auth/auth.service";
+import { Router } from "@angular/router";
+import { Roles } from "src/app/shared/models/roles/roles";
+import { ProjectCreationComponent } from "./project-creation/project-creation.component";
 
 @Component({
   selector: "app-project",
   templateUrl: "./project.component.html",
   styleUrls: ["./project.component.less"],
-  providers: []
+  providers: [],
 })
 export class ProjectComponent implements OnInit {
   projects: Project[];
@@ -27,7 +27,7 @@ export class ProjectComponent implements OnInit {
     private notificationService: NotificationService,
     private translate: TranslateService,
     private userService: AuthService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class ProjectComponent implements OnInit {
   async onDelete(id) {
     this.dialogService
       .openConfirmDialog(
-        await this.translate.get("common.r-u-sure").toPromise()
+        await this.translate.get("common.r-u-sure").toPromise(),
       )
       .afterClosed()
       .subscribe(async res => {
@@ -59,7 +59,7 @@ export class ProjectComponent implements OnInit {
               .subscribe((projects: Project[]) => (this.projects = projects));
           });
           this.notificationService.warn(
-            await this.translate.get("common.deleted-successfully").toPromise()
+            await this.translate.get("common.deleted-successfully").toPromise(),
           );
         }
       });

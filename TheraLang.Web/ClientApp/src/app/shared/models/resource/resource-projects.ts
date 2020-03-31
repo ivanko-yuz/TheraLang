@@ -1,4 +1,4 @@
 export class ResourceProjects {
-    '$type': string;
-    '$values': any[];
+    "$type": string;
+    "$values": any[];
 }

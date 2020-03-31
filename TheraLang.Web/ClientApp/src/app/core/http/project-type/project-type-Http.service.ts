@@ -19,7 +19,7 @@ export class ProjectTypeHttp {
 
   delete(projectTypeId: number): Observable<any> {
     return this.http.delete(`${projectTypeUrl}/${projectTypeId}`, {
-      observe: "response"
+      observe: "response",
     });
   }
 

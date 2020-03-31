@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ResourcesTableComponent } from './resources-table.component';
+import { ResourcesTableComponent } from "./resources-table.component";
 
-describe('ResourcesTableComponent', () => {
+describe("ResourcesTableComponent", () => {
   let component: ResourcesTableComponent;
   let fixture: ComponentFixture<ResourcesTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourcesTableComponent ]
+      declarations: [ ResourcesTableComponent ],
     })
     .compileComponents();
   }));
@@ -19,7 +19,7 @@ describe('ResourcesTableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

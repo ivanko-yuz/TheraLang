@@ -2,12 +2,12 @@ import {
   FormGroup,
   ValidationErrors,
   ValidatorFn,
-  Validators
+  Validators,
 } from "@angular/forms";
 
 export const atLeastOne = (
   validator: ValidatorFn,
-  controls: string[] = null
+  controls: string[] = null,
 ) => (group: FormGroup): ValidationErrors | null => {
   if (!controls) {
     controls = Object.keys(group.controls);
@@ -21,6 +21,6 @@ export const atLeastOne = (
   return hasAtLeastOne
     ? null
     : {
-        atLeastOne: true
+        atLeastOne: true,
       };
 };

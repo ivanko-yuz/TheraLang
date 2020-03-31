@@ -1,33 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {Resource} from "../../../../../shared/models/resource/resource";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ResourceService} from "../../../../../core/http/resource/resource.service";
 
 @Component({
-  selector: 'app-resource-edit',
-  templateUrl: './resource-edit.component.html',
-  styleUrls: ['./resource-edit.component.less']
+  selector: "app-resource-edit",
+  templateUrl: "./resource-edit.component.html",
+  styleUrls: ["./resource-edit.component.less"],
 })
 export class ResourceEditComponent implements OnInit {
 
   resource: Resource;
-  loaded: boolean = false;
+  loaded = false;
 
   constructor(
     private route: ActivatedRoute,
     private resourceService: ResourceService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
     let resourceId;
     this.route.params.subscribe(params => {
-      resourceId = parseInt(params["resourceId"]);
+      resourceId = parseInt(params.resourceId);
       this.resourceService.getResource(resourceId).subscribe(res => {
           this.resource = res as Resource;
           this.loaded = true;
-        })
-    })
+        });
+    });
   }
 
   onSubmit(resource: Resource) {
@@ -36,7 +36,7 @@ export class ResourceEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigateByUrl("/resources")
+    this.router.navigateByUrl("/resources");
   }
 
 }

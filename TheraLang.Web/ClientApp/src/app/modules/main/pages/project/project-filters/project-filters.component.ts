@@ -1,22 +1,20 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AuthService } from 'src/app/core/auth/auth.service';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { AuthService } from "src/app/core/auth/auth.service";
 
 @Component({
-  selector: 'app-project-filters',
-  templateUrl: './project-filters.component.html',
-  styleUrls: ['./project-filters.component.less']
+  selector: "app-project-filters",
+  templateUrl: "./project-filters.component.html",
+  styleUrls: ["./project-filters.component.less"],
 })
-
-
 
 export class ProjectFiltersComponent implements OnInit {
 
   @Output() filtered = new EventEmitter<string>();
-  filterQuery: string = "?";
-  search: string = "";
-  sort: string = "";
-  myProjects: boolean = false;
-  FiltersIsShown: boolean = false;
+  filterQuery = "?";
+  search = "";
+  sort = "";
+  myProjects = false;
+  FiltersIsShown = false;
   params = new Map<string, string>();
   constructor(private userService: AuthService) { }
   Search() {
@@ -48,8 +46,8 @@ export class ProjectFiltersComponent implements OnInit {
     this.Search();
     this.Sort();
     this.MyProjects();
-    for (let key of this.params.keys()) {
-      this.filterQuery += key + "=" + this.params.get(key) + "&"
+    for (const key of this.params.keys()) {
+      this.filterQuery += key + "=" + this.params.get(key) + "&";
     }
     this.filtered.emit(this.filterQuery);
     this.filterQuery = "?";
@@ -64,4 +62,3 @@ export class ProjectFiltersComponent implements OnInit {
     return this.userService.isAuthenticated();
   }
 }
-

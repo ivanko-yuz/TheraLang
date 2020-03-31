@@ -8,22 +8,22 @@ import { ProjectParticipationRequestStatus } from "src/app/configs/project-parti
 @Component({
   selector: "app-project-participants",
   templateUrl: "./project-participants.component.html",
-  styleUrls: ["./project-participants.component.less"]
+  styleUrls: ["./project-participants.component.less"],
 })
 export class ProjectParticipantsComponent implements OnInit {
   projectParticipationRequest = new MatTableDataSource<
     ProjectParticipationRequest
   >();
-  showActionButtons: boolean = true;
+  showActionButtons = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   displayedColumns: string[] = [
     "requestedUserName",
     "projectName",
-    "actions"
+    "actions",
   ];
   constructor(
     private participantService: ProjectParticipationService,
-    private eventService: EventService
+    private eventService: EventService,
   ) {}
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class ProjectParticipantsComponent implements OnInit {
         this.projectParticipationRequest.data = projectParticipants;
         this.projectParticipationRequest.filterPredicate = (
           projectParticipant: ProjectParticipationRequest,
-          filter: string
+          filter: string,
         ) => projectParticipant.status.toString() === filter;
         this.projectParticipationRequest.paginator = this.paginator;
         this.projectParticipationRequest.filter = ProjectParticipationRequestStatus.New.toString();
@@ -48,7 +48,7 @@ export class ProjectParticipantsComponent implements OnInit {
         this.removeNotificationIcon();
       });
   }
-  
+
   changeTab(tabPosition: number) {
     this.projectParticipationRequest.filter = this.changeFilter(tabPosition);
     this.showActionButtons =
@@ -67,19 +67,20 @@ export class ProjectParticipantsComponent implements OnInit {
 
   changeStatus(
     status: string,
-    projectParticipant: ProjectParticipationRequest
+    projectParticipant: ProjectParticipationRequest,
   ) {
-    if (status === "approved")
+    if (status === "approved") {
       projectParticipant.status = ProjectParticipationRequestStatus.Approved;
-    else if (status === "rejected")
+    } else if (status === "rejected") {
       projectParticipant.status = ProjectParticipationRequestStatus.Rejected;
-    else if (status === "new")
+ } else if (status === "new") {
       projectParticipant.status = ProjectParticipationRequestStatus.New;
+ }
 
     this.participantService
       .changeParticipationStatus(
         projectParticipant.id,
-        projectParticipant.status
+        projectParticipant.status,
       )
       .subscribe(data => {
         this.loadPatricipants();

@@ -5,12 +5,10 @@ import { NotificationService } from "src/app/core/services/notification/notifica
 import { DialogService } from "src/app/core/services/dialog/dialog.service";
 import { Router, ActivatedRoute } from "@angular/router";
 
-
-
 @Component({
   selector: "app-registration",
   templateUrl: "./registration.component.html",
-  styleUrls: ["./registration.component.less"]
+  styleUrls: ["./registration.component.less"],
 })
 export class RegistrationComponent implements OnInit {
   hide = true;
@@ -23,7 +21,7 @@ export class RegistrationComponent implements OnInit {
     public authService: AuthService,
     private translate: TranslateService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {

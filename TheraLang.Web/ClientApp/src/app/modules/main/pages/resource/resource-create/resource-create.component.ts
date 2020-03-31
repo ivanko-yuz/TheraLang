@@ -8,7 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 @Component({
   selector: "app-resource-create",
   templateUrl: "./resource-create.component.html",
-  styleUrls: ["./resource-create.component.less"]
+  styleUrls: ["./resource-create.component.less"],
 })
 export class ResourceCreateComponent implements OnInit {
 
@@ -16,29 +16,29 @@ export class ResourceCreateComponent implements OnInit {
     private resourceService: ResourceService,
     private notificationService: NotificationService,
     private router: Router,
-    private translate : TranslateService
+    private translate: TranslateService,
   ) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
   onSubmit(submittedResource: Resource) {
     this.resourceService.postResource(submittedResource).subscribe(
       async response => {
         this.notificationService.success(
-          await this.translate.get("common.created-successfully").toPromise()
+          await this.translate.get("common.created-successfully").toPromise(),
         );
         await this.router.navigateByUrl(`/resources/${submittedResource.categoryId || ""}`);
       },
       async error => {
         this.notificationService.warn(
-          await this.translate.get("common.wth").toPromise()
+          await this.translate.get("common.wth").toPromise(),
         );
-      }
+      },
     );
   }
-  onCancel(){
+  onCancel() {
     this.router.navigateByUrl("/resources");
   }
 }

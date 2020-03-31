@@ -6,7 +6,7 @@ import { DateAdapter, MatDialogRef } from "@angular/material";
 @Component({
   selector: "app-project-type-create-form",
   templateUrl: "./project-type-create-form.component.html",
-  styleUrls: ["./project-type-create-form.component.less"]
+  styleUrls: ["./project-type-create-form.component.less"],
 })
 export class ProjectTypeCreateFormComponent implements OnInit {
   newData: ProjectType;
@@ -18,7 +18,7 @@ export class ProjectTypeCreateFormComponent implements OnInit {
   constructor(
     private dialog: MatDialogRef<ProjectTypeCreateFormComponent>,
     public service: ProjectTypeService,
-    public dateAdapter: DateAdapter<Date>
+    public dateAdapter: DateAdapter<Date>,
   ) {}
 
   onCloseForm(): void {

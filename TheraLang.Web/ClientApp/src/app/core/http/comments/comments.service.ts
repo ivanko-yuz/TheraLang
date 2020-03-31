@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { commentUrl } from 'src/app/configs/api-endpoint.constants';
-import { HttpClient } from '@angular/common/http';
-import { PaginationParams } from 'src/app/shared/models/pagination-params/pagination-params';
+import { Injectable } from "@angular/core";
+import { commentUrl } from "src/app/configs/api-endpoint.constants";
+import { HttpClient } from "@angular/common/http";
+import { PaginationParams } from "src/app/shared/models/pagination-params/pagination-params";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CommentsService {
 

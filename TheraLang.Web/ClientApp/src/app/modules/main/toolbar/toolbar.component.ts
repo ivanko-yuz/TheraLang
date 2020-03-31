@@ -6,15 +6,15 @@ import { EventService } from "../../../core/services/event/event-service";
 import { DialogService } from "../../../core/services/dialog/dialog.service";
 import { AuthService } from "../../../core/auth/auth.service";
 import { ProjectParticipationRequestStatus } from "src/app/configs/project-participation-request-status";
-import { LoginComponent } from 'src/app/modules/login/login.component';
+import { LoginComponent } from "src/app/modules/login/login.component";
 
 @Component({
   selector: "app-toolbar",
   templateUrl: "./toolbar.component.html",
-  styleUrls: ["./toolbar.component.less", "./toolbar-menu-item.less"]
+  styleUrls: ["./toolbar.component.less", "./toolbar-menu-item.less"],
 })
 export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
-  hasNotification: boolean = false;
+  hasNotification = false;
   projectParticipation: ProjectParticipationRequest[];
 
   private subscription = new Subscription();
@@ -23,7 +23,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     private participantService: ProjectParticipationService,
     private eventService: EventService,
     private dialog: DialogService,
-    private userService: AuthService
+    private userService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
         this.projectParticipation = projectParticipation;
         if (
           this.projectParticipation.filter(
-            x => x.status === ProjectParticipationRequestStatus.New
+            x => x.status === ProjectParticipationRequestStatus.New,
           ).length > 0
         ) {
           this.hasNotification = true;
@@ -56,11 +56,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dialog.openFormDialog(LoginComponent);
   }
 
-  isAuthenticated(){
+  isAuthenticated() {
        return this.userService.isAuthenticated();
   }
 
-  isAdmin(){
+  isAdmin() {
     return this.userService.isAdmin();
   }
 }

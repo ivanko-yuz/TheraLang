@@ -6,7 +6,7 @@ import { ChangedSiteMap } from "src/app/shared/models/site-map/changed-site-map"
 @Component({
   selector: "app-page-entry",
   templateUrl: "./page-entry.component.html",
-  styleUrls: ["./page-entry.component.less"]
+  styleUrls: ["./page-entry.component.less"],
 })
 export class PageEntryComponent implements OnInit {
   @Input("page") page: SiteMap;
@@ -38,9 +38,9 @@ export class PageEntryComponent implements OnInit {
 
       const entriesToChange = this.formEvent(from, to, target, siblings);
       this.onChange.emit(entriesToChange);
-    }
+    },
   };
-  languages = ["ua","en"];
+  languages = ["ua", "en"];
   constructor() {}
 
   ngOnInit() {}
@@ -57,7 +57,7 @@ export class PageEntryComponent implements OnInit {
     from: number,
     to: number,
     target: number,
-    siblings: any
+    siblings: any,
   ): ChangedSiteMap[] {
     const entriesToChange: ChangedSiteMap[] = [];
     siblings.forEach((sibling, index) => {
@@ -68,12 +68,12 @@ export class PageEntryComponent implements OnInit {
             id: target,
             prevParentId: from,
             newParentId: to,
-            newIndex: index
+            newIndex: index,
           });
         } else {
           entriesToChange.push({
             id: siblingId,
-            newIndex: index
+            newIndex: index,
           });
         }
       }

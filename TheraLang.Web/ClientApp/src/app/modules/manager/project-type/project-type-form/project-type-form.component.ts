@@ -8,7 +8,7 @@ import { ProjectType } from "../../../../shared/models/project-type/project-type
   selector: "app-project-type-form",
   templateUrl: "./project-type-form.component.html",
   styleUrls: ["./project-type-form.component.less"],
-  providers: [ProjectTypeService]
+  providers: [ProjectTypeService],
 })
 export class ProjectTypeFormComponent implements OnInit {
   ngOnInit(): void {}
@@ -17,7 +17,7 @@ export class ProjectTypeFormComponent implements OnInit {
     private dialog: MatDialogRef<ProjectTypeFormComponent>,
     public service: ProjectTypeService,
     public dateAdapter: DateAdapter<Date>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
 
   onCloseForm(): void {
@@ -25,7 +25,7 @@ export class ProjectTypeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    let newData = new ProjectType();
+    const newData = new ProjectType();
     newData.id = this.data.id;
     newData.typeName = this.data.name;
     this.service.Update(newData);

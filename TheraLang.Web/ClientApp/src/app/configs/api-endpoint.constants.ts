@@ -18,4 +18,4 @@ export const userUrl = baseUrl + "user";
 export const paymentHistoryUrl = baseUrl + "paymentHistory/all";
 export const chatUrl = baseUrl + "chats";
 export const paymentUrl = baseUrl + "user/payment";
-export const commentUrl = baseUrl + "comment"
+export const commentUrl = baseUrl + "comment";
