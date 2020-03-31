@@ -21,9 +21,10 @@ jobs:
       run: dotnet build --configuration Release
       
     - name: dotnet publish
-      if: github.ref == 'refs/heads/master'
-      run: |
-        dotnet publish -c Release -o myapp 
+      run: dotnet publish -c Release -o myapp 
+      
+    - name: Testing
+      run: dotnet test
 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       if: github.ref == 'refs/heads/master'

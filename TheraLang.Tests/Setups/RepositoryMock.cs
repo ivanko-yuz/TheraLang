@@ -26,7 +26,10 @@ namespace TheraLang.Tests.Mocks
                      {
                          testDB.Add(item);
                      });
-            Repository.Setup(r => r.GetAllAsync()).ReturnsAsync(testDB.AsQueryable().BuildMock().Object);
+            Repository.Setup(r => r.GetAllAsync(It.IsAny<Expression<Func<T, bool>>>()))
+                .ReturnsAsync((Expression<Func<T, bool>> predicate) => testDB.AsQueryable()
+                .Where((predicate == null ? _ => true : predicate))
+                .BuildMock().Object);
         }
     }
 }

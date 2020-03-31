@@ -12,7 +12,6 @@ using SendGrid;
 using System;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
-using TheraLang.BLL.LiqPay;
 using TheraLang.BLL.Services;
 using TheraLang.BLL.Services.FileServices;
 using TheraLang.Web.ActionFilters;
@@ -55,11 +54,11 @@ namespace TheraLang.Web
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IConfirmationService, ConfirmationService>();
 
-            services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
+            ConfigureDatabase(services);
             services.AddUnitOfWork();
             services.AddFileStorage(Configuration.GetConnectionString("AzureConnection"));
-            
-            services.AddAuthentication(Configuration);
+
+            AddAuth(services);
             services.Configure<EmailSettings>(Configuration.GetSection("email_settings"));
 
             services.AddLiqPayServices(Configuration.GetSection("LiqPay"));
@@ -92,7 +91,7 @@ namespace TheraLang.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public virtual void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -134,6 +133,16 @@ namespace TheraLang.Web
                     spa.UseAngularCliServer("start");
                 }
             });
+        }
+
+        protected virtual void AddAuth(IServiceCollection services)
+        {
+            services.AddAuthentication(Configuration);
+        }
+
+        protected virtual void ConfigureDatabase(IServiceCollection services)
+        {
+            services.AddMainContext(Configuration.GetConnectionString("DefaultConnection"));
         }
     }
 }

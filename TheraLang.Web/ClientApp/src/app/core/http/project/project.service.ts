@@ -80,11 +80,11 @@ export class ProjectService {
     formData.append("imgFile", project.imgFile as File);
     formData.append("imgUrl", project.imgUrl);
 
-    return this.http.post(this.url + "create", formData);
+    return this.http.post(`${this.url}create`, formData);
   }
 
   updateProject(project: Project) {
-    return this.http.put(this.url + "update" + "/" + project.id, project);
+    return this.http.put(`${this.url}update/${project.id}`, project);
   }
 
   getProjectTypes() {

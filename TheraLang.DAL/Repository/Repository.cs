@@ -34,12 +34,6 @@ namespace TheraLang.DAL.Repository
             return await query.ToListAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
-        {
-            var query = GetAll();
-            return await query.ToListAsync();
-        }
-
         public IQueryable<TEntity> GetAll()
         {
             return _dbSet.AsQueryable();

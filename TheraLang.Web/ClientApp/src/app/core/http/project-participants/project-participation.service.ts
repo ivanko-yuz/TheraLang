@@ -19,14 +19,14 @@ export class ProjectParticipationService {
     requestId: number,
     requestStatus: ProjectParticipationRequestStatus
   ) {
-    return this.http.put(this.url + "/" + requestId, requestStatus);
+    return this.http.put(`${this.url}/${requestId}`, requestStatus);
   }
 
   createParticipRequest(projectId) {
-    return this.http.post(this.url + "/create", projectId);
+    return this.http.post(`${this.url}/create`, projectId);
   }
 
   getProjectParticipants(projectId){
-    return this.http.get(this.url + "/" + projectId);
+    return this.http.get(`${this.url}/${projectId}`);
   }
 }

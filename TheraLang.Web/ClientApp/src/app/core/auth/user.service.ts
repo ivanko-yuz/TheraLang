@@ -26,7 +26,7 @@ export class UserService {
   });
   readonly baseUrl = accountUrl;
   login(loginData) {
-    return this.http.post(this.baseUrl + "/login", loginData);
+    return this.http.post(`${this.baseUrl}/login`, loginData);
   }
   logout() {
     localStorage.removeItem("jwt");
@@ -55,7 +55,7 @@ export class UserService {
   }
 
   getUserName() {
-    return this.http.get(this.baseUrl + "/getUserName", {
+    return this.http.get(`${this.baseUrl}/getUserName`, {
       responseType: "text"
     });
   }
