@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TheraLang.BLL.DataTransferObjects;
 using TheraLang.BLL.Interfaces;
@@ -9,6 +10,7 @@ using TheraLang.Web.ViewModels;
 
 namespace TheraLang.Web.Controllers
 {
+    [Authorize(Roles = RolesConstants.Admin)]
     [Route("api/memberFee")]
     [ApiController]
     public class MemberFeeController : ControllerBase
@@ -29,11 +31,6 @@ namespace TheraLang.Web.Controllers
 
             var memberFeeDtos = await _memberFeeService.GetMemberFeesAsync();
 
-            if (memberFeeDtos == null)
-            {
-                return NotFound();
-            }
-
             var memberFeeModels = mapper.Map<List<MemberFeeViewModel>>(memberFeeDtos);
             return Ok(memberFeeModels);
         }
@@ -42,11 +39,6 @@ namespace TheraLang.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMemberFee([FromBody] MemberFeeViewModel memberFeeModel)
         {
-            if (memberFeeModel == null)
-            {
-                throw new ArgumentNullException($"{nameof(memberFeeModel)} can not be null");
-            }
-
             var mapper =
                 new MapperConfiguration(cfg => cfg.CreateMap<MemberFeeViewModel, MemberFeeDto>()).CreateMapper();
             var memberFeeDto = mapper.Map<MemberFeeViewModel, MemberFeeDto>(memberFeeModel);
@@ -59,16 +51,7 @@ namespace TheraLang.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                await _memberFeeService.DeleteAsync(id);
-            }
-
-            catch (ArgumentException)
-            {
-                return NotFound();
-            }
-
+            await _memberFeeService.DeleteAsync(id);
             return Ok();
         }
     }

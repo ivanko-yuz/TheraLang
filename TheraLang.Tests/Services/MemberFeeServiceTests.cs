@@ -11,6 +11,7 @@ using TheraLang.DAL.UnitOfWork;
 using Xunit;
 using FluentAssertions;
 using TheraLang.BLL.DataTransferObjects;
+using Common.Exceptions;
 
 namespace TheraLang.Tests.Services
 {
@@ -31,18 +32,18 @@ namespace TheraLang.Tests.Services
 
             mockRepo = new Mock<IRepository<MemberFee>>();
             mockUnitOfWork = new Mock<IUnitOfWork>();
+            mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
         }
 
         [Fact]
         public void GetMemberFeesAsync_ShouldReturnAllFees()
         {
-            mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockRepo.Setup(x => x.GetAllAsync(It.IsAny<Expression<Func<MemberFee, bool>>>()))
                 .ReturnsAsync((Expression<Func<MemberFee, bool>> expression) => fakeMemberFees);
 
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
             var result = memberFeeService.GetMemberFeesAsync();
-
+            
             result.Should().NotBeNull();
             result.Result.Count().Should().Be(3);
         }
@@ -50,7 +51,6 @@ namespace TheraLang.Tests.Services
         [Fact]
         public void DeleteAsync_ShouldDeleteOneFee()
         {
-            mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
             mockRepo.Setup(x => x.Get(It.IsAny<Expression<Func<MemberFee, bool>>>()))
                 .ReturnsAsync((Expression<Func<MemberFee, bool>> expression) => fakeMemberFees
@@ -69,38 +69,36 @@ namespace TheraLang.Tests.Services
 
         [Fact]
         public void DeleteAsync_ShouldThrowArgumentNullException()
-        {
-            mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
+        {            
             mockRepo.Setup(x => x.Get(It.IsAny<Expression<Func<MemberFee, bool>>>())).ReturnsAsync(() => null);
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
             
             int id = 4;
             Func<Task> act = async () => await memberFeeService.DeleteAsync(id);
 
-            act.Should().Throw<ArgumentNullException>()
-                .WithMessage($"Value cannot be null.\n" +
-                $"Parameter name: Error while deleting member fee. Fee with {nameof(id)}={id} not found");
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
         public void AddAsync_ShouldAddMemberFee()
-        {
-            mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
+        {            
             mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
             mockRepo.Setup(x => x.Add(It.IsAny<MemberFee>())).Verifiable();
+            mockRepo.Setup(x => x.GetAllAsync(It.IsAny<Expression<Func<MemberFee, bool>>>()))
+                 .ReturnsAsync((Expression<Func<MemberFee, bool>> expression) => fakeMemberFees);
 
             MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
 
-            var result = memberFeeService.AddAsync(new MemberFeeDto());
+            var result = memberFeeService.AddAsync(new MemberFeeDto() 
+                { FeeDate = new DateTime(2022,7,20),FeeAmount = 500});
 
             mockRepo.Verify(x => x.Add(It.IsAny<MemberFee>()), Times.Once());
             mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Once());
         }
 
         [Fact]
-        public void AddAsync_ShouldThrowException()
+        public void AddAsync_ShouldThrowNullReferenceException()
         {
-            mockUnitOfWork.Setup(x => x.Repository<MemberFee>()).Returns(mockRepo.Object);
             mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
             mockRepo.Setup(x => x.Add(It.IsAny<MemberFee>())).Verifiable();
 
@@ -110,8 +108,22 @@ namespace TheraLang.Tests.Services
 
             mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Never());
             mockRepo.Verify(x => x.Add(It.IsAny<MemberFee>()), Times.Never());
-            act.Should().Throw<NullReferenceException>()
-                .WithMessage($"{nameof(MemberFeeDto)} cannot be null");
+            act.Should().Throw<NullReferenceException>();
+        }
+        [Fact]
+        public void AddAsync_ShouldThrowInvalidArgumentException()
+        {
+            mockUnitOfWork.Setup(x => x.SaveChangesAsync()).Verifiable();
+            mockRepo.Setup(x => x.Add(It.IsAny<MemberFee>())).Verifiable();
+
+            MemberFeeService memberFeeService = new MemberFeeService(mockUnitOfWork.Object);
+
+            Func<Task> act = async () => await memberFeeService.AddAsync(new MemberFeeDto()
+            { FeeDate = new DateTime(2020, 2, 20), FeeAmount = 500 });
+
+            mockUnitOfWork.Verify(x => x.SaveChangesAsync(), Times.Never());
+            mockRepo.Verify(x => x.Add(It.IsAny<MemberFee>()), Times.Never());
+            act.Should().Throw<InvalidArgumentException>();
         }
     }
 }

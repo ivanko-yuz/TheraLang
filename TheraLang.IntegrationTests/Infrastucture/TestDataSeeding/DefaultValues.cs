@@ -12,5 +12,9 @@ namespace TheraLang.IntegrationTests.Infrastucture.TestDataSeeding
         public static readonly Guid GuestRoleId = new Guid("7e9b3674-e720-4d50-939b-93ce8e8b1c44");
         public static readonly Guid UnconfirmedRoleId = new Guid("5ea1ce2d-1bf0-4d39-a01b-a5d90962bdb1");
         public static readonly Guid BlockedRoleId = new Guid("7a0f5ea1-f192-4188-bc98-b59d95f6e109");
+
+        public static readonly string DefaultString = "someString";
+        public static readonly DateTime DefaultDate = new DateTime(2009, 8, 7);
+        public static readonly string DefaultEmail = "email@gmail.com";
     }
 }
