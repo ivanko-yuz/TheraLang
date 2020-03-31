@@ -1,4 +1,5 @@
 ﻿using Castle.Core.Logging;
+using Common.Configurations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
