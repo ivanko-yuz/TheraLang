@@ -19,7 +19,7 @@ export class CommentsService {
   }
 
   getCommentsPage(newsId: number, paginationParams: PaginationParams) {
-    return this.http.get(`${commentUrl}/${newsId}?pageNumber="${paginationParams.pageNumber}&pageSize=${paginationParams.pageSize}`);
+    return this.http.get(`${commentUrl}/${newsId}?pageNumber=${paginationParams.pageNumber}&pageSize=${paginationParams.pageSize}`);
   }
 
   createComment(comment) {
