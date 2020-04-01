@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SendGrid;
 using System;
 using TheraLang.BLL.Infrastructure;
 using TheraLang.BLL.Interfaces;
@@ -83,6 +84,7 @@ namespace TheraLang.Web
             services.AddTransient<SchedulerService>();
             services.AddTransient<INewsCommentService, NewsCommentService>();
             services.AddTransient<IChatService, ChatService>();
+            services.AddTransient<ISendGridClient>(provider => new SendGridClient(Configuration.GetSection("send_grip_api_key").Value));
 
             services.AddOpenApiDocument();
             services.AddSignalR();

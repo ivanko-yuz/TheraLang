@@ -10,6 +10,7 @@ using TheraLang.DAL.Entities;
 using TheraLang.DAL.UnitOfWork;
 using Common;
 using System.Linq;
+using Common.Exceptions;
 
 namespace TheraLang.BLL.Services
 {
@@ -26,43 +27,29 @@ namespace TheraLang.BLL.Services
 
         public async Task<UserAllDto> GetMyProfile(Guid id)
         {
-            try
-            {
-                var user = await _unitOfWork.Repository<User>().Get(u => u.Id == id);
+            var user = await _unitOfWork.Repository<User>().Get(u => u.Id == id);
 
-                var userDetails = await _unitOfWork.Repository<UserDetails>().GetAll()
-                    .Include(ud => ud.User)
-                    .FirstOrDefaultAsync(ud => ud.UserDetailsId == id);
-                var detailsMapper = new MapperConfiguration(cfg =>
-                    cfg.CreateMap<UserDetails, UserAllDto>()
-                        .ForMember(userAllDto => userAllDto.Email,
-                            opts => opts.MapFrom(details => details.User.Email))
-                        .ForMember(userAllDto => userAllDto.Id, opt => opt.MapFrom(details => details.UserDetailsId)))
-                    .CreateMapper();
-                var userAll = detailsMapper.Map<UserDetails, UserAllDto>(userDetails);
-                return userAll;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when getting user by {nameof(id)}={id}: ", ex);
-            }
+            var userDetails = await _unitOfWork.Repository<UserDetails>().GetAll()
+                .Include(ud => ud.User)
+                .FirstOrDefaultAsync(ud => ud.UserDetailsId == id);
+            var detailsMapper = new MapperConfiguration(cfg =>
+                cfg.CreateMap<UserDetails, UserAllDto>()
+                    .ForMember(userAllDto => userAllDto.Email,
+                        opts => opts.MapFrom(details => details.User.Email))
+                    .ForMember(userAllDto => userAllDto.Id, opt => opt.MapFrom(details => details.UserDetailsId)))
+                .CreateMapper();
+            var userAll = detailsMapper.Map<UserDetails, UserAllDto>(userDetails);
+            return userAll;
         }
 
         public async Task<UserDetailsDto> GetUserDetailsById(Guid id)
         {
-            try
-            {
-                var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
+            var user = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
 
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>()).CreateMapper();
-                var userDto = mapper.Map<UserDetails, UserDetailsDto>(user);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UserDetailsDto>()).CreateMapper();
+            var userDto = mapper.Map<UserDetails, UserDetailsDto>(user);
 
-                return userDto;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error when getting user by {nameof(id)}={id}: ", ex);
-            }
+            return userDto;
         }
 
         public async Task<UsersListDto> GetAllUsers(PaginationParams pagination)
@@ -73,7 +60,7 @@ namespace TheraLang.BLL.Services
             var usersList = new UsersListDto()
             {
                 UserList = usersDto.ToList(),
-                CountOfItems = await _unitOfWork.Repository<User>().GetAll().CountAsync()
+                CountOfItems = await _unitOfWork.Repository<UserDetails>().GetAll().CountAsync()
             };
 
             return usersList;
@@ -82,30 +69,23 @@ namespace TheraLang.BLL.Services
 
         public async Task Update(UserDetailsDto user, Guid id)
         {
-            try
+            var updateUser = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
+
+            updateUser.FirstName = user.FirstName;
+            updateUser.LastName = user.LastName;
+            updateUser.PhoneNumber = user.PhoneNumber;
+            updateUser.BirthDay = user.BirthDay;
+            updateUser.City = user.City;
+            updateUser.ShortInformation = user.ShortInformation;
+
+            if (user.Image != null)
             {
-                var updateUser = await _unitOfWork.Repository<UserDetails>().Get(u => u.UserDetailsId == id);
-
-                updateUser.FirstName = user.FirstName;
-                updateUser.LastName = user.LastName;
-                updateUser.PhoneNumber = user.PhoneNumber;
-                updateUser.BirthDay = user.BirthDay;
-                updateUser.City = user.City;
-                updateUser.ShortInformation = user.ShortInformation;
-
-                if (user.Image != null)
-                {
-                    var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(),
-                        Path.GetExtension(user.Image.FileName));
-                    updateUser.ImageURl = imageUri.ToString();
-                }
-
-                await _unitOfWork.SaveChangesAsync();
+                var imageUri = await _fileService.SaveFile(user.Image.OpenReadStream(),
+                    Path.GetExtension(user.Image.FileName));
+                updateUser.ImageURl = imageUri.ToString();
             }
-            catch (Exception ex)
-            {
-                throw new Exception($"Cannot update the {nameof(UserDetails)}.", ex);
-            }
+
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task<bool> ChangeRole(Guid userId, Guid newRole)
