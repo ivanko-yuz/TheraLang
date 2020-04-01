@@ -100,7 +100,7 @@ namespace TheraLang.Tests.Services
                 new MemberFee()
                 {
                     FeeDate = new DateTime(2020,4,1),
-                    FeeAmount = 150
+                    FeeAmount = 100
                 },
                 new MemberFee()
                 {
