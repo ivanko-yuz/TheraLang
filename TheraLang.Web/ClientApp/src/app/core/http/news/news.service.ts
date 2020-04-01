@@ -13,27 +13,27 @@ export class NewsService {
   private url = baseUrl;
 
   getAllNews(){
-    return this.http.get(this.url+"news/all");
+    return this.http.get(`${this.url}news/all`);
   }
 
   getNewsById(id: number){
-    return this.http.get(this.url+"news/"+id);
+    return this.http.get(`${this.url}news/${id}`);
   }
 
   createNews(news){
-    return this.http.post(this.url + "news",news);
+    return this.http.post(`${this.url}news`,news);
   }
 
   deleteNews(newsId:number){
-    return this.http.delete(this.url + "news/"+newsId);
+    return this.http.delete(`${this.url}news/${newsId}`);
   }
 
   editNews(newsId:number,news){
-    return this.http.put(this.url + "news/" + newsId,news);
+    return this.http.put(`${this.url}news/${newsId}`,news);
   }
   
   like(newsId: number){
-    return this.http.put(this.url + "news/like/" + newsId, null)
+    return this.http.put(`${this.url}news/like/${newsId}`, null)
   }
 
 }
