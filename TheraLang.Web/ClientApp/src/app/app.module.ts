@@ -58,7 +58,7 @@ import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ToolbarComponent } from "./modules/main/toolbar/toolbar.component";
 
-import { LanguageComponent } from "./modules/main/toolbar/language/language.component";
+import { LanguageComponent } from "./modules/shared/language/language.component";
 import { ResourceService } from "./core/http/resource/resource.service";
 import { HttpService } from "./core/http/http/http.service";
 import { EventService } from "./core/services/event/event-service";
@@ -82,7 +82,7 @@ import { ToolbarItemComponent } from "./modules/main/toolbar/toolbar-item/toolba
 import { DonationComponent } from "./modules/main/pages/donation/donation.component";
 import { TransactionResultComponent } from "./shared/components/transaction-result/transaction-result.component";
 import { LoginComponent } from "./modules/login/login.component";
-import { ProfileMenuComponent } from "./modules/main/toolbar/profile-menu/profile-menu.component";
+import { ProfileMenuComponent } from "./modules/shared/profile-menu/profile-menu.component";
 import { ResourceCreateComponent } from "./modules/main/pages/resource/resource-create/resource-create.component";
 import { MainComponent } from "./modules/main/main.component";
 import { MaterialFileInputModule } from "ngx-material-file-input";
@@ -134,7 +134,7 @@ import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-t
 import {ConfirmationComponent} from './modules/registration/confirmation/confirmation.component';
 import {ForgotPasswordComponent} from './modules/password/email/forgot-password.component';
 import {ResetPasswordComponent} from './modules/password/reset-password.component';
-
+import { NgxFlagIconCssModule } from 'ngx-flag-icon-css'
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -283,7 +283,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgImageSliderModule,
     SortablejsModule.forRoot({animation: 400}),
     SharedModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxFlagIconCssModule,
   ],
   exports: [],
   providers: [

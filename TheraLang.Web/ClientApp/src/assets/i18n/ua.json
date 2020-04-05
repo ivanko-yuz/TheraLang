@@ -67,8 +67,11 @@
     "home": {
       "title": "Головна сторінка"
     },
+    "contacts": {
+      "title": "Контакти"
+    },
     "cms-pages": {
-      "title": "CMS Pages"
+      "title": "Інше"
     },
     "news" : {
       "title" : "Новини",
