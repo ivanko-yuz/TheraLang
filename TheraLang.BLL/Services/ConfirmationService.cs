@@ -43,7 +43,7 @@ namespace TheraLang.BLL.Services
                 var url = "https://theralang.azurewebsites.net";
                 if (_env.IsDevelopment())
                 {
-                    url = "http://localhost:5000";
+                url = "http://localhost:5000";
                 }
 
                 body = body.Replace("{EMAIL}", UserEmail);
