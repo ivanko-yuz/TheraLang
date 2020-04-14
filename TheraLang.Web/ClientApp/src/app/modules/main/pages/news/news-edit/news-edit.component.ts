@@ -132,7 +132,7 @@ export class NewsEditComponent implements OnInit {
             .get("common.edited-successfully")
             .toPromise();
           this.notificationService.success(msg);
-          this.router.navigateByUrl("/news/details/"+this.newsId);
+          this.router.navigateByUrl(`/news/details/${this.newsId}`);
         },
         async error => {
           console.log(error);
@@ -140,7 +140,7 @@ export class NewsEditComponent implements OnInit {
             await this.translate.get("common.wth").toPromise()
           );
         })
-      this.router.navigate(["/news/details/"+this.newsId]);
+      this.router.navigate([`/news/details/${this.newsId}`]);
     }
   }
 }
