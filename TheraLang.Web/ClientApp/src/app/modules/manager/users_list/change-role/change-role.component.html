@@ -1,4 +1,5 @@
-<h1 class = "big-text" mat-dialog-title fxLayoutAlign="center center">{{'common.change_role'|translate}}</h1>
+<div>
+  <span class = "big-text" mat-dialog-title fxLayoutAlign="center center">{{'common.change_role'|translate}}</span>
 <span class = "small-text">{{'common.select_role'|translate}}</span>
 <div mat-dialog-content fxLayoutAlign="center center" >
   <mat-form-field>
@@ -13,6 +14,7 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions fxLayoutAlign="center center">
-  <button mat-button (click)="onNoClick()">{{'common.no_thanks'|translate}}</button>
-  <button mat-button [mat-dialog-close]="selectedValue" cdkFocusInitial>{{'common.ok'|translate}}</button>
+  <button mat-button class = "change"[mat-dialog-close]="selectedValue" cdkFocusInitial>{{'common.change'|translate}}</button>
+  <br>
+</div>
 </div>
