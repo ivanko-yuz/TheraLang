@@ -45,7 +45,8 @@ export class UsersListComponent implements OnInit {
       (value: Role) => {
         this.userService.getRoles().subscribe((roles: Role[]) => {
           const dialog = this.dialog.open(ChangeRoleComponent, {
-            width: "400px",
+            width: "514px",
+            height: "313",
             data: {
               rolesList: roles,
               userRoleId: value.id,

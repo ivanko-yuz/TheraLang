@@ -17,7 +17,8 @@
       "number-positive": "The number must be positive",
       "date-intersect": "End date must be less than start date",
       "edit": "edit",
-      "edit_profile": "Edit profile"
+      "edit_profile": "Edit profile",
+      "select_role" : "Please, select role"
     },
     "deleted-successfully": "Deleted successfully!",
     "added-successfully": "Added successfully!",

@@ -1,5 +1,6 @@
-<div *ngFor="let user of usersList.userList">
-    <mat-card class="container"  fxFlex="18%">
+<div fxLayout="row"fxLayout.md="column" fxLayout.sm="column" >
+<div *ngFor="let user of usersList.userList" >
+    <mat-card class="container" >
       <mat-card-content class="container" fxLayout="row" >
         <div class="main-container" fxLayout="column" fxLayout.md="column" fxLayout.sm="column" >
           <div class="content-container" fxLayout="column" fxLayout.md="column" fxLayout.sm="column" >
@@ -32,6 +33,7 @@
                  <br>
                </span>
               </mat-card-title>
+
               <div class="project-description info">
                 <p *ngIf="user.city != null">
                   <span class="material-icons icon">
@@ -52,4 +54,4 @@
         <button mat-raised-button class = "button info" (click)="openChangeRoleModal(user.id)">{{'common.change_role'|translate}}</button>
     </mat-card>
     </div>
-
+</div>
