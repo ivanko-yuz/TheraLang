@@ -1,8 +1,11 @@
 <div infiniteScroll class="comments-block" [infiniteScrollDistance]="0" (scrolled)="onScroll()">
     <div fxLayout="column">
-        <span class="comments-count">{{this.commentsCount}}  {{'components.comments.comments-count-title'|translate}}</span>
-        <app-comment-create *ngIf="this.currentUser" [currentUser]="this.currentUser" (commentCreated)="updateComments()"></app-comment-create>
-        <app-comment *ngFor="let comment of this.comments" [comment]="comment" (commentChanged)="updateComments()"></app-comment>
+        <span class="comments-count">{{this.commentsCount}}
+            {{'components.comments.comments-count-title'|translate}}</span>
+        <app-comment-create *ngIf="this.currentUser" [currentUser]="this.currentUser"
+            (commentCreated)="updateComments()"></app-comment-create>
+        <app-comment *ngFor="let comment of this.comments" [comment]="comment" [currentUser]="this.currentUser"
+            (commentChanged)="updateComments()"></app-comment>
         <mat-spinner color="primary" diameter="40" *ngIf="isLoading()"></mat-spinner>
     </div>
 </div>

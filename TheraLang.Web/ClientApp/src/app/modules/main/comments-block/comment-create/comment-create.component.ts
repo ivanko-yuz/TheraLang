@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { CommentRequest } from 'src/app/shared/models/comment/comment-request';
 import { ActivatedRoute } from '@angular/router';
+import { CommentView } from 'src/app/shared/models/comment/comment-view';
 
 @Component({
   selector: 'app-comment-create',
@@ -15,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 export class CommentCreateComponent implements OnInit {
 
   @Input() currentUser: User;
+  @Input() answeredComment: CommentView; 
   @Output() commentCreated = new EventEmitter();
   public commentForm: FormGroup;
   commentText: string;
@@ -48,6 +50,11 @@ export class CommentCreateComponent implements OnInit {
       formData.append("text", comment.text);
       comment.newsId = parseInt(this.route.snapshot.paramMap.get("newsId"))
       formData.append("newsId", comment.newsId.toString());
+
+      if(this.answeredComment){
+        comment.answeredCommentId = this.answeredComment.id;
+        formData.append("answeredCommentId", comment.answeredCommentId.toString());
+      }
 
       this.commentsService.createComment(formData).subscribe(
         async (msg: string) => {

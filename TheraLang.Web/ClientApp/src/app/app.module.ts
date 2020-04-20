@@ -205,7 +205,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfirmDialogComponent,
     LoginComponent,
     ResourceCreateComponent,
-    CommentEditComponent
+    CommentEditComponent,
+    CommentCreateComponent,
   ],
   imports: [
     BrowserModule,

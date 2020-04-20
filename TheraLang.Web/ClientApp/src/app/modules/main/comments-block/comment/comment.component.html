@@ -1,34 +1,59 @@
-<ng-container #container>
-    <div *ngIf="!this.isEditing">
-        <div fxLayout="row">
-            <img *ngIf="this.comment.authorImageUrl else defaultImage" src="{{this.comment.authorImageUrl}}"
-                class="user-image">
-            <ng-template #defaultImage>
-                <img src="/assets/img/avatar-placeholder.gif" class="user-image">
-            </ng-template>
-            <div fxLayout="column" fxFlex>
-                <div fxLayout="row" fxLayoutAlign=" center">
-                    <span class="author-name padding-right">{{this.comment.authorName}}</span>
-                    <span class="foreign-text padding-right">{{this.comment.createdDateUtc | date:'MM.dd.yyyy HH:mm'}}</span>
-                    <span *ngIf="this.comment.isEdited" class="foreign-text">({{'components.comments.edited'|translate}})</span>
-                    <span fxFlex></span>
-                    <span>
-                        <button mat-icon-button *ngIf="isOwner()" (click)="onEdit()">
-                            <mat-icon>edit</mat-icon>
+<div>
+    <ng-container #container>
+        <div *ngIf="!this.isEditing">
+            <div fxLayout="row">
+                <img *ngIf="this.comment.authorImageUrl else defaultImage" src="{{this.comment.authorImageUrl}}"
+                    class="user-image">
+                <ng-template #defaultImage>
+                    <img src="/assets/img/avatar-placeholder.gif" class="user-image">
+                </ng-template>
+
+                <div fxLayout="column" fxFlex>
+                    <div fxLayout="row" fxLayoutAlign=" center">
+                        <span class="author-name padding-right">{{this.comment.authorName}}</span>
+                        <span
+                            class="foreign-text padding-right">{{this.comment.createdDateUtc | date:'MM.dd.yyyy HH:mm'}}</span>
+                        <span *ngIf="this.comment.isEdited"
+                            class="foreign-text">({{'components.comments.edited'|translate}})</span>
+                        <span fxFlex></span>
+                        <span>
+                            <button mat-icon-button *ngIf="isOwner()" (click)="onEdit()">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button *ngIf="isOwner() || isAdmin()" (click)="onDelete()">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </span>
+                    </div>
+
+                    <div>{{this.comment.text.substr(0, this.textSize)}}</div>
+
+                    <div>
+                        <div *ngIf="!isFull()">
+                            <a class="change-comment-size"
+                                (click)="showFullComment()">{{'components.comments.read-more'|translate}}...</a>
+                        </div>
+                        <div *ngIf="this.isOpened">
+                            <a class="change-comment-size"
+                                (click)="showSmallComment()">{{'components.comments.show-less'|translate}}</a>
+                        </div>
+                    </div>
+                    <div *ngIf="!this.comment.answeredCommentId && this.currentUser">
+                        <button mat-button (click)="onReply()">
+                            Reply
                         </button>
-                        <button mat-icon-button *ngIf="isOwner() || isAdmin()" (click)="onDelete()">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </span>
-                </div>
-                <div>{{this.comment.text.substr(0, this.textSize)}}</div>
-                <div *ngIf="!isFull()">
-                    <a class="change-comment-size" (click)="showFullComment()">{{'components.comments.read-more'|translate}}...</a>
-                </div>
-                <div *ngIf="this.isOpened">
-                    <a class="change-comment-size" (click)="showSmallComment()">{{'components.comments.show-less'|translate}}</a>
+                    </div>
                 </div>
             </div>
+            <div *ngIf="this.isReplying" class="reply">
+                <app-comment-create [currentUser]="this.currentUser"
+                    [answeredComment]="this.comment" (commentCreated)="this.commentChanged.emit()"></app-comment-create>
+            </div>
+            <div class="reply">
+                <app-comment *ngFor="let reply of this.comment.replies" [comment]="reply"
+                    (commentChanged)="this.commentChanged.emit()">
+                </app-comment>
+            </div>
         </div>
-    </div>
-</ng-container>
+    </ng-container>
+</div>
