@@ -16,7 +16,7 @@ import { CommentView } from 'src/app/shared/models/comment/comment-view';
 export class CommentCreateComponent implements OnInit {
 
   @Input() currentUser: User;
-  @Input() answeredComment: CommentView; 
+  @Input() answeredCommentId: number; 
   @Output() commentCreated = new EventEmitter();
   public commentForm: FormGroup;
   commentText: string;
@@ -51,8 +51,8 @@ export class CommentCreateComponent implements OnInit {
       comment.newsId = parseInt(this.route.snapshot.paramMap.get("newsId"))
       formData.append("newsId", comment.newsId.toString());
 
-      if(this.answeredComment){
-        comment.answeredCommentId = this.answeredComment.id;
+      comment.answeredCommentId = this.answeredCommentId;
+      if(comment.answeredCommentId){
         formData.append("answeredCommentId", comment.answeredCommentId.toString());
       }
 

@@ -47,13 +47,12 @@
             </div>
             <div *ngIf="this.isReplying" class="reply">
                 <app-comment-create [currentUser]="this.currentUser"
-                    [answeredComment]="this.comment" (commentCreated)="this.commentChanged.emit()"></app-comment-create>
+                    [answeredCommentId]="this.comment.answeredCommentId ? this.comment.answeredCommentId : this.comment.id"
+                    (commentCreated)="this.commentChanged.emit()"></app-comment-create>
             </div>
             <div class="reply">
-                <app-comment *ngFor="let reply of this.comment.replies" 
-                    [comment]="reply"
-                    [currentUser]="this.currentUser"
-                    (commentChanged)="this.commentChanged.emit()">
+                <app-comment *ngFor="let reply of this.comment.replies" [comment]="reply"
+                    [currentUser]="this.currentUser" (commentChanged)="this.commentChanged.emit()">
                 </app-comment>
             </div>
         </div>

@@ -99,14 +99,6 @@ namespace TheraLang.BLL.Services
                 .CreateMapper();
 
             var comment = mapper.Map<CommentRequestDto, NewsComment>(commentDto);
-            
-            var mainComment = comment;
-            while(mainComment.AnsweredCommentId != null)
-            {
-                mainComment = await _unitOfWork.Repository<NewsComment>()
-                    .Get(c=>c.Id == mainComment.AnsweredCommentId); 
-            }
-            comment.AnsweredCommentId = mainComment.Id;
 
             _unitOfWork.Repository<NewsComment>().Add(comment);
             await _unitOfWork.SaveChangesAsync();
