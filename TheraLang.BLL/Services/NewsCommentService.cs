@@ -45,10 +45,10 @@ namespace TheraLang.BLL.Services
             });
 
             var commentDtos = await _unitOfWork.Repository<NewsComment>().GetAll()
+                .Include(c => c.Replies)
                 .Where(c => c.NewsId == newsId)
                 .Where(c => c.AnsweredCommentId == null)
                 .OrderByDescending(c => c.CreatedDateUtc)
-                .Include(c => c.Replies)
                 .ProjectTo<CommentResponseDto>(mapper)
                 .ToListAsync();
 
@@ -73,12 +73,12 @@ namespace TheraLang.BLL.Services
             });
 
             var commentDtos = await _unitOfWork.Repository<NewsComment>().GetAll()
+                .Include(c => c.Replies)
                 .Where(c => c.NewsId == newsId)
                 .Where(c => c.AnsweredCommentId == null)
                 .OrderByDescending(c => c.CreatedDateUtc)
                 .Skip(paginationParams.Skip)
                 .Take(paginationParams.Take)
-                .Include(c => c.Replies)
                 .ProjectTo<CommentResponseDto>(mapper)
                 .ToListAsync();
 
