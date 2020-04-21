@@ -38,7 +38,7 @@
                                 (click)="showSmallComment()">{{'components.comments.show-less'|translate}}</a>
                         </div>
                     </div>
-                    <div *ngIf="!this.comment.answeredCommentId && this.currentUser">
+                    <div *ngIf="this.currentUser">
                         <button mat-button (click)="onReply()">
                             Reply
                         </button>
@@ -50,7 +50,9 @@
                     [answeredComment]="this.comment" (commentCreated)="this.commentChanged.emit()"></app-comment-create>
             </div>
             <div class="reply">
-                <app-comment *ngFor="let reply of this.comment.replies" [comment]="reply"
+                <app-comment *ngFor="let reply of this.comment.replies" 
+                    [comment]="reply"
+                    [currentUser]="this.currentUser"
                     (commentChanged)="this.commentChanged.emit()">
                 </app-comment>
             </div>
