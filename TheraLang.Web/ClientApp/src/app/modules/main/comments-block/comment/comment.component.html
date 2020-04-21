@@ -9,12 +9,16 @@
                 </ng-template>
 
                 <div fxLayout="column" fxFlex>
-                    <div fxLayout="row" fxLayoutAlign=" center">
-                        <span class="author-name padding-right">{{this.comment.authorName}}</span>
-                        <span
-                            class="foreign-text padding-right">{{this.comment.createdDateUtc | date:'MM.dd.yyyy HH:mm'}}</span>
-                        <span *ngIf="this.comment.isEdited"
-                            class="foreign-text">({{'components.comments.edited'|translate}})</span>
+                    <div fxLayout="row" fxLayoutAlign=" center" class="header">
+                        <div fxLayout="column">
+                            <span class="author-name padding-right">{{this.comment.authorName}}</span>
+                            <div fxLayout="row">
+                                <span
+                                    class="foreign-text padding-right">{{this.comment.createdDateUtc | date:'MM.dd.yyyy HH:mm'}}</span>
+                                <span *ngIf="this.comment.isEdited"
+                                    class="foreign-text">({{'components.comments.edited'|translate}})</span>
+                            </div>
+                        </div>
                         <span fxFlex></span>
                         <span>
                             <button mat-icon-button *ngIf="isOwner()" (click)="onEdit()">
@@ -26,7 +30,7 @@
                         </span>
                     </div>
 
-                    <div>{{this.comment.text.substr(0, this.textSize)}}</div>
+                    <div class="comment-text">{{this.comment.text.substr(0, this.textSize)}}</div>
 
                     <div>
                         <div *ngIf="!isFull()">
@@ -38,11 +42,13 @@
                                 (click)="showSmallComment()">{{'components.comments.show-less'|translate}}</a>
                         </div>
                     </div>
-                    <div *ngIf="this.currentUser">
-                        <button mat-button (click)="onReply()">
-                            Reply
+                    <div *ngIf="this.currentUser" fxLayoutAlign="end start">
+                        <button (click)="onReply()" class="reply-button color-primary">
+                            <span *ngIf="!this.isReplying">{{'components.comments.reply'|translate}}</span>
+                            <span *ngIf="this.isReplying">{{'components.comments.close-reply'|translate}}</span>
                         </button>
                     </div>
+                    <div><hr></div>
                 </div>
             </div>
             <div *ngIf="this.isReplying" class="reply">

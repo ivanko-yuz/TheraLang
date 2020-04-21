@@ -85,12 +85,14 @@
       "new-content-images":"Нові зображення для наповнення"
     },
     "comments" : {
-      "comments-count-title" : "коментарів",
+      "comments-count-title" : "Коментарі",
       "create-comment": "Коментувати",
       "enter-comment": "Додайте ваш коментар",
       "edited" : "редагований",
       "read-more" : "БІЛЬШЕ",
-      "show-less" : "МЕНШЕ"
+      "show-less" : "МЕНШЕ",
+      "reply" : "Відповісти",
+      "close-reply" : "Згорнути"
     },
     "users": {
       "title": "Користувачі"
