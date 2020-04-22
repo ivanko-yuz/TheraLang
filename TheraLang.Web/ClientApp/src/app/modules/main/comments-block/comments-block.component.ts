@@ -77,7 +77,6 @@ export class CommentsBlockComponent implements OnInit {
     this.commentsService.getCommentsPage(this.newsId, paginationParams)
       .subscribe((response: CommentView[]) => {
          this.comments = response
-         console.log(response)
       })
   }
 
