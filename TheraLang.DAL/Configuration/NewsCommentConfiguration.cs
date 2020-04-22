@@ -20,6 +20,9 @@ namespace TheraLang.DAL.Configuration
                 .OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(e => e.News).WithMany(n => n.Comments).HasForeignKey(c => c.NewsId)
                 .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(e => e.AnsweredComment).WithMany(a => a.Replies)
+                .HasForeignKey(c => c.AnsweredCommentId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

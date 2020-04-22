@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TheraLang.Web.ViewModels.CommentViewModels
 {
@@ -11,5 +12,7 @@ namespace TheraLang.Web.ViewModels.CommentViewModels
         public string AuthorImageUrl { get; set; }
         public DateTime CreatedDateUtc { get; set; }
         public bool isEdited { get; set; }
+        public int? AnsweredCommentId { get; set; }
+        public ICollection<CommentResponseViewModel> Replies { get; set; }
     }
 }
