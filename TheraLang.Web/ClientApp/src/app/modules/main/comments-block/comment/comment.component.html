@@ -56,8 +56,8 @@
                     [answeredCommentId]="this.comment.answeredCommentId ? this.comment.answeredCommentId : this.comment.id"
                     (commentCreated)="this.commentChanged.emit()"></app-comment-create>
             </div>
-            <div class="reply">
-                <app-comment *ngFor="let reply of this.comment.replies" [comment]="reply"
+            <div class="reply" *ngFor="let reply of this.comment.replies">
+                <app-comment [comment]="reply"
                     [currentUser]="this.currentUser" (commentChanged)="this.commentChanged.emit()">
                 </app-comment>
             </div>
