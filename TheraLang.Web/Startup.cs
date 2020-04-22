@@ -84,7 +84,8 @@ namespace TheraLang.Web
             services.AddTransient<SchedulerService>();
             services.AddTransient<INewsCommentService, NewsCommentService>();
             services.AddTransient<IChatService, ChatService>();
-            services.AddTransient<ISendGridClient>(provider => new SendGridClient(Configuration.GetSection("send_grip_api_key").Value));
+
+            AddSendGrid(services);
 
             services.AddOpenApiDocument();
             services.AddSignalR();
@@ -138,6 +139,11 @@ namespace TheraLang.Web
         protected virtual void AddAuth(IServiceCollection services)
         {
             services.AddAuthentication(Configuration);
+        }
+
+        protected virtual void AddSendGrid(IServiceCollection services)
+        {
+            services.AddTransient<ISendGridClient>(provider => new SendGridClient(Configuration.GetSection("send_grip_api_key").Value));
         }
 
         protected virtual void ConfigureDatabase(IServiceCollection services)

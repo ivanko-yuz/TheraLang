@@ -6,6 +6,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Moq;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using System.Threading;
+using System.Threading.Tasks;
 using TheraLang.DAL;
 using TheraLang.IntegrationTests.Infrastucture.TestAuthentication;
 using TheraLang.IntegrationTests.Infrastucture.TestDataSeeding;
@@ -36,6 +41,15 @@ namespace TheraLang.IntegrationTests
             services.AddAuthentication("Test")
                     .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
                         "Test", options => { });
+        }
+
+        protected override void AddSendGrid(IServiceCollection services)
+        {
+            var _sendGridMock = new Mock<ISendGridClient>();
+            _sendGridMock.SetupAllProperties();
+            var response = new Response(System.Net.HttpStatusCode.OK, null, null);
+            _sendGridMock.Setup(x => x.SendEmailAsync(It.IsAny<SendGridMessage>(), CancellationToken.None)).Returns(Task.FromResult(response));
+            services.AddTransient<ISendGridClient>(provider => _sendGridMock.Object);
         }
 
         protected override void ConfigureDatabase(IServiceCollection services)
