@@ -69,11 +69,8 @@
     "home": {
       "title": "Main page"
     },
-    "contacts": {
-      "title": "Contacts"
-    },
     "cms-pages": {
-      "title": "Other"
+      "title": "CMS Pages"
     },
     "news": {
       "title": "News",

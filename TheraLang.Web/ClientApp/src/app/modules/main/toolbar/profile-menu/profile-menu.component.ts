@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { AuthService } from "../../../core/auth/auth.service";
-import { NotificationService } from "../../../core/services/notification/notification.service";
+import { AuthService } from "../../../../core/auth/auth.service";
+import { NotificationService } from "../../../../core/services/notification/notification.service";
 import {Router} from '@angular/router';
 
 @Component({

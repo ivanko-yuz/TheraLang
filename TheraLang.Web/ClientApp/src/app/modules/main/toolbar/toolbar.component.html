@@ -1,37 +1,40 @@
 <div>
-  <mat-toolbar class="color-background">
-    <div class="default-side-margin toolbar-items" fxLayout="row">
-      <div fxLayout="row">
-        <a class="img-wrapper" routerLink="/">
-          <img src="assets/img/uttmm.png" alt="Home">
-        </a>
+  <mat-toolbar class="mat-elevation-z3" fxLayout="row">
+    <div fxLayout="row">
+      <a class="img-wrapper" routerLink="/">
+        <img src="assets/img/uttmm.png" alt="Home">
+      </a>
 
-        <a class="menu-item" routerLink="/projects">{{'components.projects.title'|translate}}</a>
-        <a class="menu-item" routerLink="/donations">{{'components.donation.title'|translate}}</a>
-        <a class="menu-item" routerLink="/news">{{'components.news.title'|translate}}</a>
-        <app-cms-pages-toolbar-item fxLayout="row"></app-cms-pages-toolbar-item>
-        <a class="menu-item" *ngIf=" isAuthenticated()"
-          routerLink="/resources">{{'components.resources.title'|translate}}</a>
-        <a class="menu-item" *ngIf=" isAuthenticated()"
-          routerLink="/participants">{{'components.participation.title'|translate}}
-          <span>
-            <mat-icon *ngIf="hasNotification">notifications</mat-icon>
-          </span>
-        </a>
-        <a class="menu-item" *ngIf="isAdmin()" routerLink="/admin">{{'manager.title'|translate}}</a>
-      </div>
-
-      <div fxFlex></div>
-
-      <div fxLayout="row" fxLayoutAlign="end center">
-        <app-language></app-language>
-        <button mat-button color="primary" *ngIf="! isAuthenticated()" class="toolbar-button"
-          routerLink="/login">{{'components.account.signIn'|translate}}</button>
-        <span *ngIf=" isAuthenticated()">
-          <app-profile-menu></app-profile-menu>
+      <app-cms-pages-toolbar-item fxLayout="row"></app-cms-pages-toolbar-item>
+      <a class="menu-item" routerLink="/news">{{'components.news.title'|translate}}</a>
+      <a class="menu-item" routerLink="/projects">{{'components.projects.title'|translate}}</a>
+      <a class="menu-item" routerLink="/donations">{{'components.donation.title'|translate}}</a>
+      <a class="menu-item" *ngIf=" isAuthenticated()"
+        routerLink="/resources">{{'components.resources.title'|translate}}</a>
+      <a class="menu-item" *ngIf=" isAuthenticated()"
+        routerLink="/participants">{{'components.participation.title'|translate}}
+        <span>
+          <mat-icon *ngIf="hasNotification">notifications</mat-icon>
         </span>
-      </div>
+      </a>
+      <a class="menu-item"  *ngIf="isAdmin()"
+        routerLink="/admin">{{'manager.title'|translate}}</a>
     </div>
+
+    <span fxFlex></span>
+
+    <div>
+      <span class="language">
+        <app-language></app-language>
+      </span>
+      <button mat-flat-button color="primary" *ngIf="! isAuthenticated()" class="toolbar-button"
+      routerLink="/login">{{'components.account.signIn'|translate}}</button>
+    </div>
+
+    <span *ngIf=" isAuthenticated()">
+      <app-profile-menu></app-profile-menu>
+    </span>
+
   </mat-toolbar>
   <div class="fill-toolbar-space"></div>
 </div>

@@ -1,7 +1,4 @@
-<a class="menu-item" [matMenuTriggerFor]="menu">
-    {{'components.cms-pages.title'|translate}}
-    <mat-icon>keyboard_arrow_down</mat-icon>
-</a>
+<a class="menu-item" [matMenuTriggerFor]="menu">{{'components.cms-pages.title'|translate}}</a>
 <mat-menu #menu="matMenu">
     <app-toolbar-item *ngFor="let toolbarItem of toolbarItems" [toolbarItem]="toolbarItem"></app-toolbar-item>
 </mat-menu>
