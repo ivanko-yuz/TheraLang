@@ -14,7 +14,6 @@ export class LanguageComponent implements OnInit {
   @ViewChild('menu', {static: false}) menu: any;
   languages: Language[];
   currentLang : string;
-  country : string;
 
   constructor(
     private translate: TranslateService,
@@ -23,8 +22,6 @@ export class LanguageComponent implements OnInit {
 
   ngOnInit() {
     this.languages = this.languageService.languages;
-    this.getCurrentLang();
-    this.getLangCountry();
   }
 
   changeLang(lang: Language): void {
@@ -39,10 +36,14 @@ export class LanguageComponent implements OnInit {
   }
 
   getLangCountry() {
-    this.country = this.currentLang.toLowerCase();
-    if(this.country == "en")
-      this.country = "us";
+    if(!this.currentLang){
+      this.getCurrentLang();
+    }
 
-    return this.country;
+    let country = this.currentLang.toLowerCase();
+    if(country == "en")
+      country = "us";
+
+    return country;
   }
 }
