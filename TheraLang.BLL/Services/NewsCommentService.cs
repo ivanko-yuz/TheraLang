@@ -27,7 +27,10 @@ namespace TheraLang.BLL.Services
 
         public async Task<int> GetCommentsForNewsCount(int newsId)
         {
-            return await _unitOfWork.Repository<NewsComment>().GetAll().Where(c => c.NewsId == newsId).CountAsync();
+            return await _unitOfWork.Repository<NewsComment>()
+                .GetAll()
+                .Where(c => c.NewsId == newsId)
+                .CountAsync();
         }
 
         public async Task<IEnumerable<CommentResponseDto>> GetCommentsForNews(int newsId)
@@ -42,7 +45,9 @@ namespace TheraLang.BLL.Services
             });
 
             var commentDtos = await _unitOfWork.Repository<NewsComment>().GetAll()
+                .Include(c => c.Replies)
                 .Where(c => c.NewsId == newsId)
+                .Where(c => c.AnsweredCommentId == null)
                 .OrderByDescending(c => c.CreatedDateUtc)
                 .ProjectTo<CommentResponseDto>(mapper)
                 .ToListAsync();
@@ -68,7 +73,9 @@ namespace TheraLang.BLL.Services
             });
 
             var commentDtos = await _unitOfWork.Repository<NewsComment>().GetAll()
+                .Include(c => c.Replies)
                 .Where(c => c.NewsId == newsId)
+                .Where(c => c.AnsweredCommentId == null)
                 .OrderByDescending(c => c.CreatedDateUtc)
                 .Skip(paginationParams.Skip)
                 .Take(paginationParams.Take)
@@ -126,7 +133,7 @@ namespace TheraLang.BLL.Services
 
             //Check permissions (only owner)
             var authUser = await _authenticateService.GetAuthUser();
-            if(authUser.Id != commentToUpdate.CreatedById)
+            if (authUser.Id != commentToUpdate.CreatedById)
             {
                 throw new NoPermissionsException("Only comment owner can edit comment");
             }

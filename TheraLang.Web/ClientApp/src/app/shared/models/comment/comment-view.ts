@@ -6,4 +6,6 @@ export class CommentView {
     authorImageUrl: string
     createdDateUtc: Date
     isEdited: boolean
+    replies: CommentView[]
+    answeredCommentId: number
 }

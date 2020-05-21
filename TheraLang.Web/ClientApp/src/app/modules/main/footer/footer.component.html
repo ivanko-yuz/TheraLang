@@ -1,12 +1,29 @@
-<footer>
-    <div fxFlex="none">
-        <img src="assets/img/uttmm2.png" alt="Logo" class="logo">
+<footer class="color-background" fxLayout="column">
+    <div class="default-side-margin main-block" fxLayout="row" fxLayoutAlign="space-between stretch">
+        <div>
+            <img src="assets/img/uttmm2.png" alt="Logo" class="logo">
+        </div>
+        <div class="nav-block block" fxLayout="column" fxLayoutAlign="space-between stretch">
+            <a class="color-black" routerLink="/projects">{{'components.projects.title'|translate}}</a>
+            <a class="color-black" routerLink="/donations">{{'components.donation.title'|translate}}</a>
+            <a class="color-black" routerLink="/news">{{'components.news.title'|translate}}</a>
+        </div>
+        <div class="contacts-block block" div fxLayout="column" fxLayoutAlign="space-between stretch">
+            <span class="color-black">{{'components.contacts.title'|translate}}</span>
+            <span fxLayout="row" class="color-primary">
+                <mat-icon class="phone-icon">phone</mat-icon>
+                +38 (068) 33 623 77
+            </span>
+            <span fxLayout="row" class="color-primary">
+                <mat-icon class="phone-icon">phone</mat-icon>
+                +38 (066) 47 654 64
+            </span>
+        </div>
+        <div class="language-block block" fxLayoutAlign="space-between stretch">
+            <app-language></app-language>
+        </div>
     </div>
-    <div class="footerMainBlock" fxFlex fxLayout="column" fxLayoutAlign="end stretch">
-        <span>(c) All rights reserved</span>
-    </div>
-    <div class="footerAboutBlock" fxFlex="none" div fxLayout="column" fxLayoutAlign="center stretch">
-        <span>+38 (068) 33 623 77</span>
-        <span>+38 (066) 47 654 64</span>
+    <div class="bottom-line" fxLayout="row" fxLayoutAlign="center center">
+        <span>Copyright © 2020 UTTMM. All rights reserved.</span>
     </div>
 </footer>

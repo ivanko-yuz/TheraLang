@@ -71,8 +71,11 @@
     "home": {
       "title": "Main page"
     },
+    "contacts": {
+      "title": "Contacts"
+    },
     "cms-pages": {
-      "title": "CMS Pages"
+      "title": "Other"
     },
     "news": {
       "title": "News",
@@ -89,12 +92,14 @@
       "new-content-images":"New content images"
     },
     "comments" : {
-      "comments-count-title" : "comments",
+      "comments-count-title" : "Сomments",
       "create-comment": "Comment",
       "enter-comment": "Add your comment",
       "edited" : "edited",
       "read-more" : "READ MORE",
-      "show-less" : "SHOW LESS"
+      "show-less" : "SHOW LESS",
+      "reply" : "Reply",
+      "close-reply" : "Collapse"
     },
     "users": {
       "title": "Users"

@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <flag-icon [country]='this.getLangCountry()'></flag-icon>
+  <button mat-button [matMenuTriggerFor]="menu" fxLayout="row">
+    <span>{{this.getCurrentLang() | uppercase}}</span>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" class="panel">
+    <button mat-menu-item *ngFor="let lang of languages" [innerText]="languageService.langToString(lang) | uppercase"
+      (click)="changeLang(lang)"></button>
+  </mat-menu>
+</div>

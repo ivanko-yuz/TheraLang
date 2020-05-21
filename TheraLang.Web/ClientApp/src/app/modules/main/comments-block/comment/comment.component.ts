@@ -7,6 +7,8 @@ import { NotificationService } from 'src/app/core/services/notification/notifica
 import { CommentEditComponent } from '../comment-edit/comment-edit.component';
 import { UserService } from 'src/app/core/auth/user.service';
 import { Roles } from 'src/app/shared/models/roles/roles';
+import { CommentCreateComponent } from '../comment-create/comment-create.component';
+import { User } from 'src/app/shared/models/user/user';
 
 @Component({
   selector: 'app-comment',
@@ -16,12 +18,14 @@ import { Roles } from 'src/app/shared/models/roles/roles';
 export class CommentComponent implements OnInit {
   @ViewChild('container', {read: ViewContainerRef, static: true}) container: ViewContainerRef;
 
+  @Input() currentUser: User;
   @Input() comment: CommentView;
   @Output() commentChanged = new EventEmitter();
   smallTextSize: number = 400;
   textSize: number = this.smallTextSize;
   isOpened: boolean = false;
   isEditing: boolean = false;
+  isReplying: boolean = false;
 
   constructor
     (
@@ -91,5 +95,9 @@ export class CommentComponent implements OnInit {
       this.container.clear();
       this.comment.isEdited = true;
     })
+  }
+
+  onReply(){
+    this.isReplying = !this.isReplying;
   }
 }
