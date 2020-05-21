@@ -1,13 +1,13 @@
-<mat-sidenav-container>
+<mat-sidenav-container >
     <mat-sidenav class="sidebar" [opened]="true" disableClose="true" #sidenav mode="side" opened
         [attr.color]="themeColor">
         <mat-nav-list>
             <div class="pad">
                 <a mat-list-item routerLink="/admin">
-                    <h2>{{'manager.title'|translate|uppercase}}</h2>
+                    <h2 class = "title">{{'manager.title'|translate|uppercase}}</h2>
                 </a>
             </div>
-            <a class="menu-item" mat-list-item routerLink="/">
+            <a class="menu-item" mat-list-item routerLink="/" >
                 <mat-icon class="white-icon">home</mat-icon>
                 <span class="space"> </span>
                 <span>{{'manager.home'|translate}}</span>

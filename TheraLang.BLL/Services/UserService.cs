@@ -11,6 +11,7 @@ using TheraLang.DAL.UnitOfWork;
 using Common;
 using System.Linq;
 using Common.Exceptions;
+using TheraLang.BLL.CustomTypes;
 
 namespace TheraLang.BLL.Services
 {
@@ -70,6 +71,14 @@ namespace TheraLang.BLL.Services
             };
 
             return usersList;
+        }
+
+        private IQueryable<UserDetails> GetFilteredProjects(FilterQuery query)
+        {
+            var userDtos = _unitOfWork.Repository<UserDetails>()
+                .GetAll();
+
+            return query.UserFilter(userDtos);
         }
 
 
