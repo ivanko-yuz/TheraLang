@@ -8,7 +8,8 @@ namespace TheraLang.BLL.CustomTypes
 {
     public class FilterQuery
     {
-       private  IQueryable<Project> _projectsDtos;
+        private IQueryable<Project> _projectsDtos;
+        private IQueryable<UserDetails> _userDetailsDto;
         public string Search { get; set; }
         public bool MyProjects { get; set; }
         public bool SortByDateAsc { get; set; }
@@ -60,6 +61,13 @@ namespace TheraLang.BLL.CustomTypes
             SearchFilter();
             SortByDateFilter();
             return _projectsDtos;
+        }
+
+        public IQueryable<UserDetails> UserFilter(IQueryable<UserDetails> userDetailsDtos)
+        {
+            _userDetailsDto = userDetailsDtos;
+            SearchFilter();
+            return _userDetailsDto;
         }
     }
 }

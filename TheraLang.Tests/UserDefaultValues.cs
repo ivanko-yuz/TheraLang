@@ -62,7 +62,8 @@ namespace TheraLang.Tests
             City = DefaultString,
             ShortInformation = DefaultString,
             BirthDay = DefaultBirthDate,
-            UserDetailsId = DefaultId
+            UserDetailsId = DefaultId,
+            RoleName = DefaultRoleName
         };
         public static List<UsersDto> Users = new List<UsersDto>();
         public static IEnumerable<UsersDto> ListInit()

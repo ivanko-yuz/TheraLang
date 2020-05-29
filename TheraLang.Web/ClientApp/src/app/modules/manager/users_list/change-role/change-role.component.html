@@ -1,17 +1,20 @@
-<h1 mat-dialog-title>{{'common.change_role'|translate}}</h1>
-<div mat-dialog-content>
+<div>
+  <span class = "big-text" mat-dialog-title fxLayoutAlign="center center">{{'common.change_role'|translate}}</span>
+<span class = "small-text">{{'common.select_role'|translate}}</span>
+<div mat-dialog-content fxLayoutAlign="center center" >
   <mat-form-field>
     <mat-label *ngFor ="let role of data.rolesList">
-      <div *ngIf="data.userRoleId == role.id">{{role.name}}</div>
+      <div class = "role" *ngIf="data.userRoleId == role.id">{{role.name}}</div>
     </mat-label>
     <mat-select [(ngModel)]="selectedValue">
-      <mat-option *ngFor="let role of data.rolesList" [value]="role.id">
+      <mat-option class = "roles" *ngFor="let role of data.rolesList" [value]="role.id">
         {{role.name}} <span *ngIf="data.userRoleId == role.id"><mat-icon>check</mat-icon></span>
       </mat-option>
     </mat-select>
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">{{'common.no_thanks'|translate}}</button>
-  <button mat-button [mat-dialog-close]="selectedValue" cdkFocusInitial>{{'common.ok'|translate}}</button>
+<div mat-dialog-actions fxLayoutAlign="center center">
+  <button mat-button class = "change"[mat-dialog-close]="selectedValue" cdkFocusInitial>{{'common.change'|translate}}</button>
+  <br>
+</div>
 </div>

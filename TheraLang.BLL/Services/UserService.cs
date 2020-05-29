@@ -11,6 +11,7 @@ using TheraLang.DAL.UnitOfWork;
 using Common;
 using System.Linq;
 using Common.Exceptions;
+using TheraLang.BLL.CustomTypes;
 
 namespace TheraLang.BLL.Services
 {
@@ -57,6 +58,12 @@ namespace TheraLang.BLL.Services
             var users = await _unitOfWork.Repository<UserDetails>().GetAll().Skip((pagination.PageNumber - 1) * pagination.PageSize).Take(pagination.PageSize).ToListAsync();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserDetails, UsersDto>()).CreateMapper();
             var usersDto = mapper.Map<IEnumerable<UserDetails>, IEnumerable<UsersDto>>(users);
+            foreach(var user in usersDto)
+            {
+                var roleId = await GetUserRole(user.UserDetailsId);
+                var role = await _unitOfWork.Repository<Role>().Get(r => r.Id == roleId);
+                user.RoleName = role.Name;
+            }
             var usersList = new UsersListDto()
             {
                 UserList = usersDto.ToList(),
@@ -64,6 +71,14 @@ namespace TheraLang.BLL.Services
             };
 
             return usersList;
+        }
+
+        private IQueryable<UserDetails> GetFilteredProjects(FilterQuery query)
+        {
+            var userDtos = _unitOfWork.Repository<UserDetails>()
+                .GetAll();
+
+            return query.UserFilter(userDtos);
         }
 
 

@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 @Component({
   selector: "app-change-role",
   templateUrl: "./change-role.component.html",
+  styleUrls: ["./change-role.component.less"]
 })
 export class ChangeRoleComponent {
   selectedValue: string;

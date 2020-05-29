@@ -5,6 +5,7 @@
     "edit": "Edit",
     "delete": "Delete",
     "wth": "Something went wrong...",
+    "change": "Change",
     "validation": {
       "field-is-required": "This field is required",
       "line-too-long": "The line is too long",
@@ -17,7 +18,8 @@
       "number-positive": "The number must be positive",
       "date-intersect": "End date must be less than start date",
       "edit": "edit",
-      "edit_profile": "Edit profile"
+      "edit_profile": "Edit profile",
+      "select_role" : "Please, select role",
     },
     "deleted-successfully": "Deleted successfully!",
     "added-successfully": "Added successfully!",

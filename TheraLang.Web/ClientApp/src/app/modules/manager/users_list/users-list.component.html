@@ -1,42 +1,54 @@
-<div class="container mb-5">
-  <div *ngFor="let user of usersList.userList" class="mt-5">
-    <mat-card class="home-card mat-elevation-z5">
-      <mat-card-content class="home-card-content" fxLayout="row" fxLayout.md="column" fxLayout.sm="column" fxLayoutGap="10px" >
-        <div class="image-container">
-          <img *ngIf="user.imageURl != null"
-            style="width: 200px"
-            src="{{ user.imageURl }}"
-            alt=""
-          />
-          <img *ngIf="user.imageURl == null"
-               style="width: 200px"
-               src="/assets/img/avatar-placeholder.gif"
-               alt=""
-          />
-        </div>
-
-        <div class="main-container" fxLayout="column" fxLayout.md="column" fxLayout.sm="column" >
-          <div class="content-container" fxLayout="row" fxLayout.md="column" fxLayout.sm="column" >
-            <div class="text-conteiner" fxLayout="column">
+<mat-grid-list [cols]="isMobile ? 1 : 3" rowHeight="500px" (window:resize)="onResize($event)">
+  <mat-grid-tile
+    *ngFor="let user of usersList.userList"
+    [colspan]="1"
+    [rowspan]="1">
+    <mat-card class="container user" >
+      <mat-card-content class="container">
+        <div class="main-container" fxLayout="column" fxLayout.md="column" fxLayout.sm="row" >
+          <div class="content-container" fxLayout="column" fxLayout.md="column" fxLayout.sm="column" >
+            <div class="image-container" fxLayoutAlign="center" fxLayout="column" >
+              <a [routerLink]="['/users', user.id]">
+                <img *ngIf="user.imageURl != null"
+                     class = "photo"
+                     style="width: 200px"
+                     src="{{ user.imageURl }}"
+                     alt=""
+                />
+                <img *ngIf="user.imageURl == null"
+                     class = "photo"
+                     style="width: 200px"
+                     src="/assets/img/avatar-placeholder.gif"
+                     alt=""
+                />
+              </a>
+            </div>
+            <div class="text-conteiner info" fxLayout="column">
               <mat-card-title>
-                <a class="details" [routerLink]="['/users', user.id]">{{ user.firstName }} {{ user.lastName }}</a>
+                <mat-icon class = "icon">perm_identity</mat-icon>
+                <span> <a class="details info"
+                          [routerLink]="['/users', user.id]">
+                 {{ user.firstName }} {{ user.lastName }}</a>
+                  <br>
+                <span class = "role">{{user.roleName}}</span>
+                 <br>
+               </span>
               </mat-card-title>
-              <div class="project-description">
-                <p *ngIf="user.shortInformation != null">{{'common.short_information'|translate}}: {{ user.shortInformation.substring(0, 400) }}</p>
-                <p *ngIf="user.city != null">{{'common.city'|translate}}: {{ user.city.substring(0, 400) }}</p>
-                <p *ngIf="user.birthDay != null"> {{'common.birthdayDate'|translate}}: {{ user.birthDay | date: 'shortDate' }}</p>
-                <p *ngIf="user.phoneNumber!=null">{{'common.phone_number'|translate}}: {{user.phoneNumber}}</p>
+
+              <div class="project-description info">
+                <p *ngIf="user.city != null">
+                  <mat-icon class = "icon">room</mat-icon>
+                  {{ user.city.substring(0, 400) }}
+                </p>
+                <p *ngIf="user.birthDay != null">
+                  <mat-icon class = "icon">today</mat-icon> {{ user.birthDay | date: 'shortDate' }}
+                </p>
               </div>
             </div>
           </div>
         </div>
       </mat-card-content>
-      <mat-card-footer fxLayout="row" fxLayoutAlign="end" class="m-1">
-        <button mat-raised-button color="primary" (click)="openChangeRoleModal(user.id)">{{'common.change_role'|translate}}</button>
-      </mat-card-footer>
+      <button mat-raised-button class = "button info" (click)="openChangeRoleModal(user.id)">{{'common.change_role'|translate}}</button>
     </mat-card>
-  </div>
-</div>
-
-<app-pagination (pageChange)="pageChange($event)" [collection]="usersList.userList" [totalRows]="usersList.countOfItems"
-                [pageSize]="pageSize" fxLayout="row" fxLayoutAlign="center"></app-pagination>
+  </mat-grid-tile>
+</mat-grid-list>
