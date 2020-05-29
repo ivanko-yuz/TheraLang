@@ -134,8 +134,7 @@ import {ResourcesTableComponent} from "./modules/main/pages/resource/resources-t
 import {ConfirmationComponent} from './modules/registration/confirmation/confirmation.component';
 import {ForgotPasswordComponent} from './modules/password/email/forgot-password.component';
 import {ResetPasswordComponent} from './modules/password/reset-password.component';
-import { NgxFlagIconCssModule } from 'ngx-flag-icon-css'
-
+import { NgxFlagIconCssModule } from 'ngx-flag-icon-css';
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }

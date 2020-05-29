@@ -25,9 +25,7 @@
             </div>
             <div class="text-conteiner info" fxLayout="column">
               <mat-card-title>
-                  <span class="material-icons icon">
-                  person_outline
-                </span>
+                <mat-icon class = "icon">perm_identity</mat-icon>
                 <span> <a class="details info"
                           [routerLink]="['/users', user.id]">
                  {{ user.firstName }} {{ user.lastName }}</a>
@@ -39,15 +37,11 @@
 
               <div class="project-description info">
                 <p *ngIf="user.city != null">
-                  <span class="material-icons icon">
-                  place
-</span>
+                  <mat-icon class = "icon">room</mat-icon>
                   {{ user.city.substring(0, 400) }}
                 </p>
                 <p *ngIf="user.birthDay != null">
-                  <span class="material-icons icon ">
-                  calendar_today
-                  </span> {{ user.birthDay | date: 'shortDate' }}
+                  <mat-icon class = "icon">today</mat-icon> {{ user.birthDay | date: 'shortDate' }}
                 </p>
               </div>
             </div>
